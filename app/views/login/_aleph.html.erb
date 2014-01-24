@@ -9,7 +9,7 @@
     <%= field_set_tag do -%>
       <%= label_tag "username", t("application.#{current_institution.code.downcase}.username_label") %>
       <%= text_field_tag "username", nil, placeholder: t("application.#{current_institution.code.downcase}.username_placeholder") %>
-      <%= label_tag "username", t("application.#{current_institution.code.downcase}.password_label") %>
+      <%= label_tag "password", t("application.#{current_institution.code.downcase}.password_label") %>
       <%= password_field_tag "password" %><br />
       <%= submit_tag "Login" %>
     <%- end -%>
