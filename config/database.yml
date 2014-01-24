@@ -48,7 +48,7 @@ test:
   encoding: unicode
   database: login_test
   pool: 5
-  username: login
+  username: <%= (ENV['TRAVIS']) ? "root" : "login" %>
   password:
 
 production:
