@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe User do
+  # Make sure the database is clean
+  before { User.destroy_all }
+
   context "when created with factory defaults" do
     subject { create(:user) }
     it { should be_valid }
