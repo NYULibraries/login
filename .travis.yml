@@ -1,0 +1,27 @@
+language: ruby
+
+bundler_args: --without development
+
+before_script:
+  - psql -c 'create database login_test;' -U postgres
+  - bundle exec rake db:schema:load RAILS_ENV=test
+
+script: "bundle exec rake && bundle exec rake teaspoon"
+
+rvm:
+  - 1.9.3
+  - 2.0.0
+  - 2.1.0
+  - jruby-19mode
+  - rbx
+
+notifications:
+  irc: 
+    channels:
+      - "irc.freenode.org#libtechnyu"
+    template:
+      - "%{repository}#%{build_number} (%{branch} - %{commit} : %{author}): %{message}"
+      - "Change view : %{compare_url}"
+      - "Build details : %{build_url}"
+  email:
+    - web.services@library.nyu.edu
