@@ -34,7 +34,8 @@ gem "mustache-rails", "~> 0.2.3", :require => "mustache/railtie"
 
 # Use the NYU Libraries Assets gem
 # gem "nyulibraries-assets", git: "git://github.com/NYULibraries/nyulibraries-assets.git", tag: 'v2.0.1'
-gem "nyulibraries-assets", path: "/Users/dalton/Documents/workspace/nyulibraries-assets"
+gem "nyulibraries-assets", git: "git://github.com/NYULibraries/nyulibraries-assets.git", branch: 'development-login'
+# gem "nyulibraries-assets", path: "/Users/dalton/Documents/workspace/nyulibraries-assets"
 
 gem "institutions", "~> 0.1.3"
 
