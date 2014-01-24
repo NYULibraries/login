@@ -14,7 +14,7 @@ describe Identity do
     it { should_not be_valid }
   end
 
-  describe "when uid is not unique for the same provider" do
+  context "when uid is not unique for the same provider" do
     before(:each) { create(:identity, provider: 'twitter') }
     subject { build(:identity, provider: 'twitter') }
     it { should_not be_valid }
