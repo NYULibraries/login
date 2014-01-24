@@ -3,7 +3,7 @@ language: ruby
 bundler_args: --without development
 
 before_script:
-  - psql -c 'create database login_test;' -U postgres
+  - psql -c 'create database login_test;' -U $DB_USER
   - bundle exec rake db:schema:load RAILS_ENV=test
 
 env:
