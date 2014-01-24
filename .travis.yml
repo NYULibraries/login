@@ -6,7 +6,7 @@ before_script:
   - psql -c 'create database login_test;' -U postgres
   - bundle exec rake db:schema:load RAILS_ENV=test
 
-script: "bundle exec rake && bundle exec rake teaspoon"
+script: "bundle exec rake"
 
 rvm:
   - 1.9.3
