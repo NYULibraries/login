@@ -29,6 +29,10 @@ describe InstitutionsHelper do
       end
     end
 
+    context 'when the request is by a NYSID user' do
+      it "shoudl be the NYSID institution"
+    end
+
     context 'when the request specifies the Cooper Union insitute' do
       it 'should be the Cooper Union institution' do
         allow(self).to receive(:institution_param).and_return(:CU)
