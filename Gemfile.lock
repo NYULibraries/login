@@ -1,5 +1,7 @@
-PATH
-  remote: /Users/dalton/Documents/workspace/nyulibraries-assets
+GIT
+  remote: git://github.com/NYULibraries/nyulibraries-assets.git
+  revision: 5e7a2a2a2b8bb4057e7526cc7778fd4e85de7e48
+  branch: development-login
   specs:
     nyulibraries-assets (2.0.1)
       bootstrap-sass (>= 2.2.0, < 2.3.1.1)
@@ -263,8 +265,7 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
-    teaspoon (0.7.8)
-      phantomjs (>= 1.8.1.1)
+    teaspoon (0.7.9)
       railties (>= 3.2.5, < 5)
     term-ansicolor (1.2.2)
       tins (~> 0.8)
