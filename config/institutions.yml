@@ -1,0 +1,15 @@
+BOBST:
+  name: NYU Libraries' Affiliates
+  views:
+    css: application
+    dir: nyu
+    breadcrumbs:
+      title: NYU Libraries
+      url: http://library.nyu.edu
+    login:
+      primary: aleph
+      secondary:
+        - nyu
+        - ns
+        - cu
+        - nysid

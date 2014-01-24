@@ -1,0 +1,17 @@
+<div id="ns_ldap">
+  <h2>
+    <%= t('application.ns.header') %>
+    <a class="nyulibraries-help nyulibraries-help-icon" href="https://library.nyu.edu/info/bobcat/login.html" target="_blank">
+      help
+    </a>
+  </h2>
+  <%= form_tag(user_omniauth_callback_url(:ldap, institute: current_institute.code)) do -%>
+    <%= field_set_tag do -%>
+      <%= label_tag "username", t('application.ns.username_label') %>
+      <%= text_field_tag "username", nil, placeholder: t('application.ns.username_placeholder') %>
+      <%= label_tag "username", t('application.ns.password_label') %>
+      <%= password_field_tag "password" %><br />
+      <%= submit_tag "Login" %>
+    <%- end -%>
+  <%- end -%>
+</div>
