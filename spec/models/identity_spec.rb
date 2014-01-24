@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Identity do
   # Make sure the database is clean
-  after { User.destroy_all }
+  before { User.destroy_all }
 
   context "when created with factory defaults" do
     subject { create(:identity) }
@@ -15,13 +15,13 @@ describe Identity do
   end
 
   context "when uid is not unique for the same provider" do
-    before(:each) { create(:identity, provider: 'twitter') }
+    before { create(:identity, provider: 'twitter') }
     subject { build(:identity, provider: 'twitter') }
     it { should_not be_valid }
   end
 
   context "when uid is not unique for different providers" do
-    before(:each) { create(:identity, provider: 'twitter') }
+    before { create(:identity, provider: 'twitter') }
     subject { build(:identity, provider: 'aleph') }
     it { should be_valid }
   end
