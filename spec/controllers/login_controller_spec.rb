@@ -1,19 +1,16 @@
 require 'spec_helper'
-
 describe LoginController do
-  
   context "when not logged in" do
     describe "GET 'new'" do
+      before { get :new }
+      subject { response }
       context 'when not rendering views' do
         render_views false
-        subject { get :new; response }
         it { should be_success }
         it("should have a 200 status") { expect(subject.status).to be(200) }
       end
-
       context "when rendering views" do
         render_views
-        subject { get :new; response }
         it do
           should render_template("layouts/login")
           should render_template("login/new")
@@ -24,17 +21,15 @@ describe LoginController do
     end
 
     describe "GET 'new' for NYU" do
+      before { get :new, { institute: 'nyu' } }
+      subject { response }
       context 'when not rendering views' do
         render_views false
-        subject { get :new, { institute: 'nyu' }; response }
         it { should be_success }
         it("should have a 200 status") { expect(subject.status).to be(200) }
       end
-
       context "when rendering views" do
         render_views
-        let(:get_new) { get :new, { institute: 'nyu' } }
-        subject { get_new; response }
         it do
           should render_template("layouts/login")
           should render_template("login/new")
@@ -45,9 +40,10 @@ describe LoginController do
     end
 
     describe "GET 'new' for NYU Abu Dhabi" do
+      before { get :new, { institute: 'nyuad' } }
+      subject { response }
       context "when rendering views" do
         render_views
-        subject { get :new, { institute: 'nyuad' }; response }
         it do
           should render_template("layouts/login")
           should render_template("login/new")
@@ -58,9 +54,10 @@ describe LoginController do
     end
 
     describe "GET 'new' for NYU Shanghai" do
+      before { get :new, { institute: 'nyush' } }
+      subject { response }
       context "when rendering views" do
         render_views
-        subject { get :new, { institute: 'nyush' }; response }
         it do
           should render_template("layouts/login")
           should render_template("login/new")
@@ -71,9 +68,10 @@ describe LoginController do
     end
 
     describe "GET 'new' for NYU Health Science Libraries" do
+      before { get :new, { institute: 'hsl' } }
+      subject { response }
       context "when rendering views" do
         render_views
-        subject { get :new, { institute: 'hsl' }; response }
         it do
           should render_template("layouts/login")
           should render_template("login/new")
@@ -84,9 +82,10 @@ describe LoginController do
     end
 
     describe "GET 'new' for the New School" do
+      before { get :new, { institute: 'ns' } }
+      subject { response }
       context "when rendering views" do
         render_views
-        subject { get :new, { institute: 'ns' }; response }
         it do
           should render_template("layouts/login")
           should render_template("login/new")
@@ -97,9 +96,10 @@ describe LoginController do
     end
 
     describe "GET 'new' for Cooper Union" do
+      before { get :new, { institute: 'cu' } }
+      subject { response }
       context "when rendering views" do
         render_views
-        subject { get :new, { institute: 'cu' }; response }
         it do
           should render_template("layouts/login")
           should render_template("login/new")
@@ -110,9 +110,10 @@ describe LoginController do
     end
 
     describe "GET 'new' for NYSID" do
+      before { get :new, { institute: 'nysid' } }
+      subject { response }
       context "when rendering views" do
         render_views
-        subject { get :new, { institute: 'nysid' }; response }
         it do
           should render_template("layouts/login")
           should render_template("login/new")
@@ -123,9 +124,10 @@ describe LoginController do
     end
 
     describe "GET 'new' for NYU Libraries' affiliates" do
+      before { get :new, { institute: 'bobst' } }
+      subject { response }
       context "when rendering views" do
         render_views
-        subject { get :new, { institute: 'bobst' }; response }
         it do
           should render_template("layouts/login")
           should render_template("login/new")
@@ -140,9 +142,11 @@ describe LoginController do
     login_user
     render_views false
     describe "GET 'new'" do
-      subject { get :new; response }
+      before { get :new }
+      subject { response }
       it { should be_redirect }
       it("should have a 302 status") { expect(subject.status).to be(302) }
+      it { should redirect_to("/users/#{attributes_for(:user)[:username]}") }
     end
   end
 end

@@ -7,12 +7,12 @@ module InstitutionsHelper
   #   4. first default institution
   def current_institution
     @current_institution ||= case
-      when (institution_param.present? && all_institutions[institution_param])
-        all_institutions[institution_param]
-      when primary_institution_from_ip.present?
-        primary_institution_from_ip
-      when (@current_user && current_user.primary_institution)
-        current_user.primary_institution
+      when (institution_param.present? && institutions[institution_param])
+        institutions[institution_param]
+      when institution_from_ip.present?
+        institution_from_ip
+      when (@current_user && current_user.institution)
+        current_user.institution
       else
         Institutions.defaults.first
       end
@@ -29,19 +29,18 @@ module InstitutionsHelper
   end
 
   # Grab the first institution that matches the client IP
-  def primary_institution_from_ip
+  def institution_from_ip
     unless request.nil?
-      @primary_institution_from_ip ||=
-        Institutions.with_ip(request.remote_ip).first
+      @institution_from_ip ||= Institutions.with_ip(request.remote_ip).first
     end
   end
-  private :primary_institution_from_ip
+  private :institution_from_ip
 
   # All institutions
-  def all_institutions
-    @all_institutions ||= Institutions.institutions
+  def institutions
+    @institutions ||= Institutions.institutions
   end
-  private :all_institutions
+  private :institutions
 
   # The institution param as a Symbol
   def institution_param

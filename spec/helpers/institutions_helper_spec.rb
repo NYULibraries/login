@@ -12,50 +12,63 @@ require 'spec_helper'
 # end
 describe InstitutionsHelper do
   describe '#current_institution' do
-    context 'when the request is from off campus' do
-      it 'should be the NYU institution' do
-        expect(current_institute.code).to eql(:NYU)
-        expect(current_institution.code).to eql(:NYU)
-        expect(current_primary_institution.code).to eql(:NYU)
+    subject(:institute) { current_institution }
+    it { should be_a(Institutions::Institution) }
+    
+    describe '#code' do
+      subject { institute.code }
+      it { should_not be_nil }
+
+      context 'when the request is from off all campuses' do
+        it { should eql(:NYU) }
       end
-    end
 
-    context 'when the request is from on the New School campus' do
-      it 'should be the New School institution' do
-        allow(self).to receive(:primary_institution_from_ip).and_return(Institutions.institutions[:NS])
-        expect(current_institute.code).to eql(:NS)
-        expect(current_institution.code).to eql(:NS)
-        expect(current_primary_institution.code).to eql(:NS)
+      context 'when the request is from on the New School campus' do
+        let(:ns_institution) { Institutions.institutions[:NS] }
+        before do
+          allow(self).to receive(:institution_from_ip).and_return(ns_institution)
+        end
+        it { should eql(:NS) }
       end
-    end
 
-    context 'when the request is by a NYSID user' do
-      it "shoudl be the NYSID institution"
-    end
+      context 'when the request is by a NYSID user' do
+        let(:nysid_user) { build(:user, institution_code: 'NYSID')}
+        before do
+          @current_user = nysid_user
+          allow(self).to receive(:current_user).and_return(nysid_user)
+        end
+        it { should eql(:NYSID) }
+      end
 
-    context 'when the request specifies the Cooper Union insitute' do
-      it 'should be the Cooper Union institution' do
-        allow(self).to receive(:institution_param).and_return(:CU)
-        expect(current_institute.code).to eql(:CU)
-        expect(current_institution.code).to eql(:CU)
-        expect(current_primary_institution.code).to eql(:CU)
+      context 'when the request specifies the Cooper Union insitute' do
+        before do
+          allow(self).to receive(:institution_param).and_return(:CU)
+        end
+        it { should eql(:CU) }
+      end
+
+      context 'when the request specifies an invalid insitute' do
+        before do
+          allow(self).to receive(:institution_param).and_return(:INVALID)
+        end
+        it { should eql(:NYU) }
       end
     end
   end
 
   describe '#url_for' do
-     context 'when the request specifies the New School institute' do
-      it 'should have the institute=NS in the URL' do
-        allow(self).to receive(:institution_param).and_return(:NS)
-        expect(url_for({ controller: :users, action: :show })).to eql("/users/show?institute=NS")
-      end
+    subject { url_for({ controller: :users, action: :show, id: "username" }) }
+    it { should_not be_nil }
+    it { should be_a(String) }
+    it { should_not be_empty }
+
+    context 'when the request doesn\'t specify institute' do
+      it { should eql("/users/username") }
     end
 
-    context 'when the request specifies the Cooper Union institute' do
-      it 'should have the institute=CU in the URL' do
-        allow(self).to receive(:institution_param).and_return(:CU)
-        expect(url_for({ controller: :users, action: :show })).to eql("/users/show?institute=CU")
-      end
+    context 'when the request specifies the New School institute' do
+      before { allow(self).to receive(:institution_param).and_return(:NS) }
+      it { should eql("/users/username?institute=NS") }
     end
   end
 end

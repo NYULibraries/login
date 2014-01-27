@@ -1,7 +1,7 @@
 Login::Application.routes.draw do
-  get "users/show"
   use_doorkeeper
   devise_for :users, controllers: {omniauth_callbacks: "identities"}
+  resources :users, only: :show
   get 'login(/:institute)', to: 'login#new', as: 'login'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

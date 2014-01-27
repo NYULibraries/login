@@ -41,6 +41,6 @@ RSpec.configure do |config|
   # Include Devise test helpers
   config.include Devise::TestHelpers, type: :controller
 
-  # Include Controller Macros
-  config.extend ControllerMacros, type: :controller
+  # Include Login Macros
+  config.extend LoginMacros, type: :controller
 end
