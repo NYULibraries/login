@@ -22,7 +22,7 @@ describe Identity do
 
   context "when uid is not unique for different providers" do
     before { create(:identity, provider: 'twitter') }
-    subject { build(:identity, provider: 'aleph') }
+    subject { create(:identity, provider: 'aleph') }
     it { should be_valid }
   end
 

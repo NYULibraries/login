@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140115221314) do
+ActiveRecord::Schema.define(version: 20140127140709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20140115221314) do
   end
 
   add_index "identities", ["properties"], name: "index_identities_on_properties", using: :gin
-  add_index "identities", ["uid"], name: "index_identities_on_uid", unique: true, using: :btree
+  add_index "identities", ["uid", "provider"], name: "index_identities_on_uid_and_provider", unique: true, using: :btree
   add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
 
   create_table "oauth_access_grants", force: true do |t|
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 20140115221314) do
     t.boolean  "admin",              default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "institution_code",   default: "",    null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
