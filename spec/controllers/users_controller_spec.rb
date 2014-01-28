@@ -33,6 +33,13 @@ describe UsersController do
           end
         end
       end
+      context "when request is for a different user than is logged in" do
+        before { get :show, id: 'different' }
+        subject { response }
+        it { should be_redirect }
+        it("should have a 302 status") { expect(subject.status).to be(302) }
+        it { should redirect_to('/login')}
+      end
     end
   end
 end
