@@ -1,41 +1,58 @@
-describe "routes for Login" do
-  describe "GET /users" do
-    subject { get('/users') }
+describe "routes for Users" do
+  describe "GET /" do
+    subject { get('/') }
+    it { should route_to('users#show') }
+  end
+
+  describe "POST /" do
+    subject { post('/') }
     it { should_not be_routable }
   end
 
-  describe "POST /users" do
-    subject { post('/users') }
-    it { should_not be_routable }
+  NON_ROUTABLES =
+    %w{ / /invalid_provider/username /aleph /twitter /facebook /omniauth_callback }
+  # Non-routable
+  NON_ROUTABLES.each do |path|
+    describe "GET /users#{path}" do
+      subject { get("/users") }
+      it { should_not be_routable }
+    end
+
+    describe "POST /users#{path}" do
+      subject { post("/users#{path}") }
+      it { should_not be_routable }
+    end
+
+    describe "PUT /users#{path}" do
+      subject { post("/users#{path}") }
+      it { should_not be_routable }
+    end
+
+    describe "DELETE /users#{path}" do
+      subject { delete("/users#{path}") }
+      it { should_not be_routable }
+    end
   end
 
-  describe "PUT /users" do
-    subject { post('/users') }
-    it { should_not be_routable }
-  end
+  Devise.omniauth_providers.each do |provider|
+    describe "GET /users/#{provider}/username" do
+      subject { get("/users/#{provider}/username") }
+      it { should route_to(controller: "users", action: "show", provider: "#{provider}", id: "username") }
+    end
 
-  describe "DELETE /users" do
-    subject { delete('/users') }
-    it { should_not be_routable }
-  end
+    describe "POST /users#{provider}/username" do
+      subject { post("/users#{provider}/username") }
+      it { should_not be_routable }
+    end
 
-  describe "GET /users/username" do
-    subject { get('/users/username') }
-    it { should route_to(controller: "users", action: "show", id: "username") }
-  end
+    describe "PUT /users#{provider}/username" do
+      subject { post("/users#{provider}/username") }
+      it { should_not be_routable }
+    end
 
-  describe "POST /users/username" do
-    subject { post('/users/username') }
-    it { should_not be_routable }
-  end
-
-  describe "PUT /users/username" do
-    subject { post('/users/username') }
-    it { should_not be_routable }
-  end
-
-  describe "DELETE /users/username" do
-    subject { delete('/users/username') }
-    it { should_not be_routable }
+    describe "DELETE /users#{provider}/username" do
+      subject { delete("/users#{provider}/username") }
+      it { should_not be_routable }
+    end
   end
 end

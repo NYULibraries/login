@@ -2,16 +2,40 @@ require 'spec_helper'
 
 describe User do
   # Make sure the database is clean
-  before { User.destroy_all }
+  before { User.delete_all }
 
   context "when created with factory defaults" do
     subject { create(:user) }
+    it { should be_a(User) }
     it { should_not be_a_new(User) }
     it { should be_valid }
   end
 
+  context "when username is not unique for the same provider" do
+    before { create(:user, provider: 'twitter') }
+    subject { build(:user, provider: 'twitter') }
+    it { should_not be_valid }
+  end
+
+  context "when username is not unique for different providers" do
+    before { create(:user, provider: 'twitter', email: "") }
+    subject { create(:user, provider: 'aleph') }
+    it { should be_valid }
+  end
+
+  context "when provider is nil" do
+    subject { build(:user, provider: nil) }
+    it { should_not be_valid }
+  end
+
+  context "when provider is not valid" do
+    subject { build(:user, provider: "invalid") }
+    it { should_not be_valid }
+  end
+
   context "when valid" do
-    subject(:user) { build(:user, username: 'dev123', email: 'dev123@example.com', institution_code: 'NYUAD') }
+    subject(:user) { build(:user, username: 'dev123', email: 'dev123@example.com', institution_code: 'NYUAD', provider: 'shibboleth') }
+    it { should be_a(User) }
     it { should be_a_new(User) }
     it { should be_valid }
 
@@ -39,7 +63,12 @@ describe User do
     end
 
     describe '#password_required?' do
-      subject { user.password }
+      subject { user.send :password_required? }
+      it { should be_false }
+    end
+
+    describe '#email_required?' do
+      subject { user.send :email_required? }
       it { should be_false }
     end
 
@@ -59,7 +88,19 @@ describe User do
         it { should eql(:NYUAD) }
       end
     end
+
+    describe '#provider' do
+      subject { user.provider }
+      it { should_not be_nil }
+      it { should eql('shibboleth') }
+    end
+
+    describe '#identities' do
+      subject { user.identities }
+      it { should be_blank }
+    end
   end
+
 
   context "when email is invalid" do
     subject { build(:user, email: "dev123") }
@@ -74,6 +115,7 @@ describe User do
     before { create(:user, username: username, email: "dupusername1@example.com") }
     # then build another user based on the name but with a different email
     subject { build(:user, username: username, email: "dupusername2@example.com") }
+    it { should be_a(User) }
     it { should be_a_new(User) }
     it { should_not be_valid }
   end
@@ -85,13 +127,28 @@ describe User do
     before { create(:user, username: "dupemailuser1", email: email) }
     # then build another user based on the email but with a different username
     subject { build(:user, username: "dupemailuser2", email: email) }
+    it { should be_a(User) }
     it { should be_a_new(User) }
     it { should_not be_valid }
   end
 
   context "when institution code is invalid" do
     subject { build(:user, institution_code: 'INVALID') }
+    it { should be_a(User) }
     it { should be_a_new(User) }
     it { should_not be_valid }
+  end
+
+  context "when OmniAuth::AuthHash is present" do
+    let(:user) { create(:user, omniauth_hash: authhash(:aleph)) }
+    subject { user }
+    it { should be_a(User) }
+    it { should_not be_a_new(User) }
+    it { should be_valid }
+
+    describe '#identities' do
+      subject { user.identities }
+      it { should_not be_blank }
+    end
   end
 end

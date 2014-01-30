@@ -2,11 +2,12 @@ require 'spec_helper'
 
 describe Identity do
   # Make sure the database is clean
-  before { User.destroy_all }
+  before { User.delete_all; Identity.delete_all }
 
   context "when created with factory defaults" do
     subject { create(:identity) }
     it { should be_valid }
+    it { should_not be_expired }
   end
 
   context "when uid is nil" do
@@ -44,17 +45,18 @@ describe Identity do
   context "when valid" do
     subject(:identity) { build(:identity) }
     it { should be_valid }
+    it { should be_expired }
 
-    describe '#user' do
-      subject(:user) { identity.user }
-      it { should be_a User }
-
-      describe '#username' do
-        subject { user.username }
-        it { should_not be_nil }
-        it { should eql("developer") }
-      end
-    end
+    # describe '#user' do
+    #   subject(:user) { identity.user }
+    #   it { should be_a User }
+    # 
+    #   describe '#username' do
+    #     subject { user.username }
+    #     it { should_not be_nil }
+    #     it { should eql("developer") }
+    #   end
+    # end
 
     describe '#provider' do
       subject { identity.provider }
@@ -92,6 +94,7 @@ describe Identity do
     context "when created with factory defaults" do
       subject { create(:aleph_identity) }
       it { should be_valid }
+      it { should_not be_expired }
     end
 
     context "when uid is nil" do
@@ -112,17 +115,18 @@ describe Identity do
     context "when valid" do
       subject(:identity) { build(:aleph_identity) }
       it { should be_valid }
+      it { should be_expired }
 
-      describe '#user' do
-        subject(:user) { identity.user }
-        it { should be_a User }
-
-        describe '#username' do
-          subject { user.username }
-          it { should_not be_nil }
-          it { should eql("developer") }
-        end
-      end
+      # describe '#user' do
+      #   subject(:user) { identity.user }
+      #   it { should be_a User }
+      # 
+      #   describe '#username' do
+      #     subject { user.username }
+      #     it { should_not be_nil }
+      #     it { should eql("developer") }
+      #   end
+      # end
 
       describe '#provider' do
         subject { identity.provider }

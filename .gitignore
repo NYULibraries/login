@@ -24,3 +24,6 @@ coverage/
 
 # Ignore the wiki
 wiki
+
+# Ignore pow environment
+.powenv
