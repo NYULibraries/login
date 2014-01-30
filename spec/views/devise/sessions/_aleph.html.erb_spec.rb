@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "login/_aleph.html.erb" do
+describe "devise/sessions/_aleph.html.erb" do
   subject { render; rendered }
   it do
     should match(/<div id="aleph">/)

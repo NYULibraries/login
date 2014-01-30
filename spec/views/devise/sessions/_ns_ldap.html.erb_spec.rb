@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "login/_ns_ldap.html.erb" do
+describe "devise/sessions/_ns_ldap.html.erb" do
   subject { render; rendered }
   it do
     should match(/<div id="ns_ldap">/)

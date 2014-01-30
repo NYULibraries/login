@@ -20,10 +20,16 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  devise:
+    users:
+      user:
+        failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
+        success: "Successfully authenticated from %{kind} account."
   application:
     title_html: Login
     errors:
-      require_current_user: You must be logged in to see users
+      messages:
+        require_login: Please log in
     nyu:
       header: Login with an NYU NetID
       link_text: Click to Login

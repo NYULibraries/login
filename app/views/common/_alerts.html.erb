@@ -1,10 +1,10 @@
-<%- if flash[:alert] -%>
+<%- if flash[:alert].present? -%>
   <%= content_tag(:div, class: ["alert", "alert-error", "fade", "in"]) do -%>
     <a href="#" class="close" data-dismiss="alert">&times;</a>
     <%= content_tag :div, flash[:alert] -%>
   <%- end -%>
 <%- end -%>
-<%- if flash[:notice] -%>
+<%- if flash[:notice].present? -%>
   <%= content_tag(:div, class: ["alert", "alert-info", "fade", "in"]) do -%>
     <a href="#" class="close" data-dismiss="alert">&times;</a>
     <%= content_tag :div, flash[:notice] -%>

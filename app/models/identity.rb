@@ -1,5 +1,8 @@
 class Identity < ActiveRecord::Base
-  VALID_PROVIDERS = %w(nyu_shibboleth ns_ldap aleph twitter facebook)
+  VALID_PROVIDERS = Devise.omniauth_providers.map(&:to_s)
+
+  # Include OmniAuth hash helper methods
+  include OmniAuthHashHelper
 
   belongs_to :user
 
@@ -13,4 +16,9 @@ class Identity < ActiveRecord::Base
 
   # Must have a valid provider
   validates :provider, inclusion: { in: VALID_PROVIDERS }
+
+  # Identities expire in a week's time.
+  def expired?
+    (updated_at.blank? || updated_at < 1.week.ago)
+  end
 end

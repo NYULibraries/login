@@ -1,3 +1,7 @@
+# Set the full host to be the current URL.
+# Super annoying!
+OmniAuth.config.full_host = "https://login.dev"
+
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
@@ -235,18 +239,17 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   require "omniauth-facebook"
-  config.omniauth :facebook, "1455011644721652", "98c5e419df088f734f478969df71e509", 
-    callback_url: "https://login.dev/users/auth/facebook/callback"
+  config.omniauth :facebook, ENV['FACEBOOK_APP_KEY'], ENV['FACEBOOK_APP_SECRET']
   require "omniauth-twitter"
-  config.omniauth :twitter, "GL2ahr9RQ9wnlivaSLvSHw", "0n3ZQbpHcyCkBxm7WHkQtHnOWkxLOkRvfG4WVc9KSOo"
-  require "omniauth-aleph"
-  config.omniauth :aleph, host: "aleph.library.nyu.edu", library: "NYU50", sub_library: "BOBST",
-       form: LoginController.action(:new)
+  config.omniauth :twitter, ENV['TWITTER_APP_KEY'], ENV['TWITTER_APP_SECRET']
   require "omniauth-shibboleth"
   config.omniauth :shibboleth
   require "omniauth-ldap"
   config.omniauth :ldap, host: "dir.nyu.edu", base: "o=nyu",
-    form: LoginController.action(:new)
+    form: ->(env) {}
+  require "omniauth-aleph"
+  config.omniauth :aleph, host: "aleph.library.nyu.edu", library: "NYU50", sub_library: "NYU50",
+    form: ->(env) {}
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

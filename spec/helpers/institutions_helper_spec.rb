@@ -57,18 +57,18 @@ describe InstitutionsHelper do
   end
 
   describe '#url_for' do
-    subject { url_for({ controller: :users, action: :show, id: "username" }) }
+    subject { url_for({ controller: :users, action: :show, provider: "aleph", id: "username" }) }
     it { should_not be_nil }
     it { should be_a(String) }
     it { should_not be_empty }
 
     context 'when the request doesn\'t specify institute' do
-      it { should eql("/users/username") }
+      it { should eql("/users/aleph/username") }
     end
 
     context 'when the request specifies the New School institute' do
-      before { allow(self).to receive(:institution_param).and_return(:NS) }
-      it { should eql("/users/username?institute=NS") }
+      before { allow(self).to receive(:institution_param).and_return(:ns) }
+      it { should eql("/users/aleph/username/ns") }
     end
   end
 end

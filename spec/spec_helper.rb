@@ -43,4 +43,7 @@ RSpec.configure do |config|
 
   # Include Login Macros
   config.extend LoginMacros, type: :controller
+
+  # Include OmniAuth Hash Macros
+  config.include OmniAuthHashMacros
 end

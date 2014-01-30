@@ -4,7 +4,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
 
       ## Database authenticatable
       t.string :username, null: false, default: ""
-      t.string :email,    null: false, default: ""
+      t.string :email, null: false, default: ""
 
       ## Trackable
       t.integer :sign_in_count, default: 0
@@ -21,7 +21,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :users, :username, unique: true
+    # add_index :users, :username, unique: true
     add_index :users, :email, unique: true
     # add_index :users, :authentication_token, unique: true
   end
