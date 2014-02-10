@@ -27,3 +27,6 @@ wiki
 
 # Ignore pow environment
 .powenv
+
+# Ignore ruby version
+.ruby-version

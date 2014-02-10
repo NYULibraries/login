@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe User do
   # Make sure the database is clean
-  before { User.delete_all }
+  before { User.destroy_all }
 
   context "when created with factory defaults" do
     subject { create(:user) }
@@ -23,6 +23,11 @@ describe User do
     it { should be_valid }
   end
 
+  context "when provider is nyu_shibboleth" do
+    subject { build(:user, provider: "nyu_shibboleth") }
+    it { should be_valid }
+  end
+
   context "when provider is nil" do
     subject { build(:user, provider: nil) }
     it { should_not be_valid }
@@ -33,8 +38,18 @@ describe User do
     it { should_not be_valid }
   end
 
+  context "when provider is shibboleth" do
+    subject { build(:user, provider: "shibboleth") }
+    it { should_not be_valid }
+  end
+
+  context "when provider is shibboleth_passive" do
+    subject { build(:user, provider: "shibboleth_passive") }
+    it { should_not be_valid }
+  end
+
   context "when valid" do
-    subject(:user) { build(:user, username: 'dev123', email: 'dev123@example.com', institution_code: 'NYUAD', provider: 'shibboleth') }
+    subject(:user) { build(:user, username: 'dev123', email: 'dev123@example.com', institution_code: 'NYUAD', provider: 'nyu_shibboleth') }
     it { should be_a(User) }
     it { should be_a_new(User) }
     it { should be_valid }
@@ -92,7 +107,7 @@ describe User do
     describe '#provider' do
       subject { user.provider }
       it { should_not be_nil }
-      it { should eql('shibboleth') }
+      it { should eql('nyu_shibboleth') }
     end
 
     describe '#identities' do

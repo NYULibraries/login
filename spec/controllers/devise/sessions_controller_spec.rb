@@ -92,7 +92,7 @@ module Devise
             should render_template("layouts/login")
             should render_template("sessions/new")
             should render_template("common/_alerts")
-            should render_template("sessions/_ns_ldap")
+            should render_template("sessions/_new_school_ldap")
           end
         end
       end

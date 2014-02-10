@@ -5,7 +5,7 @@ rvm:
   - 2.1.0
 
 env:
-  - DB_USER=postgres
+  - LOGIN_DB_USER=postgres
 
 before_script:
   - psql -c 'create database login_test;' -U $DB_USER

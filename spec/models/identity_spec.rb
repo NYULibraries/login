@@ -32,8 +32,23 @@ describe Identity do
     it { should_not be_valid }
   end
 
+  context "when provider is nyu_shibboleth" do
+    subject { build(:identity, provider: "nyu_shibboleth") }
+    it { should be_valid }
+  end
+
   context "when provider is not valid" do
     subject { build(:identity, provider: "invalid") }
+    it { should_not be_valid }
+  end
+
+  context "when provider is shibboleth" do
+    subject { build(:identity, provider: "shibboleth") }
+    it { should_not be_valid }
+  end
+
+  context "when provider is shibboleth_passive" do
+    subject { build(:identity, provider: "shibboleth_passive") }
     it { should_not be_valid }
   end
 

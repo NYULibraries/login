@@ -6,6 +6,11 @@ module Views
       def breadcrumbs
         super << "Login"
       end
+
+      # Override to only link to logout
+      def login(params={})
+        link_to_logout(params) if current_user
+      end
     end
   end
 end

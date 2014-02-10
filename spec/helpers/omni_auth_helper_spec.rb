@@ -36,15 +36,22 @@ describe OmniAuthHelper do
     end
   end
 
-  describe '#omniauth_provider' do
-    subject { omniauth_provider }
+  describe '#omniauth_identity_provider' do
+    subject { omniauth_identity_provider }
     context 'when the request enviroment doesn\'t have an omniauth hash' do
       it { should be_blank }
     end
     context 'when the request enviroment has a valid omniauth hash' do
-      before { params[:action] = "aleph"; @request.env['omniauth.auth'] = authhash(:aleph) }
-      it { should_not be_blank }
-      it { should eq("aleph") }
+      context "and it's from an Aleph login" do
+        before { params[:action] = "aleph"; @request.env['omniauth.auth'] = authhash(:aleph) }
+        it { should_not be_blank }
+        it { should eq("aleph") }
+      end
+      context "and it's from a passive shibboleth login" do
+        before { params[:action] = "shibboleth_passive"; @request.env['omniauth.auth'] = authhash(:shibboleth_passive) }
+        it { should_not be_blank }
+        it { should eq("nyu_shibboleth") }
+      end
     end
   end
 

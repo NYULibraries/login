@@ -1,3 +1,4 @@
-<%= render "common/alerts", flash: flash %>
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<%= content_tag(:h1, t(:greeting_html, scope: [:application, :users, :user], username:@user.username)) %>
+<%= content_tag(:p, t(:info_html, scope: [:application, :users, :user], provider: @user.provider.titleize, time: @user.current_sign_in_at.to_formatted_s(:long))) %>
+<%= content_tag(:p, t(:sign_in_count_html, scope: [:application, :users, :user], sign_in_count: @user.sign_in_count.ordinalize)) %>
+<%= content_tag(:p, t(:admin_html, scope: [:application, :users, :user])) if @user.admin? %>

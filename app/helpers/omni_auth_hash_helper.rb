@@ -14,8 +14,15 @@ module OmniAuthHashHelper
     omniauth_hash.uid if omniauth_hash?
   end
 
-  def omniauth_provider
-    omniauth_hash.provider if omniauth_hash?
+  def omniauth_identity_provider
+    if omniauth_hash?
+      @omniauth_identity_provider ||= case omniauth_hash.provider
+        when 'shibboleth_passive'
+          'nyu_shibboleth'
+        else
+          omniauth_hash.provider
+        end
+    end
   end
 
   def omniauth_info
@@ -32,7 +39,7 @@ module OmniAuthHashHelper
 
   def omniauth_username
     if omniauth_hash?
-      @omniauth_username ||= case omniauth_provider
+      @omniauth_username ||= case omniauth_hash.provider
         when "twitter", "facebook"
           omniauth_info.nickname
         else

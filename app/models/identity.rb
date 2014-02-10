@@ -1,5 +1,7 @@
 class Identity < ActiveRecord::Base
-  VALID_PROVIDERS = Devise.omniauth_providers.map(&:to_s)
+  VALID_PROVIDERS = Devise.omniauth_providers.map(&:to_s).delete_if do |item|
+    item === "shibboleth_passive"
+  end
 
   # Include OmniAuth hash helper methods
   include OmniAuthHashHelper

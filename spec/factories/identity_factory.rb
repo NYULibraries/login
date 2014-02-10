@@ -219,9 +219,29 @@ FactoryGirl.define do
         }
       })
     end
+    trait :nyu_shibboleth do
+      provider 'nyu_shibboleth'
+      uid 'nyu123'
+      properties({
+        nickname: 'nyu123',
+        email: 'nyu123@nyu.edu',
+        name: 'N Yu'
+      })
+    end
+    trait :shibboleth_passive do
+      provider 'nyu_shibboleth'
+      uid 'passivist'
+      properties({
+        nickname: 'passivist',
+        email: 'passivist@shibboleth.edu',
+        name: 'Pas Sivist'
+      })
+    end
 
     factory :aleph_identity,   traits: [:aleph]
     factory :twitter_identity,   traits: [:twitter]
     factory :facebook_identity,   traits: [:facebook]
+    factory :nyu_shibboleth_identity,   traits: [:nyu_shibboleth]
+    factory :shibboleth_passive_identity,   traits: [:shibboleth_passive]
   end
 end
