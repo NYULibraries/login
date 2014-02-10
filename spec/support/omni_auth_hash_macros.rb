@@ -3,7 +3,7 @@ module OmniAuthHashMacros
     authhash = OmniAuth::AuthHash.new
     attributes = attributes_for("#{provider}_identity")
     authhash.uid = attributes[:uid]
-    authhash.provider = attributes[:provider]
+    authhash.provider = "#{provider}"
     properties = attributes[:properties]
     name = properties[:name]
     email = properties[:email]

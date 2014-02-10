@@ -11,24 +11,41 @@
 # Configure Using Gemfile
 # gem 'pg'
 #
-shared: &database
+postgres: &postgres
   adapter: postgresql
   encoding: unicode
   pool: 5
-  username: <%= (ENV['DB_USER'] || "login") %>
-  password: <%= (ENV['DB_PASSWORD'] || "") %>
+
+local: &local
+  <<: *postgres
+  username: <%= (ENV['LOGIN_DB_USER'] || "login") %>
+  password: <%= (ENV['LOGIN_DB_PASSWORD'] || "") %>
+
+remote: &remote
+  <<: *local
+  host: <%= ENV['LOGIN_DB_HOST'] %>
+  port: <%= ENV['LOGIN_DB_PORT'] %>
+  database: <%= ENV['LOGIN_DB_DATABASE'] %>
+
+remote_or_local: &remote_or_local
+  <<: *local
+  host: <%= (ENV['LOGIN_DB_HOST'] || "localhost") %>
+  port: <%= (ENV['LOGIN_DB_PORT'] || "") %>
+  database: <%= (ENV['LOGIN_DB_DATABASE'] || "login") %>
 
 development:
-  <<: *database
-  database: login_development
+  <<: *remote_or_local
+  database: <%= (ENV['LOGIN_DB_DATABASE'] || "login_development") %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  <<: *database
+  <<: *local
   database: login_test
 
+staging:
+  <<: *remote
+
 production:
-  <<: *database
-  database: login_production
+  <<: *remote

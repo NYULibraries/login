@@ -32,11 +32,15 @@ gem "compass-rails", "~> 1.1.3"
 gem "mustache", "0.99.4"
 gem "mustache-rails", "~> 0.2.3", :require => "mustache/railtie"
 
-# Use the NYU Libraries Assets gem
+# Use the NYU Libraries assets gem
 # gem "nyulibraries-assets", git: "git://github.com/NYULibraries/nyulibraries-assets.git", tag: 'v2.0.1'
 gem "nyulibraries-assets", git: "git://github.com/NYULibraries/nyulibraries-assets.git", branch: 'development-login'
 # gem "nyulibraries-assets", path: "/Users/dalton/Documents/workspace/nyulibraries-assets"
 
+# Use the NYU Libraries deploy gem
+gem "nyulibraries-deploy", git: "git://github.com/NYULibraries/nyulibraries-deploy.git"# , tag: 'v3.2.5'
+
+# Used for determining which institution is in play
 gem "institutions", "~> 0.1.3"
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -55,6 +59,8 @@ gem "ox", "~> 2.0.0"
 gem "omniauth", "~> 1.2.0"
 # Shibboleth strategy
 gem "omniauth-shibboleth", "~> 1.1.1"
+# Passive Shibboleth strategy
+gem "omniauth-shibboleth-passive", "~> 0.1.0"
 # Facebook strategy
 gem "omniauth-facebook", "~> 1.6.0"
 # Twitter strategy
@@ -90,8 +96,6 @@ group :development, :test do
   gem "rspec-rails", "~> 2.14.0"
   # Phantomjs for headless browser testing
   gem "phantomjs", ">= 1.9.0"
-  # Teaspoon for javascript testing
-  # gem "teaspoon", "~> 0.7.7"
   # Use factory girl for creating models
   gem "factory_girl_rails", "~> 4.3.0"
   # Use pry-debugger as the REPL and for debugging
@@ -100,7 +104,6 @@ end
 
 # Development gems
 group :development do
-  gem 'guard-rspec', require: false
   gem "better_errors", "~> 1.1.0", platform: :ruby
   gem "binding_of_caller", "~> 0.7.0", platform: :ruby
 end
@@ -109,8 +112,4 @@ end
 group :test do
   # Coveralls for testing coverage
   gem 'coveralls', "~> 0.7.0", require: false
-  # VCR for deterministic HTTP requests
-  gem "vcr", "~> 2.6.0"
-  # WebMock for HTTP stubbing
-  gem "webmock", "~> 1.15.0"
 end

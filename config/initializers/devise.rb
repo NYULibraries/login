@@ -1,6 +1,6 @@
 # Set the full host to be the current URL.
 # Super annoying!
-OmniAuth.config.full_host = "https://login.dev"
+OmniAuth.config.full_host = (ENV['OMNIAUTH_FULL_HOST'] || "https://login.dev")
 
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
@@ -243,10 +243,14 @@ Devise.setup do |config|
   require "omniauth-twitter"
   config.omniauth :twitter, ENV['TWITTER_APP_KEY'], ENV['TWITTER_APP_SECRET']
   require "omniauth-shibboleth"
-  config.omniauth :shibboleth
+  config.omniauth :shibboleth, name: :nyu_shibboleth
+  require "omniauth-shibboleth-passive"
+  config.omniauth :shibboleth_passive
   require "omniauth-ldap"
-  config.omniauth :ldap, host: "dir.nyu.edu", base: "o=nyu",
-    form: ->(env) {}
+  config.omniauth :ldap, name: "new_school_ldap", host: ENV['NEWSCHOOL_LDAP_HOST'], 
+    port: ENV['NEWSCHOOL_LDAP_PORT'], bind_dn: ENV['NEWSCHOOL_LDAP_BIND_DN'],
+      password: ENV['NEWSCHOOL_LDAP_PASSWORD'], base: ENV['NEWSCHOOL_LDAP_BASE'],
+        uid: ENV['NEWSCHOOL_LDAP_UID'], method: :ssl, form: ->(env) {}
   require "omniauth-aleph"
   config.omniauth :aleph, host: "aleph.library.nyu.edu", library: "NYU50", sub_library: "NYU50",
     form: ->(env) {}

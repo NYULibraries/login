@@ -75,7 +75,7 @@ describe UsersController do
               expect(identity.properties).not_to be_empty
             end
             it { should be_redirect }
-            it { should redirect_to user_url(id: "username", provider: "aleph") }
+            it { should redirect_to root_url }
           end
         end
         context 'when the omniauth.auth environment provider is not aleph' do
@@ -111,7 +111,7 @@ describe UsersController do
             expect(identity.properties).not_to be_empty
           end
           it { should be_redirect }
-          it { should redirect_to user_url(id: "libtechnyu", provider: "twitter") }
+          it { should redirect_to root_url }
         end
         context 'when the omniauth.auth environment provider is not twitter' do
           before { @request.env['omniauth.auth'].provider = "invalid" }
@@ -146,9 +146,79 @@ describe UsersController do
             expect(identity.properties).not_to be_empty
           end
           it { should be_redirect }
-          it { should redirect_to user_url(id: "developer", provider: "facebook") }
+          it { should redirect_to root_url }
         end
         context 'when the omniauth.auth environment provider is not facebook' do
+          before { @request.env['omniauth.auth'].provider = "invalid" }
+          it("should not assign @user") { expect(assigns(:identity)).to be_nil }
+          it { should be_redirect }
+          it { should redirect_to(login_url) }
+        end
+      end
+      context 'when the omniauth.auth environment is not present' do
+        it("should not assign @user") { expect(assigns(:identity)).to be_nil }
+        it { should be_redirect }
+        it { should redirect_to(login_url) }
+      end
+    end
+
+    describe "GET 'nyu_shibboleth'" do
+      subject { get :nyu_shibboleth; response }
+      context 'when the omniauth.auth environment is present' do
+        before { @request.env['omniauth.auth'] = authhash(:nyu_shibboleth) }
+        context 'when the omniauth.auth.provider is shibboleth_passive' do
+          let(:identity) { assigns(:user).identities.first }
+          it "should assign a nyu_shibboleth user to @user" do
+            subject
+            expect(assigns(:user)).to be_a(User)
+            expect(assigns(:user)).not_to be_nil
+            expect(assigns(:user).provider).to eq("nyu_shibboleth")
+            expect(identity).not_to be_nil
+            expect(identity).to be_a(Identity)
+            expect(identity.uid).not_to be_nil
+            expect(identity.provider).to eq("nyu_shibboleth")
+            expect(identity.properties).not_to be_nil
+            expect(identity.properties).not_to be_empty
+          end
+          it { should be_redirect }
+          it { should redirect_to root_url }
+        end
+        context 'when the omniauth.auth environment provider is not nyu_shibboleth' do
+          before { @request.env['omniauth.auth'].provider = "invalid" }
+          it("should not assign @user") { expect(assigns(:identity)).to be_nil }
+          it { should be_redirect }
+          it { should redirect_to(login_url) }
+        end
+      end
+      context 'when the omniauth.auth environment is not present' do
+        it("should not assign @user") { expect(assigns(:identity)).to be_nil }
+        it { should be_redirect }
+        it { should redirect_to(login_url) }
+      end
+    end
+
+    describe "GET 'shibboleth_passive'" do
+      subject { get :shibboleth_passive; response }
+      context 'when the omniauth.auth environment is present' do
+        before { @request.env['omniauth.auth'] = authhash(:shibboleth_passive) }
+        context 'when the omniauth.auth.provider is shibboleth_passive' do
+          let(:identity) { assigns(:user).identities.first }
+          it "should assign a nyu_shibboleth user to @user" do
+            subject
+            expect(assigns(:user)).to be_a(User)
+            expect(assigns(:user)).not_to be_nil
+            expect(assigns(:user).provider).to eq("nyu_shibboleth")
+            expect(identity).not_to be_nil
+            expect(identity).to be_a(Identity)
+            expect(identity.uid).not_to be_nil
+            expect(identity.provider).to eq("nyu_shibboleth")
+            expect(identity.properties).not_to be_nil
+            expect(identity.properties).not_to be_empty
+          end
+          it { should be_redirect }
+          it { should redirect_to root_url }
+        end
+        context 'when the omniauth.auth environment provider is not shibboleth_passive' do
           before { @request.env['omniauth.auth'].provider = "invalid" }
           it("should not assign @user") { expect(assigns(:identity)).to be_nil }
           it { should be_redirect }

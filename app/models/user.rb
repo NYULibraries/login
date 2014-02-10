@@ -2,7 +2,6 @@
 # and a unique and valid email address
 class User < ActiveRecord::Base
   VALID_INSTITUTION_CODES = Institutions.institutions.keys.map(&:to_s)
-  VALID_PROVIDERS = Devise.omniauth_providers.map(&:to_s)
 
   # Include OmniAuth::AuthHash helper methods
   include OmniAuthHashHelper
@@ -25,8 +24,8 @@ class User < ActiveRecord::Base
   # Must have a unique uid per provider
   validates :username, uniqueness: { scope: :provider }
 
-  # Must have a valid provider
-  validates :provider, inclusion: { in: VALID_PROVIDERS }
+  # Must have a valid identity provider
+  validates :provider, inclusion: { in: Identity::VALID_PROVIDERS }
 
   # Must have a valid institution code
   validates :institution_code, inclusion: { in: VALID_INSTITUTION_CODES },
@@ -61,7 +60,7 @@ class User < ActiveRecord::Base
 
   def create_identity_from_omniauth_hash
     if omniauth_hash?
-      identities.create(uid: omniauth_uid, provider: omniauth_provider, properties: omniauth_properties)
+      identities.create(uid: omniauth_uid, provider: omniauth_identity_provider, properties: omniauth_properties)
     end
   end
 end
