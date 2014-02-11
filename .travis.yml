@@ -8,7 +8,7 @@ env:
   - LOGIN_DB_USER=postgres
 
 before_script:
-  - psql -c 'create database login_test;' -U $DB_USER
+  - psql -c 'create database login_test;' -U $LOGIN_DB_USER
   - bundle exec rake db:schema:load RAILS_ENV=test
 
 bundler_args: --without development
