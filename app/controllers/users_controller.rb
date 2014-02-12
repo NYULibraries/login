@@ -41,9 +41,10 @@ class UsersController < Devise::OmniauthCallbacksController
       kind = omniauth_identity_provider.titleize
       set_flash_message(:notice, :success, kind: kind) if is_navigational_format?
     else
-      redirect_to login_url
+      redirect_to after_omniauth_failure_path_for(resource_name)
     end
   end
+
   Devise.omniauth_providers.each do |omniauth_provider|
     alias_method omniauth_provider, :omniauth_callback
   end
