@@ -33,22 +33,22 @@ module Doorkeeper
         it { should be_redirect }
         it { should redirect_to('/login') }
       end
-    end
-    describe "PUT 'update'" do
-      before do
-        put :update, id: application.id, application: { name: "#{application.name} redux" }
+      describe "PUT 'update'" do
+        before do
+          put :update, id: application.id, application: { name: "#{application.name} redux" }
+        end
+        subject { response }
+        it { should be_redirect }
+        it { should redirect_to('/login') }
       end
-      subject { response }
-      it { should be_redirect }
-      it { should redirect_to('/login') }
+      describe "DELETE 'destroy'" do
+        before { delete :destroy, id: application.id }
+        subject { response }
+        it { should be_redirect }
+        it { should redirect_to('/login') }
+      end
     end
-    describe "DELETE 'destroy'" do
-      before { delete :destroy, id: application.id }
-      subject { response }
-      it { should be_redirect }
-      it { should redirect_to('/login') }
-    end
-    context "when not logged in" do
+    context "when logged in" do
       context "and the user is not an admin" do
         login_user
         describe "GET 'index'" do
