@@ -7,7 +7,7 @@
 
 The NYU Libraries' Login application is an [OAuth2](http://oauth.net/2/) server
 that provides registered clients with a set of user metadata that can be used for
-authorize decisions and feature provision.
+authorization decisions and feature provision.
 
 ## Authentication
 Users can authenticate via the services listed below:
