@@ -19,7 +19,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails', '~> 3.0.0'
+gem 'jquery-rails', '~> 3.1.0'
 
 # Use modernizr for browser feature detection
 gem "modernizr-rails", "~> 2.7.0"
@@ -53,7 +53,7 @@ gem 'turbolinks', '~> 2.2.0'
 gem 'devise', '~> 3.2.0'
 
 # Use Ox for parsing XML
-gem "ox", "~> 2.0.0"
+gem "ox", "~> 2.1.0"
 
 # Use omniauth for logging in from multiple providers
 gem "omniauth", "~> 1.2.0"
@@ -97,7 +97,7 @@ group :development, :test do
   # Phantomjs for headless browser testing
   gem "phantomjs", ">= 1.9.0"
   # Use factory girl for creating models
-  gem "factory_girl_rails", "~> 4.3.0"
+  gem "factory_girl_rails", "~> 4.4.0"
   # Use pry-debugger as the REPL and for debugging
   gem 'pry-debugger', '~> 0.2.2'
 end

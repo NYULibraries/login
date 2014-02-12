@@ -32,7 +32,10 @@ en:
         greeting_html: "Hi %{username}!"
         info_html: "You logged in via %{provider} at %{time}"
         sign_in_count_html: "This was the %{sign_in_count} time you've logged in to the NYU Libraries' services."
-        admin_html: You are an admin.
+        admin:
+          greeting_html: You are an admin.
+          manage_html: Manage OAuth2 %{link}
+          applications_html: applications
     errors:
       messages:
         require_login: Please log in

@@ -1,3 +1,4 @@
+require 'spec_helper'
 describe "routes for Users" do
   describe "GET /" do
     subject { get('/') }
@@ -7,6 +8,11 @@ describe "routes for Users" do
   describe "POST /" do
     subject { post('/') }
     it { should_not be_routable }
+  end
+
+  describe "GET /api/v1/user" do
+    subject { get('/api/v1/user') }
+    it { should route_to({ controller: "users", action: "api", format: :json }) }
   end
 
   NON_ROUTABLES =

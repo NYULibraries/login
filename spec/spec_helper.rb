@@ -41,9 +41,20 @@ RSpec.configure do |config|
   # Include Devise test helpers
   config.include Devise::TestHelpers, type: :controller
 
+  # Include User Macros
+  config.include UserMacros, type: :controller
+
   # Include Login Macros
   config.extend LoginMacros, type: :controller
 
+  # Include Doorkeeper Macros
+  config.extend DoorkeeperMacros, type: :controller
+
   # Include OmniAuth Hash Macros
   config.include OmniAuthHashMacros
+
+  # Run factory girl lint before the suite
+  config.before(:suite) do
+    FactoryGirl.lint
+  end
 end

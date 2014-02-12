@@ -1,3 +1,4 @@
+require 'spec_helper'
 describe "routes for Devise::Sessions" do
   describe "GET /login" do
     context "when no institute is passed" do
