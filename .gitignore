@@ -28,5 +28,11 @@ wiki
 # Ignore pow environment
 .powenv
 
+# Ignore the httpd environment
+.httpdenv
+
+# Ignore the capistrano environment
+.capenv
+
 # Ignore ruby version
 .ruby-version

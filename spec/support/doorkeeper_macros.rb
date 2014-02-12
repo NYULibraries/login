@@ -9,6 +9,14 @@ module DoorkeeperMacros
   end
   private :set_oauth_application
 
+  def set_code
+    let(:code) do
+      get :new, client_id: application.uid,
+        redirect_uri: application.redirect_uri, response_type: "code"
+      response.location.gsub("#{application.redirect_uri}?code=", "")
+    end
+  end
+
   def set_access_token
     set_resource_owner
     set_oauth_application
