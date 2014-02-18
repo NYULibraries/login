@@ -60,5 +60,26 @@ describe "routes for Users" do
       subject { delete("/users#{provider}/username") }
       it { should_not be_routable }
     end
+
+    # Make sure usernames can have dots
+    describe "GET /users/#{provider}/user.name" do
+      subject { get("/users/#{provider}/user.name") }
+      it { should route_to(controller: "users", action: "show", provider: "#{provider}", id: "user.name") }
+    end
+
+    describe "POST /users#{provider}/user.name" do
+      subject { post("/users#{provider}/user.name") }
+      it { should_not be_routable }
+    end
+
+    describe "PUT /users#{provider}/user.name" do
+      subject { post("/users#{provider}/user.name") }
+      it { should_not be_routable }
+    end
+
+    describe "DELETE /users#{provider}/user.name" do
+      subject { delete("/users#{provider}/user.name") }
+      it { should_not be_routable }
+    end
   end
 end
