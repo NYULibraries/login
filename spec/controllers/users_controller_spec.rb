@@ -100,7 +100,6 @@ describe UsersController do
     end
   end
   describe "OmniAuth callback methods" do
-    before { @request.env["devise.mapping"] = Devise.mappings[:user] }
     describe "GET 'aleph'" do
       subject { get :aleph; response }
       context 'when the omniauth.auth environment is present' do
