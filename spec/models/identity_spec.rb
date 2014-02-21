@@ -65,7 +65,7 @@ describe Identity do
     # describe '#user' do
     #   subject(:user) { identity.user }
     #   it { should be_a User }
-    # 
+    #
     #   describe '#username' do
     #     subject { user.username }
     #     it { should_not be_nil }
@@ -135,7 +135,7 @@ describe Identity do
       # describe '#user' do
       #   subject(:user) { identity.user }
       #   it { should be_a User }
-      # 
+      #
       #   describe '#username' do
       #     subject { user.username }
       #     it { should_not be_nil }

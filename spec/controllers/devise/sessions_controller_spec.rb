@@ -139,7 +139,7 @@ module Devise
         end
       end
     end
-  
+
     context 'when logged in' do
       login_user
       render_views false
