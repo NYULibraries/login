@@ -243,7 +243,9 @@ Devise.setup do |config|
   require "omniauth-twitter"
   config.omniauth :twitter, ENV['TWITTER_APP_KEY'], ENV['TWITTER_APP_SECRET']
   require "omniauth-shibboleth"
-  config.omniauth :shibboleth, name: :nyu_shibboleth
+  config.omniauth :shibboleth, name: :nyu_shibboleth, uid_field: 'uid',
+    info_fields: { email: 'email', nickname: 'givenName' , first_name: 'givenName',
+      last_name: 'sn' }, extra_fields: ['nyuidn', 'entitlement']
   require "omniauth-shibboleth-passive"
   config.omniauth :shibboleth_passive
   require "omniauth-ldap"
