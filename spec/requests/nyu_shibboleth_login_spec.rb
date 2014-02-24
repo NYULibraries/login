@@ -1,35 +1,84 @@
 require 'spec_helper'
 describe "NYU Shibboleth Login" do
-  before { https! }
+  before { https!; get("/users/auth/nyu_shibboleth/callback", nil, environment) }
   context "when there is no Shibboleth session in the SP " do
-    it("should not have an OmniAuth AuthHash after running") do
-      expect(@request).to be_nil
-      get "/users/auth/nyu_shibboleth/callback"
-      expect(@request.env['omniauth.auth']).to be_nil
+    let(:environment) { nil }
+    describe 'OmniAuth::AuthHash' do
+      subject(:omniauth_hash) { @request.env['omniauth.auth'] if @request.present? }
+      it { should be_blank }
     end
   end
   context "when there is a Shibboleth session in the SP " do
-    it("should have an OmniAuth AuthHash after running") do
-      expect(@request).to be_nil
-      https!
-      get "/users/auth/nyu_shibboleth/callback", nil, shibboleth_env
-      expect(@request.env['omniauth.auth']).not_to be_nil
-      expect(@request.env['omniauth.auth'].uid).not_to be_nil
-      expect(@request.env['omniauth.auth'].uid).to eq('dev1')
-      expect(@request.env['omniauth.auth'].info.name).not_to be_nil
-      expect(@request.env['omniauth.auth'].info.name).to eq('Dev Eloper')
-      expect(@request.env['omniauth.auth'].info.email).not_to be_nil
-      expect(@request.env['omniauth.auth'].info.email).to eq('dev.eloper@nyu.edu')
-      expect(@request.env['omniauth.auth'].info.nickname).not_to be_nil
-      expect(@request.env['omniauth.auth'].info.nickname).to eq('Dev')
-      expect(@request.env['omniauth.auth'].info.first_name).not_to be_nil
-      expect(@request.env['omniauth.auth'].info.first_name).to eq('Dev')
-      expect(@request.env['omniauth.auth'].info.last_name).not_to be_nil
-      expect(@request.env['omniauth.auth'].info.last_name).to eq('Eloper')
-      expect(@request.env['omniauth.auth'].extra.raw_info.nyuidn).not_to be_nil
-      expect(@request.env['omniauth.auth'].extra.raw_info.nyuidn).to eq('1234567890')
-      expect(@request.env['omniauth.auth'].extra.raw_info.entitlement).not_to be_nil
-      expect(@request.env['omniauth.auth'].extra.raw_info.entitlement).to eq('urn:mace:nyu.edu:entl:lib:eresources;urn:mace:incommon:entitlement:common:1')
+    let(:environment) { shibboleth_env }
+    describe 'User creation' do
+      it "should create the User and assign it to @User" do
+        expect(assigns(:user)).to be_a(User)
+        expect(assigns(:user)).not_to be_nil
+        expect(assigns(:user)).not_to be_a_new(User)
+        expect(assigns(:user).username).to eq('dev1')
+      end
+    end
+    describe 'OmniAuth::AuthHash' do
+      subject(:omniauth_hash) { @request.env['omniauth.auth'] if @request.present? }
+      it { should_not be_blank }
+      describe '#uid' do
+        subject { omniauth_hash.uid }
+        it { should_not be_blank }
+        it { should eq('dev1') }
+      end
+      describe '#provider' do
+        subject { omniauth_hash.provider }
+        it { should_not be_blank }
+        it { should eq('nyu_shibboleth') }
+      end
+      describe '#info' do
+        subject(:info) { omniauth_hash.info }
+        it { should_not be_blank }
+        describe '#name' do
+          subject { info.name }
+          it { should_not be_blank }
+          it { should eq('Dev Eloper') }
+        end
+        describe '#email' do
+          subject { info.email }
+          it { should_not be_blank }
+          it { should eq('dev.eloper@nyu.edu') }
+        end
+        describe '#nickname' do
+          subject { info.nickname }
+          it { should_not be_blank }
+          it { should eq('Dev') }
+        end
+        describe '#first_name' do
+          subject { info.first_name }
+          it { should_not be_blank }
+          it { should eq('Dev') }
+        end
+        describe '#last_name' do
+          subject { info.last_name }
+          it { should_not be_blank }
+          it { should eq('Eloper') }
+        end
+      end
+      describe '#extra' do
+        subject(:extra) { omniauth_hash.extra }
+        it { should_not be_blank }
+        it { should_not be_empty }
+        describe '#raw_info' do
+          subject(:raw_info) { extra.raw_info }
+          it { should_not be_blank }
+          describe '#nyuidn' do
+            subject { raw_info.nyuidn }
+            it { should_not be_blank }
+            it { should eq('1234567890') }
+          end
+          describe '#entitlement' do
+            subject { raw_info.entitlement }
+            it { should_not be_blank }
+            it { should eq('urn:mace:nyu.edu:entl:lib:eresources;urn:mace:incommon:entitlement:common:1') }
+          end
+        end
+      end
     end
   end
 end
