@@ -30,7 +30,6 @@ class UsersController < Devise::OmniauthCallbacksController
     @user = User.find_or_initialize_by(username: omniauth_username, provider: omniauth_identity_provider)
     # Initialize with an email address if the omniauth hash has it.
     @user.email = omniauth_email if @user.email.blank? && omniauth_email.present?
-    @user.admin = true if ["libtechnyu"].include? omniauth_username
     # Set the OmniAuth::AuthHash for the user
     @user.omniauth_hash = omniauth_hash
     if @user.save 
