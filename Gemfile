@@ -114,4 +114,5 @@ group :test do
   gem 'coveralls', "~> 0.7.0", require: false
   gem 'cucumber-rails', '~> 1.4.0'
   gem 'pickle', '~> 0.4.11'
+  gem 'database_cleaner', '~> 1.2.0'
 end
