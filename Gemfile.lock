@@ -222,6 +222,9 @@ GEM
     ox (2.1.0)
     pg (0.17.1)
     phantomjs (1.9.2.1)
+    pickle (0.4.11)
+      cucumber (>= 0.8)
+      rake
     polyglot (0.3.4)
     pry (0.9.12.6)
       coderay (~> 1.0)
@@ -348,6 +351,7 @@ DEPENDENCIES
   ox (~> 2.1.0)
   pg (~> 0.17.1)
   phantomjs (>= 1.9.0)
+  pickle (~> 0.4.11)
   pry-debugger (~> 0.2.2)
   rails (~> 4.0.3)
   rspec-rails (~> 2.14.0)
