@@ -113,4 +113,5 @@ group :test do
   # Coveralls for testing coverage
   gem 'coveralls', "~> 0.7.0", require: false
   gem 'cucumber-rails', '~> 1.4.0'
+  gem 'pickle', '~> 0.4.11'
 end
