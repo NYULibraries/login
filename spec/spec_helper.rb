@@ -22,6 +22,7 @@ Coveralls.wear!
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
+require 'database_cleaner'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -30,23 +31,6 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
-
-# Allows us to store our Shibboleth environment variables
-# without worrying about their keys getting dashes translated to
-# to underscores or getting prefixed with HTTP_ which seems to be
-# a result of https://github.com/rails/rails/pull/9700
-ActionDispatch::Http::Headers.class_eval do
-  def env_name(key)
-    key = key.to_s
-    return key if SHIBBOLETH_ENV.keys.include?(key)
-    if key =~ ActionDispatch::Http::Headers::HTTP_HEADER
-      key = key.upcase.tr('-', '_')
-      key = "HTTP_" + key unless ActionDispatch::Http::Headers::CGI_VARIABLES.include?(key)
-    end
-    key
-  end
-  private :env_name
-end
 
 RSpec.configure do |config|
   # ## Mock Framework
@@ -89,8 +73,19 @@ RSpec.configure do |config|
   # Include Shibboleth Macros
   config.include ShibbolethMacros, type: :request
 
-  # Run factory girl lint before the suite
   config.before(:suite) do
+    # Run factory girl lint before the suite
     FactoryGirl.lint
+
+    # Startout by trucating all the tables
+    DatabaseCleaner.clean_with :truncation
+    # Then use transactions to roll back other changes
+    DatabaseCleaner.strategy = :transaction
+  end
+
+  config.around(:each) do |example|
+    DatabaseCleaner.start
+    example.run
+    DatabaseCleaner.clean
   end
 end
