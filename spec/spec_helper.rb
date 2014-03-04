@@ -22,6 +22,7 @@ Coveralls.wear!
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
+require 'database_cleaner'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -89,8 +90,19 @@ RSpec.configure do |config|
   # Include Shibboleth Macros
   config.include ShibbolethMacros, type: :request
 
-  # Run factory girl lint before the suite
   config.before(:suite) do
+    # Run factory girl lint before the suite
     FactoryGirl.lint
+
+    # Startout by trucating all the tables
+    DatabaseCleaner.clean_with :truncation
+    # Then use transactions to roll back other changes
+    DatabaseCleaner.strategy = :transaction
+  end
+
+  config.around(:each) do |example|
+    DatabaseCleaner.start
+    example.run
+    DatabaseCleaner.clean
   end
 end
