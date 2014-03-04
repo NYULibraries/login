@@ -5,7 +5,9 @@ require File.expand_path('../config/application', __FILE__)
 
 Login::Application.load_tasks
 
-# Add the coveralls task as the default with the appropriate prereqs
-require 'coveralls/rake/task'
-Coveralls::RakeTask.new
-task default: 'coveralls:push'
+if Rails.env.test?
+  # Add the coveralls task as the default with the appropriate prereqs
+  require 'coveralls/rake/task'
+  Coveralls::RakeTask.new
+  task default: 'coveralls:push'
+end
