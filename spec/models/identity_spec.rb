@@ -1,9 +1,6 @@
 require 'spec_helper'
 
 describe Identity do
-  # Make sure the database is clean
-  before { User.delete_all; Identity.delete_all }
-
   context "when created with factory defaults" do
     subject { create(:identity) }
     it { should be_valid }
