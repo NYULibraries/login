@@ -18,7 +18,7 @@ SHIBBOLETH_ENV = {
 }
 # Wear coveralls
 require 'coveralls'
-Coveralls.wear!
+Coveralls.wear_merged!('rails')
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
