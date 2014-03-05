@@ -1,9 +1,10 @@
 Given(/^I am off campus$/) do
-  ENV['REMOTE_ADDR'] = '127.0.0.1'
+  page.driver.options[:headers] = {'REMOTE_ADDR' => '127.0.0.1'}
 end
 
 Given(/^I am at (.+)$/) do |location|
-  ENV['REMOTE_ADDR'] = ip_for_location(location)
+  ip = ip_for_location(location)
+  page.driver.options[:headers] = {'REMOTE_ADDR' => ip}
 end
 
 When(/^I want to login$/) do
