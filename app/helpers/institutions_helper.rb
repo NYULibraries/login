@@ -28,10 +28,11 @@ module InstitutionsHelper
     super options
   end
 
-  # Grab the first institution that matches the client IP
+  # Grab the last institution that matches the client IP
+  # We grab the last since we assume NYU will be the first
   def institution_from_ip
     unless request.nil?
-      @institution_from_ip ||= Institutions.with_ip(request.remote_ip).first
+      @institution_from_ip ||= Institutions.with_ip(request.remote_ip).last
     end
   end
   private :institution_from_ip
