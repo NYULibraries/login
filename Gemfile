@@ -73,6 +73,9 @@ gem "omniauth-ldap", "~> 1.0.4"
 # Use doorkeeper as our OAuth 2.0 provider
 gem "doorkeeper", "~> 1.0.0"
 
+# Figs for configuration
+gem "figs", "~> 1.2.0"
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
