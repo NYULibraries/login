@@ -1,3 +1,5 @@
+# Private institutional settings
+<%= Figs.env.institutions.to_yaml if Figs.env.respond_to?(:institutions)%>
 BOBST:
   name: NYU Libraries' Affiliates
   views:
