@@ -86,5 +86,14 @@ module LoginFeatures
         -> { have_css '.twitter.alt-login' }
       ]
     end
+
+    def logged_in_matchers(location)
+      @logged_in_matchers ||= [
+        -> { have_content 'Successfully authenticated ' },
+        -> { have_content "Hi #{username_for_location(location)}!" },
+        -> { have_content 'You logged in via' },
+        -> { have_content " you've logged in to the NYU Libraries' services." }
+      ]
+    end
   end
 end

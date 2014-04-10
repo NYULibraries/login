@@ -1,5 +1,5 @@
 module LoginFeatures
-  module Institutions
+  module Locations
     def first_ip_for_institute(institute)
       ip_addresses = ::Institutions.institutions[institute.to_sym].ip_addresses
       if ip_addresses.present?
@@ -16,6 +16,14 @@ module LoginFeatures
 
     def ip_for_location(location)
       first_ip_for_institute(institute_for_location(location))
+    end
+
+    def username_for_location(location)
+      ENV["TEST_#{institute_for_location(location)}_USERNAME"]
+    end
+
+    def password_for_location(location)
+      ENV["TEST_#{institute_for_location(location)}_PASSWORD"]
     end
 
     def institute_for_location(location)
