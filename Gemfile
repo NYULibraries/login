@@ -74,7 +74,7 @@ gem "omniauth-ldap", "~> 1.0.4"
 gem "doorkeeper", "~> 1.0.0"
 
 # Figs for configuration
-gem "figs", "~> 1.2.0"
+gem "figs", "~> 2.0.0"
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
