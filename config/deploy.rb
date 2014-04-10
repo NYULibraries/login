@@ -1,6 +1,6 @@
 require 'nyulibraries/deploy/capistrano'
 require 'figs'
-# Load up our figs
+# Load up our figs, again
 Figs.load(stage: fetch(:rails_env))
 set :recipient, "web.services@library.nyu.edu"
 set :app_title, "login"
@@ -19,6 +19,7 @@ set(:app_path, ENV['DEPLOY_PATH'])
 set(:user, ENV['DEPLOY_USER'])
 set(:puma_ports, nil)
 set(:deploy_to, "#{fetch(:app_path)}#{fetch(:application)}")
+
 Figs.env.deploy_servers.each_with_index do |deploy_server, index|
   primary_flag = (index === 1)
   server deploy_server, :app, :web, :db, primary: primary_flag
