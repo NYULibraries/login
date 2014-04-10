@@ -237,11 +237,27 @@ FactoryGirl.define do
         name: 'Pas Sivist'
       })
     end
+    trait :new_school_ldap do
+      provider 'new_school_ldap'
+      uid 'uid=1234567890,ou=People,o=newschool.edu,o=cp'
+      properties({
+        email: 'ns123@newschool.edu',
+        first_name: 'News',
+        last_name: 'Cholar',
+        nickname: "1234567890",
+        extra: {
+          raw_info: {
+            pdsloginid: 'ns123',
+            pdsloginalias: 'ns123'
+          }
+        }
+      })
+    end
 
-    factory :aleph_identity,   traits: [:aleph]
-    factory :twitter_identity,   traits: [:twitter]
-    factory :facebook_identity,   traits: [:facebook]
-    factory :nyu_shibboleth_identity,   traits: [:nyu_shibboleth]
-    factory :shibboleth_passive_identity,   traits: [:shibboleth_passive]
+    factory :aleph_identity, traits: [:aleph]
+    factory :twitter_identity, traits: [:twitter]
+    factory :facebook_identity, traits: [:facebook]
+    factory :nyu_shibboleth_identity, traits: [:nyu_shibboleth]
+    factory :shibboleth_passive_identity, traits: [:shibboleth_passive]
   end
 end
