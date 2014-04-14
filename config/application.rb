@@ -13,13 +13,9 @@ Bundler.require(:default, Rails.env)
 
 require 'nyulibraries-assets'
 
-<<<<<<< HEAD
-=======
 require 'figs'
 # Don't run this initializer on travis.
 Figs.load(stage: Rails.env) unless ENV['TRAVIS']
-
->>>>>>> 8d86d0f3706cb78612f1f9c58e0c1ad128407f01
 module Login
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
