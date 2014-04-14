@@ -4,7 +4,7 @@ FactoryGirl.define do
     provider "twitter"
     uid "1234567890"
     properties({ prop1: "Property 1", prop2: "Property 2" })
-    
+
     trait :aleph do
       provider "aleph"
       uid "USERNAME"
@@ -155,9 +155,9 @@ FactoryGirl.define do
             name: "libtechnyu",
             screen_name: "libtechnyu",
             url: "http://t.co/Ujmbv1PKeq",
-            entities: { 
+            entities: {
               url: {
-                urls: [{ 
+                urls: [{
                   url: 'http://t.co/Ujmbv1PKeq',
                   expanded_url: 'http://library.nyu.edu',
                   display_url: 'library.nyu.edu'
@@ -259,5 +259,6 @@ FactoryGirl.define do
     factory :facebook_identity, traits: [:facebook]
     factory :nyu_shibboleth_identity, traits: [:nyu_shibboleth]
     factory :shibboleth_passive_identity, traits: [:shibboleth_passive]
+    factory :new_school_ldap_identity, traits: [:new_school_ldap]
   end
 end
