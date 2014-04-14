@@ -1,9 +1,16 @@
 # Login
+<<<<<<< HEAD
 
 [![Build Status](https://travis-ci.org/NYULibraries/login.png?branch=master)](https://travis-ci.org/NYULibraries/login)
 [![Dependency Status](https://gemnasium.com/NYULibraries/login.png)](https://gemnasium.com/NYULibraries/login)
 [![Code Climate](https://codeclimate.com/github/NYULibraries/login.png)](https://codeclimate.com/github/NYULibraries/login)
 [![Coverage Status](https://coveralls.io/repos/NYULibraries/login/badge.png?branch=master)](https://coveralls.io/r/NYULibraries/login)
+=======
+[![Build Status](https://travis-ci.org/NYULibraries/login.png?branch=development)](https://travis-ci.org/NYULibraries/login)
+[![Dependency Status](https://gemnasium.com/NYULibraries/login.png)](https://gemnasium.com/NYULibraries/login)
+[![Code Climate](https://codeclimate.com/github/NYULibraries/login.png)](https://codeclimate.com/github/NYULibraries/login)
+[![Coverage Status](https://coveralls.io/repos/NYULibraries/login/badge.png?branch=development)](https://coveralls.io/r/NYULibraries/login)
+>>>>>>> 8d86d0f3706cb78612f1f9c58e0c1ad128407f01
 
 The NYU Libraries' Login application is an [OAuth2](http://oauth.net/2/) server
 that provides registered clients with a set of user metadata that can be used for

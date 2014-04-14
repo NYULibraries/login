@@ -1,22 +1,30 @@
 Given(/^I am off campus$/) do
-  page.driver.options[:headers] = {'REMOTE_ADDR' => '127.0.0.1'}
+  # page.driver.options[:headers] = {'REMOTE_ADDR' => '127.0.0.1'}
 end
 
 Given(/^I am at (.+)$/) do |location|
   ip = ip_for_location(location)
-  page.driver.options[:headers] = {'REMOTE_ADDR' => ip}
+  # page.driver.options[:headers] = {'REMOTE_ADDR' => ip}
 end
 
 When(/^I want to login$/) do
-  visit login_path
+  visit '/login'
 end
 
 When(/^I want to login with (.+)$/) do |account|
-  visit login_path
+  visit login_path(institute_for_location(account))
 end
 
 When(/^I want to login to (.+)$/) do |location|
   visit login_path(institute_for_location(location))
+end
+
+When(/^I enter my New School NetID and password$/) do
+  within("#new_school_ldap") do
+    fill_in 'Enter your NetID Username', with: username_for_location('New School')
+    fill_in 'Enter your NetID Password', with: password_for_location('New School')
+    # click_button 'Login'
+  end
 end
 
 Then(/^I should (not )?see the NYU torch login button$/) do |negator|
@@ -67,6 +75,10 @@ When(/^I press the New School login option$/) do
   click_link 'New School Libraries'
 end
 
-Then(/^I should go to the New School login page$/) do
-  expect(current_path).to eq(login_path('ns'))
+Then(/^I should go to the (.+) login page$/) do |location|
+  expect(current_path).to eq(login_path(institute_for_location(location)))
+end
+
+Then(/^I (not )?should be logged in as (.+) user$/) do |negator, account|
+  expectations_for_page(page, negator, *logged_in_matchers(account))
 end
