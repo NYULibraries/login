@@ -249,7 +249,7 @@ Devise.setup do |config|
   require "omniauth-shibboleth-passive"
   config.omniauth :shibboleth_passive
   require "omniauth-ldap"
-  config.omniauth :ldap, name: "new_school_ldap", host: ENV['NEWSCHOOL_LDAP_HOST'],
+  config.omniauth :ldap, name: 'new_school_ldap', host: ENV['NEWSCHOOL_LDAP_HOST'],
     port: ENV['NEWSCHOOL_LDAP_PORT'], bind_dn: ENV['NEWSCHOOL_LDAP_BIND_DN'],
       password: ENV['NEWSCHOOL_LDAP_PASSWORD'], base: ENV['NEWSCHOOL_LDAP_BASE'],
         uid: ENV['NEWSCHOOL_LDAP_UID'], method: :ssl, form: ->(env) {}
