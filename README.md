@@ -42,4 +42,3 @@ NYU Shibboleth identity and also will have an Aleph identity. A user who logs in
 via the New School's LDAP server will have a New School LDAP identity and an Aleph
 identity. A user who logs in via Aleph, Facebook or Twitter, will only have an Aleph,
 Facebook or Twitter identity.
-
