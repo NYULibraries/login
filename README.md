@@ -1,5 +1,4 @@
 # Login
-
 [![Build Status](https://travis-ci.org/NYULibraries/login.png?branch=development)](https://travis-ci.org/NYULibraries/login)
 [![Dependency Status](https://gemnasium.com/NYULibraries/login.png)](https://gemnasium.com/NYULibraries/login)
 [![Code Climate](https://codeclimate.com/github/NYULibraries/login.png)](https://codeclimate.com/github/NYULibraries/login)
