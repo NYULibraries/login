@@ -7,10 +7,29 @@ module LoginFeatures
       end
     end
 
+    def shib_login_matchers
+      @shib_login_matchers ||= [
+        -> { have_content 'Login to' },
+        -> { have_content 'NYU Login' },
+        -> { have_css '#login label[for="username"]' },
+        -> { have_css '#login #netid' },
+        -> { have_css '#login label[for="password"]' },
+        -> { have_css '#login #password' },
+        -> { have_css '#login input[type="submit"][value="Login"]' }
+      ]
+    end
+
     def nyu_login_matchers
       @nyu_login_matchers ||= [
         -> { have_content 'Login with an NYU NetID' },
         -> { have_css '#shibboleth .btn' }
+      ]
+    end
+
+    def nyu_style_matchers
+      @nyu_style_matches ||= [
+        -> { have_content 'NYU Libraries' },
+        -> { have_link('NYU Libraries', {:href => 'http://library.nyu.edu'}) }
       ]
     end
 

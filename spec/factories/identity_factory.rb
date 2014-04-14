@@ -259,5 +259,6 @@ FactoryGirl.define do
     factory :facebook_identity, traits: [:facebook]
     factory :nyu_shibboleth_identity, traits: [:nyu_shibboleth]
     factory :shibboleth_passive_identity, traits: [:shibboleth_passive]
+    factory :new_school_ldap_identity, traits: [:new_school_ldap]
   end
 end

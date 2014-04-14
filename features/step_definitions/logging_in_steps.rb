@@ -76,9 +76,55 @@ When(/^I press the New School login option$/) do
 end
 
 Then(/^I should go to the (.+) login page$/) do |location|
-  expect(current_path).to eq(login_path(institute_for_location(location)))
+  expect(current_path).to eq(login_path(institute_for_location(location).downcase))
 end
 
-Then(/^I (not )?should be logged in as (.+) user$/) do |negator, account|
+Then(/^I should (not )?be logged in as(\s?a|an)? (.+) user$/) do |negator, ignore, account|
   expectations_for_page(page, negator, *logged_in_matchers(account))
+end
+
+Given(/^I am on the Libraries' central login page$/) do
+  visit '/login'
+end
+
+Given(/^I am on the (.+) login page$/) do |location|
+  visit_login_page_for(location)
+  expect_login_page_for(location)
+end
+
+When(/^I visit the (.+) login page$/) do |location|
+  visit_login_page_for(location)
+  expect_login_page_for(location)
+end
+
+Then(/^I should see a(n)? "(.*?)" login page$/) do |ignore, location|
+  expectations_for_page(page, nil, *nyu_style_matchers)
+end
+
+When(/^I click on the torch logo$/) do
+  click_link 'Click to Login'
+end
+
+When(/^I am redirected to the NYU central login page$/) do
+  expectations_for_page(page, nil, *shib_login_matchers)
+end
+
+When(/^I enter my NYU NetID and password (correctly|incorrectly)$/) do |correct_credentials|
+  within("#login") do
+    fill_in 'netid', with: username_for_location('NYU New York')
+    if correct_credentials == "correctly"
+      fill_in 'password', with: password_for_location('NYU New York')
+    else
+      fill_in 'password', with: "BAD_CREDENTIALS"
+    end
+    click_button 'Login'
+  end
+end
+
+Then(/^I should be redirected to the Libraries' central login page$/) do
+  # Do nothing
+end
+
+Then(/^I should see a(n)? "(.*?)" error on the NYU central login page$/) do |ignore, error_message|
+  expect(page).to have_content(error_message)
 end
