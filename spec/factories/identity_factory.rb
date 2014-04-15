@@ -4,7 +4,7 @@ FactoryGirl.define do
     provider "twitter"
     uid "1234567890"
     properties({ prop1: "Property 1", prop2: "Property 2" })
-    
+
     trait :aleph do
       provider "aleph"
       uid "USERNAME"
@@ -155,9 +155,9 @@ FactoryGirl.define do
             name: "libtechnyu",
             screen_name: "libtechnyu",
             url: "http://t.co/Ujmbv1PKeq",
-            entities: { 
+            entities: {
               url: {
-                urls: [{ 
+                urls: [{
                   url: 'http://t.co/Ujmbv1PKeq',
                   expanded_url: 'http://library.nyu.edu',
                   display_url: 'library.nyu.edu'

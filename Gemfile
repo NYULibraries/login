@@ -30,16 +30,14 @@ gem "compass-rails", "~> 1.1.3"
 # Use mustache for templating
 # Fix to 0.99.4 cuz 0.99.5 broke my shit.
 gem "mustache", "0.99.4"
-# gem "mustache-rails", "~> 0.2.3", :require => "mustache/railtie"
-gem "mustache-rails", github: "josh/mustache-rails", require: "mustache/railtie"
+gem "mustache-rails", git: "git://github.com/josh/mustache-rails.git", :require => "mustache/railtie"
 
 # Use the NYU Libraries assets gem
-# gem "nyulibraries-assets", git: "git://github.com/NYULibraries/nyulibraries-assets.git", tag: 'v2.0.1'
-gem "nyulibraries-assets", git: "git://github.com/NYULibraries/nyulibraries-assets.git", branch: 'development-login'
+gem "nyulibraries-assets", git: "git://github.com/NYULibraries/nyulibraries-assets.git", tag: 'v2.1.1'
 # gem "nyulibraries-assets", path: "/Users/dalton/Documents/workspace/nyulibraries-assets"
 
 # Use the NYU Libraries deploy gem
-gem "nyulibraries-deploy", git: "git://github.com/NYULibraries/nyulibraries-deploy.git"# , tag: 'v3.2.5'
+gem "nyulibraries-deploy", git: "git://github.com/NYULibraries/nyulibraries-deploy.git" , branch: 'development-fig'
 
 # Used for determining which institution is in play
 gem "institutions", "~> 0.1.3"
@@ -75,7 +73,7 @@ gem "omniauth-ldap", "~> 1.0.4"
 gem "doorkeeper", "~> 1.0.0"
 
 # Figs for configuration
-gem "figs", "~> 1.2.0"
+gem "figs", "~> 2.0.0"
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -117,7 +115,6 @@ group :test do
   # Coveralls for testing coverage
   gem 'coveralls', "~> 0.7.0", require: false
   gem 'cucumber-rails', '~> 1.4.0', require: false
-  gem 'selenium-webdriver', '~> 2.41.0'
   gem 'pickle', '~> 0.4.11'
   gem 'database_cleaner', '~> 1.2.0'
 end

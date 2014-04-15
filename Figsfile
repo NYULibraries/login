@@ -1,7 +1,6 @@
---- !ruby/object:Figs::Figfile
+--- !ruby/object:Figs::Figsfile
 repo: git@github.com:NYULibraries/configula.git
 locations:
-- common/deploy.yml
-- common/institutions.yml
+- common
 - login.yml
 method: git
