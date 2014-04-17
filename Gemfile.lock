@@ -1,16 +1,16 @@
 GIT
   remote: git://github.com/NYULibraries/nyulibraries-assets.git
-  revision: 434cf2908ad87dfed7ca1f22892714780a3804cb
+  revision: de54db2a5170f0bdc8ea4998dd156a6383a195cf
   branch: master
   specs:
-    nyulibraries-assets (2.1.1)
-      bootstrap-sass (>= 2.2.0, < 2.3.1.1)
-      compass (~> 0.12.2)
+    nyulibraries-assets (3.0.0)
+      bootstrap-sass (= 2.3.2.2)
+      compass (= 0.12.5)
       institutions (~> 0.1.1)
 
 GIT
   remote: git://github.com/NYULibraries/nyulibraries-deploy.git
-  revision: 9e308aa3680ef021ffeeca31f2b208037bb13502
+  revision: 4a95367073b1fc0a0aaad3e065c918ee0974aab1
   branch: development-fig
   specs:
     nyulibraries-deploy (3.2.5)
@@ -66,7 +66,7 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap-sass (2.3.1.0)
+    bootstrap-sass (2.3.2.2)
       sass (~> 3.2)
     builder (3.1.4)
     cap_git_tools (0.9.1)
