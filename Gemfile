@@ -34,6 +34,7 @@ gem "mustache-rails", git: "git://github.com/josh/mustache-rails.git", :require 
 
 # Use the NYU Libraries assets gem
 gem "nyulibraries-assets", git: "git://github.com/NYULibraries/nyulibraries-assets.git", tag: 'v2.1.1'
+# gem "nyulibraries-assets", path: "/apps/nyulibraries-assets"
 # gem "nyulibraries-assets", path: "/Users/dalton/Documents/workspace/nyulibraries-assets"
 
 # Use the NYU Libraries deploy gem
