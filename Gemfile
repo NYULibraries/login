@@ -39,6 +39,7 @@ gem "nyulibraries-assets", git: "git://github.com/NYULibraries/nyulibraries-asse
 
 # Use the NYU Libraries deploy gem
 gem "nyulibraries-deploy", git: "git://github.com/NYULibraries/nyulibraries-deploy.git" , branch: 'development-fig'
+# gem "nyulibraries-deploy", path: "/apps/nyulibraries-deploy"
 
 # Used for determining which institution is in play
 gem "institutions", "~> 0.1.3"
