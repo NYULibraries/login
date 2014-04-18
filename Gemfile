@@ -100,6 +100,7 @@ group :development, :test do
   gem "rspec-rails", "~> 2.14.0"
   # Phantomjs for headless browser testing
   gem "phantomjs", ">= 1.9.0"
+  gem 'poltergeist', '~> 1.5.0'
   # Use factory girl for creating models
   gem "factory_girl_rails", "~> 4.4.0"
   # Use pry-debugger as the REPL and for debugging

@@ -102,29 +102,38 @@ Then(/^I should see a(n)? "(.*?)" login page$/) do |ignore, location|
 end
 
 When(/^I click on the torch logo$/) do
-  click_link 'Click to Login'
+  expect(page).to have_xpath("//a[@href='#{user_omniauth_authorize_path(:provider => "nyu_shibboleth", :institute => "NYU")}']")
 end
 
-When(/^I am redirected to the NYU central login page$/) do
-  expectations_for_page(page, nil, *shib_login_matchers)
-end
-
-When(/^I enter my NYU NetID and password (correctly|incorrectly)$/) do |correct_credentials|
-  within("#login") do
-    fill_in 'netid', with: username_for_location('NYU New York')
-    if correct_credentials == "correctly"
-      fill_in 'password', with: password_for_location('NYU New York')
-    else
-      fill_in 'password', with: "BAD_CREDENTIALS"
-    end
-    click_button 'Login'
-  end
-end
-
-Then(/^I should be redirected to the Libraries' central login page$/) do
+When(/^I am redirected to NYU Home$/) do
   # Do nothing
 end
 
-Then(/^I should see a(n)? "(.*?)" error on the NYU central login page$/) do |ignore, error_message|
-  expect(page).to have_content(error_message)
+When(/^I enter my NYU NetID and password$/) do
+  # Set environment vars
+  SHIBBOLETH_ENV = {
+    'Shib-Application-ID' => 'application-id',
+    'Shib-Authentication-Instant' => '2014-02-19T14:17:28.747Z',
+    'Shib-Authentication-Method' => 'urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport',
+    'Shib-AuthnContext-Class' => 'urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport',
+    'Shib-Identity-Provider' => 'https://idp.shibboleth.edu/idp/shibboleth',
+    'Shib-Session-ID' => 'session-id',
+    'Shib-Session-Index' => 'session-index',
+    'displayName' => 'Dev Eloper',
+    'email' => 'dev.eloper@nyu.edu',
+    'entitlement' => 'urn:mace:nyu.edu:entl:lib:eresources;urn:mace:incommon:entitlement:common:1',
+    'givenName' => 'Dev',
+    'nyuidn' => '1234567890',
+    'sn' => 'Eloper',
+    'uid' => 'dev1'
+  }
+  SHIBBOLETH_ENV.each do |vars|
+    ENV["HTTP_#{vars[0]}"] = vars[1]
+    ENV[vars[0]] = vars[1]
+  end
+end
+
+Then(/^I should be redirected to the Libraries' login page$/) do
+  # Visit callback
+  visit user_omniauth_callback_path(:action => "nyu_shibboleth")
 end
