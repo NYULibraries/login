@@ -88,6 +88,7 @@ Given(/^I am on the Libraries' central login page$/) do
 end
 
 Given(/^I am on the (.+) login page$/) do |location|
+  @location = location
   visit_login_page_for(location)
   expect_login_page_for(location)
 end
@@ -102,7 +103,7 @@ Then(/^I should see a(n)? "(.*?)" login page$/) do |ignore, location|
 end
 
 When(/^I click on the torch logo$/) do
-  expect(page).to have_xpath("//a[@href='#{user_omniauth_authorize_path(:provider => "nyu_shibboleth", :institute => "NYU")}']")
+  expect(page).to have_xpath("//a[@href='#{user_omniauth_authorize_path(:provider => "nyu_shibboleth", :institute => institute_for_location(@location))}']")
 end
 
 When(/^I am redirected to NYU Home$/) do
