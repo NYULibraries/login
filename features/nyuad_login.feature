@@ -6,7 +6,7 @@ Feature: NYU Abu Dhabi Login
   Scenario: Logging in with NYU NetID and Password
     Given I am on the NYU Abu Dhabi login page
     When I click on the torch logo
-    And I am redirected to the NYU central login page
-    And I enter my NYU NetID and password correctly
-    Then I should be redirected to the Libraries' central login page
-    And I should be logged in as an NYU Abu Dhabi user
+    And I am redirected to NYU Home
+    And I enter my NYU NetID and password
+    Then I should be redirected to the Libraries' login page
+    And I should not be logged in as an NYU Abu Dhabi user
