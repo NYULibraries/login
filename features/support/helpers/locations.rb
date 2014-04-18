@@ -49,5 +49,13 @@ module LoginFeatures
         raise "Unknown location!"
       end
     end
+
+    def visit_login_page_for(location)
+      visit login_path(institute_for_location(location).downcase)
+    end
+
+    def expect_login_page_for(location)
+      expect(current_path).to eq(login_path(institute_for_location(location).downcase))
+    end
   end
 end

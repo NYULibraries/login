@@ -36,4 +36,6 @@ Login::Application.configure do
       IRB = Pry
     end
   end
+
+  config.force_ssl = false
 end
