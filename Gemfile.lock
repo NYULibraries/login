@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: git://github.com/NYULibraries/nyulibraries-deploy.git
-  revision: 21c3aa59c2aff49a1ebcc5d44a87c66e9ae146f0
+  revision: 10d809403ed8bda05f7bfe14c948a4a4ae66dc35
   branch: development-fig
   specs:
     nyulibraries-deploy (3.2.5)
