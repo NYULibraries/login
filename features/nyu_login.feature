@@ -9,4 +9,4 @@ Feature: NYU Login
     And I am redirected to NYU Home
     And I enter my NYU NetID and password
     Then I should be redirected to the Libraries' login page
-    And I should not be logged in as an NYU New York user
+    And I should be logged in
