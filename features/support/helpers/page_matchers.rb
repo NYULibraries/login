@@ -106,6 +106,14 @@ module LoginFeatures
       ]
     end
 
+    def twitter_style_matchers
+      @twitter_style_matchers ||= [
+        -> { have_content 'Authorize NYU Libraries to use your account?' },
+        -> { have_css '#oauth_form #username_or_email' },
+        -> { have_css '#oauth_form #allow' },
+      ]
+    end
+
     def logged_in_matchers(location)
       @logged_in_matchers ||= [
         -> { have_content 'Successfully authenticated ' },

@@ -10,11 +10,10 @@ Dir[Rails.root.join("features/support/helpers/**/*.rb")].each do |helper|
 end
 
 # Configure Capybara
-# Capybara.configure do |config|
-#   # config.app_host = 'https://dev.login.library.nyu.edu'
-#   config.app_host = 'http://localhost:3000'
-#   config.default_driver = :selenium
-# end
+Capybara.configure do |config|
+  # config.app_host = 'https://dev.login.library.nyu.edu'
+  config.app_host = 'https://login.dev'
+end
 
 require 'capybara/poltergeist'
 if ENV['IN_BROWSER']

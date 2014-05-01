@@ -19,14 +19,6 @@ When(/^I want to login to (.+)$/) do |location|
   visit login_path(institute_for_location(location))
 end
 
-When(/^I enter my New School NetID and password$/) do
-  within("#new_school_ldap") do
-    fill_in 'Enter your NetID Username', with: username_for_location('New School')
-    fill_in 'Enter your NetID Password', with: password_for_location('New School')
-    # click_button 'Login'
-  end
-end
-
 Then(/^I should (not )?see the NYU torch login button$/) do |negator|
   expectations_for_page(page, negator, *nyu_login_matchers)
 end
@@ -79,12 +71,16 @@ Then(/^I should go to the (.+) login page$/) do |location|
   expect(current_path).to eq(login_path(institute_for_location(location).downcase))
 end
 
-Then(/^I should (not )?be logged in as(\s?a|an)? (.+) user$/) do |negator, ignore, account|
-  expectations_for_page(page, negator, *logged_in_matchers(account))
+Then(/^I should be logged in as a New School user$/) do
+  expectations_for_page(page, nil, *logged_in_matchers("New School"))
 end
 
-Given(/^I am on the Libraries' central login page$/) do
-  visit '/login'
+Then(/^I should be logged in as an NYU New York user$/) do
+  # Do nothing
+end
+
+Then(/^I should be logged in with my Twitter handle$/) do
+  expectations_for_page(page, nil, *logged_in_matchers("Twitter"))
 end
 
 Given(/^I am on the (.+) login page$/) do |location|
@@ -101,8 +97,8 @@ Then(/^I should see a(n)? "(.*?)" login page$/) do |ignore, location|
   expectations_for_page(page, nil, *nyu_style_matchers)
 end
 
-When(/^I click on the torch logo$/) do
-  expect(page).to have_xpath("//a[@href='#{user_omniauth_authorize_path(:provider => "nyu_shibboleth", :institute => "NYU")}']")
+When(/^I click on the torch logo for (.*?)$/) do |location|
+  expect(page).to have_xpath("//a[@href='#{user_omniauth_authorize_path(:provider => "nyu_shibboleth", :institute => institute_for_location(location))}']")
 end
 
 When(/^I am redirected to NYU Home$/) do
@@ -113,12 +109,31 @@ When(/^I enter my NYU NetID and password$/) do
   # Do nothing
 end
 
-Then(/^I should be redirected to the Libraries' login page$/) do
-  # Visit callback
-  visit user_omniauth_callback_path(:action => "nyu_shibboleth")
+Then(/^I should be redirected to the (.+?) login page$/) do |location|
+  expect_login_page_for(location)
 end
 
-Then(/^I should be logged in$/) do
-  # Do nothing
-  # Dummy logged in statements for when I can't login
+When(/^I click on the "(.*?)" button$/) do |button|
+  click_link(button)
+end
+
+When(/^I am redirected to a Twitter login page$/) do
+  expectations_for_page(page, nil, *twitter_style_matchers)
+end
+
+When(/^I enter my New School NetID and password$/) do
+  within("#new_school_ldap") do
+    fill_in 'Enter your NetID Username', with: username_for_location('New School')
+    fill_in 'Enter your NetID Password', with: password_for_location('New School')
+    click_button 'Login'
+  end
+end
+
+When(/^Twitter authorizes me$/) do
+  expectations_for_page(page, nil, *twitter_style_matchers)
+  within("#oauth_form") do
+    fill_in 'Username or email', with: username_for_location("Twitter")
+    fill_in 'Password', with: password_for_location("Twitter")
+    click_button 'Sign In'
+  end
 end

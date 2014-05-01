@@ -5,8 +5,8 @@ Feature: NYU Login
 
   Scenario: Logging in with NYU NetID and Password
     Given I am on the NYU New York login page
-    When I click on the torch logo
+    When I click on the torch logo for NYU New York
     And I am redirected to NYU Home
     And I enter my NYU NetID and password
-    Then I should be redirected to the Libraries' login page
-    And I should be logged in
+    Then I should be redirected to the NYU New York login page
+    And I should be logged in as an NYU New York user

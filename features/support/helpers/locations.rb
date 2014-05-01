@@ -45,6 +45,8 @@ module LoginFeatures
         :CU
       when /NYSID/
         :NYSID
+      when /Twitter/
+        :TWITTER
       else
         raise "Unknown location!"
       end
