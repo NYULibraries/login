@@ -1,6 +1,8 @@
 # Set the full host to be the current URL.
 # Super annoying!
-OmniAuth.config.full_host = (ENV['LOGIN_APP_HOST'] || "https://login.dev")
+if !Rails.env.test? || ENV['IN_BROWSER']
+  OmniAuth.config.full_host = (ENV['LOGIN_APP_HOST'] || "https://login.dev")
+end
 
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
