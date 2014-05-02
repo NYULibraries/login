@@ -75,8 +75,8 @@ Then(/^I should be logged in as a New School user$/) do
   expectations_for_page(page, nil, *logged_in_matchers("New School"))
 end
 
-Then(/^I should be logged in as an NYU New York user$/) do
-  # Do nothing
+Then(/^I should be logged in as an NYU user$/) do
+  expectations_for_page(page, nil, *logged_in_matchers("NYU New York"))
 end
 
 Then(/^I should be logged in with my Twitter handle$/) do
@@ -97,16 +97,8 @@ Then(/^I should see a(n)? "(.*?)" login page$/) do |ignore, location|
   expectations_for_page(page, nil, *nyu_style_matchers)
 end
 
-When(/^I click on the torch logo for (.*?)$/) do |location|
-  expect(page).to have_xpath("//a[@href='#{user_omniauth_authorize_path(:provider => "nyu_shibboleth", :institute => institute_for_location(location))}']")
-end
-
-When(/^I am redirected to NYU Home$/) do
-  # Do nothing
-end
-
-When(/^I enter my NYU NetID and password$/) do
-  # Do nothing
+When(/^NYU Home authenticates me$/) do
+  visit nyu_home_url
 end
 
 Then(/^I should be redirected to the (.+?) login page$/) do |location|
@@ -114,11 +106,11 @@ Then(/^I should be redirected to the (.+?) login page$/) do |location|
 end
 
 When(/^I click on the "(.*?)" button$/) do |button|
-  click_link(button)
-end
-
-When(/^I am redirected to a Twitter login page$/) do
-  expectations_for_page(page, nil, *twitter_style_matchers)
+  if button == "NYU login"
+    expect(page).to have_xpath("//a[@href='#{user_omniauth_authorize_path(:provider => "nyu_shibboleth", :institute => "NYU")}']")
+  else
+    click_link(button)
+  end
 end
 
 When(/^I enter my New School NetID and password$/) do
@@ -129,11 +121,15 @@ When(/^I enter my New School NetID and password$/) do
   end
 end
 
-When(/^Twitter authorizes me$/) do
+When(/^Twitter authenticates me$/) do
   expectations_for_page(page, nil, *twitter_style_matchers)
   within("#oauth_form") do
     fill_in 'Username or email', with: username_for_location("Twitter")
     fill_in 'Password', with: password_for_location("Twitter")
     click_button 'Sign In'
   end
+end
+
+When(/^I've authorized Twitter to share my information with NYU Libraries$/) do
+ # Do nothing
 end

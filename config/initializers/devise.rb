@@ -245,7 +245,8 @@ Devise.setup do |config|
   require "omniauth-shibboleth"
   config.omniauth :shibboleth, name: 'nyu_shibboleth', uid_field: 'uid',
     info_fields: { email: 'email', nickname: 'givenName' , first_name: 'givenName',
-      last_name: 'sn' }, extra_fields: ['nyuidn', 'entitlement']
+      last_name: 'sn' }, extra_fields: ['nyuidn', 'entitlement'],
+    request_type: (Rails.env.test?) ? :params : :env
   require "omniauth-shibboleth-passive"
   config.omniauth :shibboleth_passive
   require "omniauth-ldap"
