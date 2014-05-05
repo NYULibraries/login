@@ -1,6 +1,9 @@
 require 'coveralls'
 Coveralls.wear_merged!('rails')
 
+ENV['RAILS_ENV'] = 'cucumber'
+Rails.env = 'cucumber'
+
 # Require and include helper modules
 # in feature/support/helpers and its subdirectories.
 Dir[Rails.root.join("features/support/helpers/**/*.rb")].each do |helper|
@@ -17,7 +20,7 @@ if ENV['IN_BROWSER']
   # or (to have a pause of 1 second between each step):
   # IN_BROWSER=true PAUSE=1 bundle exec cucumber
   Capybara.default_driver = :selenium
-  Capybara.app_host = 'https://login.dev'
+  # Capybara.app_host = 'https://login.dev'
   AfterStep do
     sleep (ENV['PAUSE'] || 0).to_i
   end
