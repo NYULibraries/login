@@ -1,6 +1,8 @@
 # Set the full host to be the current URL.
 # Super annoying!
-OmniAuth.config.full_host = (ENV['LOGIN_APP_HOST'] || "https://login.dev")
+if !Rails.env.cucumber? || ENV['IN_BROWSER']
+  OmniAuth.config.full_host = (ENV['LOGIN_APP_HOST'] || "https://login.dev")
+end
 
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
@@ -245,7 +247,8 @@ Devise.setup do |config|
   require "omniauth-shibboleth"
   config.omniauth :shibboleth, name: 'nyu_shibboleth', uid_field: 'uid',
     info_fields: { email: 'email', nickname: 'givenName' , first_name: 'givenName',
-      last_name: 'sn' }, extra_fields: ['nyuidn', 'entitlement']
+      last_name: 'sn' }, extra_fields: ['nyuidn', 'entitlement'],
+    request_type: (Rails.env.cucumber?) ? :params : :env
   require "omniauth-shibboleth-passive"
   config.omniauth :shibboleth_passive
   require "omniauth-ldap"

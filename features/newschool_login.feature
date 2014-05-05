@@ -1,3 +1,4 @@
+@skip_on_travis
 Feature: New School login
   In order to use NYU Libraries' online services
   As a New School user

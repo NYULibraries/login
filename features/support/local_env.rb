@@ -9,13 +9,6 @@ Dir[Rails.root.join("features/support/helpers/**/*.rb")].each do |helper|
   Cucumber::Rails::World.send(:include, helper_name.constantize)
 end
 
-# Configure Capybara
-# Capybara.configure do |config|
-#   # config.app_host = 'https://dev.login.library.nyu.edu'
-#   config.app_host = 'http://localhost:3000'
-#   config.default_driver = :selenium
-# end
-
 require 'capybara/poltergeist'
 if ENV['IN_BROWSER']
   # On demand: non-headless tests via Selenium/WebDriver
@@ -24,6 +17,7 @@ if ENV['IN_BROWSER']
   # or (to have a pause of 1 second between each step):
   # IN_BROWSER=true PAUSE=1 bundle exec cucumber
   Capybara.default_driver = :selenium
+  Capybara.app_host = 'https://login.dev'
   AfterStep do
     sleep (ENV['PAUSE'] || 0).to_i
   end
@@ -32,10 +26,12 @@ else
   Capybara.register_driver :poltergeist do |app|
     Capybara::Poltergeist::Driver.new(
       app,
+      phantomjs_options: ['--load-images=no', '--ignore-ssl-errors=yes'],
       window_size: [1280, 1024]#,
-      #debug:       true
+      # debug:       true
     )
   end
   Capybara.default_driver    = :poltergeist
   Capybara.javascript_driver = :poltergeist
+  # Capybara.default_wait_time = 8
 end

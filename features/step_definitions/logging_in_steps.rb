@@ -19,14 +19,6 @@ When(/^I want to login to (.+)$/) do |location|
   visit login_path(institute_for_location(location))
 end
 
-When(/^I enter my New School NetID and password$/) do
-  within("#new_school_ldap") do
-    fill_in 'Enter your NetID Username', with: username_for_location('New School')
-    fill_in 'Enter your NetID Password', with: password_for_location('New School')
-    # click_button 'Login'
-  end
-end
-
 Then(/^I should (not )?see the NYU torch login button$/) do |negator|
   expectations_for_page(page, negator, *nyu_login_matchers)
 end
@@ -79,16 +71,19 @@ Then(/^I should go to the (.+) login page$/) do |location|
   expect(current_path).to eq(login_path(institute_for_location(location).downcase))
 end
 
-Then(/^I should (not )?be logged in as(\s?a|an)? (.+) user$/) do |negator, ignore, account|
-  expectations_for_page(page, negator, *logged_in_matchers(account))
+Then(/^I should be logged in as a New School user$/) do
+  expectations_for_page(page, nil, *logged_in_matchers("New School"))
 end
 
-Given(/^I am on the Libraries' central login page$/) do
-  visit '/login'
+Then(/^I should be logged in as an NYU user$/) do
+  expectations_for_page(page, nil, *shibboleth_logged_in_matchers("NYU New York"))
+end
+
+Then(/^I should be logged in with my Twitter handle$/) do
+  expectations_for_page(page, nil, *logged_in_matchers("Twitter"))
 end
 
 Given(/^I am on the (.+) login page$/) do |location|
-  @location = location
   visit_login_page_for(location)
   expect_login_page_for(location)
 end
@@ -102,39 +97,39 @@ Then(/^I should see a(n)? "(.*?)" login page$/) do |ignore, location|
   expectations_for_page(page, nil, *nyu_style_matchers)
 end
 
-When(/^I click on the torch logo$/) do
-  expect(page).to have_xpath("//a[@href='#{user_omniauth_authorize_path(:provider => "nyu_shibboleth", :institute => institute_for_location(@location))}']")
+When(/^NYU Home authenticates me$/) do
+  visit nyu_home_url
 end
 
-When(/^I am redirected to NYU Home$/) do
-  # Do nothing
+Then(/^I should be redirected to the (.+?) login page$/) do |location|
+  expect_login_page_for(location)
 end
 
-When(/^I enter my NYU NetID and password$/) do
-  # Set environment vars
-  SHIBBOLETH_ENV = {
-    'Shib-Application-ID' => 'application-id',
-    'Shib-Authentication-Instant' => '2014-02-19T14:17:28.747Z',
-    'Shib-Authentication-Method' => 'urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport',
-    'Shib-AuthnContext-Class' => 'urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport',
-    'Shib-Identity-Provider' => 'https://idp.shibboleth.edu/idp/shibboleth',
-    'Shib-Session-ID' => 'session-id',
-    'Shib-Session-Index' => 'session-index',
-    'displayName' => 'Dev Eloper',
-    'email' => 'dev.eloper@nyu.edu',
-    'entitlement' => 'urn:mace:nyu.edu:entl:lib:eresources;urn:mace:incommon:entitlement:common:1',
-    'givenName' => 'Dev',
-    'nyuidn' => '1234567890',
-    'sn' => 'Eloper',
-    'uid' => 'dev1'
-  }
-  SHIBBOLETH_ENV.each do |vars|
-    ENV["HTTP_#{vars[0]}"] = vars[1]
-    ENV[vars[0]] = vars[1]
+When(/^I click on the "(.*?)" button$/) do |button|
+  if button == "NYU login"
+    expect(page).to have_xpath("//a[@href='#{user_omniauth_authorize_path(:provider => "nyu_shibboleth", :institute => "NYU")}']")
+  else
+    click_link(button)
   end
 end
 
-Then(/^I should be redirected to the Libraries' login page$/) do
-  # Visit callback
-  visit user_omniauth_callback_path(:action => "nyu_shibboleth")
+When(/^I enter my New School NetID and password$/) do
+  within("#new_school_ldap") do
+    fill_in 'Enter your NetID Username', with: username_for_location('New School')
+    fill_in 'Enter your NetID Password', with: password_for_location('New School')
+    click_button 'Login'
+  end
+end
+
+When(/^Twitter authenticates me$/) do
+  expectations_for_page(page, nil, *twitter_style_matchers)
+  within("#oauth_form") do
+    fill_in 'Username or email', with: username_for_location("Twitter")
+    fill_in 'Password', with: password_for_location("Twitter")
+    click_button 'Sign In'
+  end
+end
+
+When(/^I've authorized Twitter to share my information with NYU Libraries$/) do
+ # Do nothing
 end
