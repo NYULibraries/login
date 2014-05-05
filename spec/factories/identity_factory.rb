@@ -186,7 +186,6 @@ FactoryGirl.define do
         }
       })
     end
-
     trait :facebook do
       provider 'facebook'
       uid '123456789'
