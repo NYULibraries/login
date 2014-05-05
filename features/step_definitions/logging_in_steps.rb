@@ -76,7 +76,7 @@ Then(/^I should be logged in as a New School user$/) do
 end
 
 Then(/^I should be logged in as an NYU user$/) do
-  expectations_for_page(page, nil, *logged_in_matchers("NYU New York"))
+  expectations_for_page(page, nil, *shibboleth_logged_in_matchers("NYU New York"))
 end
 
 Then(/^I should be logged in with my Twitter handle$/) do

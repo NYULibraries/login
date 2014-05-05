@@ -95,7 +95,7 @@ gem "newrelic_rpm", "~> 3.7.0"
 # gem 'capistrano', group: :development
 
 # Development and testing gems
-group :development, :test do
+group :development, :test, :cucumber do
   # Rspec as the test framework
   gem "rspec-rails", "~> 2.14.0"
   # Phantomjs for headless browser testing
@@ -114,7 +114,7 @@ group :development do
 end
 
 # Testing gems
-group :test do
+group :test, :cucumber do
   # Coveralls for testing coverage
   gem 'coveralls', "~> 0.7.0", require: false
   gem 'cucumber-rails', '~> 1.4.0', require: false
