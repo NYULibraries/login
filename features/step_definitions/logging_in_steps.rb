@@ -132,6 +132,10 @@ When(/^Twitter authenticates me$/) do
   end
 end
 
+When(/^I wait up to (\d+) seconds for twitter to redirect me$/) do |timeout|
+  wait_for_ajax timeout.to_i
+end
+
 When(/^I've authorized Twitter to share my information with NYU Libraries$/) do
  # Do nothing
 end
