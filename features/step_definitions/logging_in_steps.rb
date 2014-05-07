@@ -108,6 +108,10 @@ end
 When(/^I click on the "(.*?)" button$/) do |button|
   if button == "NYU login"
     expect(page).to have_xpath("//a[@href='#{user_omniauth_authorize_path(:provider => "nyu_shibboleth", :institute => "NYU")}']")
+  elsif button == "NYU AD login"
+      expect(page).to have_xpath("//a[@href='#{user_omniauth_authorize_path(:provider => "nyu_shibboleth", :institute => "NYUAD")}']")
+  elsif button == "NYU SH login"
+      expect(page).to have_xpath("//a[@href='#{user_omniauth_authorize_path(:provider => "nyu_shibboleth", :institute => "NYUSH")}']")
   else
     click_link(button)
   end
