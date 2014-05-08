@@ -125,6 +125,20 @@ When(/^I enter my New School NetID and password$/) do
   end
 end
 
+When(/^I enter my Library Patron ID and first four letters of my last name$/) do
+  within("#aleph") do
+    fill_in 'Enter your ID Number', with: username_for_location('Cooper Union')
+    fill_in 'First four letter of your last name', with: password_for_location('Cooper Union')
+    click_button 'Login'
+  end
+end
+
+Then(/^I should be logged in as a Cooper Union user$/) do
+  expectations_for_page(page, nil, *logged_in_matchers("Cooper Union"))
+  # binding.pry
+  # pending # express the regexp above with the code you wish you had
+end
+
 When(/^Twitter authenticates me$/) do
   expectations_for_page(page, nil, *twitter_style_matchers)
   within("#oauth_form") do
