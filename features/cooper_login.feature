@@ -14,3 +14,4 @@ Feature: Cooper Union login
     When I want to login to Cooper Union
     And I incorrectly enter my Library Patron ID and first four letters of my last name
     Then I should not be logged in as a Cooper Union user
+    And I should get an informative message about my incorrect credentials
