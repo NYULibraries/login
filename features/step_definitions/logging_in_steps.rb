@@ -146,6 +146,10 @@ Then(/^I should( not)? be logged in as a Cooper Union user$/) do |negate|
   expectations_for_page(page, negate, *logged_in_matchers("Cooper Union"))
 end
 
+Then(/^I should( not)? be logged in as a New York School of Interior Design user$/) do |negate|
+  expectations_for_page(page, negate, *logged_in_matchers("NYSID"))
+end
+
 When(/^Twitter authenticates me$/) do
   expectations_for_page(page, nil, *twitter_style_matchers)
   within("#oauth_form") do
