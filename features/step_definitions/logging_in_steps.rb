@@ -148,6 +148,9 @@ end
 
 Then(/^I should( not)? be logged in as a New York School of Interior Design user$/) do |negate|
   expectations_for_page(page, negate, *logged_in_matchers("NYSID"))
+
+Then(/^I should get an informative message about my incorrect credentials$/) do
+  expectations_for_page(page, nil, *mismatched_aleph_credentials_matchers)
 end
 
 When(/^Twitter authenticates me$/) do
