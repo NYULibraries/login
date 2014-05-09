@@ -47,6 +47,8 @@ module LoginFeatures
         :NYSID
       when /Twitter/
         :TWITTER
+      when /Bobst Affiliate/
+        :BOBST
       else
         raise "Unknown location!"
       end
