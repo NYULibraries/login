@@ -11,7 +11,7 @@ describe "#env_git_branch" do
   end
 
   context 'when environment variable GIT_BRANCH is not set' do
-    before { ENV.stub(:delete).with("GIT_BRANCH").and_return(nil) }
+    before { ENV.stub(:[]).with("GIT_BRANCH").and_return(nil) }
     it "raises an ArgumentEror" do
       expect{env_git_branch}.to raise_error(ArgumentError)
     end
