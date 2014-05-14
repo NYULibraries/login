@@ -1,4 +1,3 @@
-@skip_on_travis
 Feature: Twitter login
   In order to use NYU Libraries' online services
   As a visitor at Bobst Library with a Twitter account
@@ -10,5 +9,4 @@ Feature: Twitter login
     When I click on the "Twitter" button
     And Twitter authenticates me
     And I've authorized Twitter to share my information with NYU Libraries
-    And I wait up to 30 seconds for twitter to redirect me
     Then I should be logged in with my Twitter handle
