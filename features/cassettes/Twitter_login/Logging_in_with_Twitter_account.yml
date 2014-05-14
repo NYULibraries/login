@@ -73,7 +73,7 @@ http_interactions:
     body:
       encoding: US-ASCII
       string: oauth_token=rg1PlxWDG52jPHl3BTZNK8vDZUGQbZkaxpTnVaKd4&oauth_token_secret=CIvYqIM2eisOqug9RN8X0BHMrgHASdimEie2DgDsc&oauth_callback_confirmed=true
-    http_version: 
+    http_version:
   recorded_at: Wed, 14 May 2014 16:44:56 GMT
 - request:
     method: post
@@ -146,7 +146,7 @@ http_interactions:
     body:
       encoding: US-ASCII
       string: oauth_token=1365110203-1vOTfiRxvFPZtAWcEWSXQSE5swnwH9FbbcgFr3I&oauth_token_secret=DxreKIh6WdJe6fCtlI075R4l4tAFdeRHRf1Q3krfgRWyL&user_id=1365110203&screen_name=libtechnyu
-    http_version: 
+    http_version:
   recorded_at: Wed, 14 May 2014 16:44:58 GMT
 - request:
     method: get
@@ -215,6 +215,6 @@ http_interactions:
       encoding: US-ASCII
       string: ! '{"id":1365110203,"id_str":"1365110203","name":"libtechnyu","screen_name":"libtechnyu","location":"","description":"","url":"http:\/\/t.co\/Ujmbv1PKeq","entities":{"url":{"urls":[{"url":"http:\/\/t.co\/Ujmbv1PKeq","expanded_url":"http:\/\/library.nyu.edu","display_url":"library.nyu.edu","indices":[0,22]}]},"description":{"urls":[]}},"protected":false,"followers_count":1,"friends_count":0,"listed_count":0,"created_at":"Fri
         Apr 19 18:32:13 +0000 2013","favourites_count":0,"utc_offset":null,"time_zone":null,"geo_enabled":false,"verified":false,"statuses_count":1,"lang":"en","contributors_enabled":false,"is_translator":false,"is_translation_enabled":false,"profile_background_color":"C0DEED","profile_background_image_url":"http:\/\/abs.twimg.com\/images\/themes\/theme1\/bg.png","profile_background_image_url_https":"https:\/\/abs.twimg.com\/images\/themes\/theme1\/bg.png","profile_background_tile":false,"profile_image_url":"http:\/\/abs.twimg.com\/sticky\/default_profile_images\/default_profile_2_normal.png","profile_image_url_https":"https:\/\/abs.twimg.com\/sticky\/default_profile_images\/default_profile_2_normal.png","profile_link_color":"0084B4","profile_sidebar_border_color":"C0DEED","profile_sidebar_fill_color":"DDEEF6","profile_text_color":"333333","profile_use_background_image":true,"default_profile":true,"default_profile_image":true,"following":false,"follow_request_sent":false,"notifications":false}'
-    http_version: 
+    http_version:
   recorded_at: Wed, 14 May 2014 16:44:58 GMT
 recorded_with: VCR 2.8.0
