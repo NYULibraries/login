@@ -140,7 +140,7 @@ FactoryGirl.define do
     end
     trait :twitter do
       provider "twitter"
-      uid '1365110203'
+      uid "1365110203"
       properties({
         nickname: "libtechnyu",
         name: "libtechnyu",
@@ -151,16 +151,16 @@ FactoryGirl.define do
         extra: {
           raw_info: {
             id: 1365110203,
-            id_str: '1365110203',
+            id_str: "1365110203",
             name: "libtechnyu",
             screen_name: "libtechnyu",
             url: "http://t.co/Ujmbv1PKeq",
             entities: {
               url: {
                 urls: [{
-                  url: 'http://t.co/Ujmbv1PKeq',
-                  expanded_url: 'http://library.nyu.edu',
-                  display_url: 'library.nyu.edu'
+                  url: "http://t.co/Ujmbv1PKeq",
+                  expanded_url: "http://library.nyu.edu",
+                  display_url: "library.nyu.edu"
                 }]
               }
             },
@@ -173,7 +173,7 @@ FactoryGirl.define do
             geo_enabled: false,
             verified: false,
             statuses_count: 1,
-            lang: 'en',
+            lang: "en",
             contributors_enabled: false,
             is_translator: false,
             is_translation_enabled: false,
@@ -187,67 +187,67 @@ FactoryGirl.define do
       })
     end
     trait :facebook do
-      provider 'facebook'
-      uid '123456789'
+      provider "facebook"
+      uid "123456789"
       properties({
-        nickname: 'developer',
-        email: 'developer@library.edu',
-        name: 'Dev Eloper',
-        first_name: 'Dev',
-        last_name: 'Eloper',
-        image: 'http://graph.facebook.com/123456789/picture',
+        nickname: "developer",
+        email: "developer@library.edu",
+        name: "Dev Eloper",
+        first_name: "Dev",
+        last_name: "Eloper",
+        image: "http://graph.facebook.com/123456789/picture",
         urls: {
-          Facebook: 'https://www.facebook.com/developer'
+          Facebook: "https://www.facebook.com/developer"
         },
-        verified: 'true',
+        verified: "true",
         extra: {
           raw_info: {
-            id: '123456789',
-            name: 'Dev Eloper',
-            first_name: 'Dev',
-            last_name: 'Eloper',
-            link: 'https://www.facebook.com/developer',
-            gender: 'male',
-            email: 'developer@library.edu',
+            id: "123456789",
+            name: "Dev Eloper",
+            first_name: "Dev",
+            last_name: "Eloper",
+            link: "https://www.facebook.com/developer",
+            gender: "male",
+            email: "developer@library.edu",
             timezone: -5,
-            locale: 'en_US',
+            locale: "en_US",
             verified: true,
-            updated_time: '2014-01-21T14:53:00+0000',
-            username: 'developer'
+            updated_time: "2014-01-21T14:53:00+0000",
+            username: "developer"
           }
         }
       })
     end
     trait :nyu_shibboleth do
-      provider 'nyu_shibboleth'
-      uid 'nyu123'
+      provider "nyu_shibboleth"
+      uid "nyu123"
       properties({
-        nickname: 'nyu123',
-        email: 'nyu123@nyu.edu',
-        name: 'N Yu'
+        nickname: "nyu123",
+        email: "nyu123@nyu.edu",
+        name: "N Yu"
       })
     end
     trait :shibboleth_passive do
-      provider 'nyu_shibboleth'
-      uid 'passivist'
+      provider "nyu_shibboleth"
+      uid "passivist"
       properties({
-        nickname: 'passivist',
-        email: 'passivist@shibboleth.edu',
-        name: 'Pas Sivist'
+        nickname: "passivist",
+        email: "passivist@shibboleth.edu",
+        name: "Pas Sivist"
       })
     end
     trait :new_school_ldap do
-      provider 'new_school_ldap'
-      uid 'uid=1234567890,ou=People,o=newschool.edu,o=cp'
+      provider "new_school_ldap"
+      uid "uid=1234567890,ou=People,o=newschool.edu,o=cp"
       properties({
-        email: 'ns123@newschool.edu',
-        first_name: 'News',
-        last_name: 'Cholar',
+        email: "ns123@newschool.edu",
+        first_name: "News",
+        last_name: "Cholar",
         nickname: "1234567890",
         extra: {
           raw_info: {
-            pdsloginid: 'ns123',
-            pdsloginalias: 'ns123'
+            pdsloginid: "ns123",
+            pdsloginalias: "ns123"
           }
         }
       })
