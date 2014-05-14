@@ -1,2 +1,3 @@
+require './config/deploy/env_git_branch'
 set :rails_env, "staging"
-set(:branch, ENV["GIT_BRANCH"].gsub(/remotes\//,"").gsub(/origin\//,""))
+set(:branch, env_git_branch)
