@@ -1,5 +1,5 @@
 require 'spec_helper'
-require './config/deploy/env_git_branch.rb'
+require './config/env_git_branch.rb'
 
 
 describe "#env_git_branch" do
