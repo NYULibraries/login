@@ -1,0 +1,249 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://collector.newrelic.com/agent_listener/12//get_redirect_host?marshal_format=json
+    body:
+      encoding: UTF-8
+      string: ! '[]'
+    headers:
+      Content-Encoding:
+      - identity
+      Host:
+      - collector.newrelic.com
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - NewRelic-RubyAgent/3.8.0.218 (ruby 1.9.3 x86_64-darwin13.0.0) zlib/1.2.5
+      Content-Type:
+      - application/octet-stream
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '133'
+    body:
+      encoding: US-ASCII
+      string: ! '{"exception":{"message":"Invalid license key, please contact support@newrelic.com","error_type":"NewRelic::Agent::LicenseException"}}'
+    http_version: 
+  recorded_at: Thu, 15 May 2014 19:26:49 GMT
+- request:
+    method: post
+    uri: https://api.twitter.com/oauth/request_token
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - OAuth gem v0.4.7
+      Content-Length:
+      - '0'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Authorization:
+      - OAuth oauth_callback="http%3A%2F%2F127.0.0.1%3A57124%2Fusers%2Fauth%2Ftwitter%2Fcallback%3Finstitute%3DNYU",
+        oauth_consumer_key="<TWITTER_APP_KEY>", oauth_nonce="FgplDo3LJl0H445Hp8CqD8dHE7PFWfzP87N8tM86olA",
+        oauth_signature="lvLaLFZ75jMDkdh1Tjjyo7o6CxY%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1400182010", oauth_version="1.0"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+      Content-Length:
+      - '143'
+      Content-Type:
+      - text/html; charset=utf-8
+      Date:
+      - Thu, 15 May 2014 19:26:52 GMT
+      Etag:
+      - ! '"c6e8922fad63b440b72561fad3a5ead3"'
+      Expires:
+      - Tue, 31 Mar 1981 05:00:00 GMT
+      Last-Modified:
+      - Thu, 15 May 2014 19:26:52 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - tfe
+      Set-Cookie:
+      - _twitter_sess=BAh7BzoHaWQiJWIzNDZkZjRkMDJiM2ExNWQ1NDdhNjA1ZWYzOTQyZWY0Og9j%250AcmVhdGVkX2F0bCsIV%252FpZAUYB--993635c538991b807df1838fbd6b25b2eeb1c3b6;
+        domain=.twitter.com; path=/; secure; HttpOnly
+      - guest_id=v1%3A140018201235917765; Domain=.twitter.com; Path=/; Expires=Sat,
+        14-May-2016 19:26:52 UTC
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=631138519
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Mid:
+      - 26eb69544b1e6405fd2384322eba187dcff0b6b3
+      X-Runtime:
+      - '0.01793'
+      X-Tfe-Logging-Request-Category:
+      - API
+      X-Transaction:
+      - 5b0f9e4d90852d28
+      X-Ua-Compatible:
+      - IE=edge,chrome=1
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: US-ASCII
+      string: oauth_token=iouawPzYHS0w9MOzMJgDuEkMt24fHhw9ydFefLI&oauth_token_secret=jMVG3tfJpzxOVe4kIgspIaBGOf5FuepnCD9AMuikpA&oauth_callback_confirmed=true
+    http_version: 
+  recorded_at: Thu, 15 May 2014 19:26:51 GMT
+- request:
+    method: post
+    uri: https://api.twitter.com/oauth/access_token
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - OAuth gem v0.4.7
+      Content-Length:
+      - '0'
+      Authorization:
+      - OAuth oauth_body_hash="2jmj7l5rSw0yVb%2FvlWAYkK%2FYBwk%3D", oauth_consumer_key="<TWITTER_APP_KEY>",
+        oauth_nonce="9qEIDPLMuWDE3tosWSR094Hwin0lOnOZPTYpaidAuU", oauth_signature="NP3aDjL3thKxovYTNqcdXbSfZLM%3D",
+        oauth_signature_method="HMAC-SHA1", oauth_timestamp="1400182017", oauth_token="iouawPzYHS0w9MOzMJgDuEkMt24fHhw9ydFefLI",
+        oauth_verifier="P5NkREBLfgt2QHZYAt0m9S8LvE1W6h2XKO6mVlMYuI", oauth_version="1.0"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+      Content-Length:
+      - '169'
+      Content-Type:
+      - text/html; charset=utf-8
+      Date:
+      - Thu, 15 May 2014 19:26:59 GMT
+      Etag:
+      - ! '"8d186eb5f7e63c5a4d6fd28843069ada"'
+      Expires:
+      - Tue, 31 Mar 1981 05:00:00 GMT
+      Last-Modified:
+      - Thu, 15 May 2014 19:26:59 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - tfe
+      Set-Cookie:
+      - _twitter_sess=BAh7BzoHaWQiJTM3YzRlMWJmNmU0MmE3NGFhMmM0ODRkYjc5MWU1YzM2Og9j%250AcmVhdGVkX2F0bCsI7RVaAUYB--966c97df88b3b0092bc36ae33b8f4c154f1a4698;
+        domain=.twitter.com; path=/; secure; HttpOnly
+      - guest_id=v1%3A140018201942762655; Domain=.twitter.com; Path=/; Expires=Sat,
+        14-May-2016 19:26:59 UTC
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=631138519
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Mid:
+      - 7c71d3f51fbe60e656cea5fa5164f6b7217262c0
+      X-Runtime:
+      - '0.05341'
+      X-Tfe-Logging-Request-Category:
+      - API
+      X-Transaction:
+      - 221d6bf76fd0b64d
+      X-Ua-Compatible:
+      - IE=edge,chrome=1
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: US-ASCII
+      string: oauth_token=1365110203-1vOTfiRxvFPZtAWcEWSXQSE5swnwH9FbbcgFr3I&oauth_token_secret=DxreKIh6WdJe6fCtlI075R4l4tAFdeRHRf1Q3krfgRWyL&user_id=1365110203&screen_name=libtechnyu
+    http_version: 
+  recorded_at: Thu, 15 May 2014 19:26:58 GMT
+- request:
+    method: get
+    uri: https://api.twitter.com/1.1/account/verify_credentials.json?include_entities=false&skip_status=true
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - OAuth gem v0.4.7
+      Authorization:
+      - OAuth oauth_consumer_key="<TWITTER_APP_KEY>", oauth_nonce="WLeL1sUU5jQ5Yam7J5hfuIt8Ca7Vu8pRoTAvk6qTsIk",
+        oauth_signature="QWxmgLX6dggJKhRYcDUs8qphEjo%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1400182018", oauth_token="1365110203-1vOTfiRxvFPZtAWcEWSXQSE5swnwH9FbbcgFr3I",
+        oauth_version="1.0"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+      Content-Length:
+      - '1425'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Thu, 15 May 2014 19:27:00 GMT
+      Expires:
+      - Tue, 31 Mar 1981 05:00:00 GMT
+      Last-Modified:
+      - Thu, 15 May 2014 19:27:00 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - tfe
+      Set-Cookie:
+      - guest_id=v1%3A140018202012512792; Domain=.twitter.com; Path=/; Expires=Sat,
+        14-May-2016 19:27:00 UTC
+      - lang=en
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=631138519
+      X-Access-Level:
+      - read
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Rate-Limit-Limit:
+      - '15'
+      X-Rate-Limit-Remaining:
+      - '14'
+      X-Rate-Limit-Reset:
+      - '1400182920'
+      X-Tfe-Logging-Request-Category:
+      - API
+      X-Transaction:
+      - 76bdbea82f98f51d
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: US-ASCII
+      string: ! '{"id":1365110203,"id_str":"1365110203","name":"libtechnyu","screen_name":"libtechnyu","location":"","description":"","url":"http:\/\/t.co\/Ujmbv1PKeq","entities":{"url":{"urls":[{"url":"http:\/\/t.co\/Ujmbv1PKeq","expanded_url":"http:\/\/library.nyu.edu","display_url":"library.nyu.edu","indices":[0,22]}]},"description":{"urls":[]}},"protected":false,"followers_count":1,"friends_count":0,"listed_count":0,"created_at":"Fri
+        Apr 19 18:32:13 +0000 2013","favourites_count":0,"utc_offset":null,"time_zone":null,"geo_enabled":false,"verified":false,"statuses_count":1,"lang":"en","contributors_enabled":false,"is_translator":false,"is_translation_enabled":false,"profile_background_color":"C0DEED","profile_background_image_url":"http:\/\/abs.twimg.com\/images\/themes\/theme1\/bg.png","profile_background_image_url_https":"https:\/\/abs.twimg.com\/images\/themes\/theme1\/bg.png","profile_background_tile":false,"profile_image_url":"http:\/\/abs.twimg.com\/sticky\/default_profile_images\/default_profile_2_normal.png","profile_image_url_https":"https:\/\/abs.twimg.com\/sticky\/default_profile_images\/default_profile_2_normal.png","profile_link_color":"0084B4","profile_sidebar_border_color":"C0DEED","profile_sidebar_fill_color":"DDEEF6","profile_text_color":"333333","profile_use_background_image":true,"default_profile":true,"default_profile_image":true,"following":false,"follow_request_sent":false,"notifications":false}'
+    http_version: 
+  recorded_at: Thu, 15 May 2014 19:26:58 GMT
+recorded_with: VCR 2.8.0

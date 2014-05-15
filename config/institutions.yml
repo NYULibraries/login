@@ -1,5 +1,5 @@
 # Private institutional settings
-<%= Figs.env.institutions.to_yaml if Figs.env.respond_to?(:institutions)%>
+<%= Figs.env.institutions.to_yaml if ENV.has_key?("institutions") %>
 BOBST:
   name: NYU Libraries' Affiliates
   views:

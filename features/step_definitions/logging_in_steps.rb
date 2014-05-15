@@ -154,11 +154,15 @@ Then(/^I should get an informative message about my incorrect credentials$/) do
 end
 
 When(/^Twitter authenticates me$/) do
-  expectations_for_page(page, nil, *twitter_style_matchers)
-  within("#oauth_form") do
-    fill_in 'Username or email', with: username_for_location("Twitter")
-    fill_in 'Password', with: password_for_location("Twitter")
-    click_button 'Sign In'
+  if VCR.current_cassette.recording?
+    expectations_for_page(page, nil, *twitter_style_matchers)
+    within("#oauth_form") do
+      fill_in 'Username or email', with: username_for_location("Twitter")
+      fill_in 'Password', with: password_for_location("Twitter")
+      click_button 'Sign In'
+    end
+  else
+    visit '/users/auth/twitter/callback?institute=NYU'
   end
 end
 

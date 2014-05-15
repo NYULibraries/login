@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.0.3'
+gem 'rails', '~> 4.0.5'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.17.1'
@@ -83,7 +83,7 @@ group :doc do
 end
 
 # New Relic performance monitoring
-gem "newrelic_rpm", "~> 3.7.0"
+gem "newrelic_rpm", "~> 3.8.0"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -121,4 +121,6 @@ group :test, :cucumber do
   gem 'selenium-webdriver', '~> 2.41.0'
   gem 'pickle', '~> 0.4.11'
   gem 'database_cleaner', '~> 1.2.0'
+  gem 'vcr', '~> 2.8.0'
+  gem 'webmock', '~> 1.17.4'
 end
