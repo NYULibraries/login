@@ -7,7 +7,7 @@ Feature: Cooper Union login
   Scenario: Logging in with Cooper Union Library patron ID and first four letters of my last name
     Given I am at Cooper Union
     When I want to login to Cooper Union
-    And I enter my Library Patron ID and first four letters of my last name
+    And I enter my Library Patron ID for "Cooper Union" and first four letters of my last name
     Then I should be logged in as a Cooper Union user
 
   Scenario: Logging in with incorrect Cooper Union Library patron ID and first four letters of my last name
