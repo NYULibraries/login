@@ -1,3 +1,4 @@
+@vcr
 Feature: Cooper Union login
   In order to use NYU Libraries' online services
   As a Cooper Union user
