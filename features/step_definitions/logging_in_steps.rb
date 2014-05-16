@@ -125,10 +125,10 @@ When(/^I enter my New School NetID and password$/) do
   end
 end
 
-When(/^I enter my Library Patron ID and first four letters of my last name$/) do
+When(/^I enter my Library Patron ID for "(.*?)" and first four letters of my last name$/) do |location|
   within("#aleph") do
-    fill_in 'Enter your ID Number', with: username_for_location('Cooper Union')
-    fill_in 'First four letter of your last name', with: password_for_location('Cooper Union')
+    fill_in 'Enter your ID Number', with: username_for_location(location)
+    fill_in 'First four letter of your last name', with: password_for_location(location)
     click_button 'Login'
   end
 end
