@@ -6,7 +6,7 @@ module OmniAuthHashHelper
   end
 
   def omniauth_hash?
-    omniauth_hash.present? && 
+    omniauth_hash.present? &&
       omniauth_hash.is_a?(OmniAuth::AuthHash)
   end
 
@@ -30,6 +30,7 @@ module OmniAuthHashHelper
   end
 
   def omniauth_email
+    binding.pry
     omniauth_info.email if omniauth_hash?
   end
 

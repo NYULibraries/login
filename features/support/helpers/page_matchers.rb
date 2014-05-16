@@ -7,6 +7,13 @@ module LoginFeatures
       end
     end
 
+    def error_matchers(message)
+      @error_matchers ||= [
+        -> { have_css "div.alert.alert-error"},
+        -> { have_content message }
+      ]
+    end
+
     def shib_login_matchers
       @shib_login_matchers ||= [
         -> { have_content 'Login to' },
@@ -119,6 +126,15 @@ module LoginFeatures
         -> { have_content 'Successfully authenticated ' },
         -> { have_content "Hi #{username_for_location(location)}!" },
         -> { have_content 'You logged in via' },
+        -> { have_content " you've logged in to the NYU Libraries' services." }
+      ]
+    end
+
+    def newschool_logged_in_matchers
+      @logged_in_matchers ||= [
+        -> { have_content 'Successfully authenticated from your New School Ldap account' },
+        -> { have_content "Hi" },
+        -> { have_content 'You logged in via New School Ldap' },
         -> { have_content " you've logged in to the NYU Libraries' services." }
       ]
     end
