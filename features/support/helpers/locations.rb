@@ -19,11 +19,21 @@ module LoginFeatures
     end
 
     def username_for_location(location)
-      ENV["TEST_#{institute_for_location(location)}_USERNAME"]
+      # Defaults out to 'auth_key' for Travis' and VCR's sake
+      ENV.fetch(username_for(location), "username")
     end
 
     def password_for_location(location)
-      ENV["TEST_#{institute_for_location(location)}_PASSWORD"]
+      # Defaults out to 'auth_key' for Travis' and VCR's sake
+      ENV.fetch(password_for(location), "auth_key")
+    end
+
+    def username_for(location)
+      "TEST_#{institute_for_location(location)}_USERNAME"
+    end
+
+    def password_for(location)
+      "TEST_#{institute_for_location(location)}_PASSWORD"
     end
 
     def institute_for_location(location)
