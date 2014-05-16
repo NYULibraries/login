@@ -7,11 +7,11 @@ Feature: Bobst Affiliate login
   Scenario: Logging in with Bobst Affiliate patron ID
     Given I am on the NYU New York login page
     When I want to login to Bobst Affiliate
-    And I enter my Library Patron ID and first four letters of my last name
-    Then I should be logged in as a New York School of Interior Design user
+    And I enter my Library Patron ID for "Bobst Affiliate" and first four letters of my last name
+    Then I should be logged in as a Bobst Affiliate user
 
   Scenario: Logging in with incorrect Bobst Affiliate patron ID
     Given I am on the NYU New York login page
     When I want to login to Bobst Affiliate
     And I incorrectly enter my Library Patron ID and first four letters of my last name
-    Then I should not be logged in as a New York School of Interior Design user
+    Then I should not be logged in as a Bobst Affiliate user
