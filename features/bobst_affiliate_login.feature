@@ -1,3 +1,4 @@
+@vcr
 Feature: Bobst Affiliate login
   In order to use NYU Libraries' online services
   As a Bobst Affiliate user
