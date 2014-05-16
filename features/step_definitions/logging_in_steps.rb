@@ -150,6 +150,10 @@ Then(/^I should( not)? be logged in as a New York School of Interior Design user
   expectations_for_page(page, negate, *logged_in_matchers("NYSID"))
 end
 
+Then(/^I should( not)? be logged in as a Bobst Affiliate user$/) do |negate|
+  expectations_for_page(page, negate, *logged_in_matchers("Bobst Affiliate"))
+end
+
 Then(/^I should get an informative message about my incorrect credentials$/) do
   expectations_for_page(page, nil, *mismatched_aleph_credentials_matchers)
 end
