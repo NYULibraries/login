@@ -20,6 +20,6 @@ When(/^New School LDAP authenticates me$/) do
 end
 
 When(/^I submit invalid New School credentials$/) do
-  OmniAuth.config.mock_auth[:new_school_ldap] = :invalid_credentials
+  submit_invalid_credentials_to_newschool_ldap
   visit newschool_callback_url
 end

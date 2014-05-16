@@ -8,7 +8,7 @@ Feature: New School login
     Given I am on the New School login page
     When I submit my New School NetID and password
     And New School LDAP authenticates me
-    #Then I should be logged in as a New School user
+    Then I should be logged in as a New School user
 
   Scenario: Logging in with invalid credentials
     Given I am on the New School login page

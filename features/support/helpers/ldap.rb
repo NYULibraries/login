@@ -16,6 +16,10 @@ module LoginFeatures
       })
     end
 
+    def submit_invalid_credentials_to_newschool_ldap
+      OmniAuth.config.mock_auth[:new_school_ldap] = :invalid_credentials
+    end
+
     def newschool_callback_url
       user_omniauth_authorize_path(:provider => "new_school_ldap")
     end
