@@ -30,7 +30,6 @@ module OmniAuthHashHelper
   end
 
   def omniauth_email
-    binding.pry
     omniauth_info.email if omniauth_hash?
   end
 
