@@ -125,6 +125,39 @@ When(/^I enter my New School NetID and password$/) do
   end
 end
 
+When(/^I enter my Library Patron ID for "(.*?)" and first four letters of my last name$/) do |location|
+  within("#aleph") do
+    fill_in 'Enter your ID Number', with: username_for_location(location)
+    fill_in 'First four letter of your last name', with: password_for_location(location)
+    click_button 'Login'
+  end
+end
+
+When(/^I incorrectly enter my Library Patron ID and first four letters of my last name$/) do
+  within("#aleph") do
+    fill_in 'Enter your ID Number', with: 'copper'
+    fill_in 'First four letter of your last name', with: 'onion'
+    click_button 'Login'
+  end
+end
+
+
+Then(/^I should( not)? be logged in as a Cooper Union user$/) do |negate|
+  expectations_for_page(page, negate, *logged_in_matchers("Cooper Union"))
+end
+
+Then(/^I should( not)? be logged in as a New York School of Interior Design user$/) do |negate|
+  expectations_for_page(page, negate, *logged_in_matchers("NYSID"))
+end
+
+Then(/^I should( not)? be logged in as a Bobst Affiliate user$/) do |negate|
+  expectations_for_page(page, negate, *logged_in_matchers("Bobst Affiliate"))
+end
+
+Then(/^I should get an informative message about my incorrect credentials$/) do
+  expectations_for_page(page, nil, *mismatched_aleph_credentials_matchers)
+end
+
 When(/^Twitter authenticates me$/) do
   if VCR.current_cassette.recording?
     expectations_for_page(page, nil, *twitter_style_matchers)
