@@ -6,7 +6,7 @@ module OmniAuthHashHelper
   end
 
   def omniauth_hash?
-    omniauth_hash.present? && 
+    omniauth_hash.present? &&
       omniauth_hash.is_a?(OmniAuth::AuthHash)
   end
 

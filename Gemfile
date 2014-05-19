@@ -83,7 +83,7 @@ group :doc do
 end
 
 # New Relic performance monitoring
-gem "newrelic_rpm", "~> 3.8.0"
+# gem "newrelic_rpm", "~> 3.8.0"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -105,6 +105,7 @@ group :development, :test, :cucumber do
   gem "factory_girl_rails", "~> 4.4.0"
   # Use pry-debugger as the REPL and for debugging
   gem 'pry-debugger', '~> 0.2.2'
+  gem 'pry-remote', '~> 0.1.8'
 end
 
 # Development gems

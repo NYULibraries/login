@@ -57,3 +57,11 @@ end
 # The :transaction strategy is faster, but might give you threading problems.
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
+
+# Use OmniAuth test mode when tagged
+# This allows us to create reliable integration tests across environments
+Around('@omniauth_test') do |scenario, block|
+  OmniAuth.config.test_mode = true
+  block.call
+  OmniAuth.config.test_mode = false
+end

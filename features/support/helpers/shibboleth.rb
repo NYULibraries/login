@@ -1,5 +1,5 @@
 module LoginFeatures
-  module ShibbolethUrls
+  module Shibboleth
     def nyu_home_url(institute = "NYU")
       user_omniauth_authorize_path({provider: "nyu_shibboleth"}.merge(institute_user(institute)))
     end

@@ -34,6 +34,11 @@ class User < ActiveRecord::Base
   # Make pretty URLs for users based on their usernames
   def to_param; username end
 
+  # New School LDAP sends back uid as LDAP attrs, so use email instead
+  def display_username
+    (self.provider == "new_school_ldap") ? self.email : self.username
+  end
+
   # Override Devise::Models::Validatable#password_required?
   # since we don't have passwords and therefore can't
   # require them.
@@ -53,7 +58,7 @@ class User < ActiveRecord::Base
   def email_required?; false end
   protected :email_required?
 
-  # Resolve the institution based on 
+  # Resolve the institution based on
   def institution
     @institution ||= Institutions.institutions[institution_code.to_sym]
   end
