@@ -139,6 +139,15 @@ module LoginFeatures
       ]
     end
 
+    def aleph_logged_in_matchers(location)
+      @logged_in_matchers ||= [
+        -> { have_content 'Successfully authenticated ' },
+        -> { have_content "Hi " },
+        -> { have_content 'You logged in via' },
+        -> { have_content " you've logged in to the NYU Libraries' services." }
+      ]
+    end
+
     def mismatched_aleph_credentials_matchers()
       @mismatched_credentials_matchers ||= [
         -> { have_content 'Could not authenticate you from Aleph because "Error in verification".' }
