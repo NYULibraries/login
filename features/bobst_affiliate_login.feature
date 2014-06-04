@@ -4,6 +4,7 @@ Feature: Bobst Affiliate login
   As a Bobst Affiliate user
   I want to login with my Bobst Affiliate patron ID
 
+  @ignore_user_keys
   Scenario: Logging in with Bobst Affiliate patron ID
     Given I am on the NYU New York login page
     When I want to login to Bobst Affiliate

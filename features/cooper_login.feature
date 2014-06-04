@@ -4,6 +4,7 @@ Feature: Cooper Union login
   As a Cooper Union user
   I want to login with my Library patron ID and first four letters of my last name
 
+  @ignore_user_keys
   Scenario: Logging in with Cooper Union Library patron ID and first four letters of my last name
     Given I am at Cooper Union
     When I want to login to Cooper Union

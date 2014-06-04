@@ -123,5 +123,5 @@ group :test, :cucumber do
   gem 'pickle', '~> 0.4.11'
   gem 'database_cleaner', '~> 1.2.0'
   gem 'vcr', '~> 2.8.0'
-  gem 'webmock', '~> 1.17.4'
+  gem 'webmock', '>= 1.8.0', '< 1.16'
 end

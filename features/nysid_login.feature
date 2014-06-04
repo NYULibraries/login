@@ -4,6 +4,7 @@ Feature: New York School of Interior Design login
   As a New York School of Interior Design user
   I want to login with my NYSID patron ID
 
+  @ignore_user_keys
   Scenario: Logging in with NYSID patron ID
     Given I am at NYSID
     When I want to login to NYSID
