@@ -20,5 +20,5 @@ When(/^I wait up to (\d+) seconds for twitter to redirect me$/) do |timeout|
 end
 
 When(/^I've authorized Twitter to share my information with NYU Libraries$/) do
- # Do nothing
+  # Do nothing
 end

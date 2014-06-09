@@ -11,14 +11,11 @@ end
 
 Given(/^I am on an NYU client application$/) do
   # Do nothing
-  # visit @test
-  binding.pry
 end
 
 When(/^I login$/) do
   login_as(@current_user, scope: :user)
   auth_url = @client.auth_code.authorize_url(redirect_uri: "http://example.com")
-  binding.pry
   visit auth_url
 end
 
