@@ -38,32 +38,32 @@ This last one is the preferred way and the one we will be exploring.
 
 Mocking a client application allows us to purely test the provider's response to what we can assume is a valid application using Login as authentication. Using the [doorkeeper provider sample app](https://github.com/doorkeeper-gem/doorkeeper-provider-app) as an example we can see how to mock a client app, create a fake token from a factory user and test the `#api` method via GET:
 
-  # spec/controllers/api/v1/users_controller_spec.rb
-  describe Api::V1::UsersController do
+    # spec/controllers/api/v1/users_controller_spec.rb
+    describe Api::V1::UsersController do
 
-    before :each do
-      request.env['devise.mapping'] = Devise.mappings[:user]
-    end
-
-    describe 'GET #api (integrated)' do
-
-      let!(:application) { Doorkeeper::Application.create!(:name => "MyApp", :redirect_uri => "http://app.com") }
-      let!(:user) { FactoryGirl.create(:user) }
-      let!(:token) { Doorkeeper::AccessToken.create! :application_id => application.id, :resource_owner_id => user.id }
-
-      it 'should respond with 200' do
-      get :api, :format => :json, :access_token => token.token
-        expect(response.status).to be 200
+      before :each do
+        request.env['devise.mapping'] = Devise.mappings[:user]
       end
 
-      it 'should return the user as JSON' do
-      get :api, :format => :json, :access_token => token.token
-        expect(response.body).to eql user.to_json
+      describe 'GET #api (integrated)' do
+
+        let!(:application) { Doorkeeper::Application.create!(:name => "MyApp", :redirect_uri => "http://app.com") }
+        let!(:user) { FactoryGirl.create(:user) }
+        let!(:token) { Doorkeeper::AccessToken.create! :application_id => application.id, :resource_owner_id => user.id }
+
+        it 'should respond with 200' do
+        get :api, :format => :json, :access_token => token.token
+          expect(response.status).to be 200
+        end
+
+        it 'should return the user as JSON' do
+        get :api, :format => :json, :access_token => token.token
+          expect(response.body).to eql user.to_json
+        end
+
       end
 
     end
-
-  end
 
 These simple tests make sure that, given a user known by the provider and a token created from that user's ID/Application combination, we can always retrieve a user's information from a GET to the `#api` method.
 
@@ -84,17 +84,17 @@ Writing integration Cucumber tests for this interaction poses an initial problem
 
 In a truly integrated test suite we might have specific features for each client application, this may in fact live in [Browbeat](https://github.com/NYULibraries/browbeat) and be run after each successful deploy of each dependent application. However, for the sake of creating features within Login which only test the specific provider responses to any generic client application we can word a feature as follows:
 
-  @client
-  Feature: Login as an OAuth2 Provider
-    In order to use a specific NYU Libraries' online service
-    As a user
-    I want to login on NYU's central login page and be logged into that specific service
+    @client
+    Feature: Login as an OAuth2 Provider
+      In order to use a specific NYU Libraries' online service
+      As a user
+      I want to login on NYU's central login page and be logged into that specific service
 
-    Scenario: Logging into a client application
-      Given I am on an NYU client application
-      When I login
-      Then NYU Libraries' Login authorizes me
-      And I should be logged in to the NYU client application
+      Scenario: Logging into a client application
+        Given I am on an NYU client application
+        When I login
+        Then NYU Libraries' Login authorizes me
+        And I should be logged in to the NYU client application
 
 And thank goodness the doorkeeper wiki is deep and well maintained because it provides us with a outline for testing a provider with a dummy client: [Testing your provider with OAuth2 gem](https://github.com/doorkeeper-gem/doorkeeper/wiki/Testing-your-provider-with-OAuth2-gem).
 
@@ -104,35 +104,35 @@ The first step of the above scenario cannot be checked and are is a convenience 
 
 In order to simulate a client application we can run this before each `@client` tagged feature:
 
-  Before('@client') do
-    @client = OAuth2::Client.new("123", "secret123", :site => "https://login.dev")
-    @redirect_uri = "http://example.com"
-  end
+    Before('@client') do
+      @client = OAuth2::Client.new("123", "secret123", :site => "https://login.dev")
+      @redirect_uri = "http://example.com"
+    end
 
 ##### `When I login`
 
 Force a login to the Login application, retrieve the authorization url and go there:
 
-  When(/^I login$/) do
-    login_user
-    auth_url = @client.auth_code.authorize_url(:redirect_uri => @redirect_uri)
-    visit auth_url
-    @auth_code = get_auth_code_from_url
-  end
+    When(/^I login$/) do
+      login_user
+      auth_url = @client.auth_code.authorize_url(:redirect_uri => @redirect_uri)
+      visit auth_url
+      @auth_code = get_auth_code_from_url
+    end
 
 ##### `Then NYU Libraries' Login authorizes me`
 
 Retrieve the authorized access token:
 
-  Then(/^NYU Libraries' Login authenticates me$/) do
-    @token = @client.auth_code.get_token(@auth_code, :redirect_uri => @redirect_uri)
-  end
+    Then(/^NYU Libraries' Login authenticates me$/) do
+      @token = @client.auth_code.get_token(@auth_code, :redirect_uri => @redirect_uri)
+    end
 
 ##### `And I should be logged in to the NYU client application`
 
 Ensure that the user information was found:
 
-  And(/^I should be logged in to the NYU client application$/) do
-    response = @token.get('/api/v1/users')
-    expect(JSON.parse(response.body)).to eql oauth_user_hash.to_json
-  end
+    And(/^I should be logged in to the NYU client application$/) do
+      response = @token.get('/api/v1/users')
+      expect(JSON.parse(response.body)).to eql oauth_user_hash.to_json
+    end
