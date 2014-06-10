@@ -41,7 +41,7 @@ module OmniAuthHashHelper
     if omniauth_hash?
       @omniauth_username ||= case omniauth_hash.provider
         when "twitter", "facebook"
-          omniauth_info.nickname
+          omniauth_info.nickname or omniauth_info.email
         else
           omniauth_uid
         end.downcase
