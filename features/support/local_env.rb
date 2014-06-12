@@ -18,7 +18,8 @@ if ENV['IN_BROWSER']
   # or (to have a pause of 1 second between each step):
   # IN_BROWSER=true PAUSE=1 bundle exec cucumber
   Capybara.default_driver = :selenium
-  # Capybara.app_host = 'https://login.dev'
+  Capybara.app_host = 'http://localhost:3000'
+  Capybara.server_port = 3000
   AfterStep do
     sleep (ENV['PAUSE'] || 0).to_i
   end
