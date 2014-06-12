@@ -4,8 +4,10 @@ When(/^Facebook authenticates me$/) do
     fill_in("email", with: username_for_location("Facebook"))
     fill_in("pass", with: password_for_location("Facebook"))
     click_button "Log In"
+  #   binding.pry
   # else
-  #   visit '/users/auth/twitter/callback?institute=NYU'
+  #   binding.pry
+  #   # visit '/users/auth/facebook/callback'
   # end
 end
 
