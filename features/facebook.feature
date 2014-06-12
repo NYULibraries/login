@@ -1,9 +1,10 @@
 @vcr
-Feature: Twitter login
+Feature: Facebook login
   In order to use NYU Libraries' online services
   As a visitor at Bobst Library with a Facebook account
   I want to login with my Facebook credentials on the Libraries' login page
 
+#  @ignore_user_keys
   Scenario: Logging in with Facebook account
     Given I am on the NYU New York login page
     And I should see an option to login with a Facebook account
