@@ -1,9 +1,9 @@
 GIT
   remote: git://github.com/NYULibraries/nyulibraries-assets.git
-  revision: 81840279dccbe59080607e5f5bc3729558ebc0e2
-  tag: v3.0.1
+  revision: 18fedd3b2d792e8c23ad29468a9659c53fde92e9
+  branch: development-login-remove-privileges
   specs:
-    nyulibraries-assets (3.0.1)
+    nyulibraries-assets (3.0.0)
       bootstrap-sass (= 2.3.2.2)
       compass (= 0.12.5)
       institutions (~> 0.1.1)
