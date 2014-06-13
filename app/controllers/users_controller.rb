@@ -1,4 +1,4 @@
-class UsersController < Devise::OmniauthCallbacksController 
+class UsersController < Devise::OmniauthCallbacksController
   doorkeeper_for :api
   before_filter :require_login, only: :show
   before_filter :require_no_authentication, except: [:show, :api]
@@ -32,7 +32,7 @@ class UsersController < Devise::OmniauthCallbacksController
     @user.email = omniauth_email if @user.email.blank? && omniauth_email.present?
     # Set the OmniAuth::AuthHash for the user
     @user.omniauth_hash = omniauth_hash
-    if @user.save 
+    if @user.save
       @identity = @user.identities.find_or_initialize_by(uid: omniauth_uid, provider: omniauth_identity_provider)
       @identity.properties = omniauth_properties if @identity.expired?
       @identity.save
@@ -47,4 +47,11 @@ class UsersController < Devise::OmniauthCallbacksController
   Devise.omniauth_providers.each do |omniauth_provider|
     alias_method omniauth_provider, :omniauth_callback
   end
+
+  def require_login
+    unless user_signed_in?
+      redirect_to login_url
+    end
+  end
+  private :require_login
 end

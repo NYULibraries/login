@@ -8,5 +8,5 @@ class ApplicationController < ActionController::Base
 
   helper :institutions
 
-  include InstitutionsHelper, SessionsHelper, OmniAuthHelper, UsersHelper
+  include InstitutionsHelper, OmniAuthHelper, UsersHelper
 end

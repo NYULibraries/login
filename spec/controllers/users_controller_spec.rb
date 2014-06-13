@@ -16,6 +16,7 @@ describe UsersController do
       context "when request is for the same user as is logged in" do
         before { get :show, id: attributes[:username], provider: attributes[:provider] }
         subject { response }
+        it { should_not be_redirect }
         context "when not rendering views" do
           render_views false
           it { should be_success }
