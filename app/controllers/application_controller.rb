@@ -6,9 +6,6 @@ class ApplicationController < ActionController::Base
 
   layout Proc.new { |controller| (controller.request.xhr?) ? false : "login" }
 
-  # Make these functions available to views
-  helper :institutions
-
   # Include these helper functions explicitly to make them available to controllers
   include InstitutionsHelper, OmniAuthHelper, UsersHelper
 end
