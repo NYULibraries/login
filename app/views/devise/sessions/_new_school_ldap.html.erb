@@ -1,9 +1,6 @@
 <div id="new_school_ldap">
   <h2>
     <%= t('application.ns.header') %>
-    <a class="nyulibraries-help nyulibraries-help-icon" href="https://library.nyu.edu/info/bobcat/login.html" target="_blank">
-      help
-    </a>
   </h2>
   <%= form_tag(user_omniauth_callback_path(:new_school_ldap, institute: current_institute.code)) do -%>
     <%= field_set_tag do -%>
