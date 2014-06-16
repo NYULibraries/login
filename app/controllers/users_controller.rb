@@ -2,7 +2,7 @@ class UsersController < Devise::OmniauthCallbacksController
   doorkeeper_for :api
   before_filter :require_login, only: :show
   before_filter :require_no_authentication, except: [:show, :api]
-  before_filter :require_valid_omniauth, only: (Devise.omniauth_providers << :omniauth_callback)
+  before_filter :require_valid_omniauth_hash, only: (Devise.omniauth_providers << :omniauth_callback)
   respond_to :html, except: :api
   respond_to :json, only: :api
 
