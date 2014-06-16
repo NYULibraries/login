@@ -129,13 +129,15 @@ describe UsersController do
           before { @request.env['omniauth.auth'].provider = "invalid" }
           it("should not assign @user") { expect(assigns(:identity)).to be_nil }
           it { should be_redirect }
-          it { should redirect_to(login_url('nyu')) }
+          require 'pry'
+          # binding.pry
+          it { should redirect_to(login_url()) }
         end
       end
       context 'when the omniauth.auth environment is not present' do
         it("should not assign @user") { expect(assigns(:identity)).to be_nil }
         it { should be_redirect }
-        it { should redirect_to(login_url('nyu')) }
+        it { should redirect_to(login_url()) }
       end
     end
 
@@ -164,13 +166,13 @@ describe UsersController do
           before { @request.env['omniauth.auth'].provider = "invalid" }
           it("should not assign @user") { expect(assigns(:identity)).to be_nil }
           it { should be_redirect }
-          it { should redirect_to(login_url('nyu')) }
+          it { should redirect_to(login_url()) }
         end
       end
       context 'when the omniauth.auth environment is not present' do
         it("should not assign @user") { expect(assigns(:identity)).to be_nil }
         it { should be_redirect }
-        it { should redirect_to(login_url('nyu')) }
+        it { should redirect_to(login_url()) }
       end
     end
 
@@ -199,13 +201,13 @@ describe UsersController do
           before { @request.env['omniauth.auth'].provider = "invalid" }
           it("should not assign @user") { expect(assigns(:identity)).to be_nil }
           it { should be_redirect }
-          it { should redirect_to(login_url('nyu')) }
+          it { should redirect_to(login_url()) }
         end
       end
       context 'when the omniauth.auth environment is not present' do
         it("should not assign @user") { expect(assigns(:identity)).to be_nil }
         it { should be_redirect }
-        it { should redirect_to(login_url('nyu')) }
+        it { should redirect_to(login_url()) }
       end
     end
 
@@ -234,13 +236,13 @@ describe UsersController do
           before { @request.env['omniauth.auth'].provider = "invalid" }
           it("should not assign @user") { expect(assigns(:identity)).to be_nil }
           it { should be_redirect }
-          it { should redirect_to(login_url('nyu')) }
+          it { should redirect_to(login_url()) }
         end
       end
       context 'when the omniauth.auth environment is not present' do
         it("should not assign @user") { expect(assigns(:identity)).to be_nil }
         it { should be_redirect }
-        it { should redirect_to(login_url('nyu')) }
+        it { should redirect_to(login_url()) }
       end
     end
 
@@ -270,13 +272,13 @@ describe UsersController do
           before { @request.env['omniauth.auth'].provider = "invalid" }
           it("should not assign @user") { expect(assigns(:identity)).to be_nil }
           it { should be_redirect }
-          it { should redirect_to(login_url('nyu')) }
+          it { should redirect_to(login_url()) }
         end
       end
       context 'when the omniauth.auth environment is not present' do
         it("should not assign @user") { expect(assigns(:identity)).to be_nil }
         it { should be_redirect }
-        it { should redirect_to(login_url('nyu')) }
+        it { should redirect_to(login_url()) }
       end
     end
 
@@ -305,13 +307,13 @@ describe UsersController do
           before { @request.env['omniauth.auth'].provider = "invalid" }
           it("should not assign @user") { expect(assigns(:identity)).to be_nil }
           it { should be_redirect }
-          it { should redirect_to(login_url('nyu')) }
+          it { should redirect_to(login_url()) }
         end
       end
       context 'when the omniauth.auth environment is not present' do
         it("should not assign @user") { expect(assigns(:identity)).to be_nil }
         it { should be_redirect }
-        it { should redirect_to(login_url('nyu')) }
+        it { should redirect_to(login_url()) }
       end
     end
   end
