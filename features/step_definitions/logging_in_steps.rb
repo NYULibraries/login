@@ -68,7 +68,6 @@ When(/^I incorrectly enter my Library Patron ID and first four letters of my las
   end
 end
 
-
 Then(/^I should( not)? be logged in as a Cooper Union user$/) do |negate|
   expectations_for_page(page, negate, *aleph_logged_in_matchers("Cooper Union"))
 end

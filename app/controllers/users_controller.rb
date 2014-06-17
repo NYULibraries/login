@@ -1,10 +1,8 @@
-class UsersController < Devise::OmniauthCallbacksController 
-  doorkeeper_for :api
+class UsersController < Devise::OmniauthCallbacksController
   before_filter :require_login, only: :show
-  before_filter :require_no_authentication, except: [:show, :api]
+  before_filter :require_no_authentication, except: [:show]
   before_filter :require_valid_omniauth, only: :omniauth_callback
-  respond_to :html, except: :api
-  respond_to :json, only: :api
+  respond_to :html
 
   def show
     @user = User.find_by(username: params[:id], provider: params[:provider])
@@ -12,13 +10,6 @@ class UsersController < Devise::OmniauthCallbacksController
       respond_with(@user)
     else
       redirect_to user_url(current_user)
-    end
-  end
-
-  def api
-    if doorkeeper_token
-      @user = User.find(doorkeeper_token.resource_owner_id)
-      respond_with(@user, include: :identities)
     end
   end
 
@@ -32,7 +23,7 @@ class UsersController < Devise::OmniauthCallbacksController
     @user.email = omniauth_email if @user.email.blank? && omniauth_email.present?
     # Set the OmniAuth::AuthHash for the user
     @user.omniauth_hash = omniauth_hash
-    if @user.save 
+    if @user.save
       @identity = @user.identities.find_or_initialize_by(uid: omniauth_uid, provider: omniauth_identity_provider)
       @identity.properties = omniauth_properties if @identity.expired?
       @identity.save

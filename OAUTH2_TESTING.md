@@ -18,7 +18,7 @@ The same way we want Login to recognize users logging into Facebook, we want say
 
 ### Testing the API (Provider)
 
-An OAuth2 provider is required to have an API path where one can request protected resources. The path would look something like `/api/v1/users?token=a1b2c3d4` where that returns a JSON body containing the authenticated user's protected information.
+An OAuth2 provider is required to have an API path where one can request protected resources. The path would look something like `/api/v1/user?token=a1b2c3d4` where that returns a JSON body containing the authenticated user's protected information.
 
 Given a valid token we expect this route to return a valid user represented as JSON.
 
@@ -41,34 +41,27 @@ Mocking a client application allows us to purely test the provider's response to
     # spec/controllers/api/v1/users_controller_spec.rb
     describe Api::V1::UsersController do
 
-      before :each do
-        request.env['devise.mapping'] = Devise.mappings[:user]
-      end
+      let(:user) { create(:user) }
 
-      describe 'GET #api (integrated)' do
+      describe 'GET #api' do
 
-        let!(:application) { Doorkeeper::Application.create!(:name => "MyApp", :redirect_uri => "http://app.com") }
-        let!(:user) { FactoryGirl.create(:user) }
-        let!(:token) { Doorkeeper::AccessToken.create! :application_id => application.id, :resource_owner_id => user.id }
+        let(:app) { create(:oauth_application) }
+        let(:token) { Doorkeeper::AccessToken.create! :application_id => app.id, :resource_owner_id => user.id }
 
-        it 'should respond with 200' do
-        get :api, :format => :json, :access_token => token.token
+        it 'responds with 200' do
+          get :show, :format => :json, :access_token => token.token
           expect(response.status).to be 200
         end
 
-        it 'should return the user as JSON' do
-        get :api, :format => :json, :access_token => token.token
-          expect(response.body).to eql user.to_json
+        it 'returns the user as json' do
+          get :show, :format => :json, :access_token => token.token
+          expect(response.body).to eql user.to_json(:include => :identities)
         end
-
       end
 
     end
 
-These simple tests make sure that, given a user known by the provider and a token created from that user's ID/Application combination, we can always retrieve a user's information from a GET to the `#api` method.
-
-__TODO:__
-Currently our `#api` is a bit of a budget method. It doesn't exist the modular way laid out above, that is within its own `Api::V1` module, but rather it's just a function within the `UsersController` that is routed to `/api/v1/user`.
+These simple tests make sure that, given a user known by the provider and a token created from that user's ID/Application combination, we can always retrieve a user's information from a GET to the `#show` method.
 
 ### Routes
 
@@ -78,61 +71,81 @@ Check the oauth endpoint routes.
 
 ### Integration
 
-Writing integration Cucumber tests for this interaction poses an initial problem. Since we don't want to spin off a dummy application and run it side-by-side with Login (sounds like a headache) we will have to do a bit of mocking to create a dummy client. Luckily, though not without a bit of thought, there are ways to mock this client interaction.
+Writing integration Cucumber tests for this interaction poses a problem. Since we don't want to spin off a dummy application and run it side-by-side with Login (sounds like a headache) we will have to do a bit of mocking to create a dummy client. There appear to be ways to hack together a mocked client, but currently I could not get this to work. Following is the process I tried:
 
 #### Cucumber Feature
 
-In a truly integrated test suite we might have specific features for each client application, this may in fact live in [Browbeat](https://github.com/NYULibraries/browbeat) and be run after each successful deploy of each dependent application. However, for the sake of creating features within Login which only test the specific provider responses to any generic client application we can word a feature as follows:
+In a truly integrated test suite we might have specific features for each client application, this may in fact live in [Browbeat](https://github.com/NYULibraries/browbeat) and be run after each successful deploy of each dependent application. However, for the sake of creating features within Login which only test the specific provider responses to any generic client application we want to word a feature as follows:
 
-    @client
+    @omniauth_test
     Feature: Login as an OAuth2 Provider
       In order to use a specific NYU Libraries' online service
       As a user
       I want to login on NYU's central login page and be logged into that specific service
 
+	  @client_app
       Scenario: Logging into a client application
         Given I am on an NYU client application
         When I login
         Then NYU Libraries' Login authorizes me
         And I should be logged in to the NYU client application
 
-And thank goodness the doorkeeper wiki is deep and well maintained because it provides us with a outline for testing a provider with a dummy client: [Testing your provider with OAuth2 gem](https://github.com/doorkeeper-gem/doorkeeper/wiki/Testing-your-provider-with-OAuth2-gem).
+The doorkeeper wiki provides an outline for testing a provider with a dummy client: [Testing your provider with OAuth2 gem](https://github.com/doorkeeper-gem/doorkeeper/wiki/Testing-your-provider-with-OAuth2-gem). This provides a process for creating on the fly client applications and getting an access token from them. I could not get this to work mainly when trying to point [Faraday](https://github.com/lostisland/faraday), which the `Client` class of the OAuth2 gem wraps, to the RackTest application in either Capybara or RSpec. They do have [recommendations for doing this](https://github.com/doorkeeper-gem/doorkeeper/wiki/Testing-your-provider-with-OAuth2-gem#rspec) but I could not make it work.
 
-The first step of the above scenario cannot be checked and are is a convenience step to give the feature fluidity.
+##### `Before` and `After`
 
-##### Before
+The `@omniauth_test` tag just sets up the [OmniAuth test environment](https://github.com/intridea/omniauth/wiki/Integration-Testing) so we can simulate login.
 
-In order to simulate a client application we can run this before each `@client` tagged feature:
+In order to simulate a client application I tried running this before each `@client_app` tagged feature:
 
-    Before('@client') do
-      @client = OAuth2::Client.new("123", "secret123", :site => "https://login.dev")
-      @redirect_uri = "http://example.com"
+    Warden.test_mode!
+    World Warden::Test::Helpers
+
+    Before('@client_app') do
+      @app = FactoryGirl.create(:oauth_app_no_redirect)
+      @client = OAuth2::Client.new(@app.uid, @app.secret) do |b|
+        b.request :url_encoded
+        b.adapter :rack, Rails.application
+      end
+      @admin_user = FactoryGirl.create(:admin)
     end
+
+And this after:
+
+    After('@client_app') do
+      Warden.test_reset!
+    end
+
+The use of the Warden test helpers are documented here: [Test with Capybara](https://github.com/plataformatec/devise/wiki/How-To:-Test-with-Capybara),
 
 ##### `When I login`
 
 Force a login to the Login application, retrieve the authorization url and go there:
 
     When(/^I login$/) do
-      login_user
-      auth_url = @client.auth_code.authorize_url(:redirect_uri => @redirect_uri)
+      login_as(@admin_user, scope: :user)
+      auth_url = @client.auth_code.authorize_url(:redirect_uri => @app.redirect_uri)
       visit auth_url
-      @auth_code = get_auth_code_from_url
+      @auth_code = retrieve_auth_code_from_current_page
     end
+
+This never redirects to the proper RackTest environment. The URL comes through in the form `http:/oauth/...`
+
+Using the test `redirect_uri` we are supposed to see a page containing the auth_code, so we would screen scrape it here with a helper function such as `retrieve_auth_code_from_current_page`.
 
 ##### `Then NYU Libraries' Login authorizes me`
 
-Retrieve the authorized access token:
+Next try to retrieve the authorized access token:
 
     Then(/^NYU Libraries' Login authenticates me$/) do
-      @token = @client.auth_code.get_token(@auth_code, :redirect_uri => @redirect_uri)
+      @token = @client.auth_code.get_token(@auth_code, :redirect_uri => @app.redirect_uri)
     end
 
 ##### `And I should be logged in to the NYU client application`
 
-Ensure that the user information was found:
+Then we should be able to use that token to visit the API:
 
     And(/^I should be logged in to the NYU client application$/) do
       response = @token.get('/api/v1/users')
-      expect(JSON.parse(response.body)).to eql oauth_user_hash.to_json
+      expect(JSON.parse(response.body)).to eql FactoryGirl.build(:admin_user).to_json
     end
