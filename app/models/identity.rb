@@ -11,6 +11,7 @@ class Identity < ActiveRecord::Base
   # Must have a uid, provider and properties
   validates :uid, presence: true
   validates :provider, presence: true
+  # Properties is an Hstore column type
   validates :properties, presence: true
 
   # Must have a unique uid per provider

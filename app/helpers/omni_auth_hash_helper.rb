@@ -39,12 +39,16 @@ module OmniAuthHashHelper
 
   def omniauth_username
     if omniauth_hash?
-      @omniauth_username ||= case omniauth_hash.provider
+      @omniauth_username ||= begin
+        case omniauth_hash.provider
         when "twitter", "facebook"
-          omniauth_info.nickname or omniauth_info.email
+          omniauth_info.nickname || omniauth_info.email
+        when "new_school_ldap"
+          omniauth_email
         else
           omniauth_uid
         end.downcase
+      end
     end
   end
 end

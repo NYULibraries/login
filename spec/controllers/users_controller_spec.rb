@@ -16,6 +16,7 @@ describe UsersController do
       context "when request is for the same user as is logged in" do
         before { get :show, id: attributes[:username], provider: attributes[:provider] }
         subject { response }
+        it { should_not be_redirect }
         context "when not rendering views" do
           render_views false
           it { should be_success }
@@ -128,13 +129,21 @@ describe UsersController do
           before { @request.env['omniauth.auth'].provider = "invalid" }
           it("should not assign @user") { expect(assigns(:identity)).to be_nil }
           it { should be_redirect }
+          require 'pry'
+          # binding.pry
+          it { should redirect_to(login_url()) }
+        end
+        context 'when the omniauth.auth environment username is empty' do
+          before { @request.env['omniauth.auth'].uid = "" }
+          it("should not assign @user") { expect(assigns(:identity)).to be_nil }
+          it { should be_redirect }
           it { should redirect_to(login_url('nyu')) }
         end
       end
       context 'when the omniauth.auth environment is not present' do
         it("should not assign @user") { expect(assigns(:identity)).to be_nil }
         it { should be_redirect }
-        it { should redirect_to(login_url('nyu')) }
+        it { should redirect_to(login_url()) }
       end
     end
 
@@ -163,13 +172,19 @@ describe UsersController do
           before { @request.env['omniauth.auth'].provider = "invalid" }
           it("should not assign @user") { expect(assigns(:identity)).to be_nil }
           it { should be_redirect }
+          it { should redirect_to(login_url()) }
+        end
+        context 'when the omniauth.auth environment username is empty' do
+          before { @request.env['omniauth.auth'].info.nickname = "" }
+          it("should not assign @user") { expect(assigns(:identity)).to be_nil }
+          it { should be_redirect }
           it { should redirect_to(login_url('nyu')) }
         end
-      end
+     end
       context 'when the omniauth.auth environment is not present' do
         it("should not assign @user") { expect(assigns(:identity)).to be_nil }
         it { should be_redirect }
-        it { should redirect_to(login_url('nyu')) }
+        it { should redirect_to(login_url()) }
       end
     end
 
@@ -198,13 +213,19 @@ describe UsersController do
           before { @request.env['omniauth.auth'].provider = "invalid" }
           it("should not assign @user") { expect(assigns(:identity)).to be_nil }
           it { should be_redirect }
+          it { should redirect_to(login_url()) }
+        end
+        context 'when the omniauth.auth environment username is empty' do
+          before { @request.env['omniauth.auth'].info.nickname = "" }
+          it("should not assign @user") { expect(assigns(:identity)).to be_nil }
+          it { should be_redirect }
           it { should redirect_to(login_url('nyu')) }
         end
       end
       context 'when the omniauth.auth environment is not present' do
         it("should not assign @user") { expect(assigns(:identity)).to be_nil }
         it { should be_redirect }
-        it { should redirect_to(login_url('nyu')) }
+        it { should redirect_to(login_url()) }
       end
     end
 
@@ -233,13 +254,19 @@ describe UsersController do
           before { @request.env['omniauth.auth'].provider = "invalid" }
           it("should not assign @user") { expect(assigns(:identity)).to be_nil }
           it { should be_redirect }
+          it { should redirect_to(login_url()) }
+        end
+        context 'when the omniauth.auth environment username is empty' do
+          before { @request.env['omniauth.auth'].uid = "" }
+          it("should not assign @user") { expect(assigns(:identity)).to be_nil }
+          it { should be_redirect }
           it { should redirect_to(login_url('nyu')) }
         end
       end
       context 'when the omniauth.auth environment is not present' do
         it("should not assign @user") { expect(assigns(:identity)).to be_nil }
         it { should be_redirect }
-        it { should redirect_to(login_url('nyu')) }
+        it { should redirect_to(login_url()) }
       end
     end
 
@@ -269,13 +296,19 @@ describe UsersController do
           before { @request.env['omniauth.auth'].provider = "invalid" }
           it("should not assign @user") { expect(assigns(:identity)).to be_nil }
           it { should be_redirect }
+          it { should redirect_to(login_url()) }
+        end
+        context 'when the omniauth.auth environment username is empty' do
+          before { @request.env['omniauth.auth'].info.email = "" }
+          it("should not assign @user") { expect(assigns(:identity)).to be_nil }
+          it { should be_redirect }
           it { should redirect_to(login_url('nyu')) }
         end
       end
       context 'when the omniauth.auth environment is not present' do
         it("should not assign @user") { expect(assigns(:identity)).to be_nil }
         it { should be_redirect }
-        it { should redirect_to(login_url('nyu')) }
+        it { should redirect_to(login_url()) }
       end
     end
 
@@ -304,13 +337,19 @@ describe UsersController do
           before { @request.env['omniauth.auth'].provider = "invalid" }
           it("should not assign @user") { expect(assigns(:identity)).to be_nil }
           it { should be_redirect }
+          it { should redirect_to(login_url()) }
+        end
+        context 'when the omniauth.auth environment username is empty' do
+          before { @request.env['omniauth.auth'].uid = "" }
+          it("should not assign @user") { expect(assigns(:identity)).to be_nil }
+          it { should be_redirect }
           it { should redirect_to(login_url('nyu')) }
         end
       end
       context 'when the omniauth.auth environment is not present' do
         it("should not assign @user") { expect(assigns(:identity)).to be_nil }
         it { should be_redirect }
-        it { should redirect_to(login_url('nyu')) }
+        it { should redirect_to(login_url()) }
       end
     end
   end
