@@ -133,6 +133,12 @@ describe UsersController do
           # binding.pry
           it { should redirect_to(login_url()) }
         end
+        context 'when the omniauth.auth environment username is empty' do
+          before { @request.env['omniauth.auth'].uid = "" }
+          it("should not assign @user") { expect(assigns(:identity)).to be_nil }
+          it { should be_redirect }
+          it { should redirect_to(login_url('nyu')) }
+        end
       end
       context 'when the omniauth.auth environment is not present' do
         it("should not assign @user") { expect(assigns(:identity)).to be_nil }
@@ -168,7 +174,13 @@ describe UsersController do
           it { should be_redirect }
           it { should redirect_to(login_url()) }
         end
-      end
+        context 'when the omniauth.auth environment username is empty' do
+          before { @request.env['omniauth.auth'].info.nickname = "" }
+          it("should not assign @user") { expect(assigns(:identity)).to be_nil }
+          it { should be_redirect }
+          it { should redirect_to(login_url('nyu')) }
+        end
+     end
       context 'when the omniauth.auth environment is not present' do
         it("should not assign @user") { expect(assigns(:identity)).to be_nil }
         it { should be_redirect }
@@ -202,6 +214,12 @@ describe UsersController do
           it("should not assign @user") { expect(assigns(:identity)).to be_nil }
           it { should be_redirect }
           it { should redirect_to(login_url()) }
+        end
+        context 'when the omniauth.auth environment username is empty' do
+          before { @request.env['omniauth.auth'].info.nickname = "" }
+          it("should not assign @user") { expect(assigns(:identity)).to be_nil }
+          it { should be_redirect }
+          it { should redirect_to(login_url('nyu')) }
         end
       end
       context 'when the omniauth.auth environment is not present' do
@@ -237,6 +255,12 @@ describe UsersController do
           it("should not assign @user") { expect(assigns(:identity)).to be_nil }
           it { should be_redirect }
           it { should redirect_to(login_url()) }
+        end
+        context 'when the omniauth.auth environment username is empty' do
+          before { @request.env['omniauth.auth'].uid = "" }
+          it("should not assign @user") { expect(assigns(:identity)).to be_nil }
+          it { should be_redirect }
+          it { should redirect_to(login_url('nyu')) }
         end
       end
       context 'when the omniauth.auth environment is not present' do
@@ -274,6 +298,12 @@ describe UsersController do
           it { should be_redirect }
           it { should redirect_to(login_url()) }
         end
+        context 'when the omniauth.auth environment username is empty' do
+          before { @request.env['omniauth.auth'].info.email = "" }
+          it("should not assign @user") { expect(assigns(:identity)).to be_nil }
+          it { should be_redirect }
+          it { should redirect_to(login_url('nyu')) }
+        end
       end
       context 'when the omniauth.auth environment is not present' do
         it("should not assign @user") { expect(assigns(:identity)).to be_nil }
@@ -308,6 +338,12 @@ describe UsersController do
           it("should not assign @user") { expect(assigns(:identity)).to be_nil }
           it { should be_redirect }
           it { should redirect_to(login_url()) }
+        end
+        context 'when the omniauth.auth environment username is empty' do
+          before { @request.env['omniauth.auth'].uid = "" }
+          it("should not assign @user") { expect(assigns(:identity)).to be_nil }
+          it { should be_redirect }
+          it { should redirect_to(login_url('nyu')) }
         end
       end
       context 'when the omniauth.auth environment is not present' do
