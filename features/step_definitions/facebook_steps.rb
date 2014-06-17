@@ -23,7 +23,7 @@ Then(/^I should be logged in with my Facebook handle$/) do
 end
 
 When(/^I wait for facebook login page$/) do
-  using_wait_time 30 do
+  using_wait_time 60 do
     expectations_for_page(page, nil, *facebook_style_matchers)
   end
 end
