@@ -16,12 +16,7 @@ module OmniAuthHashHelper
 
   def omniauth_identity_provider
     if omniauth_hash?
-      @omniauth_identity_provider ||= case omniauth_hash.provider
-        when 'shibboleth_passive'
-          'nyu_shibboleth'
-        else
-          omniauth_hash.provider
-        end
+      @omniauth_identity_provider ||= omniauth_hash.provider
     end
   end
 

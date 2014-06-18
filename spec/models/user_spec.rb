@@ -40,11 +40,6 @@ describe User do
     it { should_not be_valid }
   end
 
-  context "when provider is shibboleth_passive" do
-    subject { build(:user, provider: "shibboleth_passive") }
-    it { should_not be_valid }
-  end
-
   context "when valid" do
     subject(:user) { build(:user, username: 'dev123', email: 'dev123@example.com', institution_code: 'NYUAD', provider: 'nyu_shibboleth') }
     it { should be_a(User) }

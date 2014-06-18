@@ -44,11 +44,6 @@ describe Identity do
     it { should_not be_valid }
   end
 
-  context "when provider is shibboleth_passive" do
-    subject { build(:identity, provider: "shibboleth_passive") }
-    it { should_not be_valid }
-  end
-
   context "when properties is nil" do
     subject { build(:identity, properties: nil) }
     it { should_not be_valid }

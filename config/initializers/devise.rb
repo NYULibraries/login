@@ -87,8 +87,6 @@ Devise.setup do |config|
     info_fields: { email: 'email', nickname: 'givenName' , first_name: 'givenName',
       last_name: 'sn' }, extra_fields: ['nyuidn', 'entitlement'],
     request_type: (Rails.env.cucumber?) ? :params : :env
-  require "omniauth-shibboleth-passive"
-  config.omniauth :shibboleth_passive
   require "omniauth-ldap"
   config.omniauth :ldap, name: 'new_school_ldap', host: ENV['NEWSCHOOL_LDAP_HOST'],
     port: ENV['NEWSCHOOL_LDAP_PORT'], bind_dn: ENV['NEWSCHOOL_LDAP_BIND_DN'],

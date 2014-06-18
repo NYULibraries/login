@@ -47,11 +47,6 @@ describe OmniAuthHelper do
         it { should_not be_blank }
         it { should eq("aleph") }
       end
-      context "and it's from a passive shibboleth login" do
-        before { params[:action] = "shibboleth_passive"; @request.env['omniauth.auth'] = authhash(:shibboleth_passive) }
-        it { should_not be_blank }
-        it { should eq("nyu_shibboleth") }
-      end
     end
   end
 
