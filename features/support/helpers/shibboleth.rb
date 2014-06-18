@@ -25,7 +25,6 @@ module LoginFeatures
       }
     end
 
-
     def shibboleth_username_for_institute(institute)
       case institute
       when /NYU New York/

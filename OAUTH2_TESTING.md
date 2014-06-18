@@ -36,7 +36,7 @@ This last one is the preferred way and the one we will be exploring.
 
 #### Controllers
 
-Mocking a client application allows us to purely test the provider's response to what we can assume is a valid application using Login as authentication. Using the [doorkeeper provider sample app](https://github.com/doorkeeper-gem/doorkeeper-provider-app) as an example we can see how to mock a client app, create a fake token from a factory user and test the `#api` method via GET:
+Mocking a client application allows us to purely test the provider's response to what we can assume is a valid application using Login as authentication. Using the [doorkeeper provider sample app](https://github.com/doorkeeper-gem/doorkeeper-provider-app) as an example we can see how to mock a client app, create a fake token from a factory user and test the `#show` method via GET:
 
     # spec/controllers/api/v1/users_controller_spec.rb
     describe Api::V1::UsersController do
@@ -71,7 +71,7 @@ Check the oauth endpoint routes.
 
 ### Integration
 
-Writing integration Cucumber tests for this interaction poses a problem. Since we don't want to spin off a dummy application and run it side-by-side with Login (sounds like a headache) we will have to do a bit of mocking to create a dummy client. There appear to be ways to hack together a mocked client, but currently I could not get this to work. Following is the process I tried:
+Writing integration Cucumber tests for this interaction poses a problem. Since we don't want to spin off a dummy application and run it side-by-side with Login (sounds like a headache) we will have to do a bit of mocking to create a dummy client. There appear to be ways to hack together a mocked client as outlined below:
 
 #### Cucumber Feature
 
@@ -90,62 +90,80 @@ In a truly integrated test suite we might have specific features for each client
         Then NYU Libraries' Login authorizes me
         And I should be logged in to the NYU client application
 
-The doorkeeper wiki provides an outline for testing a provider with a dummy client: [Testing your provider with OAuth2 gem](https://github.com/doorkeeper-gem/doorkeeper/wiki/Testing-your-provider-with-OAuth2-gem). This provides a process for creating on the fly client applications and getting an access token from them. I could not get this to work mainly when trying to point [Faraday](https://github.com/lostisland/faraday), which the `Client` class of the OAuth2 gem wraps, to the RackTest application in either Capybara or RSpec. They do have [recommendations for doing this](https://github.com/doorkeeper-gem/doorkeeper/wiki/Testing-your-provider-with-OAuth2-gem#rspec) but I could not make it work.
+The doorkeeper wiki provides an outline for testing a provider with a dummy client: [Testing your provider with OAuth2 gem](https://github.com/doorkeeper-gem/doorkeeper/wiki/Testing-your-provider-with-OAuth2-gem). This provides a process for creating on the fly client applications and getting an access token from them. 
 
-##### `Before` and `After`
+I could not get this to work  when trying to point [Faraday](https://github.com/lostisland/faraday), which the `Client` class of the OAuth2 gem wraps, to the RackTest application in either Capybara or RSpec. They do have [recommendations for doing this](https://github.com/doorkeeper-gem/doorkeeper/wiki/Testing-your-provider-with-OAuth2-gem#rspec) but I could not make it work.
+
+Instead in a before step I made sure the current RackTest which Capybara was using and captured the URL, as seen below in the Before.
+
+##### `Before` 
 
 The `@omniauth_test` tag just sets up the [OmniAuth test environment](https://github.com/intridea/omniauth/wiki/Integration-Testing) so we can simulate login.
 
 In order to simulate a client application I tried running this before each `@client_app` tagged feature:
 
-    Warden.test_mode!
-    World Warden::Test::Helpers
-
     Before('@client_app') do
-      @app = FactoryGirl.create(:oauth_app_no_redirect)
-      @client = OAuth2::Client.new(@app.uid, @app.secret) do |b|
-        b.request :url_encoded
-        b.adapter :rack, Rails.application
-      end
-      @admin_user = FactoryGirl.create(:admin)
+  	  visit login_path
+	  url = URI.parse(current_url)
+	  @site = "#{url.scheme}://#{url.host}:#{url.port}"
+    end
+ 
+Now I can use `@site` as intended when creating a client. However, this might have been the cause of some threading issues when trying to use DatabaseCleaner in transaction mode, hence causing inconsistencies between what the Capybara driver was seeing as "in the database." To solve this, in the Cucumber `env.rb` I changed the `DatabaseCleaner.strategy` to `:truncation`.
+
+Additionally I'm assuming the existence of a client application from a factory and hence the following is wrapped by a helper:
+
+    @oauth_app ||= FactoryGirl.create(:oauth_app_no_redirect)
+
+##### `Given I am on an NYU client application`
+
+Setting up a test client application in helpers via a helper method wrapping:
+
+    @client ||= OAuth2::Client.new(oauth_app.uid, oauth_app.secret, site: @site) unless @site.blank?
+    
+Allows me to make the following assertions:
+
+	Given(/^I am on an NYU client application$/) do
+  	  expect(client).not_to be_nil
+      expect(client).to be_instance_of OAuth2::Client
     end
 
-And this after:
-
-    After('@client_app') do
-      Warden.test_reset!
-    end
-
-The use of the Warden test helpers are documented here: [Test with Capybara](https://github.com/plataformatec/devise/wiki/How-To:-Test-with-Capybara),
-
-##### `When I login`
+##### `I login via NYU Shibboleth`
 
 Force a login to the Login application, retrieve the authorization url and go there:
 
     When(/^I login$/) do
-      login_as(@admin_user, scope: :user)
-      auth_url = @client.auth_code.authorize_url(:redirect_uri => @app.redirect_uri)
-      visit auth_url
-      @auth_code = retrieve_auth_code_from_current_page
+  	  # Log user in via NYU Shibboleth
+	  login_as_nyu_shibboleth
+	  # Visit the callback to ensure login and user creation
+	  visit nyu_home_url
+	  # Make sure this user is authorized for this app
+	  oauth_app.authorized_tokens.create(resource_owner_id: current_resource_owner.id)
     end
 
-This never redirects to the proper RackTest environment. The URL comes through in the form `http:/oauth/...`
+##### `NYU Libraries' Login authorizes me for the client application`
 
-Using the test `redirect_uri` we are supposed to see a page containing the auth_code, so we would screen scrape it here with a helper function such as `retrieve_auth_code_from_current_page`.
+Using the Doorkeeper recommended test `redirect_uri`, which is `urn:ietf:wg:oauth:2.0:oob`, we are supposed to see a page containing the auth_code and not get redirected to a real uri with `code=token` in the querystring. So we screen scrape it here with a helper function:
 
-##### `Then NYU Libraries' Login authorizes me`
+    @auth_code ||= page.find("#authorization_code").text
 
-Next try to retrieve the authorized access token:
+But only after we've visited the auth_url which we've pulled out like so:
+
+    @auth_url ||= client.auth_code.authorize_url(:redirect_uri => oauth_app.redirect_uri)
+
+The combination of leveraging these helper functions in a clean cucumber step follows:
 
     Then(/^NYU Libraries' Login authenticates me$/) do
-      @token = @client.auth_code.get_token(@auth_code, :redirect_uri => @app.redirect_uri)
+  	  # Visit the auth url for this client
+ 	  visit auth_url
+  	  expect(auth_code).to have_content
     end
 
 ##### `And I should be logged in to the NYU client application`
 
-Then we should be able to use that token to visit the API:
+Then we should be able to use the token to visit the API:
 
     And(/^I should be logged in to the NYU client application$/) do
-      response = @token.get('/api/v1/users')
-      expect(JSON.parse(response.body)).to eql FactoryGirl.build(:admin_user).to_json
+  	  # Visit the protected API
+  	  visit api_v1_user_path(:access_token => access_token)
+  	  expect(body).to include current_resource_owner.to_json(include: :identities)
     end
