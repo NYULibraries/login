@@ -7,5 +7,6 @@ describe "devise/sessions/_nyu_shibboleth.html.erb" do
     should match(/<h2>\s+Login with an NYU NetID/)
     should match(/href="\/users\/auth\/nyu_shibboleth\?institute=NYU"/)
     should match('Click to Login')
+    should_not match("<a class=\"nyulibraries-help nyulibraries-help-icon\" ")
   end
 end

@@ -5,9 +5,6 @@
   <div class="span5 well">
     <h2>
       Alternative Logins
-      <a class="nyulibraries-help nyulibraries-help-icon" href="https://library.nyu.edu/info/bobcat/login.html" target="_blank">
-        help
-      </a>
     </h2>
     <% institution.views["login"]["secondary"].each do |option| %>
       <%- name = Institutions.institutions[option.upcase.to_sym].name -%>

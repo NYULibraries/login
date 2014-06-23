@@ -59,6 +59,8 @@ module LoginFeatures
         :TWITTER
       when /Bobst Affiliate/
         :BOBST
+      when /Facebook/
+        :FACEBOOK
       else
         raise "Unknown location!"
       end

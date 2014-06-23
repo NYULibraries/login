@@ -12,5 +12,6 @@ describe "devise/sessions/_aleph.html.erb" do
     should match('<input id="username" name="username"')
     should match('<label for="password">')
     should match('<input id="password" name="password" type="password"')
+    should_not match("<a class=\"nyulibraries-help nyulibraries-help-icon\" ")
   end
 end

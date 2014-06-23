@@ -121,6 +121,16 @@ module LoginFeatures
       ]
     end
 
+    def facebook_style_matchers
+      # require 'pry';
+      # binding.pry
+      @facebook_style_matchers ||= [
+        -> { have_content 'Facebook Login' },
+        -> { have_field 'email' },
+        -> { have_field 'pass' },
+      ]
+    end
+
     def logged_in_matchers(location)
       @logged_in_matchers ||= [
         -> { have_content 'Successfully authenticated ' },

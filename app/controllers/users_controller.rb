@@ -1,7 +1,7 @@
 class UsersController < Devise::OmniauthCallbacksController
   before_filter :require_login, only: :show
   before_filter :require_no_authentication, except: [:show]
-  before_filter :require_valid_omniauth, only: :omniauth_callback
+  before_filter :require_valid_omniauth_hash, only: (Devise.omniauth_providers << :omniauth_callback)
   respond_to :html
 
   def show
@@ -38,4 +38,11 @@ class UsersController < Devise::OmniauthCallbacksController
   Devise.omniauth_providers.each do |omniauth_provider|
     alias_method omniauth_provider, :omniauth_callback
   end
+
+  def require_login
+    unless user_signed_in?
+      redirect_to login_url
+    end
+  end
+  private :require_login
 end
