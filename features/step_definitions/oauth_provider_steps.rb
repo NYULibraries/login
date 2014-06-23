@@ -1,5 +1,5 @@
 Given(/^I am on an NYU client application$/) do
-  set_provider_url
+  provider_url
   expect(client).not_to be_nil
   expect(client).to be_instance_of OAuth2::Client
 end
