@@ -105,10 +105,10 @@ In order to simulate a client application I tried running this before each `@cli
     Before('@client_app') do
   	  visit login_path
 	  url = URI.parse(current_url)
-	  @site = "#{url.scheme}://#{url.host}:#{url.port}"
+	  @provider_url = "#{url.scheme}://#{url.host}:#{url.port}"
     end
- 
-Now I can use `@site` as intended when creating a client. However, this might have been the cause of some threading issues when trying to use DatabaseCleaner in transaction mode, hence causing inconsistencies between what the Capybara driver was seeing as "in the database." To solve this, in the Cucumber `env.rb` I changed the `DatabaseCleaner.strategy` to `:truncation`.
+
+Now I can use `@provider_url` as intended when creating a client. However, this might have been the cause of some threading issues when trying to use DatabaseCleaner in transaction mode, hence causing inconsistencies between what the Capybara driver was seeing as "in the database." To solve this, in the Cucumber `env.rb` I changed the `DatabaseCleaner.strategy` to `:truncation`.
 
 Additionally I'm assuming the existence of a client application from a factory and hence the following is wrapped by a helper:
 
@@ -118,8 +118,8 @@ Additionally I'm assuming the existence of a client application from a factory a
 
 Setting up a test client application in helpers via a helper method wrapping:
 
-    @client ||= OAuth2::Client.new(oauth_app.uid, oauth_app.secret, site: @site) unless @site.blank?
-    
+    @client ||= OAuth2::Client.new(oauth_app.uid, oauth_app.secret, site: @provider_url) unless @provider_url.blank?
+
 Allows me to make the following assertions:
 
 	Given(/^I am on an NYU client application$/) do

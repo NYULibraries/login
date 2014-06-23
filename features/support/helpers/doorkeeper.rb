@@ -18,7 +18,7 @@ module LoginFeatures
     end
 
     def client
-      @client ||= OAuth2::Client.new(oauth_app.uid, oauth_app.secret, site: @site) unless @site.blank?
+      @client ||= OAuth2::Client.new(oauth_app.uid, oauth_app.secret, site: @provider_url) unless @provider_url.blank?
     end
 
     def oauth_app
