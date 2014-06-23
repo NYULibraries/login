@@ -133,7 +133,7 @@ Force a login to the Login application, retrieve the authorization url and go th
 
     When(/^I login$/) do
   	  # Log user in via NYU Shibboleth
-	  login_as_nyu_shibboleth
+	  shibboleth_callback_url
 	  # Visit the callback to ensure login and user creation
 	  visit nyu_home_url
 	  # Make sure this user is authorized for this app

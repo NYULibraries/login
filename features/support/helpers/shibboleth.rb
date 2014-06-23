@@ -4,7 +4,7 @@ module LoginFeatures
       user_omniauth_authorize_path({provider: "nyu_shibboleth"}.merge(institute_user(institute)))
     end
 
-    def login_as_nyu_shibboleth
+    def shibboleth_callback_url
       OmniAuth.config.mock_auth[:nyu_shibboleth] = OmniAuth::AuthHash.new(shibboleth_hash)
     end
 
