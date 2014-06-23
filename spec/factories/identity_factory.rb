@@ -227,15 +227,6 @@ FactoryGirl.define do
         name: "N Yu"
       })
     end
-    trait :shibboleth_passive do
-      provider "nyu_shibboleth"
-      uid "passivist"
-      properties({
-        nickname: "passivist",
-        email: "passivist@shibboleth.edu",
-        name: "Pas Sivist"
-      })
-    end
     trait :new_school_ldap do
       provider "new_school_ldap"
       uid "uid=1234567890,ou=People,o=newschool.edu,o=cp"
@@ -257,7 +248,6 @@ FactoryGirl.define do
     factory :twitter_identity, traits: [:twitter]
     factory :facebook_identity, traits: [:facebook]
     factory :nyu_shibboleth_identity, traits: [:nyu_shibboleth]
-    factory :shibboleth_passive_identity, traits: [:shibboleth_passive]
     factory :new_school_ldap_identity, traits: [:new_school_ldap]
   end
 end

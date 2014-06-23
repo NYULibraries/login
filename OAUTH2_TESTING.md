@@ -90,13 +90,13 @@ In a truly integrated test suite we might have specific features for each client
         Then NYU Libraries' Login authorizes me
         And I should be logged in to the NYU client application
 
-The doorkeeper wiki provides an outline for testing a provider with a dummy client: [Testing your provider with OAuth2 gem](https://github.com/doorkeeper-gem/doorkeeper/wiki/Testing-your-provider-with-OAuth2-gem). This provides a process for creating on the fly client applications and getting an access token from them. 
+The doorkeeper wiki provides an outline for testing a provider with a dummy client: [Testing your provider with OAuth2 gem](https://github.com/doorkeeper-gem/doorkeeper/wiki/Testing-your-provider-with-OAuth2-gem). This provides a process for creating on the fly client applications and getting an access token from them.
 
 I could not get this to work  when trying to point [Faraday](https://github.com/lostisland/faraday), which the `Client` class of the OAuth2 gem wraps, to the RackTest application in either Capybara or RSpec. They do have [recommendations for doing this](https://github.com/doorkeeper-gem/doorkeeper/wiki/Testing-your-provider-with-OAuth2-gem#rspec) but I could not make it work.
 
 Instead in a before step I made sure the current RackTest which Capybara was using and captured the URL, as seen below in the Before.
 
-##### `Before` 
+##### `Before`
 
 The `@omniauth_test` tag just sets up the [OmniAuth test environment](https://github.com/intridea/omniauth/wiki/Integration-Testing) so we can simulate login.
 
@@ -105,10 +105,10 @@ In order to simulate a client application I tried running this before each `@cli
     Before('@client_app') do
   	  visit login_path
 	  url = URI.parse(current_url)
-	  @site = "#{url.scheme}://#{url.host}:#{url.port}"
+	  @provider_url = "#{url.scheme}://#{url.host}:#{url.port}"
     end
- 
-Now I can use `@site` as intended when creating a client. However, this might have been the cause of some threading issues when trying to use DatabaseCleaner in transaction mode, hence causing inconsistencies between what the Capybara driver was seeing as "in the database." To solve this, in the Cucumber `env.rb` I changed the `DatabaseCleaner.strategy` to `:truncation`.
+
+Now I can use `@provider_url` as intended when creating a client. However, this might have been the cause of some threading issues when trying to use DatabaseCleaner in transaction mode, hence causing inconsistencies between what the Capybara driver was seeing as "in the database." To solve this, in the Cucumber `env.rb` I changed the `DatabaseCleaner.strategy` to `:truncation`.
 
 Additionally I'm assuming the existence of a client application from a factory and hence the following is wrapped by a helper:
 
@@ -118,8 +118,8 @@ Additionally I'm assuming the existence of a client application from a factory a
 
 Setting up a test client application in helpers via a helper method wrapping:
 
-    @client ||= OAuth2::Client.new(oauth_app.uid, oauth_app.secret, site: @site) unless @site.blank?
-    
+    @client ||= OAuth2::Client.new(oauth_app.uid, oauth_app.secret, site: @provider_url) unless @provider_url.blank?
+
 Allows me to make the following assertions:
 
 	Given(/^I am on an NYU client application$/) do
@@ -133,7 +133,7 @@ Force a login to the Login application, retrieve the authorization url and go th
 
     When(/^I login$/) do
   	  # Log user in via NYU Shibboleth
-	  login_as_nyu_shibboleth
+	  shibboleth_callback_url
 	  # Visit the callback to ensure login and user creation
 	  visit nyu_home_url
 	  # Make sure this user is authorized for this app

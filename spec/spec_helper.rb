@@ -75,7 +75,7 @@ RSpec.configure do |config|
 
   config.before(:suite) do
     # Run factory girl lint before the suite
-    FactoryGirl.lint
+    # FactoryGirl.lint
 
     # Startout by trucating all the tables
     DatabaseCleaner.clean_with :truncation

@@ -4,9 +4,15 @@ Feature: Login as an OAuth2 Provider
   As a user
   I want to login on NYU's central login page and be logged into that specific service
 
-  @client_app
+  Scenario: Authorizing a logged in user to a client application
+    Given I have previously logged in to Login as an NYU Shibboleth user
+    And I am on an NYU client application
+    When I click Login on the client application
+    Then I should be logged in to the NYU client application
+
   Scenario: Logging into a client application
     Given I am on an NYU client application
-    When I login via NYU Shibboleth
-    Then NYU Libraries' Login authorizes me for the client application
-    And I should be logged in to the NYU client application
+    When I click Login on the client application
+    Then I should see the Login page
+    When I have logged in to Login as an NYU Shibboleth user
+    Then I should be logged in to the NYU client application

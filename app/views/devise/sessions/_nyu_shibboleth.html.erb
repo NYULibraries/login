@@ -1,9 +1,6 @@
 <div id="shibboleth">
   <h2>
     <%= t('application.nyu.header') %>
-    <a class="nyulibraries-help nyulibraries-help-icon" href="https://library.nyu.edu/info/bobcat/login.html" target="_blank">
-      help
-    </a>
   </h2>
   <p>
     <%= link_to t('application.nyu.link_text'), user_omniauth_authorize_path(:nyu_shibboleth, institute: current_institute.code), class: "btn" %>
