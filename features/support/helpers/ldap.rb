@@ -1,7 +1,7 @@
 module LoginFeatures
   module Ldap
 
-    def signin_to_newschool_ldap
+    def login_as_newschool_ldap
       OmniAuth.config.mock_auth[:new_school_ldap] = OmniAuth::AuthHash.new({
         provider: "new_school_ldap",
         uid: "uid=12345,ou=People,o=newschool.edu,o=cp",

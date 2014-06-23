@@ -18,6 +18,7 @@ postgres: &postgres
 
 local: &local
   <<: *postgres
+  host: "localhost"
   username: <%= (ENV['LOGIN_DB_USER'] || "login") %>
   password: <%= (ENV['LOGIN_DB_PASSWORD'] || "") %>
 

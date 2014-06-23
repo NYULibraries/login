@@ -16,7 +16,7 @@ When(/^I submit my New School NetID and password$/) do
 end
 
 When(/^New School LDAP authenticates me$/) do
-  signin_to_newschool_ldap
+  login_as_newschool_ldap
 end
 
 When(/^I submit invalid New School credentials$/) do

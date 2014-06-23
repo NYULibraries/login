@@ -1,10 +1,8 @@
 class UsersController < Devise::OmniauthCallbacksController
-  doorkeeper_for :api
   before_filter :require_login, only: :show
-  before_filter :require_no_authentication, except: [:show, :api]
+  before_filter :require_no_authentication, except: [:show]
   before_filter :require_valid_omniauth_hash, only: (Devise.omniauth_providers << :omniauth_callback)
-  respond_to :html, except: :api
-  respond_to :json, only: :api
+  respond_to :html
 
   def show
     @user = User.find_by(username: params[:id], provider: params[:provider])
@@ -12,13 +10,6 @@ class UsersController < Devise::OmniauthCallbacksController
       respond_with(@user)
     else
       redirect_to user_url(current_user)
-    end
-  end
-
-  def api
-    if doorkeeper_token
-      @user = User.find(doorkeeper_token.resource_owner_id)
-      respond_with(@user, include: :identities)
     end
   end
 

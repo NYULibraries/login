@@ -4,7 +4,26 @@ module LoginFeatures
       user_omniauth_authorize_path({provider: "nyu_shibboleth"}.merge(institute_user(institute)))
     end
 
+    def shibboleth_callback_url
+      OmniAuth.config.mock_auth[:nyu_shibboleth] = OmniAuth::AuthHash.new(shibboleth_hash)
+    end
+
     private
+
+    def shibboleth_hash
+      @shibboleth_hash ||= {
+        provider: "nyu_shibboleth",
+        uid: "js123",
+        info: {
+          first_name: "Jon",
+          last_name: "Snow",
+          email: "snowj@newschool.edu",
+          nickname: "12345",
+          location: ", , ,  ",
+          uid: "js123"
+        }
+      }
+    end
 
     def shibboleth_username_for_institute(institute)
       case institute
