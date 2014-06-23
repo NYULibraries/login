@@ -1,0 +1,54 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://127.0.0.1:61053/oauth/token
+    body:
+      encoding: US-ASCII
+      string: client_id=4c1e47046ec9a9455b32b3f6935903a52160a2c02eb0acf4ba3989e7d21a4113&client_secret=6d9cca811855763f578ffa396b5ed87f43fa4eccaef0bb8614946dbd4fbd29e2&code=e996ca89e088d0b35ea3a74646433cd7287f432ee318f60076866bab608a89bd&grant_type=authorization_code&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Ua-Compatible:
+      - chrome=1
+      Cache-Control:
+      - no-store
+      Pragma:
+      - no-cache
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - ! '"96080d4975170552511646e32808da13"'
+      X-Request-Id:
+      - f00981ac-daf8-42ee-98e9-90e8d1f97647
+      X-Runtime:
+      - '0.026868'
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-06-27)
+      Date:
+      - Mon, 23 Jun 2014 18:41:59 GMT
+      Content-Length:
+      - '123'
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: ! '{"access_token":"71b684673938814cefee943e81b94e6edea263e63e2468c8fcea118249b5a269","token_type":"bearer","expires_in":7200}'
+    http_version: 
+  recorded_at: Mon, 23 Jun 2014 18:41:59 GMT
+recorded_with: VCR 2.8.0

@@ -14,7 +14,7 @@ module LoginFeatures
     end
 
     def access_token
-      @access_token ||= oauth_app.authorized_tokens.where(resource_owner_id: current_resource_owner.id).first.token
+      @access_token ||= client.auth_code.get_token(auth_code, :redirect_uri => oauth_app.redirect_uri).token
     end
 
     def client

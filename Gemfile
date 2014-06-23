@@ -48,7 +48,7 @@ gem "institutions", "~> 0.1.3"
 gem 'turbolinks', '~> 2.2.0'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-# gem 'jbuilder', '~> 2.0'
+gem 'jbuilder', '~> 2.0'
 
 # Use devise for our user model
 gem 'devise', '~> 3.2.0'
