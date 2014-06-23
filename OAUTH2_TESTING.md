@@ -90,13 +90,13 @@ In a truly integrated test suite we might have specific features for each client
         Then NYU Libraries' Login authorizes me
         And I should be logged in to the NYU client application
 
-The doorkeeper wiki provides an outline for testing a provider with a dummy client: [Testing your provider with OAuth2 gem](https://github.com/doorkeeper-gem/doorkeeper/wiki/Testing-your-provider-with-OAuth2-gem). This provides a process for creating on the fly client applications and getting an access token from them. 
+The doorkeeper wiki provides an outline for testing a provider with a dummy client: [Testing your provider with OAuth2 gem](https://github.com/doorkeeper-gem/doorkeeper/wiki/Testing-your-provider-with-OAuth2-gem). This provides a process for creating on the fly client applications and getting an access token from them.
 
 I could not get this to work  when trying to point [Faraday](https://github.com/lostisland/faraday), which the `Client` class of the OAuth2 gem wraps, to the RackTest application in either Capybara or RSpec. They do have [recommendations for doing this](https://github.com/doorkeeper-gem/doorkeeper/wiki/Testing-your-provider-with-OAuth2-gem#rspec) but I could not make it work.
 
 Instead in a before step I made sure the current RackTest which Capybara was using and captured the URL, as seen below in the Before.
 
-##### `Before` 
+##### `Before`
 
 The `@omniauth_test` tag just sets up the [OmniAuth test environment](https://github.com/intridea/omniauth/wiki/Integration-Testing) so we can simulate login.
 
