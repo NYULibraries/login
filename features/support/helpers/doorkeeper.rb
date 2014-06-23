@@ -9,8 +9,8 @@ module LoginFeatures
       @auth_code ||= page.find("#authorization_code").text
     end
 
-    def auth_url
-      @auth_url ||= client.auth_code.authorize_url(:redirect_uri => oauth_app.redirect_uri)
+    def client_authorize_url
+      @client_authorize_url ||= client.auth_code.authorize_url(:redirect_uri => oauth_app.redirect_uri)
     end
 
     def access_token
