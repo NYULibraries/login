@@ -26,9 +26,12 @@ module LoginFeatures
     end
 
     def provider_url
+      @provider_url ||= "#{racktest_url.scheme}://#{racktest_url.host}:#{racktest_url.port}"
+    end
+
+    def racktest_url
       visit login_path
-      url = URI.parse(current_url)
-      return @provider_url ||= "#{url.scheme}://#{url.host}:#{url.port}"
+      @racktest_url ||= URI.parse(current_url)
     end
 
   end
