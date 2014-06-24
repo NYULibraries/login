@@ -51,29 +51,82 @@ describe Api::V1::UsersController do
         subject { response }
         it { should be_success }
 
-        describe 'body' do
+        context "and the user's identity provider is Aleph" do
+          set_access_token(:aleph_user)
+          before { get :show, access_token: access_token, format: :json }
+          subject { response }
+          it { should be_success }
 
-          subject { response.body }
-
-          context "and the user's identity provider is Aleph" do
+          describe 'body' do
+            subject { response.body }
             it "should be the resource owner in json" do
               expect(subject).to eq(resource_owner.to_json(include: :identities))
             end
-          end
-
-          context "and the user's identity provider is Twitter" do
 
           end
 
-          context "and the user's identity provider is Facebook" do
+        end
+
+        context "and the user's identity provider is Twitter" do
+          set_access_token(:twitter_user)
+          before { get :show, access_token: access_token, format: :json }
+          subject { response }
+          it { should be_success }
+
+
+          describe 'body' do
+            subject { response.body }
+            it "should be the resource owner in json" do
+              expect(subject).to eq(resource_owner.to_json(include: :identities))
+            end
 
           end
 
-          context "and the user's identity provider is NYU Shibboleth" do
+        end
+
+        context "and the user's identity provider is Facebook" do
+          set_access_token(:facebook_user)
+          before { get :show, access_token: access_token, format: :json }
+          subject { response }
+          it { should be_success }
+
+          describe 'body' do
+            subject { response.body }
+            it "should be the resource owner in json" do
+              expect(subject).to eq(resource_owner.to_json(include: :identities))
+            end
 
           end
 
-          context "and the user's identity provider is New School LDAP" do
+        end
+
+        context "and the user's identity provider is NYU Shibboleth" do
+          set_access_token(:nyu_shibboleth_user)
+          before { get :show, access_token: access_token, format: :json }
+          subject { response }
+          it { should be_success }
+
+          describe 'body' do
+            subject { response.body }
+            it "should be the resource owner in json" do
+              expect(subject).to eq(resource_owner.to_json(include: :identities))
+            end
+
+          end
+
+        end
+
+        context "and the user's identity provider is New School LDAP" do
+          set_access_token(:new_school_ldap_user)
+          before { get :show, access_token: access_token, format: :json }
+          subject { response }
+          it { should be_success }
+
+          describe 'body' do
+            subject { response.body }
+            it "should be the resource owner in json" do
+              expect(subject).to eq(resource_owner.to_json(include: :identities))
+            end
 
           end
 
