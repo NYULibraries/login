@@ -1,21 +1,21 @@
 module LoginFeatures
-  module Ldap
+  module NewSchoolLdap
 
-    def login_as_newschool_ldap
-      OmniAuth.config.mock_auth[:new_school_ldap] = OmniAuth::AuthHash.new(newschool_hash)
+    def set_new_school_ldap_login_env
+      OmniAuth.config.mock_auth[:new_school_ldap] = OmniAuth::AuthHash.new(new_school_hash)
     end
 
-    def submit_invalid_credentials_to_newschool_ldap
+    def set_invalid_new_school_ldap_login_env
       OmniAuth.config.mock_auth[:new_school_ldap] = :invalid_credentials
     end
 
-    def newschool_callback_url
+    def new_school_callback_url
       user_omniauth_authorize_path(:provider => "new_school_ldap")
     end
 
     private
 
-    def newschool_hash
+    def new_school_hash
       {
         provider: "new_school_ldap",
         uid: "uid=12345,ou=people,o=newschool.edu,o=cp",

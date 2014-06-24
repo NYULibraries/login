@@ -33,23 +33,19 @@ Then(/^I should see a(n)? "(.*?)" login page$/) do |ignore, location|
 end
 
 When(/^NYU Home authenticates me$/) do
-  visit nyu_home_url
+  visit shibboleth_callback_url
 end
 
 Then(/^I should be redirected to the (.+?) login page$/) do |location|
   expect_login_page_for(location)
 end
 
+When(/^I click on the NYU NetID "Click to Login" button$/) do
+  expect(page).to have_xpath("//a[contains(@href, '#{user_omniauth_authorize_path(:provider => "nyu_shibboleth")}')]")
+end
+
 When(/^I click on the "(.*?)" button$/) do |button|
-  if button == "NYU login"
-    expect(page).to have_xpath("//a[@href='#{user_omniauth_authorize_path(:provider => "nyu_shibboleth", :institute => "NYU")}']")
-  elsif button == "NYU AD login"
-      expect(page).to have_xpath("//a[@href='#{user_omniauth_authorize_path(:provider => "nyu_shibboleth", :institute => "NYUAD")}']")
-  elsif button == "NYU SH login"
-      expect(page).to have_xpath("//a[@href='#{user_omniauth_authorize_path(:provider => "nyu_shibboleth", :institute => "NYUSH")}']")
-  else
-    click_link(button)
-  end
+  click_on button
 end
 
 When(/^I enter my Library Patron ID for "(.*?)" and first four letters of my last name$/) do |location|

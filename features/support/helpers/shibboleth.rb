@@ -1,10 +1,10 @@
 module LoginFeatures
   module Shibboleth
-    def nyu_home_url(institute = "NYU")
+    def shibboleth_callback_url(institute = "NYU")
       user_omniauth_authorize_path({provider: "nyu_shibboleth"}.merge(institute_user(institute)))
     end
 
-    def shibboleth_callback_url
+    def set_shibboleth_login_env
       OmniAuth.config.mock_auth[:nyu_shibboleth] = OmniAuth::AuthHash.new(shibboleth_hash)
     end
 
