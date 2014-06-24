@@ -3,8 +3,7 @@
 class User < ActiveRecord::Base
   VALID_INSTITUTION_CODES = Institutions.institutions.keys.map(&:to_s)
 
-  # Include OmniAuth::AuthHash helper methods
-  include OmniAuthHashHelper
+  attr_accessor :omniauth_hash_map
 
   # Create an identity from the OmniAuth::AuthHash after the user is created
   after_create :create_identity_from_omniauth_hash
@@ -58,9 +57,11 @@ class User < ActiveRecord::Base
     @institution ||= Institutions.institutions[institution_code.to_sym]
   end
 
-  def create_identity_from_omniauth_hash
-    if omniauth_hash?
-      identities.create(uid: omniauth_uid, provider: omniauth_identity_provider, properties: omniauth_properties)
-    end
-  end
+  # Commenting out but pending for deletion
+  # Isn't this same code run in the callback phase?
+  # def create_identity_from_omniauth_hash
+  #   if ::Login::OmniAuthHashManager::Validator.new(self.omniauth_hash_map)
+  #     identities.create(uid: self.omniauth_hash_map.uid, provider: self.omniauth_hash_map.provider, properties: self.omniauth_hash_map.properties)
+  #   end
+  # end
 end
