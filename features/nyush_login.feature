@@ -5,6 +5,6 @@ Feature: NYU Shanghai Login
 
   Scenario: Logging in with NYU NetID and Password
     Given I am on the NYU Shanghai login page
-    When I click on the "NYU SH login" button
+    When I click on the NYU NetID "Click to Login" button
     And NYU Home authenticates me
     Then I should be logged in as an NYU user

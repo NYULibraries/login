@@ -1,3 +1,6 @@
+# Have to set the full_host for this application for Devise when using OmniAuth
+# So OmniAuth knows where to redirect back
+#
 # Set the full host to configured full url if it exists in the environment
 # or to the current rack application for testing
 rack_url = lambda do |env|
@@ -83,17 +86,33 @@ Devise.setup do |config|
   require "omniauth-twitter"
   config.omniauth :twitter, ENV['TWITTER_APP_KEY'], ENV['TWITTER_APP_SECRET']
   require "omniauth-shibboleth"
-  config.omniauth :shibboleth, name: 'nyu_shibboleth', uid_field: 'uid',
-    info_fields: { email: 'email', nickname: 'givenName' , first_name: 'givenName',
-      last_name: 'sn' }, extra_fields: ['nyuidn', 'entitlement'],
+  config.omniauth :shibboleth,
+    name: 'nyu_shibboleth',
+    uid_field: 'uid',
+    info_fields: {
+      email: 'email',
+      nickname: 'givenName' ,
+      first_name: 'givenName',
+      last_name: 'sn'
+    },
+    extra_fields: ['nyuidn', 'entitlement'],
     request_type: (Rails.env.cucumber?) ? :params : :env
   require "omniauth-ldap"
-  config.omniauth :ldap, name: 'new_school_ldap', host: ENV['NEWSCHOOL_LDAP_HOST'],
-    port: ENV['NEWSCHOOL_LDAP_PORT'], bind_dn: ENV['NEWSCHOOL_LDAP_BIND_DN'],
-      password: ENV['NEWSCHOOL_LDAP_PASSWORD'], base: ENV['NEWSCHOOL_LDAP_BASE'],
-        uid: ENV['NEWSCHOOL_LDAP_UID'], method: :ssl, form: ->(env) {}
+  config.omniauth :ldap,
+    name: 'new_school_ldap',
+    host: ENV['NEWSCHOOL_LDAP_HOST'],
+    port: ENV['NEWSCHOOL_LDAP_PORT'],
+    bind_dn: ENV['NEWSCHOOL_LDAP_BIND_DN'],
+    password: ENV['NEWSCHOOL_LDAP_PASSWORD'],
+    base: ENV['NEWSCHOOL_LDAP_BASE'],
+    uid: ENV['NEWSCHOOL_LDAP_UID'],
+    method: :ssl,
+    form: ->(env) {}
   require "omniauth-aleph"
-  config.omniauth :aleph, host: "aleph.library.nyu.edu", library: "NYU50", sub_library: "NYU50",
+  config.omniauth :aleph,
+    host: "aleph.library.nyu.edu",
+    library: "NYU50",
+    sub_library: "NYU50",
     form: ->(env) {}
 
 end
