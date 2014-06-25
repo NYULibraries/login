@@ -13,7 +13,6 @@ class ApplicationController < ActionController::Base
 
   rescue_from Login::OmniAuthHashManager::Validator::ArgumentError do |exception|
     flash[:error] ||= exception.message.html_safe
-    # binding.pry
     redirect_to login_path(current_institution.code.downcase)
   end
 end

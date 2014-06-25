@@ -4,9 +4,8 @@ Feature: Get attributes from protected API when user is authenticated
   As an authenticated user
   I want to get the user's identity attributes from the protected API in Login
 
-  @client_app
   Scenario: Logging in with New School LDAP
-    Given I am logged in as an New School LDAP user
+    Given I am logged in as a New School LDAP user
     When I request my attributes from the protected API
     Then I retrieve the attributes as JSON:
       | NetID       |

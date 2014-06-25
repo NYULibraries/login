@@ -30,13 +30,13 @@ module Login
 
       def username
         username = begin
-          case self.provider
+          case @omniauth_hash_mapper.provider
           when "twitter"
             @omniauth_hash_mapper.info.nickname
           when "facebook"
             @omniauth_hash_mapper.info.nickname || @omniauth_hash_mapper.info.email
           when "new_school_ldap"
-            @omniauth_hash_mapper.email
+            @omniauth_hash_mapper.info.email
           else
             @omniauth_hash_mapper.uid
           end
@@ -47,18 +47,6 @@ module Login
       def to_hash
         @omniauth_hash_mapper
       end
-      #
-      # def method_missing(method_id, *args)
-      #   if match = matches_valid_attr?(method_id)
-      #     nil
-      #   else
-      #     super
-      #   end
-      # end
-      #
-      # def matches_valid_attr?(method_id)
-      #   /^(uid|info|properties|email|provider|username)$/.match(method_id.to_s)
-      # end
 
     end
   end

@@ -1,4 +1,4 @@
-Given(/^I am logged in as an New School LDAP user$/) do
+Given(/^I am logged in as a New School LDAP user$/) do
   set_new_school_ldap_login_env
 end
 

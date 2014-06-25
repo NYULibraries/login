@@ -23,7 +23,6 @@ class UsersController < Devise::OmniauthCallbacksController
     @user.email = omniauth_hash_map.email if @user.email.blank? && omniauth_hash_map.email.present?
     # Set the OmniAuth::AuthHash for the user
     @user.omniauth_hash_map = omniauth_hash_map
-    # binding.pry
     if @user.save
       sign_in_and_redirect @user, event: :authentication
       kind = omniauth_hash_map.provider.titleize

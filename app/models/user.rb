@@ -60,7 +60,6 @@ class User < ActiveRecord::Base
 
   # Create identity assoc from OmniAuth hash
   def create_identity_from_omniauth_hash
-    # binding.pry
     # Validate OmniAuth::AuthHash representation of the hash mapper
     if Login::OmniAuthHashManager::Validator.new(omniauth_hash_map.to_hash)
       # And create an identity from the attributes mapped in the mapper
@@ -70,7 +69,6 @@ class User < ActiveRecord::Base
 
   # Update identity assoc from OmniAuth hash if it's expired
   def update_identity_from_omniauth_hash
-    # binding.pry
     # Validate OmniAuth::AuthHash representation of the hash mapper
     if Login::OmniAuthHashManager::Validator.new(omniauth_hash_map.to_hash)
       # And create or update an identity from the attributes mapped in the mapper
