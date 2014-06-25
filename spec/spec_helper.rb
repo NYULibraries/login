@@ -55,6 +55,8 @@ RSpec.configure do |config|
   # Include Factory Girl convenience methods
   config.include FactoryGirl::Syntax::Methods
 
+  FactoryGirl::SyntaxRunner.send(:include, OmniAuthHashMacros)
+
   # Include Devise test helpers
   config.include Devise::TestHelpers, type: :controller
 

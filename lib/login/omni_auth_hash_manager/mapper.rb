@@ -21,24 +21,24 @@ module Login
       end
 
       def email
-        self.info.email
+        @omniauth_hash_mapper.info.email
       end
 
       def properties
-        self.info.merge(extra: @omniauth_hash_mapper.extra)
+        @omniauth_hash_mapper.info.merge(extra: @omniauth_hash_mapper.extra)
       end
 
       def username
         username = begin
           case self.provider
           when "twitter"
-            self.info.nickname
+            @omniauth_hash_mapper.info.nickname
           when "facebook"
-            self.info.nickname || self.info.email
+            @omniauth_hash_mapper.info.nickname || @omniauth_hash_mapper.info.email
           when "new_school_ldap"
-            self.email
+            @omniauth_hash_mapper.email
           else
-            self.uid
+            @omniauth_hash_mapper.uid
           end
         end
         username.downcase unless username.nil?

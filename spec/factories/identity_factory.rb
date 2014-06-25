@@ -243,11 +243,16 @@ FactoryGirl.define do
         }
       })
     end
+    trait :invalid do
+      uid "invalid"
+      properties({})
+    end
 
     factory :aleph_identity, traits: [:aleph]
     factory :twitter_identity, traits: [:twitter]
     factory :facebook_identity, traits: [:facebook]
     factory :nyu_shibboleth_identity, traits: [:nyu_shibboleth]
     factory :new_school_ldap_identity, traits: [:new_school_ldap]
+    factory :invalid_identity, traits: [:invalid]
   end
 end

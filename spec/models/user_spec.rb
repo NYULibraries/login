@@ -147,7 +147,7 @@ describe User do
   end
 
   context "when OmniAuth::AuthHash is present" do
-    let(:user) { create(:user, omniauth_hash_map: authhash(:aleph)) }
+    let(:user) { create(:user, omniauth_hash_map: authhash_map(:aleph)) }
     subject { user }
     it { should be_a(User) }
     it { should_not be_a_new(User) }
@@ -155,7 +155,7 @@ describe User do
 
     describe '#identities' do
       subject { user.identities }
-      xit { should_not be_blank }
+      it { should_not be_blank }
     end
   end
 end
