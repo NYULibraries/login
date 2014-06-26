@@ -1,5 +1,5 @@
 module DoorkeeperMacros
-  def set_resource_owner(factory_name = :user)
+  def set_resource_owner(factory_name = nil)
     let(:resource_owner) { find_or_create_user(factory_name) }
   end
   private :set_resource_owner
@@ -17,7 +17,7 @@ module DoorkeeperMacros
     end
   end
 
-  def set_access_token(factory_name = :user)
+  def set_access_token(factory_name = nil)
     set_resource_owner(factory_name)
     set_oauth_application
     let(:access_token) do
