@@ -1,6 +1,7 @@
 module DoorkeeperMacros
   def set_resource_owner
-    let(:resource_owner) { find_or_create_user }
+    let(:provider) { "twitter" }
+    let(:resource_owner) { find_or_create_user(provider) }
   end
   private :set_resource_owner
 

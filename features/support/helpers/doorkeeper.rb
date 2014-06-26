@@ -1,8 +1,8 @@
 module LoginFeatures
   module Doorkeeper
 
-    def current_resource_owner
-      @current_resource_owner ||= User.where(username: shibboleth_hash[:uid], provider: shibboleth_hash[:provider]).first
+    def current_resource_owner(provider = "nyu_shibboleth")
+      @current_resource_owner ||= User.where(username: Login::OmniAuthHashManager::Mapper.new(eval("#{provider}_omniauth_hash")).username, provider: provider).first
     end
 
     def auth_code

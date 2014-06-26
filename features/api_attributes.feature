@@ -8,7 +8,7 @@ Feature: Get attributes from protected API when user is authenticated
     Given I am logged in as a New School LDAP user
     When I request my attributes from the protected API
     Then I retrieve the attributes as JSON:
-      | NetID       |
-      | Given Name  |
-      | Surname     |
-      | N Number    |
+      | NetID       | snowj     |
+      | Given Name  | Jon       |
+      | Surname     | Snow      |
+      | N Number    | N00000000 |

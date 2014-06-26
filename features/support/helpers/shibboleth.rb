@@ -5,12 +5,16 @@ module LoginFeatures
     end
 
     def set_shibboleth_login_env
-      OmniAuth.config.mock_auth[:nyu_shibboleth] = OmniAuth::AuthHash.new(shibboleth_hash)
+      OmniAuth.config.mock_auth[:nyu_shibboleth] = nyu_shibboleth_omniauth_hash
+    end
+
+    def nyu_shibboleth_omniauth_hash
+      OmniAuth::AuthHash.new(nyu_shibboleth_hash)
     end
 
     private
 
-    def shibboleth_hash
+    def nyu_shibboleth_hash
       @shibboleth_hash ||= {
         provider: "nyu_shibboleth",
         uid: "js123",

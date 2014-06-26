@@ -236,10 +236,15 @@ FactoryGirl.define do
         last_name: "Cholar",
         nickname: "1234567890",
         extra: {
-          raw_info: {
-            pdsloginid: "ns123",
-            pdsloginalias: "ns123"
-          }
+          raw_info:
+          Net::LDAP::Entry.new({
+            pdsexternalsystemid:
+              ["12345::gtmb",
+              "snowj@1newschool.edu::mir3",
+              "N00000000::sct"],
+            pdsloginid: ["ns123"],
+            pdsloginalias: ["ns123"]
+          })
         }
       })
     end

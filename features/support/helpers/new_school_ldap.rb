@@ -2,7 +2,11 @@ module LoginFeatures
   module NewSchoolLdap
 
     def set_new_school_ldap_login_env
-      OmniAuth.config.mock_auth[:new_school_ldap] = OmniAuth::AuthHash.new(new_school_hash)
+      OmniAuth.config.mock_auth[:new_school_ldap] = new_school_ldap_omniauth_hash
+    end
+
+    def new_school_ldap_omniauth_hash
+      OmniAuth::AuthHash.new(new_school_ldap_hash)
     end
 
     def set_invalid_new_school_ldap_login_env
@@ -15,7 +19,7 @@ module LoginFeatures
 
     private
 
-    def new_school_hash
+    def new_school_ldap_hash
       {
         provider: "new_school_ldap",
         uid: "uid=12345,ou=people,o=newschool.edu,o=cp",

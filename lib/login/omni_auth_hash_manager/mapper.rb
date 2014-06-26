@@ -19,7 +19,16 @@ module Login
       ##
       # Return the uid attribute
       def uid
-        @omniauth_hash_mapper.uid
+        case @omniauth_hash_mapper.provider
+        when "new_school_ldap"
+          new_school_ldap_hash[:pdsloginid].first
+        else
+          @omniauth_hash_mapper.uid
+        end
+      end
+
+      def new_school_ldap_hash
+        eval(@omniauth_hash_mapper.extra.raw_info.dn)
       end
 
       ##
@@ -43,7 +52,19 @@ module Login
       ##
       # Generate the properties hash from InfoHash and extra fields
       def properties
-        @omniauth_hash_mapper.info.merge(extra: @omniauth_hash_mapper.extra)
+        @omniauth_hash_mapper.info.merge(extra_attributes)
+      end
+
+      ##
+      # Define hash of extra attributes for merging into properties
+      def extra_attributes
+        {
+          extra: @omniauth_hash_mapper.extra,
+          uid: self.uid,
+          first_name: first_name,
+          last_name: last_name,
+          nyuidn: nyuidn
+        }
       end
 
       ##
@@ -62,6 +83,33 @@ module Login
           end
         end
         username.downcase unless username.nil?
+      end
+
+      ##
+      # Get first name out of hash
+      def first_name
+        @omniauth_hash_mapper.info.first_name
+      end
+
+      ##
+      # Get last name out of hash
+      def last_name
+        @omniauth_hash_mapper.info.last_name
+      end
+
+      ##
+      # Get N# out of hash
+      def nyuidn
+        case @omniauth_hash_mapper.provider
+        when "new_school_ldap"
+          extract_value_from_keyed_array(new_school_ldap_hash[:pdsexternalsystemid], "sct")
+        else
+          @omniauth_hash_mapper.uid
+        end
+      end
+
+      def extract_value_from_keyed_array(array, key)
+        array.find { |val| /(.+)::#{key}/.match(val) }.split("::").first
       end
 
       ##

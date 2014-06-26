@@ -74,7 +74,7 @@ describe Api::V1::UsersController do
           end
 
           context "and the user's identity provider is New School LDAP" do
-
+            # expect(subject).to eq(resource_owner.to_json(include: :identities))
           end
 
         end
