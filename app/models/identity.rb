@@ -1,6 +1,5 @@
 class Identity < ActiveRecord::Base
   VALID_PROVIDERS = Devise.omniauth_providers.map(&:to_s)
-
   # Include OmniAuth hash helper methods
   include OmniAuthHashHelper
 
@@ -17,6 +16,9 @@ class Identity < ActiveRecord::Base
 
   # Must have a valid provider
   validates :provider, inclusion: { in: VALID_PROVIDERS }
+
+  # Properties is a NESTED Hstore column type now (no longer string values)
+  serialize :properties, ActiveRecord::Coders::NestedHstore
 
   # Identities expire in a week's time.
   def expired?

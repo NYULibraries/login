@@ -6,6 +6,9 @@ gem 'rails', '~> 4.0.5'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.17.1'
 
+# Use nested hstore to store serialized objects in Active Record hstore
+gem 'nested-hstore'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
