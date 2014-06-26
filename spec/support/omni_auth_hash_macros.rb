@@ -11,6 +11,7 @@ module OmniAuthHashMacros
     phone = properties[:phone]
     authhash.info =
       infohash({ name: name, email: email, nickname: nickname, phone: phone })
+    authhash.extra = attributes[:properties][:extra]
     authhash
   end
 

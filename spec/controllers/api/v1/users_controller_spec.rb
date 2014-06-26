@@ -56,6 +56,7 @@ describe Api::V1::UsersController do
           subject { response.body }
 
           context "and the user's identity provider is Aleph" do
+            let(:provider) { "aleph" }
             it "should be the resource owner in json" do
               expect(subject).to eq(resource_owner.to_json(include: :identities))
             end
@@ -74,7 +75,32 @@ describe Api::V1::UsersController do
           end
 
           context "and the user's identity provider is New School LDAP" do
-            # expect(subject).to eq(resource_owner.to_json(include: :identities))
+            let(:provider) { "new_school_ldap" }
+            let(:response_properties) { JSON.parse(response.body)["identities"].first["properties"] }
+            let(:resource_owner_properties) { resource_owner.identities.first.properties }
+            let(:property) { "uid" }
+            
+            subject { response_properties[property] }
+
+            context "when querying the NetID" do
+              it { should eql resource_owner_properties[property] }
+            end
+
+            context "when querying the N Number" do
+              let(:property) { "nyuidn" }
+              it { should eql resource_owner_properties[property] }
+            end
+
+            context "when querying the Given Name" do
+              let(:property) { "first_name" }
+              it { should eql resource_owner_properties[property] }
+            end
+
+            context "when querying the SurName" do
+              let(:property) { "last_name" }
+              it { should eql resource_owner_properties[property] }
+            end
+
           end
 
         end

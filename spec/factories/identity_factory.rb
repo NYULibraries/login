@@ -229,12 +229,14 @@ FactoryGirl.define do
     end
     trait :new_school_ldap do
       provider "new_school_ldap"
-      uid "uid=1234567890,ou=People,o=newschool.edu,o=cp"
+      uid "ns123"
       properties({
+        uid: "ns123",
         email: "ns123@newschool.edu",
         first_name: "News",
         last_name: "Cholar",
         nickname: "1234567890",
+        nyuidn: "N00000000",
         extra: {
           raw_info:
           Net::LDAP::Entry.new({
