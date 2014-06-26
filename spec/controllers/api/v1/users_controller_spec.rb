@@ -110,6 +110,11 @@ describe Api::V1::UsersController do
             subject { response.body }
             it "should be the resource owner in json" do
               expect(subject).to be_json_eql(resource_owner.to_json(include: :identities))
+              expect(subject).to have_json_path("identities/0/properties/surname")
+              expect(subject).to have_json_path("identities/0/properties/given_name")
+              expect(subject).to have_json_path("identities/0/properties/nyuidn")
+              expect(subject).to have_json_path("identities/0/properties/entitlement")
+              expect(subject).to have_json_path("identities/0/uid")
             end
 
           end
