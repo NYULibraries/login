@@ -52,7 +52,7 @@ describe Api::V1::UsersController do
         it { should be_success }
 
         context "and the user's identity provider is Aleph" do
-          set_access_token(:aleph_user)
+          set_access_token(:aleph_identity)
           before { get :show, access_token: access_token, format: :json }
           subject { response }
           it { should be_success }
@@ -60,7 +60,7 @@ describe Api::V1::UsersController do
           describe 'body' do
             subject { response.body }
             it "should be the resource owner in json" do
-              expect(subject).to eq(resource_owner.to_json(include: :identities))
+              expect(subject).to be_json_eql(resource_owner.to_json(include: :identities))
             end
 
           end
@@ -68,7 +68,7 @@ describe Api::V1::UsersController do
         end
 
         context "and the user's identity provider is Twitter" do
-          set_access_token(:twitter_user)
+          set_access_token(:twitter_identity)
           before { get :show, access_token: access_token, format: :json }
           subject { response }
           it { should be_success }
@@ -77,7 +77,7 @@ describe Api::V1::UsersController do
           describe 'body' do
             subject { response.body }
             it "should be the resource owner in json" do
-              expect(subject).to eq(resource_owner.to_json(include: :identities))
+              expect(subject).to be_json_eql(resource_owner.to_json(include: :identities))
             end
 
           end
@@ -85,7 +85,7 @@ describe Api::V1::UsersController do
         end
 
         context "and the user's identity provider is Facebook" do
-          set_access_token(:facebook_user)
+          set_access_token(:facebook_identity)
           before { get :show, access_token: access_token, format: :json }
           subject { response }
           it { should be_success }
@@ -93,7 +93,7 @@ describe Api::V1::UsersController do
           describe 'body' do
             subject { response.body }
             it "should be the resource owner in json" do
-              expect(subject).to eq(resource_owner.to_json(include: :identities))
+              expect(subject).to be_json_eql(resource_owner.to_json(include: :identities))
             end
 
           end
@@ -101,7 +101,7 @@ describe Api::V1::UsersController do
         end
 
         context "and the user's identity provider is NYU Shibboleth" do
-          set_access_token(:nyu_shibboleth_user)
+          set_access_token(:nyu_shibboleth_identity)
           before { get :show, access_token: access_token, format: :json }
           subject { response }
           it { should be_success }
@@ -109,7 +109,7 @@ describe Api::V1::UsersController do
           describe 'body' do
             subject { response.body }
             it "should be the resource owner in json" do
-              expect(subject).to eq(resource_owner.to_json(include: :identities))
+              expect(subject).to be_json_eql(resource_owner.to_json(include: :identities))
             end
 
           end
@@ -117,7 +117,7 @@ describe Api::V1::UsersController do
         end
 
         context "and the user's identity provider is New School LDAP" do
-          set_access_token(:new_school_ldap_user)
+          set_access_token(:new_school_ldap_identity)
           before { get :show, access_token: access_token, format: :json }
           subject { response }
           it { should be_success }
@@ -125,7 +125,7 @@ describe Api::V1::UsersController do
           describe 'body' do
             subject { response.body }
             it "should be the resource owner in json" do
-              expect(subject).to eq(resource_owner.to_json(include: :identities))
+              expect(subject).to be_json_eql(resource_owner.to_json(include: :identities))
             end
 
           end
