@@ -221,10 +221,15 @@ FactoryGirl.define do
     trait :nyu_shibboleth do
       provider "nyu_shibboleth"
       uid "nyu123"
+
       properties({
         nickname: "nyu123",
         email: "nyu123@nyu.edu",
-        name: "N Yu"
+        name: "N Yu",
+        given_name: "N",
+        surname: "Yu",
+        nyuidn: "N10012",
+        entitlement: "very"
       })
     end
     trait :new_school_ldap do
