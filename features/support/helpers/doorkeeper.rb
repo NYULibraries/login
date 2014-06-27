@@ -5,8 +5,8 @@ module LoginFeatures
       @current_resource_owner ||= User.where(username: nyu_shibboleth_hash[:uid], provider: nyu_shibboleth_hash[:provider]).first
     end
 
-    def auth_code
-      @auth_code ||= page.find("#authorization_code").text
+    def authorization_code
+      @authorization_code ||= page.find("#authorization_code").text
     end
 
     def client_authorize_url
@@ -14,7 +14,7 @@ module LoginFeatures
     end
 
     def access_token
-      @access_token ||= client.auth_code.get_token(auth_code, :redirect_uri => oauth_app.redirect_uri).token
+      @access_token ||= client.auth_code.get_token(authorization_code, :redirect_uri => oauth_app.redirect_uri).token
     end
 
     def client
