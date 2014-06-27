@@ -46,21 +46,21 @@ module LoginFeatures
     def dummy_nyu_user
       dummy_user.merge({
         institute: "NYU",
-        uid: shibboleth_username_for_institute("NYU New York")
+        uid: nyu_shibboleth_username_for_institute("NYU New York")
       })
     end
 
     def dummy_nyush_user
       dummy_user.merge({
         institute: "NYUSH",
-        uid: shibboleth_username_for_institute("NYU Shanghai")
+        uid: nyu_shibboleth_username_for_institute("NYU Shanghai")
       })
     end
 
     def dummy_nyuad_user
       dummy_user.merge({
         institute: "NYUAD",
-        uid: shibboleth_username_for_institute("NYU Abu Dhabi")
+        uid: nyu_shibboleth_username_for_institute("NYU Abu Dhabi")
       })
     end
 

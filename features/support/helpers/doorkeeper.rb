@@ -2,7 +2,7 @@ module LoginFeatures
   module Doorkeeper
 
     def current_resource_owner
-      @current_resource_owner ||= User.where(username: shibboleth_hash[:uid], provider: shibboleth_hash[:provider]).first
+      @current_resource_owner ||= User.where(username: nyu_shibboleth_hash[:uid], provider: nyu_shibboleth_hash[:provider]).first
     end
 
     def auth_code
