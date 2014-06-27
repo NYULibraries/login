@@ -16,11 +16,11 @@ end
 
 When(/^I have previously logged in to Login as an NYU Shibboleth user$/) do
   # Log user in via NYU Shibboleth, by mocking environment
-  set_shibboleth_login_env
+  set_nyu_shibboleth_login_env
 end
 
 When(/^I login to Login as an NYU Shibboleth user$/) do
-  set_shibboleth_login_env
+  set_nyu_shibboleth_login_env
   visit client_authorize_url
   click_on "Click to Login"
 end

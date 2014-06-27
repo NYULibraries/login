@@ -1,17 +1,17 @@
 module LoginFeatures
-  module Shibboleth
-    def shibboleth_callback_url(institute = "NYU")
+  module NYUShibboleth
+    def nyu_shibboleth_callback_url(institute = "NYU")
       user_omniauth_authorize_path({provider: "nyu_shibboleth"}.merge(institute_user(institute)))
     end
 
-    def set_shibboleth_login_env
-      OmniAuth.config.mock_auth[:nyu_shibboleth] = OmniAuth::AuthHash.new(shibboleth_hash)
+    def set_nyu_shibboleth_login_env
+      OmniAuth.config.mock_auth[:nyu_shibboleth] = OmniAuth::AuthHash.new(nyu_shibboleth_hash)
     end
 
     private
 
-    def shibboleth_hash
-      @shibboleth_hash ||= {
+    def nyu_shibboleth_hash
+      @nyu_shibboleth_hash ||= {
         provider: "nyu_shibboleth",
         uid: "js123",
         info: {
@@ -25,7 +25,7 @@ module LoginFeatures
       }
     end
 
-    def shibboleth_username_for_institute(institute)
+    def nyu_shibboleth_username_for_institute(institute)
       case institute
       when /NYU New York/
         :dev123

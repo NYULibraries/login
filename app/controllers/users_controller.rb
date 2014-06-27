@@ -44,12 +44,17 @@ class UsersController < Devise::OmniauthCallbacksController
   private :require_login
 
   def require_valid_omniauth_hash
-    require_login unless omniauth_hash_map
+    require_login unless omniauth_hash?
   end
   private :require_valid_omniauth_hash
 
   def omniauth_hash_map
-    @omniauth_hash_map ||= Login::OmniAuthHashManager::Mapper.new(request.env["omniauth.auth"])
+    @omniauth_hash_map ||= Login::OmniAuthHash::Mapper.new(request.env["omniauth.auth"])
   end
   private :omniauth_hash_map
+
+  def omniauth_hash?
+    Login::OmniAuthHash::Validator.new(request.env["omniauth.auth"], params[:action])
+  end
+  private :omniauth_hash?
 end
