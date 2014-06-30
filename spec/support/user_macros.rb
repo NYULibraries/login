@@ -1,14 +1,13 @@
 module UserMacros
-  def find_or_create_user(factory_name = nil)
-    user = User.find_by(username: attributes_for(:user)[:username], provider: attributes_for(:user)[:provider])
-    user ||= create(:user)
-    user.identities = [create(factory_name)] unless factory_name.nil?
+  def find_or_create_user(provider)
+    user = User.find_by(username: attributes_for("#{provider}_user")[:username], provider: attributes_for("#{provider}_user")[:provider])
+    user ||= create(:user, omniauth_hash_map: authhash_map(attributes_for("#{provider}_user")[:provider]))
     user
   end
 
   def find_or_create_admin
     user = User.find_by(username: attributes_for(:admin)[:username], provider: attributes_for(:admin)[:provider])
-    user ||= create(:admin)
+    user ||= create(:admin, omniauth_hash_map: authhash_map(attributes_for(:admin)[:provider]))
     user
   end
 end

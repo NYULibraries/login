@@ -220,33 +220,46 @@ FactoryGirl.define do
     end
     trait :nyu_shibboleth do
       provider "nyu_shibboleth"
-      uid "nyu123"
+      uid "nyu1234"
 
       properties({
-        nickname: "nyu123",
+        nickname: "nyu1234",
         email: "nyu123@nyu.edu",
         name: "N Yu",
         given_name: "N",
         surname: "Yu",
-        nyuidn: "N10012",
-        entitlement: "very"
+        extra: {
+          nyuidn: "1234567890",
+          entitlement: "very"
+        }
       })
     end
     trait :new_school_ldap do
       provider "new_school_ldap"
-      uid "uid=1234567890,ou=People,o=newschool.edu,o=cp"
+      uid "ns123"
       properties({
+        uid: "ns123",
         email: "ns123@newschool.edu",
         first_name: "News",
         last_name: "Cholar",
         nickname: "1234567890",
+        nyuidn: "N00000000",
         extra: {
-          raw_info: {
-            pdsloginid: "ns123",
-            pdsloginalias: "ns123"
-          }
+          raw_info:
+          Net::LDAP::Entry.new({
+            pdsexternalsystemid:
+              ["12345::gtmb",
+              "snowj@1newschool.edu::mir3",
+              "N00000000::sct"],
+            pdsloginid: ["ns123"],
+            pdsloginalias: ["ns123"]
+          })
         }
       })
+    end
+    trait :invalid do
+      uid "invalid"
+      properties({})
     end
 
     factory :aleph_identity, traits: [:aleph]
@@ -254,5 +267,6 @@ FactoryGirl.define do
     factory :facebook_identity, traits: [:facebook]
     factory :nyu_shibboleth_identity, traits: [:nyu_shibboleth]
     factory :new_school_ldap_identity, traits: [:new_school_ldap]
+    factory :invalid_identity, traits: [:invalid]
   end
 end

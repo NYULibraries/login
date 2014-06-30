@@ -1,8 +1,8 @@
 module LoginFeatures
   module Doorkeeper
 
-    def current_resource_owner
-      @current_resource_owner ||= User.where(username: shibboleth_hash[:uid], provider: shibboleth_hash[:provider]).first
+    def current_resource_owner(provider = "nyu_shibboleth")
+      @current_resource_owner ||= User.where(username: Login::OmniAuthHashManager::Mapper.new(eval("#{provider}_omniauth_hash")).username, provider: provider).first
     end
 
     def auth_code
@@ -14,7 +14,7 @@ module LoginFeatures
     end
 
     def access_token
-      @access_token ||= oauth_app.authorized_tokens.where(resource_owner_id: current_resource_owner.id).first.token
+      @access_token ||= client.auth_code.get_token(auth_code, :redirect_uri => oauth_app.redirect_uri).token
     end
 
     def client
@@ -27,17 +27,8 @@ module LoginFeatures
 
     def provider_url
       visit login_path
-      url = URI.parse(current_url)
-      @provider_url = "#{url.scheme}://#{url.host}:#{url.port}"
-    end
-
-    def login_and_authorize_nyu_shibboleth_user
-      # Log user in via NYU Shibboleth
-      shibboleth_callback_url
-      # Visit the callback to ensure login and user creation
-      visit nyu_home_url
-      # Make sure this user is authorized for this app
-      oauth_app.authorized_tokens.create(resource_owner_id: current_resource_owner.id)
+      racktest_url = URI.parse(current_url)
+      return @provider_url ||= "#{racktest_url.scheme}://#{racktest_url.host}:#{racktest_url.port}"
     end
 
   end

@@ -1,7 +1,7 @@
 module OmniAuthHashMacros
   def authhash(provider)
     authhash = OmniAuth::AuthHash.new
-    attributes = attributes_for("#{provider}_identity")
+    attributes = (FactoryGirl.factories.registered?("#{provider}_identity")) ? attributes_for("#{provider}_identity") : attributes_for(:invalid_identity, provider: provider)
     authhash.uid = attributes[:uid]
     authhash.provider = "#{provider}"
     properties = attributes[:properties]
@@ -9,9 +9,14 @@ module OmniAuthHashMacros
     email = properties[:email]
     nickname = properties[:nickname]
     phone = properties[:phone]
-    authhash.info = 
+    authhash.info =
       infohash({ name: name, email: email, nickname: nickname, phone: phone })
+    authhash.extra = attributes[:properties][:extra]
     authhash
+  end
+
+  def authhash_map(provider)
+    Login::OmniAuthHashManager::Mapper.new(authhash(provider))
   end
 
   def infohash(source_hash)

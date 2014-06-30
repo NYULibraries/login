@@ -51,86 +51,94 @@ describe Api::V1::UsersController do
         subject { response }
         it { should be_success }
 
-        context "and the user's identity provider is Aleph" do
-          set_access_token(:aleph_identity)
-          before { get :show, access_token: access_token, format: :json }
-          subject { response }
-          it { should be_success }
+        describe 'body' do
 
-          describe 'body' do
-            subject { response.body }
+          subject { response.body }
+
+          context "and the user's identity provider is Aleph" do
+            let(:provider) { "aleph" }
             it "should be the resource owner in json" do
-              expect(subject).to be_json_eql(resource_owner.to_json(include: :identities))
+              expect(subject).to eq(resource_owner.to_json(include: :identities))
             end
+          end
+
+          context "and the user's identity provider is Twitter" do
 
           end
 
-        end
-
-        context "and the user's identity provider is Twitter" do
-          set_access_token(:twitter_identity)
-          before { get :show, access_token: access_token, format: :json }
-          subject { response }
-          it { should be_success }
-
-
-          describe 'body' do
-            subject { response.body }
-            it "should be the resource owner in json" do
-              expect(subject).to be_json_eql(resource_owner.to_json(include: :identities))
-            end
+          context "and the user's identity provider is Facebook" do
 
           end
 
-        end
+          context "and the user's identity provider is NYU Shibboleth" do
+            let(:provider) { "nyu_shibboleth" }
+            let(:response_properties) { JSON.parse(response.body)["identities"].first["properties"] }
+            let(:resource_owner_properties) { resource_owner.identities.first.properties }
+            let(:property) { "uid" }
 
-        context "and the user's identity provider is Facebook" do
-          set_access_token(:facebook_identity)
-          before { get :show, access_token: access_token, format: :json }
-          subject { response }
-          it { should be_success }
+            context "when querying raw JSON" do
+              subject{ response.body }
+              it { should have_json_path("identities/0/properties/uid") }
+              it { should have_json_path("identities/0/properties/nyuidn") }
+              it { should have_json_path("identities/0/properties/first_name") }
+              it { should have_json_path("identities/0/properties/last_name") }
+              it { should have_json_path("identities/0/properties/extra/entitlement") }
 
-          describe 'body' do
-            subject { response.body }
-            it "should be the resource owner in json" do
-              expect(subject).to be_json_eql(resource_owner.to_json(include: :identities))
             end
 
-          end
+            subject { response_properties[property] }
 
-        end
-
-        context "and the user's identity provider is NYU Shibboleth" do
-          set_access_token(:nyu_shibboleth_identity)
-          before { get :show, access_token: access_token, format: :json }
-          subject { response }
-          it { should be_success }
-
-          describe 'body' do
-            subject { response.body }
-            it "should be the resource owner in json" do
-              expect(subject).to be_json_eql(resource_owner.to_json(include: :identities))
-              expect(subject).to have_json_path("identities/0/properties/surname")
-              expect(subject).to have_json_path("identities/0/properties/given_name")
-              expect(subject).to have_json_path("identities/0/properties/nyuidn")
-              expect(subject).to have_json_path("identities/0/properties/entitlement")
-              expect(subject).to have_json_path("identities/0/uid")
+            context "when querying the NetID" do
+              it { should eql resource_owner_properties[property] }
             end
 
+            context "when querying the N Number" do
+              let(:property) { "nyuidn" }
+              it { should eql resource_owner_properties[property] }
+            end
+
+            context "when querying the Given Name" do
+              let(:property) { "first_name" }
+              it { should eql resource_owner_properties[property] }
+            end
+
+            context "when querying the SurName" do
+              let(:property) { "last_name" }
+              it { should eql resource_owner_properties[property] }
+            end
+
+            context "when querying the Entitlement" do
+              let(:property) { "entitlement" }
+
+              it { should eql resource_owner_properties[property] }
+            end
           end
 
-        end
+          context "and the user's identity provider is New School LDAP" do
+            let(:provider) { "new_school_ldap" }
+            let(:response_properties) { JSON.parse(response.body)["identities"].first["properties"] }
+            let(:resource_owner_properties) { resource_owner.identities.first.properties }
+            let(:property) { "uid" }
 
-        context "and the user's identity provider is New School LDAP" do
-          set_access_token(:new_school_ldap_identity)
-          before { get :show, access_token: access_token, format: :json }
-          subject { response }
-          it { should be_success }
+            subject { response_properties[property] }
 
-          describe 'body' do
-            subject { response.body }
-            it "should be the resource owner in json" do
-              expect(subject).to be_json_eql(resource_owner.to_json(include: :identities))
+            context "when querying the NetID" do
+              it { should eql resource_owner_properties[property] }
+            end
+
+            context "when querying the N Number" do
+              let(:property) { "nyuidn" }
+              it { should eql resource_owner_properties[property] }
+            end
+
+            context "when querying the Given Name" do
+              let(:property) { "first_name" }
+              it { should eql resource_owner_properties[property] }
+            end
+
+            context "when querying the SurName" do
+              let(:property) { "last_name" }
+              it { should eql resource_owner_properties[property] }
             end
 
           end

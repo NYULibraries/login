@@ -1,6 +1,7 @@
 module DoorkeeperMacros
-  def set_resource_owner(factory_name = nil)
-    let(:resource_owner) { find_or_create_user(factory_name) }
+  def set_resource_owner
+    let(:passthru_provider) { defined?(provider) ? provider : "twitter" }
+    let(:resource_owner) { find_or_create_user(passthru_provider) }
   end
   private :set_resource_owner
 
@@ -17,8 +18,8 @@ module DoorkeeperMacros
     end
   end
 
-  def set_access_token(factory_name = nil)
-    set_resource_owner(factory_name)
+  def set_access_token
+    set_resource_owner
     set_oauth_application
     let(:access_token) do
       authorized_token = oauth_application.authorized_tokens.

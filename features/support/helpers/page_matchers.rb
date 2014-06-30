@@ -122,8 +122,6 @@ module LoginFeatures
     end
 
     def facebook_style_matchers
-      # require 'pry';
-      # binding.pry
       @facebook_style_matchers ||= [
         -> { have_content 'Facebook Login' },
         -> { have_field 'email' },

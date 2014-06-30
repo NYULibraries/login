@@ -1,8 +1,7 @@
 When(/^Facebook authenticates me$/) do
-    fill_in("email", with: username_for_location("Facebook"))
-    fill_in("pass", with: password_for_location("Facebook"))
-    click_button "Log In"
-
+  fill_in("email", with: username_for_location("Facebook"))
+  fill_in("pass", with: password_for_location("Facebook"))
+  click_button "Log In"
 end
 
 Then(/^I should be logged in with my Facebook handle$/) do

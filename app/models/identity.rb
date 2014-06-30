@@ -1,7 +1,5 @@
 class Identity < ActiveRecord::Base
   VALID_PROVIDERS = Devise.omniauth_providers.map(&:to_s)
-  # Include OmniAuth hash helper methods
-  include OmniAuthHashHelper
 
   belongs_to :user
 
