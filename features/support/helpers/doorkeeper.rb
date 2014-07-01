@@ -2,11 +2,15 @@ module LoginFeatures
   module Doorkeeper
 
     def current_resource_owner(provider = "nyu_shibboleth")
-      @current_resource_owner ||= User.where(username: Login::OmniAuthHashManager::Mapper.new(eval("#{provider}_omniauth_hash")).username, provider: provider).first
+      @current_resource_owner ||= User.where(username: Login::OmniAuthHash::Mapper.new(eval("#{provider}_omniauth_hash")).username, provider: provider).first
     end
 
-    def auth_code
-      @auth_code ||= page.find("#authorization_code").text
+    def authorization_code
+      @authorization_code ||= (authorization_code?) ? page.find("#authorization_code").text : "foobar"
+    end
+
+    def authorization_code?
+      page.has_css?("#authorization_code")
     end
 
     def client_authorize_url
@@ -14,7 +18,7 @@ module LoginFeatures
     end
 
     def access_token
-      @access_token ||= client.auth_code.get_token(auth_code, :redirect_uri => oauth_app.redirect_uri).token
+      @access_token ||= client.auth_code.get_token(authorization_code, :redirect_uri => oauth_app.redirect_uri).token
     end
 
     def client

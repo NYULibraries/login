@@ -33,7 +33,7 @@ Then(/^I should see a(n)? "(.*?)" login page$/) do |ignore, location|
 end
 
 When(/^NYU Home authenticates me$/) do
-  visit shibboleth_callback_url
+  visit nyu_shibboleth_callback_url
 end
 
 Then(/^I should be redirected to the (.+?) login page$/) do |location|

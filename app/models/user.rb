@@ -3,11 +3,10 @@
 class User < ActiveRecord::Base
   VALID_INSTITUTION_CODES = Institutions.institutions.keys.map(&:to_s)
 
-  attr_accessor :omniauth_hash_map
+  attr_reader :omniauth_hash_map
 
   # Create an identity from the OmniAuth::AuthHash after the user is created
-  after_create :create_identity_from_omniauth_hash
-  after_save :update_identity_from_omniauth_hash
+  after_save :create_or_update_identity_from_omniauth_hash
 
   # Available devise modules are:
   # :database_authenticatable, :registerable,
@@ -20,7 +19,7 @@ class User < ActiveRecord::Base
   has_many :identities, dependent: :destroy
 
   # Must have a username
-  validates_presence_of   :username
+  validates_presence_of :username
   # Must have a unique uid per provider
   validates :username, uniqueness: { scope: :provider }
 
@@ -30,6 +29,12 @@ class User < ActiveRecord::Base
   # Must have a valid institution code
   validates :institution_code, inclusion: { in: VALID_INSTITUTION_CODES },
     allow_blank: true
+
+  # Attr writer for omniauth_hash_map
+  def omniauth_hash_map=(omniauth_hash_map)
+    raise ArgumentError unless omniauth_hash_map.is_a? Login::OmniAuthHash::Mapper
+    @omniauth_hash_map = omniauth_hash_map
+  end
 
   # Make pretty URLs for users based on their usernames
   def to_param; username end
@@ -58,19 +63,10 @@ class User < ActiveRecord::Base
     @institution ||= Institutions.institutions[institution_code.to_sym]
   end
 
-  # Create identity assoc from OmniAuth hash
-  def create_identity_from_omniauth_hash
-    # Validate OmniAuth::AuthHash representation of the hash mapper
-    if Login::OmniAuthHashManager::Validator.new(omniauth_hash_map.to_hash)
-      # And create an identity from the attributes mapped in the mapper
-      identities.create(uid: omniauth_hash_map.uid, provider: omniauth_hash_map.provider, properties: omniauth_hash_map.properties)
-    end
-  end
-
   # Update identity assoc from OmniAuth hash if it's expired
-  def update_identity_from_omniauth_hash
+  def create_or_update_identity_from_omniauth_hash
     # Validate OmniAuth::AuthHash representation of the hash mapper
-    if Login::OmniAuthHashManager::Validator.new(omniauth_hash_map.to_hash)
+    if omniauth_hash_map.present?
       # And create or update an identity from the attributes mapped in the mapper
       identity = identities.find_or_initialize_by(uid: omniauth_hash_map.uid, provider: omniauth_hash_map.provider)
       identity.properties = omniauth_hash_map.properties if identity.expired?
