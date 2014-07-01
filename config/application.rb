@@ -38,6 +38,8 @@ module Login
     # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
     config.force_ssl = true
 
+    config.autoload_paths += Dir["#{config.root}/lib/**/"]
+
     # It seems like images are included by default only from app/assets folder
     # So in order to get images from shared assets we do this
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)

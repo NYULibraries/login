@@ -7,5 +7,10 @@ class ApplicationController < ActionController::Base
   layout Proc.new { |controller| (controller.request.xhr?) ? false : "login" }
 
   # Include these helper functions explicitly to make them available to controllers
-  include InstitutionsHelper, OmniAuthHelper, UsersHelper
+  include InstitutionsHelper, UsersHelper
+
+  rescue_from Login::OmniAuthHash::Validator::ArgumentError do |exception|
+    flash[:error] ||= exception.message
+    redirect_to login_path(current_institution.code.downcase)
+  end
 end

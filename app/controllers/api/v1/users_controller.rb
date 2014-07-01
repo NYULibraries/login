@@ -2,6 +2,7 @@ module Api::V1
   class UsersController < ::ApplicationController
     doorkeeper_for :all
     respond_to :json
+    layout false
 
     def show
       if doorkeeper_token

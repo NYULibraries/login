@@ -80,9 +80,7 @@ describe UsersController do
           before { @request.env['omniauth.auth'].provider = "invalid" }
           it("should not assign @user") { expect(assigns(:identity)).to be_nil }
           it { should be_redirect }
-          require 'pry'
-          # binding.pry
-          it { should redirect_to(login_url()) }
+          it { should redirect_to(login_url('nyu')) }
         end
         context 'when the omniauth.auth environment username is empty' do
           before { @request.env['omniauth.auth'].uid = "" }
@@ -94,7 +92,7 @@ describe UsersController do
       context 'when the omniauth.auth environment is not present' do
         it("should not assign @user") { expect(assigns(:identity)).to be_nil }
         it { should be_redirect }
-        it { should redirect_to(login_url()) }
+        it { should redirect_to(login_url('nyu')) }
       end
     end
 
@@ -123,7 +121,7 @@ describe UsersController do
           before { @request.env['omniauth.auth'].provider = "invalid" }
           it("should not assign @user") { expect(assigns(:identity)).to be_nil }
           it { should be_redirect }
-          it { should redirect_to(login_url()) }
+          it { should redirect_to(login_url('nyu')) }
         end
         context 'when the omniauth.auth environment username is empty' do
           before { @request.env['omniauth.auth'].info.nickname = "" }
@@ -135,7 +133,7 @@ describe UsersController do
       context 'when the omniauth.auth environment is not present' do
         it("should not assign @user") { expect(assigns(:identity)).to be_nil }
         it { should be_redirect }
-        it { should redirect_to(login_url()) }
+        it { should redirect_to(login_url('nyu')) }
       end
     end
 
@@ -164,7 +162,7 @@ describe UsersController do
           before { @request.env['omniauth.auth'].provider = "invalid" }
           it("should not assign @user") { expect(assigns(:identity)).to be_nil }
           it { should be_redirect }
-          it { should redirect_to(login_url()) }
+          it { should redirect_to(login_url('nyu')) }
         end
         context 'when the omniauth.auth environment username is empty' do
           before { @request.env['omniauth.auth'].info.nickname = "" }
@@ -176,7 +174,7 @@ describe UsersController do
       context 'when the omniauth.auth environment is not present' do
         it("should not assign @user") { expect(assigns(:identity)).to be_nil }
         it { should be_redirect }
-        it { should redirect_to(login_url()) }
+        it { should redirect_to(login_url('nyu')) }
       end
     end
 
@@ -188,7 +186,7 @@ describe UsersController do
           before { @request.env['omniauth.auth'].provider = "invalid" }
           it("should not assign @user") { expect(assigns(:identity)).to be_nil }
           it { should be_redirect }
-          it { should redirect_to(login_url()) }
+          it { should redirect_to(login_url('nyu')) }
         end
         context 'when the omniauth.auth environment username is empty' do
           before { @request.env['omniauth.auth'].uid = "" }
@@ -200,7 +198,7 @@ describe UsersController do
       context 'when the omniauth.auth environment is not present' do
         it("should not assign @user") { expect(assigns(:identity)).to be_nil }
         it { should be_redirect }
-        it { should redirect_to(login_url()) }
+        it { should redirect_to(login_url('nyu')) }
       end
     end
 
@@ -213,7 +211,7 @@ describe UsersController do
           before { @request.env['omniauth.auth'].provider = "invalid" }
           it("should not assign @user") { expect(assigns(:identity)).to be_nil }
           it { should be_redirect }
-          it { should redirect_to(login_url()) }
+          it { should redirect_to(login_url('nyu')) }
         end
         context 'when the omniauth.auth environment username is empty' do
           before { @request.env['omniauth.auth'].info.email = "" }
@@ -225,7 +223,7 @@ describe UsersController do
       context 'when the omniauth.auth environment is not present' do
         it("should not assign @user") { expect(assigns(:identity)).to be_nil }
         it { should be_redirect }
-        it { should redirect_to(login_url()) }
+        it { should redirect_to(login_url('nyu')) }
       end
     end
   end

@@ -18,17 +18,14 @@ class UsersController < Devise::OmniauthCallbacksController
   end
 
   def omniauth_callback
-    @user = User.find_or_initialize_by(username: omniauth_username, provider: omniauth_identity_provider)
+    @user = User.find_or_initialize_by(username: omniauth_hash_map.username, provider: omniauth_hash_map.provider)
     # Initialize with an email address if the omniauth hash has it.
-    @user.email = omniauth_email if @user.email.blank? && omniauth_email.present?
+    @user.email = omniauth_hash_map.email if @user.email.blank? && omniauth_hash_map.email.present?
     # Set the OmniAuth::AuthHash for the user
-    @user.omniauth_hash = omniauth_hash
+    @user.omniauth_hash_map = omniauth_hash_map
     if @user.save
-      @identity = @user.identities.find_or_initialize_by(uid: omniauth_uid, provider: omniauth_identity_provider)
-      @identity.properties = omniauth_properties if @identity.expired?
-      @identity.save
       sign_in_and_redirect @user, event: :authentication
-      kind = omniauth_identity_provider.titleize
+      kind = omniauth_hash_map.provider.titleize
       set_flash_message(:notice, :success, kind: kind) if is_navigational_format?
     else
       redirect_to after_omniauth_failure_path_for(resource_name)
@@ -45,4 +42,19 @@ class UsersController < Devise::OmniauthCallbacksController
     end
   end
   private :require_login
+
+  def require_valid_omniauth_hash
+    require_login unless omniauth_hash?
+  end
+  private :require_valid_omniauth_hash
+
+  def omniauth_hash_map
+    @omniauth_hash_map ||= Login::OmniAuthHash::Mapper.new(request.env["omniauth.auth"])
+  end
+  private :omniauth_hash_map
+
+  def omniauth_hash?
+    Login::OmniAuthHash::Validator.new(request.env["omniauth.auth"], params[:action])
+  end
+  private :omniauth_hash?
 end

@@ -122,8 +122,6 @@ module LoginFeatures
     end
 
     def facebook_style_matchers
-      # require 'pry';
-      # binding.pry
       @facebook_style_matchers ||= [
         -> { have_content 'Facebook Login' },
         -> { have_field 'email' },
@@ -167,7 +165,7 @@ module LoginFeatures
     def shibboleth_logged_in_matchers(institute)
       @logged_in_matchers ||= [
         -> { have_content 'Successfully authenticated ' },
-        -> { have_content "Hi #{shibboleth_username_for_institute(institute)}!" },
+        -> { have_content "Hi #{nyu_shibboleth_username_for_institute(institute)}!" },
         -> { have_content 'You logged in via' },
         -> { have_content " you've logged in to the NYU Libraries' services." }
       ]
