@@ -6,7 +6,11 @@ module LoginFeatures
     end
 
     def authorization_code
-      @authorization_code ||= page.find("#authorization_code").text
+      @authorization_code ||= (authorization_code?) ? page.find("#authorization_code").text : "foobar"
+    end
+
+    def authorization_code?
+      page.has_css?("#authorization_code")
     end
 
     def client_authorize_url

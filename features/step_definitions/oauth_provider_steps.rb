@@ -28,17 +28,27 @@ Then(/^I should (not )?see the Login page$/) do |negator|
   expectations_for_page(page, negator, *nyu_login_matchers)
 end
 
+# How can you test that you're logged into a non-existance app?
+# For now, you can just make sure that an authorization code is returned
 Then(/^I should be logged in to the OAuth2 client application$/) do
-  expect(authorization_code).to have_content
+  expect(page).to have_content authorization_code
 end
 
+# I should not be prompted with an authorize screen
+# I should just receive the authorization code in the page
+# If this was production it would return to the redirect_uri with code=auth_code in the querystring
 Then(/^I should be automatically authorized to use Login as my provider$/) do
-  expect(authorization_code).to have_content
+  expect(page).to have_content authorization_code
 end
 
-Then(/^the OAuth2 client should have access to exposed attributes$/) do
+Then(/^the OAuth2 client should (not )?have access to exposed attributes$/) do |negator|
   VCR.use_cassette("get access token", match_requests_on: [:path], record: :all) do
-    get api_v1_user_path(:access_token => access_token)
-    expect(last_response.body).to include current_resource_owner.to_json(include: :identities)
+    begin
+      get api_v1_user_path(:access_token => access_token)
+      expect(last_response.body).to include current_resource_owner.to_json(include: :identities)
+    rescue Exception => e
+      expect(e).to be_instance_of(OAuth2::Error)
+      expect(e.message).to include "invalid_grant"
+    end
   end
 end
