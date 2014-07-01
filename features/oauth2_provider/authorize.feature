@@ -14,5 +14,6 @@ Feature: Authorize an OAuth2 client application
   Scenario: A logged in user is authorized
     Given I have previously logged in to Login as an NYU Shibboleth user
     And I am on an OAuth2 client application
+    When I click "Login"
     Then I should be automatically authorized to use Login as my provider
     And the OAuth2 client should have access to exposed attributes

@@ -13,4 +13,5 @@ Feature: Authenticate as an OAuth2 client application
   Scenario: A logged in user should be authenticated for an OAuth2 client application
     Given I have previously logged in to Login as an NYU Shibboleth user
     And I am on an OAuth2 client application
+    When I click "Login"
     Then I should be logged in to the OAuth2 client application

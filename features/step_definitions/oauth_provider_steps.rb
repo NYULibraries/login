@@ -32,6 +32,10 @@ Then(/^I should be logged in to the OAuth2 client application$/) do
   expect(authorization_code).to have_content
 end
 
+Then(/^I should be automatically authorized to use Login as my provider$/) do
+  expect(authorization_code).to have_content
+end
+
 Then(/^the OAuth2 client should have access to exposed attributes$/) do
   VCR.use_cassette("get access token", match_requests_on: [:path], record: :all) do
     get api_v1_user_path(:access_token => access_token)
