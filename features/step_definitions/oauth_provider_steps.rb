@@ -35,6 +35,6 @@ end
 Then(/^the OAuth2 client should have access to exposed attributes$/) do
   VCR.use_cassette("get access token", match_requests_on: [:path], record: :all) do
     get api_v1_user_path(:access_token => access_token)
-    expect(last_response.body).to include "snowj@newschool.edu"
+    expect(last_response.body).to include current_resource_owner.to_json(include: :identities)
   end
 end
