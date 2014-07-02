@@ -2,7 +2,7 @@
 #
 module Login
   module OmniAuthHash
-    module Providers
+    module IdentityMappers
       class Base
 
         def initialize(omniauth_hash)

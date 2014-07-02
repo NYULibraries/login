@@ -2,8 +2,8 @@
 #
 module Login
   module OmniAuthHash
-    module Providers
-      class Twitter < Login::OmniAuthHash::Providers::Base
+    module IdentityMappers
+      class Twitter < Login::OmniAuthHash::IdentityMappers::Base
 
         def username
           @omniauth_hash.info.nickname

@@ -2,8 +2,8 @@
 #
 module Login
   module OmniAuthHash
-    module Providers
-      class Facebook < Login::OmniAuthHash::Providers::Base
+    module IdentityMappers
+      class Facebook < Login::OmniAuthHash::IdentityMappers::Base
 
         def username
           @omniauth_hash.info.nickname || @omniauth_hash.info.email

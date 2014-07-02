@@ -2,8 +2,8 @@
 #
 module Login
   module OmniAuthHash
-    module Providers
-      class NewSchoolLdap < Login::OmniAuthHash::Providers::Base
+    module IdentityMappers
+      class NewSchoolLdap < Login::OmniAuthHash::IdentityMappers::Base
 
         def uid
           ldap_hash[:pdsloginid].first

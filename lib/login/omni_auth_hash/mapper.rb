@@ -30,7 +30,7 @@ module Login
 
       def method_missing(method_id, *args)
         if match = matches_provider_whitelist?(@omniauth_hash.provider)
-          instance_variable_set("@#{@omniauth_hash.provider}_mapper", "Login::OmniAuthHash::Providers::#{@omniauth_hash.provider.classify}".constantize.new(@omniauth_hash))
+          instance_variable_set("@#{@omniauth_hash.provider}_mapper", "Login::OmniAuthHash::IdentityMappers::#{@omniauth_hash.provider.classify}".constantize.new(@omniauth_hash))
           instance_variable_get("@#{@omniauth_hash.provider}_mapper").send(method_id)
         else
           super
