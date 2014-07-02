@@ -1,7 +1,7 @@
 module LoginFeatures
   module ApiAttributes
-    def map_field_to_title(field)
-      field_titles[field]
+    def map_title_to_field(title)
+      field_titles[title]
     end
 
     def field_titles
