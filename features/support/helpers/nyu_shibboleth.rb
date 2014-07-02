@@ -24,6 +24,7 @@ module LoginFeatures
           email: "snowj@newschool.edu",
           nickname: "12345",
           location: ", , ,  ",
+          entitlement: "nothing",
           uid: "js123"
         }
       }

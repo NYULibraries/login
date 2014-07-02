@@ -9,6 +9,7 @@ module LoginFeatures
         "NetID" => "uid",
         "Given Name" => "first_name",
         "Surname" => "last_name",
+        "Entitlement" => "entitlement",
         "N Number" => "nyuidn"
       }
     end
