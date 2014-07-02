@@ -69,17 +69,6 @@ module Login
           @omniauth_hash.info.last_name
         end
 
-        ##
-        # Check if method_id matches the is_role? schema
-        def matches_attribute_name?(method_id)
-          whitelist_attributes.include? method_id.to_sym
-        end
-        private :matches_attribute_name?
-
-        def whitelist_attributes
-          [:uid, :username, :first_name, :last_name, :nyuidn]
-        end
-
       end
     end
   end
