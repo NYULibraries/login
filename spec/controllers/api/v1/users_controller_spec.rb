@@ -83,6 +83,7 @@ describe Api::V1::UsersController do
               it { should have_json_path("identities/0/properties/first_name") }
               it { should have_json_path("identities/0/properties/last_name") }
               it { should have_json_path("identities/0/properties/extra/entitlement") }
+              it { should be_json_eql(resource_owner.to_json(include: :identities))}
 
             end
 
