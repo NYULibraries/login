@@ -1,5 +1,6 @@
 ##
-#
+# Inherits default values for attributes from base class
+# and overrides Aleph specific ones
 module Login
   module OmniAuthHash
     module IdentityMappers
