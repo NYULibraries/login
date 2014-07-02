@@ -6,7 +6,7 @@ module LoginFeatures
     end
 
     def new_school_ldap_omniauth_hash
-      OmniAuth::AuthHash.new(new_school_ldap_hash)
+      @new_school_ldap_omniauth_hash ||= OmniAuth::AuthHash.new(new_school_ldap_hash)
     end
 
     def set_invalid_new_school_ldap_login_env

@@ -16,7 +16,7 @@ module OmniAuthHashMacros
   end
 
   def authhash_map(provider)
-    Login::OmniAuthHashManager::Mapper.new(authhash(provider))
+    Login::OmniAuthHash::Mapper.new(authhash(provider))
   end
 
   def infohash(source_hash)
