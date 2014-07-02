@@ -18,14 +18,8 @@ module Login
       # Example:
       #   Mapper.new(OmniAuth::AuthHash)
       def initialize(omniauth_hash)
+        raise ArgumentError.new(omniauth_hash) unless omniauth_hash.present? && omniauth_hash.is_a?(OmniAuth::AuthHash)
         @omniauth_hash = omniauth_hash
-        raise ArgumentError.new(omniauth_hash) unless @omniauth_hash.present? && @omniauth_hash.is_a?(OmniAuth::AuthHash)
-      end
-
-      ##
-      # Return OmniAuth::AuthHash representation
-      def to_hash
-        @omniauth_hash
       end
 
       def method_missing(method_id, *args)

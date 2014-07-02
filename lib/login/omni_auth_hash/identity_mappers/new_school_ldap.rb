@@ -5,6 +5,10 @@ module Login
     module IdentityMappers
       class NewSchoolLdap < Login::OmniAuthHash::IdentityMappers::Base
 
+        def initialize(omniauth_hash)
+          super(omniauth_hash)
+        end
+
         def uid
           ldap_hash[:pdsloginid].first
         end
@@ -23,7 +27,7 @@ module Login
         private :extract_value_from_keyed_array
 
         def ldap_hash
-          @omniauth_hash.extra.raw_info.instance_variable_get(:@myhash)[:dn].first
+          @omniauth_hash.extra.raw_info
         end
         private :ldap_hash
 

@@ -9,6 +9,12 @@ module Login
           @omniauth_hash = omniauth_hash
         end
 
+        ##
+        # Return OmniAuth::AuthHash representation
+        def to_hash
+          @omniauth_hash
+        end
+
         def uid
           @omniauth_hash.uid
         end
