@@ -9,16 +9,14 @@ When(/^I request my attributes from the protected API$/) do
 end
 
 Then(/^I retrieve the attributes as JSON:$/) do |table|
-  VCR.use_cassette("get access token", match_requests_on: [:path], record: :all) do
-    get api_v1_user_path(:access_token => access_token)
+  get api_v1_user_path(:access_token => access_token)
 
-    parsed_user = JSON.parse(last_response.body)
-    resource_owner = current_resource_owner(parsed_user["provider"])
+  parsed_user = JSON.parse(last_response.body)
+  resource_owner = current_resource_owner(parsed_user["provider"])
 
-    expect(last_response.body).to eql resource_owner.to_json(include: :identities)
+  expect(last_response.body).to eql resource_owner.to_json(include: :identities)
 
-    table.rows_hash.each do |field, value|
-      expect(parsed_user["identities"].first["properties"][map_field_to_title(field)]).to eql value
-    end
+  table.rows_hash.each do |field, value|
+    expect(parsed_user["identities"].first["properties"][map_field_to_title(field)]).to eql value
   end
 end

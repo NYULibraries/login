@@ -30,9 +30,7 @@ module LoginFeatures
     end
 
     def provider_url
-      visit login_path
-      racktest_url = URI.parse(current_url)
-      return @provider_url ||= "#{racktest_url.scheme}://#{racktest_url.host}:#{racktest_url.port}"
+      @provider ||= Capybara.app_host
     end
 
   end

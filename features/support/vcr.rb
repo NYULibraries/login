@@ -8,6 +8,9 @@ VCR.configure do |c|
   c.ignore_request do |request|
     URI(request.uri).path == "/__identify__" || URI(request.uri).path =~ /\/hub\/session/
   end
+  c.ignore_request do |request|
+    URI(request.uri).path == "/oauth/token"
+  end
   c.default_cassette_options = { allow_playback_repeats: true }
   # c.debug_logger = $stdout
   c.hook_into :webmock
