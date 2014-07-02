@@ -21,15 +21,14 @@ module Login
           extract_value_from_keyed_array(ldap_hash[:pdsexternalsystemid], "sct")
         end
 
+        def ldap_hash
+          @omniauth_hash.extra.raw_info
+        end
+
         def extract_value_from_keyed_array(array, key)
           array.find { |val| /(.+)::#{key}/.match(val) }.split("::").first
         end
         private :extract_value_from_keyed_array
-
-        def ldap_hash
-          @omniauth_hash.extra.raw_info
-        end
-        private :ldap_hash
 
       end
     end
