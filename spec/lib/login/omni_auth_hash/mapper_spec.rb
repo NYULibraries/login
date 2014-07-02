@@ -26,60 +26,52 @@ describe Login::OmniAuthHash::Mapper do
     end
   end
 
-  describe "#to_hash" do
-    subject { mapper.to_hash }
-    it { should be_a OmniAuth::AuthHash }
-  end
+  context "when provider is New School Ldap" do
+    let(:provider) { "new_school_ldap" }
 
-  describe "#uid" do
-    subject { mapper.uid }
-    it { should eql omniauth_hash.uid }
-  end
-
-  describe "#provider" do
-    subject { mapper.provider }
-    it { should eql omniauth_hash.provider }
-    it { should eql provider }
-  end
-
-  describe "#info" do
-    subject { mapper.info }
-    it { should eql omniauth_hash.info }
-  end
-
-  describe "#email" do
-    subject { mapper.email }
-    it { should eql omniauth_hash.info.email }
-  end
-
-  describe "#properties" do
-    subject { mapper.properties }
-    xit { should eql omniauth_hash.info.merge(extra: omniauth_hash.extra) }
-  end
-
-  describe "#username" do
-    subject { mapper.username }
-    context "when provider is twitter" do
-      let(:provider) { "twitter" }
-      it { should eql omniauth_hash.info.nickname }
+    describe "#to_hash" do
+      subject { mapper.to_hash }
+      it { should be_a OmniAuth::AuthHash }
     end
-    context "when provider is facebook" do
-      let(:provider) { "facebook" }
-      context "and nickname is present" do
-        it { should eql omniauth_hash.info.nickname }
-      end
-      context "and nickname is missing" do
-        before(:each) { omniauth_hash.info.nickname = nil }
-        it { should eql omniauth_hash.info.email }
-      end
+
+    describe "#uid" do
+      subject { mapper.uid }
+      it { should eql mapper.to_hash.extra.raw_info[:pdsloginid].first }
     end
-    context "when provider is new_school_ldap" do
-      let(:provider) { "new_school_ldap" }
+
+    describe "#nyuidn" do
+      subject { mapper.nyuidn }
+      it { should eql "N00000000" }
+    end
+
+    describe "#provider" do
+      subject { mapper.provider }
+      it { should eql omniauth_hash.provider }
+      it { should eql provider }
+    end
+
+    describe "#info" do
+      subject { mapper.info }
+      it { should eql omniauth_hash.info }
+    end
+
+    describe "#email" do
+      subject { mapper.email }
       it { should eql omniauth_hash.info.email }
     end
-    context "when provider is nyu_shibboleth" do
-      let(:provider) { "nyu_shibboleth" }
-      it { should eql omniauth_hash.uid }
+
+    describe "#username" do
+      subject { mapper.username }
+      it { should eql omniauth_hash.info.email }
+    end
+
+  end
+
+  context "when provider is not whitelisted" do
+    let(:provider) { "malevolent" }
+
+    it "should not be able to create an object from a non-whitelisted provider" do
+      expect { mapper.to_hash }.to raise_error NoMethodError
     end
   end
 
