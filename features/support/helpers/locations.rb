@@ -73,5 +73,28 @@ module LoginFeatures
     def expect_login_page_for(location)
       expect(current_path).to eq(login_path(institute_for_location(location).downcase))
     end
+
+    def set_login_env_for(location)
+      case location
+      when /New School LDAP$/
+        set_new_school_ldap_login_env
+      when /NYU Shibboleth$/
+        set_nyu_shibboleth_login_env
+      else
+        raise "Unknown location!"
+      end
+    end
+
+    def follow_login_steps_for(location)
+      case location
+      when /New School LDAP$/
+        click_on "New School Libraries"
+        click_on "Login"
+      when /NYU Shibboleth$/
+        click_on "Click to Login"
+      else
+        raise "Unknown location!"
+      end
+    end
   end
 end
