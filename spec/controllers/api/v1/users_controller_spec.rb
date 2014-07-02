@@ -76,31 +76,14 @@ describe Api::V1::UsersController do
 
           context "and the user's identity provider is New School LDAP" do
             let(:provider) { "new_school_ldap" }
-            let(:response_properties) { JSON.parse(response.body)["identities"].first["properties"] }
-            let(:resource_owner_properties) { resource_owner.identities.first.properties }
-            let(:property) { "uid" }
-            
-            subject { response_properties[property] }
 
-            context "when querying the NetID" do
-              it { should eql resource_owner_properties[property] }
+            context "when querying raw JSON" do
+              subject{ response.body }
+              it { should have_json_path("identities/0/properties/uid") }
+              it { should have_json_path("identities/0/properties/nyuidn") }
+              it { should have_json_path("identities/0/properties/first_name") }
+              it { should have_json_path("identities/0/properties/last_name") }
             end
-
-            context "when querying the N Number" do
-              let(:property) { "nyuidn" }
-              it { should eql resource_owner_properties[property] }
-            end
-
-            context "when querying the Given Name" do
-              let(:property) { "first_name" }
-              it { should eql resource_owner_properties[property] }
-            end
-
-            context "when querying the SurName" do
-              let(:property) { "last_name" }
-              it { should eql resource_owner_properties[property] }
-            end
-
           end
 
         end
