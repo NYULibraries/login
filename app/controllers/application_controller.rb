@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   # Include these helper functions explicitly to make them available to controllers
   include InstitutionsHelper, UsersHelper
 
-  rescue_from Login::OmniAuthHash::Validator::ArgumentError do |exception|
+  rescue_from Login::OmniAuthHash::Mapper::ArgumentError do |exception|
     flash[:error] ||= exception.message
     redirect_to login_path(current_institution.code.downcase)
   end
