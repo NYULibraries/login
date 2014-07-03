@@ -1,7 +1,7 @@
 Given(/^I am logged in as a "(.*?)" user$/) do |location|
-  set_login_env_for location
+  set_login_env_for_location location
   visit client_authorize_url
-  follow_login_steps_for location
+  follow_login_steps_for_location location
 end
 
 When(/^I request my attributes from the protected API$/) do
