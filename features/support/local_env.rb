@@ -27,7 +27,8 @@ else
     Capybara::Poltergeist::Driver.new(
       app,
       phantomjs_options: ['--load-images=no', '--ignore-ssl-errors=yes'],
-      window_size: [1280, 1024]#,
+      window_size: [1280, 1024],
+      timeout: 120#,
       # debug:       true
     )
   end

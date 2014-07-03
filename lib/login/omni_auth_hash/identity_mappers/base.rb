@@ -1,5 +1,6 @@
 ##
-#
+# Base class sets default values for known attributes
+# from passed in OmniAuth::AuthHash
 module Login
   module OmniAuthHash
     module IdentityMappers
@@ -9,28 +10,50 @@ module Login
           @omniauth_hash = omniauth_hash
         end
 
-        def uid
-          @omniauth_hash.uid
+        ##
+        # Return OmniAuth::AuthHash representation
+        def to_hash
+          @omniauth_hash
         end
 
-        def nyuidn
-          @omniauth_hash.uid
-        end
-
-        def username
-          @omniauth_hash.uid
-        end
-
+        # Map provider to function
         def provider
           @omniauth_hash.provider
         end
 
+        # Map info to function
         def info
           @omniauth_hash.info
         end
 
+        # Default uid
+        def uid
+          @omniauth_hash.uid
+        end
+
+        # Default nyuidn
+        def nyuidn
+          @omniauth_hash.uid
+        end
+
+        # Default username
+        def username
+          @omniauth_hash.uid
+        end
+
+        # Default email
         def email
           @omniauth_hash.info.email
+        end
+
+        # Map first name out of hash
+        def first_name
+          @omniauth_hash.info.first_name
+        end
+
+        # Map last name out of hash
+        def last_name
+          @omniauth_hash.info.last_name
         end
 
         ##
@@ -49,29 +72,6 @@ module Login
             last_name: last_name,
             nyuidn: nyuidn
           }
-        end
-
-        ##
-        # Get first name out of hash
-        def first_name
-          @omniauth_hash.info.first_name
-        end
-
-        ##
-        # Get last name out of hash
-        def last_name
-          @omniauth_hash.info.last_name
-        end
-
-        ##
-        # Check if method_id matches the is_role? schema
-        def matches_attribute_name?(method_id)
-          whitelist_attributes.include? method_id.to_sym
-        end
-        private :matches_attribute_name?
-
-        def whitelist_attributes
-          [:uid, :username, :first_name, :last_name, :nyuidn]
         end
 
       end

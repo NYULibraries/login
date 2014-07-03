@@ -5,6 +5,7 @@ module Login
   module OmniAuthHash
     class Mapper
 
+      # Raise an argument error when there is an invalid hash
       class ArgumentError < ::ArgumentError
         def initialize(omniauth_hash)
           super("#{omniauth_hash} is not a valid OmniAuth::AuthHash")
@@ -18,18 +19,15 @@ module Login
       # Example:
       #   Mapper.new(OmniAuth::AuthHash)
       def initialize(omniauth_hash)
+        raise ArgumentError.new(omniauth_hash) unless omniauth_hash.present? && omniauth_hash.is_a?(OmniAuth::AuthHash)
         @omniauth_hash = omniauth_hash
-        raise ArgumentError.new(omniauth_hash) unless @omniauth_hash.present? && @omniauth_hash.is_a?(OmniAuth::AuthHash)
-      end
-
-      ##
-      # Return OmniAuth::AuthHash representation
-      def to_hash
-        @omniauth_hash
       end
 
       def method_missing(method_id, *args)
         if match = matches_provider_whitelist?(@omniauth_hash.provider)
+          # Sets an instance variable like
+          #   @twitter_mapper = Login::OmniAuthHash::IdentityMappers::Twitter.new(@omniauth_hash)
+          # And passes the method_id on to it
           instance_variable_set("@#{@omniauth_hash.provider}_mapper", "Login::OmniAuthHash::IdentityMappers::#{@omniauth_hash.provider.classify}".constantize.new(@omniauth_hash))
           instance_variable_get("@#{@omniauth_hash.provider}_mapper").send(method_id)
         else
@@ -42,6 +40,7 @@ module Login
       end
       private :matches_provider_whitelist?
 
+      # Static whitelist of valid identity providers
       def whitelist_providers
         [:new_school_ldap, :twitter, :nyu_shibboleth, :facebook, :aleph]
       end

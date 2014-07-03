@@ -5,16 +5,13 @@ Given(/^I am logged in as a "(.*?)" user$/) do |location|
 end
 
 When(/^I request my attributes from the protected API$/) do
+  # Get attributes from API with a get call
   get api_v1_user_path(:access_token => access_token)
 end
 
 Then(/^I retrieve the attributes as JSON:$/) do |table|
-  parsed_user = JSON.parse(last_response.body)
-  resource_owner = current_resource_owner(parsed_user["provider"])
-
-  expect(last_response.body).to eql resource_owner.to_json(include: :identities)
-
-  table.rows_hash.each do |field, value|
-    expect(parsed_user["identities"].first["properties"][map_field_to_title(field)]).to eql value
+  # Match retrieved result with expectant attrs
+  table.rows_hash.each do |field_title, value|
+    expect(last_response.body).to include "\"#{map_title_to_field(field_title)}\":\"#{value}\""
   end
 end

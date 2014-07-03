@@ -64,21 +64,6 @@ describe User do
       it { should eql("dev123@example.com") }
     end
 
-    describe '#password' do
-      subject { user.password }
-      it { should be_nil }
-    end
-
-    describe '#password_required?' do
-      subject { user.send :password_required? }
-      it { should be_false }
-    end
-
-    describe '#email_required?' do
-      subject { user.send :email_required? }
-      it { should be_false }
-    end
-
     describe '#institution_code' do
       subject { user.institution_code }
       it { should_not be_nil }
@@ -136,7 +121,7 @@ describe User do
     subject { build(:user, username: "dupemailuser2", email: email) }
     it { should be_a(User) }
     it { should be_a_new(User) }
-    it { should_not be_valid }
+    it { should be_valid }
   end
 
   context "when institution code is invalid" do

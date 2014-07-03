@@ -1,6 +1,11 @@
 # A user must have a unique username
 # and a unique and valid email address
 class User < ActiveRecord::Base
+  module ClassMethods
+    Devise::Models.config(self, :email_regexp)
+  end
+  self.extend ClassMethods
+
   VALID_INSTITUTION_CODES = Institutions.institutions.keys.map(&:to_s)
 
   attr_reader :omniauth_hash_map
@@ -13,7 +18,7 @@ class User < ActiveRecord::Base
   # :recoverable, :rememberable, :trackable, :validatable
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
-  devise :omniauthable, :timeoutable, :trackable, :validatable#, :token_authenticatable
+  devise :omniauthable, :timeoutable, :trackable#, :token_authenticatable
 
   # A user can have many identities
   has_many :identities, dependent: :destroy
@@ -30,6 +35,8 @@ class User < ActiveRecord::Base
   validates :institution_code, inclusion: { in: VALID_INSTITUTION_CODES },
     allow_blank: true
 
+  validates_format_of :email, with: email_regexp, allow_blank: true, if: :email_changed?
+
   # Attr writer for omniauth_hash_map
   def omniauth_hash_map=(omniauth_hash_map)
     raise ArgumentError unless omniauth_hash_map.is_a? Login::OmniAuthHash::Mapper
@@ -38,25 +45,6 @@ class User < ActiveRecord::Base
 
   # Make pretty URLs for users based on their usernames
   def to_param; username end
-
-  # Override Devise::Models::Validatable#password_required?
-  # since we don't have passwords and therefore can't
-  # require them.
-  def password_required?; false end
-  protected :password_required?
-
-  # We want to leverage email validations via the
-  # Devise::Models::Validatable module but not password
-  # validations. Devise assumes a password column in the DB.
-  # Since we don't have one, this is a dummy password method
-  # for password length validation.
-  def password; end
-
-  # Override Devise::Models::Validatable#email_required?
-  # since twitter doesn't provide emails and therefore can't
-  # require them.
-  def email_required?; false end
-  protected :email_required?
 
   # Resolve the institution based on
   def institution
