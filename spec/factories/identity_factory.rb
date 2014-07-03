@@ -238,15 +238,14 @@ FactoryGirl.define do
         nickname: "1234567890",
         nyuidn: "N00000000",
         extra: {
-          raw_info:
-          Net::LDAP::Entry.new({
+          raw_info: {
             pdsexternalsystemid:
               ["12345::gtmb",
               "snowj@1newschool.edu::mir3",
               "N00000000::sct"],
             pdsloginid: ["ns123"],
             pdsloginalias: ["ns123"]
-          })
+          }
         }
       })
     end
