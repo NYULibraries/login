@@ -9,6 +9,7 @@ module Login
           super(omniauth_hash)
           # Map to nickname if exists, or to email
           @username = (@omniauth_hash.info.nickname || @omniauth_hash.info.email)
+          @properties = @omniauth_hash.info.merge(extra_attributes)
         end
       end
     end

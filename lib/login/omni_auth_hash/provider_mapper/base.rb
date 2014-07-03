@@ -12,13 +12,12 @@ module Login
           @omniauth_hash = omniauth_hash
           @provider = @omniauth_hash.provider
           @uid = @omniauth_hash.uid
-          @username = @uid
-          @nyuidn = @uid
+          @username = @omniauth_hash.uid
+          @nyuidn = @omniauth_hash.uid
           @info = @omniauth_hash.info
-          @email = @info.email
-          @first_name = @info.first_name
-          @last_name = @info.last_name
-          @properties = @info.merge(extra_attributes)
+          @email = @omniauth_hash.info.email
+          @first_name = @omniauth_hash.info.first_name
+          @last_name = @omniauth_hash.info.last_name
         end
 
         ##
@@ -32,7 +31,7 @@ module Login
         def extra_attributes
           @extra_attributes ||= {
             extra: @omniauth_hash.extra,
-            uid: self.uid,
+            uid: uid,
             first_name: first_name,
             last_name: last_name,
             nyuidn: nyuidn
