@@ -27,17 +27,23 @@ describe User do
 
   context "when provider is nil" do
     subject { build(:user, provider: nil) }
-    it { should_not be_valid }
+    it "should raise an error" do
+      expect { subject }.to raise_error
+    end
   end
 
   context "when provider is not valid" do
     subject { build(:user, provider: "invalid") }
-    it { should_not be_valid }
+    it "should raise an error" do
+      expect { subject }.to raise_error
+    end
   end
 
   context "when provider is shibboleth" do
     subject { build(:user, provider: "shibboleth") }
-    it { should_not be_valid }
+    it "should raise an error" do
+      expect { subject }.to raise_error
+    end
   end
 
   context "when valid" do

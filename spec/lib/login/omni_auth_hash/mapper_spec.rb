@@ -36,7 +36,7 @@ describe Login::OmniAuthHash::Mapper do
 
     describe "#uid" do
       subject { mapper.uid }
-      it { should eql mapper.to_hash.extra.raw_info[:pdsloginid].first }
+      it { should eql "snowj" }
     end
 
     describe "#nyuidn" do
@@ -46,8 +46,7 @@ describe Login::OmniAuthHash::Mapper do
 
     describe "#provider" do
       subject { mapper.provider }
-      it { should eql omniauth_hash.provider }
-      it { should eql provider }
+      it { should eql "new_school_ldap" }
     end
 
     describe "#info" do
@@ -57,12 +56,12 @@ describe Login::OmniAuthHash::Mapper do
 
     describe "#email" do
       subject { mapper.email }
-      it { should eql omniauth_hash.info.email }
+      it { should eql "snowj@1newschool.edu" }
     end
 
     describe "#username" do
       subject { mapper.username }
-      it { should eql omniauth_hash.info.email }
+      it { should eql "snowj" }
     end
 
   end
@@ -71,7 +70,7 @@ describe Login::OmniAuthHash::Mapper do
     let(:provider) { "malevolent" }
 
     it "should not be able to create an object from a non-whitelisted provider" do
-      expect { mapper.to_hash }.to raise_error NoMethodError
+      expect { mapper.to_hash }.to raise_error ArgumentError
     end
   end
 

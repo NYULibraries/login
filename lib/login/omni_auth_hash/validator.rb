@@ -5,14 +5,6 @@ module Login
   module OmniAuthHash
     class Validator
 
-      # Call this error if omniauth hash is invalid
-      # handle it as a global catch in the application controller
-      class ArgumentError < ::ArgumentError
-        def initialize(omniauth_hash)
-          super("#{omniauth_hash} is not a valid OmniAuth::AuthHash")
-        end
-      end
-
       ##
       # Create a new validator object with an OmniAuth::AuthHash and an optional provider
       # and raise and ArgumentError if the hash is invalid
@@ -22,7 +14,6 @@ module Login
       def initialize(omniauth_hash, provider)
         @omniauth_hash = omniauth_hash
         @provider = provider
-        raise ArgumentError.new(omniauth_hash) unless self.valid?
       end
 
       ##
