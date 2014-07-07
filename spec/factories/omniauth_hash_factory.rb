@@ -55,6 +55,11 @@ FactoryGirl.define do
           phone: "123-456-7890"
         }
       end
+      extra do
+        {
+          entitlement: "nothing"
+        }
+      end
     end
     trait :aleph do
       provider "aleph"

@@ -75,6 +75,9 @@ RSpec.configure do |config|
   # Include Shibboleth Macros
   config.include ShibbolethMacros, type: :request
 
+  # Include helpers for JSON
+  config.include JsonSpec::Helpers
+
   config.before(:suite) do
     # Run factory girl lint before the suite
     # FactoryGirl.lint

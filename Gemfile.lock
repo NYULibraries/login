@@ -53,6 +53,10 @@ GEM
       activesupport (= 4.0.5)
       arel (~> 4.0.0)
     activerecord-deprecated_finders (1.0.3)
+    activerecord-postgres-hstore (0.7.7)
+      activerecord (>= 3.1)
+      pg-hstore (>= 1.1.5)
+      rake
     activesupport (4.0.5)
       i18n (~> 0.6, >= 0.6.9)
       minitest (~> 4.2)
@@ -192,6 +196,10 @@ GEM
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     mustache (0.99.4)
+    nested-hstore (0.0.5)
+      activerecord
+      activerecord-postgres-hstore
+      activesupport
     net-ldap (0.3.1)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
@@ -245,6 +253,7 @@ GEM
     orm_adapter (0.5.0)
     ox (2.1.1)
     pg (0.17.1)
+    pg-hstore (1.2.0)
     phantomjs (1.9.7.1)
     pickle (0.4.11)
       cucumber (>= 0.8)
@@ -390,6 +399,7 @@ DEPENDENCIES
   modernizr-rails (~> 2.7.0)
   mustache (= 0.99.4)
   mustache-rails!
+  nested-hstore
   nyulibraries-assets!
   nyulibraries-deploy!
   omniauth (~> 1.2.0)

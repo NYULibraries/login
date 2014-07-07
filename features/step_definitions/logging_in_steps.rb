@@ -19,8 +19,8 @@ Then(/^I should be logged in as an NYU user$/) do
 end
 
 Given(/^I am on the (.+) login page$/) do |location|
-  visit_login_page_for(location)
-  expect_login_page_for(location)
+  visit_login_page_for_location(location)
+  expect_login_page_for_location(location)
 end
 
 When(/^I visit the (.+) login page$/) do |location|

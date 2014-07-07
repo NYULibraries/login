@@ -220,11 +220,18 @@ FactoryGirl.define do
     end
     trait :nyu_shibboleth do
       provider "nyu_shibboleth"
-      uid "nyu123"
+      uid "nyu1234"
+
       properties({
-        nickname: "nyu123",
+        nickname: "nyu1234",
         email: "nyu123@nyu.edu",
-        name: "N Yu"
+        name: "N Yu",
+        given_name: "N",
+        surname: "Yu",
+        extra: {
+          nyuidn: "1234567890",
+          entitlement: "nothing"
+        }
       })
     end
     trait :new_school_ldap do
