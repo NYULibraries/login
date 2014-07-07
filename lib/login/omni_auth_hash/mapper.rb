@@ -25,9 +25,13 @@ module Login
       #   Mapper.new(OmniAuth::AuthHash)
       def initialize(omniauth_hash)
         # Raise error if in valid OmniAuth::AuthHash
-        raise ArgumentError.new(omniauth_hash) unless omniauth_hash.present? && omniauth_hash.is_a?(OmniAuth::AuthHash)
+        unless omniauth_hash.present? && omniauth_hash.is_a?(OmniAuth::AuthHash)
+          raise ArgumentError.new(omniauth_hash)
+        end
         # Raise error if provider is not whitelisted
-        raise ArgumentError.new(omniauth_hash, omniauth_hash.provider) unless matches_provider_whitelist?(omniauth_hash.provider)
+        unless matches_provider_whitelist?(omniauth_hash.provider)
+          raise ArgumentError.new(omniauth_hash, omniauth_hash.provider)
+        end
         # Set instance vars
         @omniauth_hash = omniauth_hash
         # Generate the provider mapper from the provider, so we can delegate all calls to it
