@@ -4,7 +4,6 @@
 module Login
   module OmniAuthHash
     class Mapper
-      extend Forwardable
 
       # Raise an argument error when there is an invalid hash
       class ArgumentError < ::ArgumentError
@@ -39,6 +38,7 @@ module Login
       end
 
       # Delegate all calls to @provider_mapper
+      extend Forwardable
       def_delegators :@provider_mapper, :provider, :uid, :username, :nyuidn, :email, :first_name, :last_name, :info, :properties, :to_hash
 
       def matches_provider_whitelist?(provider)
