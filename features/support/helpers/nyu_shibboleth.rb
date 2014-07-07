@@ -5,25 +5,14 @@ module LoginFeatures
     end
 
     def set_nyu_shibboleth_login_env
-      OmniAuth.config.mock_auth[:nyu_shibboleth] = OmniAuth::AuthHash.new(nyu_shibboleth_hash)
+      OmniAuth.config.mock_auth[:nyu_shibboleth] = nyu_shibboleth_omniauth_hash
+    end
+
+    def nyu_shibboleth_omniauth_hash
+      @nyu_shibboleth_omniauth_hash ||= OmniAuth::AuthHash.new(FactoryGirl.create(:nyu_shibboleth_authhash))
     end
 
     private
-
-    def nyu_shibboleth_hash
-      @nyu_shibboleth_hash ||= {
-        provider: "nyu_shibboleth",
-        uid: "js123",
-        info: {
-          first_name: "Jon",
-          last_name: "Snow",
-          email: "snowj@newschool.edu",
-          nickname: "12345",
-          location: ", , ,  ",
-          uid: "js123"
-        }
-      }
-    end
 
     def nyu_shibboleth_username_for_institute(institute)
       case institute

@@ -107,6 +107,8 @@ group :development, :test, :cucumber do
   # Use pry-debugger as the REPL and for debugging
   gem 'pry-debugger', '~> 0.2.2'
   gem 'pry-remote', '~> 0.1.8'
+  # Use json_spec to do rspec tests with JSON
+  gem 'json_spec', '~> 1.1.2'
 end
 
 # Development gems

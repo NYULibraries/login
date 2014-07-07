@@ -27,17 +27,23 @@ describe User do
 
   context "when provider is nil" do
     subject { build(:user, provider: nil) }
-    it { should_not be_valid }
+    it "should raise an error" do
+      expect { subject }.to raise_error
+    end
   end
 
   context "when provider is not valid" do
     subject { build(:user, provider: "invalid") }
-    it { should_not be_valid }
+    it "should raise an error" do
+      expect { subject }.to raise_error
+    end
   end
 
   context "when provider is shibboleth" do
     subject { build(:user, provider: "shibboleth") }
-    it { should_not be_valid }
+    it "should raise an error" do
+      expect { subject }.to raise_error
+    end
   end
 
   context "when valid" do
@@ -62,21 +68,6 @@ describe User do
       subject { user.email }
       it { should_not be_nil }
       it { should eql("dev123@example.com") }
-    end
-
-    describe '#password' do
-      subject { user.password }
-      it { should be_nil }
-    end
-
-    describe '#password_required?' do
-      subject { user.send :password_required? }
-      it { should be_false }
-    end
-
-    describe '#email_required?' do
-      subject { user.send :email_required? }
-      it { should be_false }
     end
 
     describe '#institution_code' do
@@ -136,7 +127,7 @@ describe User do
     subject { build(:user, username: "dupemailuser2", email: email) }
     it { should be_a(User) }
     it { should be_a_new(User) }
-    it { should_not be_valid }
+    it { should be_valid }
   end
 
   context "when institution code is invalid" do

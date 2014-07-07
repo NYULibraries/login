@@ -1,8 +1,8 @@
 module LoginFeatures
   module Doorkeeper
 
-    def current_resource_owner
-      @current_resource_owner ||= User.where(username: nyu_shibboleth_hash[:uid], provider: nyu_shibboleth_hash[:provider]).first
+    def current_resource_owner(provider = "nyu_shibboleth")
+      @current_resource_owner ||= User.where(username: Login::OmniAuthHash::Mapper.new(eval("#{provider}_omniauth_hash")).username, provider: provider).first
     end
 
     def authorization_code
@@ -30,9 +30,7 @@ module LoginFeatures
     end
 
     def provider_url
-      visit login_path
-      racktest_url = URI.parse(current_url)
-      return @provider_url ||= "#{racktest_url.scheme}://#{racktest_url.host}:#{racktest_url.port}"
+      @provider ||= Capybara.app_host
     end
 
   end

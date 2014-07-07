@@ -42,13 +42,12 @@ Then(/^I should be automatically authorized to use Login as my provider$/) do
 end
 
 Then(/^the OAuth2 client should (not )?have access to exposed attributes$/) do |negator|
-  VCR.use_cassette("get access token", match_requests_on: [:path], record: :all) do
-    begin
-      get api_v1_user_path(:access_token => access_token)
-      expect(last_response.body).to include current_resource_owner.to_json(include: :identities)
-    rescue Exception => e
-      expect(e).to be_instance_of(OAuth2::Error)
-      expect(e.message).to include "invalid_grant"
-    end
+  begin
+    get api_v1_user_path(:access_token => access_token)
+    expect(last_response.body).to include current_resource_owner.to_json(include: :identities)
+  rescue Exception => e
+    expect(negator).to include "not"
+    expect(e).to be_instance_of(OAuth2::Error)
+    expect(e.message).to include "invalid_grant"
   end
 end

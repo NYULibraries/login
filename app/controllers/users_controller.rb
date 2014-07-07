@@ -44,7 +44,7 @@ class UsersController < Devise::OmniauthCallbacksController
   private :require_login
 
   def require_valid_omniauth_hash
-    require_login unless omniauth_hash?
+    redirect_to after_omniauth_failure_path_for(resource_name) unless omniauth_hash_validator.valid?
   end
   private :require_valid_omniauth_hash
 
@@ -53,8 +53,8 @@ class UsersController < Devise::OmniauthCallbacksController
   end
   private :omniauth_hash_map
 
-  def omniauth_hash?
-    Login::OmniAuthHash::Validator.new(request.env["omniauth.auth"], params[:action])
+  def omniauth_hash_validator
+    @omniauth_hash_validator ||= Login::OmniAuthHash::Validator.new(request.env["omniauth.auth"], params[:action])
   end
-  private :omniauth_hash?
+  private :omniauth_hash_validator
 end

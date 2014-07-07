@@ -27,7 +27,8 @@ else
     Capybara::Poltergeist::Driver.new(
       app,
       phantomjs_options: ['--load-images=no', '--ignore-ssl-errors=yes'],
-      window_size: [1280, 1024]#,
+      window_size: [1280, 1024],
+      timeout: 120#,
       # debug:       true
     )
   end
@@ -35,7 +36,6 @@ else
   Capybara.javascript_driver = :poltergeist
   # Capybara.default_wait_time = 8
 end
-
 
 Capybara.app_host = 'http://localhost:3000'
 Capybara.server_port = 3000

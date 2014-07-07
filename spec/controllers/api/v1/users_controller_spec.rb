@@ -56,6 +56,7 @@ describe Api::V1::UsersController do
           subject { response.body }
 
           context "and the user's identity provider is Aleph" do
+            let(:provider) { "aleph" }
             it "should be the resource owner in json" do
               expect(subject).to eq(resource_owner.to_json(include: :identities))
             end
@@ -74,7 +75,15 @@ describe Api::V1::UsersController do
           end
 
           context "and the user's identity provider is New School LDAP" do
+            let(:provider) { "new_school_ldap" }
 
+            context "when querying raw JSON" do
+              subject{ response.body }
+              it { should have_json_path("identities/0/properties/uid") }
+              it { should have_json_path("identities/0/properties/nyuidn") }
+              it { should have_json_path("identities/0/properties/first_name") }
+              it { should have_json_path("identities/0/properties/last_name") }
+            end
           end
 
         end
