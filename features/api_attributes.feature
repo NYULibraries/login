@@ -22,3 +22,13 @@ Feature: Get attributes from protected API when user is authenticated
       | Surname     | Snow      |
       | N Number    | js123     |
       | Entitlement | nothing   |
+
+  Scenario: Logging in with Aleph
+    Given I am logged in as an "Aleph" user
+    When I request my attributes from the protected API
+    Then I retrieve the attributes as JSON:
+      | Aleph ID       | N00000000      |
+      | Patron Status  | Night's Watch  |
+      | Patron Type    | Bastard        |
+      | ILL Permission | Y              |
+      | PLIF Status    | Kings Landing  |
