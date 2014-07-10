@@ -80,6 +80,8 @@ module LoginFeatures
         set_new_school_ldap_login_env
       when /NYU Shibboleth$/
         set_nyu_shibboleth_login_env
+      when /Aleph$/
+        set_aleph_login_env
       else
         raise "Unknown location!"
       end
@@ -92,6 +94,9 @@ module LoginFeatures
         click_on "Login"
       when /NYU Shibboleth$/
         click_on "Click to Login"
+      when /Aleph$/
+        click_on "NYU Libraries' Affiliates"
+        click_button 'Login'
       else
         raise "Unknown location!"
       end
