@@ -66,33 +66,21 @@ describe Api::V1::UsersController do
             it { should have_json_path("identities/#{index}/properties/extra/raw_info/bor_auth/z305/z305_photo_permission") }
 
             describe "identity properties" do
-              let(:index)    { parse_json(response.body)["identities"].find_index {|x| x["provider"].eql? provider} }
-              let(:response_properties) { parse_json(response.body)["identities"][index]["properties"]  }
+              let(:response_properties) { parse_json(body)["identities"][index]["properties"]  }
+              subject { response_properties[property] }
 
 
               context "when property is the Aleph ID" do
-                subject { response_properties["uid"] }
+                let(:property) { "uid" }
                 it { should eql "N00000000" }
               end
 
-              context "when the property is the PLIF Status" do
-                subject { response_properties["extra"]["raw_info"]["bor_auth"]["z303"]["z303_birthplace"] }
-                it { should eql "Kings Landing" }
-              end
-
-              context "when the property is the Patron Type" do
-                subject { response_properties["extra"]["raw_info"]["bor_auth"]["z305"]["z305_bor_type"] }
-                it { should eql "Bastard" }
-              end
-
-              context "when the property is the Patron Status" do
-                subject { response_properties["extra"]["raw_info"]["bor_auth"]["z305"]["z305_bor_status"] }
-                it { should eql "Night's Watch" }
-              end
-
-              context "when the property is the ILL Permission" do
-                subject { response_properties["extra"]["raw_info"]["bor_auth"]["z305"]["z305_photo_permission"] }
-                it { should eql "Y" }
+              context "when the property is the extra attributes" do
+                let(:property) { "extra" }
+                its(["plif_status"])     { should eql "Kings Landing" }
+                its(["patron_type"])     { should eql "Bastard" }
+                its(["patron_status"])   { should eql "Night's Watch" }
+                its(["ill_permission"])  { should eql "Y" }
               end
 
             end
