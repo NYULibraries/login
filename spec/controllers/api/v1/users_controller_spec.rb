@@ -60,10 +60,10 @@ describe Api::V1::UsersController do
             let(:index)    { parse_json(body)["identities"].find_index {|x| x["provider"].eql? provider} }
 
             it { should have_json_path("identities/#{index}/properties/uid") }
-            it { should have_json_path("identities/#{index}/properties/extra/raw_info/bor_auth/z303/z303_birthplace") }
-            it { should have_json_path("identities/#{index}/properties/extra/raw_info/bor_auth/z305/z305_bor_type") }
-            it { should have_json_path("identities/#{index}/properties/extra/raw_info/bor_auth/z305/z305_bor_status") }
-            it { should have_json_path("identities/#{index}/properties/extra/raw_info/bor_auth/z305/z305_photo_permission") }
+            it { should have_json_path("identities/#{index}/properties/extra/plif_status") }
+            it { should have_json_path("identities/#{index}/properties/extra/patron_type") }
+            it { should have_json_path("identities/#{index}/properties/extra/patron_status") }
+            it { should have_json_path("identities/#{index}/properties/extra/ill_permission") }
 
             describe "identity properties" do
               let(:response_properties) { parse_json(body)["identities"][index]["properties"]  }
