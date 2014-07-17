@@ -8,6 +8,7 @@ gem 'pg', '~> 0.17.1'
 
 # Use nested hstore to store serialized objects in Active Record hstore
 gem 'nested-hstore'
+gem 'activerecord-postgres-hstore', "0.7.6"
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
