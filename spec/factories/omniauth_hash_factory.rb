@@ -121,12 +121,26 @@ FactoryGirl.define do
         }
       end
     end
+    trait :admin do
+      provider "facebook"
+      info do
+        {
+          name: "Jon Snow",
+          first_name: "Jon",
+          last_name: "Snow",
+          email: "admin@example.com",
+          nickname: "jonsnow",
+          location: "The Wall"
+        }
+      end
+    end
 
     factory :new_school_ldap_authhash, traits: [:new_school_ldap]
     factory :nyu_shibboleth_authhash, traits: [:nyu_shibboleth]
     factory :twitter_authhash, traits: [:twitter]
     factory :facebook_authhash, traits: [:facebook]
     factory :aleph_authhash, traits: [:aleph]
+    factory :admin_authhash, traits: [:admin]
 
     factory :invalid_provider_authhash do
       uid "invalid"
