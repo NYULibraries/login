@@ -170,5 +170,15 @@ module LoginFeatures
         -> { have_content " you've logged in to the NYU Libraries' services." }
       ]
     end
+
+    def authorize_applications_matchers
+      @authorize_applications_matchers ||= [
+        -> { have_css(".brand") },
+        -> { have_text("OAuth2 Provider") },
+        -> { have_text("Your applications") },
+        -> { have_text("New Application") },
+        -> { have_css(".zebra-striped") }
+      ]
+    end
   end
 end
