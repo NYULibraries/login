@@ -57,7 +57,11 @@ describe Api::V1::UsersController do
 
           context "and the user's identity provider is Aleph" do
             let(:provider) { "aleph" }
-            let(:index)    { parse_json(body)["identities"].find_index {|x| x["provider"].eql? provider} }
+            let(:index) do
+              parse_json(body)["identities"].find_index do |identity|
+                identity["provider"].eql?(provider)
+              end
+            end
 
             it { should have_json_path("identities/#{index}/properties/uid") }
             it { should have_json_path("identities/#{index}/properties/extra/plif_status") }
