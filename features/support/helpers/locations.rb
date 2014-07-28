@@ -97,8 +97,17 @@ module LoginFeatures
       when /Aleph$/
         click_on "NYU Libraries' Affiliates"
         click_button 'Login'
+      when /Facebook$/
+        click_on "Facebook"
       else
         raise "Unknown location!"
+      end
+
+      def provider_to_location
+        {
+          "facebook" => "Facebook",
+          "nyu_shibboleth" => "NYU Shibboleth"
+        }
       end
     end
   end

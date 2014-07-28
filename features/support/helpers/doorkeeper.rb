@@ -33,5 +33,8 @@ module LoginFeatures
       @provider ||= Capybara.app_host
     end
 
+    def ensure_logout
+      OmniAuth.config.mock_auth.clear
+    end
   end
 end
