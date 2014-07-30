@@ -117,5 +117,21 @@ Available to you are now fancy view helpers
 ```ruby
 <%= link_to "Sign in with NYU Login", user_omniauth_authorize_path(:nyulibraries) %>
 ```
+### How to sign out
+
+If you want to add links to signing out, simply add this to your Routes:
+
+```ruby
+devise_scope :user do
+  get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
+end
+```
+You'll have to make sure you're `User` model does not have the `devise :database_authenticatable` module loaded or else there will be a clash.
+
+Then add the sign out link by using:
+
+```ruby
+<%= link_to "Sign out", destroy_user_session_path %>
+```
 
 And that's it! You can now login with __NYU Libraries central login system__ in the simplest way possible.
