@@ -52,6 +52,9 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
+  # Add an exclusion filter
+  config.filter_run_excluding pending_implementation: true
+
   # Include Factory Girl convenience methods
   config.include FactoryGirl::Syntax::Methods
 
