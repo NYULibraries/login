@@ -1,7 +1,8 @@
 @omniauth_test
-Feature: Adding client applications
-  As an admin of the Login application
-  I want to be able to add client applications.
+Feature: Authorizing (OAuth2) client applications
+  In order to use Login as an OAuth2 provider for NYU Libraries service applications
+  As an admin
+  I want to be able to add authorized client applications through a web interface in Login.
 
   Scenario: Viewing the list of client applications as an admin
     Given I am logged in as an admin
