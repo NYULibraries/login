@@ -102,13 +102,13 @@ module LoginFeatures
       else
         raise "Unknown location!"
       end
+    end
 
-      def provider_to_location
-        {
-          "facebook" => "Facebook",
-          "nyu_shibboleth" => "NYU Shibboleth"
-        }
-      end
+    def provider_to_location
+      {
+        "facebook" => "Facebook",
+        "nyu_shibboleth" => "NYU Shibboleth"
+      }
     end
   end
 end
