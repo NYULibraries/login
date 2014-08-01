@@ -27,7 +27,7 @@ Feature: Authorizing (OAuth2) client applications
     Given I am logged in as a non-admin user
     When I go to the new client applications page
     Then I should not see the form to add a new application
-    
+  
   Scenario: Trying to add a client application without logging in.
     Given I am a logged out user
     When I go to the client applications page
