@@ -53,13 +53,42 @@ describe Api::V1::UsersController do
 
         describe 'body' do
 
-          subject { response.body }
+          subject(:body) { response.body }
 
           context "and the user's identity provider is Aleph" do
             let(:provider) { "aleph" }
-            it "should be the resource owner in json" do
-              expect(subject).to eq(resource_owner.to_json(include: :identities))
+            let(:index) do
+              parse_json(body)["identities"].find_index do |identity|
+                identity["provider"].eql?(provider)
+              end
             end
+
+            it { should have_json_path("identities/#{index}/properties/uid") }
+            it { should have_json_path("identities/#{index}/properties/extra/plif_status") }
+            it { should have_json_path("identities/#{index}/properties/extra/patron_type") }
+            it { should have_json_path("identities/#{index}/properties/extra/patron_status") }
+            it { should have_json_path("identities/#{index}/properties/extra/ill_permission") }
+
+            describe "identity properties" do
+              let(:response_properties) { parse_json(body)["identities"][index]["properties"]  }
+              subject { response_properties[property] }
+
+
+              context "when property is the Aleph ID" do
+                let(:property) { "uid" }
+                it { should eql "N00000000" }
+              end
+
+              context "when the property is the extra attributes" do
+                let(:property) { "extra" }
+                its(["plif_status"])     { should eql "Kings Landing" }
+                its(["patron_type"])     { should eql "Bastard" }
+                its(["patron_status"])   { should eql "Night's Watch" }
+                its(["ill_permission"])  { should eql "Y" }
+              end
+
+            end
+
           end
 
           context "and the user's identity provider is Twitter" do

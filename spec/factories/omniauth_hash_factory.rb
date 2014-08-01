@@ -76,6 +76,22 @@ FactoryGirl.define do
           phone: "123-456-7890"
         }
       end
+      extra do
+        {
+          raw_info: {
+            bor_auth: {
+              z303: {
+                z303_birthplace: "Kings Landing"
+              },
+              z305: {
+                z305_bor_type: "Bastard",
+                z305_bor_status: "Night's Watch",
+                z305_photo_permission: "Y"
+              }
+            }
+          }
+        }
+      end
     end
     trait :twitter do
       provider "twitter"

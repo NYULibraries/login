@@ -1,4 +1,4 @@
-Given(/^I am logged in as a "(.*?)" user$/) do |location|
+Given(/^I am logged in as (?:an|a) "(.*?)" user$/) do |location|
   set_login_env_for_location location
   visit client_authorize_url
   # We follow login steps so we can explicitly login to the client app (AKA Login).

@@ -32,6 +32,5 @@ module LoginFeatures
     def provider_url
       @provider ||= Capybara.app_host
     end
-
   end
 end
