@@ -22,6 +22,7 @@ Coveralls.wear_merged!('rails')
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
+require 'vcr'
 require 'database_cleaner'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
@@ -96,4 +97,13 @@ RSpec.configure do |config|
     example.run
     DatabaseCleaner.clean
   end
+end
+
+VCR.configure do |c|
+  # c.filter_sensitive_data('BOR_ID') { "" }
+
+  c.default_cassette_options = { :record => :new_episodes }
+  c.cassette_library_dir = 'spec/vcr_cassettes'
+  c.configure_rspec_metadata!
+  c.hook_into :webmock
 end
