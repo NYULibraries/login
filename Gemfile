@@ -82,6 +82,9 @@ gem "doorkeeper", "~> 1.0.0"
 # Figs for configuration
 gem "figs", "~> 2.0.0"
 
+gem "faraday"
+gem "faraday_middleware"
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

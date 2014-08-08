@@ -155,6 +155,8 @@ GEM
       railties (>= 3.0.0)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
+    faraday_middleware (0.9.1)
+      faraday (>= 0.7.4, < 0.10)
     ffi (1.9.3)
     figs (2.0.1)
       git (~> 1.2.6)
@@ -394,6 +396,8 @@ DEPENDENCIES
   devise (~> 3.2.0)
   doorkeeper (~> 1.0.0)
   factory_girl_rails (~> 4.4.0)
+  faraday
+  faraday_middleware
   figs (~> 2.0.0)
   institutions (~> 0.1.3)
   jbuilder (~> 2.0)
