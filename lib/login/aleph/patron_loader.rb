@@ -8,7 +8,7 @@ module Login
       end
 
       def patron
-        bor_info_strategy.patron || flat_file_strategy.patron
+        flat_file_strategy.patron || bor_info_strategy.patron
       end
 
     private
