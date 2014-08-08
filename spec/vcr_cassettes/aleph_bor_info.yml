@@ -43,4 +43,42 @@ http_interactions:
         Administrator</z305-bor-status>\n<z305-registration-date>00000000</z305-registration-date>\n<z305-expiry-date>10/31/2014</z305-expiry-date>\n<z305-note></z305-note>\n<z305-loan-permission>N</z305-loan-permission>\n<z305-photo-permission>Y</z305-photo-permission>\n<z305-over-permission>Y</z305-over-permission>\n<z305-multi-hold>N</z305-multi-hold>\n<z305-loan-check>N</z305-loan-check>\n<z305-hold-permission>N</z305-hold-permission>\n<z305-renew-permission>N</z305-renew-permission>\n<z305-rr-permission>N</z305-rr-permission>\n<z305-ignore-late-return>N</z305-ignore-late-return>\n<z305-last-activity-date></z305-last-activity-date>\n<z305-photo-charge>C</z305-photo-charge>\n<z305-no-loan>0000</z305-no-loan>\n<z305-no-hold>0000</z305-no-hold>\n<z305-no-photo>0000</z305-no-photo>\n<z305-no-cash>0000</z305-no-cash>\n<z305-cash-limit>0.00</z305-cash-limit>\n<z305-credit-debit></z305-credit-debit>\n<z305-sum>0.00</z305-sum>\n<z305-delinq-1>00</z305-delinq-1>\n<z305-delinq-n-1></z305-delinq-n-1>\n<z305-delinq-1-update-date>00000000</z305-delinq-1-update-date>\n<z305-delinq-1-cat-name></z305-delinq-1-cat-name>\n<z305-delinq-2>00</z305-delinq-2>\n<z305-delinq-n-2></z305-delinq-n-2>\n<z305-delinq-2-update-date>00000000</z305-delinq-2-update-date>\n<z305-delinq-2-cat-name></z305-delinq-2-cat-name>\n<z305-delinq-3>00</z305-delinq-3>\n<z305-delinq-n-3></z305-delinq-n-3>\n<z305-delinq-3-update-date>00000000</z305-delinq-3-update-date>\n<z305-delinq-3-cat-name></z305-delinq-3-cat-name>\n<z305-field-1></z305-field-1>\n<z305-field-2></z305-field-2>\n<z305-field-3></z305-field-3>\n<z305-hold-on-shelf>N</z305-hold-on-shelf>\n<z305-end-block-date></z305-end-block-date>\n<z305-booking-permission>N</z305-booking-permission>\n<z305-booking-ignore-hours>N</z305-booking-ignore-hours>\n<z305-rush-cat-request>N</z305-rush-cat-request>\n<z305-upd-time-stamp>200001011200000</z305-upd-time-stamp>\n</z305>\n<session-id>XVVI1HMRV9CACY7H4J6K476LTNKG6BDGJAFY3AR3AEQ282PCJ2</session-id>\n</bor-info>\n "
     http_version:
   recorded_at: Fri, 08 Aug 2014 21:56:51 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=INVALID_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 08 Aug 2014 22:16:04 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>4FBQC6LRKFFV1311674G3FIVMDLMK65AVYAXGCPX4YVVAAJD5A</session-id>\n</bor-info>\n "
+    http_version:
+  recorded_at: Fri, 08 Aug 2014 22:16:04 GMT
 recorded_with: VCR 2.8.0
