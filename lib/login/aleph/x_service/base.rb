@@ -2,8 +2,6 @@ module Login
   module Aleph
     module XService
       class Base
-        DEFAULT_SHOW_LOANS_VALUE = "N"
-        DEFAULT_SHOW_CASH_VALUE = "N"
         attr_accessor :host, :port, :path
 
         def initialize(host = ENV["ALEPH_XSERVICE_HOST"], port = ENV["ALEPH_XSERVICE_PORT"], path = ENV["ALEPH_XSERVICE_PATH"])
@@ -18,14 +16,16 @@ module Login
 
       protected
 
-        def querystring
-          @querystring ||= {
+        def options
+          @options ||= {
             op: op,
             bor_id: identifier,
-            library: library,
-            loans: DEFAULT_SHOW_LOANS_VALUE,
-            cash: DEFAULT_SHOW_CASH_VALUE
-          }.to_query
+            library: library
+          }
+        end
+
+        def querystring
+          @querystring ||= options.to_query
         end
 
         def op
