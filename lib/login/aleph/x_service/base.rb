@@ -2,12 +2,13 @@ module Login
   module Aleph
     module XService
       class Base
-        attr_accessor :host, :port, :path
+        attr_accessor :host, :port, :path, :library
 
-        def initialize(host = ENV["ALEPH_XSERVICE_HOST"], port = ENV["ALEPH_XSERVICE_PORT"], path = ENV["ALEPH_XSERVICE_PATH"])
+        def initialize(host = ENV["ALEPH_XSERVICE_HOST"], port = ENV["ALEPH_XSERVICE_PORT"], path = ENV["ALEPH_XSERVICE_PATH"], library = ENV["ALEPH_XSERVICE_LIBRARY"])
           @host = host
           @port = port
           @path = path
+          @library = library
         end
 
         def response
@@ -26,10 +27,6 @@ module Login
 
         def querystring
           @querystring ||= options.to_query
-        end
-
-        def op
-          raise ArgumentError.new "Expected child to implement this function!"
         end
 
       private
