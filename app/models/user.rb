@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
 
   # Create an identity from the OmniAuth::AuthHash after the user is created
   after_save :create_or_update_identity_from_omniauth_hash
+  # Create an identity from Aleph if the user is in Aleph
+  after_save :create_or_update_aleph_identity
 
   # Available devise modules are:
   # :database_authenticatable, :registerable,
@@ -59,6 +61,20 @@ class User < ActiveRecord::Base
       identity = identities.find_or_initialize_by(uid: omniauth_hash_map.uid, provider: omniauth_hash_map.provider)
       identity.properties = omniauth_hash_map.properties if identity.expired?
       identity.save
+    end
+  end
+
+  def create_or_update_aleph_identity
+    # binding.pry
+    if omniauth_hash_map.present?
+      identity = identities.find_or_initialize_by(uid: omniauth_hash_map.nyuidn, provider: "aleph")
+      if identity.expired?
+        aleph_patron = Login::Aleph::PatronLoader.new(omniauth_hash_map.nyuidn).patron
+        if aleph_patron.present?
+          identity.properties.merge!(aleph_patron.attributes)
+          identity.save
+        end
+      end
     end
   end
 end

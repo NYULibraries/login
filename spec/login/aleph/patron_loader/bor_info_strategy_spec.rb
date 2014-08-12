@@ -1,8 +1,8 @@
 require 'spec_helper'
 module Login
   module Aleph
-    describe PatronLoader::BorInfoStrategy, vcr: { cassette_name: "aleph bor info" } do
-      let(:identifier) { 'BOR_ID' }
+    describe PatronLoader::BorInfoStrategy do
+      let(:identifier) { 'N19064851' }
       subject(:bor_info_strategy) { PatronLoader::BorInfoStrategy.new(identifier) }
       it { should be_a PatronLoader::Strategy }
       it { should be_a PatronLoader::BorInfoStrategy }
@@ -13,10 +13,10 @@ module Login
       describe '#patron' do
         subject { bor_info_strategy.patron }
         context "when identifier is valid and returns a BorInfo object" do
-          its(:identifier) { should eql "BOR_ID" }
-          its(:plif_status) { should eql "PLIF LOADED" }
-          its(:status) { should eql "NYU Administrator" }
-          its(:type) { should eql "CB" }
+          its(:identifier) { should eql "N19064851" }
+          its(:plif_status) { should be_nil }
+          its(:status) { should eql "NYU Undergraduate Student" }
+          its(:type) { should be_nil }
           its(:ill_permission) { should eql "Y" }
         end
         context "when identifier is invalid" do

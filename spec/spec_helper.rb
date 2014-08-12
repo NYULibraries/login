@@ -94,15 +94,18 @@ RSpec.configure do |config|
 
   config.around(:each) do |example|
     DatabaseCleaner.start
-    example.run
+    VCR.use_cassette('aleph bor info') do
+      example.run
+    end
     DatabaseCleaner.clean
   end
 end
 
 VCR.configure do |c|
-  # c.filter_sensitive_data('BOR_ID') { "" }
+  c.filter_sensitive_data('DEFAULT_LIB') { ENV["ALEPH_XSERVICE_LIBRARY"] }
+  c.filter_sensitive_data('http://aleph.institution.edu') { ENV["ALEPH_XSERVICE_HOST"] }
 
-  c.default_cassette_options = { :record => :new_episodes }
+  c.default_cassette_options = { :record => :new_episodes, :allow_playback_repeats => true }
   c.cassette_library_dir = 'spec/vcr_cassettes'
   c.configure_rspec_metadata!
   c.hook_into :webmock

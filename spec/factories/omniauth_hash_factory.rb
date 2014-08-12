@@ -57,13 +57,14 @@ FactoryGirl.define do
       end
       extra do
         {
+          nyuidn: "N19064851",
           entitlement: "nothing"
         }
       end
     end
     trait :aleph do
       provider "aleph"
-      uid "N00000000"
+      uid "N19064851"
       info do
         {
           name: "SNOW, JON",
@@ -71,7 +72,7 @@ FactoryGirl.define do
           last_name: "Snow",
           email: "snowj@1nyu.edu",
           nickname: "SNOW",
-          uid: "N00000000",
+          uid: "N19064851",
           location: "The Wall",
           phone: "123-456-7890"
         }

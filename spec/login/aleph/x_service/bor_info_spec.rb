@@ -2,8 +2,8 @@ require 'spec_helper'
 module Login
   module Aleph
     module XService
-      describe BorInfo, vcr: { cassette_name: 'aleph bor info' } do
-        let(:identifier) { 'BOR_ID' }
+      describe BorInfo do
+        let(:identifier) { 'N19064851' }
         let(:bor_info) { Aleph::XService::BorInfo.new(identifier) }
         subject { bor_info }
         it { should be_a Aleph::XService::BorInfo }
