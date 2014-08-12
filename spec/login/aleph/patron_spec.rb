@@ -10,6 +10,18 @@ module Login
       let(:department) { 'Department' }
       let(:major) { 'Major' }
       let(:plif_status) { 'PLIF_LOADED' }
+      let(:patron_hash) {
+        {
+          identifier: identifier,
+          status: status,
+          type: type,
+          ill_permission: ill_permission,
+          college: college,
+          department: department,
+          major: major,
+          plif_status: plif_status
+        }
+      }
       subject (:patron) do
         Patron.new do |patron|
           patron.identifier = identifier
@@ -54,6 +66,10 @@ module Login
       describe '#plif_status' do
         subject { patron.plif_status }
         it { should eq plif_status }
+      end
+      describe '#to_hash' do
+        subject { patron.to_hash }
+        it { should include patron_hash }
       end
 
       context 'when initialized without a block' do

@@ -18,6 +18,7 @@ module Login
       end
 
       def flat_file_strategy
+        @flat_file_strategy ||= FlatFileStrategy.new(identifier)
       end
     end
   end

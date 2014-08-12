@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://aleph.institution.edu/X?bor_id=BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    uri: http://aleph.institution.edu/X?bor_id=snowj&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
     body:
       encoding: US-ASCII
       string: ''
@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 08 Aug 2014 21:56:51 GMT
+      - Tue, 12 Aug 2014 17:50:32 GMT
       Server:
       - ALEPH/5.20
       Content-Type:
@@ -31,18 +31,97 @@ http_interactions:
       Expires:
       - Sat, 01 Jan 2000 01:00:00 GMT
       Content-Length:
-      - '5083'
+      - '193'
     body:
       encoding: US-ASCII
-      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<z303>\n<z303-id>BOR_ID</z303-id>\n<z303-proxy-for-id></z303-proxy-for-id>\n<z303-primary-id></z303-primary-id>\n<z303-name-key>Ronage
-        Pat                         BOR_ID</z303-name-key>\n<z303-user-type></z303-user-type>\n<z303-user-library></z303-user-library>\n<z303-open-date>10/30/2008</z303-open-date>\n<z303-update-date>05/24/2014</z303-update-date>\n<z303-con-lng>ENG</z303-con-lng>\n<z303-alpha>L</z303-alpha>\n<z303-name>Ronage,
-        Pat</z303-name>\n<z303-title></z303-title>\n<z303-delinq-1>00</z303-delinq-1>\n<z303-delinq-n-1></z303-delinq-n-1>\n<z303-delinq-1-update-date>00000000</z303-delinq-1-update-date>\n<z303-delinq-1-cat-name></z303-delinq-1-cat-name>\n<z303-delinq-2>00</z303-delinq-2>\n<z303-delinq-n-2></z303-delinq-n-2>\n<z303-delinq-2-update-date>00000000</z303-delinq-2-update-date>\n<z303-delinq-2-cat-name></z303-delinq-2-cat-name>\n<z303-delinq-3>00</z303-delinq-3>\n<z303-delinq-n-3></z303-delinq-n-3>\n<z303-delinq-3-update-date>00000000</z303-delinq-3-update-date>\n<z303-delinq-3-cat-name></z303-delinq-3-cat-name>\n<z303-budget></z303-budget>\n<z303-profile-id></z303-profile-id>\n<z303-ill-library></z303-ill-library>\n<z303-home-library>NYU
-        Bobst</z303-home-library>\n<z303-field-1></z303-field-1>\n<z303-field-2></z303-field-2>\n<z303-field-3></z303-field-3>\n<z303-note-1></z303-note-1>\n<z303-note-2></z303-note-2>\n<z303-salutation></z303-salutation>\n<z303-ill-total-limit>0000</z303-ill-total-limit>\n<z303-ill-active-limit>0000</z303-ill-active-limit>\n<z303-dispatch-library></z303-dispatch-library>\n<z303-birth-date></z303-birth-date>\n<z303-export-consent>Y</z303-export-consent>\n<z303-proxy-id-type>00</z303-proxy-id-type>\n<z303-send-all-letters>Y</z303-send-all-letters>\n<z303-plain-html>P</z303-plain-html>\n<z303-want-sms></z303-want-sms>\n<z303-plif-modification></z303-plif-modification>\n<z303-title-req-limit>0000</z303-title-req-limit>\n<z303-gender></z303-gender>\n<z303-birthplace>PLIF
-        LOADED</z303-birthplace>\n<z303-upd-time-stamp>200001011200000</z303-upd-time-stamp>\n<z303-last-name></z303-last-name>\n<z303-first-name></z303-first-name>\n</z303>\n<z304>\n<z304-id>BOR_ID</z304-id>\n<z304-sequence>02</z304-sequence>\n<z304-address-0>Ronage,
-        Pat</z304-address-0>\n<z304-address-1>70 WASHINGTON SQUARE SOUTH</z304-address-1>\n<z304-address-2>SUNNYSIDE</z304-address-2>\n<z304-address-3>NY</z304-address-3>\n<z304-zip>11104</z304-zip>\n<z304-email-address></z304-email-address>\n<z304-telephone></z304-telephone>\n<z304-date-from>20140524</z304-date-from>\n<z304-date-to>20200101</z304-date-to>\n<z304-address-type>02</z304-address-type>\n<z304-telephone-2></z304-telephone-2>\n<z304-telephone-3></z304-telephone-3>\n<z304-telephone-4></z304-telephone-4>\n<z304-sms-number></z304-sms-number>\n<z304-update-date>20140524</z304-update-date>\n<z304-cat-name>BATCH</z304-cat-name>\n<z304-upd-time-stamp>200001011200000</z304-upd-time-stamp>\n</z304>\n<z305>\n<z305-id>BOR_ID</z305-id>\n<z305-sub-library>DEFAULT_LIB</z305-sub-library>\n<z305-open-date>10/30/2008</z305-open-date>\n<z305-update-date>05/24/2014</z305-update-date>\n<z305-bor-type>CB</z305-bor-type>\n<z305-bor-status>NYU
-        Administrator</z305-bor-status>\n<z305-registration-date>00000000</z305-registration-date>\n<z305-expiry-date>10/31/2014</z305-expiry-date>\n<z305-note></z305-note>\n<z305-loan-permission>N</z305-loan-permission>\n<z305-photo-permission>Y</z305-photo-permission>\n<z305-over-permission>Y</z305-over-permission>\n<z305-multi-hold>N</z305-multi-hold>\n<z305-loan-check>N</z305-loan-check>\n<z305-hold-permission>N</z305-hold-permission>\n<z305-renew-permission>N</z305-renew-permission>\n<z305-rr-permission>N</z305-rr-permission>\n<z305-ignore-late-return>N</z305-ignore-late-return>\n<z305-last-activity-date></z305-last-activity-date>\n<z305-photo-charge>C</z305-photo-charge>\n<z305-no-loan>0000</z305-no-loan>\n<z305-no-hold>0000</z305-no-hold>\n<z305-no-photo>0000</z305-no-photo>\n<z305-no-cash>0000</z305-no-cash>\n<z305-cash-limit>0.00</z305-cash-limit>\n<z305-credit-debit></z305-credit-debit>\n<z305-sum>0.00</z305-sum>\n<z305-delinq-1>00</z305-delinq-1>\n<z305-delinq-n-1></z305-delinq-n-1>\n<z305-delinq-1-update-date>00000000</z305-delinq-1-update-date>\n<z305-delinq-1-cat-name></z305-delinq-1-cat-name>\n<z305-delinq-2>00</z305-delinq-2>\n<z305-delinq-n-2></z305-delinq-n-2>\n<z305-delinq-2-update-date>00000000</z305-delinq-2-update-date>\n<z305-delinq-2-cat-name></z305-delinq-2-cat-name>\n<z305-delinq-3>00</z305-delinq-3>\n<z305-delinq-n-3></z305-delinq-n-3>\n<z305-delinq-3-update-date>00000000</z305-delinq-3-update-date>\n<z305-delinq-3-cat-name></z305-delinq-3-cat-name>\n<z305-field-1></z305-field-1>\n<z305-field-2></z305-field-2>\n<z305-field-3></z305-field-3>\n<z305-hold-on-shelf>N</z305-hold-on-shelf>\n<z305-end-block-date></z305-end-block-date>\n<z305-booking-permission>N</z305-booking-permission>\n<z305-booking-ignore-hours>N</z305-booking-ignore-hours>\n<z305-rush-cat-request>N</z305-rush-cat-request>\n<z305-upd-time-stamp>200001011200000</z305-upd-time-stamp>\n</z305>\n<session-id>XVVI1HMRV9CACY7H4J6K476LTNKG6BDGJAFY3AR3AEQ282PCJ2</session-id>\n</bor-info>\n "
-    http_version:
-  recorded_at: Fri, 08 Aug 2014 21:56:51 GMT
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>SJ7R5HQS11FT24BPCE9PABUBJF4TQX5DFMNH6H19DGR4GXQ32V</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Tue, 12 Aug 2014 17:50:33 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=N19064851&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 12 Aug 2014 17:51:01 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '4936'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<z303>\n<z303-id>N19064851</z303-id>\n<z303-proxy-for-id></z303-proxy-for-id>\n<z303-primary-id></z303-primary-id>\n<z303-name-key>test
+        nyustudent                       N19064851</z303-name-key>\n<z303-user-type></z303-user-type>\n<z303-user-library></z303-user-library>\n<z303-open-date>05/22/2014</z303-open-date>\n<z303-update-date>05/22/2014</z303-update-date>\n<z303-con-lng>ENG</z303-con-lng>\n<z303-alpha>L</z303-alpha>\n<z303-name>Test,
+        NYUStudent</z303-name>\n<z303-title></z303-title>\n<z303-delinq-1>00</z303-delinq-1>\n<z303-delinq-n-1></z303-delinq-n-1>\n<z303-delinq-1-update-date>00000000</z303-delinq-1-update-date>\n<z303-delinq-1-cat-name></z303-delinq-1-cat-name>\n<z303-delinq-2>00</z303-delinq-2>\n<z303-delinq-n-2></z303-delinq-n-2>\n<z303-delinq-2-update-date>00000000</z303-delinq-2-update-date>\n<z303-delinq-2-cat-name></z303-delinq-2-cat-name>\n<z303-delinq-3>00</z303-delinq-3>\n<z303-delinq-n-3></z303-delinq-n-3>\n<z303-delinq-3-update-date>00000000</z303-delinq-3-update-date>\n<z303-delinq-3-cat-name></z303-delinq-3-cat-name>\n<z303-budget></z303-budget>\n<z303-profile-id></z303-profile-id>\n<z303-ill-library></z303-ill-library>\n<z303-home-library></z303-home-library>\n<z303-field-1></z303-field-1>\n<z303-field-2></z303-field-2>\n<z303-field-3></z303-field-3>\n<z303-note-1></z303-note-1>\n<z303-note-2></z303-note-2>\n<z303-salutation></z303-salutation>\n<z303-ill-total-limit>9999</z303-ill-total-limit>\n<z303-ill-active-limit>9999</z303-ill-active-limit>\n<z303-dispatch-library></z303-dispatch-library>\n<z303-birth-date></z303-birth-date>\n<z303-export-consent>Y</z303-export-consent>\n<z303-proxy-id-type>00</z303-proxy-id-type>\n<z303-send-all-letters>Y</z303-send-all-letters>\n<z303-plain-html>P</z303-plain-html>\n<z303-want-sms>N</z303-want-sms>\n<z303-plif-modification></z303-plif-modification>\n<z303-title-req-limit>0000</z303-title-req-limit>\n<z303-gender></z303-gender>\n<z303-birthplace></z303-birthplace>\n<z303-upd-time-stamp>200001011200000</z303-upd-time-stamp>\n<z303-last-name></z303-last-name>\n<z303-first-name></z303-first-name>\n</z303>\n<z304>\n<z304-id>N19064851</z304-id>\n<z304-sequence>01</z304-sequence>\n<z304-address-0>NYUStudent
+        Test</z304-address-0>\n<z304-zip></z304-zip>\n<z304-email-address></z304-email-address>\n<z304-telephone></z304-telephone>\n<z304-date-from>20140522</z304-date-from>\n<z304-date-to>20990724</z304-date-to>\n<z304-address-type>01</z304-address-type>\n<z304-telephone-2></z304-telephone-2>\n<z304-telephone-3></z304-telephone-3>\n<z304-telephone-4></z304-telephone-4>\n<z304-sms-number></z304-sms-number>\n<z304-update-date>20140522</z304-update-date>\n<z304-cat-name>MONTELEONE</z304-cat-name>\n<z304-upd-time-stamp>200001011200000</z304-upd-time-stamp>\n</z304>\n<z305>\n<z305-id>N19064851</z305-id>\n<z305-sub-library>DEFAULT_LIB</z305-sub-library>\n<z305-open-date>05/22/2014</z305-open-date>\n<z305-update-date>05/22/2014</z305-update-date>\n<z305-bor-type></z305-bor-type>\n<z305-bor-status>NYU
+        Undergraduate Student</z305-bor-status>\n<z305-registration-date>00000000</z305-registration-date>\n<z305-expiry-date>05/22/2034</z305-expiry-date>\n<z305-note></z305-note>\n<z305-loan-permission>N</z305-loan-permission>\n<z305-photo-permission>Y</z305-photo-permission>\n<z305-over-permission>Y</z305-over-permission>\n<z305-multi-hold>N</z305-multi-hold>\n<z305-loan-check>N</z305-loan-check>\n<z305-hold-permission>N</z305-hold-permission>\n<z305-renew-permission>N</z305-renew-permission>\n<z305-rr-permission>N</z305-rr-permission>\n<z305-ignore-late-return>N</z305-ignore-late-return>\n<z305-last-activity-date></z305-last-activity-date>\n<z305-photo-charge>C</z305-photo-charge>\n<z305-no-loan>0000</z305-no-loan>\n<z305-no-hold>0000</z305-no-hold>\n<z305-no-photo>0000</z305-no-photo>\n<z305-no-cash>0000</z305-no-cash>\n<z305-cash-limit>0.00</z305-cash-limit>\n<z305-credit-debit></z305-credit-debit>\n<z305-sum>0.00</z305-sum>\n<z305-delinq-1>00</z305-delinq-1>\n<z305-delinq-n-1></z305-delinq-n-1>\n<z305-delinq-1-update-date>00000000</z305-delinq-1-update-date>\n<z305-delinq-1-cat-name></z305-delinq-1-cat-name>\n<z305-delinq-2>00</z305-delinq-2>\n<z305-delinq-n-2></z305-delinq-n-2>\n<z305-delinq-2-update-date>00000000</z305-delinq-2-update-date>\n<z305-delinq-2-cat-name></z305-delinq-2-cat-name>\n<z305-delinq-3>00</z305-delinq-3>\n<z305-delinq-n-3></z305-delinq-n-3>\n<z305-delinq-3-update-date>00000000</z305-delinq-3-update-date>\n<z305-delinq-3-cat-name></z305-delinq-3-cat-name>\n<z305-field-1></z305-field-1>\n<z305-field-2></z305-field-2>\n<z305-field-3></z305-field-3>\n<z305-hold-on-shelf>N</z305-hold-on-shelf>\n<z305-end-block-date></z305-end-block-date>\n<z305-booking-permission>N</z305-booking-permission>\n<z305-booking-ignore-hours>N</z305-booking-ignore-hours>\n<z305-rush-cat-request>N</z305-rush-cat-request>\n<z305-upd-time-stamp>200001011200000</z305-upd-time-stamp>\n</z305>\n<session-id>DVAU3P7GIDTEU2NL61TDYXTH86B9R6TI2KM53RE9AC62KI4IMI</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Tue, 12 Aug 2014 17:51:02 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=N00000000&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 12 Aug 2014 17:51:01 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '5166'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<z303>\n<z303-id>N00000000</z303-id>\n<z303-proxy-for-id>N00000001</z303-proxy-for-id>\n<z303-primary-id></z303-primary-id>\n<z303-name-key>tree
+        elm jr                           N00000000</z303-name-key>\n<z303-user-type></z303-user-type>\n<z303-user-library></z303-user-library>\n<z303-open-date>10/11/2007</z303-open-date>\n<z303-update-date>03/24/2010</z303-update-date>\n<z303-con-lng>ENG</z303-con-lng>\n<z303-alpha>L</z303-alpha>\n<z303-name>Tree,
+        Elm Jr.</z303-name>\n<z303-title></z303-title>\n<z303-delinq-1>00</z303-delinq-1>\n<z303-delinq-n-1></z303-delinq-n-1>\n<z303-delinq-1-update-date>20090406</z303-delinq-1-update-date>\n<z303-delinq-1-cat-name>MARTINA</z303-delinq-1-cat-name>\n<z303-delinq-2>00</z303-delinq-2>\n<z303-delinq-n-2></z303-delinq-n-2>\n<z303-delinq-2-update-date>00000000</z303-delinq-2-update-date>\n<z303-delinq-2-cat-name></z303-delinq-2-cat-name>\n<z303-delinq-3>00</z303-delinq-3>\n<z303-delinq-n-3></z303-delinq-n-3>\n<z303-delinq-3-update-date>00000000</z303-delinq-3-update-date>\n<z303-delinq-3-cat-name></z303-delinq-3-cat-name>\n<z303-budget></z303-budget>\n<z303-profile-id></z303-profile-id>\n<z303-ill-library></z303-ill-library>\n<z303-home-library></z303-home-library>\n<z303-field-1>banner
+        hold</z303-field-1>\n<z303-field-2></z303-field-2>\n<z303-field-3></z303-field-3>\n<z303-note-1></z303-note-1>\n<z303-note-2></z303-note-2>\n<z303-salutation></z303-salutation>\n<z303-ill-total-limit>9999</z303-ill-total-limit>\n<z303-ill-active-limit>9999</z303-ill-active-limit>\n<z303-dispatch-library></z303-dispatch-library>\n<z303-birth-date></z303-birth-date>\n<z303-export-consent>Y</z303-export-consent>\n<z303-proxy-id-type>00</z303-proxy-id-type>\n<z303-send-all-letters>Y</z303-send-all-letters>\n<z303-plain-html>P</z303-plain-html>\n<z303-want-sms>N</z303-want-sms>\n<z303-plif-modification></z303-plif-modification>\n<z303-title-req-limit>0000</z303-title-req-limit>\n<z303-gender></z303-gender>\n<z303-birthplace></z303-birthplace>\n<z303-upd-time-stamp>200001011200000</z303-upd-time-stamp>\n<z303-last-name></z303-last-name>\n<z303-first-name></z303-first-name>\n</z303>\n<z304>\n<z304-id>N00000000</z304-id>\n<z304-sequence>01</z304-sequence>\n<z304-address-0>Tree,
+        Elm Jr.</z304-address-0>\n<z304-address-1>1223 Lost Lane Apt 3</z304-address-1>\n<z304-address-2>NEW
+        YORK</z304-address-2>\n<z304-address-3>NY</z304-address-3>\n<z304-address-4>USA</z304-address-4>\n<z304-zip>10006</z304-zip>\n<z304-email-address></z304-email-address>\n<z304-telephone>212-333-3333</z304-telephone>\n<z304-date-from>20080711</z304-date-from>\n<z304-date-to>20990101</z304-date-to>\n<z304-address-type>02</z304-address-type>\n<z304-telephone-2>212-229-5307</z304-telephone-2>\n<z304-telephone-3></z304-telephone-3>\n<z304-telephone-4></z304-telephone-4>\n<z304-sms-number></z304-sms-number>\n<z304-update-date>20110120</z304-update-date>\n<z304-cat-name>JONESA</z304-cat-name>\n<z304-upd-time-stamp>200001011200000</z304-upd-time-stamp>\n</z304>\n<z305>\n<z305-id>N00000000</z305-id>\n<z305-sub-library>DEFAULT_LIB</z305-sub-library>\n<z305-open-date>03/19/2010</z305-open-date>\n<z305-update-date>03/19/2010</z305-update-date>\n<z305-bor-type></z305-bor-type>\n<z305-bor-status>New
+        School Faculty</z305-bor-status>\n<z305-registration-date>00000000</z305-registration-date>\n<z305-expiry-date>03/19/2030</z305-expiry-date>\n<z305-note></z305-note>\n<z305-loan-permission>N</z305-loan-permission>\n<z305-photo-permission>Y</z305-photo-permission>\n<z305-over-permission>Y</z305-over-permission>\n<z305-multi-hold>N</z305-multi-hold>\n<z305-loan-check>N</z305-loan-check>\n<z305-hold-permission>N</z305-hold-permission>\n<z305-renew-permission>N</z305-renew-permission>\n<z305-rr-permission>N</z305-rr-permission>\n<z305-ignore-late-return>N</z305-ignore-late-return>\n<z305-last-activity-date></z305-last-activity-date>\n<z305-photo-charge>C</z305-photo-charge>\n<z305-no-loan>0000</z305-no-loan>\n<z305-no-hold>0000</z305-no-hold>\n<z305-no-photo>0000</z305-no-photo>\n<z305-no-cash>0000</z305-no-cash>\n<z305-cash-limit>0.00</z305-cash-limit>\n<z305-credit-debit></z305-credit-debit>\n<z305-sum>0.00</z305-sum>\n<z305-delinq-1>00</z305-delinq-1>\n<z305-delinq-n-1></z305-delinq-n-1>\n<z305-delinq-1-update-date>20100319</z305-delinq-1-update-date>\n<z305-delinq-1-cat-name>CLAIRED</z305-delinq-1-cat-name>\n<z305-delinq-2>00</z305-delinq-2>\n<z305-delinq-n-2></z305-delinq-n-2>\n<z305-delinq-2-update-date>20100319</z305-delinq-2-update-date>\n<z305-delinq-2-cat-name>CLAIRED</z305-delinq-2-cat-name>\n<z305-delinq-3>00</z305-delinq-3>\n<z305-delinq-n-3></z305-delinq-n-3>\n<z305-delinq-3-update-date>20100319</z305-delinq-3-update-date>\n<z305-delinq-3-cat-name>CLAIRED</z305-delinq-3-cat-name>\n<z305-field-1></z305-field-1>\n<z305-field-2></z305-field-2>\n<z305-field-3></z305-field-3>\n<z305-hold-on-shelf>N</z305-hold-on-shelf>\n<z305-end-block-date></z305-end-block-date>\n<z305-booking-permission>N</z305-booking-permission>\n<z305-booking-ignore-hours>N</z305-booking-ignore-hours>\n<z305-rush-cat-request>N</z305-rush-cat-request>\n<z305-upd-time-stamp>200001011200000</z305-upd-time-stamp>\n</z305>\n<session-id>1IYKRQ5DMHCBS3INBHJ7YE31HTVCP2MEKYBDD8Q2C8FCFQB6E1</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Tue, 12 Aug 2014 17:51:03 GMT
 - request:
     method: get
     uri: http://aleph.institution.edu/X?bor_id=INVALID_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
@@ -62,7 +141,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 08 Aug 2014 22:16:04 GMT
+      - Tue, 12 Aug 2014 19:25:02 GMT
       Server:
       - ALEPH/5.20
       Content-Type:
@@ -78,7 +157,121 @@ http_interactions:
     body:
       encoding: US-ASCII
       string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
-        retrieving Patron System Key</error>\n<session-id>4FBQC6LRKFFV1311674G3FIVMDLMK65AVYAXGCPX4YVVAAJD5A</session-id>\n</bor-info>\n "
-    http_version:
-  recorded_at: Fri, 08 Aug 2014 22:16:04 GMT
+        retrieving Patron System Key</error>\n<session-id>USLDV5EBLK5M7456JCG5JIU4YR95AFSY8CJDDKDFPI36UPB1I3</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Tue, 12 Aug 2014 19:25:02 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=snowj@1nyu.edu&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 12 Aug 2014 19:28:36 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>GQV2SCUBT5VB6YS1HIVMB5E5IJE5GCM2AAUR11VNY2CFD6TPA8</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Tue, 12 Aug 2014 19:28:36 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 12 Aug 2014 19:43:49 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '182'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<session-id>YYUD4XRSGNKJ1LUAPIADHQ4YMXI42KFTEF26PG1YXCVV2NTA6C</session-id>\n<error>bor_id
+        must be provided</error>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Tue, 12 Aug 2014 19:43:49 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 12 Aug 2014 19:43:49 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '182'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<session-id>XJPAJH7G1QQIBVKYVQ5NL7FA5GP3XUL4TKIMSAVYG1HSAPHQHH</session-id>\n<error>bor_id
+        must be provided</error>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Tue, 12 Aug 2014 19:43:49 GMT
 recorded_with: VCR 2.8.0
