@@ -27,9 +27,13 @@ VCR.configure do |c|
     # Filter out aleph password for CU, this time the caps.
     c.filter_sensitive_data('auth_key') { ENV["TEST_#{institute}_PASSWORD"] }
   end
+  c.filter_sensitive_data('DEFAULT_LIB') { ENV["ALEPH_LIBRARY"] }
+  c.filter_sensitive_data('DEFAULT_LIB') { ENV["ALEPH_SUB_LIBRARY"] }
+  c.filter_sensitive_data('aleph.institution.edu') { ENV["ALEPH_HOST"] }
+  c.filter_sensitive_data('BOR_ID') { ENV["ALEPH_TEST_USER"] }
 end
 
 VCR.cucumber_tags do |t|
   t.tag '@vcr', use_scenario_name: true
-  t.tag '@ignore_user_keys', match_requests_on: [:method, VCR.request_matchers.uri_without_params(:verification, :bor_id)]
+  t.tag '@ignore_user_keys', match_requests_on: [:method, VCR.request_matchers.uri_without_params(:verification, :bor_id, :library, :sub_library)]
 end

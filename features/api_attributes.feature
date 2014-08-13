@@ -1,4 +1,4 @@
-@omniauth_test
+@omniauth_test @aleph_bor_info
 Feature: Get attributes from protected API when user is authenticated
   In order to have an identity in an NYU client applications
   As an authenticated user
@@ -11,7 +11,7 @@ Feature: Get attributes from protected API when user is authenticated
       | NetID       | snowj     |
       | Given Name  | Jon       |
       | Surname     | Snow      |
-      | N Number    | N00000000 |
+      | N Number    | BOR_ID    |
 
   Scenario: Logging in with NYU Shibboleth
     Given I am logged in as a "NYU Shibboleth" user
@@ -20,5 +20,5 @@ Feature: Get attributes from protected API when user is authenticated
       | NetID       | js123     |
       | Given Name  | Jon       |
       | Surname     | Snow      |
-      | N Number    | js123     |
+      | N Number    | BOR_ID    |
       | Entitlement | nothing   |

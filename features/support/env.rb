@@ -67,3 +67,9 @@ Around('@omniauth_test') do |scenario, block|
   block.call
   OmniAuth.config.test_mode = false
 end
+
+Around do |scenario, block|
+  VCR.use_cassette('aleph bor info') do
+    block.call
+  end
+end
