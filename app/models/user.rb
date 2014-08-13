@@ -65,7 +65,6 @@ class User < ActiveRecord::Base
   end
 
   def create_or_update_aleph_identity
-    # binding.pry
     if omniauth_hash_map.present?
       identity = identities.find_or_initialize_by(uid: omniauth_hash_map.nyuidn, provider: "aleph")
       if identity.expired?
@@ -73,6 +72,10 @@ class User < ActiveRecord::Base
         if aleph_patron.present?
           identity.properties.merge!(aleph_patron.attributes)
           identity.save
+        # If there is no previous aleph identity and there is
+        # not one to be created, destroy this identity as it is invalid
+        elsif identity.new_record?
+          identity.destroy
         end
       end
     end
