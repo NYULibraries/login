@@ -8,7 +8,7 @@ module Login
         def initialize(omniauth_hash)
           super(omniauth_hash)
           # Map to nickname if exists, or to email
-          @username = (@omniauth_hash.info.nickname || @omniauth_hash.info.email)
+          @username = (omniauth_hash.info.nickname || omniauth_hash.info.email)
         end
       end
     end
