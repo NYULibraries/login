@@ -23,7 +23,7 @@ user_omniauth_authorize GET|POST /users/auth/:provider(.:format)        users/om
 Look familiar? This is the callback URL you added to __NYU Libraries central login system__ as part of the [getting started](https://github.com/NYULibraries/login#adding-your-application-as-a-client)!
 
 
-Now that you have the proper route that __NYU Libraries central login system__ can send the `auth_hash` to, you must now create a controller for that route.
+Now that you have the proper route that NYU Libraries central login system can send the `auth_hash` to, you must now create a controller for that route.
 
 ### Controllers
 
@@ -117,7 +117,7 @@ Then add the sign out link by using:
 <%= link_to "Sign out", destroy_user_session_path %>
 ```
 
-And that's it! You can now login with __NYU Libraries central login system__ in the simplest way possible.
+And that's it! You can now login with NYU Libraries central login system in the simplest way possible.
 
 
 # NYULibraries Login API
@@ -128,7 +128,7 @@ The API is pretty straightforward. However you might have to make some changes t
 rails g migration AddLoginAccessTokenToUsers nyu_access_token:string
 ```
 
-This token allows you to interact with login's API. You will want to store this token when getting information from __NYU Libraries central login system__.
+This token allows you to interact with login's API. You will want to store this token when getting information from NYU Libraries central login system.
 
 
 Alter the `User` model to include a method like this:
@@ -161,7 +161,7 @@ Once you have your access token, you can use the following methods to interact w
   @json = @token.get("api/v1/#{params[:api]}").parsed
 ```
 
-The `@json` will give you a hash that contains all the information you need on the `User`. For example `@json['identities']` will give you any identities attached to that `User` from __NYU Libraries central login system__.
+The `@json` will give you a hash that contains all the information you need on the `User`. For example `@json['identities']` will give you any identities attached to that `User` from NYU Libraries central login system.
 
 ## Putting it in a helper
 
