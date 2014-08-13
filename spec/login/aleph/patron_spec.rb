@@ -2,7 +2,7 @@ require 'spec_helper'
 module Login
   module Aleph
     describe Patron do
-      let(:identifier) { 'BOR_ID' }
+      let(:identifier) { ENV["ALEPH_TEST_USER"] || 'BOR_ID' }
       let(:status) { '01' }
       let(:type) { 'TP' }
       let(:ill_permission) { 'Y' }
@@ -67,8 +67,8 @@ module Login
         subject { patron.plif_status }
         it { should eq plif_status }
       end
-      describe '#to_hash' do
-        subject { patron.to_hash }
+      describe '#to_h' do
+        subject { patron.to_h }
         it { should include patron_hash }
       end
 

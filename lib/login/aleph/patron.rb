@@ -11,10 +11,10 @@ module Login
         yield self
       end
 
-      def to_hash
-        @to_hash ||= HashWithIndifferentAccess[instance_variables.collect {|var| [var.to_s.delete("@").to_sym, instance_variable_get(var)] }]
+      def to_h
+        @to_h ||= HashWithIndifferentAccess[instance_variables.collect {|var| [var.to_s.delete("@").to_sym, instance_variable_get(var)] }]
       end
-      alias_method :attributes, :to_hash
+      alias_method :attributes, :to_h
     end
   end
 end
