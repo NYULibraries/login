@@ -4,9 +4,9 @@ module Login
       class Base
         attr_accessor :host, :port, :path, :library
 
-        def initialize(host = ENV["ALEPH_XSERVICE_HOST"], port = ENV["ALEPH_XSERVICE_PORT"], path = ENV["ALEPH_XSERVICE_PATH"], library = ENV["ALEPH_XSERVICE_LIBRARY"])
-          @host = host
+        def initialize(host = ENV["ALEPH_HOST"], port = ENV["ALEPH_X_PORT"], path = ENV["ALEPH_X_PATH"], library = ENV["ALEPH_LIBRARY"])
           @port = port
+          @host = (port == "443") ? "https://#{host}" : "http://#{host}"
           @path = path
           @library = library
         end
