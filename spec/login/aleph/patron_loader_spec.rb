@@ -2,7 +2,7 @@ require 'spec_helper'
 module Login
   module Aleph
     describe PatronLoader do
-      let(:identifier) { 'BOR_ID' }
+      let(:identifier) { ENV["ALEPH_XSERVICE_TEST_USER"] || 'BOR_ID' }
       subject(:patron_loader) { PatronLoader.new(identifier) }
       it { should be_a PatronLoader }
       describe '#identifier' do
