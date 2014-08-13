@@ -3,7 +3,7 @@ module Login
   module Aleph
     module XService
       describe BorInfo do
-        let(:identifier) { 'N19064851' }
+        let(:identifier) { ENV["ALEPH_TEST_USER"] || 'BOR_ID' }
         let(:bor_info) { Aleph::XService::BorInfo.new(identifier) }
         subject { bor_info }
         it { should be_a Aleph::XService::BorInfo }

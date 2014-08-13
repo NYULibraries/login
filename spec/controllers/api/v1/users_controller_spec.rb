@@ -81,6 +81,7 @@ describe Api::V1::UsersController do
             let(:response_properties) { JSON.parse(response.body)["identities"][identity_index]["properties"]  }
 
             describe "NYU Shibboleth identity properties" do
+              let(:bor_id) { attributes_for(:nyu_shibboleth_authhash)[:extra][:raw_info][:nyuidn]}
               subject { response_properties[property] }
 
               context "when property is the NetID" do
@@ -90,7 +91,7 @@ describe Api::V1::UsersController do
 
               context "when property is the N Number" do
                 let(:property) { "nyuidn" }
-                it { should eql "js123" }
+                it { should eql bor_id }
               end
 
               context "when property is the Given Name" do
@@ -105,19 +106,19 @@ describe Api::V1::UsersController do
 
               context "when the property is the extra attributes" do
                 let(:property) { "extra" }
-                its(["entitlement"])     { should eql "nothing" }
-                its(["nyuidn"])  { should eql "N19064851" }
+                its(["entitlement"]) { should eql "nothing" }
               end
 
             end
 
             describe "Aleph identity properties" do
+              let(:bor_id) { attributes_for(:aleph_authhash)[:uid]}
               let(:identity) { "aleph" }
               subject { response_properties[property] }
 
               context "when property is identifier" do
                 let(:property) { "identifier" }
-                it { should eql "N19064851" }
+                it { should eql bor_id }
               end
 
               context "when property is PLIF status" do
@@ -146,6 +147,7 @@ describe Api::V1::UsersController do
 
           context "and the user's identity provider is New School LDAP" do
             let(:provider) { "new_school_ldap" }
+            let(:bor_id) { ENV["ALEPH_TEST_USER"] || 'BOR_ID' }
             it { should have_json_path("identities/#{identity_index}/properties/uid") }
             it { should have_json_path("identities/#{identity_index}/properties/nyuidn") }
             it { should have_json_path("identities/#{identity_index}/properties/first_name") }
@@ -159,7 +161,7 @@ describe Api::V1::UsersController do
               end
               context "when property is the N Number" do
                 let(:property) { "nyuidn" }
-                it { should eql "N00000000" }
+                it { should eql bor_id }
               end
               context "when property is the Given Name" do
                 let(:property) { "first_name" }

@@ -2,6 +2,47 @@
 http_interactions:
 - request:
     method: get
+    uri: http://aleph.institution.edu/X?bor_id=BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:25:49 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '4936'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<z303>\n<z303-id>BOR_ID</z303-id>\n<z303-proxy-for-id></z303-proxy-for-id>\n<z303-primary-id></z303-primary-id>\n<z303-name-key>test
+        nyustudent                       BOR_ID</z303-name-key>\n<z303-user-type></z303-user-type>\n<z303-user-library></z303-user-library>\n<z303-open-date>05/22/2014</z303-open-date>\n<z303-update-date>05/22/2014</z303-update-date>\n<z303-con-lng>ENG</z303-con-lng>\n<z303-alpha>L</z303-alpha>\n<z303-name>Test,
+        NYUStudent</z303-name>\n<z303-title></z303-title>\n<z303-delinq-1>00</z303-delinq-1>\n<z303-delinq-n-1></z303-delinq-n-1>\n<z303-delinq-1-update-date>00000000</z303-delinq-1-update-date>\n<z303-delinq-1-cat-name></z303-delinq-1-cat-name>\n<z303-delinq-2>00</z303-delinq-2>\n<z303-delinq-n-2></z303-delinq-n-2>\n<z303-delinq-2-update-date>00000000</z303-delinq-2-update-date>\n<z303-delinq-2-cat-name></z303-delinq-2-cat-name>\n<z303-delinq-3>00</z303-delinq-3>\n<z303-delinq-n-3></z303-delinq-n-3>\n<z303-delinq-3-update-date>00000000</z303-delinq-3-update-date>\n<z303-delinq-3-cat-name></z303-delinq-3-cat-name>\n<z303-budget></z303-budget>\n<z303-profile-id></z303-profile-id>\n<z303-ill-library></z303-ill-library>\n<z303-home-library></z303-home-library>\n<z303-field-1></z303-field-1>\n<z303-field-2></z303-field-2>\n<z303-field-3></z303-field-3>\n<z303-note-1></z303-note-1>\n<z303-note-2></z303-note-2>\n<z303-salutation></z303-salutation>\n<z303-ill-total-limit>9999</z303-ill-total-limit>\n<z303-ill-active-limit>9999</z303-ill-active-limit>\n<z303-dispatch-library></z303-dispatch-library>\n<z303-birth-date></z303-birth-date>\n<z303-export-consent>Y</z303-export-consent>\n<z303-proxy-id-type>00</z303-proxy-id-type>\n<z303-send-all-letters>Y</z303-send-all-letters>\n<z303-plain-html>P</z303-plain-html>\n<z303-want-sms>N</z303-want-sms>\n<z303-plif-modification></z303-plif-modification>\n<z303-title-req-limit>0000</z303-title-req-limit>\n<z303-gender></z303-gender>\n<z303-birthplace></z303-birthplace>\n<z303-upd-time-stamp>200001011200000</z303-upd-time-stamp>\n<z303-last-name></z303-last-name>\n<z303-first-name></z303-first-name>\n</z303>\n<z304>\n<z304-id>BOR_ID</z304-id>\n<z304-sequence>01</z304-sequence>\n<z304-address-0>NYUStudent
+        Test</z304-address-0>\n<z304-zip></z304-zip>\n<z304-email-address></z304-email-address>\n<z304-telephone></z304-telephone>\n<z304-date-from>20140522</z304-date-from>\n<z304-date-to>20990724</z304-date-to>\n<z304-address-type>01</z304-address-type>\n<z304-telephone-2></z304-telephone-2>\n<z304-telephone-3></z304-telephone-3>\n<z304-telephone-4></z304-telephone-4>\n<z304-sms-number></z304-sms-number>\n<z304-update-date>20140522</z304-update-date>\n<z304-cat-name>MONTELEONE</z304-cat-name>\n<z304-upd-time-stamp>200001011200000</z304-upd-time-stamp>\n</z304>\n<z305>\n<z305-id>BOR_ID</z305-id>\n<z305-sub-library>DEFAULT_LIB</z305-sub-library>\n<z305-open-date>05/22/2014</z305-open-date>\n<z305-update-date>05/22/2014</z305-update-date>\n<z305-bor-type></z305-bor-type>\n<z305-bor-status>NYU
+        Undergraduate Student</z305-bor-status>\n<z305-registration-date>00000000</z305-registration-date>\n<z305-expiry-date>05/22/2034</z305-expiry-date>\n<z305-note></z305-note>\n<z305-loan-permission>N</z305-loan-permission>\n<z305-photo-permission>Y</z305-photo-permission>\n<z305-over-permission>Y</z305-over-permission>\n<z305-multi-hold>N</z305-multi-hold>\n<z305-loan-check>N</z305-loan-check>\n<z305-hold-permission>N</z305-hold-permission>\n<z305-renew-permission>N</z305-renew-permission>\n<z305-rr-permission>N</z305-rr-permission>\n<z305-ignore-late-return>N</z305-ignore-late-return>\n<z305-last-activity-date></z305-last-activity-date>\n<z305-photo-charge>C</z305-photo-charge>\n<z305-no-loan>0000</z305-no-loan>\n<z305-no-hold>0000</z305-no-hold>\n<z305-no-photo>0000</z305-no-photo>\n<z305-no-cash>0000</z305-no-cash>\n<z305-cash-limit>0.00</z305-cash-limit>\n<z305-credit-debit></z305-credit-debit>\n<z305-sum>0.00</z305-sum>\n<z305-delinq-1>00</z305-delinq-1>\n<z305-delinq-n-1></z305-delinq-n-1>\n<z305-delinq-1-update-date>00000000</z305-delinq-1-update-date>\n<z305-delinq-1-cat-name></z305-delinq-1-cat-name>\n<z305-delinq-2>00</z305-delinq-2>\n<z305-delinq-n-2></z305-delinq-n-2>\n<z305-delinq-2-update-date>00000000</z305-delinq-2-update-date>\n<z305-delinq-2-cat-name></z305-delinq-2-cat-name>\n<z305-delinq-3>00</z305-delinq-3>\n<z305-delinq-n-3></z305-delinq-n-3>\n<z305-delinq-3-update-date>00000000</z305-delinq-3-update-date>\n<z305-delinq-3-cat-name></z305-delinq-3-cat-name>\n<z305-field-1></z305-field-1>\n<z305-field-2></z305-field-2>\n<z305-field-3></z305-field-3>\n<z305-hold-on-shelf>N</z305-hold-on-shelf>\n<z305-end-block-date></z305-end-block-date>\n<z305-booking-permission>N</z305-booking-permission>\n<z305-booking-ignore-hours>N</z305-booking-ignore-hours>\n<z305-rush-cat-request>N</z305-rush-cat-request>\n<z305-upd-time-stamp>200001011200000</z305-upd-time-stamp>\n</z305>\n<session-id>EIM2K6H7KEUA2VUEUFH5YFXYVDSI7QMA97765C5PSPDQN7JG3J</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:25:49 GMT
+- request:
+    method: get
     uri: http://aleph.institution.edu/X?bor_id=snowj&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
     body:
       encoding: US-ASCII
@@ -19,7 +60,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 12 Aug 2014 17:50:32 GMT
+      - Wed, 13 Aug 2014 20:35:14 GMT
       Server:
       - ALEPH/5.20
       Content-Type:
@@ -35,12 +76,12 @@ http_interactions:
     body:
       encoding: US-ASCII
       string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
-        retrieving Patron System Key</error>\n<session-id>SJ7R5HQS11FT24BPCE9PABUBJF4TQX5DFMNH6H19DGR4GXQ32V</session-id>\n</bor-info>\n "
+        retrieving Patron System Key</error>\n<session-id>IUPTFH35A2YVEHTRPV72LJ15XICBVU98CBYEC3NDGIY4NP2RI1</session-id>\n</bor-info>\n "
     http_version: 
-  recorded_at: Tue, 12 Aug 2014 17:50:33 GMT
+  recorded_at: Wed, 13 Aug 2014 20:35:13 GMT
 - request:
     method: get
-    uri: http://aleph.institution.edu/X?bor_id=N19064851&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
     body:
       encoding: US-ASCII
       string: ''
@@ -57,91 +98,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 12 Aug 2014 17:51:01 GMT
-      Server:
-      - ALEPH/5.20
-      Content-Type:
-      - text/xml; charset=UTF-8
-      Pragma:
-      - no-cache
-      Cache-Control:
-      - no-cache, no-store, must-revalidate
-      Expires:
-      - Sat, 01 Jan 2000 01:00:00 GMT
-      Content-Length:
-      - '4936'
-    body:
-      encoding: US-ASCII
-      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<z303>\n<z303-id>N19064851</z303-id>\n<z303-proxy-for-id></z303-proxy-for-id>\n<z303-primary-id></z303-primary-id>\n<z303-name-key>test
-        nyustudent                       N19064851</z303-name-key>\n<z303-user-type></z303-user-type>\n<z303-user-library></z303-user-library>\n<z303-open-date>05/22/2014</z303-open-date>\n<z303-update-date>05/22/2014</z303-update-date>\n<z303-con-lng>ENG</z303-con-lng>\n<z303-alpha>L</z303-alpha>\n<z303-name>Test,
-        NYUStudent</z303-name>\n<z303-title></z303-title>\n<z303-delinq-1>00</z303-delinq-1>\n<z303-delinq-n-1></z303-delinq-n-1>\n<z303-delinq-1-update-date>00000000</z303-delinq-1-update-date>\n<z303-delinq-1-cat-name></z303-delinq-1-cat-name>\n<z303-delinq-2>00</z303-delinq-2>\n<z303-delinq-n-2></z303-delinq-n-2>\n<z303-delinq-2-update-date>00000000</z303-delinq-2-update-date>\n<z303-delinq-2-cat-name></z303-delinq-2-cat-name>\n<z303-delinq-3>00</z303-delinq-3>\n<z303-delinq-n-3></z303-delinq-n-3>\n<z303-delinq-3-update-date>00000000</z303-delinq-3-update-date>\n<z303-delinq-3-cat-name></z303-delinq-3-cat-name>\n<z303-budget></z303-budget>\n<z303-profile-id></z303-profile-id>\n<z303-ill-library></z303-ill-library>\n<z303-home-library></z303-home-library>\n<z303-field-1></z303-field-1>\n<z303-field-2></z303-field-2>\n<z303-field-3></z303-field-3>\n<z303-note-1></z303-note-1>\n<z303-note-2></z303-note-2>\n<z303-salutation></z303-salutation>\n<z303-ill-total-limit>9999</z303-ill-total-limit>\n<z303-ill-active-limit>9999</z303-ill-active-limit>\n<z303-dispatch-library></z303-dispatch-library>\n<z303-birth-date></z303-birth-date>\n<z303-export-consent>Y</z303-export-consent>\n<z303-proxy-id-type>00</z303-proxy-id-type>\n<z303-send-all-letters>Y</z303-send-all-letters>\n<z303-plain-html>P</z303-plain-html>\n<z303-want-sms>N</z303-want-sms>\n<z303-plif-modification></z303-plif-modification>\n<z303-title-req-limit>0000</z303-title-req-limit>\n<z303-gender></z303-gender>\n<z303-birthplace></z303-birthplace>\n<z303-upd-time-stamp>200001011200000</z303-upd-time-stamp>\n<z303-last-name></z303-last-name>\n<z303-first-name></z303-first-name>\n</z303>\n<z304>\n<z304-id>N19064851</z304-id>\n<z304-sequence>01</z304-sequence>\n<z304-address-0>NYUStudent
-        Test</z304-address-0>\n<z304-zip></z304-zip>\n<z304-email-address></z304-email-address>\n<z304-telephone></z304-telephone>\n<z304-date-from>20140522</z304-date-from>\n<z304-date-to>20990724</z304-date-to>\n<z304-address-type>01</z304-address-type>\n<z304-telephone-2></z304-telephone-2>\n<z304-telephone-3></z304-telephone-3>\n<z304-telephone-4></z304-telephone-4>\n<z304-sms-number></z304-sms-number>\n<z304-update-date>20140522</z304-update-date>\n<z304-cat-name>MONTELEONE</z304-cat-name>\n<z304-upd-time-stamp>200001011200000</z304-upd-time-stamp>\n</z304>\n<z305>\n<z305-id>N19064851</z305-id>\n<z305-sub-library>DEFAULT_LIB</z305-sub-library>\n<z305-open-date>05/22/2014</z305-open-date>\n<z305-update-date>05/22/2014</z305-update-date>\n<z305-bor-type></z305-bor-type>\n<z305-bor-status>NYU
-        Undergraduate Student</z305-bor-status>\n<z305-registration-date>00000000</z305-registration-date>\n<z305-expiry-date>05/22/2034</z305-expiry-date>\n<z305-note></z305-note>\n<z305-loan-permission>N</z305-loan-permission>\n<z305-photo-permission>Y</z305-photo-permission>\n<z305-over-permission>Y</z305-over-permission>\n<z305-multi-hold>N</z305-multi-hold>\n<z305-loan-check>N</z305-loan-check>\n<z305-hold-permission>N</z305-hold-permission>\n<z305-renew-permission>N</z305-renew-permission>\n<z305-rr-permission>N</z305-rr-permission>\n<z305-ignore-late-return>N</z305-ignore-late-return>\n<z305-last-activity-date></z305-last-activity-date>\n<z305-photo-charge>C</z305-photo-charge>\n<z305-no-loan>0000</z305-no-loan>\n<z305-no-hold>0000</z305-no-hold>\n<z305-no-photo>0000</z305-no-photo>\n<z305-no-cash>0000</z305-no-cash>\n<z305-cash-limit>0.00</z305-cash-limit>\n<z305-credit-debit></z305-credit-debit>\n<z305-sum>0.00</z305-sum>\n<z305-delinq-1>00</z305-delinq-1>\n<z305-delinq-n-1></z305-delinq-n-1>\n<z305-delinq-1-update-date>00000000</z305-delinq-1-update-date>\n<z305-delinq-1-cat-name></z305-delinq-1-cat-name>\n<z305-delinq-2>00</z305-delinq-2>\n<z305-delinq-n-2></z305-delinq-n-2>\n<z305-delinq-2-update-date>00000000</z305-delinq-2-update-date>\n<z305-delinq-2-cat-name></z305-delinq-2-cat-name>\n<z305-delinq-3>00</z305-delinq-3>\n<z305-delinq-n-3></z305-delinq-n-3>\n<z305-delinq-3-update-date>00000000</z305-delinq-3-update-date>\n<z305-delinq-3-cat-name></z305-delinq-3-cat-name>\n<z305-field-1></z305-field-1>\n<z305-field-2></z305-field-2>\n<z305-field-3></z305-field-3>\n<z305-hold-on-shelf>N</z305-hold-on-shelf>\n<z305-end-block-date></z305-end-block-date>\n<z305-booking-permission>N</z305-booking-permission>\n<z305-booking-ignore-hours>N</z305-booking-ignore-hours>\n<z305-rush-cat-request>N</z305-rush-cat-request>\n<z305-upd-time-stamp>200001011200000</z305-upd-time-stamp>\n</z305>\n<session-id>DVAU3P7GIDTEU2NL61TDYXTH86B9R6TI2KM53RE9AC62KI4IMI</session-id>\n</bor-info>\n "
-    http_version: 
-  recorded_at: Tue, 12 Aug 2014 17:51:02 GMT
-- request:
-    method: get
-    uri: http://aleph.institution.edu/X?bor_id=N00000000&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Faraday v0.9.0
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - ! '*/*'
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Tue, 12 Aug 2014 17:51:01 GMT
-      Server:
-      - ALEPH/5.20
-      Content-Type:
-      - text/xml; charset=UTF-8
-      Pragma:
-      - no-cache
-      Cache-Control:
-      - no-cache, no-store, must-revalidate
-      Expires:
-      - Sat, 01 Jan 2000 01:00:00 GMT
-      Content-Length:
-      - '5166'
-    body:
-      encoding: US-ASCII
-      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<z303>\n<z303-id>N00000000</z303-id>\n<z303-proxy-for-id>N00000001</z303-proxy-for-id>\n<z303-primary-id></z303-primary-id>\n<z303-name-key>tree
-        elm jr                           N00000000</z303-name-key>\n<z303-user-type></z303-user-type>\n<z303-user-library></z303-user-library>\n<z303-open-date>10/11/2007</z303-open-date>\n<z303-update-date>03/24/2010</z303-update-date>\n<z303-con-lng>ENG</z303-con-lng>\n<z303-alpha>L</z303-alpha>\n<z303-name>Tree,
-        Elm Jr.</z303-name>\n<z303-title></z303-title>\n<z303-delinq-1>00</z303-delinq-1>\n<z303-delinq-n-1></z303-delinq-n-1>\n<z303-delinq-1-update-date>20090406</z303-delinq-1-update-date>\n<z303-delinq-1-cat-name>MARTINA</z303-delinq-1-cat-name>\n<z303-delinq-2>00</z303-delinq-2>\n<z303-delinq-n-2></z303-delinq-n-2>\n<z303-delinq-2-update-date>00000000</z303-delinq-2-update-date>\n<z303-delinq-2-cat-name></z303-delinq-2-cat-name>\n<z303-delinq-3>00</z303-delinq-3>\n<z303-delinq-n-3></z303-delinq-n-3>\n<z303-delinq-3-update-date>00000000</z303-delinq-3-update-date>\n<z303-delinq-3-cat-name></z303-delinq-3-cat-name>\n<z303-budget></z303-budget>\n<z303-profile-id></z303-profile-id>\n<z303-ill-library></z303-ill-library>\n<z303-home-library></z303-home-library>\n<z303-field-1>banner
-        hold</z303-field-1>\n<z303-field-2></z303-field-2>\n<z303-field-3></z303-field-3>\n<z303-note-1></z303-note-1>\n<z303-note-2></z303-note-2>\n<z303-salutation></z303-salutation>\n<z303-ill-total-limit>9999</z303-ill-total-limit>\n<z303-ill-active-limit>9999</z303-ill-active-limit>\n<z303-dispatch-library></z303-dispatch-library>\n<z303-birth-date></z303-birth-date>\n<z303-export-consent>Y</z303-export-consent>\n<z303-proxy-id-type>00</z303-proxy-id-type>\n<z303-send-all-letters>Y</z303-send-all-letters>\n<z303-plain-html>P</z303-plain-html>\n<z303-want-sms>N</z303-want-sms>\n<z303-plif-modification></z303-plif-modification>\n<z303-title-req-limit>0000</z303-title-req-limit>\n<z303-gender></z303-gender>\n<z303-birthplace></z303-birthplace>\n<z303-upd-time-stamp>200001011200000</z303-upd-time-stamp>\n<z303-last-name></z303-last-name>\n<z303-first-name></z303-first-name>\n</z303>\n<z304>\n<z304-id>N00000000</z304-id>\n<z304-sequence>01</z304-sequence>\n<z304-address-0>Tree,
-        Elm Jr.</z304-address-0>\n<z304-address-1>1223 Lost Lane Apt 3</z304-address-1>\n<z304-address-2>NEW
-        YORK</z304-address-2>\n<z304-address-3>NY</z304-address-3>\n<z304-address-4>USA</z304-address-4>\n<z304-zip>10006</z304-zip>\n<z304-email-address></z304-email-address>\n<z304-telephone>212-333-3333</z304-telephone>\n<z304-date-from>20080711</z304-date-from>\n<z304-date-to>20990101</z304-date-to>\n<z304-address-type>02</z304-address-type>\n<z304-telephone-2>212-229-5307</z304-telephone-2>\n<z304-telephone-3></z304-telephone-3>\n<z304-telephone-4></z304-telephone-4>\n<z304-sms-number></z304-sms-number>\n<z304-update-date>20110120</z304-update-date>\n<z304-cat-name>JONESA</z304-cat-name>\n<z304-upd-time-stamp>200001011200000</z304-upd-time-stamp>\n</z304>\n<z305>\n<z305-id>N00000000</z305-id>\n<z305-sub-library>DEFAULT_LIB</z305-sub-library>\n<z305-open-date>03/19/2010</z305-open-date>\n<z305-update-date>03/19/2010</z305-update-date>\n<z305-bor-type></z305-bor-type>\n<z305-bor-status>New
-        School Faculty</z305-bor-status>\n<z305-registration-date>00000000</z305-registration-date>\n<z305-expiry-date>03/19/2030</z305-expiry-date>\n<z305-note></z305-note>\n<z305-loan-permission>N</z305-loan-permission>\n<z305-photo-permission>Y</z305-photo-permission>\n<z305-over-permission>Y</z305-over-permission>\n<z305-multi-hold>N</z305-multi-hold>\n<z305-loan-check>N</z305-loan-check>\n<z305-hold-permission>N</z305-hold-permission>\n<z305-renew-permission>N</z305-renew-permission>\n<z305-rr-permission>N</z305-rr-permission>\n<z305-ignore-late-return>N</z305-ignore-late-return>\n<z305-last-activity-date></z305-last-activity-date>\n<z305-photo-charge>C</z305-photo-charge>\n<z305-no-loan>0000</z305-no-loan>\n<z305-no-hold>0000</z305-no-hold>\n<z305-no-photo>0000</z305-no-photo>\n<z305-no-cash>0000</z305-no-cash>\n<z305-cash-limit>0.00</z305-cash-limit>\n<z305-credit-debit></z305-credit-debit>\n<z305-sum>0.00</z305-sum>\n<z305-delinq-1>00</z305-delinq-1>\n<z305-delinq-n-1></z305-delinq-n-1>\n<z305-delinq-1-update-date>20100319</z305-delinq-1-update-date>\n<z305-delinq-1-cat-name>CLAIRED</z305-delinq-1-cat-name>\n<z305-delinq-2>00</z305-delinq-2>\n<z305-delinq-n-2></z305-delinq-n-2>\n<z305-delinq-2-update-date>20100319</z305-delinq-2-update-date>\n<z305-delinq-2-cat-name>CLAIRED</z305-delinq-2-cat-name>\n<z305-delinq-3>00</z305-delinq-3>\n<z305-delinq-n-3></z305-delinq-n-3>\n<z305-delinq-3-update-date>20100319</z305-delinq-3-update-date>\n<z305-delinq-3-cat-name>CLAIRED</z305-delinq-3-cat-name>\n<z305-field-1></z305-field-1>\n<z305-field-2></z305-field-2>\n<z305-field-3></z305-field-3>\n<z305-hold-on-shelf>N</z305-hold-on-shelf>\n<z305-end-block-date></z305-end-block-date>\n<z305-booking-permission>N</z305-booking-permission>\n<z305-booking-ignore-hours>N</z305-booking-ignore-hours>\n<z305-rush-cat-request>N</z305-rush-cat-request>\n<z305-upd-time-stamp>200001011200000</z305-upd-time-stamp>\n</z305>\n<session-id>1IYKRQ5DMHCBS3INBHJ7YE31HTVCP2MEKYBDD8Q2C8FCFQB6E1</session-id>\n</bor-info>\n "
-    http_version: 
-  recorded_at: Tue, 12 Aug 2014 17:51:03 GMT
-- request:
-    method: get
-    uri: http://aleph.institution.edu/X?bor_id=INVALID_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Faraday v0.9.0
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - ! '*/*'
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Tue, 12 Aug 2014 19:25:02 GMT
+      - Wed, 13 Aug 2014 20:35:14 GMT
       Server:
       - ALEPH/5.20
       Content-Type:
@@ -157,9 +114,1187 @@ http_interactions:
     body:
       encoding: US-ASCII
       string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
-        retrieving Patron System Key</error>\n<session-id>USLDV5EBLK5M7456JCG5JIU4YR95AFSY8CJDDKDFPI36UPB1I3</session-id>\n</bor-info>\n "
+        retrieving Patron System Key</error>\n<session-id>UKMMJY533NMGSSQGAI44V2CHUIP4IT24EBC1HXAV6JD36A61LF</session-id>\n</bor-info>\n "
     http_version: 
-  recorded_at: Tue, 12 Aug 2014 19:25:02 GMT
+  recorded_at: Wed, 13 Aug 2014 20:35:14 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:35:14 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>DE5QLGYI1I1LMLT5KVUHSDRI244IVLCJK4UV587JKS4RLCDQND</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:35:14 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:35:14 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>62XS6KA154XUT3N5JPDQY7B1AF2S82RNDQ8P5KYDHR1RDJVHYL</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:35:14 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:35:14 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>NSAGQTTYYECNRFF2N2Y9AFVDSA42R9AFS7XVVBJ2KUPVI8517S</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:35:14 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:35:14 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>1PMRXGGPL93HFTJTL9VC5T9T46CJFXGMFRXK6TTCKHE65AQN4R</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:35:14 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:35:14 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>6C1VC2AVCQIJTM4VKK98MKSGDIK18R13CHB8XUDHBFHT6F4SA5</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:35:14 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:35:14 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>6493KBTJBF8HS3QU3KEBFXMIGQB7RUNXL7A11B52A7YENETITU</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:35:14 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:35:15 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>9DISN2NKVIN2F8VLPQ5IQ6Q2X97GM9QXNV5GYS8NKNXFGI6CQM</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:35:14 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:38:24 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>9G533KDDBRIH1SS7IHXQDF6A11YXDV7CAJ6L1CHDM7NLSETHSK</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:38:24 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:38:24 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>S2QT5BE7XG254HHQNPCBEXDSNITF93EN8388XXFMBAKRGH37KH</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:38:24 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:38:24 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>7N7FFP1U2S3TT83UM5NK8BN91785Y6YDUUQP9778KPPUJAC1JX</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:38:24 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:38:24 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>P46VFUEXPIXGUQTR2N8NPP94SX7L6U6S6DIS9AXAHFSHN28MX5</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:38:24 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:38:24 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>JMR2LNPUM5E3JRTJXEJYCYI9KSAQPHF75KC5LXI9VXCSED78Y4</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:38:24 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:38:25 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>N63HUGRSJVSCLUVI2368X4HTVKJUH8TIYJ2J1NNCGVVCA9Q6IM</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:38:24 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:38:25 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>V8VRUYMRX6AGUCS34GNKLVT8AAGY98V6A4NJ4U56FYMHERFDN8</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:38:25 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:38:25 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>IDC8VQV8BG8EHIUK27I4L5IG31C2A8AYP5TIFARVGGD2EAXG9L</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:38:25 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:41:00 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>J53CH4ECUQNXUMMHJX86KT269KMG7CB1Q8KV7Q3F3631PIHQQC</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:41:00 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:41:00 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>IJHESPP2DPJXCCNFJ845E5QM8AQUG8PYF1TK3YIL6L16F85JAR</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:41:00 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:41:00 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>GRIRRA521QIDJYP3467JSIE5KC94HJ768KR4369R2I4DMSR8B4</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:41:00 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:41:00 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>EQPVCY6HRRBBHQFTVY7TB7RU5N7G1FY4QN121TT8CTGMH74J78</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:41:00 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:41:00 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>H7BNPCH1598IRQXUBG55P7VRB2FALMYGR1GX2M8SBGG9SK8EUL</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:41:00 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:41:01 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>P27EDKH326VEG9BRX7A42IS4CS3H6FJB9M7Y4UTD48C8JLQAVX</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:41:00 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:41:01 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>2PEKADADB2QTTAYN6T2BP5ICBXRAL752MSRSKCLR6JC6FF8A9U</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:41:01 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:41:01 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>N4P3DBJEKS3NP7EBI12LY8YM5TR4RI841Y4AQ66BVM9XHS87PB</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:41:01 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:41:41 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>L44QEM4L98BL7L1JVBLCXQAMR4LT4EQPN7DK5SFNMUT2J9UT23</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:41:41 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:41:42 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>C8CJB1YHBSMSGGB7JAFLR93H3RXKACRIMG1592X6Q42BUE9YB4</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:41:42 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:41:42 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>RB3QIPX545MRNILPIURTDD8D5UI6ITG4BRD8YX2T2PCHTVSPKS</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:41:42 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:41:42 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>J1D28N43MBE1CX3CA2S6IIETILYT1D9DLHRM6MXSI2ILU84CBR</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:41:42 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:41:42 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>H3XFSI1C6VF2F4DFXACAM3XYNY1SNRLGJT9BG42IGKVVD7GRQ1</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:41:42 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:41:43 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>A7Q1RMGR3SEY4ASV6JNMGGF91D98ICMBEE8VT578CJ42T55Y23</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:41:42 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:41:43 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>XJANL9P566BSMQFG23HH5LND2PL45SAQ6X5CVYU79XVD83KL33</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:41:43 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:41:43 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>LLNGKY95YGHLYBBTD2DGBVABFX2VEU56BDSBSD36I94RSMVP15</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:41:43 GMT
 - request:
     method: get
     uri: http://aleph.institution.edu/X?bor_id=snowj@1nyu.edu&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
@@ -179,7 +1314,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 12 Aug 2014 19:28:36 GMT
+      - Wed, 13 Aug 2014 20:53:47 GMT
       Server:
       - ALEPH/5.20
       Content-Type:
@@ -195,12 +1330,12 @@ http_interactions:
     body:
       encoding: US-ASCII
       string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
-        retrieving Patron System Key</error>\n<session-id>GQV2SCUBT5VB6YS1HIVMB5E5IJE5GCM2AAUR11VNY2CFD6TPA8</session-id>\n</bor-info>\n "
+        retrieving Patron System Key</error>\n<session-id>XP4HPVC8QAXRSRYG8UAS3RK3BHATE2GXPJQT96BD2MDNML1ILM</session-id>\n</bor-info>\n "
     http_version: 
-  recorded_at: Tue, 12 Aug 2014 19:28:36 GMT
+  recorded_at: Wed, 13 Aug 2014 20:53:47 GMT
 - request:
     method: get
-    uri: http://aleph.institution.edu/X?bor_id=&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    uri: http://aleph.institution.edu/X?bor_id=INVALID_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
     body:
       encoding: US-ASCII
       string: ''
@@ -217,7 +1352,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 12 Aug 2014 19:43:49 GMT
+      - Wed, 13 Aug 2014 20:53:50 GMT
       Server:
       - ALEPH/5.20
       Content-Type:
@@ -229,16 +1364,16 @@ http_interactions:
       Expires:
       - Sat, 01 Jan 2000 01:00:00 GMT
       Content-Length:
-      - '182'
+      - '193'
     body:
       encoding: US-ASCII
-      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<session-id>YYUD4XRSGNKJ1LUAPIADHQ4YMXI42KFTEF26PG1YXCVV2NTA6C</session-id>\n<error>bor_id
-        must be provided</error>\n</bor-info>\n "
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>8V28RSMS8QBKLRNT8YJKM1FBL1MEYY4VNKAP5TDSJ5LETE18KI</session-id>\n</bor-info>\n "
     http_version: 
-  recorded_at: Tue, 12 Aug 2014 19:43:49 GMT
+  recorded_at: Wed, 13 Aug 2014 20:53:50 GMT
 - request:
     method: get
-    uri: http://aleph.institution.edu/X?bor_id=&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
     body:
       encoding: US-ASCII
       string: ''
@@ -255,7 +1390,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 12 Aug 2014 19:43:49 GMT
+      - Wed, 13 Aug 2014 20:53:53 GMT
       Server:
       - ALEPH/5.20
       Content-Type:
@@ -267,11 +1402,888 @@ http_interactions:
       Expires:
       - Sat, 01 Jan 2000 01:00:00 GMT
       Content-Length:
-      - '182'
+      - '193'
     body:
       encoding: US-ASCII
-      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<session-id>XJPAJH7G1QQIBVKYVQ5NL7FA5GP3XUL4TKIMSAVYG1HSAPHQHH</session-id>\n<error>bor_id
-        must be provided</error>\n</bor-info>\n "
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>CH38GLJ62TEEI5RY9E78KVCUJ4C8T1D9V6XSKA1IBK7SIHKU3C</session-id>\n</bor-info>\n "
     http_version: 
-  recorded_at: Tue, 12 Aug 2014 19:43:49 GMT
+  recorded_at: Wed, 13 Aug 2014 20:53:53 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:53:54 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>M3J5M5CVM2KU56F12F1CEJ55YEJH4KSARTSNUQVL59RPX9XV25</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:53:54 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:53:54 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>EVYI4T3CDSQGU8GHJ9N6A432Q3SA9KMDEEM8RCQL6YQVT1RT9L</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:53:54 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:53:55 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>DASBT6TU3SE348R3TF14CT38GRIPNPSRITS2EQCYXADTEHH7GH</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:53:55 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:53:55 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>R4VHJAMUAMHI2RG9IYLSL93ABDT1PEJ11DEBBECMAFD3K5S7N1</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:53:55 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:53:55 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>R1B59JD67Y34757GKC24G5LBAPV8HCMI8ICNBEH9Q98L8VFHG7</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:53:55 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:53:56 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>PRRB1B6B4FA3L5ENBXX29B5M5IGIV8SEXTJ54JEND1SUDV9VKP</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:53:55 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:53:56 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>AJTP91ITHD47KE4HT5RNTGDAAMYA1Q359HJITXUVD32LH2GMJC</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:53:56 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=1234567890&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:53:56 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>QHQM1GDKF62KSR35EQQB385JCEEQ5JH3XNQ3MXFVTDNF2NUFRI</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:53:56 GMT
+- request:
+    method: get
+    uri: http://aleph.institution.edu/X?bor_id=1234567890&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:53:56 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>7RL8E5P2833PEA9UR5P1GM3HE7N47CHTGDKGH8C4HN962HDP83</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:53:56 GMT
+- request:
+    method: get
+    uri: http://http://aleph.institution.edu/X?bor_id=snowj&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:56:23 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>SGNXQLRCLMDYTQ1E2BG5NCLUAQESPSC6SUT9DGCBPU83FXALXF</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:56:22 GMT
+- request:
+    method: get
+    uri: http://http://aleph.institution.edu/X?bor_id=BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:56:24 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '4936'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<z303>\n<z303-id>BOR_ID</z303-id>\n<z303-proxy-for-id></z303-proxy-for-id>\n<z303-primary-id></z303-primary-id>\n<z303-name-key>test
+        nyustudent                       BOR_ID</z303-name-key>\n<z303-user-type></z303-user-type>\n<z303-user-library></z303-user-library>\n<z303-open-date>05/22/2014</z303-open-date>\n<z303-update-date>05/22/2014</z303-update-date>\n<z303-con-lng>ENG</z303-con-lng>\n<z303-alpha>L</z303-alpha>\n<z303-name>Test,
+        NYUStudent</z303-name>\n<z303-title></z303-title>\n<z303-delinq-1>00</z303-delinq-1>\n<z303-delinq-n-1></z303-delinq-n-1>\n<z303-delinq-1-update-date>00000000</z303-delinq-1-update-date>\n<z303-delinq-1-cat-name></z303-delinq-1-cat-name>\n<z303-delinq-2>00</z303-delinq-2>\n<z303-delinq-n-2></z303-delinq-n-2>\n<z303-delinq-2-update-date>00000000</z303-delinq-2-update-date>\n<z303-delinq-2-cat-name></z303-delinq-2-cat-name>\n<z303-delinq-3>00</z303-delinq-3>\n<z303-delinq-n-3></z303-delinq-n-3>\n<z303-delinq-3-update-date>00000000</z303-delinq-3-update-date>\n<z303-delinq-3-cat-name></z303-delinq-3-cat-name>\n<z303-budget></z303-budget>\n<z303-profile-id></z303-profile-id>\n<z303-ill-library></z303-ill-library>\n<z303-home-library></z303-home-library>\n<z303-field-1></z303-field-1>\n<z303-field-2></z303-field-2>\n<z303-field-3></z303-field-3>\n<z303-note-1></z303-note-1>\n<z303-note-2></z303-note-2>\n<z303-salutation></z303-salutation>\n<z303-ill-total-limit>9999</z303-ill-total-limit>\n<z303-ill-active-limit>9999</z303-ill-active-limit>\n<z303-dispatch-library></z303-dispatch-library>\n<z303-birth-date></z303-birth-date>\n<z303-export-consent>Y</z303-export-consent>\n<z303-proxy-id-type>00</z303-proxy-id-type>\n<z303-send-all-letters>Y</z303-send-all-letters>\n<z303-plain-html>P</z303-plain-html>\n<z303-want-sms>N</z303-want-sms>\n<z303-plif-modification></z303-plif-modification>\n<z303-title-req-limit>0000</z303-title-req-limit>\n<z303-gender></z303-gender>\n<z303-birthplace></z303-birthplace>\n<z303-upd-time-stamp>200001011200000</z303-upd-time-stamp>\n<z303-last-name></z303-last-name>\n<z303-first-name></z303-first-name>\n</z303>\n<z304>\n<z304-id>BOR_ID</z304-id>\n<z304-sequence>01</z304-sequence>\n<z304-address-0>NYUStudent
+        Test</z304-address-0>\n<z304-zip></z304-zip>\n<z304-email-address></z304-email-address>\n<z304-telephone></z304-telephone>\n<z304-date-from>20140522</z304-date-from>\n<z304-date-to>20990724</z304-date-to>\n<z304-address-type>01</z304-address-type>\n<z304-telephone-2></z304-telephone-2>\n<z304-telephone-3></z304-telephone-3>\n<z304-telephone-4></z304-telephone-4>\n<z304-sms-number></z304-sms-number>\n<z304-update-date>20140522</z304-update-date>\n<z304-cat-name>MONTELEONE</z304-cat-name>\n<z304-upd-time-stamp>200001011200000</z304-upd-time-stamp>\n</z304>\n<z305>\n<z305-id>BOR_ID</z305-id>\n<z305-sub-library>DEFAULT_LIB</z305-sub-library>\n<z305-open-date>05/22/2014</z305-open-date>\n<z305-update-date>05/22/2014</z305-update-date>\n<z305-bor-type></z305-bor-type>\n<z305-bor-status>NYU
+        Undergraduate Student</z305-bor-status>\n<z305-registration-date>00000000</z305-registration-date>\n<z305-expiry-date>05/22/2034</z305-expiry-date>\n<z305-note></z305-note>\n<z305-loan-permission>N</z305-loan-permission>\n<z305-photo-permission>Y</z305-photo-permission>\n<z305-over-permission>Y</z305-over-permission>\n<z305-multi-hold>N</z305-multi-hold>\n<z305-loan-check>N</z305-loan-check>\n<z305-hold-permission>N</z305-hold-permission>\n<z305-renew-permission>N</z305-renew-permission>\n<z305-rr-permission>N</z305-rr-permission>\n<z305-ignore-late-return>N</z305-ignore-late-return>\n<z305-last-activity-date></z305-last-activity-date>\n<z305-photo-charge>C</z305-photo-charge>\n<z305-no-loan>0000</z305-no-loan>\n<z305-no-hold>0000</z305-no-hold>\n<z305-no-photo>0000</z305-no-photo>\n<z305-no-cash>0000</z305-no-cash>\n<z305-cash-limit>0.00</z305-cash-limit>\n<z305-credit-debit></z305-credit-debit>\n<z305-sum>0.00</z305-sum>\n<z305-delinq-1>00</z305-delinq-1>\n<z305-delinq-n-1></z305-delinq-n-1>\n<z305-delinq-1-update-date>00000000</z305-delinq-1-update-date>\n<z305-delinq-1-cat-name></z305-delinq-1-cat-name>\n<z305-delinq-2>00</z305-delinq-2>\n<z305-delinq-n-2></z305-delinq-n-2>\n<z305-delinq-2-update-date>00000000</z305-delinq-2-update-date>\n<z305-delinq-2-cat-name></z305-delinq-2-cat-name>\n<z305-delinq-3>00</z305-delinq-3>\n<z305-delinq-n-3></z305-delinq-n-3>\n<z305-delinq-3-update-date>00000000</z305-delinq-3-update-date>\n<z305-delinq-3-cat-name></z305-delinq-3-cat-name>\n<z305-field-1></z305-field-1>\n<z305-field-2></z305-field-2>\n<z305-field-3></z305-field-3>\n<z305-hold-on-shelf>N</z305-hold-on-shelf>\n<z305-end-block-date></z305-end-block-date>\n<z305-booking-permission>N</z305-booking-permission>\n<z305-booking-ignore-hours>N</z305-booking-ignore-hours>\n<z305-rush-cat-request>N</z305-rush-cat-request>\n<z305-upd-time-stamp>200001011200000</z305-upd-time-stamp>\n</z305>\n<session-id>42GSSR4VBVI8DU5D65L3HLKFEES23N26J5LR5V66G2JRVE8RYB</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:56:24 GMT
+- request:
+    method: get
+    uri: http://http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:56:27 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>RIUPE32LSMJG5ULPXTN71DXJJJQCQ42FLXCVNXRVUUUJHNVP84</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:56:27 GMT
+- request:
+    method: get
+    uri: http://http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:56:27 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>U3FPPH977RRSF57GN6HT58PLF39V52YQP2278JNPMDTGH8HA6V</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:56:27 GMT
+- request:
+    method: get
+    uri: http://http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:56:27 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>GC7V73M913Q8IFICTS8PMMPB9BFTV5PX9FBNTGYLYGXE9QJ1C5</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:56:27 GMT
+- request:
+    method: get
+    uri: http://http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:56:28 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>92EJUI48D5GI1NQNTHHC5PY64782BKISXQ333X5S4FU49HX53J</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:56:27 GMT
+- request:
+    method: get
+    uri: http://http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:56:28 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>G2ANFG986B9CRKXT2V2DRBYUG96R6HRD22Y7GIXKE9CDSX2A2A</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:56:28 GMT
+- request:
+    method: get
+    uri: http://http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:56:28 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>LX8SDIDUYNEJTM1GN64KMX6PNBGLX83E1RCKST3R5MHKQBALPC</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:56:28 GMT
+- request:
+    method: get
+    uri: http://http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:56:28 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>L7CP9M6ISFC4L65VKED42LQMVIK72GDD38GNDB7R191R2SM73M</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:56:28 GMT
+- request:
+    method: get
+    uri: http://http://aleph.institution.edu/X?bor_id=NS_BOR_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:56:29 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>A4FSGS5KP86BHXRL5MRDLHI5DQMP99BBELLGN813FBIQS548PQ</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:56:29 GMT
+- request:
+    method: get
+    uri: http://http://aleph.institution.edu/X?bor_id=snowj@1nyu.edu&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:56:33 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>PFJUM6PNQ6P7AKDN86MBYVX2RANKLH62YNJSBBNFP4H68KXR8I</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:56:32 GMT
+- request:
+    method: get
+    uri: http://http://aleph.institution.edu/X?bor_id=1234567890&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:56:36 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>XR8PG7DK2MQ3B8E3P6NY5YU7PUSQ736KLFSMDAU1C4QP1GAFC8</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:56:36 GMT
+- request:
+    method: get
+    uri: http://http://aleph.institution.edu/X?bor_id=1234567890&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:56:37 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>CDC96IYI29K2T2934RD74XLM3XGE6NQGS4GM6I4TM9D433M7K7</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:56:36 GMT
+- request:
+    method: get
+    uri: http://http://aleph.institution.edu/X?bor_id=INVALID_ID&cash=N&library=DEFAULT_LIB&loans=N&op=bor_info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 Aug 2014 20:56:45 GMT
+      Server:
+      - ALEPH/5.20
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 01:00:00 GMT
+      Content-Length:
+      - '193'
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
+        retrieving Patron System Key</error>\n<session-id>TLIYC7MF1V4F1E99K8A3BFLP49Y3QC7FRKNT1RMHGR4Q48RHLM</session-id>\n</bor-info>\n "
+    http_version: 
+  recorded_at: Wed, 13 Aug 2014 20:56:45 GMT
 recorded_with: VCR 2.8.0

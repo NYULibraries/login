@@ -37,11 +37,6 @@ FactoryGirl.define do
     after(:build) {|user| user.omniauth_hash_map = authhash_map(user.provider) unless user.omniauth_hash_map.present? }
   end
 
-  trait :skip_callbacks do
-    after(:build) { |user| user.class.skip_callback(:save, :after, :create_or_update_aleph_identity) }
-    # after(:build) { |user| user.class.skip_callback(:save, :after, :create_or_update_identity_from_omniauth_hash) }
-  end
-
   factory :admin, class: User do
     username 'admin'
     email 'admin@example.com'
