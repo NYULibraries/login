@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe User do
   context "when created with factory defaults" do
-    subject { create(:user, :skip_callbacks) }
-    xit { should be_a(User) }
-    xit { should_not be_a_new(User) }
-    xit { should be_valid }
+    subject { create(:user) }
+    it { should be_a(User) }
+    it { should_not be_a_new(User) }
+    it { should be_valid }
   end
 
   context "when username is not unique for the same provider" do
