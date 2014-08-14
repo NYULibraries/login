@@ -2,14 +2,14 @@ module Login
   module Aleph
     module XService
       class BorInfo < Base
-        attr_accessor :identifier, :op
-
         DEFAULT_SHOW_LOANS_VALUE = "N"
         DEFAULT_SHOW_CASH_VALUE = "N"
 
+        attr_accessor :identifier, :op
+
         def initialize(identifier)
           @identifier = identifier
-          @op = "bor_info"
+          @op = self.class.name.demodulize.underscore
           super()
         end
 

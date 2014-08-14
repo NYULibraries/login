@@ -102,8 +102,8 @@ RSpec.configure do |config|
 end
 
 VCR.configure do |c|
-  c.filter_sensitive_data('DEFAULT_LIB') { ENV["ALEPH_LIBRARY"] }
-  c.filter_sensitive_data('DEFAULT_LIB') { ENV["ALEPH_SUB_LIBRARY"] }
+  c.filter_sensitive_data('LIBRARY') { ENV["ALEPH_LIBRARY"] }
+  c.filter_sensitive_data('SUB_LIBRARY') { ENV["ALEPH_SUB_LIBRARY"] }
   c.filter_sensitive_data('aleph.institution.edu') { ENV["ALEPH_HOST"] }
   c.filter_sensitive_data('BOR_ID') { ENV["ALEPH_TEST_USER"] }
   c.default_cassette_options = { :record => :new_episodes, :allow_playback_repeats => true }
