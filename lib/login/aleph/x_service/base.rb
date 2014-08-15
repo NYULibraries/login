@@ -5,8 +5,8 @@ module Login
         attr_accessor :host, :port, :path, :library
 
         def initialize(host = ENV["ALEPH_HOST"], port = ENV["ALEPH_X_PORT"], path = ENV["ALEPH_X_PATH"], library = ENV["ALEPH_LIBRARY"])
-          @port = port
           @host = (port == "443") ? "https://#{host}" : "http://#{host}"
+          @port = port
           @path = path
           @library = library
         end
@@ -15,18 +15,35 @@ module Login
           @response ||= connection.get "#{path}?#{querystring}"
         end
 
+        def error
+          @error ||= response.body[op]["error"]
+        end
+
+        def error?
+          error.present?
+        end
+
       protected
 
         def options
           @options ||= {
             op: op,
             bor_id: identifier,
-            library: library
+            library: library,
+            sub_library: library
           }
         end
 
         def querystring
           @querystring ||= options.to_query
+        end
+
+        def op
+          raise RuntimeError, "Expected this to be implemented in a subclass!"
+        end
+
+        def identifier
+          raise RuntimeError, "Expected this to be implemented in a subclass!"
         end
 
       private

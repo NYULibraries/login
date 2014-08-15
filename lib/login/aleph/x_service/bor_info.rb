@@ -13,14 +13,6 @@ module Login
           super()
         end
 
-        def error
-          @error ||= response.body[op]["error"]
-        end
-
-        def error?
-          error.present?
-        end
-
       protected
 
         def options

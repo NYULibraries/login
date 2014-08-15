@@ -11,6 +11,14 @@ module Login
           subject { bor_info.identifier }
           it { should eq identifier }
         end
+        describe '#op' do
+          subject { bor_info.op }
+          it { should eq "bor_info" }
+        end
+        describe "#response" do
+          subject { bor_info.response }
+          it { should be_instance_of Faraday::Response }
+        end
         describe '#error' do
           subject { bor_info.error }
           context "when the identifier is valid" do
