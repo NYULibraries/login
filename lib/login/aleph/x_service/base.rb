@@ -6,8 +6,8 @@ module Login
 
         def initialize(host = ENV["ALEPH_HOST"], port = ENV["ALEPH_X_PORT"], path = ENV["ALEPH_X_PATH"], library = ENV["ALEPH_LIBRARY"])
           @host = (port == "443") ? "https://#{host}" : "http://#{host}"
-          @port = port
-          @path = path
+          @port = (port || "80")
+          @path = (path || "/X")
           @library = library
         end
 
