@@ -73,7 +73,7 @@ gem "omniauth-facebook", "~> 1.6.0"
 gem "omniauth-twitter", "~> 1.0.1"
 # GitHub strategy
 gem "omniauth-github", "~> 1.1.1"
-gem "omniauth-aleph", "~> 0.1.0"
+gem "omniauth-aleph", "~> 0.1.3"
 gem "omniauth-ldap", "~> 1.0.4"
 
 # Use doorkeeper as our OAuth 2.0 provider

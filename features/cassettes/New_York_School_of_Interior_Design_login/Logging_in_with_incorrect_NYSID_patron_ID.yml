@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://aleph.institution.edu/X?bor_id=copper&library=DEFAULT_LIB&op=bor-auth&sub_library=DEFAULT_LIB&verification=onion
+    uri: http://aleph.library.edu/X?bor_id=copper&library=LIBRARY&op=bor-auth&sub_library=LIBRARY&verification=onion
     body:
       encoding: US-ASCII
       string: ''
@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 13 Aug 2014 21:29:58 GMT
+      - Fri, 15 Aug 2014 14:02:55 GMT
       Server:
       - ALEPH/5.20
       Content-Type:
@@ -35,7 +35,7 @@ http_interactions:
     body:
       encoding: US-ASCII
       string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-auth>\n<error>Error
-        in Verification</error>\n<session-id>XP1EPL526VAM9Y9X2LIC77N8NBYXUL92VYCYK13NPA6QR2CLD4</session-id>\n</bor-auth>\n "
+        in Verification</error>\n<session-id>7T5GEQ2FQHS7YN4B82XAFK69XQUHIP1694YNTME13LN92E929A</session-id>\n</bor-auth>\n "
     http_version: 
-  recorded_at: Wed, 13 Aug 2014 21:29:58 GMT
+  recorded_at: Fri, 15 Aug 2014 14:02:55 GMT
 recorded_with: VCR 2.8.0
