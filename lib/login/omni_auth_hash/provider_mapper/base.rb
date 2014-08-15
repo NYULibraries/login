@@ -18,7 +18,7 @@ module Login
           @email ||= omniauth_hash.info.email
           @first_name ||= omniauth_hash.info.first_name
           @last_name ||= omniauth_hash.info.last_name
-          @properties ||= omniauth_hash.info.merge(extra_attributes)
+          @properties ||= omniauth_hash.info.merge(properties_attributes)
         end
 
         ##
@@ -29,14 +29,22 @@ module Login
 
         ##
         # Define hash of extra attributes for merging into properties
-        def extra_attributes
+        def properties_attributes
           {
-            extra: omniauth_hash.extra,
+            extra: extra_attributes,
             uid: uid,
             first_name: first_name,
             last_name: last_name,
             nyuidn: nyuidn
           }
+        end
+
+        def extra_attributes(options = {})
+          extra.merge(options)
+        end
+
+        def extra
+          (omniauth_hash.extra || {})
         end
 
       end
