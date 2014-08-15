@@ -39,7 +39,7 @@ module Login
 
       # Delegate all calls to @provider_mapper
       extend Forwardable
-      def_delegators :@provider_mapper, :provider, :uid, :username, :nyuidn, :email, :first_name, :last_name, :info, :properties, :to_hash
+      def_delegators :@provider_mapper, :omniauth_hash, :provider, :uid, :username, :nyuidn, :email, :first_name, :last_name, :info, :properties, :to_h
 
       def matches_provider_whitelist?(provider)
         provider.present? && whitelist_providers.include?(provider.to_sym)

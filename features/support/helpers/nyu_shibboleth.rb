@@ -61,7 +61,7 @@ module LoginFeatures
         givenName: "Dev",
         firstName: "Dev",
         sn: "Eloper",
-        nyuidn: "N12345678"
+        nyuidn: ENV['ALEPH_TEST_USER'] || 'BOR_ID'
       }
     end
   end

@@ -2,7 +2,7 @@ require 'spec_helper'
 module Login
   module Aleph
     describe Patron do
-      let(:identifier) { 'BOR_ID' }
+      let(:identifier) { ENV["ALEPH_TEST_USER"] || 'BOR_ID' }
       let(:status) { '01' }
       let(:type) { 'TP' }
       let(:ill_permission) { 'Y' }
@@ -10,6 +10,18 @@ module Login
       let(:department) { 'Department' }
       let(:major) { 'Major' }
       let(:plif_status) { 'PLIF_LOADED' }
+      let(:patron_hash) {
+        {
+          identifier: identifier,
+          status: status,
+          type: type,
+          ill_permission: ill_permission,
+          college: college,
+          department: department,
+          major: major,
+          plif_status: plif_status
+        }
+      }
       subject (:patron) do
         Patron.new do |patron|
           patron.identifier = identifier
@@ -54,6 +66,10 @@ module Login
       describe '#plif_status' do
         subject { patron.plif_status }
         it { should eq plif_status }
+      end
+      describe '#to_h' do
+        subject { patron.to_h }
+        it { should include patron_hash }
       end
 
       context 'when initialized without a block' do

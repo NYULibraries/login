@@ -110,9 +110,9 @@ Devise.setup do |config|
     form: ->(env) {}
   require "omniauth-aleph"
   config.omniauth :aleph,
-    host: "aleph.library.nyu.edu",
-    library: "NYU50",
-    sub_library: "NYU50",
+    host: ENV['ALEPH_HOST'],
+    library: ENV['ALEPH_LIBRARY'],
+    sub_library: ENV['ALEPH_LIBRARY'],
     form: ->(env) {}
 
 end

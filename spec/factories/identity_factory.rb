@@ -229,8 +229,10 @@ FactoryGirl.define do
         given_name: "N",
         surname: "Yu",
         extra: {
-          nyuidn: "1234567890",
-          entitlement: "nothing"
+          raw_info: {
+            nyuidn: "1234567890",
+            entitlement: "nothing"
+          }
         }
       })
     end
@@ -243,13 +245,13 @@ FactoryGirl.define do
         first_name: "News",
         last_name: "Cholar",
         nickname: "1234567890",
-        nyuidn: "N00000000",
+        nyuidn: (ENV["ALEPH_TEST_USER"] || 'BOR_ID'),
         extra: {
           raw_info: {
             pdsexternalsystemid:
               ["12345::gtmb",
               "snowj@1newschool.edu::mir3",
-              "N00000000::sct"],
+              "#{(ENV["ALEPH_TEST_USER"] || 'BOR_ID')}::sct"],
             pdsloginid: ["ns123"],
             pdsloginalias: ["ns123"]
           }
