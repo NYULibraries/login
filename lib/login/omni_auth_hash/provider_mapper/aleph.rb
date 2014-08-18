@@ -5,6 +5,11 @@ module Login
   module OmniAuthHash
     module ProviderMapper
       class Aleph < Base
+        def initialize(omniauth_hash)
+          super(omniauth_hash)
+          @nyuidn = omniauth_hash.uid
+        end
+
         ##
         # Override hash of extra attributes for merging into properties
         def extra_attributes

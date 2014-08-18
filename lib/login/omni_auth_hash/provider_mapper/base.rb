@@ -13,7 +13,6 @@ module Login
           @provider ||= omniauth_hash.provider
           @uid ||= omniauth_hash.uid
           @username ||= omniauth_hash.uid
-          @nyuidn ||= omniauth_hash.uid
           @info ||= omniauth_hash.info
           @email ||= omniauth_hash.info.email
           @first_name ||= omniauth_hash.info.first_name
@@ -22,10 +21,9 @@ module Login
         end
 
         ##
-        # Return OmniAuth::AuthHash representation
-        def to_h
-          omniauth_hash
-        end
+        # Alias #to_h function to return
+        # OmniAuth::AuthHash representation
+        alias_method :to_h, :omniauth_hash
 
         ##
         # Define hash of extra attributes for merging into properties
