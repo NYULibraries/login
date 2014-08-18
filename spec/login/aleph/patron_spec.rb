@@ -2,7 +2,7 @@ require 'spec_helper'
 module Login
   module Aleph
     describe Patron do
-      let(:identifier) { ENV["ALEPH_TEST_USER"] || 'BOR_ID' }
+      let(:identifier) { ENV["TEST_ALEPH_USER"] || 'BOR_ID' }
       let(:status) { '01' }
       let(:type) { 'TP' }
       let(:ill_permission) { 'Y' }

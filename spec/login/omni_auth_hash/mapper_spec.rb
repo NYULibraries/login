@@ -28,7 +28,7 @@ describe Login::OmniAuthHash::Mapper do
 
   context "when provider is New School Ldap" do
     let(:provider) { "new_school_ldap" }
-    let(:bor_id) { ENV["ALEPH_TEST_USER"] || 'BOR_ID' }
+    let(:bor_id) { ENV["TEST_ALEPH_USER"] || 'BOR_ID' }
 
     describe "#to_h" do
       subject { mapper.to_h }

@@ -245,13 +245,13 @@ FactoryGirl.define do
         first_name: "News",
         last_name: "Cholar",
         nickname: "1234567890",
-        nyuidn: (ENV["ALEPH_TEST_USER"] || 'BOR_ID'),
+        nyuidn: (ENV["TEST_ALEPH_USER"] || 'BOR_ID'),
         extra: {
           raw_info: {
             pdsexternalsystemid:
               ["12345::gtmb",
               "snowj@1newschool.edu::mir3",
-              "#{(ENV["ALEPH_TEST_USER"] || 'BOR_ID')}::sct"],
+              "#{(ENV["TEST_ALEPH_USER"] || 'BOR_ID')}::sct"],
             pdsloginid: ["ns123"],
             pdsloginalias: ["ns123"]
           }

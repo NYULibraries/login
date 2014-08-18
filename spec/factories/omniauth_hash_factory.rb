@@ -28,7 +28,7 @@ FactoryGirl.define do
             pdsexternalsystemid:
               ["12345::gtmb",
               "snowj@1newschool.edu::mir3",
-              "#{(ENV["ALEPH_TEST_USER"] || 'BOR_ID')}::sct"],
+              "#{(ENV["TEST_ALEPH_USER"] || 'BOR_ID')}::sct"],
             mail: ["snowj@1newschool.edu"],
             sn: ["Snow"],
             pdsemaildefaultaddress: ["snowj@1newschool.edu"],
@@ -58,7 +58,7 @@ FactoryGirl.define do
       extra do
         {
           raw_info: {
-            nyuidn: (ENV["ALEPH_TEST_USER"] || 'BOR_ID'),
+            nyuidn: (ENV["TEST_ALEPH_USER"] || 'BOR_ID'),
             entitlement: "nothing"
           }
         }
@@ -66,7 +66,7 @@ FactoryGirl.define do
     end
     trait :aleph do
       provider "aleph"
-      uid (ENV["ALEPH_TEST_USER"] || 'BOR_ID')
+      uid (ENV["TEST_ALEPH_USER"] || 'BOR_ID')
       info do
         {
           name: "SNOW, JON",
@@ -74,7 +74,7 @@ FactoryGirl.define do
           last_name: "Snow",
           email: "snowj@1nyu.edu",
           nickname: "SNOW",
-          uid: (ENV["ALEPH_TEST_USER"] || 'BOR_ID'),
+          uid: (ENV["TEST_ALEPH_USER"] || 'BOR_ID'),
           location: "The Wall",
           phone: "123-456-7890"
         }

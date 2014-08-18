@@ -176,7 +176,7 @@ describe Api::V1::UsersController do
 
           context "and the user's identity provider is New School LDAP" do
             let(:provider) { "new_school_ldap" }
-            let(:bor_id) { ENV["ALEPH_TEST_USER"] || 'BOR_ID' }
+            let(:bor_id) { ENV["TEST_ALEPH_USER"] || 'BOR_ID' }
             it { should have_json_path("identities/#{identity_index}/properties/uid") }
             it { should have_json_path("identities/#{identity_index}/properties/nyuidn") }
             it { should have_json_path("identities/#{identity_index}/properties/first_name") }

@@ -2,7 +2,7 @@ require 'spec_helper'
 module Login
   module Aleph
     describe PatronLoader::BorInfoStrategy do
-      let(:identifier) { ENV["ALEPH_TEST_USER"] || 'BOR_ID' }
+      let(:identifier) { ENV["TEST_ALEPH_USER"] || 'BOR_ID' }
       subject(:bor_info_strategy) { PatronLoader::BorInfoStrategy.new(identifier) }
       it { should be_a PatronLoader::Strategy }
       it { should be_a PatronLoader::BorInfoStrategy }

@@ -29,7 +29,7 @@ VCR.configure do |c|
   end
   c.filter_sensitive_data('LIBRARY') { ENV["ALEPH_LIBRARY"] }
   c.filter_sensitive_data('aleph.library.edu') { ENV["ALEPH_HOST"] }
-  c.filter_sensitive_data('BOR_ID') { ENV["ALEPH_TEST_USER"] }
+  c.filter_sensitive_data('BOR_ID') { ENV["TEST_ALEPH_USER"] }
 end
 
 VCR.cucumber_tags do |t|

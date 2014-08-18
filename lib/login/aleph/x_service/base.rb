@@ -2,13 +2,14 @@ module Login
   module Aleph
     module XService
       class Base
-        attr_accessor :host, :port, :path, :library
+        attr_accessor :host, :port, :path, :library, :sub_library
 
-        def initialize(host = ENV["ALEPH_HOST"], port = ENV["ALEPH_X_PORT"], path = ENV["ALEPH_X_PATH"], library = ENV["ALEPH_LIBRARY"])
-          @host = (port == "443") ? "https://#{host}" : "http://#{host}"
-          @port = (port || "80")
-          @path = (path || "/X")
-          @library = library
+        def initialize
+          @port = ENV["ALEPH_X_PORT"]
+          @host = (port == "443") ? "https://#{ENV["ALEPH_HOST"]}" : "http://#{ENV["ALEPH_HOST"]}"
+          @path = ENV["ALEPH_X_PATH"]
+          @library = ENV["ALEPH_LIBRARY"]
+          @sub_library = ENV["ALEPH_SUB_LIBRARY"]
         end
 
         def response
@@ -30,7 +31,7 @@ module Login
             op: op,
             bor_id: identifier,
             library: library,
-            sub_library: library
+            sub_library: sub_library
           }
         end
 
