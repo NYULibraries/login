@@ -110,7 +110,7 @@ describe Api::V1::UsersController do
             let(:response_properties) { JSON.parse(response.body)["identities"][identity_index]["properties"]  }
 
             describe "NYU Shibboleth identity properties" do
-              let(:bor_id) { attributes_for(:nyu_shibboleth_authhash)[:extra][:raw_info][:nyuidn]}
+              let(:bor_id) { ENV["TEST_ALEPH_USER"] || 'BOR_ID' }
               subject { response_properties[property] }
 
               context "when property is the NetID" do
@@ -141,7 +141,7 @@ describe Api::V1::UsersController do
             end
 
             describe "Aleph identity properties" do
-              let(:bor_id) { attributes_for(:aleph_authhash)[:uid]}
+              let(:bor_id) { let(:identifier) { ENV["TEST_ALEPH_USER"] || 'BOR_ID' } }
               let(:identity) { "aleph" }
               subject { response_properties[property] }
 
