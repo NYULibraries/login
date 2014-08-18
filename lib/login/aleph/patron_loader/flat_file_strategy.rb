@@ -18,10 +18,16 @@ module Login
 
         private
 
+        def matches_from_flat_file
+          File.readlines(ENV["FLAT_FILE"]).select { |line| line =~ Regexp.new(identifier) }
+        end
+
         def line_from_flat_file
-          File.readlines(ENV["FLAT_FILE"]).select do
-             |line| line =~ Regexp.new(identifier)
-           end.first.gsub(NEW_LINE,"").split(DELIMITER)
+          clean_line(matches_from_flat_file.first) || []
+        end
+
+        def clean_line(line)
+          line.gsub(NEW_LINE,"").split(DELIMITER) unless line.nil?
         end
 
         def map_accessors_to_values
