@@ -1,8 +1,23 @@
-<div id="shibboleth">
-  <h2>
-    <%= t('application.nyu.header') %>
-  </h2>
-  <p>
-    <%= link_to t('application.nyu.link_text'), user_omniauth_authorize_path(:nyu_shibboleth, institute: current_institute.code), class: "btn" %>
-  </p>
+<div class="row-fluid">
+  <div class="span9" id="nyu_shibboleth-login">
+    <%= link_to t('application.nyu.link_text'), user_omniauth_authorize_path(:nyu_shibboleth, institute: current_institute.code) %>
+  </div>
+  <%- option = institution.views["login"]["secondary"].first -%>
+  <%- name = Institutions.institutions[option.upcase.to_sym].views["login"]["name"] -%>
+  <%= content_tag(:div, class: [option, "alt-login", "span3"], id: "#{option}-login") do
+      link_to("#{name}", login_path(option), title: "#{name}")
+    end %>
+</div>
+<div class="row-fluid">
+  <% institution.views["login"]["secondary"][1..-1].each do |option| %>
+    <%- name = Institutions.institutions[option.upcase.to_sym].views["login"]["name"] -%>
+    <%= content_tag(:div, class: [option, "alt-login", "span3"], id: "#{option}-login") do
+        link_to("#{name}", login_path(option), title: "#{name}")
+      end %>
+  <% end %>
+  <%- if institution.views["login"]["general_public"] -%>
+    <%= content_tag(:div, class: ["alt-login", "span3"], id: "guest-login") do
+        link_to(t('application.general_public.link_text'), '#', title: t('application.general_public.link_text'))
+      end %>
+  <%- end -%>
 </div>

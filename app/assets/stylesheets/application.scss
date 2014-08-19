@@ -1,1 +1,42 @@
 @import "login";
+
+#logins {
+  div {
+    // font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-size: 100%;
+    font-weight: bold;
+    text-align: center;
+    height: 200px;
+    a {
+      color: white;
+      &:hover {
+        text-decoration: none;
+      }
+      &:active {
+        color: white;
+      }
+      &:visited {
+        color: white
+      }
+    }
+    &#nyu_shibboleth-login {
+      background-color: #57068C;
+    }
+    &#bobst-login {
+      background-color: #AA97C2;
+    }
+    &#nysid-login {
+      background-color: #EF4135;
+    }
+    &#cu-login {
+      background-color: #730000;
+    }
+    &#ns-login {
+      background-color: #F58026;
+    }
+    &#guest-login {
+      background-color: #48AFE3;
+    }
+  }
+}

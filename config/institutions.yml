@@ -9,6 +9,7 @@ BOBST:
       title: NYU Libraries
       url: http://library.nyu.edu
     login:
+      name: Other Borrowers
       primary: aleph
       secondary:
         - nyu
