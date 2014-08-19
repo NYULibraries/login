@@ -112,7 +112,7 @@ Devise.setup do |config|
   config.omniauth :aleph,
     host: ENV['ALEPH_HOST'],
     library: ENV['ALEPH_LIBRARY'],
-    sub_library: ENV['ALEPH_LIBRARY'],
+    sub_library: ENV['ALEPH_SUB_LIBRARY'],
     form: ->(env) {}
 
 end

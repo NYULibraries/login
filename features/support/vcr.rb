@@ -34,7 +34,7 @@ VCR.configure do |c|
 end
 
 VCR.cucumber_tags do |t|
-  t.tag '@twitter_login', use_scenario_name: true
+  t.tag '@twitter_login', use_scenario_name: true, record: :once
   t.tag '@vcr', use_scenario_name: true, record: :new_episodes
-  t.tag '@ignore_user_keys', record: :new_episodes, match_requests_on: [:method, VCR.request_matchers.uri_without_params(:verification, :bor_id, :sublibrary, :library)]
+  t.tag '@ignore_user_keys', record: :new_episodes, match_requests_on: [:method, VCR.request_matchers.uri_without_params(:verification, :bor_id, :sub_library, :library)]
 end
