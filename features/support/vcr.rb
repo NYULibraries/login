@@ -27,8 +27,8 @@ VCR.configure do |c|
     # Filter out aleph password for CU, this time the caps.
     c.filter_sensitive_data('auth_key') { ENV["TEST_#{institute}_PASSWORD"] }
   end
-  c.filter_sensitive_data('&sub_library=<SUBLIB>') { "&sub_library=#{ENV["ALEPH_SUB_LIBRARY"]}" }
-  c.filter_sensitive_data('&library=<LIB>') { "&library=#{ENV["ALEPH_LIBRARY"]}" }
+  c.filter_sensitive_data('&sub_library=BET') { "&sub_library=#{ENV["ALEPH_SUB_LIBRARY"]}" }
+  c.filter_sensitive_data('&library=ALEPH') { "&library=#{ENV["ALEPH_LIBRARY"]}" }
   c.filter_sensitive_data('aleph.library.edu') { ENV["ALEPH_HOST"] }
   c.filter_sensitive_data('BOR_ID') { ENV["TEST_ALEPH_USER"] }
 end
