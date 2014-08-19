@@ -17,9 +17,9 @@ http_interactions:
       - application/x-www-form-urlencoded
       Authorization:
       - OAuth oauth_callback="http%3A%2F%2Flocalhost%3A3000%2Fusers%2Fauth%2Ftwitter%2Fcallback%3Finstitute%3DNYU",
-        oauth_consumer_key="<TWITTER_APP_KEY>", oauth_nonce="yaBQWylkYA2Uo6EszUvcm8Bsgsa7c7ypN5O6GtEfI",
-        oauth_signature="xljyUECFtm76tg1KLzEv4M1CZfw%3D", oauth_signature_method="HMAC-SHA1",
-        oauth_timestamp="1408117589", oauth_version="1.0"
+        oauth_consumer_key="<TWITTER_APP_KEY>", oauth_nonce="suRnxsua2L1XZVKtxQcHJLfKwTkNXqYYddDL8utqf4",
+        oauth_signature="o6ZwZoSuX0r9Vj5OQKwDSYHOsEk%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1408463347", oauth_version="1.0"
   response:
     status:
       code: 200
@@ -38,22 +38,22 @@ http_interactions:
       Content-Type:
       - text/html; charset=utf-8
       Date:
-      - Fri, 15 Aug 2014 15:46:29 GMT
+      - Tue, 19 Aug 2014 15:49:08 GMT
       Etag:
-      - ! '"3f741a72279e282eb83c7f3edc6ea3cd"'
+      - ! '"4473f01a3a50a653c6075d188b338360"'
       Expires:
       - Tue, 31 Mar 1981 05:00:00 GMT
       Last-Modified:
-      - Fri, 15 Aug 2014 15:46:29 GMT
+      - Tue, 19 Aug 2014 15:49:08 GMT
       Pragma:
       - no-cache
       Server:
       - tfe
       Set-Cookie:
-      - _twitter_sess=BAh7BzoHaWQiJTFkZTNjNjhkNmNlYzRiYzA4MTYyMzEwNGM2NWQ0M2MyOg9j%250AcmVhdGVkX2F0bCsIWkdZ2kcB--70064ccf4b6be625a5f7acb7f69e8e7c00cfda42;
+      - _twitter_sess=BAh7BzoHaWQiJWIyNjA5MDgxMWEwZWYxODRjNmJiOGYyODI4NDYzYmRiOg9j%250AcmVhdGVkX2F0bCsItSH17kcB--380583cd9dd1de14d5841d5856fea0a44e7d3c70;
         domain=.twitter.com; path=/; secure; HttpOnly
-      - guest_id=v1%3A140811758970135682; Domain=.twitter.com; Path=/; Expires=Sun,
-        14-Aug-2016 15:46:29 UTC
+      - guest_id=v1%3A140846334802419292; Domain=.twitter.com; Path=/; Expires=Thu,
+        18-Aug-2016 15:49:08 UTC
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -65,20 +65,20 @@ http_interactions:
       X-Frame-Options:
       - SAMEORIGIN
       X-Mid:
-      - d1c1538d84f5a331fce4459d7371a11b0ea4c656
+      - d5b8b0d4d54fa426ad3caba13a5ec5abafaab9ff
       X-Runtime:
-      - '0.03383'
+      - '0.02163'
       X-Transaction:
-      - 0d5748f09f1d7497
+      - 522c6f9d9bf97a83
       X-Ua-Compatible:
       - IE=edge,chrome=1
       X-Xss-Protection:
       - 1; mode=block
     body:
       encoding: US-ASCII
-      string: oauth_token=0gTb4ucOLwrEbDA7lXDqgFPMCDSjc89O&oauth_token_secret=HMbtWfJ4yGc6sO82DtGf5VpQ4FPC9wJJ&oauth_callback_confirmed=true
+      string: oauth_token=A62yGmtEyBFHOfgivOtMxeZr01OvzAOJ&oauth_token_secret=Ig7srnfRFeCbuW08jFVPgEDuS3ssCqIR&oauth_callback_confirmed=true
     http_version: 
-  recorded_at: Fri, 15 Aug 2014 15:46:29 GMT
+  recorded_at: Tue, 19 Aug 2014 15:49:08 GMT
 - request:
     method: post
     uri: https://api.twitter.com/oauth/access_token
@@ -94,9 +94,9 @@ http_interactions:
       - '0'
       Authorization:
       - OAuth oauth_body_hash="2jmj7l5rSw0yVb%2FvlWAYkK%2FYBwk%3D", oauth_consumer_key="<TWITTER_APP_KEY>",
-        oauth_nonce="oChmHHdQSx77WJRQLL5U51CmGHqi2ypiPnfbto", oauth_signature="9qRnQTiDulttXitm%2FOUF5%2BXhKO0%3D",
-        oauth_signature_method="HMAC-SHA1", oauth_timestamp="1408117591", oauth_token="0gTb4ucOLwrEbDA7lXDqgFPMCDSjc89O",
-        oauth_verifier="qj2WvqRkfvrNKgzVgQyUfJughJ0msCDV", oauth_version="1.0"
+        oauth_nonce="xdzqCHzPkSrwFIXP7aFPgSitVucQLECiwIuyEz5Q8nw", oauth_signature="DLUA40cP0CaB8bIDJIHyWa0GEmM%3D",
+        oauth_signature_method="HMAC-SHA1", oauth_timestamp="1408463350", oauth_token="A62yGmtEyBFHOfgivOtMxeZr01OvzAOJ",
+        oauth_verifier="Q4gwx9Hi6fMyLhaq4OmQhrhzjypnWO6r", oauth_version="1.0"
   response:
     status:
       code: 200
@@ -115,22 +115,22 @@ http_interactions:
       Content-Type:
       - text/html; charset=utf-8
       Date:
-      - Fri, 15 Aug 2014 15:46:32 GMT
+      - Tue, 19 Aug 2014 15:49:11 GMT
       Etag:
       - ! '"8d186eb5f7e63c5a4d6fd28843069ada"'
       Expires:
       - Tue, 31 Mar 1981 05:00:00 GMT
       Last-Modified:
-      - Fri, 15 Aug 2014 15:46:32 GMT
+      - Tue, 19 Aug 2014 15:49:11 GMT
       Pragma:
       - no-cache
       Server:
       - tfe
       Set-Cookie:
-      - _twitter_sess=BAh7BzoPY3JlYXRlZF9hdGwrCLZQWdpHAToHaWQiJWM3NjcyYTIyM2QxODM1%250ANjVkMTBkYmZmMjcwMmE4Njg0--66cc2edb301f3132b217fc7bb7842ba22bc1f2a5;
+      - _twitter_sess=BAh7BzoHaWQiJWQzYzVhODk2NzMyZDNhNzU0OGNmZmJiY2YyZDIyOGVhOg9j%250AcmVhdGVkX2F0bCsI%252FSz17kcB--5b566db602ec1fd53e8e7989ecb7c608851b07d8;
         domain=.twitter.com; path=/; secure; HttpOnly
-      - guest_id=v1%3A140811759219724529; Domain=.twitter.com; Path=/; Expires=Sun,
-        14-Aug-2016 15:46:32 UTC
+      - guest_id=v1%3A140846335099071000; Domain=.twitter.com; Path=/; Expires=Thu,
+        18-Aug-2016 15:49:11 UTC
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -142,11 +142,11 @@ http_interactions:
       X-Frame-Options:
       - SAMEORIGIN
       X-Mid:
-      - 02681382b0eda9503e79b416e43155420780b25d
+      - b89eac5043b6be1b81c46d0c2018ee91cc5fdbd8
       X-Runtime:
-      - '0.08759'
+      - '0.08439'
       X-Transaction:
-      - a50b040ac42c2dc7
+      - 759bcbfafd91782d
       X-Ua-Compatible:
       - IE=edge,chrome=1
       X-Xss-Protection:
@@ -155,7 +155,7 @@ http_interactions:
       encoding: US-ASCII
       string: oauth_token=1365110203-1vOTfiRxvFPZtAWcEWSXQSE5swnwH9FbbcgFr3I&oauth_token_secret=DxreKIh6WdJe6fCtlI075R4l4tAFdeRHRf1Q3krfgRWyL&user_id=1365110203&screen_name=libtechnyu
     http_version: 
-  recorded_at: Fri, 15 Aug 2014 15:46:32 GMT
+  recorded_at: Tue, 19 Aug 2014 15:49:11 GMT
 - request:
     method: get
     uri: https://api.twitter.com/1.1/account/verify_credentials.json?include_entities=false&skip_status=true
@@ -168,9 +168,9 @@ http_interactions:
       User-Agent:
       - OAuth gem v0.4.7
       Authorization:
-      - OAuth oauth_consumer_key="<TWITTER_APP_KEY>", oauth_nonce="q41tsc6Vyi5tlVFMeREXJpL1BDEBayzbEPKrezVWIMU",
-        oauth_signature="2L%2F1RTS%2FiT9u0tzG3GqncYA7EFo%3D", oauth_signature_method="HMAC-SHA1",
-        oauth_timestamp="1408117592", oauth_token="1365110203-1vOTfiRxvFPZtAWcEWSXQSE5swnwH9FbbcgFr3I",
+      - OAuth oauth_consumer_key="<TWITTER_APP_KEY>", oauth_nonce="onwpoqdRfAoplkDMHV2f3drcjyUKnIJ1Qgb9QgofJ4",
+        oauth_signature="QzadEkNMxz%2BVXjtQ4quhsZ80AkI%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1408463351", oauth_token="1365110203-1vOTfiRxvFPZtAWcEWSXQSE5swnwH9FbbcgFr3I",
         oauth_version="1.0"
   response:
     status:
@@ -184,18 +184,18 @@ http_interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Fri, 15 Aug 2014 15:46:32 GMT
+      - Tue, 19 Aug 2014 15:49:12 GMT
       Expires:
       - Tue, 31 Mar 1981 05:00:00 GMT
       Last-Modified:
-      - Fri, 15 Aug 2014 15:46:32 GMT
+      - Tue, 19 Aug 2014 15:49:12 GMT
       Pragma:
       - no-cache
       Server:
       - tfe
       Set-Cookie:
-      - guest_id=v1%3A140811759256338477; Domain=.twitter.com; Path=/; Expires=Sun,
-        14-Aug-2016 15:46:32 UTC
+      - guest_id=v1%3A140846335205474171; Domain=.twitter.com; Path=/; Expires=Thu,
+        18-Aug-2016 15:49:12 UTC
       - lang=en
       Status:
       - 200 OK
@@ -210,11 +210,11 @@ http_interactions:
       X-Rate-Limit-Limit:
       - '15'
       X-Rate-Limit-Remaining:
-      - '13'
+      - '14'
       X-Rate-Limit-Reset:
-      - '1408118366'
+      - '1408464252'
       X-Transaction:
-      - 580316d8653c9399
+      - 4d46c6acdc88e64c
       X-Xss-Protection:
       - 1; mode=block
     body:
@@ -222,81 +222,5 @@ http_interactions:
       string: ! '{"id":1365110203,"id_str":"1365110203","name":"libtechnyu","screen_name":"libtechnyu","location":"","description":"","url":"http:\/\/t.co\/Ujmbv1PKeq","entities":{"url":{"urls":[{"url":"http:\/\/t.co\/Ujmbv1PKeq","expanded_url":"http:\/\/library.nyu.edu","display_url":"library.nyu.edu","indices":[0,22]}]},"description":{"urls":[]}},"protected":false,"followers_count":1,"friends_count":0,"listed_count":0,"created_at":"Fri
         Apr 19 18:32:13 +0000 2013","favourites_count":0,"utc_offset":null,"time_zone":null,"geo_enabled":false,"verified":false,"statuses_count":1,"lang":"en","contributors_enabled":false,"is_translator":false,"is_translation_enabled":false,"profile_background_color":"C0DEED","profile_background_image_url":"http:\/\/abs.twimg.com\/images\/themes\/theme1\/bg.png","profile_background_image_url_https":"https:\/\/abs.twimg.com\/images\/themes\/theme1\/bg.png","profile_background_tile":false,"profile_image_url":"http:\/\/abs.twimg.com\/sticky\/default_profile_images\/default_profile_2_normal.png","profile_image_url_https":"https:\/\/abs.twimg.com\/sticky\/default_profile_images\/default_profile_2_normal.png","profile_link_color":"0084B4","profile_sidebar_border_color":"C0DEED","profile_sidebar_fill_color":"DDEEF6","profile_text_color":"333333","profile_use_background_image":true,"default_profile":true,"default_profile_image":true,"following":false,"follow_request_sent":false,"notifications":false}'
     http_version: 
-  recorded_at: Fri, 15 Aug 2014 15:46:32 GMT
-- request:
-    method: get
-    uri: http://aleph.library.edu/X?bor_id=1365110203&cash=N&library=LIBRARY&loans=N&op=bor_info&sub_library=LIBRARY
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Faraday v0.9.0
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - ! '*/*'
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 15 Aug 2014 15:46:33 GMT
-      Server:
-      - ALEPH/5.20
-      Content-Type:
-      - text/xml; charset=UTF-8
-      Pragma:
-      - no-cache
-      Cache-Control:
-      - no-cache, no-store, must-revalidate
-      Expires:
-      - Sat, 01 Jan 2000 01:00:00 GMT
-      Content-Length:
-      - '193'
-    body:
-      encoding: US-ASCII
-      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
-        retrieving Patron System Key</error>\n<session-id>1I2HH7QVLPUR535MLNUJ45LT68V49AVJM8D7BISYE7X2SA2L8G</session-id>\n</bor-info>\n "
-    http_version: 
-  recorded_at: Fri, 15 Aug 2014 15:46:33 GMT
-- request:
-    method: get
-    uri: http://aleph.library.edu/X?bor_id=1365110203&cash=N&library=LIBRARY&loans=N&op=bor_info&sub_library=LIBRARY
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Faraday v0.9.0
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - ! '*/*'
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 15 Aug 2014 15:46:33 GMT
-      Server:
-      - ALEPH/5.20
-      Content-Type:
-      - text/xml; charset=UTF-8
-      Pragma:
-      - no-cache
-      Cache-Control:
-      - no-cache, no-store, must-revalidate
-      Expires:
-      - Sat, 01 Jan 2000 01:00:00 GMT
-      Content-Length:
-      - '193'
-    body:
-      encoding: US-ASCII
-      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-info>\n<error>Error
-        retrieving Patron System Key</error>\n<session-id>GR9N7GVNY3ARRH37F1E2MV8XJTNEPM27FCP871RJKGU1DV8VSL</session-id>\n</bor-info>\n "
-    http_version: 
-  recorded_at: Fri, 15 Aug 2014 15:46:33 GMT
+  recorded_at: Tue, 19 Aug 2014 15:49:12 GMT
 recorded_with: VCR 2.8.0

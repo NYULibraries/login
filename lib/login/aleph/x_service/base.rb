@@ -4,12 +4,12 @@ module Login
       class Base
         attr_accessor :host, :port, :path, :library, :sub_library
 
-        def initialize
-          @port = ENV["ALEPH_X_PORT"]
-          @host = (port == "443") ? "https://#{ENV["ALEPH_HOST"]}" : "http://#{ENV["ALEPH_HOST"]}"
-          @path = ENV["ALEPH_X_PATH"]
-          @library = ENV["ALEPH_LIBRARY"]
-          @sub_library = ENV["ALEPH_SUB_LIBRARY"]
+        def initialize(host = ENV["ALEPH_HOST"], port = ENV["ALEPH_X_PORT"], path = ENV["ALEPH_X_PATH"], library = ENV["ALEPH_LIBRARY"], sub_library = ENV["ALEPH_SUB_LIBRARY"])
+          @port = (port || "80")
+          @host = (port == "443") ? "https://#{host}" : "http://#{host}"
+          @path = (path || "/X")
+          @library = library
+          @sub_library = (sub_library || library)
         end
 
         def response
@@ -17,7 +17,11 @@ module Login
         end
 
         def error
-          @error ||= response.body[op]["error"]
+          @error ||= begin
+            response.body[op]["error"]
+          rescue NoMethodError => e
+            response.body["login"]["error"]
+          end
         end
 
         def error?

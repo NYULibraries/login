@@ -141,7 +141,7 @@ describe Api::V1::UsersController do
             end
 
             describe "Aleph identity properties" do
-              let(:bor_id) { let(:identifier) { ENV["TEST_ALEPH_USER"] || 'BOR_ID' } }
+              let(:bor_id) { ENV["TEST_ALEPH_USER"] || 'BOR_ID' }
               let(:identity) { "aleph" }
               subject { response_properties[property] }
 
