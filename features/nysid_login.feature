@@ -1,4 +1,4 @@
-@vcr
+@vcr @wip
 Feature: New York School of Interior Design login
   In order to use NYU Libraries' online services
   As a New York School of Interior Design user
