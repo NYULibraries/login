@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/NYULibraries/nyulibraries-assets.git
-  revision: 49621736bab7260524dd3093297a29f6dbd30457
+  revision: 872114add189bddea8daa9b9155578fceca6abc8
   branch: login-design
   specs:
     nyulibraries-assets (3.0.8)
@@ -364,7 +364,7 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    turbolinks (2.2.2)
+    turbolinks (2.2.3)
       coffee-rails
     tzinfo (0.3.41)
     uglifier (2.5.3)
