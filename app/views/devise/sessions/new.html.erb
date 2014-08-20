@@ -1,4 +1,8 @@
 <div id="logins" class="row-fluid">
-  <h1><%= t('application.header_html') %></h1>
-  <%= render "#{institution.views["login"]["primary"]}" %>
+  <% if request.path.include? "visitor" %>
+    <%= render "visitor" %>
+  <% else %>
+    <%= render "#{institution.views["login"]["primary"]}" %>
+  <% end %>
+  <h2 class="help"><span class="circle">?</span><span class="help_text"><%= t('application.footer_html', link: link_to('Ask a Librarian', 'http://library.nyu.edu/ask', target: '_blank')) %></span></h2>
 </div>
