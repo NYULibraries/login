@@ -1,4 +1,14 @@
 GIT
+  remote: git://github.com/NYULibraries/nyulibraries-assets.git
+  revision: 49621736bab7260524dd3093297a29f6dbd30457
+  branch: login-design
+  specs:
+    nyulibraries-assets (3.0.8)
+      bootstrap-sass (= 2.3.2.2)
+      compass (= 0.12.5)
+      institutions (~> 0.1.1)
+
+GIT
   remote: git://github.com/NYULibraries/nyulibraries-deploy.git
   revision: 84b4cc5fed4391122ae326f77b00e5857d7f6531
   branch: development-fig
@@ -21,14 +31,6 @@ GIT
     mustache-rails (0.2.3)
       actionpack (>= 3.1)
       mustache (~> 0.99.4)
-
-PATH
-  remote: /apps/nyulibraries-assets
-  specs:
-    nyulibraries-assets (3.0.8)
-      bootstrap-sass (= 2.3.2.2)
-      compass (= 0.12.5)
-      institutions (~> 0.1.1)
 
 GEM
   remote: https://rubygems.org/
