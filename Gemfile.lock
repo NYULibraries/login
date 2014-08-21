@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/NYULibraries/nyulibraries-assets.git
-  revision: 872114add189bddea8daa9b9155578fceca6abc8
+  revision: a7049c39f1219e543e50564305085dd78851b9d6
   branch: login-design
   specs:
     nyulibraries-assets (3.0.8)
