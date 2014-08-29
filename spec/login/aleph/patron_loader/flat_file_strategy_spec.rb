@@ -11,7 +11,7 @@ module Login
         it { should eq identifier }
       end
       describe '#patron' do
-        subject { bor_info_strategy.patron }
+        subject { flat_file_strategy.patron }
         context "when identifier is valid and returns a BorInfo object" do
           its(:identifier) { should eql identifier }
           its(:plif_status) { should be_nil }
