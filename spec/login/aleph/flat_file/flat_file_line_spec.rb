@@ -29,7 +29,7 @@ module Login
             end
             describe "#type" do
               subject { flatfileline.type }
-              it { should eq "0" }
+              it { should be_nil }
             end
             describe "#bor_name" do
               subject { flatfileline.bor_name }
@@ -104,7 +104,7 @@ module Login
             end
             describe "#type" do
               subject { flatfileline.type }
-              it { should eq "0" }
+              it { should be_nil }
             end
             describe "#bor_name" do
               subject { flatfileline.bor_name }

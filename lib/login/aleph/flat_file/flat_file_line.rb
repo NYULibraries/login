@@ -26,6 +26,10 @@ module Login
           end
         end
 
+        def type=(raw_type)
+          @type = raw_type.eql?("0") ? nil : raw_type 
+        end
+
         private
 
         def clean_new_line(line)
