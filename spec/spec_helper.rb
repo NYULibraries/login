@@ -16,6 +16,8 @@ SHIBBOLETH_ENV = {
   'sn' => 'Eloper',
   'uid' => 'dev1'
 }
+
+ENV['FLAT_FILE'] = "spec/data/patrons.dat"
 # Wear coveralls
 require 'coveralls'
 Coveralls.wear_merged!('rails')
