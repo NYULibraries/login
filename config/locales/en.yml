@@ -27,8 +27,8 @@ en:
         success: "Successfully authenticated from your %{kind} account."
   application:
     title_html: Login
-    header_html: Select your affiliation to begin
-    footer_html: I'm lost. I'd like to %{link}
+    header_html: Select your affiliation
+    footer_html: I'm lost. %{link}
     users:
       user:
         greeting_html: "Hi %{username}!"
