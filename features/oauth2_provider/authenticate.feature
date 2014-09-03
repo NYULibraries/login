@@ -1,4 +1,4 @@
-@omniauth_test @wip
+@omniauth_test 
 Feature: Authenticate as an OAuth2 client application
   In order to use an OAuth2 client application with Login as a provider
   As a user of the OAuth2 client application

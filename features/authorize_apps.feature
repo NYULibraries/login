@@ -1,4 +1,4 @@
-@omniauth_test @wip
+@omniauth_test
 Feature: Authorizing (OAuth2) client applications
   In order to use Login as an OAuth2 provider for NYU Libraries' service applications
   As an admin
