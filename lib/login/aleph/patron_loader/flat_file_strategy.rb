@@ -3,16 +3,16 @@ module Login
     class PatronLoader
       class FlatFileStrategy < Strategy
         def patron
-          @patron ||= flat_file_line.to_patron unless flat_file_line.nil?
+          @patron ||= patron_from_flat_file unless patron_from_flat_file.nil?
         end
 
         private
         def flat_file
-          @flat_file ||= Aleph::FlatFile::FlatFileLoader.new(ENV["FLAT_FILE"])
+          @flat_file ||= Aleph::FlatFile.new(ENV["FLAT_FILE"])
         end
 
-        def flat_file_line
-          @flat_file_line ||= flat_file.find_line_by_identity(identifier)
+        def patron_from_flat_file
+          @patron_from_flat_file ||= flat_file.find_patron_by_identifier(identifier)
         end
       end
     end
