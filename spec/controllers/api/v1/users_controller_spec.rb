@@ -83,7 +83,7 @@ describe Api::V1::UsersController do
 
               context "when property is the Aleph ID" do
                 let(:property) { "uid" }
-                it { should eql "N00000000" }
+                it { should eql (ENV["TEST_ALEPH_USER"] || 'BOR_ID') }
               end
 
               context "when the property is the extra attributes" do
