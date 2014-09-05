@@ -12,6 +12,9 @@ module Login
 
         ##
         # Override hash of extra attributes for merging into properties
+        # Merges a new hash with wanted attributes with the parent hash.
+        # Then merges again with the parent hash to get all the changes in parent.
+        # The resulting hash will be have everything we want with no dupes.
         def properties_attributes
           super.merge({
               extra: {
