@@ -12,7 +12,7 @@ module Login
 
         ##
         # Override hash of extra attributes for merging into properties
-        def extra_attributes
+        def properties_attributes
           super.merge({
               extra: {
                 plif_status: @omniauth_hash.extra.raw_info.bor_auth.z303.z303_birthplace,
