@@ -1,3 +1,4 @@
+@vcr
 Feature: NYU Shanghai Login
   In order to use NYU Libraries' online services
   As an NYU user in Shanghai with a NetID

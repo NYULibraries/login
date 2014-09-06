@@ -16,12 +16,15 @@ SHIBBOLETH_ENV = {
   'sn' => 'Eloper',
   'uid' => 'dev1'
 }
+
+ENV['FLAT_FILE'] = "spec/data/patrons.dat"
 # Wear coveralls
 require 'coveralls'
 Coveralls.wear_merged!('rails')
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
+require 'vcr'
 require 'database_cleaner'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
@@ -51,6 +54,9 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
+
+  # Add an exclusion filter
+  config.filter_run_excluding pending_implementation: true
 
   # Include Factory Girl convenience methods
   config.include FactoryGirl::Syntax::Methods
@@ -90,7 +96,20 @@ RSpec.configure do |config|
 
   config.around(:each) do |example|
     DatabaseCleaner.start
-    example.run
+    VCR.use_cassette('aleph bor info') do
+      example.run
+    end
     DatabaseCleaner.clean
   end
+end
+
+VCR.configure do |c|
+  c.filter_sensitive_data('&sub_library=BET') { "&sub_library=#{ENV["ALEPH_SUB_LIBRARY"]}" }
+  c.filter_sensitive_data('&library=ALEPH') { "&library=#{ENV["ALEPH_LIBRARY"]}" }
+  c.filter_sensitive_data('aleph.library.edu') { ENV["ALEPH_HOST"] }
+  c.filter_sensitive_data('BOR_ID') { ENV["TEST_ALEPH_USER"] }
+  c.default_cassette_options = { :record => :new_episodes, :allow_playback_repeats => true }
+  c.cassette_library_dir = 'spec/vcr_cassettes'
+  c.configure_rspec_metadata!
+  c.hook_into :webmock
 end

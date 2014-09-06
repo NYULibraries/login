@@ -1,3 +1,4 @@
+@vcr
 Feature: NYU Abu Dhabi Login
   In order to use NYU Libraries' online services
   As an NYU user in Abu Dhabi with a NetID

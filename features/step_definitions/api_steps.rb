@@ -13,6 +13,7 @@ end
 Then(/^I retrieve the attributes as JSON:$/) do |table|
   # Match retrieved result with expectant attrs
   table.rows_hash.each do |field_title, value|
+    value = (["N Number", "Aleph ID"].include?(field_title)) ? (ENV['TEST_ALEPH_USER'] || value) : value
     expect(last_response.body).to include "\"#{map_title_to_field(field_title)}\":\"#{value}\""
   end
 end

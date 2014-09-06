@@ -5,6 +5,7 @@
 # files.
 
 ENV['RAILS_ENV'] = 'cucumber'
+ENV['FLAT_FILE'] = 'spec/data/patrons.dat'
 
 require 'cucumber/rails'
 

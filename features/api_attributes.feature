@@ -1,4 +1,4 @@
-@omniauth_test
+@omniauth_test @vcr
 Feature: Get attributes from protected API when user is authenticated
   In order to have an identity in an NYU client applications
   As an authenticated user
@@ -11,7 +11,7 @@ Feature: Get attributes from protected API when user is authenticated
       | NetID       | snowj     |
       | Given Name  | Jon       |
       | Surname     | Snow      |
-      | N Number    | N00000000 |
+      | N Number    | BOR_ID    |
 
   Scenario: Logging in with NYU Shibboleth
     Given I am logged in as a "NYU Shibboleth" user
@@ -20,14 +20,14 @@ Feature: Get attributes from protected API when user is authenticated
       | NetID       | js123     |
       | Given Name  | Jon       |
       | Surname     | Snow      |
-      | N Number    | js123     |
+      | N Number    | BOR_ID    |
       | Entitlement | nothing   |
 
   Scenario: Logging in with Aleph
     Given I am logged in as an "Aleph" user
     When I request my attributes from the protected API
     Then I retrieve the attributes as JSON:
-      | Aleph ID       | N00000000      |
+      | Aleph ID       | BOR_ID         |
       | Patron Status  | Night's Watch  |
       | Patron Type    | Bastard        |
       | ILL Permission | Y              |

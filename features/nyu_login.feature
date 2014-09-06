@@ -1,3 +1,4 @@
+@vcr
 Feature: NYU Login
   In order to use NYU Libraries' online services
   As an NYU user in New York with a NetID

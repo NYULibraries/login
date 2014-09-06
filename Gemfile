@@ -73,7 +73,7 @@ gem "omniauth-facebook", "~> 1.6.0"
 gem "omniauth-twitter", "~> 1.0.1"
 # GitHub strategy
 gem "omniauth-github", "~> 1.1.1"
-gem "omniauth-aleph", "~> 0.1.0"
+gem "omniauth-aleph", "~> 0.1.3"
 gem "omniauth-ldap", "~> 1.0.4"
 
 # Use doorkeeper as our OAuth 2.0 provider
@@ -81,6 +81,9 @@ gem "doorkeeper", "~> 1.0.0"
 
 # Figs for configuration
 gem "figs", "~> 2.0.0"
+
+gem "faraday", "~> 0.9.0"
+gem "faraday_middleware", "~> 0.9.0"
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

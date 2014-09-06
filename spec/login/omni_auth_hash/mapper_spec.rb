@@ -28,9 +28,10 @@ describe Login::OmniAuthHash::Mapper do
 
   context "when provider is New School Ldap" do
     let(:provider) { "new_school_ldap" }
+    let(:bor_id) { ENV["TEST_ALEPH_USER"] || 'BOR_ID' }
 
-    describe "#to_hash" do
-      subject { mapper.to_hash }
+    describe "#to_h" do
+      subject { mapper.to_h }
       it { should be_a OmniAuth::AuthHash }
     end
 
@@ -41,7 +42,7 @@ describe Login::OmniAuthHash::Mapper do
 
     describe "#nyuidn" do
       subject { mapper.nyuidn }
-      it { should eql "N00000000" }
+      it { should eql bor_id }
     end
 
     describe "#provider" do
@@ -70,7 +71,7 @@ describe Login::OmniAuthHash::Mapper do
     let(:provider) { "malevolent" }
 
     it "should not be able to create an object from a non-whitelisted provider" do
-      expect { mapper.to_hash }.to raise_error ArgumentError
+      expect { mapper.to_h }.to raise_error ArgumentError
     end
   end
 

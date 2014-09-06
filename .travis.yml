@@ -5,7 +5,7 @@ rvm:
   - 2.1.0
 
 env:
-  - LOGIN_DB_USER=postgres LOGIN_SECRET_TOKEN=33032bbf4b90e9c1e7bddbfdec0ea9ae1e3626989ff9c86ced32c23fc5ceded08c3969c011604401b5aeaf742e6713627db6adb0765798e4c6d6e8b895ec96c6 TEST_TWITTER_USERNAME=libtechnyu
+  - LOGIN_DB_USER=postgres LOGIN_SECRET_TOKEN=33032bbf4b90e9c1e7bddbfdec0ea9ae1e3626989ff9c86ced32c23fc5ceded08c3969c011604401b5aeaf742e6713627db6adb0765798e4c6d6e8b895ec96c6 TEST_TWITTER_USERNAME=libtechnyu ALEPH_HOST=aleph.library.edu ALEPH_LIBRARY=ALEPH ALEPH_SUB_LIBRARY=BET
 
 before_script:
   - psql -c 'create database login_test;' -U $LOGIN_DB_USER
