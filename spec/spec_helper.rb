@@ -17,7 +17,6 @@ SHIBBOLETH_ENV = {
   'uid' => 'dev1'
 }
 
-ENV['FLAT_FILE'] = "spec/data/patrons.dat"
 # Wear coveralls
 require 'coveralls'
 Coveralls.wear_merged!('rails')
@@ -26,6 +25,9 @@ require 'rspec/rails'
 require 'rspec/autorun'
 require 'vcr'
 require 'database_cleaner'
+
+# Set flat file for testing.
+ENV['FLAT_FILE'] = "spec/data/patrons.dat"
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
