@@ -1,4 +1,4 @@
-@vcr
+@vcr @wip
 Feature: Facebook login
   In order to use NYU Libraries' online services
   As a visitor at Bobst Library with a Facebook account
