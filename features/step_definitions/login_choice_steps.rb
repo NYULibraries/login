@@ -1,4 +1,4 @@
-Then(/^I should (not )?see the NYU torch login button$/) do |negator|
+Then(/^I should (not )?see the NYU login button$/) do |negator|
   expectations_for_page(page, negator, *nyu_login_matchers)
 end
 

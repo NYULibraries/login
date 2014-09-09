@@ -10,7 +10,8 @@ end
 When(/^I click "Login"$/) do
   # Visit the auth url for this client
   visit client_authorize_url
-  click_on "Click to Login"
+  # Click on the Shibboleth button (which says "NYU")
+  click_on "NYU"
 end
 
 When(/^I have previously logged in to Login as an NYU Shibboleth user$/) do
@@ -21,7 +22,7 @@ end
 When(/^I login to Login as an NYU Shibboleth user$/) do
   set_nyu_shibboleth_login_env
   visit client_authorize_url
-  click_on "Click to Login"
+  click_on "NYU"
 end
 
 Then(/^I should (not )?see the Login page$/) do |negator|

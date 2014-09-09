@@ -28,8 +28,8 @@ module LoginFeatures
 
     def nyu_login_matchers
       @nyu_login_matchers ||= [
-        -> { have_content 'Login with an NYU NetID' },
-        -> { have_css '#shibboleth .btn' }
+        -> { have_css '#nyu_shibboleth-login' },
+        -> { have_xpath '//div[@id="nyu_shibboleth-login"]'}
       ]
     end
 
@@ -66,49 +66,49 @@ module LoginFeatures
 
     def nyu_option_matchers
       @nyu_option_matchers ||= [
-        -> { have_content 'NYU Libraries' },
+        -> { have_content 'NYU' },
         -> { have_css '.nyu.alt-login' }
       ]
     end
 
     def ns_option_matchers
       @ns_option_matchers ||= [
-        -> { have_content 'New School Libraries' },
+        -> { have_content 'The New School' },
         -> { have_css '.ns.alt-login' }
       ]
     end
 
     def cu_option_matchers
       @cu_option_matchers ||= [
-        -> { have_content 'The Cooper Union Library' },
+        -> { have_content 'Cooper Union' },
         -> { have_css '.cu.alt-login' }
       ]
     end
 
     def nysid_option_matchers
       @nysid_option_matchers ||= [
-        -> { have_content 'New York School of Interior Design' },
+        -> { have_content 'NYSID' },
         -> { have_css '.nysid.alt-login' }
       ]
     end
 
     def bobst_option_matchers
       @bobst_option_matchers ||= [
-        -> { have_content "NYU Libraries' Affiliates" },
+        -> { have_content "Other Borrowers" },
         -> { have_css '.bobst.alt-login' }
       ]
     end
 
     def facebook_option_matchers
       @facebook_option_matchers ||= [
-        -> { have_content 'Facebook' },
+        -> { have_content 'Visitors' },
         -> { have_css '.facebook.alt-login' }
       ]
     end
 
     def twitter_option_matchers
       @twitter_option_matchers ||= [
-        -> { have_content 'Twitter' },
+        -> { have_content 'Visitors' },
         -> { have_css '.twitter.alt-login' }
       ]
     end
