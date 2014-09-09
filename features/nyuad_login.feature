@@ -6,6 +6,6 @@ Feature: NYU Abu Dhabi Login
 
   Scenario: Logging in with NYU NetID and Password
     Given I am on the NYU Abu Dhabi login page
-    When I click on the NYU NetID "Click to Login" button
+    When I click on the "NYU" button
     And NYU Home authenticates me
     Then I should be logged in as an NYU user

@@ -1,4 +1,4 @@
-@twitter_login
+@twitter_login @wip
 Feature: Twitter login
   In order to use NYU Libraries' online services
   As a visitor at Bobst Library with a Twitter account

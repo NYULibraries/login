@@ -90,14 +90,15 @@ module LoginFeatures
     def follow_login_steps_for_location(location)
       case location
       when /New School LDAP$/
-        click_on "New School Libraries"
+        click_on "The New School"
         click_on "Login"
       when /NYU Shibboleth$/
-        click_on "Click to Login"
+        click_on "NYU"
       when /Aleph$/
-        click_on "NYU Libraries' Affiliates"
-        click_button 'Login'
+        click_on "Other Borrowers"
+        click_button "Login"
       when /Facebook$/
+        click_on "Visitors"
         click_on "Facebook"
       else
         raise "Unknown location!"

@@ -4,7 +4,11 @@ module Views
     class Login < ActionView::Mustache
       # Add Login to the breadcrumbs
       def breadcrumbs
-        super << "Login"
+        breadcrumbs = []
+        if breadcrumbs.empty?
+          breadcrumbs << link_to(views["breadcrumbs"]["title"], views["breadcrumbs"]["url"])
+          breadcrumbs << "Login"
+        end
       end
 
       # Override to only link to logout

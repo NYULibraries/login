@@ -27,6 +27,8 @@ en:
         success: "Successfully authenticated from your %{kind} account."
   application:
     title_html: Login
+    header_html: Select your affiliation
+    footer_html: I'm lost. %{link}
     users:
       user:
         greeting_html: "Hi %{username}!"
@@ -41,7 +43,7 @@ en:
         require_login: Please log in
     nyu:
       header: Login with an NYU NetID
-      link_text: Click to Login
+      link_text: NYU
     ns:
       header: Login with a New School NetID
       username_label: Enter your NetID Username
@@ -62,3 +64,6 @@ en:
       username_label: Enter your ID Number
       username_placeholder: "e.g. N12345678"
       password_label: First four letter of your last name
+    general_public:
+      header: Login with your Facebook or Twitter account
+      link_text: Visitors
