@@ -67,7 +67,7 @@ module LoginFeatures
     def nyu_option_matchers
       @nyu_option_matchers ||= [
         -> { have_content 'NYU' },
-        -> { have_css '.nyu.alt-login' }
+        -> { have_css '#nyu_shibboleth-login' }
       ]
     end
 
@@ -99,17 +99,10 @@ module LoginFeatures
       ]
     end
 
-    def facebook_option_matchers
-      @facebook_option_matchers ||= [
+    def visitor_option_matchers
+      @visitor_option_matchers ||= [
         -> { have_content 'Visitors' },
-        -> { have_css '.facebook.alt-login' }
-      ]
-    end
-
-    def twitter_option_matchers
-      @twitter_option_matchers ||= [
-        -> { have_content 'Visitors' },
-        -> { have_css '.twitter.alt-login' }
+        -> { have_css '#visitor-login' }
       ]
     end
 
