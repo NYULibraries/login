@@ -82,6 +82,8 @@ module LoginFeatures
         set_nyu_shibboleth_login_env
       when /Aleph$/
         set_aleph_login_env
+      when /Facebook$/
+        set_facebook_login_env
       else
         raise "Unknown location!"
       end
