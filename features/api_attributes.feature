@@ -43,3 +43,14 @@ Feature: Get attributes from protected API when user is authenticated
       | Nickname    | jonsnow         |
       | Name        | Jon Snow        |
       | Email       | snowj@1nyu.edu  |
+
+  Scenario: Logging in with Twitter
+    Given I am logged in as an "Twitter" user
+    When I request my attributes from the protected API
+    Then I retrieve the attributes as JSON:
+      | First Name  | Jon             |
+      | Last Name   | Snow            |
+      | Location    | The Wall        |
+      | Nickname    | @knowsnothing   |
+      | Name        | Jon Snow        |
+      | Email       | snowj@1nyu.edu  |
