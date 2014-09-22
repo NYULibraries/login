@@ -84,6 +84,8 @@ module LoginFeatures
         set_aleph_login_env
       when /Facebook$/
         set_facebook_login_env
+      when /Twitter$/
+        set_twitter_login_env
       else
         raise "Unknown location!"
       end
@@ -102,6 +104,9 @@ module LoginFeatures
       when /Facebook$/
         click_on "Visitors"
         click_on "Facebook"
+      when /Twitter$/
+        click_on "Visitors"
+        click_on "Twitter"
       else
         raise "Unknown location!"
       end
