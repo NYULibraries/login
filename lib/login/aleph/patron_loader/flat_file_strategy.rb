@@ -8,7 +8,7 @@ module Login
 
         private
         def flat_file
-          @flat_file ||= Aleph::FlatFile.new(ENV["FLAT_FILE"])
+          @flat_file ||= Aleph::FlatFile.new(ENV["FLAT_FILE"], ENV["FLAT_FILE_ENCODING"])
         end
 
         def patron_from_flat_file
