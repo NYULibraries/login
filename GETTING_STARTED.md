@@ -6,7 +6,7 @@ To do so, you must have access to an Admin account in the login system.
 
 ## Providers and Clients
 
-NYU Libraries central login system is an Oauth2 Provider. What this means is that after a user is authenticated by this application, their data can be authorized to another _client_ application provided that _client_ is registered within the login system as a __Client Application__.
+NYU Libraries central login system is an Oauth2 Provider. What this means is that after a user is authenticated by this application, their data can be authorized by the Login system to another _client_ application without user interaction, provided that _client_ is registered within the login system as a __Client Application__.
 
 The 'Client Application' will be the role that you application will play when trying to connect to NYU Libraries central login system.
 
