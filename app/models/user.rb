@@ -11,7 +11,9 @@ class User < ActiveRecord::Base
   attr_reader :omniauth_hash_map
 
   # Create an identity from the OmniAuth::AuthHash after the user is created
-  after_save :create_or_update_identity_from_omniauth_hash
+  after_save :create_or_update_identity_from_omniauth_hash, if: "omniauth_hash_map.present?"
+  # Create an identity from Aleph if the user is in Aleph
+  after_save :create_or_update_aleph_identity, if: Proc.new { omniauth_hash_map.present? && omniauth_hash_map.nyuidn.present? && provider != "aleph" }
 
   # Available devise modules are:
   # :database_authenticatable, :registerable,
@@ -53,12 +55,20 @@ class User < ActiveRecord::Base
 
   # Update identity assoc from OmniAuth hash if it's expired
   def create_or_update_identity_from_omniauth_hash
-    # Validate OmniAuth::AuthHash representation of the hash mapper
-    if omniauth_hash_map.present?
-      # And create or update an identity from the attributes mapped in the mapper
-      identity = identities.find_or_initialize_by(uid: omniauth_hash_map.uid, provider: omniauth_hash_map.provider)
-      identity.properties = omniauth_hash_map.properties if identity.expired?
-      identity.save
+    # Create or update an identity from the attributes mapped in the mapper
+    identity = identities.find_or_initialize_by(uid: omniauth_hash_map.uid, provider: omniauth_hash_map.provider)
+    identity.properties = omniauth_hash_map.properties if identity.expired?
+    identity.save
+  end
+
+  def create_or_update_aleph_identity
+    identity = identities.find_or_initialize_by(uid: omniauth_hash_map.nyuidn, provider: "aleph")
+    if identity.expired?
+      aleph_patron = Login::Aleph::PatronLoader.new(omniauth_hash_map.nyuidn).patron
+      if aleph_patron.present?
+        identity.properties.merge!(aleph_patron.attributes)
+        identity.save
+      end
     end
   end
 end

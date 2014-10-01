@@ -1,8 +1,36 @@
-<div id="shibboleth">
-  <h2>
-    <%= t('application.nyu.header') %>
-  </h2>
-  <p>
-    <%= link_to t('application.nyu.link_text'), user_omniauth_authorize_path(:nyu_shibboleth, institute: current_institute.code), class: "btn" %>
-  </p>
+<h1><%= t('application.header_html') %></h1>
+<div class="row-fluid">
+  <div id="nyu_shibboleth-login" class="span9 primary-login">
+    <div class="alt-login-link">
+      <%= link_to content_tag(:span, t('application.nyu.link_text')), user_omniauth_authorize_path(:nyu_shibboleth, institute: current_institute.code) %>
+      <%= content_tag(:span, t('application.nyu.link_text')) %>
+    </div>
+  </div>
+  <%- option = institution.views["login"]["secondary"].first -%>
+  <%- name = Institutions.institutions[option.upcase.to_sym].views["login"]["name"] -%>
+  <%= content_tag(:div, class: [option, "alt-login", "span3", "square"], id: "#{option}-login") do
+        content_tag(:div, class: "alt-login-link") do
+          link_to(content_tag(:span, name), login_path(option), title: "#{name}")+
+          content_tag(:span, name)
+        end 
+    end %>
+</div>
+<div class="row-fluid">
+  <% institution.views["login"]["secondary"][1..-1].each do |option| %>
+    <%- name = Institutions.institutions[option.upcase.to_sym].views["login"]["name"] -%>
+    <%= content_tag(:div, class: [option, "alt-login", "span3", "square"], id: "#{option}-login") do
+          content_tag(:div, class: "alt-login-link") do
+            link_to(content_tag(:span, name), login_path(option), title: "#{name}")+
+            content_tag(:span, name)
+          end
+      end %>
+  <% end %>
+  <%- if institution.views["login"]["general_public"] -%>
+    <%= content_tag(:div, class: ["alt-login", "span3", "square"], id: "visitor-login") do
+          content_tag(:div, class: "alt-login-link") do
+            link_to(content_tag(:span, t('application.general_public.link_text')), login_path("visitor"), title: t('application.general_public.link_text'))+
+            content_tag(:span, t('application.general_public.link_text'))
+          end
+      end %>
+  <%- end -%>
 </div>

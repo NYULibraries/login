@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.0.5'
+gem 'rails', '~> 4.0.9'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.17.1'
@@ -37,13 +37,13 @@ gem "mustache", "0.99.4"
 gem "mustache-rails", git: "git://github.com/josh/mustache-rails.git", :require => "mustache/railtie"
 
 # Use the NYU Libraries assets gem
-gem "nyulibraries-assets", git: "git://github.com/NYULibraries/nyulibraries-assets.git", branch: 'development-login-remove-privileges'
+gem "nyulibraries-assets", git: "git://github.com/NYULibraries/nyulibraries-assets.git", branch: 'login-design'
 # gem "nyulibraries-assets", git: "git://github.com/NYULibraries/nyulibraries-assets.git", tag: 'v3.0.1'
 # gem "nyulibraries-assets", path: "/apps/nyulibraries-assets"
 # gem "nyulibraries-assets", path: "/Users/dalton/Documents/workspace/nyulibraries-assets"
 
 # Use the NYU Libraries deploy gem
-gem "nyulibraries-deploy", git: "git://github.com/NYULibraries/nyulibraries-deploy.git" , branch: 'development-fig'
+gem "formaggio", git: "git://github.com/NYULibraries/formaggio.git", tag: "v1.0.0"
 # gem "nyulibraries-deploy", path: "/apps/nyulibraries-deploy"
 
 # Used for determining which institution is in play
@@ -73,7 +73,7 @@ gem "omniauth-facebook", "~> 1.6.0"
 gem "omniauth-twitter", "~> 1.0.1"
 # GitHub strategy
 gem "omniauth-github", "~> 1.1.1"
-gem "omniauth-aleph", "~> 0.1.0"
+gem "omniauth-aleph", "~> 0.1.3"
 gem "omniauth-ldap", "~> 1.0.4"
 
 # Use doorkeeper as our OAuth 2.0 provider
@@ -81,6 +81,9 @@ gem "doorkeeper", "~> 1.0.0"
 
 # Figs for configuration
 gem "figs", "~> 2.0.0"
+
+gem "faraday", "~> 0.9.0"
+gem "faraday_middleware", "~> 0.9.0"
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

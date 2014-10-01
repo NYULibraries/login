@@ -28,7 +28,7 @@ FactoryGirl.define do
             pdsexternalsystemid:
               ["12345::gtmb",
               "snowj@1newschool.edu::mir3",
-              "N00000000::sct"],
+              "#{(ENV["TEST_ALEPH_USER"] || 'BOR_ID')}::sct"],
             mail: ["snowj@1newschool.edu"],
             sn: ["Snow"],
             pdsemaildefaultaddress: ["snowj@1newschool.edu"],
@@ -57,13 +57,16 @@ FactoryGirl.define do
       end
       extra do
         {
-          entitlement: "nothing"
+          raw_info: {
+            nyuidn: (ENV["TEST_ALEPH_USER"] || 'BOR_ID'),
+            entitlement: "nothing"
+          }
         }
       end
     end
     trait :aleph do
       provider "aleph"
-      uid "N00000000"
+      uid (ENV["TEST_ALEPH_USER"] || 'BOR_ID')
       info do
         {
           name: "SNOW, JON",
@@ -71,7 +74,7 @@ FactoryGirl.define do
           last_name: "Snow",
           email: "snowj@1nyu.edu",
           nickname: "SNOW",
-          uid: "N00000000",
+          uid: (ENV["TEST_ALEPH_USER"] || 'BOR_ID'),
           location: "The Wall",
           phone: "123-456-7890"
         }
@@ -121,26 +124,12 @@ FactoryGirl.define do
         }
       end
     end
-    trait :admin do
-      provider "facebook"
-      info do
-        {
-          name: "Jon Snow",
-          first_name: "Jon",
-          last_name: "Snow",
-          email: "admin@example.com",
-          nickname: "jonsnow",
-          location: "The Wall"
-        }
-      end
-    end
 
     factory :new_school_ldap_authhash, traits: [:new_school_ldap]
     factory :nyu_shibboleth_authhash, traits: [:nyu_shibboleth]
     factory :twitter_authhash, traits: [:twitter]
     factory :facebook_authhash, traits: [:facebook]
     factory :aleph_authhash, traits: [:aleph]
-    factory :admin_authhash, traits: [:admin]
 
     factory :invalid_provider_authhash do
       uid "invalid"

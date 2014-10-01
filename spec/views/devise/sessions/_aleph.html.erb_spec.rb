@@ -4,7 +4,7 @@ describe "devise/sessions/_aleph.html.erb" do
   subject { render; rendered }
   it do
     should match(/<div id="aleph">/)
-    should match(/<h2>\s+Login with/)
+    should match(/<h1>\s+Login with/)
     should match(/<form/)
     should match('method="post"')
     should match(/action="\/users\/auth\/aleph\/callback\?institute=/)

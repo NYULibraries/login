@@ -13,12 +13,12 @@ module Login
           @username = ldap_hash[:pdsloginid].first
           # Map to N Number - Found in LDAP response as a value under "pdsexternalsystemid" array with a "::sct" suffix
           @nyuidn = extract_value_from_keyed_array(ldap_hash[:pdsexternalsystemid], "sct")
-          @properties = @omniauth_hash.info.merge(extra_attributes)
+          @properties = omniauth_hash.info.merge(properties_attributes)
         end
 
         # Convenience method to extract Net::LDAP::Entry from OmniAuth::AuthHash, accessible as a hash
         def ldap_hash
-          @ldap_hash ||= @omniauth_hash.extra.raw_info
+          @ldap_hash ||= omniauth_hash.extra.raw_info
         end
         private :ldap_hash
 

@@ -1,4 +1,4 @@
-Then(/^I should (not )?see the NYU torch login button$/) do |negator|
+Then(/^I should (not )?see the NYU button$/) do |negator|
   expectations_for_page(page, negator, *nyu_login_matchers)
 end
 
@@ -30,14 +30,10 @@ Then(/^I should (not )?see an option to login with a NYSID account$/) do |negato
   expectations_for_page(page, negator, *nysid_option_matchers)
 end
 
-Then(/^I should (not )?see an option to login with an NYU Libraries Affiliates' account$/) do |negator|
+Then(/^I should (not )?see an option to login as an Other Borrower$/) do |negator|
   expectations_for_page(page, negator, *bobst_option_matchers)
 end
 
-Then(/^I should (not )?see an option to login with a Twitter account$/) do |negator|
-  expectations_for_page(page, negator, *twitter_option_matchers)
-end
-
-Then(/^I should (not )?see an option to login with a Facebook account$/) do |negator|
-  expectations_for_page(page, negator, *facebook_option_matchers)
+Then(/^I should (not )?see an option to login as a Visitor$/) do |negator|
+  expectations_for_page(page, negator, *visitor_option_matchers)
 end

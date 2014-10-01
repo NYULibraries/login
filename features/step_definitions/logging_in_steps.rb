@@ -40,12 +40,12 @@ Then(/^I should be redirected to the (.+?) login page$/) do |location|
   expect_login_page_for(location)
 end
 
-When(/^I click on the NYU NetID "Click to Login" button$/) do
-  expect(page).to have_xpath("//a[contains(@href, '#{user_omniauth_authorize_path(:provider => "nyu_shibboleth")}')]")
-end
-
 When(/^I click on the "(.*?)" button$/) do |button|
-  click_on button
+  if button == "NYU"
+    expect(page).to have_xpath("//a[contains(@href, '#{user_omniauth_authorize_path(:provider => "nyu_shibboleth")}')]")
+  else
+    click_on button
+  end
 end
 
 When(/^I enter my Library Patron ID for "(.*?)" and first four letters of my last name$/) do |location|

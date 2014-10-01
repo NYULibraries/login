@@ -82,6 +82,10 @@ module LoginFeatures
         set_nyu_shibboleth_login_env
       when /Aleph$/
         set_aleph_login_env
+      when /Facebook$/
+        set_facebook_login_env
+      when /Twitter$/
+        set_twitter_login_env
       else
         raise "Unknown location!"
       end
@@ -90,25 +94,29 @@ module LoginFeatures
     def follow_login_steps_for_location(location)
       case location
       when /New School LDAP$/
-        click_on "New School Libraries"
+        click_on "The New School"
         click_on "Login"
       when /NYU Shibboleth$/
-        click_on "Click to Login"
+        click_on "NYU"
       when /Aleph$/
-        click_on "NYU Libraries' Affiliates"
-        click_button 'Login'
+        click_on "Other Borrowers"
+        click_button "Login"
       when /Facebook$/
+        click_on "Visitors"
         click_on "Facebook"
+      when /Twitter$/
+        click_on "Visitors"
+        click_on "Twitter"
       else
         raise "Unknown location!"
       end
+    end
 
-      def provider_to_location
-        {
-          "facebook" => "Facebook",
-          "nyu_shibboleth" => "NYU Shibboleth"
-        }
-      end
+    def provider_to_location
+      {
+        "facebook" => "Facebook",
+        "nyu_shibboleth" => "NYU Shibboleth"
+      }
     end
   end
 end

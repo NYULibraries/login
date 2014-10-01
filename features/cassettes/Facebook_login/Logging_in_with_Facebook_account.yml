@@ -5,7 +5,7 @@ http_interactions:
     uri: https://graph.facebook.com/oauth/access_token
     body:
       encoding: US-ASCII
-      string: client_id=<FACEBOOK_APP_KEY>&client_secret=<FACEBOOK_APP_SECRET>&code=AQAJFoFVDDYc9KC31Id7efmgLrDffW4Vkk3xJy4fVZyNS_3EebTOD85GfHqiEDkDIFo3Bqqorf7OxbzffHrwvD1VEy8NTGDPPAQ3dxQHBUNpYTGKIwsnoNnLRiBI80BNA55zKC1iZaRn_TMFufy2yLep_zv22CSQ5PoibceNyuumdpbxE0nQZpJF3AWvnAGdp10kBSYS3vq7vMzw7t6hxT92T2-tF7X38SP7WYBQjv6E2AMuWaDxQS9fY_1pf5IVrVeb9zPcLsF57GcRePC3eKWtNb9Nnbjm9YI94ZBabi_1e7B8mk4tYT9bVadSk92cgXU&grant_type=authorization_code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fusers%2Fauth%2Ffacebook%2Fcallback
+      string: client_id=<FACEBOOK_APP_KEY>&client_secret=<FACEBOOK_APP_SECRET>&code=AQDqtAwlDXT_N5JRRRQQwpnuGtJKwippM05cQXEv2kTZj5vbuyvtbdijvr5cKO8Azq8URz__pFewachP6gp5QfBmPsRqWQ8TU4ZjjHf373XtDi2UlH7DauzXJaTtWmTPrfwAzKfh0rY2huuv4d9acUEthwvCZRV7id1txExJ5kuuidYBWAj_lriLSNYlizFCbEDjKxrWrCwa9iS0t_SS-D8LRdkn6lV8ztorUTkfGKT90gS9twAsxK-O1HZyCn94hWwu6gTgcX0WFYDCWmK2GMkAR7BILmf7y2o_2UfaFcVcJVwuoqbKeFHmDw237oxKe94&grant_type=authorization_code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fusers%2Fauth%2Ffacebook%2Fcallback
     headers:
       User-Agent:
       - Faraday v0.9.0
@@ -18,6 +18,8 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      Facebook-Api-Version:
+      - v1.0
       Content-Type:
       - text/plain; charset=UTF-8
       Pragma:
@@ -25,27 +27,27 @@ http_interactions:
       Access-Control-Allow-Origin:
       - ! '*'
       X-Fb-Rev:
-      - '1286616'
+      - '1404598'
       Cache-Control:
       - private, no-cache, no-store, must-revalidate
       Expires:
       - Sat, 01 Jan 2000 00:00:00 GMT
       X-Fb-Debug:
-      - kOqQGK5uXtYhcU5F3AvoOWCN7jFolPb6iJQleg7AKNMuWdW8Llw8aYmaovQwaGeCo5dXTh0JoDD72V86LTB9NA==
+      - pbnjy9W1jEQa7/2CKtzONfFsUQQhYLRBhs1OcqM5wRK723h0wZDJ4eCle/wVwWMi8991FznkGEAka3fLTRB0Zw==
       Date:
-      - Thu, 12 Jun 2014 17:10:43 GMT
+      - Tue, 09 Sep 2014 16:40:53 GMT
       Connection:
       - keep-alive
       Content-Length:
-      - '226'
+      - '214'
     body:
       encoding: US-ASCII
-      string: access_token=CAAUrU0w6SfQBAGgmjnSBSkgBEaNz80bjOJNfe0V8c6UcQtucIZAUXU42lt0fDzBwM6KvxSoYHy9jJhYZBrfHcxvaIwTCuzSxfyg1znDyY3fmttHVslukJWViLD38ixGfZAmW5Y3XhyMDmZCH11mrAOuFDgFS2yFI1sSZC98aFH15xHZCOZADgpf3avY0fcIA6YZD&expires=5181974
+      string: access_token=CAAUrU0w6SfQBACwmZAhMleCOJ6saZAxnNcvTM1z9SoHN0oFXZBR26DXaZBBkpEZB0gtrb2s6487I0QxhypgolwMiPdcU83ClfZCzIGn6HYQKuP0SYtStpX9ZBzTBkYlfmsHabLeVKC2FFQO04yaSui9mcMHEzWgrzjebsZBVLnrJ5HtfMAG81oo0&expires=5183999
     http_version: 
-  recorded_at: Thu, 12 Jun 2014 17:10:43 GMT
+  recorded_at: Tue, 09 Sep 2014 16:40:53 GMT
 - request:
     method: get
-    uri: https://graph.facebook.com/me?appsecret_proof=42e013ef2afafe80fbf079ecc133fe07bf8fc84df728962b14742caaa2a7da3d
+    uri: https://graph.facebook.com/me?appsecret_proof=9526ee1fad617f2508884af0b47253acd55f6bc8d6cdc97bc72b3cd16088f083
     body:
       encoding: US-ASCII
       string: ''
@@ -53,7 +55,7 @@ http_interactions:
       User-Agent:
       - Faraday v0.9.0
       Authorization:
-      - OAuth CAAUrU0w6SfQBAGgmjnSBSkgBEaNz80bjOJNfe0V8c6UcQtucIZAUXU42lt0fDzBwM6KvxSoYHy9jJhYZBrfHcxvaIwTCuzSxfyg1znDyY3fmttHVslukJWViLD38ixGfZAmW5Y3XhyMDmZCH11mrAOuFDgFS2yFI1sSZC98aFH15xHZCOZADgpf3avY0fcIA6YZD
+      - OAuth CAAUrU0w6SfQBACwmZAhMleCOJ6saZAxnNcvTM1z9SoHN0oFXZBR26DXaZBBkpEZB0gtrb2s6487I0QxhypgolwMiPdcU83ClfZCzIGn6HYQKuP0SYtStpX9ZBzTBkYlfmsHabLeVKC2FFQO04yaSui9mcMHEzWgrzjebsZBVLnrJ5HtfMAG81oo0
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -65,6 +67,8 @@ http_interactions:
     headers:
       Last-Modified:
       - '2014-06-11T15:48:24+0000'
+      Facebook-Api-Version:
+      - v1.0
       Etag:
       - ! '"43bbf1c8ba076afa311a84cc045a2d866d6b1b3e"'
       Content-Type:
@@ -74,15 +78,15 @@ http_interactions:
       Access-Control-Allow-Origin:
       - ! '*'
       X-Fb-Rev:
-      - '1286616'
+      - '1404598'
       Cache-Control:
       - private, no-cache, no-store, must-revalidate
       Expires:
       - Sat, 01 Jan 2000 00:00:00 GMT
       X-Fb-Debug:
-      - 418LuKVgGXQ8Bgm3P0soiO+wfQFO9zwHbQRial4PJlj2ZDvLLNw4JVhYYqcYYvKYUMElX6g4s0l+HCElFF2gdQ==
+      - qPo4Ju/JGx//lKHF8S3e9O+RKSOP+UbnlrwZtV17Lrc42KvJyDmfr42nmgge5OAv3lRZF+hh/yLrn1Sl0MJNMg==
       Date:
-      - Thu, 12 Jun 2014 17:10:44 GMT
+      - Tue, 09 Sep 2014 16:40:54 GMT
       Connection:
       - keep-alive
       Content-Length:
@@ -92,5 +96,5 @@ http_interactions:
       string: ! '{"id":"100006735525487","email":"harry_hraiolj_dinglewitz\u0040tfbnw.net","first_name":"Harry","gender":"male","last_name":"Dinglewitz","link":"https:\/\/www.facebook.com\/profile.php?id=100006735525487","locale":"en_US","middle_name":"Amfgceebedhg","name":"Harry
         Amfgceebedhg Dinglewitz","timezone":0,"updated_time":"2014-06-11T15:48:24+0000","verified":false}'
     http_version: 
-  recorded_at: Thu, 12 Jun 2014 17:10:44 GMT
+  recorded_at: Tue, 09 Sep 2014 16:40:54 GMT
 recorded_with: VCR 2.8.0

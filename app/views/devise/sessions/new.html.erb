@@ -1,24 +1,8 @@
 <div id="logins" class="row-fluid">
-  <div class="span5 well">
+  <% if request.path.include? "visitor" %>
+    <%= render "visitor" %>
+  <% else %>
     <%= render "#{institution.views["login"]["primary"]}" %>
-  </div>
-  <div class="span5 well">
-    <h2>
-      Alternative Logins
-    </h2>
-    <% institution.views["login"]["secondary"].each do |option| %>
-      <%- name = Institutions.institutions[option.upcase.to_sym].name -%>
-      <%= content_tag(:div, class: [option, "alt-login"]) do
-          link_to("#{name}", login_path(option), title: "#{name}")
-        end %>
-    <% end %>
-    <%- if institution.views["login"]["general_public"] -%>
-      <div class="facebook alt-login">
-        <%= link_to "Facebook", user_omniauth_authorize_path(:facebook, institute: current_institute.code), title: "Login via Facebook" %>
-      </div>
-      <div class="twitter alt-login">
-        <%= link_to "Twitter", user_omniauth_authorize_path(:twitter, institute: current_institute.code), title: "Login via Twitter" %>
-      </div>
-    <%- end -%>
-  </div>
+  <% end %>
+  <h2 class="help"><span class="circle">?</span><span class="help_text"><%= t('application.footer_html', link: link_to('Ask a Librarian', 'http://library.nyu.edu/ask', target: '_blank')) %></span></h2>
 </div>
