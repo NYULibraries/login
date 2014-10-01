@@ -1,6 +1,6 @@
 # Contract
 
-The NYU Libraries Central Login system is an OAuth2 provider that allows automatic authentication. Because of this, we have very strict requirements for becoming a client application. The documentation on the process of becoming a client application will be coming soon.
+The NYU Libraries Central Login system is an OAuth2 provider that allows automatic authentication. Because of this, we have very strict requirements for becoming a client application. The documentation on the process of becoming a client application will be coming soon. As an Oauth2 provider, all calls are made over HTTPS calls.
 
 ## Adding your application as a client
 
