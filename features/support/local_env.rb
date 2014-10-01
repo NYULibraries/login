@@ -44,4 +44,4 @@ end
 Capybara.app_host = 'http://localhost:3000'
 Capybara.server_port = 3000
 # Set flat file for testing.
-ENV['FLAT_FILE'] = 'spec/data/patrons.dat'
+ENV['FLAT_FILE'] = 'spec/data/patrons-UTF-8.dat'

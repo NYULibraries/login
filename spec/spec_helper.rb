@@ -27,7 +27,7 @@ require 'vcr'
 require 'database_cleaner'
 
 # Set flat file for testing.
-ENV['FLAT_FILE'] = "spec/data/patrons.dat"
+ENV['FLAT_FILE'] = "spec/data/patrons-UTF-8.dat"
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
