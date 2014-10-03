@@ -7,6 +7,7 @@ module Login
       class NYUShibboleth < Base
         def initialize(omniauth_hash)
           super(omniauth_hash)
+          @institution_code = "NYU"
           @nyuidn = omniauth_hash.extra.raw_info.nyuidn
           @properties = omniauth_hash.info.merge(properties_attributes)
         end
