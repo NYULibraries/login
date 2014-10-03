@@ -8,6 +8,7 @@ module Login
 
         def initialize(omniauth_hash)
           super(omniauth_hash)
+          @institution_code = "NS"
           # Map to NetID - Found in LDAP response as "pdsloginid"
           @uid = ldap_hash[:pdsloginid].first
           @username = ldap_hash[:pdsloginid].first
