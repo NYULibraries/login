@@ -86,11 +86,16 @@ describe Api::V1::UsersController do
                 it { should eql (ENV["TEST_ALEPH_USER"] || 'BOR_ID') }
               end
 
+              context "when the property is the institution_code attributes" do
+                let(:property) { "institution_code" }
+                it { should eql "NYU" }
+              end
+
               context "when the property is the extra attributes" do
                 let(:property) { "extra" }
                 its(["plif_status"])     { should eql "Kings Landing" }
                 its(["patron_type"])     { should eql "Bastard" }
-                its(["patron_status"])   { should eql "Night's Watch" }
+                its(["patron_status"])   { should eql "05" }
                 its(["ill_permission"])  { should eql "Y" }
               end
 
@@ -133,6 +138,11 @@ describe Api::V1::UsersController do
                 it { should eql "Snow" }
               end
 
+              context "when the property is the institution_code attributes" do
+                let(:property) { "institution_code" }
+                it { should eql "NYU" }
+              end
+
               context "when the property is the extra attributes" do
                 let(:property) { "extra" }
                 its(["entitlement"]) { should eql "nothing" }
@@ -164,6 +174,11 @@ describe Api::V1::UsersController do
                 let(:property) { "status" }
                 it { should eql "NYU Undergraduate Student" }
               end
+
+              # context "when the property is the institution_code attributes" do
+              #   let(:property) { "institution_code" }
+              #   it { should eql "NYU" }
+              # end
 
               context "when property is type" do
                 let(:property) { "type" }

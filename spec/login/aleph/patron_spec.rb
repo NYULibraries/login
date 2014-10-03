@@ -6,6 +6,7 @@ module Login
       let(:status) { '01' }
       let(:type) { 'TP' }
       let(:ill_permission) { 'Y' }
+      let(:ill_library) { 'nil' }
       let(:college) { 'College' }
       let(:department) { 'Department' }
       let(:major) { 'Major' }
@@ -16,6 +17,7 @@ module Login
           status: status,
           type: type,
           ill_permission: ill_permission,
+          ill_library: ill_library,
           college: college,
           department: department,
           major: major,
@@ -28,6 +30,7 @@ module Login
           patron.status = status
           patron.type = type
           patron.ill_permission = ill_permission
+          patron.ill_library = ill_library
           patron.college = college
           patron.department = department
           patron.major = major
@@ -50,6 +53,10 @@ module Login
       describe '#ill_permission' do
         subject { patron.ill_permission }
         it { should eq ill_permission }
+      end
+      describe '#ill_permission' do
+        subject { patron.ill_library }
+        it { should eq ill_library }
       end
       describe '#college' do
         subject { patron.college }

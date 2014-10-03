@@ -84,11 +84,11 @@ FactoryGirl.define do
           raw_info: {
             bor_auth: {
               z303: {
-                z303_birthplace: "Kings Landing"
+                z303_birthplace: "Kings Landing",
               },
               z305: {
                 z305_bor_type: "Bastard",
-                z305_bor_status: "Night's Watch",
+                z305_bor_status: "05",
                 z305_photo_permission: "Y"
               }
             }

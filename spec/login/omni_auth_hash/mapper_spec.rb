@@ -65,6 +65,11 @@ describe Login::OmniAuthHash::Mapper do
       it { should eql "snowj" }
     end
 
+    describe "#institution_code" do
+      subject { mapper.properties.institution_code }
+      it { should eql "NS" }
+    end
+
   end
 
   context "when provider is not whitelisted" do

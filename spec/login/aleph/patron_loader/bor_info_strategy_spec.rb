@@ -18,6 +18,7 @@ module Login
           its(:status) { should eql "NYU Undergraduate Student" }
           its(:type) { should be_nil }
           its(:ill_permission) { should eql "Y" }
+          its(:ill_library) { should be_nil }
         end
         context "when identifier is invalid" do
           let(:identifier) { 'INVALID_ID' }
