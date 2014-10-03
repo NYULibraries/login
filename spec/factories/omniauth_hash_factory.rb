@@ -84,7 +84,7 @@ FactoryGirl.define do
           raw_info: {
             bor_auth: {
               z303: {
-                z303_birthplace: "Kings Landing",
+                z303_birthplace: "Kings Landing"
               },
               z305: {
                 z305_bor_type: "Bastard",
