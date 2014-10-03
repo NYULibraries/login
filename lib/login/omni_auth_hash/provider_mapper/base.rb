@@ -6,7 +6,7 @@ module Login
     module ProviderMapper
       class Base
 
-        attr_reader :omniauth_hash, :provider, :uid, :username, :nyuidn, :email, :first_name, :last_name, :info, :properties
+        attr_reader :omniauth_hash, :provider, :uid, :username, :nyuidn, :email, :first_name, :last_name, :info, :properties, :institution_code
 
         def initialize(omniauth_hash)
           @omniauth_hash ||= omniauth_hash
@@ -33,7 +33,8 @@ module Login
             uid: uid,
             first_name: first_name,
             last_name: last_name,
-            nyuidn: nyuidn
+            nyuidn: nyuidn,
+            institution_code: institution_code
           }
         end
 
