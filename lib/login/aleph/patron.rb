@@ -2,7 +2,7 @@ module Login
   module Aleph
     class Patron
       attr_accessor :identifier, :status, :type, :ill_permission, :college,
-        :department, :major, :plif_status
+        :department, :major, :plif_status, :ill_library
 
       def initialize(&block)
         unless block_given?
