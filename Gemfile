@@ -11,13 +11,13 @@ gem 'nested-hstore'
 gem 'activerecord-postgres-hstore', "0.7.6"
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
+gem "sass-rails", ">= 5.0.0.beta1"
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+gem "coffee-script", "~> 2.3.0"
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
@@ -29,7 +29,7 @@ gem 'jquery-rails', '~> 3.1.0'
 gem "modernizr-rails", "~> 2.7.0"
 
 # Use the Compass CSS framework for sprites, etc.
-gem "compass-rails", "~> 1.1.3"
+gem "compass-rails", "~> 2.0.0"
 
 # Use mustache for templating
 # Fix to 0.99.4 cuz 0.99.5 broke my shit.
