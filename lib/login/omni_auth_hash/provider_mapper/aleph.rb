@@ -22,7 +22,7 @@ module Login
           @nyuidn = omniauth_hash.uid
           bor_status = @omniauth_hash.extra.raw_info.bor_auth.z305.z305_bor_status
           ill_library = @omniauth_hash.extra.raw_info.bor_auth.z303.z303_ill_library
-          @institution_code = (institute_for_bor_status(ill_library) or institute_for_bor_status(bor_status))
+          @institution_code = (institute_for_bor_status(ill_library) || institute_for_bor_status(bor_status))
           @properties = omniauth_hash.info.merge(properties_attributes)
         end
 
