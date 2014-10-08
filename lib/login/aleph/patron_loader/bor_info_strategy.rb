@@ -10,6 +10,7 @@ module Login
               instance.status = bor_info_body["z305"]["z305_bor_status"]
               instance.type = bor_info_body["z305"]["z305_bor_type"]
               instance.ill_permission = bor_info_body["z305"]["z305_photo_permission"]
+              instance.ill_library = bor_info_body["z303"]["z303_ill_library"]
               instance.plif_status = bor_info_body["z303"]["z303_birthplace"]
             end
           end

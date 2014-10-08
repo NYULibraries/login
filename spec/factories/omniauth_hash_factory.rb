@@ -88,7 +88,7 @@ FactoryGirl.define do
               },
               z305: {
                 z305_bor_type: "Bastard",
-                z305_bor_status: "Night's Watch",
+                z305_bor_status: "05",
                 z305_photo_permission: "Y"
               }
             }

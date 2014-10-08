@@ -28,7 +28,7 @@ Feature: Get attributes from protected API when user is authenticated
     When I request my attributes from the protected API
     Then I retrieve the attributes as JSON:
       | Aleph ID       | BOR_ID         |
-      | Patron Status  | Night's Watch  |
+      | Patron Status  | 05             |
       | Patron Type    | Bastard        |
       | ILL Permission | Y              |
       | PLIF Status    | Kings Landing  |
