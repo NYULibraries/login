@@ -1,5 +1,5 @@
 class WayfController < ApplicationController
   respond_to :html
 
-  def show; end
+  def index; end
 end
