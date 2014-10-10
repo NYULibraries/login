@@ -2,10 +2,26 @@
   <h1>
     <%= t('application.general_public.header') %>
   </h1>
-  <div class="facebook">
-    <%= link_to "Facebook", user_omniauth_authorize_path(:facebook, institute: current_institute.code), title: "Login via Facebook", class: "btn btn-large btn-primary" %>
-  </div>
-  <div class="twitter">
-    <%= link_to "Twitter", user_omniauth_authorize_path(:twitter, institute: current_institute.code), title: "Login via Twitter", class: "btn btn-large btn-primary" %>
+  <div class="row">
+  <%= content_tag(:div, class: ["facebook", "alt-login", "col-sm-4 col-sm-offset-2", "square"], id: "facebook-login") do
+        content_tag(:div, class: "alt-login-link") do
+          link_to(content_tag(:span, "Facebook"), user_omniauth_authorize_path(:facebook, institute: current_institute.code), title: "Facebook")+
+          content_tag(:span, "Facebook") do
+            content_tag(:span, "Facebook")+
+            tag(:br)+
+            fa_icon("facebook-square")
+          end
+        end
+    end %>
+  <%= content_tag(:div, class: ["twitter", "alt-login", "col-sm-4", "square"], id: "twitter-login") do
+        content_tag(:div, class: "alt-login-link") do
+          link_to(content_tag(:span, "Twitter"), user_omniauth_authorize_path(:twitter, institute: current_institute.code), title: "Twitter")+
+          content_tag(:span) do
+            content_tag(:span, "Twitter")+
+            tag(:br)+
+            fa_icon("twitter")
+          end
+        end
+    end %>
   </div>
 </div>

@@ -1,38 +1,24 @@
+<!-- Link to NYU Shibboleth and the first secondary login -->
 <div class="row">
   <h1><%= t('application.header_html') %></h1>
 </div>
 <div class="row">
+  <!-- Link to NYU Shibboleth auth -->
   <div id="nyu_shibboleth-login" class="col-sm-9 primary-login">
     <div class="alt-login-link">
-      <%= link_to content_tag(:span, t('application.nyu.link_text')), user_omniauth_authorize_path(:nyu_shibboleth, institute: current_institute.code) %>
+      <%= link_to content_tag(:span, t('application.nyu.link_text')), user_omniauth_authorize_path(:nyu_shibboleth, institute: current_institute.code, auth_type: :nyu) %>
       <%= content_tag(:span, t('application.nyu.link_text')) %>
     </div>
   </div>
+  <!-- Link to the first secondary login auth in the list -->
   <%- option = institution.views["login"]["secondary"].first -%>
-  <%- name = Institutions.institutions[option.upcase.to_sym].views["login"]["name"] -%>
-  <%= content_tag(:div, class: [option, "alt-login", "col-sm-3", "square"], id: "#{option}-login") do
-        content_tag(:div, class: "alt-login-link") do
-          link_to(content_tag(:span, name), auth_path(option), title: "#{name}")+
-          content_tag(:span, name)
-        end
-    end %>
+  <%= render "wayf/auth_squares/#{option}" %>
 </div>
+<!-- Link to the rest of the secondary logins -->
 <div class="row">
   <% institution.views["login"]["secondary"][1..-1].each do |option| %>
-    <%- name = Institutions.institutions[option.upcase.to_sym].views["login"]["name"] -%>
-    <%= content_tag(:div, class: [option, "alt-login", "col-sm-3", "square"], id: "#{option}-login") do
-          content_tag(:div, class: "alt-login-link") do
-            link_to(content_tag(:span, name), auth_path(option), title: "#{name}")+
-            content_tag(:span, name)
-          end
-      end %>
+    <%= render "wayf/auth_squares/#{option}" %>
   <% end %>
-  <%- if institution.views["login"]["general_public"] -%>
-    <%= content_tag(:div, class: ["alt-login", "col-sm-3", "square"], id: "visitor-login") do
-          content_tag(:div, class: "alt-login-link") do
-            link_to(content_tag(:span, t('application.general_public.link_text')), auth_path("visitor"), title: t('application.general_public.link_text'))+
-            content_tag(:span, t('application.general_public.link_text'))
-          end
-      end %>
-  <%- end -%>
+  <!-- Link to visitor square -->
+  <%= render "wayf/auth_squares/visitor" %>
 </div>
