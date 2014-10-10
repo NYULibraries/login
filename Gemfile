@@ -42,6 +42,9 @@ gem "nyulibraries-assets", github: "NYULibraries/nyulibraries-assets", branch: "
 # gem "nyulibraries-assets", path: "/apps/nyulibraries-assets"
 # gem "nyulibraries-assets", path: "/Users/dalton/Documents/workspace/nyulibraries-assets"
 
+# Use font-awesome-rails for font-awesome icons
+gem "font-awesome-rails", '~> 4.2.0.0'
+
 # Use the NYU Libraries deploy gem
 gem "formaggio", git: "git://github.com/NYULibraries/formaggio.git", tag: "v1.0.0"
 # gem "nyulibraries-deploy", path: "/apps/nyulibraries-deploy"
