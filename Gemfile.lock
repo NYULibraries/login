@@ -1,11 +1,12 @@
 GIT
   remote: git://github.com/NYULibraries/nyulibraries-assets.git
-  revision: db4a7492f130a13ebb8c769eaa5468315737693c
+  revision: fa5ee32ad49ffe7b79de839bb6876d8f5731eab4
   branch: development-login
   specs:
-    nyulibraries-assets (4.0.0)
+    nyulibraries-assets (4.0.2)
       bootstrap-sass (~> 3.2.0.2)
       compass (~> 1.0.1)
+      font-awesome-rails (~> 4.2.0.0)
       institutions (~> 0.1.3)
 
 GIT
@@ -166,6 +167,8 @@ GEM
     figs (2.0.2)
       git (~> 1.2.6)
       rake (~> 10.1)
+    font-awesome-rails (4.2.0.0)
+      railties (>= 3.2, < 5.0)
     gherkin (2.12.2)
       multi_json (~> 1.3)
     git (1.2.8)
@@ -404,6 +407,7 @@ DEPENDENCIES
   doorkeeper (~> 1.0.0)
   factory_girl_rails (~> 4.4.0)
   figs (~> 2.0.0)
+  font-awesome-rails (~> 4.2.0.0)
   institutions (~> 0.1.3)
   jbuilder (~> 2.0)
   jquery-rails (~> 3.1.0)
