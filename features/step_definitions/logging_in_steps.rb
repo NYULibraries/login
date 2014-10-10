@@ -10,8 +10,8 @@ When(/^I want to login to (.+)$/) do |location|
   visit login_path(institute_for_location(location))
 end
 
-Then(/^I should go to the (.+) login page$/) do |location|
-  expect(current_path).to eq(login_path(institute_for_location(location).downcase))
+Then(/^I should go to the (.+) authentication page$/) do |location|
+  expect(current_path).to start_with(auth_path(institute_for_location(location).downcase))
 end
 
 Then(/^I should be logged in as an NYU user$/) do

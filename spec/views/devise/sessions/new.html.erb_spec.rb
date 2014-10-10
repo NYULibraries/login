@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe "devise/sessions/new.html.erb" do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before { controller.stub(:params).and_return({ auth_type: "ns" }) }
   subject { render; rendered }
   it do
-    should_not match("<a class=\"nyulibraries-help nyulibraries-help-icon\" ")
+    should match("Login with")
   end
 end

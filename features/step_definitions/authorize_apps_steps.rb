@@ -2,7 +2,7 @@ Given(/^I am logged in as an admin$/) do
   set_admin_login_env
   visit client_authorize_url
   login_as_admin
-  visit "/login"
+  visit "/auth/nyu"
 end
 
 Given(/^I am a logged out user$/) do

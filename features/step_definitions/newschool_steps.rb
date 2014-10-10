@@ -1,5 +1,5 @@
 When(/^I press the New School login option$/) do
-  click_link 'The New School'
+  click_link 'New School'
 end
 
 When(/^I submit my New School NetID and password$/) do

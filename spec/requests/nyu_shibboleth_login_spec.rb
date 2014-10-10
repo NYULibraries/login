@@ -1,6 +1,6 @@
 require 'spec_helper'
 describe "NYU Shibboleth Login" do
-  before { https!; get("/users/auth/nyu_shibboleth/callback", nil, environment) }
+  before { https!; get("/users/auth/nyu_shibboleth/callback?auth_type=nyu", nil, environment) }
   context "when there is no Shibboleth session in the SP " do
     let(:environment) { nil }
     describe 'OmniAuth::AuthHash' do

@@ -14,7 +14,7 @@ module LoginFeatures
     end
 
     def new_school_callback_url
-      user_omniauth_authorize_path(:provider => "new_school_ldap")
+      user_omniauth_authorize_path(provider: "new_school_ldap", auth_type: 'ns')
     end
 
   end
