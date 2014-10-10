@@ -7,12 +7,12 @@ Feature: Bobst Affiliate login
   @ignore_user_keys
   Scenario: Logging in with Bobst Affiliate patron ID
     Given I am on the NYU New York login page
-    When I want to login to Bobst Affiliate
+    When I click on the "Other Borrowers" button
     And I enter my Library Patron ID for "Bobst Affiliate" and first four letters of my last name
     Then I should be logged in as a Bobst Affiliate user
 
   Scenario: Logging in with incorrect Bobst Affiliate patron ID
     Given I am on the NYU New York login page
-    When I want to login to Bobst Affiliate
+    When I click on the "Other Borrowers" button
     And I incorrectly enter my Library Patron ID and first four letters of my last name
     Then I should not be logged in as a Bobst Affiliate user

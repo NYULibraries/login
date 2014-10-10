@@ -9,7 +9,7 @@ module LoginFeatures
 
     def error_matchers(message)
       @error_matchers ||= [
-        -> { have_css "div.alert.alert-error"},
+        -> { have_css "div.alert.alert-danger"},
         -> { have_content message }
       ]
     end

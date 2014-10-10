@@ -1,38 +1,45 @@
 require 'spec_helper'
 describe "routes for Devise::Sessions" do
-  describe "GET /login" do
-    context "when no institute is passed" do
-      subject { get('/login') }
-      it { should route_to(controller: "devise/sessions", action: "new") }
+  describe "GET /auth" do
+    context "when no auth_type is passed" do
+      subject { get('/auth') }
+      it { should_not be_routable }
     end
 
-    context "when 'ns' is the institute parameter" do
+    context "when 'ns' is the auth_type parameter" do
       context "when it's a bound parameter" do
-        subject { get('/login/ns') }
-        it { should route_to(controller: "devise/sessions", action: "new", institute: "ns") }
+        subject { get('/auth/ns') }
+        it { should route_to(controller: "devise/sessions", action: "new", auth_type: "ns") }
+        context "and institue is a bound parameter" do
+          subject { get('/auth/ns/ns') }
+          it { should route_to(controller: "devise/sessions", action: "new", auth_type: "ns", institute: "ns") }
+        end
+        context "and institute a query string parameter" do
+          subject { get('/auth/ns?institute=ns') }
+          it { should route_to(controller: "devise/sessions", action: "new", auth_type: "ns", institute: "ns") }
+        end
+      end
+      context "when it's querystring parameter" do
+        subject { get('/auth?auth_type=ns') }
+        it { should_not be_routable }
+      end
+    end
+
+    context "when 'invalid' auth_type is bound parameter" do
+      context "when it's a bound parameter" do
+        subject { get('/auth/invalid') }
+        it { should route_to(controller: "devise/sessions", action: "new", auth_type: "invalid") }
       end
 
       context "when it's a query string parameter" do
-        subject { get('/login?institute=ns') }
-        it { should route_to(controller: "devise/sessions", action: "new", institute: "ns") }
-      end
-    end
-
-    context "when 'invalid' institute is bound passed" do
-      context "when it's a bound parameter" do
-        subject { get('/login/invalid') }
-        it { should route_to(controller: "devise/sessions", action: "new", institute: "invalid") }
-      end
-
-      context "when it's a query string parameter" do
-        subject { get('/login?institute=invalid') }
-        it { should route_to(controller: "devise/sessions", action: "new", institute: "invalid") }
+        subject { get('/auth?auth_type=invalid') }
+        it { should_not be_routable }
       end
     end
   end
 
-  describe "POST /login" do
-    subject { post('/login') }
+  describe "POST /auth" do
+    subject { post('/auth') }
     it { should_not be_routable }
   end
 end
