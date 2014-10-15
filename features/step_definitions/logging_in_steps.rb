@@ -2,12 +2,16 @@ When(/^I want to login$/) do
   visit '/login'
 end
 
-When(/^I want to login with (.+)$/) do |account|
-  visit login_path(institute_for_location(account))
+Then(/^my primary login option should be (.+)$/) do |location|
+  if location == "NYU"
+    expect(page).to have_css("#nyu_shibboleth-login.primary-login")
+  else
+    expect(page).to have_css("##{institute_for_location(location).downcase}-login.primary-login")
+  end
 end
 
-When(/^I want to login to (.+)$/) do |location|
-  visit login_path(institute_for_location(location))
+When(/^I want to login with (.+)$/) do |account|
+  visit login_path(institute_for_location(account))
 end
 
 Then(/^I should go to the (.+) authentication page$/) do |location|

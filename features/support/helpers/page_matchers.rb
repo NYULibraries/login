@@ -64,6 +64,28 @@ module LoginFeatures
       ]
     end
 
+    def bobst_login_matchers
+      @bobst_login_matchers ||= [
+        -> { have_content 'Login with your NYU Bobst ID' },
+        -> { have_content 'Enter your ID Number' },
+        -> { have_content 'First four letter of your last name' }
+      ]
+    end
+
+    def twitter_login_matchers
+      @twitter_login_matchers ||= [
+        -> { have_content 'Twitter' },
+        -> { have_css '#twitter-login' },
+      ]
+    end
+
+    def facebook_login_matchers
+      @facebook_login_matchers ||= [
+        -> { have_content 'Facebook' },
+        -> { have_css '#facebook-login' },
+      ]
+    end
+
     def nyu_option_matchers
       @nyu_option_matchers ||= [
         -> { have_content 'NYU' },

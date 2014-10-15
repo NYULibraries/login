@@ -59,8 +59,12 @@ module LoginFeatures
         :TWITTER
       when /Bobst Affiliate/
         :BOBST
+      when /Other Borrower/
+        :BOBST
       when /Facebook/
         :FACEBOOK
+      when /Visitors/
+        :VISITOR
       else
         raise "Unknown location!"
       end
