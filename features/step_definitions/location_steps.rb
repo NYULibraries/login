@@ -4,5 +4,9 @@ end
 
 Given(/^I am at (.+)$/) do |location|
   ip = ip_for_location(location)
-  ActionDispatch::Request.any_instance.stub(:remote_ip).and_return(ip)
+  if ip.present?
+    ActionDispatch::Request.any_instance.stub(:remote_ip).and_return(ip)
+  else
+    visit login_path(institute_for_location(location))
+  end
 end

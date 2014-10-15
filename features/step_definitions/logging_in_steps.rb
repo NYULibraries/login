@@ -1,5 +1,5 @@
 When(/^I want to login$/) do
-  visit '/login'
+  visit '/login' unless ENV['TRAVIS']
 end
 
 Then(/^my primary login option should be (.+)$/) do |location|
