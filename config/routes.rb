@@ -6,9 +6,10 @@ Login::Application.routes.draw do
     get 'users/:provider/:id(/:institute)', to: 'users#show', as: 'user',
       constraints: { provider: providers, id: /[^\/]+/ }
     get 'logout', to: 'devise/sessions#destroy', as: :logout
-    get 'login(/:institute)', to: 'devise/sessions#new', as: :login
+    get 'auth/:auth_type(/:institute)', to: 'devise/sessions#new', as: :auth
     root 'users#show'
   end
+  get 'login(/:institute)', to: 'wayf#index', as: :login
   namespace :api do
     namespace :v1 do
       get '/user' => "users#show", defaults: { format: :json }

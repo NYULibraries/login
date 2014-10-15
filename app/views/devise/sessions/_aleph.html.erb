@@ -1,14 +1,32 @@
 <div id="aleph">
   <h1>
-    <%= t("application.#{current_institution.code.downcase}.header") %>
+    <%= t("application.#{params[:auth_type]}.header") %>
   </h1>
-  <%= form_tag(user_omniauth_callback_path(:aleph, institute: current_institute.code)) do -%>
+  <%= form_tag(user_omniauth_callback_path(:aleph, institute: current_institute.code, auth_type: params[:auth_type]), class: "#{params[:auth_type]}-login-form") do -%>
     <%= field_set_tag do -%>
-      <%= label_tag "username", t("application.#{current_institution.code.downcase}.username_label") %>
-      <%= text_field_tag "username", nil, placeholder: t("application.#{current_institution.code.downcase}.username_placeholder") %>
-      <%= label_tag "password", t("application.#{current_institution.code.downcase}.password_label") %>
-      <%= password_field_tag "password" %><br />
-      <%= submit_tag "Login" %>
+      <div class="form-group">
+        <%= label_tag "username", t("application.#{params[:auth_type]}.username_label") %>
+        <div class="row">
+          <div class="col-sm-8">
+            <%= text_field_tag "username", nil, placeholder: t("application.#{params[:auth_type]}.username_placeholder"), class: "form-control" %>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= label_tag "password", t("application.#{params[:auth_type]}.password_label") %>
+        <div class="row">
+          <div class="col-sm-8">
+            <%= password_field_tag "password", nil, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-sm-3">
+            <%= submit_tag "Login", class: "btn col-xs-12" %>
+          </div>
+        </div>
+      </div>
     <%- end -%>
   <%- end -%>
 </div>

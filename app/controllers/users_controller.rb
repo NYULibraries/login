@@ -14,7 +14,11 @@ class UsersController < Devise::OmniauthCallbacksController
   end
 
   def after_omniauth_failure_path_for(scope)
-    login_path(current_institution.code.downcase)
+    if params[:auth_type] == "nyu"
+      login_path(current_institution.code.downcase)
+    else
+      auth_path(current_institution.code.downcase, auth_type: params[:auth_type])
+    end
   end
 
   def omniauth_callback
