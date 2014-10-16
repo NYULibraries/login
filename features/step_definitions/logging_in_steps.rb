@@ -1,4 +1,5 @@
 When(/^I want to login$/) do
+  # When on travis were already on the correct institution login page at this point
   visit '/login' unless ENV['TRAVIS']
 end
 
