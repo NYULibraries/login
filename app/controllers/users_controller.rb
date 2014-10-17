@@ -14,8 +14,10 @@ class UsersController < Devise::OmniauthCallbacksController
   end
 
   def after_omniauth_failure_path_for(scope)
+    # When using the auth_type nyu, for Shibboleth, redirect errors to the wayf page
     if params[:auth_type] == "nyu"
       login_path(current_institution.code.downcase)
+    # When on any authentication page redirect errors there
     else
       auth_path(current_institution.code.downcase, auth_type: params[:auth_type])
     end
@@ -62,4 +64,5 @@ class UsersController < Devise::OmniauthCallbacksController
     @omniauth_hash_validator ||= Login::OmniAuthHash::Validator.new(request.env["omniauth.auth"], params[:action])
   end
   private :omniauth_hash_validator
+
 end
