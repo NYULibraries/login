@@ -46,16 +46,19 @@ en:
       link_text: NYU
     ns:
       header: Login with a New School NetID
+      link_text: New School
       username_label: Enter your NetID Username
       username_placeholder: "e.g. ParsJ123"
       password_label: Enter your NetID Password
     cu:
       header: Login with your Cooper Union patron ID
+      link_text: Cooper Union
       username_label: Enter your ID Number
       username_placeholder: "e.g. N12345678"
       password_label: First four letter of your last name
     nysid:
       header: Login with your NYSID patron ID
+      link_text: NYSID
       username_label: Enter your ID Number
       username_placeholder: "e.g. N12345678"
       password_label: First four letter of your last name

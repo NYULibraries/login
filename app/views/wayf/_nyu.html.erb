@@ -1,0 +1,24 @@
+<!-- Link to NYU Shibboleth and the first secondary login -->
+<div class="row">
+  <h1><%= t('application.header_html') %></h1>
+</div>
+<div class="row">
+  <!-- Link to NYU Shibboleth auth -->
+  <div id="nyu_shibboleth-login" class="col-sm-9 primary-login">
+    <div class="alt-login-link">
+      <%= link_to content_tag(:span, t('application.nyu.link_text')), user_omniauth_authorize_path(:nyu_shibboleth, institute: current_institute.code, auth_type: :nyu) %>
+      <%= content_tag(:span, t('application.nyu.link_text')) %>
+    </div>
+  </div>
+  <!-- Link to the first secondary login auth in the list -->
+  <%- option = institution.views["login"]["secondary"].first -%>
+  <%= render "wayf/auth_squares/#{option}" %>
+</div>
+<!-- Link to the rest of the secondary logins -->
+<div class="row">
+  <% institution.views["login"]["secondary"][1..-1].each do |option| %>
+    <%= render "wayf/auth_squares/#{option}" %>
+  <% end %>
+  <!-- Link to visitor square -->
+  <%= render "wayf/auth_squares/visitor" %>
+</div>

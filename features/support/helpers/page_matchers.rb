@@ -9,7 +9,7 @@ module LoginFeatures
 
     def error_matchers(message)
       @error_matchers ||= [
-        -> { have_css "div.alert.alert-error"},
+        -> { have_css "div.alert.alert-danger"},
         -> { have_content message }
       ]
     end
@@ -61,6 +61,28 @@ module LoginFeatures
         -> { have_content 'Login with your NYSID patron ID' },
         -> { have_content 'Enter your ID Number' },
         -> { have_content 'First four letter of your last name' }
+      ]
+    end
+
+    def bobst_login_matchers
+      @bobst_login_matchers ||= [
+        -> { have_content 'Login with your NYU Bobst ID' },
+        -> { have_content 'Enter your ID Number' },
+        -> { have_content 'First four letter of your last name' }
+      ]
+    end
+
+    def twitter_login_matchers
+      @twitter_login_matchers ||= [
+        -> { have_content 'Twitter' },
+        -> { have_css '#twitter-login' },
+      ]
+    end
+
+    def facebook_login_matchers
+      @facebook_login_matchers ||= [
+        -> { have_content 'Facebook' },
+        -> { have_css '#facebook-login' },
       ]
     end
 

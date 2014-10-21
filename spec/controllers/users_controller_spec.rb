@@ -53,7 +53,8 @@ describe UsersController do
   end
   describe "OmniAuth callback methods" do
     describe "GET 'aleph'" do
-      subject { get :aleph; response }
+      let(:auth_type) { 'bobst' }
+      subject { get :aleph, { auth_type: auth_type }; response }
       context 'when the omniauth.auth environment is present' do
         before { @request.env['omniauth.auth'] = authhash(:aleph) }
         context 'when the omniauth.auth.provider is aleph' do
@@ -80,24 +81,25 @@ describe UsersController do
           before { @request.env['omniauth.auth'].provider = "invalid" }
           it("should not assign @user") { expect(assigns(:identity)).to be_nil }
           it { should be_redirect }
-          it { should redirect_to(login_url('nyu')) }
+          it { should redirect_to(auth_url(auth_type, 'nyu')) }
         end
         context 'when the omniauth.auth environment username is empty' do
           before { @request.env['omniauth.auth'].uid = "" }
           it("should not assign @user") { expect(assigns(:identity)).to be_nil }
           it { should be_redirect }
-          it { should redirect_to(login_url('nyu')) }
+          it { should redirect_to(auth_url(auth_type, 'nyu')) }
         end
       end
       context 'when the omniauth.auth environment is not present' do
         it("should not assign @user") { expect(assigns(:identity)).to be_nil }
         it { should be_redirect }
-        it { should redirect_to(login_url('nyu')) }
+        it { should redirect_to(auth_url(auth_type, 'nyu')) }
       end
     end
 
     describe "GET 'twitter'" do
-      subject { get :twitter; response }
+      let(:auth_type) { 'twitter' }
+      subject { get :twitter, { auth_type: auth_type }; response }
       context 'when the omniauth.auth environment is present' do
         before { @request.env['omniauth.auth'] = authhash(:twitter) }
         context 'when the omniauth.auth.provider is twitter' do
@@ -121,24 +123,25 @@ describe UsersController do
           before { @request.env['omniauth.auth'].provider = "invalid" }
           it("should not assign @user") { expect(assigns(:identity)).to be_nil }
           it { should be_redirect }
-          it { should redirect_to(login_url('nyu')) }
+          it { should redirect_to(auth_url(auth_type, 'nyu')) }
         end
         context 'when the omniauth.auth environment username is empty' do
           before { @request.env['omniauth.auth'].info.nickname = "" }
           it("should not assign @user") { expect(assigns(:identity)).to be_nil }
           it { should be_redirect }
-          it { should redirect_to(login_url('nyu')) }
+          it { should redirect_to(auth_url(auth_type, 'nyu')) }
         end
      end
       context 'when the omniauth.auth environment is not present' do
         it("should not assign @user") { expect(assigns(:identity)).to be_nil }
         it { should be_redirect }
-        it { should redirect_to(login_url('nyu')) }
+        it { should redirect_to(auth_url(auth_type, 'nyu')) }
       end
     end
 
     describe "GET 'facebook'" do
-      subject { get :facebook; response }
+      let(:auth_type) { 'facebook' }
+      subject { get :facebook, { auth_type: auth_type }; response }
       context 'when the omniauth.auth environment is present' do
         before { @request.env['omniauth.auth'] = authhash(:facebook) }
         context 'when the omniauth.auth.provider is facebook' do
@@ -162,24 +165,25 @@ describe UsersController do
           before { @request.env['omniauth.auth'].provider = "invalid" }
           it("should not assign @user") { expect(assigns(:identity)).to be_nil }
           it { should be_redirect }
-          it { should redirect_to(login_url('nyu')) }
+          it { should redirect_to(auth_url(auth_type, 'nyu')) }
         end
         context 'when the omniauth.auth environment username is empty' do
           before { @request.env['omniauth.auth'].info.nickname = "" }
           it("should not assign @user") { expect(assigns(:identity)).to be_nil }
           it { should be_redirect }
-          it { should redirect_to(login_url('nyu')) }
+          it { should redirect_to(auth_url(auth_type, 'nyu')) }
         end
       end
       context 'when the omniauth.auth environment is not present' do
         it("should not assign @user") { expect(assigns(:identity)).to be_nil }
         it { should be_redirect }
-        it { should redirect_to(login_url('nyu')) }
+        it { should redirect_to(auth_url(auth_type, 'nyu')) }
       end
     end
 
     describe "GET 'nyu_shibboleth'" do
-      subject { get :nyu_shibboleth; response }
+      let(:auth_type) { 'nyu' }
+      subject { get :nyu_shibboleth, { auth_type: auth_type }; response }
       context 'when the omniauth.auth environment is present' do
         before { @request.env['omniauth.auth'] = authhash(:nyu_shibboleth) }
         context 'when the omniauth.auth environment provider is not nyu_shibboleth' do
@@ -204,26 +208,27 @@ describe UsersController do
 
 
     describe "GET 'new_school_ldap'" do
-      subject { get :new_school_ldap; response }
+      let(:auth_type) { 'ns' }
+      subject { get :new_school_ldap, { auth_type: auth_type }; response }
       context 'when the omniauth.auth environment is present' do
         before { @request.env['omniauth.auth'] = authhash(:new_school_ldap) }
         context 'when the omniauth.auth environment provider is not new_school_ldap' do
           before { @request.env['omniauth.auth'].provider = "invalid" }
           it("should not assign @user") { expect(assigns(:identity)).to be_nil }
           it { should be_redirect }
-          it { should redirect_to(login_url('nyu')) }
+          it { should redirect_to(auth_url(auth_type, 'nyu')) }
         end
         context 'when the omniauth.auth environment username is empty' do
           before { @request.env['omniauth.auth'].extra.raw_info[:pdsloginid] = [] }
           it("should not assign @user") { expect(assigns(:identity)).to be_nil }
           it { should be_redirect }
-          it { should redirect_to(login_url('nyu')) }
+          it { should redirect_to(auth_url(auth_type, 'nyu')) }
         end
       end
       context 'when the omniauth.auth environment is not present' do
         it("should not assign @user") { expect(assigns(:identity)).to be_nil }
         it { should be_redirect }
-        it { should redirect_to(login_url('nyu')) }
+        it { should redirect_to(auth_url(auth_type, 'nyu')) }
       end
     end
   end

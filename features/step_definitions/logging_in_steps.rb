@@ -1,17 +1,22 @@
 When(/^I want to login$/) do
-  visit '/login'
+  # When on travis were already on the correct institution login page at this point
+  visit '/login' unless ENV['TRAVIS']
+end
+
+Then(/^my primary login option should be (.+)$/) do |location|
+  if location == "NYU"
+    expect(page).to have_css("#nyu_shibboleth-login.primary-login")
+  else
+    expect(page).to have_css("##{institute_for_location(location).downcase}-login.primary-login")
+  end
 end
 
 When(/^I want to login with (.+)$/) do |account|
   visit login_path(institute_for_location(account))
 end
 
-When(/^I want to login to (.+)$/) do |location|
-  visit login_path(institute_for_location(location))
-end
-
-Then(/^I should go to the (.+) login page$/) do |location|
-  expect(current_path).to eq(login_path(institute_for_location(location).downcase))
+Then(/^I should go to the (.+) authentication page$/) do |location|
+  expect(current_path).to start_with(auth_path(institute_for_location(location).downcase))
 end
 
 Then(/^I should be logged in as an NYU user$/) do

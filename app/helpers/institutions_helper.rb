@@ -20,12 +20,19 @@ module InstitutionsHelper
   alias current_primary_institution current_institution
   alias current_institute current_institution
 
-  # Override Rails #url_for to add institution 
+  # Override Rails #url_for to add institution
   def url_for(options={})
     if institution_param.present? and options.is_a? Hash
       options[:institute] ||= institution_param
     end
     super options
+  end
+
+  # Get the institution from a given code
+  def institution_from_code(code)
+    unless code.nil?
+      @institution_from_code ||= institutions[code.upcase.to_sym]
+    end
   end
 
   # Grab the last institution that matches the client IP
