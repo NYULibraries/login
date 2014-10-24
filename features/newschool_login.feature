@@ -6,13 +6,13 @@ Feature: New School login
 
   Scenario: Logging in with valid credentials
     Given I am on the New School login page
-    When I click on the "New School" button
+    When I click on the "The New School" button
     And I submit my New School NetID and password
     And New School LDAP authenticates me
     Then I should be logged in as a New School user
 
   Scenario: Logging in with invalid credentials
     Given I am on the New School login page
-    When I click on the "New School" button
+    When I click on the "The New School" button
     And I submit invalid New School credentials
     Then I should see the error message "Invalid credentials"

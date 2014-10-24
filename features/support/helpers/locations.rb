@@ -98,7 +98,7 @@ module LoginFeatures
     def follow_login_steps_for_location(location)
       case location
       when /New School LDAP$/
-        click_on "New School"
+        click_on "The New School"
         click_on "Login"
       when /NYU Shibboleth$/
         click_on "NYU"
