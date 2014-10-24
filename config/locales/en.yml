@@ -46,7 +46,7 @@ en:
       link_text: NYU
     ns:
       header: Login with a New School NetID
-      link_text: New School
+      link_text: The New School
       username_label: Enter your NetID Username
       username_placeholder: "e.g. ParsJ123"
       password_label: Enter your NetID Password
