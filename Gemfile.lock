@@ -16,7 +16,7 @@ GIT
 
 GIT
   remote: git://github.com/NYULibraries/nyulibraries-assets.git
-  revision: fa5ee32ad49ffe7b79de839bb6876d8f5731eab4
+  revision: 01b66b7cfb475ea8344eda43c51f26ee3ab9ae80
   branch: development-login
   specs:
     nyulibraries-assets (4.0.2)
@@ -66,7 +66,7 @@ GEM
       tzinfo (~> 0.3.37)
     addressable (2.3.6)
     arel (4.0.2)
-    bcrypt (3.1.7)
+    bcrypt (3.1.9)
     better_errors (1.1.0)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -91,7 +91,7 @@ GEM
       xpath (~> 2.0)
     childprocess (0.5.5)
       ffi (~> 1.0, >= 1.0.11)
-    chunky_png (1.3.1)
+    chunky_png (1.3.3)
     cliver (0.3.2)
     coderay (1.1.0)
     coffee-rails (4.1.0)
@@ -182,7 +182,7 @@ GEM
       ipaddr_range_set (~> 0.10.0)
       require_all (~> 1.3.1)
     ipaddr_range_set (0.10.0)
-    jbuilder (2.2.2)
+    jbuilder (2.2.3)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jquery-rails (3.1.2)
@@ -219,8 +219,8 @@ GEM
     net-ssh (2.9.1)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
-    netrc (0.7.8)
-    newrelic_rpm (3.9.5.251)
+    netrc (0.8.0)
+    newrelic_rpm (3.9.6.257)
     nokogiri (1.6.3.1)
       mini_portile (= 0.6.0)
     oauth (0.4.7)
@@ -335,7 +335,7 @@ GEM
     rvm-capistrano (1.5.4)
       capistrano (~> 2.15.4)
     safe_yaml (1.0.4)
-    sass (3.4.5)
+    sass (3.4.6)
     sass-rails (5.0.0.beta1)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.2)
@@ -378,7 +378,7 @@ GEM
       polyglot (>= 0.3.1)
     turbolinks (2.2.3)
       coffee-rails
-    tzinfo (0.3.41)
+    tzinfo (0.3.42)
     uglifier (2.5.3)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
