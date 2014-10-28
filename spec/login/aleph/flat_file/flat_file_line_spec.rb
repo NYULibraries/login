@@ -22,12 +22,12 @@ module Login
             subject { flatfileline.expiry_date }
             it { should eq "20140101" }
           end
-          describe "#status" do
-            subject { flatfileline.status }
+          describe "#patron_status" do
+            subject { flatfileline.patron_status }
             it { should eq "65" }
           end
-          describe "#type" do
-            subject { flatfileline.type }
+          describe "#patron_type" do
+            subject { flatfileline.patron_type }
             it { should be_nil }
           end
           describe "#bor_name" do
@@ -97,12 +97,12 @@ module Login
             subject { flatfileline.expiry_date }
             it { should eq "20140101" }
           end
-          describe "#status" do
-            subject { flatfileline.status }
+          describe "#patron_status" do
+            subject { flatfileline.patron_status }
             it { should eq "03" }
           end
-          describe "#type" do
-            subject { flatfileline.type }
+          describe "#patron_type" do
+            subject { flatfileline.patron_type }
             it { should be_nil }
           end
           describe "#bor_name" do
@@ -173,12 +173,12 @@ module Login
           subject { flatfileline.expiry_date }
           it { should be_nil }
         end
-        describe "#status" do
-          subject { flatfileline.status }
+        describe "#patron_status" do
+          subject { flatfileline.patron_status }
           it { should be_nil }
         end
-        describe "#type" do
-          subject { flatfileline.type }
+        describe "#patron_type" do
+          subject { flatfileline.patron_type }
           it { should be_nil }
         end
         describe "#bor_name" do

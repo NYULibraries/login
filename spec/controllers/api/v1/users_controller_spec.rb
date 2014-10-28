@@ -72,8 +72,8 @@ describe Api::V1::UsersController do
 
             it { should have_json_path("identities/#{index}/properties/uid") }
             it { should have_json_path("identities/#{index}/properties/plif_status") }
-            it { should have_json_path("identities/#{index}/properties/type") }
-            it { should have_json_path("identities/#{index}/properties/status") }
+            it { should have_json_path("identities/#{index}/properties/patron_type") }
+            it { should have_json_path("identities/#{index}/properties/patron_status") }
             it { should have_json_path("identities/#{index}/properties/ill_permission") }
             describe "identity properties" do
               let(:response_properties) { parse_json(body)["identities"][index]["properties"]  }
@@ -91,11 +91,11 @@ describe Api::V1::UsersController do
                 it { should eql "Kings Landing" }
               end
               context "when the property is patron status" do
-                let(:property) { "status" }
+                let(:property) { "patron_status" }
                 it { should eql "05" }
               end
               context "when the property is patron type" do
-                let(:property) { "type" }
+                let(:property) { "patron_type" }
                 it { should eql "Bastard" }
               end
               context "when the property is ILL permission" do
@@ -172,8 +172,8 @@ describe Api::V1::UsersController do
                 it { should eql "Y" }
               end
 
-              context "when property is status" do
-                let(:property) { "status" }
+              context "when property is patron status" do
+                let(:property) { "patron_status" }
                 it { should eql "03" }
               end
 
@@ -182,8 +182,8 @@ describe Api::V1::UsersController do
                 it { should eql "NYU" }
               end
 
-              context "when property is type" do
-                let(:property) { "type" }
+              context "when property is patron type" do
+                let(:property) { "patron_type" }
                 it { should be_blank }
               end
 
@@ -239,7 +239,7 @@ describe Api::V1::UsersController do
                 it { should eql "Y" }
               end
               context "when property is status" do
-                let(:property) { "status" }
+                let(:property) { "patron_status" }
                 it { should eql "03" }
               end
               context "when the property is the institution_code attributes" do
@@ -247,7 +247,7 @@ describe Api::V1::UsersController do
                 it { should eql "NYU" }
               end
               context "when property is type" do
-                let(:property) { "type" }
+                let(:property) { "patron_type" }
                 it { should be_blank }
               end
             end

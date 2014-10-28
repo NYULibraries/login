@@ -3,8 +3,8 @@ module Login
   module Aleph
     describe Patron do
       let(:identifier) { ENV["TEST_ALEPH_USER"] || 'BOR_ID' }
-      let(:status) { '01' }
-      let(:type) { 'TP' }
+      let(:patron_status) { '01' }
+      let(:patron_type) { 'TP' }
       let(:ill_permission) { 'Y' }
       let(:ill_library) { 'nil' }
       let(:college) { 'College' }
@@ -14,8 +14,8 @@ module Login
       let(:patron_hash) {
         {
           identifier: identifier,
-          status: status,
-          type: type,
+          patron_status: patron_status,
+          patron_type: patron_type,
           ill_permission: ill_permission,
           ill_library: ill_library,
           college: college,
@@ -27,8 +27,8 @@ module Login
       subject (:patron) do
         Patron.new do |patron|
           patron.identifier = identifier
-          patron.status = status
-          patron.type = type
+          patron.patron_status = patron_status
+          patron.patron_type = patron_type
           patron.ill_permission = ill_permission
           patron.ill_library = ill_library
           patron.college = college
@@ -42,13 +42,13 @@ module Login
         subject { patron.identifier }
         it { should eq identifier }
       end
-      describe '#status' do
-        subject { patron.status }
-        it { should eq status }
+      describe '#patron_status' do
+        subject { patron.patron_status }
+        it { should eq patron_status }
       end
-      describe '#type' do
-        subject { patron.type }
-        it { should eq type }
+      describe '#patron_type' do
+        subject { patron.patron_type }
+        it { should eq patron_type }
       end
       describe '#ill_permission' do
         subject { patron.ill_permission }

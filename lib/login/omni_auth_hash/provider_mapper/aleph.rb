@@ -23,8 +23,8 @@ module Login
         def aleph_patron
           @aleph_patron ||= Login::Aleph::Patron.new do |instance|
             instance.plif_status = omniauth_hash.extra.raw_info.bor_auth.z303.z303_birthplace
-            instance.type = omniauth_hash.extra.raw_info.bor_auth.z305.z305_bor_type
-            instance.status = omniauth_hash.extra.raw_info.bor_auth.z305.z305_bor_status
+            instance.patron_type = omniauth_hash.extra.raw_info.bor_auth.z305.z305_bor_type
+            instance.patron_status = omniauth_hash.extra.raw_info.bor_auth.z305.z305_bor_status
             instance.ill_permission = omniauth_hash.extra.raw_info.bor_auth.z305.z305_photo_permission
             instance.ill_library = omniauth_hash.extra.raw_info.bor_auth.z303.z303_ill_library
           end

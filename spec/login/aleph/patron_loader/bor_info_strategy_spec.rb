@@ -15,8 +15,8 @@ module Login
         context "when identifier is valid and returns a BorInfo object" do
           its(:identifier) { should eql identifier }
           its(:plif_status) { should be_nil }
-          its(:status) { should eql "03" }
-          its(:type) { should be_nil }
+          its(:patron_status) { should eql "03" }
+          its(:patron_type) { should be_nil }
           its(:ill_permission) { should eql "Y" }
           its(:ill_library) { should be_nil }
         end

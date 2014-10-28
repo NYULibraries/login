@@ -13,7 +13,7 @@ module Login
         {"HSL" => %w(ILL_MED)}
       ]
 
-      attr_accessor :identifier, :status, :type, :ill_permission, :college,
+      attr_accessor :identifier, :patron_status, :patron_type, :ill_permission, :college,
         :department, :major, :plif_status, :ill_library, :institution_code
 
       def initialize(&block)
@@ -48,7 +48,7 @@ module Login
       def institute_for_bor_status
         BOR_STATUS_MAPPINGS.find do |bor_status_mapping|
           bor_status_mapping.find do |institution_code,bor_statuses|
-            return institution_code if bor_statuses.include?(status)
+            return institution_code if bor_statuses.include?(patron_status)
           end
         end
       end
