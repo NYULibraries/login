@@ -6,9 +6,10 @@ module Login
     module ProviderMapper
       class Facebook < Base
         def initialize(omniauth_hash)
-          super(omniauth_hash)
+          @omniauth_hash = omniauth_hash
           # Map to nickname if exists, or to email
           @username = (omniauth_hash.info.nickname || omniauth_hash.info.email)
+          super(omniauth_hash)
         end
       end
     end

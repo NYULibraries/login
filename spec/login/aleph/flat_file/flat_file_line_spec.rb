@@ -80,7 +80,7 @@ module Login
           end
         end
         context "and the flatfile line isn't complete" do
-          let(:line) { "BOR_ID	12345678910112	encrypted_value	20140101	NYU Undergraduate Student	0	ELOPER,DEV	developer@nyu.edu	Y" }
+          let(:line) { "BOR_ID	12345678910112	encrypted_value	20140101	03	0	ELOPER,DEV	developer@nyu.edu	Y" }
           describe "#identifier" do
             subject { flatfileline.identifier }
             it { should eq "BOR_ID" }
@@ -99,7 +99,7 @@ module Login
           end
           describe "#status" do
             subject { flatfileline.status }
-            it { should eq "NYU Undergraduate Student" }
+            it { should eq "03" }
           end
           describe "#type" do
             subject { flatfileline.type }

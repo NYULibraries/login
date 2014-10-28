@@ -6,9 +6,10 @@ module Login
     module ProviderMapper
       class Twitter < Base
         def initialize(omniauth_hash)
-          super(omniauth_hash)
+          @omniauth_hash = omniauth_hash
           # Map username to nickname
           @username = omniauth_hash.info.nickname
+          super(omniauth_hash)
         end
       end
     end
