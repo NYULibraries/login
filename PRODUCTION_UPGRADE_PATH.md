@@ -4,11 +4,12 @@
 
 Every client application that will be using Login for authentication will need to be prepped by integrating:
 
+* Rails 4
 * [Figs](https://github.com/NYULibraries/figs) and
 * [Configula](https://github.com/NYULibraries/configula) for configurations
 * [Formaggio](https://github.com/NYULibraries/formaggio) for deployment
 
-**Make these changes in dev and QA** first and then** deploy to production** before beginning the upgrade to Login to ensure that we limit the margin for error but only testing one change at a time.
+**Make these changes in dev and QA** first and then** deploy to production** before beginning the upgrade to Login to ensure that we limit the margin of error by only testing one change at a time.
 
 ### Ruby On Rails Applications
 
@@ -99,6 +100,22 @@ If we are not ready to run this service in the cloud by go-live time we will wan
 
 Once all the dev and QA work has been done to prepare the applications and we've set up our production environment there are a set of tasks that need to be followed in order to allow for a seamless transition to the new Login.
 
+This list of apps will need to do the below dance to switch back and forth between production and dev URLs for login in order to maintain all production services without downtime:
+
+* BobCat
+* Room Reservation System
+* MaRLi
+* GetIt
+* The Arch
+* Umbra
+* E-Shelf
+* Privileges Guide
+* ILLiad
+
+These apps need to do the same but login downtime is acceptable:
+* Ichabod
+* Finding Aids
+
 ### 1) Domain Switching
 
 #### a. `pds.library.nyu.edu`
@@ -117,7 +134,7 @@ Once we're sure that all existing applications are pointing to `pds.library` we 
 
 ### 2) Point QA Environments To `login.library.nyu.edu`
 
-We want to test that all of our upgrades work with the new production environment and this new domain name, i.e. `login.library.nyu.edu`
+We want to test that all of our upgrades work with the new production environment and this new domain name, i.e. `login.library.nyu.edu`. **Note that the defualt URL for these applications is `dev.login.library.nyu.edu`**
 
 This just involves a Configula change to the login URL and Jenkins deployments of QA environments.
 
