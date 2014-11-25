@@ -26,12 +26,12 @@ gem 'compass-rails', '~> 2.0.0'
 # Use mustache for templating
 # Fix to 0.99.4 cuz 0.99.5 broke my shit.
 gem 'mustache', '0.99.4'
-gem 'mustache-rails', git: 'git://github.com/josh/mustache-rails.git', :require => 'mustache/railtie'
+gem 'mustache-rails', github: 'josh/mustache-rails', :require => 'mustache/railtie'
 # Use the NYU Libraries assets gem
-gem 'nyulibraries-assets',  git: 'git://github.com/NYULibraries/nyulibraries-assets.git', branch: 'development-login'
+gem 'nyulibraries-assets', github: 'NYULibraries/nyulibraries-assets', tag: 'v4.1.1'
 
 # Use the NYU Libraries deploy gem
-gem 'formaggio', git: 'git://github.com/NYULibraries/formaggio.git', tag: 'v1.0.0'
+gem 'formaggio', github: 'NYULibraries/formaggio', tag: 'v1.0.0'
 # gem 'nyulibraries-deploy', path: '/apps/nyulibraries-deploy'
 
 # Used for determining which institution is in play

@@ -16,12 +16,13 @@ GIT
 
 GIT
   remote: git://github.com/NYULibraries/nyulibraries-assets.git
-  revision: db4a7492f130a13ebb8c769eaa5468315737693c
-  branch: development-login
+  revision: 8aecbe25dc8b3a67ec1ae82891b3700b1f58d99f
+  tag: v4.1.1
   specs:
-    nyulibraries-assets (4.0.0)
+    nyulibraries-assets (4.1.0)
       bootstrap-sass (~> 3.2.0.2)
       compass (~> 1.0.1)
+      font-awesome-rails (~> 4.2.0.0)
       institutions (~> 0.1.3)
 
 GIT
@@ -168,6 +169,8 @@ GEM
     figs (2.0.2)
       git (~> 1.2.6)
       rake (~> 10.1)
+    font-awesome-rails (4.2.0.0)
+      railties (>= 3.2, < 5.0)
     gherkin (2.12.2)
       multi_json (~> 1.3)
     git (1.2.8)
