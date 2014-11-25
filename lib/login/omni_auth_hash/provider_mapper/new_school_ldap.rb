@@ -5,16 +5,12 @@ module Login
   module OmniAuthHash
     module ProviderMapper
       class NewSchoolLdap < Base
-
         def initialize(omniauth_hash)
-          super(omniauth_hash)
+          @omniauth_hash = omniauth_hash
           @institution_code = "NS"
-          # Map to NetID - Found in LDAP response as "pdsloginid"
-          @uid = ldap_hash[:pdsloginid].first
-          @username = ldap_hash[:pdsloginid].first
-          # Map to N Number - Found in LDAP response as a value under "pdsexternalsystemid" array with a "::sct" suffix
+          @uid = @username = ns_uid
           @nyuidn = extract_value_from_keyed_array(ldap_hash[:pdsexternalsystemid], "sct")
-          @properties = omniauth_hash.info.merge(properties_attributes)
+          super(omniauth_hash)
         end
 
         # Convenience method to extract Net::LDAP::Entry from OmniAuth::AuthHash, accessible as a hash
@@ -23,12 +19,21 @@ module Login
         end
         private :ldap_hash
 
+        # Map to NetID - Found in LDAP response as "pdsloginid"
+        # Get nil value as blank string so this will fail and calling super will not reset the uid to default
+        def ns_uid
+          @ns_uid ||= ldap_hash[:pdsloginid].first.to_s
+        end
+        private :ns_uid
+
         # Find value in array suffixed with #{key}
+        #
+        # Ex.
+        # => extract_value_from_keyed_array(["yadda::mgmt","etc::nyuidn"], "nyuidn") => "etc"
         def extract_value_from_keyed_array(array, key)
           array.find { |val| /(.+)::#{key}/.match(val) }.split("::").first
         end
         private :extract_value_from_keyed_array
-
       end
     end
   end

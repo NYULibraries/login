@@ -6,14 +6,14 @@ module Login
     module ProviderMapper
       class NYUShibboleth < Base
         def initialize(omniauth_hash)
-          super(omniauth_hash)
+          @omniauth_hash = omniauth_hash
           @institution_code = "NYU"
           @nyuidn = omniauth_hash.extra.raw_info.nyuidn
-          @properties = omniauth_hash.info.merge(properties_attributes)
+          super(omniauth_hash)
         end
 
-        def extra_attributes(options = {})
-          super(options.merge({entitlement: omniauth_hash.extra.raw_info.entitlement}))
+        def properties_attributes
+          super.merge({entitlement: omniauth_hash.extra.raw_info.entitlement})
         end
       end
     end

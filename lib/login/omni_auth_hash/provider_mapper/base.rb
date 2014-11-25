@@ -5,8 +5,8 @@ module Login
   module OmniAuthHash
     module ProviderMapper
       class Base
-
-        attr_reader :omniauth_hash, :provider, :uid, :username, :nyuidn, :email, :first_name, :last_name, :info, :properties, :institution_code
+        attr_reader :omniauth_hash, :provider, :uid, :username, :nyuidn, :email,
+                    :first_name, :last_name, :info, :properties, :institution_code
 
         def initialize(omniauth_hash)
           @omniauth_hash ||= omniauth_hash
@@ -29,7 +29,7 @@ module Login
         # Define hash of extra attributes for merging into properties
         def properties_attributes
           {
-            extra: extra_attributes,
+            extra: omniauth_hash.extra,
             uid: uid,
             first_name: first_name,
             last_name: last_name,
@@ -37,15 +37,6 @@ module Login
             institution_code: institution_code
           }
         end
-
-        def extra_attributes(options = {})
-          extra.merge(options)
-        end
-
-        def extra
-          (omniauth_hash.extra || {})
-        end
-
       end
     end
   end

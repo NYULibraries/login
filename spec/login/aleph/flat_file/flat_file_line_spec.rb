@@ -22,12 +22,12 @@ module Login
             subject { flatfileline.expiry_date }
             it { should eq "20140101" }
           end
-          describe "#status" do
-            subject { flatfileline.status }
+          describe "#patron_status" do
+            subject { flatfileline.patron_status }
             it { should eq "65" }
           end
-          describe "#type" do
-            subject { flatfileline.type }
+          describe "#patron_type" do
+            subject { flatfileline.patron_type }
             it { should be_nil }
           end
           describe "#bor_name" do
@@ -80,7 +80,7 @@ module Login
           end
         end
         context "and the flatfile line isn't complete" do
-          let(:line) { "BOR_ID	12345678910112	encrypted_value	20140101	NYU Undergraduate Student	0	ELOPER,DEV	developer@nyu.edu	Y" }
+          let(:line) { "BOR_ID	12345678910112	encrypted_value	20140101	03	0	ELOPER,DEV	developer@nyu.edu	Y" }
           describe "#identifier" do
             subject { flatfileline.identifier }
             it { should eq "BOR_ID" }
@@ -97,12 +97,12 @@ module Login
             subject { flatfileline.expiry_date }
             it { should eq "20140101" }
           end
-          describe "#status" do
-            subject { flatfileline.status }
-            it { should eq "NYU Undergraduate Student" }
+          describe "#patron_status" do
+            subject { flatfileline.patron_status }
+            it { should eq "03" }
           end
-          describe "#type" do
-            subject { flatfileline.type }
+          describe "#patron_type" do
+            subject { flatfileline.patron_type }
             it { should be_nil }
           end
           describe "#bor_name" do
@@ -173,12 +173,12 @@ module Login
           subject { flatfileline.expiry_date }
           it { should be_nil }
         end
-        describe "#status" do
-          subject { flatfileline.status }
+        describe "#patron_status" do
+          subject { flatfileline.patron_status }
           it { should be_nil }
         end
-        describe "#type" do
-          subject { flatfileline.type }
+        describe "#patron_type" do
+          subject { flatfileline.patron_type }
           it { should be_nil }
         end
         describe "#bor_name" do

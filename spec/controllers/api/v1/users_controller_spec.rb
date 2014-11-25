@@ -71,36 +71,38 @@ describe Api::V1::UsersController do
             end
 
             it { should have_json_path("identities/#{index}/properties/uid") }
-            it { should have_json_path("identities/#{index}/properties/extra/plif_status") }
-            it { should have_json_path("identities/#{index}/properties/extra/patron_type") }
-            it { should have_json_path("identities/#{index}/properties/extra/patron_status") }
-            it { should have_json_path("identities/#{index}/properties/extra/ill_permission") }
-
+            it { should have_json_path("identities/#{index}/properties/plif_status") }
+            it { should have_json_path("identities/#{index}/properties/patron_type") }
+            it { should have_json_path("identities/#{index}/properties/patron_status") }
+            it { should have_json_path("identities/#{index}/properties/ill_permission") }
             describe "identity properties" do
               let(:response_properties) { parse_json(body)["identities"][index]["properties"]  }
               subject { response_properties[property] }
-
-
               context "when property is the Aleph ID" do
                 let(:property) { "uid" }
                 it { should eql (ENV["TEST_ALEPH_USER"] || 'BOR_ID') }
               end
-
               context "when the property is the institution_code attributes" do
                 let(:property) { "institution_code" }
                 it { should eql "NYU" }
               end
-
-              context "when the property is the extra attributes" do
-                let(:property) { "extra" }
-                its(["plif_status"])     { should eql "Kings Landing" }
-                its(["patron_type"])     { should eql "Bastard" }
-                its(["patron_status"])   { should eql "05" }
-                its(["ill_permission"])  { should eql "Y" }
+              context "when the property is PLIF status" do
+                let(:property) { "plif_status" }
+                it { should eql "Kings Landing" }
               end
-
+              context "when the property is patron status" do
+                let(:property) { "patron_status" }
+                it { should eql "05" }
+              end
+              context "when the property is patron type" do
+                let(:property) { "patron_type" }
+                it { should eql "Bastard" }
+              end
+              context "when the property is ILL permission" do
+                let(:property) { "ill_permission" }
+                it { should eql "Y" }
+              end
             end
-
           end
 
           context "and the user's identity provider is NYU Shibboleth" do
@@ -110,7 +112,7 @@ describe Api::V1::UsersController do
             it { should have_json_path("identities/#{identity_index}/properties/nyuidn") }
             it { should have_json_path("identities/#{identity_index}/properties/first_name") }
             it { should have_json_path("identities/#{identity_index}/properties/last_name") }
-            it { should have_json_path("identities/#{identity_index}/properties/extra/entitlement") }
+            it { should have_json_path("identities/#{identity_index}/properties/entitlement") }
 
             let(:response_properties) { JSON.parse(response.body)["identities"][identity_index]["properties"]  }
 
@@ -143,9 +145,9 @@ describe Api::V1::UsersController do
                 it { should eql "NYU" }
               end
 
-              context "when the property is the extra attributes" do
-                let(:property) { "extra" }
-                its(["entitlement"]) { should eql "nothing" }
+              context "when the property is entitlement" do
+                let(:property) { "entitlement" }
+                it { should eql "nothing" }
               end
 
             end
@@ -170,18 +172,18 @@ describe Api::V1::UsersController do
                 it { should eql "Y" }
               end
 
-              context "when property is status" do
-                let(:property) { "status" }
-                it { should eql "NYU Undergraduate Student" }
+              context "when property is patron status" do
+                let(:property) { "patron_status" }
+                it { should eql "03" }
               end
 
-              # context "when the property is the institution_code attributes" do
-              #   let(:property) { "institution_code" }
-              #   it { should eql "NYU" }
-              # end
+              context "when the property is the institution_code attributes" do
+                let(:property) { "institution_code" }
+                it { should eql "NYU" }
+              end
 
-              context "when property is type" do
-                let(:property) { "type" }
+              context "when property is patron type" do
+                let(:property) { "patron_type" }
                 it { should be_blank }
               end
 
@@ -196,8 +198,8 @@ describe Api::V1::UsersController do
             it { should have_json_path("identities/#{identity_index}/properties/nyuidn") }
             it { should have_json_path("identities/#{identity_index}/properties/first_name") }
             it { should have_json_path("identities/#{identity_index}/properties/last_name") }
-            describe "identity properties" do
-              let(:response_properties) { JSON.parse(response.body)["identities"][identity_index]["properties"]  }
+            let(:response_properties) { JSON.parse(response.body)["identities"][identity_index]["properties"]  }
+            describe "New School identity properties" do
               subject { response_properties[property] }
               context "when property is the NetID" do
                 let(:property) { "uid" }
@@ -215,10 +217,38 @@ describe Api::V1::UsersController do
                 let(:property) { "last_name" }
                 it { should eql "Snow" }
               end
-
               context "when the property is the institution_code attributes" do
                 let(:property) { "institution_code" }
                 it { should eql "NS" }
+              end
+            end
+            describe "Aleph identity properties" do
+              let(:bor_id) { ENV["TEST_ALEPH_USER"] || 'BOR_ID' }
+              let(:identity) { "aleph" }
+              subject { response_properties[property] }
+              context "when property is identifier" do
+                let(:property) { "identifier" }
+                it { should eql bor_id }
+              end
+              context "when property is PLIF status" do
+                let(:property) { "plif_status" }
+                it { should be_blank }
+              end
+              context "when property is ILL permission" do
+                let(:property) { "ill_permission" }
+                it { should eql "Y" }
+              end
+              context "when property is status" do
+                let(:property) { "patron_status" }
+                it { should eql "03" }
+              end
+              context "when the property is the institution_code attributes" do
+                let(:property) { "institution_code" }
+                it { should eql "NYU" }
+              end
+              context "when property is type" do
+                let(:property) { "patron_type" }
+                it { should be_blank }
               end
             end
           end
