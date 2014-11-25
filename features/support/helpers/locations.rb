@@ -3,8 +3,9 @@ module LoginFeatures
     def first_ip_for_institute(institute)
       ip_addresses = ::Institutions.institutions[institute.to_sym].ip_addresses
       if ip_addresses.present?
-        first_ip_address = ip_addresses.send(:segments).first
+        first_ip_address = ip_addresses.first
         if first_ip_address.is_a?(::IPAddr)
+          binding.pry
           first_ip_address = first_ip_address.to_range
         end
         if first_ip_address.is_a?(::Range)
