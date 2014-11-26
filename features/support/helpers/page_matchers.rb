@@ -188,11 +188,10 @@ module LoginFeatures
 
     def authorize_applications_matchers
       @authorize_applications_matchers ||= [
-        -> { have_css(".brand") },
+        -> { have_css(".navbar-brand") },
         -> { have_text("OAuth2 Provider") },
         -> { have_text("Your applications") },
-        -> { have_text("New Application") },
-        -> { have_css(".zebra-striped") }
+        -> { have_text("New Application") }
       ]
     end
   end
