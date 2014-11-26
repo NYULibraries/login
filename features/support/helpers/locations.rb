@@ -5,7 +5,6 @@ module LoginFeatures
       if ip_addresses.present?
         first_ip_address = ip_addresses.first
         if first_ip_address.is_a?(::IPAddr)
-          binding.pry
           first_ip_address = first_ip_address.to_range
         end
         if first_ip_address.is_a?(::Range)
