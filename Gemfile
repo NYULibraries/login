@@ -7,7 +7,7 @@ gem 'rails', '~> 4.0.9'
 gem 'pg', '~> 0.17.1'
 # Use nested hstore to store serialized objects in Active Record hstore
 gem 'nested-hstore', '~> 0.0.5'
-gem 'activerecord-postgres-hstore', '~> 0.7.7'
+gem 'activerecord-postgres-hstore', '0.7.6' # 0.7.7 Has a PG syntax error in a rake task that causes this to fail
 
 # Use SCSS for stylesheets
 gem 'sass-rails',   '>= 5.0.0.beta1'
