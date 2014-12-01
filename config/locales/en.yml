@@ -28,7 +28,8 @@ en:
   application:
     title_html: Login
     header_html: Select your affiliation
-    footer_html: I'm lost. %{link}
+    footer_html: Why am I on this page?
+    footer_popover_header_html: Online access to NYU Libraries
     users:
       user:
         greeting_html: "Hi %{username}!"
