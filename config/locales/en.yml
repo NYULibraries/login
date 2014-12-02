@@ -27,7 +27,7 @@ en:
         success: "Successfully authenticated from your %{kind} account."
   application:
     title_html: Login
-    header_html: Select your affiliation
+    header_html: Select your affiliation to login
     auth_footer_html: I'm lost. %{link}
     wayf_footer_html: Why am I on this page?
     wayf_footer_popover_header_html: Online access to NYU Libraries
