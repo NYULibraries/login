@@ -102,11 +102,9 @@ group :development, :test, :cucumber do
   gem 'poltergeist', '~> 1.5.1'
   # Use factory girl for creating models
   gem 'factory_girl_rails', '~> 4.4.1'
-  # Use pry-debugger as the REPL and for debugging
-  gem 'pry-byebug', '~> 2.0.0'
-  gem 'pry-remote', '~> 0.1.8'
   # Use json_spec to do rspec tests with JSON
   gem 'json_spec', '~> 1.1.2'
+  gem 'pry', '~> 0.10.1'
 end
 
 # Development gems
