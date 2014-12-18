@@ -22,7 +22,7 @@ module Doorkeeper
         it { should redirect_to('/login') }
       end
       describe "POST 'create'" do
-        before { post :create, application: attributes_for(:oauth_application) }
+        before { post :create, doorkeeper_application: attributes_for(:oauth_application) }
         subject { response }
         it { should be_redirect }
         it { should redirect_to('/login') }
@@ -35,7 +35,7 @@ module Doorkeeper
       end
       describe "PUT 'update'" do
         before do
-          put :update, id: application.id, application: { name: "#{application.name} redux" }
+          put :update, id: application.id, doorkeeper_application: { name: "#{application.name} redux" }
         end
         subject { response }
         it { should be_redirect }
@@ -70,7 +70,7 @@ module Doorkeeper
           it { should redirect_to(user_url(user.provider, user.username)) }
         end
         describe "POST 'create'" do
-          before { post :create, application: attributes_for(:oauth_application) }
+          before { post :create, doorkeeper_application: attributes_for(:oauth_application) }
           subject { response }
           it { should be_redirect }
           it { should redirect_to(user_url(user.provider, user.username)) }
@@ -83,7 +83,7 @@ module Doorkeeper
         end
         describe "PUT 'update'" do
           before do
-            put :update, id: application.id, application: { name: "#{application.name} redux" }
+            put :update, id: application.id, doorkeeper_application: { name: "#{application.name} redux" }
           end
           subject { response }
           it { should be_redirect }
@@ -114,7 +114,7 @@ module Doorkeeper
           it { should be_success }
         end
         describe "POST 'create'" do
-          before { post :create, application: attributes_for(:oauth_application) }
+          before { post :create, doorkeeper_application: attributes_for(:oauth_application) }
           subject { response }
           it("should assign @application") do
             expect(assigns(:application)).not_to be_nil
@@ -130,7 +130,7 @@ module Doorkeeper
         end
         describe "PUT 'update'" do
           before do
-            put :update, id: application.id, application: { name: "#{application.name} redux" }
+            put :update, id: application.id, doorkeeper_application: { name: "#{application.name} redux" }
           end
           subject { response }
           it("should assign @application") do
