@@ -10,7 +10,8 @@ gem 'nested-hstore', '~> 0.0.5'
 gem 'activerecord-postgres-hstore', '0.7.6' # 0.7.7 Has a PG syntax error in a rake task that causes this to fail
 
 # Use SCSS for stylesheets
-gem 'sass-rails',   '>= 5.0.0.beta1'
+# Locked in at beta1 release because major release doesn't play nice with compass-rails yet
+gem 'sass-rails', '5.0.0.beta1'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
@@ -33,7 +34,6 @@ gem 'nyulibraries-assets', github: 'NYULibraries/nyulibraries-assets', tag: 'v4.
 
 # Use the NYU Libraries deploy gem
 gem 'formaggio', github: 'NYULibraries/formaggio', tag: 'v1.0.0'
-# gem 'nyulibraries-deploy', path: '/apps/nyulibraries-deploy'
 
 # Used for determining which institution is in play
 gem 'institutions', '~> 0.1.3'
@@ -68,7 +68,7 @@ gem 'omniauth-ldap', '~> 1.0.4'
 gem 'font-awesome-rails', '~> 4.2.0'
 
 # Use doorkeeper as our OAuth 2.0 provider
-gem 'doorkeeper', '~> 1.4.0'
+gem 'doorkeeper', '~> 2.0.0'
 
 # Figs for configuration
 gem 'figs', '~> 2.0.0'
