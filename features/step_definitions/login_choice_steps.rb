@@ -14,6 +14,14 @@ Then(/^I should (not )?be able to login with an Other Borrower account$/) do |ne
   expectations_for_page(page, negator, *bobst_login_matchers)
 end
 
+Then(/^I should (not )?be able to login with an NYU Shanghai Other Borrower account$/) do |negator|
+  expectations_for_page(page, negator, *nyush_other_borrower_matchers)
+end
+
+Then(/^I should (not )?be able to login with an NYU Abu Dhabi Other Borrower account$/) do |negator|
+  expectations_for_page(page, negator, *nyuad_other_borrower_matchers)
+end
+
 Then(/^I should (not )?be able to login with a Facebook account$/) do |negator|
   expectations_for_page(page, negator, *facebook_login_matchers)
 end

@@ -22,14 +22,14 @@ Feature: Other Borrower authentication page
     When I want to login
     And I press the Other Borrowers login option
     Then I should go to the Other Borrower authentication page
-    And I should be able to login with an Other Borrower account
+    And I should be able to login with an NYU Abu Dhabi Other Borrower account
 
   Scenario: Log in as an Other Borrower patron from NYU, Shanghai
     Given I am at NYU Shanghai
     When I want to login
     And I press the Other Borrowers login option
     Then I should go to the Other Borrower authentication page
-    And I should be able to login with an Other Borrower account
+    And I should be able to login with an NYU Shanghai Other Borrower account
 
   Scenario: Log in as an Other Borrower patron from NYU, Health Sciences
     Given I am at NYU Health Sciences

@@ -4,8 +4,8 @@ end
 
 When(/^I submit my New School NetID and password$/) do
   within("#new_school_ldap") do
-    expect(page).to have_content 'Enter your NetID Username'
-    expect(page).to have_content 'Enter your NetID Password'
+    expect(page).to have_content 'Enter your NetID'
+    expect(page).to have_content 'Enter your password'
     expect(page).to have_css "input[value='Login']"
   end
 end
