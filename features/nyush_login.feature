@@ -9,3 +9,16 @@ Feature: NYU Shanghai Login
     When I click on the "NYU" button
     And NYU Home authenticates me
     Then I should be logged in as an NYU user
+
+  @ignore_user_keys
+  Scenario: Logging in with Bobst Affiliate patron ID
+    Given I am on the NYU Shanghai login page
+    When I click on the "Other Borrowers" button
+    And I enter my Library Patron ID for "Bobst Affiliate" and first four letters of my last name
+    Then I should be logged in as a Bobst Affiliate user
+
+  Scenario: Logging in with incorrect Bobst Affiliate patron ID
+    Given I am on the NYU Shanghai login page
+    When I click on the "Other Borrowers" button
+    And I incorrectly enter my Library Patron ID and first four letters of my last name
+    Then I should not be logged in as a Bobst Affiliate user

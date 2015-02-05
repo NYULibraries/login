@@ -43,8 +43,9 @@ module LoginFeatures
     def ns_login_matchers
       @ns_login_matchers ||= [
         -> { have_content 'Login with a New School NetID' },
-        -> { have_content 'Enter your NetID Username' },
-        -> { have_content 'Enter your NetID Password' }
+        -> { have_content 'Enter your NetID' },
+        -> { have_content 'Enter your password' },
+        -> { have_link("Ask a Librarian", { href: "http://answers.library.newschool.edu"}) }
       ]
     end
 
@@ -52,23 +53,45 @@ module LoginFeatures
       @cu_login_matchers ||= [
         -> { have_content 'Login with your Cooper Union patron ID' },
         -> { have_content 'Enter your ID Number' },
-        -> { have_content 'First four letter of your last name' }
+        -> { have_content 'First four letters of your last name' },
+        -> { have_link("I'm lost. Get help from a librarian.", { href: "http://library.cooper.edu/library_information_frameset.html"}) }
       ]
     end
 
     def nysid_login_matchers
       @nysid_login_matchers ||= [
-        -> { have_content 'Login with your NYSID patron ID' },
+        -> { have_content 'Login with your NYSID ID number' },
+        -> { have_selector("input[placeholder='e.g. 123456']") },
         -> { have_content 'Enter your ID Number' },
-        -> { have_content 'First four letter of your last name' }
+        -> { have_content 'First four letters of your last name' },
+        -> { have_link("Ask a Librarian", { href: "http://library.nysid.edu/library/about-the-library/contact-us/"}) }
       ]
     end
 
     def bobst_login_matchers
       @bobst_login_matchers ||= [
-        -> { have_content 'Login with your NYU Bobst ID' },
-        -> { have_content 'Enter your ID Number' },
-        -> { have_content 'First four letter of your last name' }
+        -> { have_content 'Login with your library card number' },
+        -> { have_content 'Enter your library card number' },
+        -> { have_no_content 'e.g.' },
+        -> { have_content 'First four letters of your last name' }
+      ]
+    end
+
+    def nyuad_other_borrower_matchers
+      @nyuad_other_borrower_matchers ||= [
+        -> { have_content 'Login with your NYU Abu Dhabi Library card number' },
+        -> { have_content 'Enter your library card number' },
+        -> { have_no_content 'e.g.' },
+        -> { have_content 'First four letters of your last name' }
+      ]
+    end
+
+    def nyush_other_borrower_matchers
+      @nyush_other_borrower_matchers ||= [
+        -> { have_content 'Login with your library card number' },
+        -> { have_content 'Enter your library card number' },
+        -> { have_no_content 'e.g.' },
+        -> { have_content 'First four letters of your last name' }
       ]
     end
 

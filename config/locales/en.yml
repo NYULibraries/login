@@ -49,26 +49,36 @@ en:
     ns:
       header: Login with a New School NetID
       link_text: The New School
-      username_label: Enter your NetID Username
+      username_label: Enter your NetID
       username_placeholder: "e.g. ParsJ123"
-      password_label: Enter your NetID Password
+      password_label: Enter your password
     cu:
       header: Login with your Cooper Union patron ID
       link_text: Cooper Union
       username_label: Enter your ID Number
       username_placeholder: "e.g. N12345678"
-      password_label: First four letter of your last name
+      password_label: First four letters of your last name
     nysid:
-      header: Login with your NYSID patron ID
+      header: Login with your NYSID ID number
       link_text: NYSID
       username_label: Enter your ID Number
-      username_placeholder: "e.g. N12345678"
-      password_label: First four letter of your last name
+      username_placeholder: "e.g. 123456"
+      password_label: First four letters of your last name
     bobst:
-      header: Login with your NYU Bobst ID
-      username_label: Enter your ID Number
-      username_placeholder: "e.g. N12345678"
-      password_label: First four letter of your last name
+      nyush:
+        header: Login with your library card number
+        username_label: Enter your library card number
+        username_placeholder: ""
+        password_label: First four letters of your last name
+      nyuad:
+        header: Login with your NYU Abu Dhabi Library card number
+        username_label: Enter your library card number
+        username_placeholder: ""
+        password_label: First four letters of your last name
+      header: Login with your library card number
+      username_label: Enter your library card number
+      username_placeholder: ""
+      password_label: First four letters of your last name
     general_public:
       header: Login with your Facebook or Twitter account
       link_text: Visitors
