@@ -5,10 +5,10 @@ module Login
       let(:flatfileline) { FlatFile::FlatFileLine.new(line) }
       context "when flatfile line exists" do
         context "and the flatfile line is complete" do
-          let(:line) { "N12345678	12345678910112	encrypted_value	20140101	65	0	ELOPER,DEV	developer@nyu.edu	Y	PLIF LOADED	LI	NYU Division of Libraries	01	DIVISION OF LIBRARIES	31300	INFO TECH SVCS/DIRCTR-DIG PROJ" }
+          let(:line) { "BOR_ID\t12345678910112\tencrypted_value\t20140101\t03\t0\tELOPER,DEV\tdeveloper@nyu.edu\tY\tPLIF STATUS\tCC\tCOLLEGE\t00\tDEPARTMENT\t00000\tMAJOR\tILL LIBRARY\n" }
           describe "#identifier" do
             subject { flatfileline.identifier }
-            it { should eq "N12345678" }
+            it { should eq "BOR_ID" }
           end
           describe "#barcode" do
             subject { flatfileline.barcode }
@@ -24,7 +24,7 @@ module Login
           end
           describe "#patron_status" do
             subject { flatfileline.patron_status }
-            it { should eq "65" }
+            it { should eq "03" }
           end
           describe "#patron_type" do
             subject { flatfileline.patron_type }
@@ -44,35 +44,35 @@ module Login
           end
           describe "#plif_status" do
             subject { flatfileline.plif_status }
-            it { should eq "PLIF LOADED" }
+            it { should eq "PLIF STATUS" }
           end
           describe "#college_code" do
             subject { flatfileline.college_code }
-            it { should eq "LI" }
+            it { should eq "CC" }
           end
           describe "#college" do
             subject { flatfileline.college }
-            it { should eq "NYU Division of Libraries" }
+            it { should eq "COLLEGE" }
           end
           describe "#dept_code" do
             subject { flatfileline.dept_code }
-            it { should eq "01" }
+            it { should eq "00" }
           end
           describe "#department" do
             subject { flatfileline.department }
-            it { should eq "DIVISION OF LIBRARIES" }
+            it { should eq "DEPARTMENT" }
           end
           describe "#major_code" do
             subject { flatfileline.major_code }
-            it { should eq "31300" }
+            it { should eq "00000" }
           end
           describe "#major" do
             subject { flatfileline.major }
-            it { should eq "INFO TECH SVCS/DIRCTR-DIG PROJ" }
+            it { should eq "MAJOR" }
           end
           describe "#ill_library" do
             subject { flatfileline.ill_library }
-            it { should be_nil }
+            it { should eq "ILL LIBRARY" }
           end
           describe "#to_patron" do
             subject { flatfileline.to_patron }

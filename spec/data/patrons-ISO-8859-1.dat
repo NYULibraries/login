@@ -1,2 +1,2 @@
-N12345678	12345678910112	encrypted_value	20140101	65	0	ELOPER,D�V	developer@nyu.edu	Y	PLIF LOADED	LI	NYU Division of Libraries	01	DIVISION OF LIBRARIES	31300	INFO TECH SVCS/DIRCTR-DIG PROJ
-BOR_ID	12345678910112	encrypted_value	20140101	03	0	EL�PER,DEV	developer@nyu.edu	Y
+identifier  barcode  verification  expiry_date  patron_status  patron_type  b�r_name  email  ill_permission  plif_status  college_code  college  dept_code  department  major_code  major  ill_library
+identifier	barcode	verification	expiry_date	patron_status	patron_type	b�r_name	email	ill_permission

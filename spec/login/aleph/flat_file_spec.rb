@@ -6,7 +6,7 @@ module Login
         context "when flatfile is UTF-8 encoded" do
           let(:location) { "spec/data/patrons-UTF-8.dat"  }
           let(:flatfile) { FlatFile.new(location)}
-          let(:identifier) { "BOR_ID" }
+          let(:identifier) { "identifier" }
           describe "#find_patron_by_identifier" do
             subject { flatfile.find_patron_by_identifier(identifier) }
             it { should be_a Patron }
@@ -26,7 +26,7 @@ module Login
           let(:location) { "spec/data/patrons-ISO-8859-1.dat"  }
           let(:encoding) { "ISO-8859-1"}
           let(:flatfile) { FlatFile.new(location, encoding)}
-          let(:identifier) { "BOR_ID" }
+          let(:identifier) { "identifier" }
           describe "#find_patron_by_identifier" do
             subject { flatfile.find_patron_by_identifier(identifier) }
             it { should be_a Patron }
