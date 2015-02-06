@@ -12,16 +12,25 @@ module Login
       ILL_LIBRARY_MAPPINGS = [
         {"HSL" => %w(ILL_MED)}
       ]
+      DEFAULT_INSTITUTE = "NYU"
 
-      attr_accessor :identifier, :patron_status, :patron_type, :ill_permission, :college,
-        :department, :major, :plif_status, :ill_library, :institution_code
+      # Attributes that any patron object will have
+      # It is important to note that this cascades to user identities
+      # If an attribute is not accessible on the patron object,
+      # the Aleph identity for any user will not have access to that attribute
+      attr_accessor :identifier, :verification, :barcode, :patron_status, :patron_type,
+      :ill_permission, :college, :department, :dept_code, :major, :major_code, :plif_status,
+      :ill_library, :institution_code
 
       def initialize(&block)
         unless block_given?
           raise ArgumentError.new("Expecting a block to be given!")
         end
         yield self
-        @institution_code ||= (institute_for_ill_library || institute_for_bor_status)
+        # Favor the institute for ILL Library, since it is more accurate,
+        # Then use the borrower status to map to an institute
+        # Or default to NYU
+        @institution_code ||= (institute_for_ill_library || institute_for_bor_status || DEFAULT_INSTITUTE)
       end
 
       ##

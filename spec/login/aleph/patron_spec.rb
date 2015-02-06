@@ -78,6 +78,40 @@ module Login
         subject { patron.to_h }
         it { should include patron_hash }
       end
+      describe '#institution_code' do
+        subject { patron.institution_code }
+        context 'when patron status is part of the NYU institution' do
+          it { should eq "NYU" }
+        end
+        context 'when patron status is part of the NYUAD institution' do
+          let(:patron_status) { "80" }
+          it { should eq "NYUAD" }
+        end
+        context 'when patron status is part of the NYUSH institution' do
+          let(:patron_status) { "20" }
+          it { should eq "NYUSH" }
+        end
+        context 'when patron status is part of the CU institution' do
+          let(:patron_status) { "10" }
+          it { should eq "CU" }
+        end
+        context 'when patron status is part of the NS institution' do
+          let(:patron_status) { "30" }
+          it { should eq "NS" }
+        end
+        context 'when patron status is part of the NYSID institution' do
+          let(:patron_status) { "90" }
+          it { should eq "NYSID" }
+        end
+        context 'when patron status is not included in known list of institutions' do
+          let(:patron_status) { "xx" }
+          it { should eq "NYU" }
+        end
+        context 'when ill library is ILL_MED' do
+          let(:ill_library) { "ILL_MED" }
+          it { should eq "HSL" }
+        end
+      end
 
       context 'when initialized without a block' do
         subject { Patron.new }

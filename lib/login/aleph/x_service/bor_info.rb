@@ -9,7 +9,7 @@ module Login
 
         def initialize(identifier)
           @identifier = identifier
-          @op = self.class.name.demodulize.underscore
+          @op = self.class.name.demodulize.underscore # I.e. bor_info
           super()
         end
 
