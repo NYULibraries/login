@@ -3,6 +3,8 @@ module Login
     class PatronLoader
       class BorInfoStrategy < Strategy
 
+        # Patron.new expects a block, so we set the known values
+        # that we retrieved from the ugly API response
         def patron
           unless bor_info.error?
             @patron ||= Patron.new do |instance|
@@ -18,10 +20,12 @@ module Login
 
       private
 
+        # Convenience for extracting the body of the response, wherein lies what we desire
         def bor_info_body
           @bor_info_body ||= bor_info.response.body["bor_info"]
         end
 
+        # Use the Aleph XServices to get the borrower info based on the unique ID
         def bor_info
           @bor_info ||= Aleph::XService::BorInfo.new(identifier)
         end
