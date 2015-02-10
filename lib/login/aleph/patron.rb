@@ -20,7 +20,7 @@ module Login
       # the Aleph identity for any user will not have access to that attribute
       attr_accessor :identifier, :verification, :barcode, :patron_status, :patron_type,
       :ill_permission, :college, :department, :dept_code, :major, :major_code, :plif_status,
-      :ill_library, :institution_code
+      :ill_library, :institution_code, :expiry_date
 
       def initialize(&block)
         unless block_given?
