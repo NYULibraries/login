@@ -24,7 +24,7 @@ class UsersController < Devise::OmniauthCallbacksController
   end
 
   def omniauth_callback
-    @user = User.find_or_initialize_by(username: omniauth_hash_map.username, provider: omniauth_hash_map.provider)
+    @user = find_for_authentication(omniauth_hash_map.username, omniauth_hash_map.provider)
     # Initialize with an email address if the omniauth hash has it.
     @user.email = omniauth_hash_map.email if @user.email.blank? && omniauth_hash_map.email.present?
     # Set the OmniAuth::AuthHash for the user
@@ -64,5 +64,11 @@ class UsersController < Devise::OmniauthCallbacksController
     @omniauth_hash_validator ||= Login::OmniAuthHash::Validator.new(request.env["omniauth.auth"], params[:action])
   end
   private :omniauth_hash_validator
+
+  # Use Devise::Models::Authenticatable::ClassMethods#find_for_authentication
+  # to take advantage of the Devise case_insensitive_keys and treat USER and user as the same username
+  def find_for_authentication(username, provider)
+    User.find_for_authentication(username: username, provider: provider) || User.find_or_initialize_by(username: username, provider: provider)
+  end
 
 end
