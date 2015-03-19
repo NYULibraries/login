@@ -17,16 +17,6 @@ describe "routes for Doorkeeper" do
     it { should route_to(controller: 'doorkeeper/authorizations', action: 'create') }
   end
 
-  describe "PATCH /oauth/authorize" do
-    subject { patch('/oauth/authorize') }
-    it { should route_to(controller: 'doorkeeper/authorizations', action: 'update') }
-  end
-
-  describe "PUT /oauth/authorize" do
-    subject { put('/oauth/authorize') }
-    it { should route_to(controller: 'doorkeeper/authorizations', action: 'update') }
-  end
-
   describe "DELETE /oauth/authorize" do
     subject { delete('/oauth/authorize') }
     it { should route_to(controller: 'doorkeeper/authorizations', action: 'destroy') }

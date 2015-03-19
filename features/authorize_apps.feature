@@ -20,7 +20,7 @@ Feature: Authorizing (OAuth2) client applications
     And I click add new application
     And I fill out the form with the following fields:
       | Name         | test                      |
-      | Redirect uri | urn:ietf:wg:oauth:2.0:oob |
+      | Redirect URI | urn:ietf:wg:oauth:2.0:oob |
     Then I should see that the application is added
 
   Scenario: Trying to add a client application as a non-admin user
