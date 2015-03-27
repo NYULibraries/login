@@ -8,4 +8,12 @@ class ApplicationController < ActionController::Base
 
   # Include these helper functions explicitly to make them available to controllers
   include InstitutionsHelper, UsersHelper
+
+  private
+
+  # After signing out of the logout application,
+  # kill SSO sessions and redirect to terminal page
+  def after_sign_out_path_for(resource_or_scope)
+    root_path
+  end
 end
