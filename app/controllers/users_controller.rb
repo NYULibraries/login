@@ -51,6 +51,14 @@ class UsersController < Devise::OmniauthCallbacksController
   end
   private :require_login
 
+  def check_passive_login
+    if !user_signed_in? && !cookies[:check_passive_login]
+      cookies[:check_passive_login] = true
+      redirect_to "/Shibboleth.sso/Login?isPassive=true&target=#{request.original_url}"
+    end
+  end
+  private :check_passive_login
+
   def require_valid_omniauth_hash
     redirect_to after_omniauth_failure_path_for(resource_name) unless omniauth_hash_validator.valid?
   end
