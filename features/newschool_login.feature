@@ -1,4 +1,4 @@
-@omniauth_test @vcr @after-deploy
+@omniauth_test @vcr @after_deploy
 Feature: New School login
   In order to use NYU Libraries' online services
   As a New School user

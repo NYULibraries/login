@@ -1,4 +1,4 @@
-@omniauth_test @vcr @after-deploy
+@omniauth_test @vcr @after_deploy
 Feature: Present the login page to an OAuth2 client application
   In order to ensure that I am being authenticated by NYU Libraries' Login
   As a user of the OAuth2 client application

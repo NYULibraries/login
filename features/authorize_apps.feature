@@ -1,4 +1,4 @@
-@omniauth_test @vcr @after-deploy
+@omniauth_test @vcr @after_deploy
 Feature: Authorizing (OAuth2) client applications
   In order to use Login as an OAuth2 provider for NYU Libraries' service applications
   As an admin
