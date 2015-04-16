@@ -1,4 +1,4 @@
-@omniauth_test @vcr
+@omniauth_test @vcr @after-deploy
 Feature: Authorize an OAuth2 client application
   In order to allow an OAuth2 client application to have access to exposed user attributes
   As a user of the OAuth2 client application
