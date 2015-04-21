@@ -1,4 +1,4 @@
-@omniauth_test @vcr @after_deploy
+@omniauth_test @vcr
 Feature: Get attributes from protected API when user is authenticated
   In order to have an identity in an NYU client applications
   As an authenticated user
