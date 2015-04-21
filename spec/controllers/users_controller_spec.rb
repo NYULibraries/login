@@ -11,10 +11,10 @@ describe UsersController do
         it { should be_redirect }
         it("should have a 302 status") { expect(subject.status).to be(302) }
         it { should redirect_to("/Shibboleth.sso/Login?isPassive=true&target=#{URI.escape(request.original_url)}") }
-        it("should set been there done that cookie") { expect(subject.cookies["check_passive_login"]).to be_true }
+        it("should set been there done that cookie") { expect(subject.cookies["_check_passive_login"]).to be_true }
       end
       context 'when been there done that cookie has been set' do
-        before { @request.cookies["check_passive_login"] = true }
+        before { @request.cookies["_check_passive_login"] = true }
         before { get :show, id: attributes[:username], provider: attributes[:provider] }
         subject { response }
         it { should be_redirect }
