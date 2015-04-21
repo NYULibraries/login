@@ -52,9 +52,9 @@ class UsersController < Devise::OmniauthCallbacksController
   private :require_login
 
   def check_passive_login
-    if !user_signed_in? && !cookies[:check_passive_login]
-      cookies[:check_passive_login] = true
-      redirect_to "/Shibboleth.sso/Login?isPassive=true&target=#{request.original_url}"
+    if !user_signed_in? && !cookies[:_check_passive_login]
+      cookies[:_check_passive_login] = true
+      redirect_to passive_shibboleth_url
     end
   end
   private :check_passive_login
@@ -79,5 +79,10 @@ class UsersController < Devise::OmniauthCallbacksController
   def find_for_authentication(username, provider)
     User.find_for_authentication(username: username, provider: provider) || User.find_or_initialize_by(username: username, provider: provider)
   end
+
+  def passive_shibboleth_url
+    "/Shibboleth.sso/Login?isPassive=true&target=#{request.original_url}"
+  end
+  private :passive_shibboleth_url
 
 end
