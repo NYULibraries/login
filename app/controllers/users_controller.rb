@@ -57,7 +57,6 @@ class UsersController < Devise::OmniauthCallbacksController
       redirect_to passive_shibboleth_url
     end
   end
-  private :check_passive_login
 
   def require_valid_omniauth_hash
     redirect_to after_omniauth_failure_path_for(resource_name) unless omniauth_hash_validator.valid?
