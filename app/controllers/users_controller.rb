@@ -56,9 +56,7 @@ class UsersController < Devise::OmniauthCallbacksController
       cookies[:_check_passive_login] = true
       redirect_to passive_shibboleth_url
     end
-    if redirect_uri_params
-      redirect_to redirect_uri_params
-    end
+    redirect_to params[:redirect_uri] if params[:redirect_uri]
   end
 
   def require_valid_omniauth_hash
@@ -86,10 +84,4 @@ class UsersController < Devise::OmniauthCallbacksController
     "/Shibboleth.sso/Login?isPassive=true&target=#{request.original_url}"
   end
   private :passive_shibboleth_url
-
-  def redirect_uri_params
-    params.require(:redirect_uri)
-  end
-  private :redirect_uri_params
-
 end
