@@ -8,8 +8,7 @@ module Login
         def initialize(omniauth_hash)
           @omniauth_hash = omniauth_hash
           @institution_code = "NS"
-          @uid = @username = ns_uid
-          @nyuidn = extract_value_from_keyed_array(ldap_hash[:pdsexternalsystemid], "sct")
+          @nyuidn = nyuidn_from_hash
           super(omniauth_hash)
         end
 
@@ -19,21 +18,10 @@ module Login
         end
         private :ldap_hash
 
-        # Map to NetID - Found in LDAP response as "pdsloginid"
-        # Get nil value as blank string so this will fail and calling super will not reset the uid to default
-        def ns_uid
-          @ns_uid ||= ldap_hash[:pdsloginid].first.to_s
+        def nyuidn_from_hash
+          @nyuidn_from_hash ||= (ldap_hash[:cn].is_a? Array) ? ldap_hash[:cn].first : ldap_hash[:cn]
         end
-        private :ns_uid
 
-        # Find value in array suffixed with #{key}
-        #
-        # Ex.
-        # => extract_value_from_keyed_array(["yadda::mgmt","etc::nyuidn"], "nyuidn") => "etc"
-        def extract_value_from_keyed_array(array, key)
-          array.find { |val| /(.+)::#{key}/.match(val) }.split("::").first
-        end
-        private :extract_value_from_keyed_array
       end
     end
   end
