@@ -54,7 +54,7 @@ class UsersController < Devise::OmniauthCallbacksController
   def check_passive_login
     if !user_signed_in? && !cookies[:_check_passive_login]
       cookies[:_check_passive_login] = true
-      redirect_to passive_shibboleth_url
+      redirect_to passive_shibboleth_url and return
     end
     redirect_to params[:redirect_uri] if params[:redirect_uri]
   end
