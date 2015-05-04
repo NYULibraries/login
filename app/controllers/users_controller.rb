@@ -84,4 +84,9 @@ class UsersController < Devise::OmniauthCallbacksController
   end
   private :passive_shibboleth_url
 
+  def redirect_uri_params
+    params.require(:redirect_uri)
+  end
+  private :redirect_uri_params
+
 end
