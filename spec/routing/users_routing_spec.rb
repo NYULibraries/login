@@ -12,7 +12,7 @@ describe "routes for Users" do
 
   describe "GET '/login/passive'" do
     subject { get '/login/passive'}
-    it { should route_to('users#check_passive_login') }
+    it { should route_to('users#redirect_to_passive_login') }
   end
 
   describe "GET /api/v1/user" do
