@@ -88,4 +88,15 @@ class UsersController < Devise::OmniauthCallbacksController
     "/Shibboleth.sso/Login?isPassive=true&target=#{request.original_url}"
   end
   private :passive_shibboleth_url
+
+  def redirect_uri_params
+    return nil unless params[:redirect_uri]
+    params.require(:redirect_uri) if whitelisted_redirect_uri_params
+  end
+  private :redirect_uri_params
+
+  def whitelisted_redirect_uri_params
+    whitelisted_client_applications.include? URI.parse(params[:redirect_uri]).host
+  end
+  private :whitelisted_redirect_uri_params
 end
