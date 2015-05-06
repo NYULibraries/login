@@ -1,7 +1,7 @@
 class UsersController < Devise::OmniauthCallbacksController
   before_filter :check_passive_login, only: [:show, :redirect_to_passive_login]
   before_filter :require_login, only: :show
-  before_filter :require_no_authentication, except: [:show]
+  before_filter :require_no_authentication, except: [:show, :redirect_to_passive_login]
   before_filter :require_valid_omniauth_hash, only: (Devise.omniauth_providers << :omniauth_callback)
   respond_to :html
 
