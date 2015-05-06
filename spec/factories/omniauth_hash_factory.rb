@@ -26,7 +26,7 @@ FactoryGirl.define do
             mail: ["snowj@1newschool.edu"],
             sn: ["Snow"],
             uid: ["snowj"],
-            cn: ["N19064851"]
+            cn: [(ENV["TEST_ALEPH_USER"] || 'BOR_ID')]
           }
         }
       end
