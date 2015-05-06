@@ -59,8 +59,8 @@ class UsersController < Devise::OmniauthCallbacksController
   end
 
   def redirect_to_passive_login
-    head :bad_request and return unless params[:redirect_uri]
-    redirect_to params[:redirect_uri]
+    return head(:bad_request) unless redirect_uri_params
+    redirect_to redirect_uri_params
   end
 
   def require_valid_omniauth_hash
