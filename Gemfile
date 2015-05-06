@@ -118,7 +118,7 @@ group :test, :cucumber do
   # Coveralls for testing coverage
   gem 'coveralls', '~> 0.7.0', require: false
   gem 'cucumber-rails', '~> 1.4.1', require: false
-  gem 'selenium-webdriver', '~> 2.43.0'
+  gem 'selenium-webdriver', '~> 2.45.0'
   gem 'pickle', '~> 0.4.11'
   gem 'database_cleaner', '~> 1.3.0'
   gem 'vcr', '~> 2.9.3'

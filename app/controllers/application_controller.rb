@@ -8,4 +8,10 @@ class ApplicationController < ActionController::Base
 
   # Include these helper functions explicitly to make them available to controllers
   include InstitutionsHelper, UsersHelper
+
+  def whitelisted_client_applications
+    @whitelisted_client_applications ||= Doorkeeper::Application.all.collect do |app|
+      URI.parse(app.redirect_uri).host
+    end
+  end
 end

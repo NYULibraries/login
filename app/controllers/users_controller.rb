@@ -1,6 +1,7 @@
 class UsersController < Devise::OmniauthCallbacksController
+  before_filter :check_passive_login, only: [:show, :redirect_to_passive_login]
   before_filter :require_login, only: :show
-  before_filter :require_no_authentication, except: [:show]
+  before_filter :require_no_authentication, except: [:show, :redirect_to_passive_login]
   before_filter :require_valid_omniauth_hash, only: (Devise.omniauth_providers << :omniauth_callback)
   respond_to :html
 
@@ -50,6 +51,18 @@ class UsersController < Devise::OmniauthCallbacksController
   end
   private :require_login
 
+  def check_passive_login
+    if !user_signed_in? && !cookies[:_check_passive_login]
+      cookies[:_check_passive_login] = true
+      redirect_to passive_shibboleth_url
+    end
+  end
+
+  def redirect_to_passive_login
+    return head(:bad_request) unless redirect_uri_params
+    redirect_to redirect_uri_params
+  end
+
   def require_valid_omniauth_hash
     redirect_to after_omniauth_failure_path_for(resource_name) unless omniauth_hash_validator.valid?
   end
@@ -71,4 +84,19 @@ class UsersController < Devise::OmniauthCallbacksController
     User.find_for_authentication(username: username, provider: provider) || User.find_or_initialize_by(username: username, provider: provider)
   end
 
+  def passive_shibboleth_url
+    "/Shibboleth.sso/Login?isPassive=true&target=#{request.original_url}"
+  end
+  private :passive_shibboleth_url
+
+  def redirect_uri_params
+    return nil unless params[:redirect_uri]
+    params.require(:redirect_uri) if whitelisted_redirect_uri_params
+  end
+  private :redirect_uri_params
+
+  def whitelisted_redirect_uri_params
+    whitelisted_client_applications.include? URI.parse(params[:redirect_uri]).host
+  end
+  private :whitelisted_redirect_uri_params
 end

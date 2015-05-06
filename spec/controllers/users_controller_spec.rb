@@ -2,14 +2,68 @@ require 'spec_helper'
 describe UsersController do
   before { @request.env["devise.mapping"] = Devise.mappings[:user] }
   let(:attributes) { attributes_for(:user) }
+  describe "get login/passive" do
+    let(:redirect_uri_param) { "http://hostname.tld" }
+    context 'when _check_passive_login cookie has been set' do
+      before { @request.cookies["_check_passive_login"] = true }
+      context 'when redirect uri has not been provided' do
+        before { get "redirect_to_passive_login" }
+        subject { response }
+        it("should have a 400 status") { expect(subject.status).to be(400) }
+      end
+      context 'when redirect uri has been provided' do
+        context 'and the redirect uri is a client application' do
+          before { controller.stub(:whitelisted_client_applications).and_return([URI.parse(redirect_uri_param).host]) }
+          before { get "redirect_to_passive_login", redirect_uri: redirect_uri_param }
+          subject { response }
+          it { should be_redirect }
+          it { should redirect_to(redirect_uri_param) }
+        end
+        context 'and the redirect uri is not a client application' do
+          before { get "redirect_to_passive_login", redirect_uri: redirect_uri_param }
+          subject { response }
+          it("should have a 400 status") { expect(subject.status).to be(400) }
+        end
+      end
+    end
+    context 'when _check_passive_login cookie has not been set' do
+      context 'when redirect uri has not been provided' do
+        before { get "redirect_to_passive_login" }
+        subject { response }
+        it { should be_redirect }
+        it("should have a 302 status") { expect(subject.status).to be(302) }
+        it { should redirect_to("/Shibboleth.sso/Login?isPassive=true&target=#{URI.escape(request.original_url)}") }
+        it("should set _check_passive_login cookie") { expect(subject.cookies["_check_passive_login"]).to be_true }
+      end
+      context 'when redirect uri has been provided' do
+        before { get "redirect_to_passive_login", redirect_uri: "http://hostname.tld" }
+        subject { response }
+        it { should be_redirect }
+        it("should have a 302 status") { expect(subject.status).to be(302) }
+        it { should redirect_to("/Shibboleth.sso/Login?isPassive=true&target=#{URI.escape(request.original_url)}") }
+        it("should set _check_passive_login cookie") { expect(subject.cookies["_check_passive_login"]).to be_true }
+      end
+    end
+  end
   describe "GET 'show'" do
     context 'when not logged in' do
       render_views false
-      before { get :show, id: attributes[:username], provider: attributes[:provider] }
-      subject { response }
-      it { should be_redirect }
-      it("should have a 302 status") { expect(subject.status).to be(302) }
-      it { should redirect_to(login_url) }
+      context 'when _check_passive_login cookie has not been set' do
+        before { get :show, id: attributes[:username], provider: attributes[:provider] }
+        subject { response }
+        it { should be_redirect }
+        it("should have a 302 status") { expect(subject.status).to be(302) }
+        it { should redirect_to("/Shibboleth.sso/Login?isPassive=true&target=#{URI.escape(request.original_url)}") }
+        it("should set _check_passive_login cookie") { expect(subject.cookies["_check_passive_login"]).to be_true }
+      end
+      context 'when _check_passive_login cookie has been set' do
+        before { @request.cookies["_check_passive_login"] = true }
+        before { get :show, id: attributes[:username], provider: attributes[:provider] }
+        subject { response }
+        it { should be_redirect }
+        it("should have a 302 status") { expect(subject.status).to be(302) }
+        it { should redirect_to(login_url) }
+      end
     end
     context 'when logged in' do
       login_user

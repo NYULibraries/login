@@ -8,6 +8,7 @@ Login::Application.routes.draw do
     get 'logout', to: 'devise/sessions#destroy', as: :logout
     get 'auth/:auth_type(/:institute)', to: 'devise/sessions#new', as: :auth
     root 'users#show'
+    get 'login/passive(/:redirect_uri)', to: "users#redirect_to_passive_login", as: :check_passive
   end
   get 'login(/:institute)', to: 'wayf#index', as: :login
   namespace :api do
