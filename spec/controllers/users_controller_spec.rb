@@ -219,7 +219,7 @@ describe UsersController do
           it { should redirect_to(auth_url(auth_type, 'nyu')) }
         end
         context 'when the omniauth.auth environment username is empty' do
-          before { @request.env['omniauth.auth'].extra.raw_info[:pdsloginid] = [] }
+          before { @request.env['omniauth.auth'][:uid] = [] }
           it("should not assign @user") { expect(assigns(:user)).to be_nil }
           it { should be_redirect }
           it { should redirect_to(auth_url(auth_type, 'nyu')) }

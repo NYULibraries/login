@@ -248,12 +248,14 @@ FactoryGirl.define do
         nyuidn: (ENV["TEST_ALEPH_USER"] || 'BOR_ID'),
         extra: {
           raw_info: {
-            pdsexternalsystemid:
-              ["12345::gtmb",
-              "snowj@1newschool.edu::mir3",
-              "#{(ENV["TEST_ALEPH_USER"] || 'BOR_ID')}::sct"],
-            pdsloginid: ["ns123"],
-            pdsloginalias: ["ns123"]
+            cn: ["#{(ENV["TEST_ALEPH_USER"] || 'BOR_ID')}"],
+            dn: ["uid=N12345,ou=people,o=newschool.edu,o=cp"],
+            displayname: ["Jon Snow"],
+            givenname: ["Jon"],
+            mail: ["snowj@1newschool.edu"],
+            sn: ["Snow"],
+            uid: ["snowj"],
+            cn: ["N12345"]
           }
         }
       })
