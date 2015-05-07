@@ -5,6 +5,7 @@ class UsersController < Devise::OmniauthCallbacksController
   before_filter :require_login, only: :show
   before_filter :require_no_authentication, except: [:show, :check_passive_and_sign_client_in]
   before_filter :require_valid_omniauth_hash, only: (Devise.omniauth_providers << :omniauth_callback)
+
   respond_to :html
 
   def show
@@ -80,6 +81,7 @@ class UsersController < Devise::OmniauthCallbacksController
     @user.omniauth_hash_map = omniauth_hash_map
     @user.institution_code = omniauth_hash_map.properties.institution_code.to_s unless omniauth_hash_map.properties.institution_code.nil?
     if @user.save
+      create_loggedin_cookie!(@user)
       sign_in_and_redirect @user, event: :authentication
       kind = omniauth_hash_map.provider.titleize
       set_flash_message(:notice, :success, kind: kind) if is_navigational_format?
@@ -114,6 +116,13 @@ class UsersController < Devise::OmniauthCallbacksController
     @omniauth_hash_validator ||= Login::OmniAuthHash::Validator.new(request.env["omniauth.auth"], params[:action])
   end
   private :omniauth_hash_validator
+
+  def create_loggedin_cookie!(user)
+    cookie_hash = { value: loggedin_cookie_value(user) }
+    cookie_hash.merge!({domain: ENV['COOKIE_DOMAIN']}) if ENV['COOKIE_DOMAIN']
+    cookies[LOGGED_IN_COOKIE_NAME] = cookie_hash
+  end
+  private :create_loggedin_cookie!
 
   # Use Devise::Models::Authenticatable::ClassMethods#find_for_authentication
   # to take advantage of the Devise case_insensitive_keys and treat USER and user as the same username
