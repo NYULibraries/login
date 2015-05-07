@@ -16,7 +16,11 @@ class ApplicationController < ActionController::Base
   # After signing out of the logout application,
   # redirect to a "you are logged out, please close your browser" page
   def after_sign_out_path_for(resource_or_scope)
-    logged_out_path(current_institution.code.downcase)
+    if current_user.provider == 'nyu_shiboleth'
+      ENV['SHIBBOLETH_LOGOUT_URL']
+    else
+      logged_out_path(current_institution.code.downcase)
+    end
   end
 
   # Create the encrypted value of a logged in user based on
