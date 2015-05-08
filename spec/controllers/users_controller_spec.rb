@@ -2,6 +2,23 @@ require 'spec_helper'
 describe UsersController do
   before { @request.env["devise.mapping"] = Devise.mappings[:user] }
   let(:attributes) { attributes_for(:user) }
+  describe "GET /login/passive" do
+    context 'when not logged in' do
+      before { get "check_passive", return_uri: "/1", login_url: "/2" }
+      subject { response }
+      it { should be_redirect }
+      it("should have a 302 status") { expect(subject.status).to be(302) }
+      it { should redirect_to("/1") }
+    end
+    context 'when logged in' do
+      login_user
+      before { get "check_passive", return_uri: "/1", login_url: "/2" }
+      subject { response }
+      it { should be_redirect }
+      it("should have a 302 status") { expect(subject.status).to be(302) }
+      it { should redirect_to("/2") }
+    end
+  end
   describe "GET 'show'" do
     context 'when not logged in' do
       render_views false
