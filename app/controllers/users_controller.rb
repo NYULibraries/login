@@ -50,6 +50,11 @@ class UsersController < Devise::OmniauthCallbacksController
   end
   private :require_login
 
+  def check_passive
+    redirect_to params[:login_url] and return if user_signed_in?
+    redirect_to params[:return_uri]
+  end
+
   def require_valid_omniauth_hash
     redirect_to after_omniauth_failure_path_for(resource_name) unless omniauth_hash_validator.valid?
   end
