@@ -10,6 +10,11 @@ describe "routes for Users" do
     it { should_not be_routable }
   end
 
+  describe "GET /login/passive" do
+    subject { get('/login/passive') }
+    it { should route_to('users#check_passive') }
+  end
+
   describe "GET /api/v1/user" do
     subject { get('/api/v1/user') }
     it { should route_to({ controller: "api/v1/users", action: "show", format: :json }) }
