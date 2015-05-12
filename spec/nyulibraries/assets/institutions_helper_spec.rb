@@ -10,11 +10,14 @@ require 'spec_helper'
 #     end
 #   end
 # end
-describe InstitutionsHelper do
+describe Nyulibraries::Assets::InstitutionsHelper do
+
+  include Nyulibraries::Assets::InstitutionsHelper
+
   describe '#current_institution' do
     subject(:institute) { current_institution }
     it { should be_a(Institutions::Institution) }
-    
+
     describe '#code' do
       subject { institute.code }
       it { should_not be_nil }

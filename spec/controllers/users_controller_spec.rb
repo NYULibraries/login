@@ -204,6 +204,9 @@ describe UsersController do
             end
             it { should be_redirect }
             it { should redirect_to root_url }
+            it "should set a logged in cookie to trigger sign off in other applications" do
+              expect(response.cookies['_login_sso']).to eq('modified bar')
+            end
           end
         end
         context 'when the omniauth.auth environment provider is not aleph' do
