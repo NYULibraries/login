@@ -234,7 +234,7 @@ module LoginFeatures
 
     def nyush_logout_matchers
       @nyush_logout_matchers ||= [
-        -> { have_link('NYU Shanghai Library', {:href => 'http://library.nyu.edu/shanghai'}) },
+        -> { have_link('NYU Shanghai Library', {:href => 'https://shanghai.nyu.edu/academics/library'}) },
         -> { have_content 'LOGGED OUT' }
       ]
     end
@@ -255,7 +255,7 @@ module LoginFeatures
 
     def nysid_logout_matchers
       @nysid_logout_matchers ||= [
-        -> { have_link('New York School of Interior Design Library', {:href => 'http://library.nysid.edu/library/'}) },
+        -> { have_link('New York School of Interior Design Library', {:href => 'http://library.nysid.edu/library'}) },
         -> { have_content 'LOGGED OUT' }
       ]
     end
