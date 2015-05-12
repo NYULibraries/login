@@ -14,6 +14,7 @@ module Views
 
       # Override to only link to logout
       def login(params={})
+        params.merge!({institute: current_institution.code.downcase}) if current_institution
         link_to_logout(params) if current_user
       end
     end
