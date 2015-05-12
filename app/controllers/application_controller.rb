@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   layout Proc.new { |controller| (controller.request.xhr?) ? false : "login" }
 
   # Include these helper functions explicitly to make them available to controllers
-  include InstitutionsHelper, UsersHelper
+  include Nyulibraries::Assets::InstitutionsHelper, UsersHelper
 
   LOGGED_IN_COOKIE_NAME = '_login_sso'
 
@@ -28,18 +28,5 @@ class ApplicationController < ActionController::Base
   def loggedin_cookie_value(user)
     AESCrypt.encrypt(user.username, ENV['LOGIN_SHARED_SECRET']).strip
   end
-
-  # prepend_before_filter :check_loggedin_sso
-  # def check_loggedin_sso
-  #   if user_signed_in?
-  #     if loggedin_cookie_set?
-  #       redirect_to logout_url
-  #     end
-  #   end
-  # end
-  #
-  # def loggedin_cookie_set?
-  #   cookies['_login_sso'] == AESCrypt.encrypt(current_user.username, ENV['LOGOUT_SHARED_SECRET'])
-  # end
 
 end

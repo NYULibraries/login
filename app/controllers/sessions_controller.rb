@@ -1,5 +1,5 @@
 class SessionsController < Devise::SessionsController
-  before_filter :destroy_sso_cookie!, only: :destroy, if: -> { cookies[LOGGED_IN_COOKIE_NAME].present? }
+  before_action :destroy_sso_cookie!, only: :destroy, if: -> { cookies[LOGGED_IN_COOKIE_NAME].present? }
 
  private
 
