@@ -16,3 +16,10 @@ Feature: New School login
     When I click on the "The New School" button
     And I submit invalid New School credentials
     Then I should see the error message "Invalid credentials"
+
+  Scenario: Logging out of a New School Library account
+    Given I am on the New School login page
+    When I click on the "The New School" button
+    And New School LDAP authenticates me
+    And I visit the "New School" log-out url
+    Then I should be on the New School logged out page

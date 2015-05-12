@@ -16,3 +16,11 @@ Feature: New York School of Interior Design login
     When I click on the "NYSID" button
     And I incorrectly enter my Library Patron ID and first four letters of my last name
     Then I should not be logged in as a New York School of Interior Design user
+
+  @ignore_user_keys
+  Scenario: Logging out of a NYSID account
+    Given I am on the NYSID login page
+    When I click on the "NYSID" button
+    And I incorrectly enter my Library Patron ID and first four letters of my last name
+    And I visit the "NYSID" log-out url
+    Then I should be on the NYSID logged out page

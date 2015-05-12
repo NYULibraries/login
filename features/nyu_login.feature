@@ -9,3 +9,10 @@ Feature: NYU Login
     When I click on the "NYU" button
     And NYU Home authenticates me
     Then I should be logged in as an NYU user
+
+  Scenario: Logging out of an NYU account
+    Given I am on the NYU New York login page
+    When I click on the "NYU" button
+    And NYU Home authenticates me
+    And I visit the "NYU New York" log-out url
+    Then I should be on the NYU New York logged out page

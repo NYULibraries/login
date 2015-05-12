@@ -22,3 +22,11 @@ Feature: NYU Shanghai Login
     When I click on the "Other Borrowers" button
     And I incorrectly enter my Library Patron ID and first four letters of my last name
     Then I should not be logged in as a Bobst Affiliate user
+
+  @ignore_user_keys
+  Scenario: Logging out of an NYU Shanghai account
+    Given I am on the NYU Shanghai login page
+    When I click on the "NYU" button
+    And NYU Home authenticates me
+    And I visit the "NYU Shanghai" log-out url
+    Then I should be on the NYU Shanghai logged out page

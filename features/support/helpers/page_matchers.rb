@@ -217,5 +217,48 @@ module LoginFeatures
         -> { have_text("New Application") }
       ]
     end
+
+    def nyu_logout_matchers
+      @nyu_logout_matchers ||= [
+        -> { have_link('NYU Libraries', {:href => 'http://library.nyu.edu'}) },
+        -> { have_content 'LOGGED OUT' }
+      ]
+    end
+
+    def nyuad_logout_matchers
+      @nyuad_logout_matchers ||= [
+        -> { have_link('NYU Abu Dhabi Library', {:href => 'http://nyuad.nyu.edu/academics/library/index.html'}) },
+        -> { have_content 'LOGGED OUT' }
+      ]
+    end
+
+    def nyush_logout_matchers
+      @nyush_logout_matchers ||= [
+        -> { have_link('NYU Shanghai Library', {:href => 'http://library.nyu.edu/shanghai'}) },
+        -> { have_content 'LOGGED OUT' }
+      ]
+    end
+
+    def ns_logout_matchers
+      @ns_logout_matchers ||= [
+        -> { have_link('New School Libraries', {:href => 'http://library.newschool.edu'}) },
+        -> { have_content 'LOGGED OUT' }
+      ]
+    end
+
+    def cu_logout_matchers
+      @cu_logout_matchers ||= [
+        -> { have_link('Cooper Union Library', {:href => 'http://library.cooper.edu'}) },
+        -> { have_content 'LOGGED OUT' }
+      ]
+    end
+
+    def nysid_logout_matchers
+      @nysid_logout_matchers ||= [
+        -> { have_link('New York School of Interior Design Library', {:href => 'http://library.nysid.edu/library/'}) },
+        -> { have_content 'LOGGED OUT' }
+      ]
+    end
+
   end
 end

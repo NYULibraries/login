@@ -99,7 +99,7 @@ module LoginFeatures
       case location
       when /New School LDAP$/
         click_on "The New School"
-        click_on "Login"
+        click_button "Login"
       when /NYU Shibboleth$/
         click_on "NYU"
       when /Aleph$/
