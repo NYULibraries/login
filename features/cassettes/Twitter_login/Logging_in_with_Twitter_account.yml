@@ -16,7 +16,7 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       Authorization:
-      - OAuth oauth_callback="http%3A%2F%2Flocalhost%3A3000%2Fusers%2Fauth%2Ftwitter%2Fcallback%3Finstitute%3DNYU",
+      - OAuth oauth_callback="http%3A%2F%2Flocalhost%3A3000%2Fusers%2Fauth%2Ftwitter%2Fcallback%3Finstitution%3DNYU",
         oauth_consumer_key="<TWITTER_APP_KEY>", oauth_nonce="lKk1l0ZKSUuxPY6KAvfB8mV9y3xAWGYBaNSWOz61Q",
         oauth_signature="HZ%2BrXtP%2BI7%2BxeGn1laMjKztNNMY%3D", oauth_signature_method="HMAC-SHA1",
         oauth_timestamp="1408471295", oauth_version="1.0"

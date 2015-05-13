@@ -1,5 +1,5 @@
 Given(/^I visit the "(.*)?" log-out url$/) do |location|
-  visit logout_path(institute: institute_for_location(location))
+  visit logout_path(institution: institution_for_location(location))
 end
 
 Then(/^I should (not )?be on the New School logged out page$/) do |negator|

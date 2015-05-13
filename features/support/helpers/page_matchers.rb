@@ -200,10 +200,10 @@ module LoginFeatures
       ]
     end
 
-    def shibboleth_logged_in_matchers(institute)
+    def shibboleth_logged_in_matchers(institution)
       @logged_in_matchers ||= [
         -> { have_content 'Successfully authenticated ' },
-        -> { have_content "Hi #{nyu_shibboleth_username_for_institute(institute)}!" },
+        -> { have_content "Hi #{nyu_shibboleth_username_for_institution(institution)}!" },
         -> { have_content 'You logged in via' },
         -> { have_content " you've logged in to the NYU Libraries' services." }
       ]

@@ -18,14 +18,14 @@ VCR.configure do |c|
   c.filter_sensitive_data('<TWITTER_APP_KEY>') { ENV['TWITTER_APP_KEY'] }
   c.filter_sensitive_data('<FACEBOOK_APP_KEY>') { ENV['FACEBOOK_APP_KEY'] }
   c.filter_sensitive_data('<FACEBOOK_APP_SECRET>') { ENV['FACEBOOK_APP_SECRET'] }
-  ["CU", "NYSID", "BOBST"].each do |institute|
+  ["CU", "NYSID", "BOBST"].each do |institution|
     # Filter out aleph username for CU
-    c.filter_sensitive_data('username') { ENV["TEST_#{institute}_USERNAME"] }
+    c.filter_sensitive_data('username') { ENV["TEST_#{institution}_USERNAME"] }
     # Filter out aleph username for CU, this time the caps.
     # Does a check to see if it exists first, to prevent NoSuchMethodError
-    c.filter_sensitive_data('username') { ENV.has_key?("TEST_#{institute}_USERNAME") ? ENV["TEST_#{institute}_USERNAME"].upcase : nil }
+    c.filter_sensitive_data('username') { ENV.has_key?("TEST_#{institution}_USERNAME") ? ENV["TEST_#{institution}_USERNAME"].upcase : nil }
     # Filter out aleph password for CU, this time the caps.
-    c.filter_sensitive_data('auth_key') { ENV["TEST_#{institute}_PASSWORD"] }
+    c.filter_sensitive_data('auth_key') { ENV["TEST_#{institution}_PASSWORD"] }
   end
   c.filter_sensitive_data('&sub_library=BET') { "&sub_library=#{ENV["ALEPH_SUB_LIBRARY"]}" }
   c.filter_sensitive_data('&library=ALEPH') { "&library=#{ENV["ALEPH_LIBRARY"]}" }

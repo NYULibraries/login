@@ -11,7 +11,7 @@ When(/^Twitter authenticates me$/) do
       click_button 'Sign In'
     end
   else
-    visit '/users/auth/twitter/callback?institute=NYU'
+    visit '/users/auth/twitter/callback?institution=NYU'
   end
 end
 

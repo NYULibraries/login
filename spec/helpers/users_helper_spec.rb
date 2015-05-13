@@ -19,13 +19,13 @@ describe UsersHelper do
       let(:args) { [ build(:user) ] }
       it { should eq("#{base_url}/#{attributes[:provider]}/#{attributes[:username]}") }
     end
-    context 'when given a User and an institute as String' do
+    context 'when given a User and an institution as String' do
       let(:args) { [ build(:user), "nyu" ] }
       subject { user_url(build(:user), "nyu") }
       it { should eq("#{base_url}/#{attributes[:provider]}/#{attributes[:username]}/nyu") }
     end
-    context 'when given a User and an institute as a Hash' do
-      let(:args) { [ build(:user), { institute: "nyu" } ] }
+    context 'when given a User and an institution as a Hash' do
+      let(:args) { [ build(:user), { institution: "nyu" } ] }
       it { should eq("#{base_url}/#{attributes[:provider]}/#{attributes[:username]}/nyu") }
     end
     context 'when not given a User' do
