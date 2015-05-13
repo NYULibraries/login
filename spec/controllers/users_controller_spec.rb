@@ -201,6 +201,7 @@ describe UsersController do
               expect(identity.provider).to eq("aleph")
               expect(identity.properties).not_to be_nil
               expect(identity.properties).not_to be_empty
+              expect(response.cookies['_login_sso']).to eq(@controller.send(:loggedin_cookie_value, assigns(:user)))
             end
             it { should be_redirect }
             it { should redirect_to root_url }
@@ -211,18 +212,21 @@ describe UsersController do
           it("should not assign @user") { expect(assigns(:user)).to be_nil }
           it { should be_redirect }
           it { should redirect_to(auth_url(auth_type, 'nyu')) }
+          it("should not set login_sso cookie") { expect(response.cookies['_login_sso']).to be_nil }
         end
         context 'when the omniauth.auth environment username is empty' do
           before { @request.env['omniauth.auth'].uid = "" }
           it("should not assign @user") { expect(assigns(:user)).to be_nil }
           it { should be_redirect }
           it { should redirect_to(auth_url(auth_type, 'nyu')) }
+          it("should not set login_sso cookie") { expect(response.cookies['_login_sso']).to be_nil }
         end
       end
       context 'when the omniauth.auth environment is not present' do
         it("should not assign @user") { expect(assigns(:user)).to be_nil }
         it { should be_redirect }
         it { should redirect_to(auth_url(auth_type, 'nyu')) }
+        it("should not set login_sso cookie") { expect(response.cookies['_login_sso']).to be_nil }
       end
     end
 
@@ -244,6 +248,7 @@ describe UsersController do
             expect(identity.provider).to eq("twitter")
             expect(identity.properties).not_to be_nil
             expect(identity.properties).not_to be_empty
+            expect(response.cookies['_login_sso']).to eq(@controller.send(:loggedin_cookie_value, assigns(:user)))
           end
           it { should be_redirect }
           it { should redirect_to root_url }
@@ -286,6 +291,7 @@ describe UsersController do
             expect(identity.provider).to eq("facebook")
             expect(identity.properties).not_to be_nil
             expect(identity.properties).not_to be_empty
+            expect(response.cookies['_login_sso']).to eq(@controller.send(:loggedin_cookie_value, assigns(:user)))
           end
           it { should be_redirect }
           it { should redirect_to root_url }
