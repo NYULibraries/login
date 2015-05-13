@@ -220,21 +220,6 @@ module LoginFeatures
 
     def nyu_logout_matchers
       @nyu_logout_matchers ||= [
-        -> { have_link('NYU Libraries', {:href => 'http://library.nyu.edu'}) },
-        -> { have_content 'LOGGED OUT' }
-      ]
-    end
-
-    def nyuad_logout_matchers
-      @nyuad_logout_matchers ||= [
-        -> { have_link('NYU Abu Dhabi Library', {:href => 'http://nyuad.nyu.edu/academics/library/index.html'}) },
-        -> { have_content 'LOGGED OUT' }
-      ]
-    end
-
-    def nyush_logout_matchers
-      @nyush_logout_matchers ||= [
-        -> { have_link('NYU Shanghai Library', {:href => 'https://shanghai.nyu.edu/academics/library'}) },
         -> { have_content 'LOGGED OUT' }
       ]
     end

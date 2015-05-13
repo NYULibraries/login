@@ -11,11 +11,11 @@ Then(/^I should (not )?be on the NYU New York logged out page$/) do |negator|
 end
 
 Then(/^I should (not )?be on the NYU Abu Dhabi logged out page$/) do |negator|
-  expectations_for_page(page, negator, *nyuad_logout_matchers)
+  expectations_for_page(page, negator, *nyu_logout_matchers)
 end
 
 Then(/^I should (not )?be on the NYU Shanghai logged out page$/) do |negator|
-  expectations_for_page(page, negator, *nyush_logout_matchers)
+  expectations_for_page(page, negator, *nyu_logout_matchers)
 end
 
 Then(/^I should (not )?be on the NYSID logged out page$/) do |negator|
