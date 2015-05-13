@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   # After signing out of the logout application,
   # redirect to a "you are logged out, please close your browser" page
   def after_sign_out_path_for(resource_or_scope)
-    if current_user.provider == 'nyu_shibboleth'
+    if current_user.provider == 'nyu_shibboleth' && ENV['SHIBBOLETH_LOGOUT_URL']
       ENV['SHIBBOLETH_LOGOUT_URL']
     else
       logged_out_path(current_institution.code.downcase)
