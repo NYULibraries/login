@@ -1,37 +1,37 @@
 GIT
   remote: git://github.com/NYULibraries/formaggio.git
-  revision: 645de8c59def833c2717000a7ca4ed5b9c709376
-  tag: v1.4.2
+  revision: 5606a4a9061830d0dfc7356c03c2ca65a95af13c
+  tag: v1.0.0
   specs:
-    formaggio (1.4.2)
-      cap_git_tools (~> 0.9)
-      capistrano (~> 2.15)
+    formaggio (1.0.0)
+      cap_git_tools (~> 0.9.1)
+      capistrano (~> 2.15.5)
       figs (~> 2.0)
-      git (~> 1.2)
-      mail (~> 2.5)
+      git (~> 1.2.5)
+      mail (~> 2.5.4)
       newrelic_rpm (~> 3.6)
-      rake (~> 10.1)
-      require_all (~> 1.3)
-      rvm-capistrano (~> 1.5)
+      rake (~> 10.1.0)
+      require_all (~> 1.3.0)
+      rvm-capistrano (~> 1.5.0)
 
 GIT
-  remote: git://github.com/NYULibraries/mustache-rails.git
+  remote: git://github.com/NYULibraries/nyulibraries-assets.git
+  revision: 23d39747f81ed7c3ad6d2ede2ff25a21eb58ba70
+  tag: v4.4.1
+  specs:
+    nyulibraries-assets (4.4.1)
+      bootstrap-sass (~> 3.2.0.2)
+      compass (~> 1.0.1)
+      font-awesome-rails (~> 4.2.0.0)
+      institutions (~> 0.1.3)
+
+GIT
+  remote: git://github.com/josh/mustache-rails.git
   revision: d219b298ddc94ca0c4b749125a803f74157ddd03
   specs:
     mustache-rails (0.2.3)
       actionpack (>= 3.1)
       mustache (~> 0.99.4)
-
-GIT
-  remote: git://github.com/NYULibraries/nyulibraries-assets.git
-  revision: 1bcf379eece4ceee6ec2e8f4fc18ba22c69e2aa4
-  branch: bug/fix_institutions
-  specs:
-    nyulibraries-assets (4.4.0)
-      bootstrap-sass (~> 3.2.0.2)
-      compass (~> 1.0.1)
-      font-awesome-rails (~> 4.2.0.0)
-      institutions (~> 0.1.3)
 
 GEM
   remote: https://rubygems.org/
@@ -170,7 +170,7 @@ GEM
       multi_json (~> 1.3)
     git (1.2.8)
     hashie (3.3.2)
-    highline (1.7.2)
+    highline (1.6.21)
     hike (1.2.3)
     i18n (0.6.11)
     institutions (0.1.3)
@@ -211,10 +211,10 @@ GEM
       net-ssh (>= 2.6.5)
     net-sftp (2.1.2)
       net-ssh (>= 2.6.5)
-    net-ssh (2.9.2)
+    net-ssh (2.9.1)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
-    newrelic_rpm (3.12.0.288)
+    newrelic_rpm (3.9.8.273)
     nokogiri (1.6.5)
       mini_portile (~> 0.6.0)
     oauth (0.4.7)
@@ -319,7 +319,7 @@ GEM
       rspec-mocks (~> 2.14.0)
     rubyntlm (0.1.1)
     rubyzip (1.1.6)
-    rvm-capistrano (1.5.6)
+    rvm-capistrano (1.5.5)
       capistrano (~> 2.15.4)
     safe_yaml (1.0.4)
     sass (3.4.9)
