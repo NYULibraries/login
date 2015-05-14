@@ -15,7 +15,7 @@ describe SessionsController do
       end
       context 'when logged in as an nyu shibboleth user' do
         let(:provider) { 'nyu_shibboleth' }
-        it { should redirect_to('https://login.nyu.edu/sso/UI/Logout') }
+        it { should redirect_to(ENV['SHIBBOLETH_LOGOUT_URL']) }
       end
       context 'when logged in as a new school user' do
         let(:provider) { 'new_school_ldap' }
