@@ -23,7 +23,6 @@ Feature: NYU Abu Dhabi Login
     And I incorrectly enter my Library Patron ID and first four letters of my last name
     Then I should not be logged in as a Bobst Affiliate user
 
-  @ignore_user_keys
   Scenario: Logging out of an NYU Abu Dhabi account
     Given I am on the NYU Abu Dhabi login page
     When I click on the "NYU" button
