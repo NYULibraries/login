@@ -1,5 +1,5 @@
 Given(/^I visit the "(.*)?" log-out url$/) do |location|
-  OmniAuth.config.mock_auth = nil
+  ensure_logout
   visit logout_path(institution: institution_for_location(location))
 end
 
