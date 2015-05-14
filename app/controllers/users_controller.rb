@@ -50,8 +50,12 @@ class UsersController < Devise::OmniauthCallbacksController
   end
   private :require_login
 
+  def doorkeeper_client
+    @doorkeeper_client ||= Doorkeeper::Application.all.select{ |app| app.uid == params[:client_id] }.first
+  end
+
   def check_passive
-    redirect_to params[:login_url] and return if user_signed_in?
+    redirect_to doorkeeper_client.redirect_uri and return if user_signed_in? && !doorkeeper_client.nil?
     redirect_to params[:return_uri]
   end
 

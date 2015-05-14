@@ -12,6 +12,7 @@ describe UsersController do
     end
     context 'when logged in' do
       login_user
+      before { controller.stub(:doorkeeper_client).and_return(Doorkeeper::Application.new(uid: 1, redirect_uri: "/2")) }
       before { get "check_passive", return_uri: "/1", login_url: "/2" }
       subject { response }
       it { should be_redirect }
