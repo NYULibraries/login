@@ -12,12 +12,12 @@ describe UsersController do
     end
     context 'when logged in' do
       login_user
-      before { controller.stub(:doorkeeper_client).and_return(Doorkeeper::Application.new(uid: 1, redirect_uri: "/2")) }
-      before { get "check_passive", return_uri: "/1", login_url: "/2" }
+      before { controller.stub(:doorkeeper_client).and_return(Doorkeeper::Application.new(uid: 1, redirect_uri: "/some_callback")) }
+      before { get "check_passive", return_uri: "/1", client_id: "1" }
       subject { response }
       it { should be_redirect }
       it("should have a 302 status") { expect(subject.status).to be(302) }
-      it { should redirect_to("/2") }
+      it { should redirect_to("/login") }
     end
   end
   describe "GET 'show'" do

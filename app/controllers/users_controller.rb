@@ -54,8 +54,12 @@ class UsersController < Devise::OmniauthCallbacksController
     @doorkeeper_client ||= Doorkeeper::Application.all.select{ |app| app.uid == params[:client_id] }.first
   end
 
+  def doorkeeper_client_uri
+    @doorkeeper_client_uri ||= URI.parse(doorkeeper_client.redirect_uri)
+  end
+
   def doorkeeper_client_login
-    URI.parse(doorkeeper_client.redirect_uri).host + "/login"
+    "#{doorkeeper_client_uri.scheme}#{doorkeeper_client_uri.host}/login"
   end
 
   def check_passive
