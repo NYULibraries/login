@@ -59,7 +59,8 @@ class UsersController < Devise::OmniauthCallbacksController
   end
 
   def doorkeeper_client_login
-    "#{doorkeeper_client_uri}"
+    return URI.join(doorkeeper_client_uri, params[:login_path]) if params[:login_path]
+    URI.join(doorkeeper_client_uri, "/login")
   end
 
   def return_uri
@@ -79,7 +80,7 @@ class UsersController < Devise::OmniauthCallbacksController
   end
 
   def check_passive
-    redirect_to doorkeeper_client_login and return if user_signed_in? && !doorkeeper_client.nil?
+    redirect_to "#{doorkeeper_client_login}" and return if user_signed_in? && !doorkeeper_client.nil?
     redirect_to "#{return_uri}" and return if return_uri_validated?
     return head(:bad_request)
   end

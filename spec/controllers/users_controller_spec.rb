@@ -4,20 +4,31 @@ describe UsersController do
   let(:attributes) { attributes_for(:user) }
   describe "GET /login/passive" do
     context 'when not logged in' do
-      before { get "check_passive", return_uri: "/1", login_url: "/2" }
+      before { controller.stub(:doorkeeper_client).and_return(Doorkeeper::Application.new(uid: 1, redirect_uri: "https://somehost.com/some_callback")) }
+      before { get "check_passive", return_uri: "https://somehost.com", client_id: "1" }
       subject { response }
       it { should be_redirect }
       it("should have a 302 status") { expect(subject.status).to be(302) }
-      it { should redirect_to("/1") }
+      it { should redirect_to("https://somehost.com") }
     end
     context 'when logged in' do
       login_user
-      before { controller.stub(:doorkeeper_client).and_return(Doorkeeper::Application.new(uid: 1, redirect_uri: "/some_callback")) }
-      before { get "check_passive", return_uri: "/1", client_id: "1" }
-      subject { response }
-      it { should be_redirect }
-      it("should have a 302 status") { expect(subject.status).to be(302) }
-      it { should redirect_to("/login") }
+      context 'and client login path is provided' do
+        before { controller.stub(:doorkeeper_client).and_return(Doorkeeper::Application.new(uid: 1, redirect_uri: "https://somehost.com/some_callback")) }
+        before { get "check_passive", return_uri: "/1", client_id: "1", login_path: "/newlogin" }
+        subject { response }
+        it { should be_redirect }
+        it("should have a 302 status") { expect(subject.status).to be(302) }
+        it { should redirect_to("https://somehost.com/newlogin") }
+      end
+      context 'and client login path is not provided' do
+        before { controller.stub(:doorkeeper_client).and_return(Doorkeeper::Application.new(uid: 1, redirect_uri: "https://somehost.com/some_callback")) }
+        before { get "check_passive", return_uri: "/1", client_id: "1" }
+        subject { response }
+        it { should be_redirect }
+        it("should have a 302 status") { expect(subject.status).to be(302) }
+        it { should redirect_to("https://somehost.com/login") }
+      end
     end
   end
   describe "GET 'show'" do
