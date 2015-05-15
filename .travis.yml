@@ -6,7 +6,7 @@ rvm:
   - 2.1.5
 
 env:
-  - LOGIN_DB_USER=postgres LOGIN_SECRET_TOKEN=123abc TEST_TWITTER_USERNAME=libtechnyu ALEPH_HOST=aleph.library.edu ALEPH_LIBRARY=ALEPH ALEPH_SUB_LIBRARY=BET SHIBBOLETH_LOGOUT_URL=http://shibboleth.library.edu/logout
+  - LOGIN_DB_USER=postgres LOGIN_SECRET_TOKEN=123abc TEST_TWITTER_USERNAME=libtechnyu ALEPH_HOST=aleph.library.edu ALEPH_LIBRARY=ALEPH ALEPH_SUB_LIBRARY=BET SHIBBOLETH_LOGOUT_URL=https://aqa.home.nyu.edu/sso/UI/Logout
 
 before_script:
   - psql -c 'create database login_test;' -U $LOGIN_DB_USER
