@@ -4,11 +4,14 @@ Feature: NYU Shanghai Login
   As an NYU user in Shanghai with a NetID
   I want to login with my NYU NetID and password on NYU's central login page
 
+  Background:
+    Given I am logged out
+
   Scenario: Logging in with NYU NetID and Password
     Given I am on the NYU Shanghai login page
     When I click on the "NYU" button
-    And NYU Home authenticates me
-    Then I should be logged in as an NYU user
+    And NYU Home authenticates me as an "NYU Shanghai" user
+    Then I should be logged in as an NYU Shanghai user
 
   @ignore_user_keys
   Scenario: Logging in with Bobst Affiliate patron ID
@@ -26,6 +29,6 @@ Feature: NYU Shanghai Login
   Scenario: Logging out of an NYU Shanghai account
     Given I am on the NYU Shanghai login page
     When I click on the "NYU" button
-    And NYU Home authenticates me
+    And NYU Home authenticates me as an "NYU Shanghai" user
     And I visit the "NYU Shanghai" log-out url
     Then I should be on the NYU Shanghai logged out page
