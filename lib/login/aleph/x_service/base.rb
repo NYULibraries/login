@@ -17,11 +17,7 @@ module Login
         end
 
         def error
-          @error ||= begin
-            response.body[op]["error"]
-          rescue NoMethodError => e
-            response.body["login"]["error"]
-          end
+          @error ||= response.body[op]["error"] if response.body.has_key?(op) && response.body[op].has_key?("error")
         end
 
         def error?

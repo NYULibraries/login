@@ -55,6 +55,18 @@ module Login
             it { should eql 'http://aleph.library.edu' }
           end
         end
+        describe '#op' do
+          subject { base.send(:op) }
+          it "should fail when called by interface class" do
+            expect { subject }.to raise_error(RuntimeError)
+          end
+        end
+        describe '#identifer' do
+          subject { base.send(:identifier) }
+          it "should fail when called by interface class" do
+            expect { subject }.to raise_error(RuntimeError)
+          end
+        end
         describe '#response' do
           subject { base.response }
           it "should fail when called by interface class" do

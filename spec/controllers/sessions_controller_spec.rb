@@ -24,4 +24,12 @@ describe SessionsController do
     end
   end
 
+  describe '#destroy_sso_cookie!' do
+    subject { @controller.send(:destroy_sso_cookie!) }
+    context 'when cookie domain is in the environment' do
+      before { stub_const('ENV', {'COOKIE_DOMAIN' => '.library.nyu.edu'}) }
+      it { should be_nil }
+    end
+  end
+
 end

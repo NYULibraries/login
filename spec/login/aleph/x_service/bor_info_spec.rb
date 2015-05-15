@@ -20,6 +20,7 @@ module Login
           it { should be_instance_of Faraday::Response }
         end
         describe '#error' do
+          let(:response) { nil }
           subject { bor_info.error }
           context "when the identifier is valid" do
             it { should be_nil }
