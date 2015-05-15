@@ -59,12 +59,29 @@ class UsersController < Devise::OmniauthCallbacksController
   end
 
   def doorkeeper_client_login
-    "#{doorkeeper_client_uri.scheme}#{doorkeeper_client_uri.host}/login"
+    "#{doorkeeper_client_uri}"
+  end
+
+  def return_uri
+    @return_uri ||= URI.parse(params[:return_uri])
+  end
+
+  def return_uri_base
+    URI.join(return_uri, "/")
+  end
+
+  def doorkeeper_client_uri_base
+    URI.join(doorkeeper_client_uri, "/")
+  end
+
+  def return_uri_validated?
+    doorkeeper_client && doorkeeper_client_uri_base.eql?(return_uri_base)
   end
 
   def check_passive
     redirect_to doorkeeper_client_login and return if user_signed_in? && !doorkeeper_client.nil?
-    redirect_to params[:return_uri]
+    redirect_to "#{return_uri}" and return if return_uri_validated?
+    return head(:bad_request)
   end
 
   def require_valid_omniauth_hash
