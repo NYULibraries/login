@@ -99,7 +99,7 @@ group :development, :test, :cucumber do
   gem 'rspec-rails', '~> 2.14.1'
   # Phantomjs for headless browser testing
   gem 'phantomjs', '>= 1.9.7'
-  gem 'poltergeist', '~> 1.5.1'
+  gem 'poltergeist', '~> 1.6.0'
   # Use factory girl for creating models
   gem 'factory_girl_rails', '~> 4.4.1'
   # Use json_spec to do rspec tests with JSON
