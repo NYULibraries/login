@@ -1,11 +1,11 @@
 Login::Application.routes.draw do
   providers = Regexp.union(Devise.omniauth_providers.map(&:to_s))
   use_doorkeeper
-  devise_for :users, controllers: { omniauth_callbacks: 'users', session: "sessions" }
+  devise_for :users, controllers: { omniauth_callbacks: 'users' }
   devise_scope :user do
     get 'users/:provider/:id(/:institution)', to: 'users#show', as: 'user',
       constraints: { provider: providers, id: /[^\/]+/ }
-    get 'logout(/:institution)', to: 'sessions#destroy', as: :logout
+    get 'logout(/:institution)', to: 'devise/sessions#destroy', as: :logout
     get 'auth/:auth_type(/:institution)', to: 'devise/sessions#new', as: :auth
     get 'login/passive', to: 'users#check_passive_and_sign_client_in'
     root 'users#show'
