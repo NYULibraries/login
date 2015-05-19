@@ -1,4 +1,5 @@
 class UsersController < Devise::OmniauthCallbacksController
+  prepend_before_filter :check_passive_login, only: :show
   before_filter :require_login, only: :show
   before_filter :require_no_authentication, except: [:show]
   before_filter :require_valid_omniauth_hash, only: (Devise.omniauth_providers << :omniauth_callback)
@@ -50,6 +51,14 @@ class UsersController < Devise::OmniauthCallbacksController
   end
   private :require_login
 
+  def check_passive_login
+    logger.info request
+    if !user_signed_in? && !cookies[:_check_passive_login]
+      cookies[:_check_passive_login] = true
+      redirect_to passive_shibboleth_url
+    end
+  end
+
   def require_valid_omniauth_hash
     redirect_to after_omniauth_failure_path_for(resource_name) unless omniauth_hash_validator.valid?
   end
@@ -70,5 +79,10 @@ class UsersController < Devise::OmniauthCallbacksController
   def find_for_authentication(username, provider)
     User.find_for_authentication(username: username, provider: provider) || User.find_or_initialize_by(username: username, provider: provider)
   end
+
+  def passive_shibboleth_url
+    "/Shibboleth.sso/Login?isPassive=true&target=#{request.original_url}"
+  end
+  private :passive_shibboleth_url
 
 end
