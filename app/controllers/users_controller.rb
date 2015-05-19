@@ -32,7 +32,7 @@ class UsersController < Devise::OmniauthCallbacksController
     @user.omniauth_hash_map = omniauth_hash_map
     @user.institution_code = omniauth_hash_map.properties.institution_code.to_s unless omniauth_hash_map.properties.institution_code.nil?
     if @user.save
-      create_loggedin_cookie!(@user)
+      
       sign_in_and_redirect @user, event: :authentication
       kind = omniauth_hash_map.provider.titleize
       set_flash_message(:notice, :success, kind: kind) if is_navigational_format?
@@ -72,14 +72,5 @@ class UsersController < Devise::OmniauthCallbacksController
     @omniauth_hash_validator ||= Login::OmniAuthHash::Validator.new(request.env["omniauth.auth"], params[:action])
   end
   private :omniauth_hash_validator
-
-  # Create a session cookie shared with other logged in clients
-  # so they can key single sign off indivudally
-  def create_loggedin_cookie!(user)
-    cookie_hash = { value: loggedin_cookie_value(user), httponly: true }
-    cookie_hash.merge!({domain: ENV['COOKIE_DOMAIN']}) if ENV['COOKIE_DOMAIN']
-    cookies[LOGGED_IN_COOKIE_NAME] = cookie_hash
-  end
-  private :create_loggedin_cookie!
 
 end

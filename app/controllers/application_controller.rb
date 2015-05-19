@@ -9,8 +9,6 @@ class ApplicationController < ActionController::Base
   # Include these helper functions explicitly to make them available to controllers
   include Nyulibraries::Assets::InstitutionsHelper, UsersHelper
 
-  LOGGED_IN_COOKIE_NAME = '_login_sso'
-
   # After signing out of the logout application,
   # redirect to a "you are logged out, please close your browser" page
   def after_sign_out_path_for(resource_or_scope)
@@ -20,12 +18,5 @@ class ApplicationController < ActionController::Base
       logged_out_path(current_institution.code.downcase)
     end
   end
-
-  # Create the encrypted value of a logged in user based on
-  # shared secret and the user's username
-  def loggedin_cookie_value(user)
-    AESCrypt.encrypt(user.username, ENV['LOGIN_SHARED_SECRET']).strip
-  end
-  private :loggedin_cookie_value
 
 end
