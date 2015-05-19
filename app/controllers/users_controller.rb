@@ -52,11 +52,17 @@ class UsersController < Devise::OmniauthCallbacksController
   private :require_login
 
   def check_passive_login
-    logger.info request
-    if !user_signed_in? && !cookies[:_check_passive_login]
-      cookies[:_check_passive_login] = true
-      redirect_to passive_shibboleth_url
+    if !user_signed_in?
+      redirect_to user_omniauth_authorize_path(:nyu_shibboleth, institute: current_institute.code, auth_type: :nyu) and return if shib_session_exists?
+      if !cookies[:_check_passive_login]
+        cookies[:_check_passive_login] = true
+        redirect_to passive_shibboleth_url
+      end
     end
+  end
+
+  def shib_session_exists?
+    !cookies.detect {|k,v| k.include? "_shibsession_" }.nil?
   end
 
   def require_valid_omniauth_hash
