@@ -5,6 +5,7 @@ describe UsersController do
   describe "GET 'show'" do
     context 'when not logged in' do
       render_views false
+      before { @request.cookies["_check_passive_login"] = true }
       before { get :show, id: attributes[:username], provider: attributes[:provider] }
       subject { response }
       it { should be_redirect }
