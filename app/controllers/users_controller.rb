@@ -1,5 +1,6 @@
 class UsersController < Devise::OmniauthCallbacksController
-  prepend_before_filter :require_login, only: :show
+  prepend_before_filter :check_passive_login, only: :show
+  before_filter :require_login, only: :show
   before_filter :require_no_authentication, except: [:show, :check_passive]
   before_filter :require_valid_omniauth_hash, only: (Devise.omniauth_providers << :omniauth_callback)
   respond_to :html
@@ -49,6 +50,21 @@ class UsersController < Devise::OmniauthCallbacksController
     end
   end
   private :require_login
+
+
+  def check_passive_login
+    if !user_signed_in?
+      redirect_to user_omniauth_authorize_path(:nyu_shibboleth, institute: current_institute.code, auth_type: :nyu) and return if shib_session_exists?
+      if !cookies[:_check_passive_login]
+        cookies[:_check_passive_login] = true
+        redirect_to passive_shibboleth_url
+      end
+    end
+  end
+
+  def shib_session_exists?
+    !cookies.detect {|k,v| k.include? "_shibsession_" }.nil?
+  end
 
   def doorkeeper_client
     @doorkeeper_client ||= Doorkeeper::Application.all.select{ |app| app.uid == params[:client_id] }.first
@@ -105,5 +121,10 @@ class UsersController < Devise::OmniauthCallbacksController
   def find_for_authentication(username, provider)
     User.find_for_authentication(username: username, provider: provider) || User.find_or_initialize_by(username: username, provider: provider)
   end
+
+  def passive_shibboleth_url
+    "/Shibboleth.sso/Login?isPassive=true&target=#{request.original_url}"
+  end
+  private :passive_shibboleth_url
 
 end
