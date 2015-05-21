@@ -1,7 +1,7 @@
 class UsersController < Devise::OmniauthCallbacksController
   prepend_before_filter :check_passive_login, only: :show
   before_filter :require_login, only: :show
-  before_filter :require_no_authentication, except: [:show]
+  before_filter :require_no_authentication, except: [:show, :check_passive]
   before_filter :require_valid_omniauth_hash, only: (Devise.omniauth_providers << :omniauth_callback)
   respond_to :html
 
@@ -51,6 +51,7 @@ class UsersController < Devise::OmniauthCallbacksController
   end
   private :require_login
 
+
   def check_passive_login
     if !user_signed_in?
       redirect_to user_omniauth_authorize_path(:nyu_shibboleth, institute: current_institute.code, auth_type: :nyu) and return if shib_session_exists?
@@ -63,6 +64,41 @@ class UsersController < Devise::OmniauthCallbacksController
 
   def shib_session_exists?
     !cookies.detect {|k,v| k.include? "_shibsession_" }.nil?
+  end
+
+  def doorkeeper_client
+    @doorkeeper_client ||= Doorkeeper::Application.all.select{ |app| app.uid == params[:client_id] }.first
+  end
+
+  def doorkeeper_client_uri
+    @doorkeeper_client_uri ||= URI.parse(doorkeeper_client.redirect_uri)
+  end
+
+  def doorkeeper_client_login
+    return URI.join(doorkeeper_client_uri, params[:login_path]) if params[:login_path]
+    URI.join(doorkeeper_client_uri, "/login")
+  end
+
+  def return_uri
+    @return_uri ||= URI.parse(params[:return_uri])
+  end
+
+  def return_uri_base
+    URI.join(return_uri, "/")
+  end
+
+  def doorkeeper_client_uri_base
+    URI.join(doorkeeper_client_uri, "/")
+  end
+
+  def return_uri_validated?
+    doorkeeper_client && doorkeeper_client_uri_base.eql?(return_uri_base)
+  end
+
+  def check_passive
+    redirect_to "#{doorkeeper_client_login}" and return if user_signed_in? && !doorkeeper_client.nil?
+    redirect_to "#{return_uri}" and return if return_uri_validated?
+    return head(:bad_request)
   end
 
   def require_valid_omniauth_hash
