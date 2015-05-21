@@ -6,16 +6,18 @@ class ApplicationController < ActionController::Base
 
   layout Proc.new { |controller| (controller.request.xhr?) ? false : "login" }
 
+  LOGGED_IN_COOKIE_NAME = '_login_sso'
+
   # Include these helper functions explicitly to make them available to controllers
   include Nyulibraries::Assets::InstitutionsHelper, UsersHelper
 
   # After signing out of the logout application,
   # redirect to a "you are logged out, please close your browser" page
   def after_sign_out_path_for(resource_or_scope)
-    if current_user.provider == 'nyu_shibboleth' && ENV['SHIBBOLETH_LOGOUT_URL']
-      ENV['SHIBBOLETH_LOGOUT_URL']
+    if cookies[:provider] == 'nyu_shibboleth' && ENV['SHIBBOLETH_LOGOUT_URL']
+      return ENV['SHIBBOLETH_LOGOUT_URL']
     else
-      logged_out_path(current_institution.code.downcase)
+      return logged_out_path(cookies[:current_institution])
     end
   end
 
