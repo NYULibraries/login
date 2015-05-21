@@ -6,7 +6,7 @@ FactoryGirl.define do
 
     trait :new_school_ldap do
       provider "new_school_ldap"
-      uid "uid=12345,ou=people,o=newschool.edu,o=cp"
+      uid "snowj"
       info do
         {
           name: "Jon Snow",
@@ -14,7 +14,7 @@ FactoryGirl.define do
           last_name: "Snow",
           email: "snowj@1newschool.edu",
           nickname: "12345",
-          uid: "uid=12345,ou=people,o=newschool.edu,o=cp"
+          uid: "snowj"
         }
       end
       extra do
@@ -23,19 +23,10 @@ FactoryGirl.define do
             dn: ["uid=12345,ou=people,o=newschool.edu,o=cp"],
             displayname: ["Jon Snow"],
             givenname: ["Jon"],
-            objectclass: ["top"],
-            pdsacademicmajor: ["cn=Non-degree,ou=Major,o=newschool.edu,o=cp"],
-            pdsexternalsystemid:
-              ["12345::gtmb",
-              "snowj@1newschool.edu::mir3",
-              "#{(ENV["TEST_ALEPH_USER"] || 'BOR_ID')}::sct"],
             mail: ["snowj@1newschool.edu"],
             sn: ["Snow"],
-            pdsemaildefaultaddress: ["snowj@1newschool.edu"],
-            uid: ["12345"],
-            pdsloginid: ["snowj"],
-            pdsloginalias: ["snowj"],
-            pdsrole: ["ns_staff"]
+            uid: ["snowj"],
+            cn: [(ENV["TEST_ALEPH_USER"] || 'BOR_ID')]
           }
         }
       end
