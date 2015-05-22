@@ -1,5 +1,5 @@
 class UsersController < Devise::OmniauthCallbacksController
-  prepend_before_filter :check_passive_login, only: :show
+  prepend_before_filter :check_passive_login, only: [:show, :check_passive]
   before_filter :require_login, only: :show
   before_filter :require_no_authentication, except: [:show, :check_passive]
   before_filter :require_valid_omniauth_hash, only: (Devise.omniauth_providers << :omniauth_callback)
