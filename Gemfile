@@ -27,7 +27,7 @@ gem 'compass-rails', '~> 2.0.0'
 # Use mustache for templating
 # Fix to 0.99.4 cuz 0.99.5 broke my shit.
 gem 'mustache', '0.99.4'
-gem 'mustache-rails', github: 'josh/mustache-rails', :require => 'mustache/railtie'
+gem 'mustache-rails', github: 'NYULibraries/mustache-rails', :require => 'mustache/railtie'
 # Use the NYU Libraries assets gem
 gem 'nyulibraries-assets', github: 'NYULibraries/nyulibraries-assets', tag: 'v4.1.3'
 # gem 'nyulibraries-assets', path: '/apps/nyulibraries-assets'
