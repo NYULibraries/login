@@ -39,3 +39,5 @@ wiki
 
 # This is run every time so we don't need to version control it
 features/cassettes/get_access_token.yml
+
+.vagrant
