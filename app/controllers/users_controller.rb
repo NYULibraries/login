@@ -15,7 +15,7 @@ class UsersController < Devise::OmniauthCallbacksController
   end
 
   def after_sign_in_path_for(resource)
-    return params[:check_passive_url] if params[:check_passive_url]
+    store_location_for(resource, params[:redirect_to]) if params[:redirect_to]
     super(resource)
   end
 
@@ -56,12 +56,11 @@ class UsersController < Devise::OmniauthCallbacksController
   end
   private :require_login
 
-
   def check_passive_login
     if !user_signed_in?
-      redirect_to user_omniauth_authorize_path(:nyu_shibboleth, institute: current_institute.code, auth_type: :nyu, check_passive_url: request.original_url) and return if shib_session_exists?
-      if !cookies[:_check_passive_login]
-        cookies[:_check_passive_login] = true
+      redirect_to nyu_shibboleth_omniauth_authorize_path and return if shib_session_exists?
+      if !cookies[:_check_passive_shibboleth]
+        cookies[:_check_passive_shibboleth] = true
         redirect_to passive_shibboleth_url
       end
     end
@@ -128,8 +127,18 @@ class UsersController < Devise::OmniauthCallbacksController
   end
 
   def passive_shibboleth_url
-    "/Shibboleth.sso/Login?isPassive=true&target=#{URI::encode(request.original_url, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))}"
+    "/Shibboleth.sso/Login?isPassive=true&target=#{uri_component_original_url}"
   end
   private :passive_shibboleth_url
+
+  def uri_component_original_url
+    URI::encode(request.original_url, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
+  end
+  private :uri_component_original_url
+
+  def nyu_shibboleth_omniauth_authorize_path
+    user_omniauth_authorize_path(:nyu_shibboleth, institute: current_institute.code, auth_type: :nyu, redirect_to: uri_component_original_url)
+  end
+  private :nyu_shibboleth_omniauth_authorize_path
 
 end
