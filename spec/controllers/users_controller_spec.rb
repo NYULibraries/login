@@ -61,7 +61,7 @@ describe UsersController do
           subject { response }
           it { should be_redirect }
           it("should have a 302 status") { expect(subject.status).to be(302) }
-          it { should redirect_to("/Shibboleth.sso/Login?isPassive=true&target=#{URI.escape(request.original_url)}") }
+          it { should redirect_to("/Shibboleth.sso/Login?isPassive=true&target=#{URI.escape(request.original_url, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))}") }
           it("should set _check_passive_login cookie") { expect(subject.cookies["_check_passive_login"]).to be_true }
         end
         context 'when _check_passive_login cookie has been set' do
@@ -80,7 +80,7 @@ describe UsersController do
           subject { response }
           it { should be_redirect }
           it("should have a 302 status") { expect(subject.status).to be(302) }
-          it { should redirect_to(user_omniauth_authorize_path(:nyu_shibboleth, institute: "NYU", auth_type: :nyu)) }
+          it { should redirect_to(user_omniauth_authorize_path(:nyu_shibboleth, institute: "NYU", auth_type: :nyu, check_passive_url: request.original_url)) }
         end
       end
     end

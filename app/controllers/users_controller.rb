@@ -14,6 +14,11 @@ class UsersController < Devise::OmniauthCallbacksController
     end
   end
 
+  def after_sign_in_path_for(resource)
+    return params[:check_passive_url] if params[:check_passive_url]
+    super(resource)
+  end
+
   def after_omniauth_failure_path_for(scope)
     # When using the auth_type nyu, for Shibboleth, redirect errors to the wayf page
     if params[:auth_type] == "nyu"
@@ -54,7 +59,7 @@ class UsersController < Devise::OmniauthCallbacksController
 
   def check_passive_login
     if !user_signed_in?
-      redirect_to user_omniauth_authorize_path(:nyu_shibboleth, institute: current_institute.code, auth_type: :nyu) and return if shib_session_exists?
+      redirect_to user_omniauth_authorize_path(:nyu_shibboleth, institute: current_institute.code, auth_type: :nyu, check_passive_url: request.original_url) and return if shib_session_exists?
       if !cookies[:_check_passive_login]
         cookies[:_check_passive_login] = true
         redirect_to passive_shibboleth_url
@@ -123,7 +128,7 @@ class UsersController < Devise::OmniauthCallbacksController
   end
 
   def passive_shibboleth_url
-    "/Shibboleth.sso/Login?isPassive=true&target=#{request.original_url}"
+    "/Shibboleth.sso/Login?isPassive=true&target=#{URI::encode(request.original_url, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))}"
   end
   private :passive_shibboleth_url
 
