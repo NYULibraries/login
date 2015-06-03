@@ -90,3 +90,40 @@ $ curl --header "Authorization: Bearer ACCESS_TOKEN" localhost:3000/api/v1/user.
 ## Rack Based
 
 If you are using a Rack Based application, you have free reign to use the [omniauth-nyulibraries gem](https://github.com/NYULibraries/omniauth-nyulibraries). This provides easier access to the provider API.
+
+## Passive Login
+
+The NYU Libraries Central Login system allows users to passively login to your app if the user has already logged into the main provider. This can be implemented using HTTP redirects.
+
+### Passive Login Flow
+
+The idea behind the passive login is as follows. When the user hits your app, and is not logged in, your app checks to see if a certain cookie exists. We call it `_check_passive_login`. If the cookie exists, then the app knows that the user has visited the app before and was not logged in to the central login system. If the cookie doesn't exist, the app should check to see if the user is indeed logged in. To do this it sets the aforementioned cookie, and then redirects to Login's passive check URI with certain parameters.
+
+```
+LOGIN_URL/login/passive?client_id=APP_ID&return_uri=RETURN_URI
+```
+
+The `APP_ID` is the ID Login assigns to your app. The `RETURN_URI` is where Login should return to if the user is not logged in, typically it is set to the app's current url.
+
+Additionally if your app's login URL is different from the standard YOUR_APP_URL/login, you can specify the login path with the `login_path` parameter.
+
+```
+LOGIN_URL/login/passive?client_id=APP_ID&return_uri=RETURN_URI&login_path=NEW_PATH
+```
+
+Important note, your NEW_PATH must have the same hostname and port as your application.
+
+### Conclusion
+
+The end flow would be like so:
+
+  - Is user logged in?
+    - __Yes__
+      - Problem solved!
+    - __No__
+      - Has the `_check_passive_login` cookie been set?
+        - __Yes__
+          - Problem solved!
+        - __No__
+          - Set `_check_passive_login` cookie
+          - Redirect to `LOGIN_URL/login/passive?client_id=APP_ID&return_uri=RETURN_URI`
