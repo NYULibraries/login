@@ -33,7 +33,7 @@ gem 'nyulibraries-assets', github: 'NYULibraries/nyulibraries-assets', tag: 'v4.
 # gem 'nyulibraries-assets', path: '/apps/nyulibraries-assets'
 
 # Use the NYU Libraries deploy gem
-gem 'formaggio', github: 'NYULibraries/formaggio', tag: 'v1.0.0'
+gem 'formaggio', github: 'NYULibraries/formaggio', tag: 'v1.4.2'
 
 # Used for determining which institution is in play
 gem 'institutions', '~> 0.1.3'
