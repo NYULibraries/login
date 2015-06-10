@@ -15,8 +15,49 @@ class UsersController < Devise::OmniauthCallbacksController
   end
 
   def after_sign_in_path_for(resource)
-    store_location_for(resource, params[:redirect_to]) if params[:redirect_to]
+    # If the provided redirect_to param is valid, that is, it redirects to
+    # a local URI and not an external URI, it will redirect to that URI.
+    if redirect_to_uri_is_valid?
+      store_location_for(resource, whitelisted_redirect_to_uri)
+    end
     super(resource)
+  end
+
+  def check_passive_shibboleth_and_sign_in
+    # The flow of logic is as follows:
+    # If a Shibboleth session is found, then that means the user must be logged
+    # into Shibboleth. Thus, the user is then redirected to the login path for
+    # NYU Shibboleth, but with a return_to parameter set so that they can come
+    # back to this URI and continue their request after being signed in.
+    if shib_session_exists?
+      redirect_to nyu_shibboleth_omniauth_authorize_path and return
+    end
+    # However if the Shibboleth session does not exist, then we check to see
+    # if this is the first time they've come to this app. If it is, we have to
+    # check with Shibboleth if they are logged in, so we use a cookie to mark
+    # that they've been here, then redirect to Shibboleth's passive login check
+    # with the return URI set to the current URI, so they can continue their
+    # request after being signed in.
+    if !cookies[:_check_passive_shibboleth]
+      cookies[:_check_passive_shibboleth] = true
+      redirect_to passive_shibboleth_url
+    end
+  end
+
+  def check_passive_and_sign_client_in
+    # If the user is signed, and the client is on the whitelist, we can safely
+    # log them into the client.
+    if user_signed_in? && whitelisted_client
+      redirect_to whitelisted_client_login_uri.to_s and return
+    end
+    # If the user is not signed in, or if the client can't be foudn,
+    # we can redirect them to the return_uri they provided, but only
+    # if the return URI is whitelisted as well
+    if return_uri_validated?
+      redirect_to return_uri.to_s and return
+    end
+    # If none of the above conditions are met, this is just a bad request.
+    return head(:bad_request)
   end
 
   def after_omniauth_failure_path_for(scope)
@@ -56,54 +97,6 @@ class UsersController < Devise::OmniauthCallbacksController
   end
   private :require_login
 
-  def check_passive_login
-    if !user_signed_in?
-      redirect_to nyu_shibboleth_omniauth_authorize_path and return if shib_session_exists?
-      if !cookies[:_check_passive_shibboleth]
-        cookies[:_check_passive_shibboleth] = true
-        redirect_to passive_shibboleth_url
-      end
-    end
-  end
-
-  def shib_session_exists?
-    !cookies.detect {|k,v| k.include? "_shibsession_" }.nil?
-  end
-
-  def doorkeeper_client
-    @doorkeeper_client ||= Doorkeeper::Application.all.select{ |app| app.uid == params[:client_id] }.first
-  end
-
-  def doorkeeper_client_uri
-    @doorkeeper_client_uri ||= URI.parse(doorkeeper_client.redirect_uri)
-  end
-
-  def doorkeeper_client_login
-    return URI.join(doorkeeper_client_uri, params[:login_path]) if params[:login_path]
-    URI.join(doorkeeper_client_uri, "/login")
-  end
-
-  def return_uri
-    @return_uri ||= URI.parse(params[:return_uri])
-  end
-
-  def return_uri_base
-    URI.join(return_uri, "/")
-  end
-
-  def doorkeeper_client_uri_base
-    URI.join(doorkeeper_client_uri, "/")
-  end
-
-  def return_uri_validated?
-    doorkeeper_client && doorkeeper_client_uri_base.eql?(return_uri_base)
-  end
-
-  def check_passive
-    redirect_to "#{doorkeeper_client_login}" and return if user_signed_in? && !doorkeeper_client.nil?
-    redirect_to "#{return_uri}" and return if return_uri_validated?
-    return head(:bad_request)
-  end
 
   def require_valid_omniauth_hash
     redirect_to after_omniauth_failure_path_for(resource_name) unless omniauth_hash_validator.valid?
@@ -125,20 +118,4 @@ class UsersController < Devise::OmniauthCallbacksController
   def find_for_authentication(username, provider)
     User.find_for_authentication(username: username, provider: provider) || User.find_or_initialize_by(username: username, provider: provider)
   end
-
-  def passive_shibboleth_url
-    "/Shibboleth.sso/Login?isPassive=true&target=#{uri_component_original_url}"
-  end
-  private :passive_shibboleth_url
-
-  def uri_component_original_url
-    URI::encode(request.original_url, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
-  end
-  private :uri_component_original_url
-
-  def nyu_shibboleth_omniauth_authorize_path
-    user_omniauth_authorize_path(:nyu_shibboleth, institute: current_institute.code, auth_type: :nyu, redirect_to: uri_component_original_url)
-  end
-  private :nyu_shibboleth_omniauth_authorize_path
-
 end
