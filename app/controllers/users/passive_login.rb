@@ -5,12 +5,13 @@ module Users::PassiveLogin
 
   PASSIVE_SHIBBOLETH_URL_STRING = "/Shibboleth.sso/Login?isPassive=true&target="
   SHIBBOLETH_COOKIE_PATTERN = "_shibsession_"
+
   def passive_shibboleth_url
     "#{PASSIVE_SHIBBOLETH_URL_STRING}#{uri_component_original_url}"
   end
 
   def shib_session_exists?
-    !cookies.detect {|key| key.include? SHIBBOLETH_COOKIE_PATTERN }.nil?
+    !cookies.detect {|key, val| key.include? SHIBBOLETH_COOKIE_PATTERN }.nil?
   end
 
   def uri_component_original_url
