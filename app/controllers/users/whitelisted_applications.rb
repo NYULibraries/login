@@ -19,7 +19,7 @@ module Users::WhitelistedApplications
   end
 
   def whitelisted_redirect_to_uri
-    params[:redirect_to]
+    unescaped_redirect_to
   end
 
   def return_uri
@@ -44,11 +44,15 @@ module Users::WhitelistedApplications
   end
 
   def redirect_to_uri_base
-    URI.join(URI.parse(params[:redirect_to]), "/")
+    URI.join(URI.parse(unescaped_redirect_to), "/")
   end
 
   def original_url_base
     URI.join(URI.parse(request.original_url), "/")
+  end
+
+  def unescaped_redirect_to
+    CGI::unescape(params[:redirect_to])
   end
 
 end
