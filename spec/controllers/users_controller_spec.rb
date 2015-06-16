@@ -2,14 +2,143 @@ require 'spec_helper'
 describe UsersController do
   before { @request.env["devise.mapping"] = Devise.mappings[:user] }
   let(:attributes) { attributes_for(:user) }
+  describe "GET /login/passive" do
+    context 'when passive shibboleth has already been checked' do
+      before { @request.cookies["_check_passive_shibboleth"] = true }
+      context 'when not logged in' do
+        context 'and redirect_uri is valid and client_id is valid' do
+          before { controller.stub(:whitelisted_client).and_return(Doorkeeper::Application.new(uid: 1, redirect_uri: "https://somehost.com/some_callback")) }
+          before { get "check_passive_and_sign_client_in", return_uri: "https://somehost.com", client_id: "1" }
+          subject { response }
+          it { should be_redirect }
+          it("should have a 302 status") { expect(subject.status).to be(302) }
+          it { should redirect_to("https://somehost.com") }
+        end
+        context 'and redirect_uri is invalid and client_id is valid' do
+          before { controller.stub(:whitelisted_client).and_return(Doorkeeper::Application.new(uid: 1, redirect_uri: "https://somehost.com/some_callback")) }
+          before { get "check_passive_and_sign_client_in", return_uri: "https://evilhost.com", client_id: "1" }
+          subject { response }
+          it { should be_bad_request }
+          it("should have a 400 status") { expect(subject.status).to be(400) }
+        end
+        context 'and redirect_uri is invalid and client_id is invalid' do
+          before { get "check_passive_and_sign_client_in", return_uri: "https://evilhost.com", client_id: "2" }
+          subject { response }
+          it { should be_bad_request }
+          it("should have a 400 status") { expect(subject.status).to be(400) }
+        end
+        context 'and redirect_uri is valid and client_id is invalid' do
+          before { get "check_passive_and_sign_client_in", return_uri: "https://somehost.com", client_id: "2" }
+          subject { response }
+          it { should be_bad_request }
+          it("should have a 400 status") { expect(subject.status).to be(400) }
+        end
+      end
+      context 'when logged in' do
+        login_user
+        context 'and client login path is provided' do
+          before { controller.stub(:whitelisted_client).and_return(Doorkeeper::Application.new(uid: 1, redirect_uri: "https://somehost.com/some_callback")) }
+          before { get "check_passive_and_sign_client_in", return_uri: "/1", client_id: "1", login_path: "/newlogin" }
+          subject { response }
+          it { should be_redirect }
+          it("should have a 302 status") { expect(subject.status).to be(302) }
+          it { should redirect_to("https://somehost.com/newlogin") }
+        end
+        context 'and client login path is not provided' do
+          before { controller.stub(:whitelisted_client).and_return(Doorkeeper::Application.new(uid: 1, redirect_uri: "https://somehost.com/some_callback")) }
+          before { get "check_passive_and_sign_client_in", return_uri: "/1", client_id: "1" }
+          subject { response }
+          it { should be_redirect }
+          it("should have a 302 status") { expect(subject.status).to be(302) }
+          it { should redirect_to("https://somehost.com/login") }
+        end
+      end
+    end
+    context 'when passive shibboleth has not already been checked' do
+      context 'when not logged in' do
+        context 'and redirect_uri is valid and client_id is valid' do
+          before { controller.stub(:whitelisted_client).and_return(Doorkeeper::Application.new(uid: 1, redirect_uri: "https://somehost.com/some_callback")) }
+          before { get "check_passive_and_sign_client_in", return_uri: "https://somehost.com", client_id: "1" }
+          subject { response }
+          it { should be_redirect }
+          it("should have a 302 status") { expect(subject.status).to be(302) }
+          it { should redirect_to("/Shibboleth.sso/Login?isPassive=true&target=#{URI.escape(request.original_url, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))}") }
+        end
+        context 'and redirect_uri is invalid and client_id is valid' do
+          before { controller.stub(:whitelisted_client).and_return(Doorkeeper::Application.new(uid: 1, redirect_uri: "https://somehost.com/some_callback")) }
+          before { get "check_passive_and_sign_client_in", return_uri: "https://evilhost.com", client_id: "1" }
+          subject { response }
+          it { should be_redirect }
+          it("should have a 302 status") { expect(subject.status).to be(302) }
+          it { should redirect_to("/Shibboleth.sso/Login?isPassive=true&target=#{URI.escape(request.original_url, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))}") }
+        end
+        context 'and redirect_uri is invalid and client_id is invalid' do
+          before { get "check_passive_and_sign_client_in", return_uri: "https://evilhost.com", client_id: "2" }
+          subject { response }
+          it { should be_redirect }
+          it("should have a 302 status") { expect(subject.status).to be(302) }
+          it { should redirect_to("/Shibboleth.sso/Login?isPassive=true&target=#{URI.escape(request.original_url, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))}") }
+        end
+        context 'and redirect_uri is valid and client_id is invalid' do
+          before { get "check_passive_and_sign_client_in", return_uri: "https://somehost.com", client_id: "2" }
+          subject { response }
+          it { should be_redirect }
+          it("should have a 302 status") { expect(subject.status).to be(302) }
+          it { should redirect_to("/Shibboleth.sso/Login?isPassive=true&target=#{URI.escape(request.original_url, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))}") }
+        end
+      end
+      context 'when logged in' do
+        login_user
+        context 'and client login path is provided' do
+          before { controller.stub(:whitelisted_client).and_return(Doorkeeper::Application.new(uid: 1, redirect_uri: "https://somehost.com/some_callback")) }
+          before { get "check_passive_and_sign_client_in", return_uri: "/1", client_id: "1", login_path: "/newlogin" }
+          subject { response }
+          it { should be_redirect }
+          it("should have a 302 status") { expect(subject.status).to be(302) }
+          it { should redirect_to("https://somehost.com/newlogin") }
+        end
+        context 'and client login path is not provided' do
+          before { controller.stub(:whitelisted_client).and_return(Doorkeeper::Application.new(uid: 1, redirect_uri: "https://somehost.com/some_callback")) }
+          before { get "check_passive_and_sign_client_in", return_uri: "/1", client_id: "1" }
+          subject { response }
+          it { should be_redirect }
+          it("should have a 302 status") { expect(subject.status).to be(302) }
+          it { should redirect_to("https://somehost.com/login") }
+        end
+      end
+    end
+  end
   describe "GET 'show'" do
+    render_views false
     context 'when not logged in' do
-      render_views false
-      before { get :show, id: attributes[:username], provider: attributes[:provider] }
-      subject { response }
-      it { should be_redirect }
-      it("should have a 302 status") { expect(subject.status).to be(302) }
-      it { should redirect_to(login_url) }
+      context "when Shibboleth session doesn't exist" do
+        context 'when _check_passive_shibboleth cookie has not been set' do
+          before { get :show, id: attributes[:username], provider: attributes[:provider] }
+          subject { response }
+          it { should be_redirect }
+          it("should have a 302 status") { expect(subject.status).to be(302) }
+          it { should redirect_to("/Shibboleth.sso/Login?isPassive=true&target=#{URI.escape(request.original_url, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))}") }
+          it("should set _check_passive_shibboleth cookie") { expect(subject.cookies["_check_passive_shibboleth"]).to be_true }
+        end
+        context 'when _check_passive_shibboleth cookie has been set' do
+          before { @request.cookies["_check_passive_shibboleth"] = true }
+          before { get :show, id: attributes[:username], provider: attributes[:provider] }
+          subject { response }
+          it { should be_redirect }
+          it("should have a 302 status") { expect(subject.status).to be(302) }
+          it { should redirect_to(login_url) }
+        end
+      end
+      context "when Shibboleth session does exist" do
+        before { @request.cookies["_shibsession_"] = true }
+        context 'when _check_passive_shibboleth cookie has not been set' do
+          before { get :show, id: attributes[:username], provider: attributes[:provider] }
+          subject { response }
+          it { should be_redirect }
+          it("should have a 302 status") { expect(subject.status).to be(302) }
+          it { should redirect_to(user_omniauth_authorize_path(:nyu_shibboleth, institute: "NYU", auth_type: :nyu, redirect_to: URI.escape(request.original_url, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]")))) }
+        end
+      end
     end
     context 'when logged in' do
       login_user

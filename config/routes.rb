@@ -7,6 +7,7 @@ Login::Application.routes.draw do
       constraints: { provider: providers, id: /[^\/]+/ }
     get 'logout', to: 'devise/sessions#destroy', as: :logout
     get 'auth/:auth_type(/:institute)', to: 'devise/sessions#new', as: :auth
+    get 'login/passive', to: 'users#check_passive_and_sign_client_in'
     root 'users#show'
   end
   get 'login(/:institute)', to: 'wayf#index', as: :login
