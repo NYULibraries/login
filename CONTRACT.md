@@ -113,6 +113,25 @@ LOGIN_URL/login/passive?client_id=APP_ID&return_uri=RETURN_URI&login_path=NEW_PA
 
 Important note, your NEW_PATH must have the same hostname and port as your application.
 
+#### For Rails
+
+With Rails you can simply do the following in your `ApplicationController`.
+
+```ruby
+class ApplicationController < ActionController::Base
+  #...
+  prepend_before_filter :passive_login
+  #...
+  def passive_login
+    if !cookies[:_check_passive_login]
+      cookies[:_check_passive_login] = true
+      redirect_to "#{LOGIN_URL}?client_id=#{APP_ID}&return_uri=#{RETURN_URI}&login_path=#{NEW_PATH}"
+    end
+  end
+  #...
+end
+```
+
 ### Conclusion
 
 The end flow would be like so:
