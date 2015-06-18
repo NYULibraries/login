@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.0.9'
+gem 'rails', '~> 4.1.11'
 
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 0.17.1'
+gem 'pg', '~> 0.18.0'
 # Use nested hstore to store serialized objects in Active Record hstore
 gem 'nested-hstore', '~> 0.0.5'
 gem 'activerecord-postgres-hstore', '0.7.6' # 0.7.7 Has a PG syntax error in a rake task that causes this to fail
@@ -39,27 +39,25 @@ gem 'formaggio', github: 'NYULibraries/formaggio', tag: 'v1.4.2'
 gem 'institutions', '~> 0.1.3'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks', '~> 2.2.0'
+gem 'turbolinks', '~> 2.5.0'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 
 # Use devise for our user model
-gem 'devise', '~> 3.2.0'
+gem 'devise', '~> 3.5.0'
 
 # Use Ox for parsing XML
-gem 'ox', '~> 2.1.0'
+gem 'ox', '~> 2.2.0'
 
 # Use omniauth for logging in from multiple providers
 gem 'omniauth', '~> 1.2.2'
 # Shibboleth strategy
-gem 'omniauth-shibboleth', '~> 1.1.2'
-# Passive Shibboleth strategy
-gem 'omniauth-shibboleth-passive', '~> 0.1.0'
+gem 'omniauth-shibboleth', '~> 1.2.0'
 # Facebook strategy
 gem 'omniauth-facebook', '~> 2.0.0'
 # Twitter strategy
-gem 'omniauth-twitter', '~> 1.0.1'
+gem 'omniauth-twitter', '~> 1.2.0'
 # GitHub strategy
 gem 'omniauth-github', '~> 1.1.2'
 gem 'omniauth-aleph', '~> 0.1.3'
@@ -68,7 +66,7 @@ gem 'omniauth-ldap', '~> 1.0.4'
 gem 'font-awesome-rails', '~> 4.2.0'
 
 # Use doorkeeper as our OAuth 2.0 provider
-gem 'doorkeeper', '~> 2.1.0'
+gem 'doorkeeper', '~> 2.2.0'
 
 # Figs for configuration
 gem 'figs', '~> 2.0.0'
