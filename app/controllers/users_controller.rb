@@ -92,13 +92,19 @@ class UsersController < Devise::OmniauthCallbacksController
     alias_method omniauth_provider, :omniauth_callback
   end
 
+  # Use Devise::Models::Authenticatable::ClassMethods#find_for_authentication
+  # to take advantage of the Devise case_insensitive_keys and treat USER and user as the same username
+  def find_for_authentication(username, provider)
+    User.find_for_authentication(username: username, provider: provider) || User.find_or_initialize_by(username: username, provider: provider)
+  end
+  private :find_for_authentication
+
   def require_login
     unless user_signed_in?
       redirect_to login_url
     end
   end
   private :require_login
-
 
   def require_valid_omniauth_hash
     redirect_to after_omniauth_failure_path_for(resource_name) unless omniauth_hash_validator.valid?
@@ -115,9 +121,4 @@ class UsersController < Devise::OmniauthCallbacksController
   end
   private :omniauth_hash_validator
 
-  # Use Devise::Models::Authenticatable::ClassMethods#find_for_authentication
-  # to take advantage of the Devise case_insensitive_keys and treat USER and user as the same username
-  def find_for_authentication(username, provider)
-    User.find_for_authentication(username: username, provider: provider) || User.find_or_initialize_by(username: username, provider: provider)
-  end
 end
