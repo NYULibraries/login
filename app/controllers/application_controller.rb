@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   layout Proc.new { |controller| (controller.request.xhr?) ? false : "login" }
 
-  LOGGED_IN_COOKIE_NAME = '_login_sso'
+  LOGGED_IN_COOKIE_NAME = '_nyulibraries_logged_in'
 
   # Include these helper functions explicitly to make them available to controllers
   include Nyulibraries::Assets::InstitutionsHelper, UsersHelper
