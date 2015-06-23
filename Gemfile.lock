@@ -67,7 +67,6 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     addressable (2.3.8)
-    aescrypt (1.0.0)
     arel (5.0.1.20140414130214)
     bcrypt (3.1.10)
     better_errors (2.0.0)
@@ -398,7 +397,6 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-postgres-hstore (= 0.7.6)
-  aescrypt (~> 1.0.0)
   better_errors (~> 2.0.0)
   binding_of_caller (~> 0.7.2)
   coffee-rails (~> 4.0.0)
