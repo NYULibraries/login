@@ -7,20 +7,28 @@ Then(/^my primary login option should be (.+)$/) do |location|
   if location == "NYU"
     expect(page).to have_css("#nyu_shibboleth-login.primary-login")
   else
-    expect(page).to have_css("##{institute_for_location(location).downcase}-login.primary-login")
+    expect(page).to have_css("##{institution_for_location(location).downcase}-login.primary-login")
   end
 end
 
 When(/^I want to login with (.+)$/) do |account|
-  visit login_path(institute_for_location(account))
+  visit login_path(institution_for_location(account))
 end
 
 Then(/^I should go to the (.+) authentication page$/) do |location|
-  expect(current_path).to start_with(auth_path(institute_for_location(location).downcase))
+  expect(current_path).to start_with(auth_path(institution_for_location(location).downcase))
 end
 
-Then(/^I should be logged in as an NYU user$/) do
+Then(/^I should be logged in as an NYU New York user$/) do
   expectations_for_page(page, nil, *shibboleth_logged_in_matchers("NYU New York"))
+end
+
+Then(/^I should be logged in as an NYU Shanghai user$/) do
+  expectations_for_page(page, nil, *shibboleth_logged_in_matchers("NYU Shanghai"))
+end
+
+Then(/^I should be logged in as an NYU Abu Dhabi user$/) do
+  expectations_for_page(page, nil, *shibboleth_logged_in_matchers("NYU Abu Dhabi"))
 end
 
 Given(/^I am on the (.+) login page$/) do |location|
@@ -35,6 +43,10 @@ end
 
 Then(/^I should see a(n)? "(.*?)" login page$/) do |ignore, location|
   expectations_for_page(page, nil, *nyu_style_matchers)
+end
+
+When(/^NYU Home authenticates me as a(n)? "(.*?)" user$/) do |ignore, location|
+  visit nyu_shibboleth_callback_url(location)
 end
 
 When(/^NYU Home authenticates me$/) do

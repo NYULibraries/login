@@ -12,11 +12,11 @@ describe "routes for Devise::Sessions" do
         it { should route_to(controller: "devise/sessions", action: "new", auth_type: "ns") }
         context "and institue is a bound parameter" do
           subject { get('/auth/ns/ns') }
-          it { should route_to(controller: "devise/sessions", action: "new", auth_type: "ns", institute: "ns") }
+          it { should route_to(controller: "devise/sessions", action: "new", auth_type: "ns", institution: "ns") }
         end
-        context "and institute a query string parameter" do
-          subject { get('/auth/ns?institute=ns') }
-          it { should route_to(controller: "devise/sessions", action: "new", auth_type: "ns", institute: "ns") }
+        context "and institution a query string parameter" do
+          subject { get('/auth/ns?institution=ns') }
+          it { should route_to(controller: "devise/sessions", action: "new", auth_type: "ns", institution: "ns") }
         end
       end
       context "when it's querystring parameter" do

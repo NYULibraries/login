@@ -6,7 +6,7 @@ describe "devise/sessions/_aleph.html.erb" do
     should match(/<div id="aleph">/)
     should match(/<form/)
     should match('method="post"')
-    should match(/action="\/users\/auth\/aleph\/callback\?institute=/)
+    should match(/action="\/users\/auth\/aleph\/callback\?institution=/)
     should match('<label for="username">')
     should match('<input class="form-control" id="username" name="username"')
     should match('<label for="password">')

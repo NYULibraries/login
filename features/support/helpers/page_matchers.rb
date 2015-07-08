@@ -200,10 +200,10 @@ module LoginFeatures
       ]
     end
 
-    def shibboleth_logged_in_matchers(institute)
+    def shibboleth_logged_in_matchers(institution)
       @logged_in_matchers ||= [
         -> { have_content 'Successfully authenticated ' },
-        -> { have_content "Hi #{nyu_shibboleth_username_for_institute(institute)}!" },
+        -> { have_content "Hi #{nyu_shibboleth_username_for_institution(institution)}!" },
         -> { have_content 'You logged in via' },
         -> { have_content " you've logged in to the NYU Libraries' services." }
       ]
@@ -217,5 +217,33 @@ module LoginFeatures
         -> { have_text("New Application") }
       ]
     end
+
+    def nyu_logout_matchers
+      @nyu_logout_matchers ||= [
+        -> { have_content 'LOGGED OUT' }
+      ]
+    end
+
+    def ns_logout_matchers
+      @ns_logout_matchers ||= [
+        -> { have_link('New School Libraries', {:href => 'http://library.newschool.edu'}) },
+        -> { have_content 'LOGGED OUT' }
+      ]
+    end
+
+    def cu_logout_matchers
+      @cu_logout_matchers ||= [
+        -> { have_link('Cooper Union Library', {:href => 'http://library.cooper.edu'}) },
+        -> { have_content 'LOGGED OUT' }
+      ]
+    end
+
+    def nysid_logout_matchers
+      @nysid_logout_matchers ||= [
+        -> { have_link('New York School of Interior Design Library', {:href => 'http://library.nysid.edu/library'}) },
+        -> { have_content 'LOGGED OUT' }
+      ]
+    end
+
   end
 end

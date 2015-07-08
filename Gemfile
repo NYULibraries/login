@@ -29,7 +29,7 @@ gem 'compass-rails', '~> 2.0.0'
 gem 'mustache', '0.99.4'
 gem 'mustache-rails', github: 'NYULibraries/mustache-rails', :require => 'mustache/railtie'
 # Use the NYU Libraries assets gem
-gem 'nyulibraries-assets', github: 'NYULibraries/nyulibraries-assets', tag: 'v4.1.3'
+gem 'nyulibraries-assets', github: 'NYULibraries/nyulibraries-assets', tag: 'v4.4.1'
 # gem 'nyulibraries-assets', path: '/apps/nyulibraries-assets'
 
 # Use the NYU Libraries deploy gem
@@ -97,7 +97,7 @@ group :development, :test, :cucumber do
   gem 'rspec-rails', '~> 2.14.1'
   # Phantomjs for headless browser testing
   gem 'phantomjs', '>= 1.9.7'
-  gem 'poltergeist', '~> 1.5.1'
+  gem 'poltergeist', '~> 1.6.0'
   # Use factory girl for creating models
   gem 'factory_girl_rails', '~> 4.4.1'
   # Use json_spec to do rspec tests with JSON

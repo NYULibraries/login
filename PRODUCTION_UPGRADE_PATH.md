@@ -30,6 +30,8 @@ These select apps need to maintain the old user data to continue to link existin
 * MaRLi
 * E-Shelf
 * Umbra
+* Ichabod
+* Finding Aids
 
 So in the OAuth2 callback phase for these apps we will need to try to find the existing user using something like this:
 
@@ -45,7 +47,6 @@ These apps do not need to maintain user data since there are no saved records, r
 
 * GetIt
 * Privileges Guide
-* Ichabod
 
 In these cases we can set a Capistrano task to clear user data before deploying as a one-time task. This can be done locally since it's an upgrade process and not necessarily something we want to build into Formaggio.
 
@@ -111,8 +112,6 @@ This list of apps will need to do the below dance to switch back and forth betwe
 * E-Shelf
 * Privileges Guide
 * ILLiad
-
-These apps need to do the same but login downtime is acceptable:
 * Ichabod
 * Finding Aids
 

@@ -1,7 +1,7 @@
 module LoginFeatures
   module NYUShibboleth
-    def nyu_shibboleth_callback_url(institute = "NYU")
-      user_omniauth_authorize_path({provider: "nyu_shibboleth"}.merge(institute_user(institute)))
+    def nyu_shibboleth_callback_url(institution = "NYU")
+      user_omniauth_authorize_path({provider: "nyu_shibboleth"}.merge(institution_user(institution)))
     end
 
     def set_nyu_shibboleth_login_env
@@ -12,10 +12,10 @@ module LoginFeatures
       @nyu_shibboleth_omniauth_hash ||= OmniAuth::AuthHash.new(FactoryGirl.create(:nyu_shibboleth_authhash))
     end
 
-    private
+  private
 
-    def nyu_shibboleth_username_for_institute(institute)
-      case institute
+    def nyu_shibboleth_username_for_institution(institution)
+      case institution
       when /NYU New York/
         :dev123
       when /NYU Abu Dhabi/
@@ -23,33 +23,33 @@ module LoginFeatures
       when /NYU Shanghai/
         :shdev123
       else
-        raise "Unknown Shibboleth institute!"
+        raise "Unknown Shibboleth institution!"
       end
     end
 
-    def institute_user(institute)
-      meth = "dummy_#{institute.downcase}_user"
+    def institution_user(institution)
+      meth = "dummy_#{institution.downcase.gsub(/ /,'_')}_user"
       send(meth.to_sym) if defined?(meth.to_sym) == "method"
     end
 
     def dummy_nyu_user
       dummy_user.merge({
-        institute: "NYU",
-        uid: nyu_shibboleth_username_for_institute("NYU New York")
+        institution: "NYU",
+        uid: nyu_shibboleth_username_for_institution("NYU New York")
       })
     end
 
-    def dummy_nyush_user
+    def dummy_nyu_shanghai_user
       dummy_user.merge({
-        institute: "NYUSH",
-        uid: nyu_shibboleth_username_for_institute("NYU Shanghai")
+        institution: "NYUSH",
+        uid: nyu_shibboleth_username_for_institution("NYU Shanghai")
       })
     end
 
-    def dummy_nyuad_user
+    def dummy_nyu_abu_dhabi_user
       dummy_user.merge({
-        institute: "NYUAD",
-        uid: nyu_shibboleth_username_for_institute("NYU Abu Dhabi")
+        institution: "NYUAD",
+        uid: nyu_shibboleth_username_for_institution("NYU Abu Dhabi")
       })
     end
 

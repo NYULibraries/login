@@ -80,6 +80,7 @@ class UsersController < Devise::OmniauthCallbacksController
     @user.omniauth_hash_map = omniauth_hash_map
     @user.institution_code = omniauth_hash_map.properties.institution_code.to_s unless omniauth_hash_map.properties.institution_code.nil?
     if @user.save
+      create_loggedin_cookie!(@user)
       sign_in_and_redirect @user, event: :authentication
       kind = omniauth_hash_map.provider.titleize
       set_flash_message(:notice, :success, kind: kind) if is_navigational_format?
@@ -92,13 +93,19 @@ class UsersController < Devise::OmniauthCallbacksController
     alias_method omniauth_provider, :omniauth_callback
   end
 
+  # Use Devise::Models::Authenticatable::ClassMethods#find_for_authentication
+  # to take advantage of the Devise case_insensitive_keys and treat USER and user as the same username
+  def find_for_authentication(username, provider)
+    User.find_for_authentication(username: username, provider: provider) || User.find_or_initialize_by(username: username, provider: provider)
+  end
+  private :find_for_authentication
+
   def require_login
     unless user_signed_in?
       redirect_to login_url
     end
   end
   private :require_login
-
 
   def require_valid_omniauth_hash
     redirect_to after_omniauth_failure_path_for(resource_name) unless omniauth_hash_validator.valid?
@@ -115,9 +122,12 @@ class UsersController < Devise::OmniauthCallbacksController
   end
   private :omniauth_hash_validator
 
-  # Use Devise::Models::Authenticatable::ClassMethods#find_for_authentication
-  # to take advantage of the Devise case_insensitive_keys and treat USER and user as the same username
-  def find_for_authentication(username, provider)
-    User.find_for_authentication(username: username, provider: provider) || User.find_or_initialize_by(username: username, provider: provider)
+  # Create a session cookie shared with other logged in clients
+  # so they can key single sign off indivudally
+  def create_loggedin_cookie!(user)
+    cookie_hash = { value: 1, httponly: true, domain: :all }
+    cookies[LOGGED_IN_COOKIE_NAME] = cookie_hash
   end
+  private :create_loggedin_cookie!
+
 end

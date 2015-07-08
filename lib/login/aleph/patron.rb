@@ -12,7 +12,7 @@ module Login
       ILL_LIBRARY_MAPPINGS = [
         {"HSL" => %w(ILL_MED)}
       ]
-      DEFAULT_INSTITUTE = "NYU"
+      DEFAULT_INSTITUTION = "NYU"
 
       # Attributes that any patron object will have
       # It is important to note that this cascades to user identities
@@ -27,10 +27,10 @@ module Login
           raise ArgumentError.new("Expecting a block to be given!")
         end
         yield self
-        # Favor the institute for ILL Library, since it is more accurate,
-        # Then use the borrower status to map to an institute
+        # Favor the institution for ILL Library, since it is more accurate,
+        # Then use the borrower status to map to an institution
         # Or default to NYU
-        @institution_code ||= (institute_for_ill_library || institute_for_bor_status || DEFAULT_INSTITUTE)
+        @institution_code ||= (institution_for_ill_library || institution_for_bor_status || DEFAULT_INSTITUTION)
       end
 
       ##
@@ -45,23 +45,23 @@ module Login
       end
       alias_method :attributes, :to_h
 
-      def institute_for_ill_library
+      def institution_for_ill_library
         ILL_LIBRARY_MAPPINGS.find do |ill_library_mapping|
           ill_library_mapping.find do |institution_code,ill_libraries|
             return institution_code if ill_libraries.include?(ill_library)
           end
         end
       end
-      private :institute_for_ill_library
+      private :institution_for_ill_library
 
-      def institute_for_bor_status
+      def institution_for_bor_status
         BOR_STATUS_MAPPINGS.find do |bor_status_mapping|
           bor_status_mapping.find do |institution_code,bor_statuses|
             return institution_code if bor_statuses.include?(patron_status)
           end
         end
       end
-      private :institute_for_bor_status
+      private :institution_for_bor_status
     end
   end
 end

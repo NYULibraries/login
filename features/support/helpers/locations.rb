@@ -1,7 +1,7 @@
 module LoginFeatures
   module Locations
-    def first_ip_for_institute(institute)
-      ip_addresses = ::Institutions.institutions[institute.to_sym].ip_addresses
+    def first_ip_for_institution(institution)
+      ip_addresses = ::Institutions.institutions[institution.to_sym].ip_addresses
       if ip_addresses.present?
         first_ip_address = ip_addresses.first
         if first_ip_address.is_a?(::IPAddr)
@@ -15,7 +15,7 @@ module LoginFeatures
     end
 
     def ip_for_location(location)
-      first_ip_for_institute(institute_for_location(location))
+      first_ip_for_institution(institution_for_location(location))
     end
 
     def username_for_location(location)
@@ -29,14 +29,14 @@ module LoginFeatures
     end
 
     def username_for(location)
-      "TEST_#{institute_for_location(location)}_USERNAME"
+      "TEST_#{institution_for_location(location)}_USERNAME"
     end
 
     def password_for(location)
-      "TEST_#{institute_for_location(location)}_PASSWORD"
+      "TEST_#{institution_for_location(location)}_PASSWORD"
     end
 
-    def institute_for_location(location)
+    def institution_for_location(location)
       case location
       when /NYU (.+)$/
         case $1
@@ -71,11 +71,11 @@ module LoginFeatures
     end
 
     def visit_login_page_for_location(location)
-      visit login_path(institute_for_location(location).downcase)
+      visit login_path(institution_for_location(location).downcase)
     end
 
     def expect_login_page_for_location(location)
-      expect(current_path).to eq(login_path(institute_for_location(location).downcase))
+      expect(current_path).to eq(login_path(institution_for_location(location).downcase))
     end
 
     def set_login_env_for_location(location)
@@ -99,7 +99,7 @@ module LoginFeatures
       case location
       when /New School LDAP$/
         click_on "The New School"
-        click_on "Login"
+        click_button "Login"
       when /NYU Shibboleth$/
         click_on "NYU"
       when /Aleph$/

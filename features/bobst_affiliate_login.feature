@@ -16,3 +16,11 @@ Feature: Bobst Affiliate login
     When I click on the "Other Borrowers" button
     And I incorrectly enter my Library Patron ID and first four letters of my last name
     Then I should not be logged in as a Bobst Affiliate user
+
+  @ignore_user_keys
+  Scenario: Logging out of a Bobst Affiliate account
+    Given I am on the NYU New York login page
+    When I click on the "Other Borrowers" button
+    And I enter my Library Patron ID for "Bobst Affiliate" and first four letters of my last name
+    And I visit the "NYU New York" log-out url
+    Then I should be on the NYU New York logged out page

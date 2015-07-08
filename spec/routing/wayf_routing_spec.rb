@@ -5,33 +5,33 @@ describe "routes for Wayf" do
       subject { get('/login') }
       it { should route_to({ controller: "wayf", action: "index" }) }
     end
-    context "when institute is NYU is passed" do
+    context "when institution is NYU is passed" do
       subject { get('/login/nyu') }
-      it { should route_to({ controller: "wayf", action: "index", institute: "nyu" }) }
+      it { should route_to({ controller: "wayf", action: "index", institution: "nyu" }) }
     end
-    context "when institute is NS is passed" do
+    context "when institution is NS is passed" do
       subject { get('/login/ns') }
-      it { should route_to({ controller: "wayf", action: "index", institute: "ns" }) }
+      it { should route_to({ controller: "wayf", action: "index", institution: "ns" }) }
     end
-    context "when institute is CU is passed" do
+    context "when institution is CU is passed" do
       subject { get('/login/cu') }
-      it { should route_to({ controller: "wayf", action: "index", institute: "cu" }) }
+      it { should route_to({ controller: "wayf", action: "index", institution: "cu" }) }
     end
-    context "when institute is NYSID is passed" do
+    context "when institution is NYSID is passed" do
       subject { get('/login/nysid') }
-      it { should route_to({ controller: "wayf", action: "index", institute: "nysid" }) }
+      it { should route_to({ controller: "wayf", action: "index", institution: "nysid" }) }
     end
-    context "when institute is NYUSH is passed" do
+    context "when institution is NYUSH is passed" do
       subject { get('/login/nyush') }
-      it { should route_to({ controller: "wayf", action: "index", institute: "nyush" }) }
+      it { should route_to({ controller: "wayf", action: "index", institution: "nyush" }) }
     end
-    context "when institute is NYUAD is passed" do
+    context "when institution is NYUAD is passed" do
       subject { get('/login/nyuad') }
-      it { should route_to({ controller: "wayf", action: "index", institute: "nyuad" }) }
+      it { should route_to({ controller: "wayf", action: "index", institution: "nyuad" }) }
     end
-    context "when institute is HSL is passed" do
+    context "when institution is HSL is passed" do
       subject { get('/login/hsl') }
-      it { should route_to({ controller: "wayf", action: "index", institute: "hsl" }) }
+      it { should route_to({ controller: "wayf", action: "index", institution: "hsl" }) }
     end
   end
 end

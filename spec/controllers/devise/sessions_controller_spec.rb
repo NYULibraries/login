@@ -5,7 +5,7 @@ module Devise
     context "when not logged in" do
       describe "GET 'new' for NYU" do
         let(:auth_type) { 'bobst' }
-        before { get :new, { institute: 'nyu', auth_type: auth_type } }
+        before { get :new, { institution: 'nyu', auth_type: auth_type } }
         subject { response }
         context 'when not rendering views' do
           render_views false
@@ -43,7 +43,7 @@ module Devise
 
       describe "GET 'new' for NYU Abu Dhabi" do
         let(:auth_type) { 'bobst' }
-        before { get :new, { institute: 'nyuad', auth_type: auth_type } }
+        before { get :new, { institution: 'nyuad', auth_type: auth_type } }
         subject { response }
         context "when rendering views" do
           render_views
@@ -60,7 +60,7 @@ module Devise
 
       describe "GET 'new' for NYU Shanghai" do
         let(:auth_type) { 'bobst' }
-        before { get :new, { institute: 'nyush', auth_type: auth_type } }
+        before { get :new, { institution: 'nyush', auth_type: auth_type } }
         subject { response }
         context "when rendering views" do
           render_views
@@ -77,7 +77,7 @@ module Devise
 
       describe "GET 'new' for NYU Health Science Libraries" do
         let(:auth_type) { 'bobst' }
-        before { get :new, { institute: 'hsl', auth_type: auth_type } }
+        before { get :new, { institution: 'hsl', auth_type: auth_type } }
         subject { response }
         context "when rendering views" do
           render_views
@@ -94,7 +94,7 @@ module Devise
 
       describe "GET 'new' for the New School" do
         let(:auth_type) { 'ns' }
-        before { get :new, { institute: 'ns', auth_type: auth_type } }
+        before { get :new, { institution: 'ns', auth_type: auth_type } }
         subject { response }
         context "when rendering views" do
           render_views
@@ -124,7 +124,7 @@ module Devise
 
       describe "GET 'new' for Cooper Union" do
         let(:auth_type) { 'cu' }
-        before { get :new, { institute: 'cu', auth_type: auth_type } }
+        before { get :new, { institution: 'cu', auth_type: auth_type } }
         subject { response }
         context "when rendering views" do
           render_views
@@ -154,7 +154,7 @@ module Devise
 
       describe "GET 'new' for NYSID" do
         let(:auth_type) { 'nysid' }
-        before { get :new, { institute: 'nysid', auth_type: auth_type } }
+        before { get :new, { institution: 'nysid', auth_type: auth_type } }
         subject { response }
         context "when rendering views" do
           render_views
@@ -187,7 +187,7 @@ module Devise
       login_user
       render_views false
       describe "GET 'new'" do
-        before { get :new, { institute: 'nyu', auth_type: 'bobst' } }
+        before { get :new, { institution: 'nyu', auth_type: 'bobst' } }
         subject { response }
         it { should be_redirect }
         it("should have a 302 status") { expect(subject.status).to be(302) }

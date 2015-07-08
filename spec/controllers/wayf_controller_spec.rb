@@ -26,7 +26,7 @@ describe WayfController do
       end
     end
     describe "GET 'index' for HSL" do
-      before { get :index, { institute: "hsl" } }
+      before { get :index, { institution: "hsl" } }
       subject { response }
       context 'when not rendering views' do
         render_views false
@@ -43,7 +43,7 @@ describe WayfController do
       end
     end
     describe "GET 'index' for NYUAD" do
-      before { get :index, { institute: "nyuad" } }
+      before { get :index, { institution: "nyuad" } }
       subject { response }
       context 'when not rendering views' do
         render_views false
@@ -60,7 +60,7 @@ describe WayfController do
       end
     end
     describe "GET 'index' for NYUSH" do
-      before { get :index, { institute: "nyush" } }
+      before { get :index, { institution: "nyush" } }
       subject { response }
       context 'when not rendering views' do
         render_views false
@@ -77,7 +77,7 @@ describe WayfController do
       end
     end
     describe "GET 'index' for NS" do
-      before { get :index, { institute: "ns" } }
+      before { get :index, { institution: "ns" } }
       subject { response }
       context 'when not rendering views' do
         render_views false
@@ -97,7 +97,7 @@ describe WayfController do
         end
       end
       describe "GET 'index' for CU" do
-        before { get :index, { institute: "cu" } }
+        before { get :index, { institution: "cu" } }
         subject { response }
         context 'when not rendering views' do
           render_views false
@@ -118,7 +118,7 @@ describe WayfController do
         end
       end
       describe "GET 'index' for NYSID" do
-        before { get :index, { institute: "nysid" } }
+        before { get :index, { institution: "nysid" } }
         subject { response }
         context 'when not rendering views' do
           render_views false
