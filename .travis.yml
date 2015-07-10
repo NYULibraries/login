@@ -5,6 +5,8 @@ rvm:
   - 2.1.0
   - 2.1.5
 
+sudo: false
+
 env:
   - LOGIN_DB_USER=postgres LOGIN_SECRET_TOKEN=123abc TEST_TWITTER_USERNAME=libtechnyu ALEPH_HOST=aleph.library.edu ALEPH_LIBRARY=ALEPH ALEPH_SUB_LIBRARY=BET SHIBBOLETH_LOGOUT_URL=https://aqa.home.nyu.edu/sso/UI/Logout
 
