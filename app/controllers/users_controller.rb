@@ -1,11 +1,15 @@
 class UsersController < Devise::OmniauthCallbacksController
 
   include Users::PassiveLogin
-  prepend_before_filter :check_passive_shibboleth_and_sign_in, only: [:show, :check_passive_and_sign_client_in], unless: -> { user_signed_in? }
-  before_filter :require_login, only: :show
-  before_filter :require_no_authentication, except: [:show, :check_passive_and_sign_client_in]
+  prepend_before_filter :check_passive_shibboleth_and_sign_in, only: [:index, :show, :check_passive_and_sign_client_in], unless: -> { user_signed_in? || Rails.env.development? }
+  before_filter :require_login, only: [:index, :show]
+  before_filter :require_no_authentication, except: [:index, :show, :check_passive_and_sign_client_in]
   before_filter :require_valid_omniauth_hash, only: (Devise.omniauth_providers << :omniauth_callback)
   respond_to :html
+
+  def index
+    redirect_to root_url_redirect
+  end
 
   def show
     @user = User.find_by(username: params[:id], provider: params[:provider])
@@ -129,5 +133,10 @@ class UsersController < Devise::OmniauthCallbacksController
     cookies[LOGGED_IN_COOKIE_NAME] = cookie_hash
   end
   private :create_loggedin_cookie!
+
+  def root_url_redirect
+    @root_url_redirect ||= (Figs.env.root_url_redirect) ? Figs.env.root_url_redirect : t('application.root_url_redirect')
+  end
+  private :root_url_redirect
 
 end

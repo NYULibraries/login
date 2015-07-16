@@ -26,6 +26,7 @@ en:
         failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
         success: "Successfully authenticated from your %{kind} account."
   application:
+    root_url_redirect: http://bobcatdev.library.nyu.edu
     title_html: Login
     header_html: Select your affiliation to login
     auth_footer_html: I'm lost. %{link}
