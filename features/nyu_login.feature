@@ -11,6 +11,7 @@ Feature: NYU Login
     Given I am on the NYU New York login page
     When I click on the "NYU" button
     And NYU Home authenticates me
+    And I am on my user page
     Then I should be logged in as an NYU New York user
 
   Scenario: Logging out of an NYU account

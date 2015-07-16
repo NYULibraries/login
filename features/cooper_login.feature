@@ -9,6 +9,7 @@ Feature: Cooper Union login
     Given I am on the Cooper Union login page
     When I click on the "Cooper Union" button
     And I enter my Library Patron ID for "Cooper Union" and first four letters of my last name
+    And I am on my user page
     Then I should be logged in as a Cooper Union user
 
   Scenario: Logging in with incorrect Cooper Union Library patron ID and first four letters of my last name

@@ -1,3 +1,7 @@
+Given(/^I am on my user page$/) do
+  visit users_show_path
+end
+
 When(/^I want to login$/) do
   # When on travis were already on the correct institution login page at this point
   visit '/login' unless ENV['TRAVIS']
