@@ -196,7 +196,8 @@ module LoginFeatures
 
     def mismatched_aleph_credentials_matchers()
       @mismatched_credentials_matchers ||= [
-        -> { have_content 'Could not authenticate you from Aleph because "Error in verification".' }
+        -> { have_content 'Something went wrong' },
+        -> { have_content 'You may have entered your information incorrectly or you do not have access to this resource' }
       ]
     end
 

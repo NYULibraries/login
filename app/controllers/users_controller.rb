@@ -64,6 +64,7 @@ class UsersController < Devise::OmniauthCallbacksController
   end
 
   def after_omniauth_failure_path_for(scope)
+    flash[:alert] = t('devise.users.user.failure', ask: t("application.#{params[:auth_type]}.ask_a_librarian")).html_safe
     # When using the auth_type nyu, for Shibboleth, redirect errors to the wayf page
     if params[:auth_type] == "nyu"
       login_path(current_institution.code.downcase)
