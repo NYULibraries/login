@@ -16,7 +16,7 @@ Feature: New School login
     Given I am on the New School login page
     When I click on the "The New School" button
     And I submit invalid New School credentials
-    Then I should see the error message "Invalid credentials"
+    Then I should see the error message "You may have entered your information incorrectly or you do not have access to this resource"
 
   Scenario: Logging out of a New School Library account
     Given I am on the New School login page
