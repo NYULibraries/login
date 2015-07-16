@@ -20,3 +20,10 @@ Feature: NYU Login
     And NYU Home authenticates me
     And I visit the "NYU New York" log-out url
     Then I should be on the NYU New York logged out page
+
+  Scenario: Attempting to visit the root page after logging in
+    Given I am on the NYU New York login page
+    When I click on the "NYU" button
+    And NYU Home authenticates me
+    And I visit the root url
+    Then I should be redirected to "http://bobcatdev.library.nyu.edu"

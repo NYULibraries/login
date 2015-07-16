@@ -54,7 +54,7 @@ module LoginFeatures
         -> { have_content 'Login with your Cooper Union patron ID' },
         -> { have_content 'Enter your ID Number' },
         -> { have_content 'First four letters of your last name' },
-        -> { have_link("I'm lost. Get help from a librarian.", { href: "http://library.cooper.edu/library_information_frameset.html"}) }
+        -> { have_link("Get help from a librarian.", { href: "http://library.cooper.edu/library_information_frameset.html"}) }
       ]
     end
 
