@@ -108,6 +108,24 @@ describe UsersController do
       end
     end
   end
+  describe "GET 'index'" do
+    render_views false
+    subject { response }
+    context 'when not logged in' do
+      before do
+        @request.cookies["_check_passive_shibboleth"] = true
+        get :index
+      end
+      it { should be_redirect }
+      it { should redirect_to login_url }
+    end
+    context 'when logged in' do
+      login_user
+      before { get :index }
+      it { should be_redirect }
+      it { should redirect_to 'http://bobcatdev.library.nyu.edu' }
+    end
+  end
   describe "GET 'show'" do
     render_views false
     context 'when not logged in' do

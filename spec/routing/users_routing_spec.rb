@@ -2,7 +2,7 @@ require 'spec_helper'
 describe "routes for Users" do
   describe "GET /" do
     subject { get('/') }
-    it { should route_to('users#show') }
+    it { should route_to('users#index') }
   end
 
   describe "POST /" do
