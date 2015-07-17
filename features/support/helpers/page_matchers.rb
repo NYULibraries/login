@@ -54,7 +54,7 @@ module LoginFeatures
         -> { have_content 'Login with your Cooper Union patron ID' },
         -> { have_content 'Enter your ID Number' },
         -> { have_content 'First four letters of your last name' },
-        -> { have_link("I'm lost. Get help from a librarian.", { href: "http://library.cooper.edu/library_information_frameset.html"}) }
+        -> { have_link("Get help from a librarian.", { href: "http://library.cooper.edu/library_information_frameset.html"}) }
       ]
     end
 
@@ -196,7 +196,8 @@ module LoginFeatures
 
     def mismatched_aleph_credentials_matchers()
       @mismatched_credentials_matchers ||= [
-        -> { have_content 'Could not authenticate you from Aleph because "Error in verification".' }
+        -> { have_content 'Something went wrong' },
+        -> { have_content 'You may have entered your information incorrectly or you do not have access to this resource' }
       ]
     end
 

@@ -9,6 +9,7 @@ Feature: New York School of Interior Design login
     Given I am on the NYSID login page
     When I click on the "NYSID" button
     And I enter my Library Patron ID for "NYSID" and first four letters of my last name
+    And I am on my user page
     Then I should be logged in as a New York School of Interior Design user
 
   Scenario: Logging in with incorrect NYSID patron ID

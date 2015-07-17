@@ -10,4 +10,5 @@ Feature: Facebook login
     And I click on the "Facebook" button
     And I wait for facebook login page
     And Facebook authenticates me
+    And I am on my user page
     Then I should be logged in with my Facebook handle

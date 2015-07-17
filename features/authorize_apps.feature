@@ -6,6 +6,7 @@ Feature: Authorizing (OAuth2) client applications
 
   Scenario: Viewing the list of client applications as an admin
     Given I am logged in as an admin
+    And I am on my user page
     When I click on the applications link
     Then I should see the list of applications
 

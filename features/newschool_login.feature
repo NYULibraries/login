@@ -9,13 +9,14 @@ Feature: New School login
     When I click on the "The New School" button
     And I submit my New School NetID and password
     And New School LDAP authenticates me
+    And I am on my user page
     Then I should be logged in as a New School user
 
   Scenario: Logging in with invalid credentials
     Given I am on the New School login page
     When I click on the "The New School" button
     And I submit invalid New School credentials
-    Then I should see the error message "Invalid credentials"
+    Then I should see the error message "You may have entered your information incorrectly or you do not have access to this resource"
 
   Scenario: Logging out of a New School Library account
     Given I am on the New School login page

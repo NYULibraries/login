@@ -9,6 +9,7 @@ Feature: Bobst Affiliate login
     Given I am on the NYU New York login page
     When I click on the "Other Borrowers" button
     And I enter my Library Patron ID for "Bobst Affiliate" and first four letters of my last name
+    And I am on my user page
     Then I should be logged in as a Bobst Affiliate user
 
   Scenario: Logging in with incorrect Bobst Affiliate patron ID

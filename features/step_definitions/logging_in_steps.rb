@@ -1,3 +1,7 @@
+Given(/^I am on my user page$/) do
+  visit users_show_path
+end
+
 When(/^I want to login$/) do
   # When on travis were already on the correct institution login page at this point
   visit '/login' unless ENV['TRAVIS']
@@ -103,4 +107,12 @@ end
 
 Then(/^I should see the error message "(.*?)"$/) do |message|
   expectations_for_page(page, nil, *error_matchers(message))
+end
+
+When(/^I visit the root url$/) do
+  visit root_path
+end
+
+Then(/^I should be redirected to "(.*?)"$/) do |url|
+  expect(current_url).to match(url)
 end
