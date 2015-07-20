@@ -2,7 +2,7 @@
   <h1><%= t('application.header_html') %></h1>
 </div>
 <div class="row">
-  <!-- Link to New School auth -->
+  <!-- Link to NYSID auth -->
   <div id="nysid-login" class="col-sm-12 primary-login">
     <div class="alt-login-link">
       <%= link_to content_tag(:span, t('application.nysid.link_text')), auth_path(:nysid, current_institution.code.downcase) %>

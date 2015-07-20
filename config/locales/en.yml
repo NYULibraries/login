@@ -61,7 +61,7 @@ en:
       header: Login with your Cooper Union patron ID
       link_text: Cooper Union
       username_label: Enter your ID Number
-      username_placeholder: "e.g. N12345678"
+      username_placeholder: "e.g. 12345678"
       password_label: First four letters of your last name
       ask_a_librarian: "http://library.cooper.edu/library_information_frameset.html"
     nysid:
