@@ -1,0 +1,14 @@
+<div id="logins" class="auth-container container">
+  <div class="auth-inner-container">
+  <% if request.path.include? "visitor" %>
+    <%= render "visitor" %>
+  <% else %>
+    <%= render "#{institution_from_code(params[:auth_type]).views["login"]["primary"]}" %>
+  <% end %>
+  <% if ["nysid", "cu", "ns"].include?(params[:auth_type]) %>
+    <%= render "devise/sessions/help/#{params[:auth_type]}_help" %>
+  <% else %>
+    <%= render "devise/sessions/help/help" %>
+  <% end %>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+# Private institutional settings
+<%= Figs.env.institutions.to_yaml if ENV.has_key?("INSTITUTIONS") %>
+BOBST:
+  name: NYU Libraries' Affiliates
+  views:
+    css: application
+    dir: nyu
+    breadcrumbs:
+      title: NYU Libraries
+      url: http://library.nyu.edu
+    login:
+      name: Other Borrowers
+      primary: aleph
+      secondary:
+        - nyu
+        - ns
+        - cu
+        - nysid

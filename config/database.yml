@@ -1,0 +1,55 @@
+# PostgreSQL. Versions 8.2 and up are supported.
+#
+# Install the pg driver:
+#   gem install pg
+# On OS X with Homebrew:
+#   gem install pg -- --with-pg-config=/usr/local/bin/pg_config
+# On OS X with MacPorts:
+#   gem install pg -- --with-pg-config=/opt/local/lib/postgresql84/bin/pg_config
+#       Install PostgreSQL and put its /bin directory on your path.
+#
+# Configure Using Gemfile
+# gem 'pg'
+#
+postgres: &postgres
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+local: &local
+  <<: *postgres
+  host: "localhost"
+  username: <%= (ENV['LOGIN_DB_USER'] || "login") %>
+  password: <%= (ENV['LOGIN_DB_PASSWORD'] || "") %>
+
+remote: &remote
+  <<: *local
+  host: <%= ENV['LOGIN_DB_HOST'] %>
+  port: <%= ENV['LOGIN_DB_PORT'] %>
+  database: <%= ENV['LOGIN_DB_DATABASE'] %>
+
+remote_or_local: &remote_or_local
+  <<: *local
+  host: <%= (ENV['LOGIN_DB_HOST'] || "localhost") %>
+  port: <%= (ENV['LOGIN_DB_PORT'] || "") %>
+  database: <%= (ENV['LOGIN_DB_DATABASE'] || "login") %>
+
+development:
+  <<: *remote_or_local
+  database: <%= (ENV['LOGIN_DB_DATABASE'] || "login_development") %>
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test: &test
+  <<: *local
+  database: login_test
+
+staging:
+  <<: *remote
+
+production:
+  <<: *remote
+
+cucumber:
+  <<: *test

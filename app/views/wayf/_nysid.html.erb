@@ -1,0 +1,20 @@
+<div class="row">
+  <h1><%= t('application.header_html') %></h1>
+</div>
+<div class="row">
+  <!-- Link to NYSID auth -->
+  <div id="nysid-login" class="col-sm-12 primary-login">
+    <div class="alt-login-link">
+      <%= link_to content_tag(:span, t('application.nysid.link_text')), auth_path(:nysid, current_institution.code.downcase) %>
+      <%= content_tag(:span, t('application.nysid.link_text')) %>
+    </div>
+  </div>
+</div>
+<!-- Link to the rest of the secondary logins -->
+<div class="row">
+  <% institution.views["login"]["secondary"].each do |option| %>
+    <%= render "wayf/auth_squares/#{option}" %>
+  <% end %>
+  <!-- Link to visitor square -->
+  <%= render "wayf/auth_squares/visitor" %>
+</div>

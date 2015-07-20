@@ -1,0 +1,100 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://graph.facebook.com/oauth/access_token
+    body:
+      encoding: US-ASCII
+      string: client_id=<FACEBOOK_APP_KEY>&client_secret=<FACEBOOK_APP_SECRET>&code=AQDqtAwlDXT_N5JRRRQQwpnuGtJKwippM05cQXEv2kTZj5vbuyvtbdijvr5cKO8Azq8URz__pFewachP6gp5QfBmPsRqWQ8TU4ZjjHf373XtDi2UlH7DauzXJaTtWmTPrfwAzKfh0rY2huuv4d9acUEthwvCZRV7id1txExJ5kuuidYBWAj_lriLSNYlizFCbEDjKxrWrCwa9iS0t_SS-D8LRdkn6lV8ztorUTkfGKT90gS9twAsxK-O1HZyCn94hWwu6gTgcX0WFYDCWmK2GMkAR7BILmf7y2o_2UfaFcVcJVwuoqbKeFHmDw237oxKe94&grant_type=authorization_code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fusers%2Fauth%2Ffacebook%2Fcallback
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Facebook-Api-Version:
+      - v1.0
+      Content-Type:
+      - text/plain; charset=UTF-8
+      Pragma:
+      - no-cache
+      Access-Control-Allow-Origin:
+      - ! '*'
+      X-Fb-Rev:
+      - '1404598'
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      X-Fb-Debug:
+      - pbnjy9W1jEQa7/2CKtzONfFsUQQhYLRBhs1OcqM5wRK723h0wZDJ4eCle/wVwWMi8991FznkGEAka3fLTRB0Zw==
+      Date:
+      - Tue, 09 Sep 2014 16:40:53 GMT
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '214'
+    body:
+      encoding: US-ASCII
+      string: access_token=CAAUrU0w6SfQBACwmZAhMleCOJ6saZAxnNcvTM1z9SoHN0oFXZBR26DXaZBBkpEZB0gtrb2s6487I0QxhypgolwMiPdcU83ClfZCzIGn6HYQKuP0SYtStpX9ZBzTBkYlfmsHabLeVKC2FFQO04yaSui9mcMHEzWgrzjebsZBVLnrJ5HtfMAG81oo0&expires=5183999
+    http_version: 
+  recorded_at: Tue, 09 Sep 2014 16:40:53 GMT
+- request:
+    method: get
+    uri: https://graph.facebook.com/me?appsecret_proof=9526ee1fad617f2508884af0b47253acd55f6bc8d6cdc97bc72b3cd16088f083
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Authorization:
+      - OAuth CAAUrU0w6SfQBACwmZAhMleCOJ6saZAxnNcvTM1z9SoHN0oFXZBR26DXaZBBkpEZB0gtrb2s6487I0QxhypgolwMiPdcU83ClfZCzIGn6HYQKuP0SYtStpX9ZBzTBkYlfmsHabLeVKC2FFQO04yaSui9mcMHEzWgrzjebsZBVLnrJ5HtfMAG81oo0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Last-Modified:
+      - '2014-06-11T15:48:24+0000'
+      Facebook-Api-Version:
+      - v1.0
+      Etag:
+      - ! '"43bbf1c8ba076afa311a84cc045a2d866d6b1b3e"'
+      Content-Type:
+      - application/json; charset=UTF-8
+      Pragma:
+      - no-cache
+      Access-Control-Allow-Origin:
+      - ! '*'
+      X-Fb-Rev:
+      - '1404598'
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      X-Fb-Debug:
+      - qPo4Ju/JGx//lKHF8S3e9O+RKSOP+UbnlrwZtV17Lrc42KvJyDmfr42nmgge5OAv3lRZF+hh/yLrn1Sl0MJNMg==
+      Date:
+      - Tue, 09 Sep 2014 16:40:54 GMT
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '361'
+    body:
+      encoding: US-ASCII
+      string: ! '{"id":"100006735525487","email":"harry_hraiolj_dinglewitz\u0040tfbnw.net","first_name":"Harry","gender":"male","last_name":"Dinglewitz","link":"https:\/\/www.facebook.com\/profile.php?id=100006735525487","locale":"en_US","middle_name":"Amfgceebedhg","name":"Harry
+        Amfgceebedhg Dinglewitz","timezone":0,"updated_time":"2014-06-11T15:48:24+0000","verified":false}'
+    http_version: 
+  recorded_at: Tue, 09 Sep 2014 16:40:54 GMT
+recorded_with: VCR 2.8.0

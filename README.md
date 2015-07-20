@@ -1,7 +1,12 @@
 # Login
+[![Build Status](https://travis-ci.org/NYULibraries/login.png?branch=development)](https://travis-ci.org/NYULibraries/login)
+[![Dependency Status](https://gemnasium.com/NYULibraries/login.png)](https://gemnasium.com/NYULibraries/login)
+[![Code Climate](https://codeclimate.com/github/NYULibraries/login.png)](https://codeclimate.com/github/NYULibraries/login)
+[![Coverage Status](https://coveralls.io/repos/NYULibraries/login/badge.png?branch=development)](https://coveralls.io/r/NYULibraries/login)
+
 The NYU Libraries' Login application is an [OAuth2](http://oauth.net/2/) server
 that provides registered clients with a set of user metadata that can be used for
-authorize decisions and feature provision.
+authorization decisions and feature provision.
 
 ## Authentication
 Users can authenticate via the services listed below:
@@ -36,4 +41,3 @@ NYU Shibboleth identity and also will have an Aleph identity. A user who logs in
 via the New School's LDAP server will have a New School LDAP identity and an Aleph
 identity. A user who logs in via Aleph, Facebook or Twitter, will only have an Aleph,
 Facebook or Twitter identity.
-

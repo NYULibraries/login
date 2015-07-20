@@ -1,0 +1,10 @@
+<div id="logins" class="container options-container">
+  <div class="inner-container">
+    <% if request.path.include? "visitor" %>
+      <%= render "visitor" %>
+    <% else %>
+      <%= render "#{institution.code.to_s.downcase}" %>
+    <% end %>
+    <%= render "wayf/help/#{institution.code.to_s.downcase}_help" rescue render "wayf/help/help" %>
+  </div>
+</div>
