@@ -24,7 +24,7 @@ en:
     users:
       user:
         failure: "<h2>Something went wrong.</h2> You may have entered your information incorrectly or you do not have access to this resource. If you think you've received this message by mistake please contact <a href='%{ask}' target='_blank'>Ask a Librarian</a>. To see your specific privileges, please visit <a href='https://privileges.library.nyu.edu' target='_blank'>NYU Libraries Privileges guide</a>."
-        success: "Successfully authenticated from your %{kind} account."
+        success: ''
   application:
     root_url_redirect: http://bobcatdev.library.nyu.edu
     title_html: Login

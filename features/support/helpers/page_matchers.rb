@@ -169,7 +169,6 @@ module LoginFeatures
 
     def logged_in_matchers(location)
       @logged_in_matchers ||= [
-        -> { have_content 'Successfully authenticated ' },
         -> { have_content "Hi #{username_for_location(location)}!" },
         -> { have_content 'You logged in via' },
         -> { have_content " you've logged in to the NYU Libraries' services." }
@@ -178,7 +177,6 @@ module LoginFeatures
 
     def newschool_logged_in_matchers
       @logged_in_matchers ||= [
-        -> { have_content 'Successfully authenticated from your New School Ldap account' },
         -> { have_content "Hi" },
         -> { have_content 'You logged in via New School Ldap' },
         -> { have_content " you've logged in to the NYU Libraries' services." }
@@ -187,7 +185,6 @@ module LoginFeatures
 
     def aleph_logged_in_matchers(location)
       @logged_in_matchers ||= [
-        -> { have_content 'Successfully authenticated ' },
         -> { have_content "Hi " },
         -> { have_content 'You logged in via' },
         -> { have_content " you've logged in to the NYU Libraries' services." }
@@ -203,7 +200,6 @@ module LoginFeatures
 
     def shibboleth_logged_in_matchers(institution)
       @logged_in_matchers ||= [
-        -> { have_content 'Successfully authenticated ' },
         -> { have_content "Hi #{nyu_shibboleth_username_for_institution(institution)}!" },
         -> { have_content 'You logged in via' },
         -> { have_content " you've logged in to the NYU Libraries' services." }
