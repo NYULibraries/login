@@ -26,6 +26,7 @@ else
     phantomjs_options: ['--debug=no', '--load-images=no', '--ignore-ssl-errors=yes', '--ssl-protocol=any'],
     window_size: [1280, 1024],
     timeout: 300,
+    js_errors: false,
     debug: false
     )
   end
