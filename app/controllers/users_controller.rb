@@ -23,7 +23,12 @@ class UsersController < Devise::OmniauthCallbacksController
     if redirect_to_uri_is_valid?
       store_location_for(resource, whitelisted_redirect_to_uri)
     end
-    super(resource)
+    if ENV['ESHELF_LOGIN_URL']
+      cookies[:_eshelf_passthru] = true
+      ENV['ESHELF_LOGIN_URL']
+    else
+      super(resource)
+    end
   end
 
   def check_passive_shibboleth_and_sign_in

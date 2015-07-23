@@ -13,6 +13,7 @@ Login::Application.routes.draw do
   end
   get 'login(/:institution)', to: 'wayf#index', as: :login
   get 'logged_out(/:institution)', to: 'wayf#logged_out', as: :logged_out
+  get 'passthru', to: 'wayf#passthru'
   namespace :api do
     namespace :v1 do
       get '/user' => "users#show", defaults: { format: :json }
