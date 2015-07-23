@@ -6,8 +6,9 @@ class WayfController < ApplicationController
   def passthru
     if user_signed_in?
       cookies.delete(:_eshelf_passthru)
-      stored_location_for('user') || signed_in_root_path('user')
+      redirect_to (stored_location_for('user') || signed_in_root_path('user'))
     end
+    head :bad_request
   end
 
  private
