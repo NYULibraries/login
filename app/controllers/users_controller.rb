@@ -19,7 +19,7 @@ class UsersController < Devise::OmniauthCallbacksController
 
   def passthru
     if user_signed_in?
-      cookies.delete(:_eshelf_passthru)
+      cookies.delete(:_nyulibraries_eshelf_passthru)
       redirect_to (stored_location_for('user') || signed_in_root_path('user'))
     end
     head :bad_request
@@ -32,8 +32,8 @@ class UsersController < Devise::OmniauthCallbacksController
       store_location_for(resource, whitelisted_redirect_to_uri)
     end
     if ENV['ESHELF_LOGIN_URL']
-      cookies[:_eshelf_passthru] = true
-      ENV['ESHELF_LOGIN_URL']
+      create_eshelf_cookie!
+      return ENV['ESHELF_LOGIN_URL']
     else
       super(resource)
     end
@@ -140,10 +140,16 @@ class UsersController < Devise::OmniauthCallbacksController
   # Create a session cookie shared with other logged in clients
   # so they can key single sign off indivudally
   def create_loggedin_cookie!(user)
-    cookie_hash = { value: 1, httponly: true, domain: :all }
+    cookie_hash = { value: 1, httponly: true, domain: ENV['LOGIN_COOKIE_COMAIN'] }
     cookies[LOGGED_IN_COOKIE_NAME] = cookie_hash
   end
   private :create_loggedin_cookie!
+
+  def create_eshelf_cookie!
+    cookie_hash = { value: 1, httponly: true, domain: ENV['LOGIN_COOKIE_COMAIN'] }
+    cookies[ESHELF_COOKIE_NAME] = cookie_hash
+  end
+  private :create_eshelf_cookie!
 
   def redirect_root
     redirect_to root_url_redirect

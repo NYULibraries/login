@@ -6,7 +6,7 @@ class Users::SessionsController < Devise::SessionsController
 
   # Single sign out by clearing cookies on all sub domains
   def sso_logout
-    cookies.clear(domain: :all)
+    cookies.clear(domain: ENV['LOGIN_COOKIE_COMAIN'])
   end
 
   # Save use info in cookies before logging out so we can use them
