@@ -17,6 +17,14 @@ class UsersController < Devise::OmniauthCallbacksController
     end
   end
 
+  def passthru
+    if user_signed_in?
+      cookies.delete(:_eshelf_passthru)
+      redirect_to (stored_location_for('user') || signed_in_root_path('user'))
+    end
+    head :bad_request
+  end
+
   def after_sign_in_path_for(resource)
     # If the provided redirect_to param is valid, that is, it redirects to
     # a local URI and not an external URI, it will redirect to that URI.
