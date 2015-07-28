@@ -4,7 +4,7 @@ class UsersController < Devise::OmniauthCallbacksController
   prepend_before_filter :check_passive_shibboleth_and_sign_in, only: [:show, :check_passive_and_sign_client_in], unless: -> { user_signed_in? || Rails.env.development? }
   prepend_before_filter :redirect_root, only: [:show], if: -> { request.path == '/' && user_signed_in? }
   before_filter :require_login, only: [:show]
-  before_filter :require_no_authentication, except: [:show, :passthru, :check_passive_and_sign_client_in]
+  before_filter :require_no_authentication, except: [:show, :check_passive_and_sign_client_in]
   before_filter :require_valid_omniauth_hash, only: (Devise.omniauth_providers << :omniauth_callback)
   skip_before_filter :verify_authenticity_token, only: [:passthru]
   respond_to :html
@@ -18,9 +18,12 @@ class UsersController < Devise::OmniauthCallbacksController
     end
   end
 
+  # GET /passthru
+  # Redirect to original stored location after being sent back to the Login app
+  # from the eshelf login
   def passthru
     if user_signed_in?
-      cookies.delete(:_nyulibraries_eshelf_passthru)
+      cookies.delete(:_nyulibraries_eshelf_passthru, domain: ENV['LOGIN_COOKIE_COMAIN'])
       redirect_to (stored_location_for('user') || signed_in_root_path('user'))
     end
     head :bad_request
