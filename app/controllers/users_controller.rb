@@ -4,7 +4,7 @@ class UsersController < Devise::OmniauthCallbacksController
   prepend_before_filter :check_passive_shibboleth_and_sign_in, only: [:show, :check_passive_and_sign_client_in], unless: -> { user_signed_in? || Rails.env.development? }
   prepend_before_filter :redirect_root, only: [:show], if: -> { request.path == '/' && user_signed_in? }
   before_filter :require_login, only: [:show]
-  before_filter :require_no_authentication, except: [:show, :check_passive_and_sign_client_in]
+  before_filter :require_no_authentication, except: [:show, :passthru, :check_passive_and_sign_client_in]
   before_filter :require_valid_omniauth_hash, only: (Devise.omniauth_providers << :omniauth_callback)
   skip_before_filter :verify_authenticity_token, only: [:passthru]
   respond_to :html
@@ -32,7 +32,9 @@ class UsersController < Devise::OmniauthCallbacksController
     if redirect_to_uri_is_valid?
       store_location_for(resource, whitelisted_redirect_to_uri)
     end
-    if ENV['ESHELF_LOGIN_URL']
+    # If there is an eshelf login variable set then we want to redirect there after login
+    # to permanently save eshelf records
+    if ENV['ESHELF_LOGIN_URL'] && !cookies[ESHELF_COOKIE_NAME]
       create_eshelf_cookie!
       return ENV['ESHELF_LOGIN_URL']
     else
