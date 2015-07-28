@@ -146,13 +146,13 @@ class UsersController < Devise::OmniauthCallbacksController
   # Create a session cookie shared with other logged in clients
   # so they can key single sign off indivudally
   def create_loggedin_cookie!(user)
-    cookie_hash = { value: 1, httponly: true, domain: ENV['LOGIN_COOKIE_COMAIN'] }
+    cookie_hash = { value: 1, httponly: true, domain: ENV['LOGIN_COOKIE_DOMAIN'] }
     cookies[LOGGED_IN_COOKIE_NAME] = cookie_hash
   end
   private :create_loggedin_cookie!
 
   def create_eshelf_cookie!
-    cookie_hash = { value: 1, httponly: true, domain: ENV['LOGIN_COOKIE_COMAIN'] }
+    cookie_hash = { value: 1, httponly: true, domain: ENV['LOGIN_COOKIE_DOMAIN'] }
     cookies[ESHELF_COOKIE_NAME] = cookie_hash
   end
   private :create_eshelf_cookie!
