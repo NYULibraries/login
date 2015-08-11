@@ -50,6 +50,10 @@ en:
       header: Login with an NYU NetID
       link_text: NYU
       ask_a_librarian: "http://library.nyu.edu/ask"
+    nyuad:
+      ask_a_librarian: "http://nyuad.nyu.edu/en/research/library/ask-a-librarian.html"
+    nyush:
+      ask_a_librarian: "http://guides.nyu.edu/ShanghaiAAL"
     ns:
       header: Login with a New School NetID
       link_text: The New School
