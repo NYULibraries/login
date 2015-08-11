@@ -5,6 +5,10 @@
   <% else %>
     <%= render "#{institution_from_code(params[:auth_type]).views["login"]["primary"]}" %>
   <% end %>
-  <%= render "devise/sessions/help/#{params[:institution]}_help" rescue render "devise/sessions/help/help" %>
+  <% if params[:auth_type] == "bobst" %>
+    <%= render "devise/sessions/help/#{params[:institution]}_help" rescue render "devise/sessions/help/help" %>
+  <% else %>
+    <%= render "devise/sessions/help/#{params[:auth_type]}_help" rescue render "devise/sessions/help/help" %>
+  <% end %>
   </div>
 </div>
