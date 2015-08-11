@@ -1,4 +1,4 @@
-<div id="logins" class="container options-container">
+<div id="logins" class="container options-container<%= " #{institution.code.to_s.downcase}-container" %>">
   <div class="inner-container">
     <% if request.path.include? "visitor" %>
       <%= render "visitor" %>
