@@ -224,21 +224,27 @@ module LoginFeatures
     def ns_logout_matchers
       @ns_logout_matchers ||= [
         -> { have_link('New School Libraries', {:href => 'http://library.newschool.edu'}) },
-        -> { have_content 'LOGGED OUT' }
+        -> { have_content 'Almost logged out' }
+      ]
+    end
+
+    def bobst_affiliate_logout_matchers
+      @bobst_affiliate_logout_matchers ||= [
+        -> { have_content 'Almost logged out' }
       ]
     end
 
     def cu_logout_matchers
       @cu_logout_matchers ||= [
         -> { have_link('Cooper Union Library', {:href => 'http://library.cooper.edu'}) },
-        -> { have_content 'LOGGED OUT' }
+        -> { have_content 'Almost logged out' }
       ]
     end
 
     def nysid_logout_matchers
       @nysid_logout_matchers ||= [
         -> { have_link('New York School of Interior Design Library', {:href => 'http://library.nysid.edu/library'}) },
-        -> { have_content 'LOGGED OUT' }
+        -> { have_content 'Almost logged out' }
       ]
     end
 

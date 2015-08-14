@@ -32,7 +32,7 @@ en:
     auth_footer_html: Need help? %{link}
     wayf_footer_html: Why am I on this page?
     wayf_footer_popover_header_html: Online access to NYU Libraries
-    logged_out: LOGGED OUT
+    logged_out: Almost logged out...
     logged_out_footer_html: Need help?
     users:
       user:

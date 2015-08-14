@@ -24,4 +24,4 @@ Feature: Bobst Affiliate login
     When I click on the "Other Borrowers" button
     And I enter my Library Patron ID for "Bobst Affiliate" and first four letters of my last name
     And I visit the "NYU New York" log-out url
-    Then I should be on the NYU New York logged out page
+    Then I should be on the Bobst Affiliate logged out page
