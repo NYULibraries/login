@@ -20,11 +20,6 @@ module Users::PassiveLogin
     CGI::escape(request.original_url)
   end
 
-  # Don't lose the context of the original return_to param if it was set
-  def stored_return_to
-    CGI.parse(URI.parse(session["user_return_to"]).query)["redirect_uri"].first
-  end
-
   def nyu_shibboleth_omniauth_authorize_path
     user_omniauth_authorize_path(:nyu_shibboleth,
                                  institute: current_institute.code,
