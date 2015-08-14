@@ -6,32 +6,64 @@ describe UsersController do
     context 'when passive shibboleth has already been checked' do
       before { @request.cookies["_check_passive_shibboleth"] = true }
       context 'when not logged in' do
-        context 'and redirect_uri is valid and client_id is valid' do
-          before { controller.stub(:whitelisted_client).and_return(Doorkeeper::Application.new(uid: 1, redirect_uri: "https://somehost.com/some_callback")) }
-          before { get "check_passive_and_sign_client_in", return_uri: "https://somehost.com", client_id: "1" }
-          subject { response }
-          it { should be_redirect }
-          it("should have a 302 status") { expect(subject.status).to be(302) }
-          it { should redirect_to("https://somehost.com") }
+        context "when 'user_return_to' session cookie is set" do
+          before { @request.session["user_return_to"] = "https://wackhost.com?redirect_uri=http%3A%2F%2Fwww.wackhost.com%2Fcallback" }
+          context 'and redirect_uri is valid and client_id is valid' do
+            before { controller.stub(:whitelisted_client).and_return(Doorkeeper::Application.new(uid: 1, redirect_uri: "https://somehost.com/some_callback")) }
+            before { get "check_passive_and_sign_client_in", return_uri: "https://somehost.com", client_id: "1" }
+            subject { response }
+            it { should be_redirect }
+            it("should have a 302 status") { expect(subject.status).to be(302) }
+            it { should redirect_to("https://somehost.com") }
+          end
+          context 'and redirect_uri is invalid and client_id is valid' do
+            before { controller.stub(:whitelisted_client).and_return(Doorkeeper::Application.new(uid: 1, redirect_uri: "https://somehost.com/some_callback")) }
+            before { get "check_passive_and_sign_client_in", return_uri: "https://evilhost.com", client_id: "1" }
+            subject { response }
+            it { should be_bad_request }
+            it("should have a 400 status") { expect(subject.status).to be(400) }
+          end
+          context 'and redirect_uri is invalid and client_id is invalid' do
+            before { get "check_passive_and_sign_client_in", return_uri: "https://evilhost.com", client_id: "2" }
+            subject { response }
+            it { should be_bad_request }
+            it("should have a 400 status") { expect(subject.status).to be(400) }
+          end
+          context 'and redirect_uri is valid and client_id is invalid' do
+            before { get "check_passive_and_sign_client_in", return_uri: "https://somehost.com", client_id: "2" }
+            subject { response }
+            it { should be_bad_request }
+            it("should have a 400 status") { expect(subject.status).to be(400) }
+          end
         end
-        context 'and redirect_uri is invalid and client_id is valid' do
-          before { controller.stub(:whitelisted_client).and_return(Doorkeeper::Application.new(uid: 1, redirect_uri: "https://somehost.com/some_callback")) }
-          before { get "check_passive_and_sign_client_in", return_uri: "https://evilhost.com", client_id: "1" }
-          subject { response }
-          it { should be_bad_request }
-          it("should have a 400 status") { expect(subject.status).to be(400) }
-        end
-        context 'and redirect_uri is invalid and client_id is invalid' do
-          before { get "check_passive_and_sign_client_in", return_uri: "https://evilhost.com", client_id: "2" }
-          subject { response }
-          it { should be_bad_request }
-          it("should have a 400 status") { expect(subject.status).to be(400) }
-        end
-        context 'and redirect_uri is valid and client_id is invalid' do
-          before { get "check_passive_and_sign_client_in", return_uri: "https://somehost.com", client_id: "2" }
-          subject { response }
-          it { should be_bad_request }
-          it("should have a 400 status") { expect(subject.status).to be(400) }
+        context "when 'user_return_to' session cookie is not set" do
+          context 'and redirect_uri is valid and client_id is valid' do
+            before { controller.stub(:whitelisted_client).and_return(Doorkeeper::Application.new(uid: 1, redirect_uri: "https://somehost.com/some_callback")) }
+            before { get "check_passive_and_sign_client_in", return_uri: "https://somehost.com", client_id: "1" }
+            subject { response }
+            it { should be_redirect }
+            it("should have a 302 status") { expect(subject.status).to be(302) }
+            it { should redirect_to("https://somehost.com") }
+          end
+          context 'and redirect_uri is invalid and client_id is valid' do
+            before { controller.stub(:whitelisted_client).and_return(Doorkeeper::Application.new(uid: 1, redirect_uri: "https://somehost.com/some_callback")) }
+            before { get "check_passive_and_sign_client_in", return_uri: "https://evilhost.com", client_id: "1" }
+            subject { response }
+            it { should be_bad_request }
+            it("should have a 400 status") { expect(subject.status).to be(400) }
+          end
+          context 'and redirect_uri is invalid and client_id is invalid' do
+            before { get "check_passive_and_sign_client_in", return_uri: "https://evilhost.com", client_id: "2" }
+            subject { response }
+            it { should be_bad_request }
+            it("should have a 400 status") { expect(subject.status).to be(400) }
+          end
+          context 'and redirect_uri is valid and client_id is invalid' do
+            before { get "check_passive_and_sign_client_in", return_uri: "https://somehost.com", client_id: "2" }
+            subject { response }
+            it { should be_bad_request }
+            it("should have a 400 status") { expect(subject.status).to be(400) }
+          end
         end
       end
       context 'when logged in' do
@@ -89,21 +121,42 @@ describe UsersController do
       end
       context 'when logged in' do
         login_user
-        context 'and client login path is provided' do
-          before { controller.stub(:whitelisted_client).and_return(Doorkeeper::Application.new(uid: 1, redirect_uri: "https://somehost.com/some_callback")) }
-          before { get "check_passive_and_sign_client_in", return_uri: "/1", client_id: "1", login_path: "/newlogin" }
-          subject { response }
-          it { should be_redirect }
-          it("should have a 302 status") { expect(subject.status).to be(302) }
-          it { should redirect_to("https://somehost.com/newlogin") }
+        context "when 'user_return_to' session cookie is set" do
+          before { @request.session["user_return_to"] = "https://wackhost.com?redirect_uri=http%3A%2F%2Fwww.wackhost.com%2Fcallback" }
+          context 'and client login path is provided' do
+            before { controller.stub(:whitelisted_client).and_return(Doorkeeper::Application.new(uid: 1, redirect_uri: "https://somehost.com/some_callback")) }
+            before { get "check_passive_and_sign_client_in", return_uri: "/1", client_id: "1", login_path: "/newlogin" }
+            subject { response }
+            it { should be_redirect }
+            it("should have a 302 status") { expect(subject.status).to be(302) }
+            it { should redirect_to("http://www.wackhost.com/callback") }
+          end
+          context 'and client login path is not provided' do
+            before { controller.stub(:whitelisted_client).and_return(Doorkeeper::Application.new(uid: 1, redirect_uri: "https://somehost.com/some_callback")) }
+            before { get "check_passive_and_sign_client_in", return_uri: "/1", client_id: "1" }
+            subject { response }
+            it { should be_redirect }
+            it("should have a 302 status") { expect(subject.status).to be(302) }
+            it { should redirect_to("http://www.wackhost.com/callback") }
+          end
         end
-        context 'and client login path is not provided' do
-          before { controller.stub(:whitelisted_client).and_return(Doorkeeper::Application.new(uid: 1, redirect_uri: "https://somehost.com/some_callback")) }
-          before { get "check_passive_and_sign_client_in", return_uri: "/1", client_id: "1" }
-          subject { response }
-          it { should be_redirect }
-          it("should have a 302 status") { expect(subject.status).to be(302) }
-          it { should redirect_to("https://somehost.com/login") }
+        context "when 'user_return_to' session cookie is not set" do
+          context 'and client login path is provided' do
+            before { controller.stub(:whitelisted_client).and_return(Doorkeeper::Application.new(uid: 1, redirect_uri: "https://somehost.com/some_callback")) }
+            before { get "check_passive_and_sign_client_in", return_uri: "/1", client_id: "1", login_path: "/newlogin" }
+            subject { response }
+            it { should be_redirect }
+            it("should have a 302 status") { expect(subject.status).to be(302) }
+            it { should redirect_to("https://somehost.com/newlogin") }
+          end
+          context 'and client login path is not provided' do
+            before { controller.stub(:whitelisted_client).and_return(Doorkeeper::Application.new(uid: 1, redirect_uri: "https://somehost.com/some_callback")) }
+            before { get "check_passive_and_sign_client_in", return_uri: "/1", client_id: "1" }
+            subject { response }
+            it { should be_redirect }
+            it("should have a 302 status") { expect(subject.status).to be(302) }
+            it { should redirect_to("https://somehost.com/login") }
+          end
         end
       end
     end
