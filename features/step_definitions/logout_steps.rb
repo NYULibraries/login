@@ -7,6 +7,10 @@ Then(/^I should (not )?be on the New School logged out page$/) do |negator|
   expectations_for_page(page, negator, *ns_logout_matchers)
 end
 
+Then(/^I should (not )?be on the Bobst Affiliate logged out page$/) do |negator|
+  expectations_for_page(page, negator, *bobst_affiliate_logout_matchers)
+end
+
 Then(/^I should (not )?be on the NYU New York logged out page$/) do |negator|
   expectations_for_page(page, negator, *nyu_logout_matchers)
 end

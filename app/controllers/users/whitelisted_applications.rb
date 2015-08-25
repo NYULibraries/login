@@ -1,6 +1,10 @@
 module Users::WhitelistedApplications
   private
 
+  def is_whitelisted?
+    URI.parse(stored_return_to) rescue whitelisted_client
+  end
+
   def whitelisted_client
     @whitelisted_client ||= Doorkeeper::Application.all.find do |app|
                               app.uid == params[:client_id]
@@ -11,7 +15,14 @@ module Users::WhitelistedApplications
     @whitelisted_client_uri ||= URI.parse(whitelisted_client.redirect_uri)
   end
 
+  # Don't lose the context of the original return_to param if it was set
+  def stored_return_to
+    CGI.parse(URI.parse(session["user_return_to"]).query)["redirect_uri"].first
+  end
+
   def whitelisted_client_login_uri
+    URI.parse(stored_return_to)
+  rescue
     if params[:login_path]
       return URI.join(whitelisted_client_uri, params[:login_path])
     end

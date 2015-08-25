@@ -14,13 +14,10 @@ module Users::PassiveLogin
     !cookies.detect {|key, val| key.include? SHIBBOLETH_COOKIE_PATTERN }.nil?
   end
 
+  # The target url always needs to be in the Login application
+  # Otherwise Shibboleth will complain about a configuration issue
   def uri_component_original_url
-    CGI::escape(stored_return_to) rescue CGI::escape(request.original_url)
-  end
-
-  # Don't lose the context of the original return_to param if it was set
-  def stored_return_to
-    CGI.parse(URI.parse(session["user_return_to"]).query)["redirect_uri"].first
+    CGI::escape(request.original_url)
   end
 
   def nyu_shibboleth_omniauth_authorize_path

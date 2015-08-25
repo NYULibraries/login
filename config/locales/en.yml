@@ -24,7 +24,7 @@ en:
     users:
       user:
         failure: "<h2>Something went wrong.</h2> You may have entered your information incorrectly or you do not have access to this resource. If you think you've received this message by mistake please contact <a href='%{ask}' target='_blank'>Ask a Librarian</a>. To see your specific privileges, please visit <a href='https://privileges.library.nyu.edu' target='_blank'>NYU Libraries Privileges guide</a>."
-        success: "Successfully authenticated from your %{kind} account."
+        success: ''
   application:
     root_url_redirect: http://bobcatdev.library.nyu.edu
     title_html: Login
@@ -32,7 +32,7 @@ en:
     auth_footer_html: Need help? %{link}
     wayf_footer_html: Why am I on this page?
     wayf_footer_popover_header_html: Online access to NYU Libraries
-    logged_out: LOGGED OUT
+    logged_out: Almost logged out...
     logged_out_footer_html: Need help?
     users:
       user:
@@ -50,6 +50,10 @@ en:
       header: Login with an NYU NetID
       link_text: NYU
       ask_a_librarian: "http://library.nyu.edu/ask"
+    nyuad:
+      ask_a_librarian: "http://nyuad.nyu.edu/en/research/library/ask-a-librarian.html"
+    nyush:
+      ask_a_librarian: "http://guides.nyu.edu/ShanghaiAAL"
     ns:
       header: Login with a New School NetID
       link_text: The New School

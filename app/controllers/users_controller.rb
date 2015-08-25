@@ -6,6 +6,7 @@ class UsersController < Devise::OmniauthCallbacksController
   before_filter :require_login, only: [:show]
   before_filter :require_no_authentication, except: [:show, :check_passive_and_sign_client_in]
   before_filter :require_valid_omniauth_hash, only: (Devise.omniauth_providers << :omniauth_callback)
+  skip_before_filter :verify_authenticity_token, only: [:passthru]
   respond_to :html
 
   def show
@@ -17,13 +18,31 @@ class UsersController < Devise::OmniauthCallbacksController
     end
   end
 
+  # GET /passthru
+  # Redirect to original stored location after being sent back to the Login app
+  # from the eshelf login
+  def passthru
+    if user_signed_in?
+      cookies.delete(:_nyulibraries_eshelf_passthru, domain: ENV['LOGIN_COOKIE_COMAIN'])
+      redirect_to (stored_location_for('user') || signed_in_root_path('user'))
+    end
+    head :bad_request
+  end
+
   def after_sign_in_path_for(resource)
     # If the provided redirect_to param is valid, that is, it redirects to
     # a local URI and not an external URI, it will redirect to that URI.
     if redirect_to_uri_is_valid?
       store_location_for(resource, whitelisted_redirect_to_uri)
     end
-    super(resource)
+    # If there is an eshelf login variable set then we want to redirect there after login
+    # to permanently save eshelf records
+    if ENV['ESHELF_LOGIN_URL'] && !cookies[ESHELF_COOKIE_NAME]
+      create_eshelf_cookie!
+      return ENV['ESHELF_LOGIN_URL']
+    else
+      super(resource)
+    end
   end
 
   def check_passive_shibboleth_and_sign_in
@@ -50,7 +69,7 @@ class UsersController < Devise::OmniauthCallbacksController
   def check_passive_and_sign_client_in
     # If the user is signed, and the client is on the whitelist, we can safely
     # log them into the client.
-    if user_signed_in? && whitelisted_client
+    if user_signed_in? && is_whitelisted?
       redirect_to whitelisted_client_login_uri.to_s and return
     end
     # If the user is not signed in, or if the client can't be foudn,
@@ -127,10 +146,16 @@ class UsersController < Devise::OmniauthCallbacksController
   # Create a session cookie shared with other logged in clients
   # so they can key single sign off indivudally
   def create_loggedin_cookie!(user)
-    cookie_hash = { value: 1, httponly: true, domain: :all }
+    cookie_hash = { value: 1, httponly: true, domain: ENV['LOGIN_COOKIE_DOMAIN'] }
     cookies[LOGGED_IN_COOKIE_NAME] = cookie_hash
   end
   private :create_loggedin_cookie!
+
+  def create_eshelf_cookie!
+    cookie_hash = { value: 1, httponly: true, domain: ENV['LOGIN_COOKIE_DOMAIN'] }
+    cookies[ESHELF_COOKIE_NAME] = cookie_hash
+  end
+  private :create_eshelf_cookie!
 
   def redirect_root
     redirect_to root_url_redirect
