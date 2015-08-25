@@ -69,7 +69,7 @@ class UsersController < Devise::OmniauthCallbacksController
   def check_passive_and_sign_client_in
     # If the user is signed, and the client is on the whitelist, we can safely
     # log them into the client.
-    if user_signed_in? && whitelisted_client
+    if user_signed_in? && is_whitelisted?
       redirect_to whitelisted_client_login_uri.to_s and return
     end
     # If the user is not signed in, or if the client can't be foudn,
