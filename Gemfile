@@ -80,7 +80,7 @@ group :doc do
 end
 
 # New Relic performance monitoring
-# gem 'newrelic_rpm', '~> 3.8.0'
+gem 'newrelic_rpm', '~> 3.12.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
