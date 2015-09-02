@@ -23,7 +23,7 @@ class UsersController < Devise::OmniauthCallbacksController
   # from the eshelf login
   def passthru
     if user_signed_in?
-      cookies.delete(:_nyulibraries_eshelf_passthru, domain: ENV['LOGIN_COOKIE_COMAIN'])
+      cookies.delete(:_nyulibraries_eshelf_passthru, domain: ENV['LOGIN_COOKIE_DOMAIN'])
       redirect_to (stored_location_for('user') || signed_in_root_path('user'))
     end
     head :bad_request
