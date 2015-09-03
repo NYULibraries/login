@@ -4,7 +4,7 @@ class UsersController < Devise::OmniauthCallbacksController
   prepend_before_filter :check_passive_shibboleth_and_sign_in, only: [:show, :check_passive_and_sign_client_in], unless: -> { user_signed_in? || Rails.env.development? }
   prepend_before_filter :redirect_root, only: [:show], if: -> { request.path == '/' && user_signed_in? }
   before_filter :require_login, only: [:show]
-  before_filter :require_no_authentication, except: [:show, :check_passive_and_sign_client_in]
+  before_filter :require_no_authentication, except: [:passthru, :show, :check_passive_and_sign_client_in]
   before_filter :require_valid_omniauth_hash, only: (Devise.omniauth_providers << :omniauth_callback)
   skip_before_filter :verify_authenticity_token, only: [:passthru]
   respond_to :html
@@ -22,18 +22,15 @@ class UsersController < Devise::OmniauthCallbacksController
   # Redirect to original stored location after being sent back to the Login app
   # from the eshelf login
   def passthru
-    if user_signed_in?
-      cookies.delete(ESHELF_COOKIE_NAME, domain: ENV['LOGIN_COOKIE_DOMAIN'])
-      redirect_to (stored_location_for('user') || signed_in_root_path('user'))
-    end
-    head :bad_request
+    cookies.delete(ESHELF_COOKIE_NAME, domain: ENV['LOGIN_COOKIE_DOMAIN'])
+    redirect_to stored_location_for("user") || session[:redirect_on_passive] || signed_in_root_path('user')
   end
 
   def after_sign_in_path_for(resource)
     # If the provided redirect_to param is valid, that is, it redirects to
     # a local URI and not an external URI, it will redirect to that URI.
     if redirect_to_uri_is_valid?
-      store_location_for(resource, whitelisted_redirect_to_uri)
+      session[:redirect_on_passive] = whitelisted_redirect_to_uri
     end
     # If there is an eshelf login variable set then we want to redirect there after login
     # to permanently save eshelf records
