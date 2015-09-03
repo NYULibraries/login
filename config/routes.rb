@@ -19,4 +19,5 @@ Login::Application.routes.draw do
       get '/user' => "users#show", defaults: { format: :json }
     end
   end
+  get 'pds' => redirect{ |params, request| "https://pds.library.nyu.edu/pds?#{request.query_string}" }
 end
