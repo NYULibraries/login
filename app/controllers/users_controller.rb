@@ -67,17 +67,17 @@ class UsersController < Devise::OmniauthCallbacksController
     # If the user is signed, and the client is on the whitelist, we can safely
     # log them into the client.
     # if user_signed_in? && is_whitelisted?
-    #   redirect_to whitelisted_client_login_uri.to_s and return
-    # end
+    if is_whitelisted?
+      redirect_to whitelisted_client_login_uri.to_s and return
+    end
     # If the user is not signed in, or if the client can't be foudn,
     # we can redirect them to the return_uri they provided, but only
     # if the return URI is whitelisted as well
     # if return_uri_validated?
     #   redirect_to return_uri.to_s and return
     # end
-    redirect_to stored_location_for("user") || signed_in_root_path('user')
     # If none of the above conditions are met, this is just a bad request.
-    # return head(:bad_request)
+    return head(:bad_request)
   end
 
   def after_omniauth_failure_path_for(scope)
