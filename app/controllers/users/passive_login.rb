@@ -1,5 +1,5 @@
 module Users::PassiveLogin
-  include WhitelistedApplications
+  #include WhitelistedApplications
 
   private
 
