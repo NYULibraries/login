@@ -23,10 +23,15 @@ class UsersController < Devise::OmniauthCallbacksController
   # from the eshelf login
   def passthru
     cookies.delete(ESHELF_COOKIE_NAME, domain: ENV['LOGIN_COOKIE_DOMAIN'])
-    redirect_to request.env['omniauth.origin'] || stored_location_for("user") || signed_in_root_path('user')
+    redirect_to stored_location_for("user") || session[:redirect_on_passive] || signed_in_root_path('user')
   end
 
   def after_sign_in_path_for(resource)
+    # If the provided redirect_to param is valid, that is, it redirects to
+    # a local URI and not an external URI, it will redirect to that URI.
+    if redirect_to_uri_is_valid?
+      session[:redirect_on_passive] = whitelisted_redirect_to_uri
+    end
     # If there is an eshelf login variable set then we want to redirect there after login
     # to permanently save eshelf records
     if ENV['ESHELF_LOGIN_URL'] && !cookies[ESHELF_COOKIE_NAME]
