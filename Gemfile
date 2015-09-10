@@ -74,6 +74,8 @@ gem 'figs', '~> 2.0.0'
 gem 'faraday', '~> 0.9.0'
 gem 'faraday_middleware', '~> 0.9.1'
 
+gem 'dalli'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
