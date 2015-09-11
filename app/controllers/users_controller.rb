@@ -1,7 +1,7 @@
 class UsersController < Devise::OmniauthCallbacksController
   prepend_before_filter :save_return_uri
   prepend_before_filter :redirect_root, only: [:show], if: -> { request.path == '/' && user_signed_in? }
-  prepend_before_filter :shibboleth_passive_login_check
+  prepend_before_filter :shibboleth_passive_login_check, only: [:client_passive_login]
   before_filter :require_login, only: [:show]
   before_filter :require_no_authentication, except: [:passthru, :show, :client_passive_login]
   before_filter :require_valid_omniauth_hash, only: (Devise.omniauth_providers << :omniauth_callback)
