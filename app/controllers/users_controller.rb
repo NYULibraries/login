@@ -49,8 +49,8 @@ class UsersController < Devise::OmniauthCallbacksController
   def shibboleth_passive_login_check
     unless user_signed_in? || session[:_check_passive_shibboleth]
       session[:_check_passive_shibboleth] = true
-      target_url = "#{CGI::escape("https://dev.login.library.nyu.edu/login/passive_shibboleth?origin=#{CGI::escape(request.url)}")}"
-      redirect_to "/Shibboleth.sso/Login?isPassive=true&target=#{target_url}"
+      target_url = "#{CGI::escape("#{passive_shibboleth_url}?origin=#{CGI::escape(request.url)}")}"
+      redirect_to "#{PASSIVE_SHIBBOLETH_URL_STRING}#{target_url}"
     end
   end
 

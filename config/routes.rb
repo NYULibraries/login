@@ -8,7 +8,7 @@ Login::Application.routes.draw do
     get 'logout(/:institution)', to: 'users/sessions#destroy', as: :logout
     get 'auth/:auth_type(/:institution)', to: 'devise/sessions#new', as: :auth
     get 'login/passive', to: 'users#client_passive_login'
-    get 'login/passive_shibboleth', to: 'users#shibboleth_passive_login'
+    get 'login/passive_shibboleth', to: 'users#shibboleth_passive_login', as: :passive_shibboleth
     get 'users/show', to: 'users#show'
     match 'passthru', to: 'users#passthru', via: [:post, :get]
     root 'users#show'
