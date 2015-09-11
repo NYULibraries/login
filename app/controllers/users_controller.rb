@@ -1,7 +1,7 @@
 class UsersController < Devise::OmniauthCallbacksController
   prepend_before_filter :save_return_uri
   prepend_before_filter :redirect_root, only: [:show], if: -> { request.path == '/' && user_signed_in? }
-  before_filter :shibboleth_passive_login
+  prepend_before_filter :shibboleth_passive_login_check
   before_filter :require_login, only: [:show]
   before_filter :require_no_authentication, except: [:passthru, :show, :client_passive_login]
   before_filter :require_valid_omniauth_hash, only: (Devise.omniauth_providers << :omniauth_callback)
@@ -18,12 +18,12 @@ class UsersController < Devise::OmniauthCallbacksController
   end
 
   def save_return_uri
-    session[:return_uri] = params[:return_uri] if params[:return_uri].present?
+    session[:_return_uri] = params[:return_uri] if params[:return_uri].present?
   end
 
   def client_passive_login
-    return_uri = session[:return_uri]
-    session[:return_uri] = nil
+    return_uri = session[:_return_uri]
+    session[:_return_uri] = nil
     client_app = client_app(params[:client_id])
     # If user is signed in
     # redirect to client login
@@ -46,7 +46,25 @@ class UsersController < Devise::OmniauthCallbacksController
     return client_app
   end
 
+  def shibboleth_passive_login_check
+    unless user_signed_in? || session[:_check_passive_shibboleth]
+      session[:_check_passive_shibboleth] = true
+      target_url = "#{CGI::escape("https://dev.login.library.nyu.edu/login/passive_shibboleth?origin=#{CGI::escape(request.url)}")}"
+      redirect_to "/Shibboleth.sso/Login?isPassive=true&target=#{target_url}"
+    end
+  end
+
   def shibboleth_passive_login
+    origin = CGI::unescape(params[:origin]) if params[:origin]
+    if shib_session_exists?
+      redirect_to user_omniauth_authorize_path(:nyu_shibboleth, institute: current_institute.code, auth_type: :nyu, redirect_to: origin, origin: origin)
+    else
+      redirect_to origin || root_url
+    end
+  end
+
+  def shib_session_exists?
+    !cookies.detect {|key, val| key.include? SHIBBOLETH_COOKIE_PATTERN }.nil?
   end
 
   # GET /passthru
