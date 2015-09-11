@@ -17,7 +17,7 @@ module Users::PassiveLogin
   # The target url always needs to be in the Login application
   # Otherwise Shibboleth will complain about a configuration issue
   def uri_component_original_url
-    CGI::escape(request.original_url)
+    CGI::escape("#{request.original_url}&origin=#{return_uri}")
   end
 
   def nyu_shibboleth_omniauth_authorize_path
