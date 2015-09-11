@@ -3,7 +3,7 @@ class UsersController < Devise::OmniauthCallbacksController
   prepend_before_filter :redirect_root, only: [:show], if: -> { request.path == '/' && user_signed_in? }
   before_filter :shibboleth_passive_login
   before_filter :require_login, only: [:show]
-  before_filter :require_no_authentication, except: [:passthru, :show]
+  before_filter :require_no_authentication, except: [:passthru, :show, :client_passive_login]
   before_filter :require_valid_omniauth_hash, only: (Devise.omniauth_providers << :omniauth_callback)
   skip_before_filter :verify_authenticity_token, only: [:passthru]
   respond_to :html
@@ -24,19 +24,26 @@ class UsersController < Devise::OmniauthCallbacksController
   def client_passive_login
     return_uri = session[:return_uri]
     session[:return_uri] = nil
+    client_app = client_app(params[:client_id])
     # If user is signed in
     # redirect to client login
-    if user_signed_in? && params[:client_id]
-      URI.join(URI.parse(client_app(params[:client_id])), '/users/auth/nyulibraries')
-    else
+    if user_signed_in? && client_app.present?
+      client_authorize_url = URI.join(URI.parse(client_app.redirect_uri), '/users/auth/nyulibraries', "?origin=#{CGI::escape(return_uri)}")
+      redirect_to "#{client_authorize_url}"
+    # If the user is not signed in but there is a return URI
+    # send the user back there
+    elsif return_uri.present?
       redirect_to return_uri
+    else
+      head :bad_request
     end
   end
 
   def client_app(client_id)
-    Doorkeeper::Application.all.find do |app|
+    client_app = Doorkeeper::Application.all.find do |app|
       app.uid == client_id
     end
+    return client_app
   end
 
   def shibboleth_passive_login
