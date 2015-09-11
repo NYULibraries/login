@@ -1,7 +1,7 @@
 class UsersController < Devise::OmniauthCallbacksController
-
-  include Users::PassiveLogin
+  prepend_before_filter :save_return_uri
   prepend_before_filter :redirect_root, only: [:show], if: -> { request.path == '/' && user_signed_in? }
+  before_filter :shibboleth_passive_login
   before_filter :require_login, only: [:show]
   before_filter :require_no_authentication, except: [:passthru, :show]
   before_filter :require_valid_omniauth_hash, only: (Devise.omniauth_providers << :omniauth_callback)
@@ -15,6 +15,31 @@ class UsersController < Devise::OmniauthCallbacksController
     else
       redirect_to user_url(current_user)
     end
+  end
+
+  def save_return_uri
+    session[:return_uri] = params[:return_uri] if params[:return_uri].present?
+  end
+
+  def client_passive_login
+    return_uri = session[:return_uri]
+    session[:return_uri] = nil
+    # If user is signed in
+    # redirect to client login
+    if user_signed_in? && params[:client_id]
+      URI.join(URI.parse(client_app(params[:client_id])), '/users/auth/nyulibraries')
+    else
+      redirect_to return_uri
+    end
+  end
+
+  def client_app(client_id)
+    Doorkeeper::Application.all.find do |app|
+      app.uid == client_id
+    end
+  end
+
+  def shibboleth_passive_login
   end
 
   # GET /passthru
