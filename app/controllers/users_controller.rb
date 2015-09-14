@@ -1,7 +1,7 @@
 class UsersController < Devise::OmniauthCallbacksController
+  prepend_before_filter :shibboleth_passive_login_check, only: [:client_passive_login]
   prepend_before_filter :save_return_uri
   prepend_before_filter :redirect_root, only: [:show], if: -> { request.path == '/' && user_signed_in? }
-  prepend_before_filter :shibboleth_passive_login_check, only: [:client_passive_login]
   before_filter :require_login, only: [:show]
   before_filter :require_no_authentication, except: [:passthru, :show, :client_passive_login]
   before_filter :require_valid_omniauth_hash, only: (Devise.omniauth_providers << :omniauth_callback)
@@ -17,10 +17,9 @@ class UsersController < Devise::OmniauthCallbacksController
     end
   end
 
-  def save_return_uri
-    session[:_return_uri] = params[:return_uri] if params[:return_uri].present?
-  end
-
+  # GET /login/passive
+  # Log client in if SP is logged in
+  # otherwise pass back to original uri
   def client_passive_login
     return_uri = session[:_return_uri]
     session[:_return_uri] = nil
@@ -39,44 +38,49 @@ class UsersController < Devise::OmniauthCallbacksController
     end
   end
 
-  def client_app(client_id)
-    client_app = Doorkeeper::Application.all.find do |app|
-      app.uid == client_id
-    end
-    return client_app
-  end
-
+  # Send user out to passively login, if the Idp has a session
   def shibboleth_passive_login_check
     unless user_signed_in? || session[:_check_passive_shibboleth]
       session[:_check_passive_shibboleth] = true
+      # Set the redirect to a callback function that we'll handle
       target_url = "#{CGI::escape("#{passive_shibboleth_url}?origin=#{CGI::escape(request.url)}")}"
       redirect_to "#{PASSIVE_SHIBBOLETH_URL_STRING}#{target_url}"
     end
   end
 
+  # Callback function for passive shibboleth
   def shibboleth_passive_login
-    origin = CGI::unescape(params[:origin]) if params[:origin]
+    # This is the original action called
+    # before checking if we were logged in
+    origin = params[:origin] if params[:origin]
+    # If there is a session, authenticate the user
     if shib_session_exists?
-      redirect_to user_omniauth_authorize_path(:nyu_shibboleth, institute: current_institute.code, auth_type: :nyu, redirect_to: origin, origin: origin)
+      redirect_to user_omniauth_authorize_path(:nyu_shibboleth, institute: current_institute.code, auth_type: :nyu, origin: origin)
+    # If there is no session, redirect back to the last action
     else
       redirect_to origin || root_url
     end
-  end
-
-  def shib_session_exists?
-    !cookies.detect {|key, val| key.include? SHIBBOLETH_COOKIE_PATTERN }.nil?
   end
 
   # GET /passthru
   # Redirect to original stored location after being sent back to the Login app
   # from the eshelf login
   def passthru
+    return_uri = session[:_return_uri]
+    session[:_return_uri] = nil
     cookies.delete(ESHELF_COOKIE_NAME, domain: ENV['LOGIN_COOKIE_DOMAIN'])
-    redirect_to stored_location_for("user") || session[:redirect_on_passive] || signed_in_root_path('user')
+    redirect_to stored_location_for("user") || return_uri || signed_in_root_path('user')
   end
 
   def after_sign_in_path_for(resource)
-    super(resource)
+    # If there is an eshelf login variable set then we want to redirect there after login
+    # to permanently save eshelf records
+    # if ENV['ESHELF_LOGIN_URL'] && !cookies[ESHELF_COOKIE_NAME]
+    #   create_eshelf_cookie!
+    #   return ENV['ESHELF_LOGIN_URL']
+    # else
+      stored_location_for(resource) || request.env['omniauth.origin'] || signed_in_root_path(resource)
+    # end
   end
 
   def after_omniauth_failure_path_for(scope)
@@ -163,5 +167,30 @@ class UsersController < Devise::OmniauthCallbacksController
     @root_url_redirect ||= (Figs.env.root_url_redirect) ? Figs.env.root_url_redirect : t('application.root_url_redirect')
   end
   private :root_url_redirect
+
+  # Check if the shibboleth session has been started
+  # based off cookie pattern. This is a weak check as it can be
+  # spoofed but if it was an we try to authenticate the error will
+  # be raised then
+  def shib_session_exists?
+    !cookies.detect {|key, val| key.include? SHIBBOLETH_COOKIE_PATTERN }.nil?
+  end
+  private :shib_session_exists?
+
+  # Get the client app based on the passed in client_id param
+  def client_app(client_id)
+    client_app = Doorkeeper::Application.all.find do |app|
+      app.uid == client_id
+    end
+    return client_app
+  end
+  private :client_app
+
+  # Save the return uri if it exists
+  def save_return_uri
+    # TODO: Whitelist here
+    session[:_return_uri] = params[:return_uri] if params[:return_uri].present?
+  end
+  private :save_return_uri
 
 end
