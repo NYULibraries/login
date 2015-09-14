@@ -24,10 +24,11 @@ class UsersController < Devise::OmniauthCallbacksController
     return_uri = session[:_return_uri]
     session[:_return_uri] = nil
     client_app = client_app(params[:client_id])
+    login_path = params[:login_path] || '/users/auth/nyulibraries'
     # If user is signed in
     # redirect to client login
     if user_signed_in? && client_app.present?
-      client_authorize_url = URI.join(URI.parse(client_app.redirect_uri), '/users/auth/nyulibraries', "?origin=#{CGI::escape(return_uri)}")
+      client_authorize_url = URI.join(URI.parse(client_app.redirect_uri), login_path, "?origin=#{CGI::escape(return_uri)}")
       redirect_to "#{client_authorize_url}"
     # If the user is not signed in but there is a return URI
     # send the user back there
@@ -195,9 +196,19 @@ class UsersController < Devise::OmniauthCallbacksController
 
   # Save the return uri if it exists
   def save_return_uri
-    # TODO: Whitelist here
-    session[:_return_uri] = params[:return_uri] if params[:return_uri].present?
+    session[:_return_uri] = params[:return_uri] if whitelisted_return_uri?
   end
   private :save_return_uri
+
+  def whitelisted_return_uri?
+    (params[:return_uri].present? &&
+      params[:client_id].present? &&
+        (URI::parse(client_app(params[:client_id]).redirect_uri).host == URI::parse(params[:return_uri]).host))
+  rescue
+    # If for some reason we can't parse the client_id
+    # or the return_uri is not a valid URI, just return false
+    false
+  end
+  private :whitelisted_return_uri?
 
 end
