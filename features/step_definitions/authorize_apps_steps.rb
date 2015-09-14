@@ -1,6 +1,5 @@
 Given(/^I am logged in as an admin$/) do
   set_admin_login_env
-  ignore_passive_shibboleth
   visit client_authorize_url
   login_as_admin
   visit "/auth/nyu"
