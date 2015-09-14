@@ -38,7 +38,8 @@ class UsersController < Devise::OmniauthCallbacksController
     end
   end
 
-  # Send user out to passively login, if the Idp has a session
+  # Interrupt and send user out to passively login,
+  # if the Idp has a session
   def shibboleth_passive_login_check
     unless user_signed_in? || session[:_check_passive_shibboleth]
       session[:_check_passive_shibboleth] = true
@@ -47,7 +48,9 @@ class UsersController < Devise::OmniauthCallbacksController
       redirect_to "#{PASSIVE_SHIBBOLETH_URL_STRING}#{target_url}"
     end
   end
+  private :shibboleth_passive_login_check
 
+  # GET /login/passive_shibboleth
   # Callback function for passive shibboleth
   def shibboleth_passive_login
     # This is the original action called
