@@ -29,4 +29,4 @@ Your application then has an [_auth_hash_](https://github.com/NYULibraries/omnia
 Before you begin, be sure you've got Devise and OmniAuth installed in your application (learn how to [here](https://github.com/plataformatec/devise/wiki) and [here](https://github.com/intridea/omniauth) respectively).
 
 ### Use the OmniAuth NYU Libraries Strategy
-Fortunately the NYU Libraries central login system has an [OmniAuth strategy](https://github.com/NYULibraries/omniauth-nyulibraries) that you can use. Follow [these directions to install the strategy](https://github.com/NYULibraries/omniauth-nyulibraries#installation) before checking out our [Contract]().
+Fortunately the NYU Libraries central login system has an [OmniAuth strategy](https://github.com/NYULibraries/omniauth-nyulibraries) that you can use. Follow [these directions to install the strategy](https://github.com/NYULibraries/omniauth-nyulibraries#installation) before checking out our [Contract](CONTRACT.md).
