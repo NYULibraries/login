@@ -9,7 +9,6 @@ end
 
 When(/^I click "Login"$/) do
   # Visit the auth url for this client
-  ignore_passive_shibboleth
   visit client_authorize_url
   # Click on the Shibboleth button (which says "NYU")
   click_on "NYU"
@@ -22,7 +21,6 @@ end
 
 When(/^I login to Login as an NYU Shibboleth user$/) do
   set_nyu_shibboleth_login_env
-  ignore_passive_shibboleth
   visit client_authorize_url
   click_on "NYU"
 end

@@ -2,7 +2,22 @@ require 'spec_helper'
 describe WayfController do
   before { @request.env["devise.mapping"] = Devise.mappings[:user] }
 
+  context 'when logged in' do
+    login_user
+    describe 'GET /logged_out' do
+      before { get :logged_out }
+      subject { response }
+      it { should redirect_to logout_url }
+    end
+  end
+
   context 'when not logged in' do
+    describe 'GET /logged_out' do
+      render_views
+      before { get :logged_out }
+      subject { response }
+      it { should render_template("wayf/logged_out") }
+    end
     describe "GET 'index' for NYU" do
       before { get :index }
       subject { response }

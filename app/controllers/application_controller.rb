@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   layout Proc.new { |controller| (controller.request.xhr?) ? false : "login" }
-
+  
   LOGGED_IN_COOKIE_NAME = '_nyulibraries_logged_in'
   ESHELF_COOKIE_NAME = '_nyulibraries_eshelf_passthru'
 

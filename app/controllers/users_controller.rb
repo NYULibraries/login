@@ -1,10 +1,8 @@
 class UsersController < Devise::OmniauthCallbacksController
-
   include Users::PassiveLogin
-  prepend_before_filter :check_passive_shibboleth_and_sign_in, only: [:show, :check_passive_and_sign_client_in], unless: -> { user_signed_in? || Rails.env.development? }
   prepend_before_filter :redirect_root, only: [:show], if: -> { request.path == '/' && user_signed_in? }
   before_filter :require_login, only: [:show]
-  before_filter :require_no_authentication, except: [:passthru, :show, :check_passive_and_sign_client_in]
+  before_filter :require_no_authentication, except: [:passthru, :show, :client_passive_login]
   before_filter :require_valid_omniauth_hash, only: (Devise.omniauth_providers << :omniauth_callback)
   skip_before_filter :verify_authenticity_token, only: [:passthru]
   respond_to :html
@@ -22,61 +20,25 @@ class UsersController < Devise::OmniauthCallbacksController
   # Redirect to original stored location after being sent back to the Login app
   # from the eshelf login
   def passthru
+    # Assuming we authenticated in E-shelf
+    # Return to the original location, on active login
+    # or back to the passive login action, on passive
+    action_before_eshelf_redirect = session[:_action_before_eshelf_redirect]
+    session[:_action_before_eshelf_redirect] = nil
     cookies.delete(ESHELF_COOKIE_NAME, domain: ENV['LOGIN_COOKIE_DOMAIN'])
-    redirect_to stored_location_for("user") || session[:redirect_on_passive] || signed_in_root_path('user')
+    redirect_to stored_location_for("user") || action_before_eshelf_redirect || signed_in_root_path('user')
   end
 
   def after_sign_in_path_for(resource)
-    # If the provided redirect_to param is valid, that is, it redirects to
-    # a local URI and not an external URI, it will redirect to that URI.
-    if redirect_to_uri_is_valid?
-      session[:redirect_on_passive] = whitelisted_redirect_to_uri
-    end
     # If there is an eshelf login variable set then we want to redirect there after login
     # to permanently save eshelf records
     if ENV['ESHELF_LOGIN_URL'] && !cookies[ESHELF_COOKIE_NAME]
+      session[:_action_before_eshelf_redirect] = (stored_location_for(resource) || request.env['omniauth.origin'])
       create_eshelf_cookie!
       return ENV['ESHELF_LOGIN_URL']
     else
       super(resource)
     end
-  end
-
-  def check_passive_shibboleth_and_sign_in
-    # The flow of logic is as follows:
-    # If a Shibboleth session is found, then that means the user must be logged
-    # into Shibboleth. Thus, the user is then redirected to the login path for
-    # NYU Shibboleth, but with a return_to parameter set so that they can come
-    # back to this URI and continue their request after being signed in.
-    if shib_session_exists?
-      redirect_to nyu_shibboleth_omniauth_authorize_path and return
-    end
-    # However if the Shibboleth session does not exist, then we check to see
-    # if this is the first time they've come to this app. If it is, we have to
-    # check with Shibboleth if they are logged in, so we use a cookie to mark
-    # that they've been here, then redirect to Shibboleth's passive login check
-    # with the return URI set to the current URI, so they can continue their
-    # request after being signed in.
-    if !cookies[:_check_passive_shibboleth]
-      cookies[:_check_passive_shibboleth] = true
-      redirect_to passive_shibboleth_url
-    end
-  end
-
-  def check_passive_and_sign_client_in
-    # If the user is signed, and the client is on the whitelist, we can safely
-    # log them into the client.
-    if user_signed_in? && is_whitelisted?
-      redirect_to whitelisted_client_login_uri.to_s and return
-    end
-    # If the user is not signed in, or if the client can't be foudn,
-    # we can redirect them to the return_uri they provided, but only
-    # if the return URI is whitelisted as well
-    if return_uri_validated?
-      redirect_to return_uri.to_s and return
-    end
-    # If none of the above conditions are met, this is just a bad request.
-    return head(:bad_request)
   end
 
   def after_omniauth_failure_path_for(scope)
