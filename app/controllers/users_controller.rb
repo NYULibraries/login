@@ -1,6 +1,5 @@
 class UsersController < Devise::OmniauthCallbacksController
-  prepend_before_filter :shibboleth_passive_login_check, only: [:client_passive_login]
-  prepend_before_filter :save_return_uri
+  include Users::PassiveLogin
   prepend_before_filter :redirect_root, only: [:show], if: -> { request.path == '/' && user_signed_in? }
   before_filter :require_login, only: [:show]
   before_filter :require_no_authentication, except: [:passthru, :show, :client_passive_login]
@@ -14,55 +13,6 @@ class UsersController < Devise::OmniauthCallbacksController
       respond_with(@user)
     else
       redirect_to user_url(current_user)
-    end
-  end
-
-  # GET /login/passive
-  # Log client in if SP is logged in
-  # otherwise pass back to original uri
-  def client_passive_login
-    return_uri = session[:_return_uri]
-    session[:_return_uri] = nil
-    client_app = client_app(params[:client_id])
-    login_path = params[:login_path] || '/users/auth/nyulibraries'
-    # If user is signed in
-    # redirect to client login
-    if user_signed_in? && client_app.present?
-      client_authorize_url = URI.join(URI.parse(client_app.redirect_uri), login_path, "?origin=#{CGI::escape(return_uri)}")
-      redirect_to "#{client_authorize_url}"
-    # If the user is not signed in but there is a return URI
-    # send the user back there
-    elsif return_uri.present?
-      redirect_to return_uri
-    else
-      head :bad_request
-    end
-  end
-
-  # Interrupt and send user out to passively login,
-  # if the Idp has a session
-  def shibboleth_passive_login_check
-    unless user_signed_in? || session[:_check_passive_shibboleth]
-      session[:_check_passive_shibboleth] = true
-      # Set the redirect to a callback function that we'll handle
-      target_url = "#{CGI::escape("#{passive_shibboleth_url}?origin=#{CGI::escape(request.url)}")}"
-      redirect_to "#{PASSIVE_SHIBBOLETH_URL_STRING}#{target_url}"
-    end
-  end
-  private :shibboleth_passive_login_check
-
-  # GET /login/passive_shibboleth
-  # Callback function for passive shibboleth
-  def shibboleth_passive_login
-    # This is the original action called
-    # before checking if we were logged in
-    origin = params[:origin] if params[:origin]
-    # If there is a session, authenticate the user
-    if shib_session_exists?
-      redirect_to user_omniauth_authorize_path(:nyu_shibboleth, institute: current_institute.code, auth_type: :nyu, origin: origin)
-    # If there is no session, redirect back to the last action
-    else
-      redirect_to origin || root_url
     end
   end
 
@@ -175,40 +125,5 @@ class UsersController < Devise::OmniauthCallbacksController
     @root_url_redirect ||= (Figs.env.root_url_redirect) ? Figs.env.root_url_redirect : t('application.root_url_redirect')
   end
   private :root_url_redirect
-
-  # Check if the shibboleth session has been started
-  # based off cookie pattern. This is a weak check as it can be
-  # spoofed but if it was an we try to authenticate the error will
-  # be raised then
-  def shib_session_exists?
-    !cookies.detect {|key, val| key.include? SHIBBOLETH_COOKIE_PATTERN }.nil?
-  end
-  private :shib_session_exists?
-
-  # Get the client app based on the passed in client_id param
-  def client_app(client_id)
-    client_app = Doorkeeper::Application.all.find do |app|
-      app.uid == client_id
-    end
-    return client_app
-  end
-  private :client_app
-
-  # Save the return uri if it exists
-  def save_return_uri
-    session[:_return_uri] = params[:return_uri] if whitelisted_return_uri?
-  end
-  private :save_return_uri
-
-  def whitelisted_return_uri?
-    (params[:return_uri].present? &&
-      params[:client_id].present? &&
-        (URI::parse(client_app(params[:client_id]).redirect_uri).host == URI::parse(params[:return_uri]).host))
-  rescue
-    # If for some reason we can't parse the client_id
-    # or the return_uri is not a valid URI, just return false
-    false
-  end
-  private :whitelisted_return_uri?
 
 end
