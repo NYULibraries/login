@@ -61,6 +61,7 @@ en:
       username_placeholder: "e.g. ParsJ123"
       password_label: Enter your password
       ask_a_librarian: "http://answers.library.newschool.edu"
+      wayf_footer_popover_header_html: "Online Access to The New School Libraries & Archives"
     cu:
       header: Login with your Cooper Union patron ID
       link_text: Cooper Union
@@ -68,6 +69,7 @@ en:
       username_placeholder: "e.g. 12345678"
       password_label: First four letters of your last name
       ask_a_librarian: "http://library.cooper.edu/library_information_frameset.html"
+      wayf_footer_popover_header_html: Online Access to Cooper Union Library
     nysid:
       header: Login with your NYSID ID number
       link_text: NYSID
@@ -75,6 +77,7 @@ en:
       username_placeholder: "e.g. 123456"
       password_label: First four letters of your last name
       ask_a_librarian: "http://library.nysid.edu/library/about-the-library/contact-us/"
+      wayf_footer_popover_header_html: Online Access to New York School of Interior Design Library
     bobst:
       nyush:
         header: Login with your library card number
