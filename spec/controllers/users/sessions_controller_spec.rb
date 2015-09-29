@@ -5,7 +5,10 @@ module Users
     context 'when logged in' do
       login_user
       render_views false
-      before { @request.cookies['_login_sso'] = 'foobar' }
+      before do
+        @request.cookies['_login_sso'] = 'foobar'
+        @request.cookies['PDS_HANDLE'] = 'TEST123'
+      end
       describe "DELETE 'destroy'" do
         subject { get :destroy }
         it { should be_redirect }
