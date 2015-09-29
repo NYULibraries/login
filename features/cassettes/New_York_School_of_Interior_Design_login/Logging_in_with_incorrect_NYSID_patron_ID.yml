@@ -8,18 +8,18 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Faraday v0.9.0
+      - Faraday v0.9.1
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
-      - ! '*/*'
+      - "*/*"
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Tue, 19 Aug 2014 18:01:30 GMT
+      - Tue, 29 Sep 2015 20:15:25 GMT
       Server:
       - ALEPH/5.20
       Content-Type:
@@ -33,9 +33,9 @@ http_interactions:
       Content-Length:
       - '180'
     body:
-      encoding: US-ASCII
-      string: ! "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-auth>\n<error>Error
-        in Verification</error>\n<session-id>UP21D782IQAHTCE1HS6CC1FSHEG6YA8C561QEX5RI9RFM69E5Q</session-id>\n</bor-auth>\n "
+      encoding: UTF-8
+      string: "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-auth>\n<error>Error
+        in Verification</error>\n<session-id>7I7SJ3XK5P9HU8JTT7N8PGS2J6N7G7L3EM7A6GP8265SK4CJYR</session-id>\n</bor-auth>\n "
     http_version: 
-  recorded_at: Tue, 19 Aug 2014 18:01:30 GMT
-recorded_with: VCR 2.8.0
+  recorded_at: Tue, 29 Sep 2015 20:15:30 GMT
+recorded_with: VCR 2.9.3
