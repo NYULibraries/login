@@ -1,11 +1,13 @@
 ##
-# Hack to deal with 2 problem
-#		1. Call to load balanced URL doesn't kill Primo
-#			session unless it happens to hit the same server.
-#			(Ex Libris problem)
-#		2. Call from PDS server to itself refuses connection,
-#			so we can't make the call from the same server.
-#			(NYU load balancer problem)
+# Logout of load-balanced primo servers 
+#
+# Hack to deal with 2 problems:
+#   1. Call to load balanced URL doesn't kill Primo
+#      session unless it happens to hit the same server.
+#      (Ex Libris problem)
+#   2. Call from PDS server to itself refuses connection,
+#      so we can't make the call from the same server.
+#      (NYU load balancer problem)
 module Login
   module Primo
     class Logout
