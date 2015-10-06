@@ -29,7 +29,7 @@ gem 'compass-rails', '~> 2.0.0'
 gem 'mustache', '0.99.4'
 gem 'mustache-rails', github: 'NYULibraries/mustache-rails', :require => 'mustache/railtie'
 # Use the NYU Libraries assets gem
-gem 'nyulibraries-assets', github: 'NYULibraries/nyulibraries-assets', tag: 'v4.4.4'
+gem 'nyulibraries-assets', github: 'NYULibraries/nyulibraries-assets'#, tag: 'v4.4.4'
 # gem 'nyulibraries-assets', path: '/apps/nyulibraries-assets'
 
 # Use the NYU Libraries deploy gem
@@ -118,7 +118,7 @@ group :test, :cucumber do
   # Coveralls for testing coverage
   gem 'coveralls', '~> 0.7.0', require: false
   gem 'cucumber-rails', '~> 1.4.1', require: false
-  gem 'selenium-webdriver', '~> 2.43.0'
+  gem 'selenium-webdriver', '~> 2.47.0'
   gem 'pickle', '~> 0.4.11'
   gem 'database_cleaner', '~> 1.3.0'
   gem 'vcr', '~> 2.9.3'
