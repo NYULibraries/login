@@ -14,8 +14,8 @@ module Login
         subject { bor_info_strategy.patron }
         context "when identifier is valid and returns a BorInfo object" do
           its(:identifier) { should eql identifier }
-          its(:plif_status) { should be_blank }
-          its(:patron_status) { should eql "03" }
+          its(:plif_status) { should eql "PLIF LOADED" }
+          its(:patron_status) { should eql "60" }
           its(:patron_type) { should be_blank }
           its(:ill_permission) { should eql "Y" }
           its(:ill_library) { should be_blank }
