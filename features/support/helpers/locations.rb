@@ -1,16 +1,15 @@
 module LoginFeatures
   module Locations
+    include Nyulibraries::Assets::InstitutionsHelper
     def first_ip_for_institution(institution)
-      ip_addresses = ::Institutions.institutions[institution.to_sym].ip_addresses
+      ip_addresses = institutions[institution.to_sym].ip_addresses
       if ip_addresses.present?
-        first_ip_address = ip_addresses.first
-        if first_ip_address.is_a?(::IPAddr)
-          first_ip_address = first_ip_address.to_range
+        first_ip_address = ip_addresses.send(:segments).first
+        if first_ip_address.is_a? Range
+          first_ip_address.first.to_s
+        elsif first_ip_address.is_a? IPAddr
+          first_ip_address.to_s
         end
-        if first_ip_address.is_a?(::Range)
-          first_ip_address = first_ip_address.first
-        end
-        first_ip_address.to_s
       end
     end
 
