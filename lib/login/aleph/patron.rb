@@ -38,8 +38,8 @@ module Login
       #
       # Ex.
       #
-      # => @patron = #<Login::Aleph::Patron:0x00 @identifier="NXXX", @ill_library="ZYU", @ill_permission="Y", @plif_status="PLIF LOADED", @status="03", @type="CB">
-      # => @patron.to_h => {"identifier"=>"NXXX", "status"=>"03", "type"=>"CB", "ill_permission"=>"Y", "ill_library"=>"ZYU", "plif_status"=>"PLIF LOADED"}
+      # => @patron = #<Login::Aleph::Patron:0x00 @identifier="NXXX", @ill_library="ZYU", @ill_permission="Y", @plif_status="PLIF LOADED", @status="60", @type="CB">
+      # => @patron.to_h => {"identifier"=>"NXXX", "status"=>"60", "type"=>"CB", "ill_permission"=>"Y", "ill_library"=>"ZYU", "plif_status"=>"PLIF LOADED"}
       def to_h
         @to_h ||= HashWithIndifferentAccess[instance_variables.collect {|var| [var.to_s.delete("@").to_sym, instance_variable_get(var)] }]
       end

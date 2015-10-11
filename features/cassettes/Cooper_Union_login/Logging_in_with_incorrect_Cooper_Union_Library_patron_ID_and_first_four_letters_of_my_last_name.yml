@@ -8,7 +8,7 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Faraday v0.9.1
+      - Faraday v0.9.2
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 29 Sep 2015 20:15:09 GMT
+      - Wed, 07 Oct 2015 16:24:42 GMT
       Server:
       - ALEPH/5.20
       Content-Type:
@@ -35,7 +35,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-auth>\n<error>Error
-        in Verification</error>\n<session-id>LHMH7B6NKD52NL3TM6X6I5YS1B2MCP4GYGIUXNRXD19MRIH9QD</session-id>\n</bor-auth>\n "
+        in Verification</error>\n<session-id>F4UHK1I8DNC8C4G3XMNDA1TISJSSME8IBK19GLCV1I86SUFSC8</session-id>\n</bor-auth>\n "
     http_version: 
-  recorded_at: Tue, 29 Sep 2015 20:15:14 GMT
+  recorded_at: Wed, 07 Oct 2015 16:24:42 GMT
 recorded_with: VCR 2.9.3

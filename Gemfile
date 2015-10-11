@@ -29,7 +29,7 @@ gem 'compass-rails', '~> 2.0.0'
 gem 'mustache', '0.99.4'
 gem 'mustache-rails', github: 'NYULibraries/mustache-rails', :require => 'mustache/railtie'
 # Use the NYU Libraries assets gem
-gem 'nyulibraries-assets', github: 'NYULibraries/nyulibraries-assets', branch: 'master' #, tag: 'v4.4.4'
+gem 'nyulibraries-assets', github: 'NYULibraries/nyulibraries-assets', tag: 'v4.6.0'
 # gem 'nyulibraries-assets', path: '/apps/nyulibraries-assets'
 
 # Use the NYU Libraries deploy gem

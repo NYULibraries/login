@@ -164,7 +164,7 @@ describe Api::V1::UsersController do
 
               context "when property is PLIF status" do
                 let(:property) { "plif_status" }
-                it { should be_blank }
+                it { should eql "PLIF LOADED" }
               end
 
               context "when property is ILL permission" do
@@ -174,7 +174,7 @@ describe Api::V1::UsersController do
 
               context "when property is patron status" do
                 let(:property) { "patron_status" }
-                it { should eql "03" }
+                it { should eql "60" }
               end
 
               context "when the property is the institution_code attributes" do
@@ -232,7 +232,7 @@ describe Api::V1::UsersController do
               end
               context "when property is PLIF status" do
                 let(:property) { "plif_status" }
-                it { should be_blank }
+                it { should eql "PLIF LOADED" }
               end
               context "when property is ILL permission" do
                 let(:property) { "ill_permission" }
@@ -240,7 +240,7 @@ describe Api::V1::UsersController do
               end
               context "when property is status" do
                 let(:property) { "patron_status" }
-                it { should eql "03" }
+                it { should eql "60" }
               end
               context "when the property is the institution_code attributes" do
                 let(:property) { "institution_code" }
