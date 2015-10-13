@@ -9,13 +9,15 @@ module Login
           @omniauth_hash = omniauth_hash
           @nyuidn = omniauth_hash.uid
           @institution_code = aleph_patron.institution_code
+          @first_name = aleph_patron.first_name
+          @last_name = aleph_patron.last_name
           super(omniauth_hash)
         end
 
         ##
         # Merge OmniAuth::AuthHash properties with properties pulled from raw_info in response
         def properties_attributes
-          super.merge(aleph_patron.attributes)
+          super.merge(aleph_patron.attributes).merge({first_name: first_name, last_name: last_name})
         end
 
         ##
@@ -27,6 +29,7 @@ module Login
             instance.patron_status = omniauth_hash.extra.raw_info.bor_auth.z305.z305_bor_status
             instance.ill_permission = omniauth_hash.extra.raw_info.bor_auth.z305.z305_photo_permission
             instance.ill_library = omniauth_hash.extra.raw_info.bor_auth.z303.z303_ill_library
+            instance.bor_name = omniauth_hash.extra.raw_info.bor_auth.z303.z303_name
           end
         end
         private :aleph_patron
