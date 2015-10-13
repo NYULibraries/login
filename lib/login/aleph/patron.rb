@@ -66,7 +66,7 @@ module Login
       private :institution_for_bor_status
 
       def aleph_names
-        @aleph_names ||= Login::Aleph::Name.new(self.bor_name, self.identifier)
+        aleph_names = Login::Aleph::Name.new(self.bor_name, self.identifier)
       end
       private :aleph_names
     end
