@@ -17,7 +17,7 @@ module Login
         ##
         # Merge OmniAuth::AuthHash properties with properties pulled from raw_info in response
         def properties_attributes
-          super.merge(aleph_patron.attributes).merge({first_name: first_name, last_name: last_name})
+          super.merge(aleph_patron.attributes)
         end
 
         ##
