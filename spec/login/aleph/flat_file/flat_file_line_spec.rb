@@ -226,8 +226,9 @@ module Login
           it { should be_nil }
         end
         describe "#to_patron" do
-          subject { flatfileline.to_patron }
-          it { should be_a Patron }
+          it 'should throw argument error when missing bor_name' do
+            expect { flatfileline.to_patron }.to raise_error ArgumentError
+          end
         end
       end
     end

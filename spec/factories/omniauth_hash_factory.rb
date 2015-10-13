@@ -61,8 +61,6 @@ FactoryGirl.define do
       info do
         {
           name: "SNOW, JON",
-          first_name: "Jon",
-          last_name: "Snow",
           email: "snowj@1nyu.edu",
           nickname: "SNOW",
           uid: (ENV["TEST_ALEPH_USER"] || 'BOR_ID'),
@@ -75,7 +73,9 @@ FactoryGirl.define do
           raw_info: {
             bor_auth: {
               z303: {
-                z303_birthplace: "Kings Landing"
+                z303_id: (ENV["TEST_ALEPH_USER"] || 'BOR_ID'),
+                z303_birthplace: "Kings Landing",
+                z303_name: "SNOW, JON"
               },
               z305: {
                 z305_bor_type: "Bastard",

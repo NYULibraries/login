@@ -11,6 +11,7 @@ module Login
       let(:department) { 'Department' }
       let(:major) { 'Major' }
       let(:plif_status) { 'PLIF_LOADED' }
+      let(:bor_name) { "ELOPER, DEV"}
       let(:patron_hash) {
         {
           identifier: identifier,
@@ -21,7 +22,8 @@ module Login
           college: college,
           department: department,
           major: major,
-          plif_status: plif_status
+          plif_status: plif_status,
+          bor_name: bor_name
         }
       }
       subject (:patron) do
@@ -35,6 +37,7 @@ module Login
           patron.department = department
           patron.major = major
           patron.plif_status = plif_status
+          patron.bor_name = bor_name
         end
       end
       it { should be_a Patron }
@@ -73,6 +76,14 @@ module Login
       describe '#plif_status' do
         subject { patron.plif_status }
         it { should eq plif_status }
+      end
+      describe '#first_name' do
+        subject { patron.first_name }
+        it { should eq "DEV" }
+      end
+      describe '#last_name' do
+        subject { patron.last_name }
+        it { should eq "ELOPER" }
       end
       describe '#to_h' do
         subject { patron.to_h }
