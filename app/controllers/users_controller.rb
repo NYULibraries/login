@@ -122,8 +122,19 @@ class UsersController < Devise::OmniauthCallbacksController
   private :redirect_root
 
   def root_url_redirect
-    @root_url_redirect ||= (Figs.env.root_url_redirect) ? Figs.env.root_url_redirect : t('application.root_url_redirect')
+    @root_url_redirect ||= begin
+      if ENV['PDS_URL'] && ENV['BOBCAT_URL'] && bobcat_institutions.include?(current_user.institution_code)
+        "#{ENV['PDS_URL']}/pds?func=load-login&institute=#{current_user.institution_code}&calling_system=primo&url=#{CGI::escape(ENV['BOBCAT_URL'])}%2fprimo_library%2flibweb%2faction%2fsearch.do%3fdscnt%3d0%26amp%3bvid%3d#{current_user.institution_code}&func=load-login&amp;institute=#{current_user.institution_code}&amp;calling_system=primo&amp;url=#{ENV['BOBCAT_URL']}:80/primo_library/libweb/action/login.do"
+      else
+        t('application.root_url_redirect')
+      end
+    end
   end
   private :root_url_redirect
+
+  def bobcat_institutions
+    @bobcat_institutions ||= Login::Aleph::Patron::BOR_STATUS_MAPPINGS.map(&:keys).flatten
+  end
+  private :bobcat_institutions
 
 end
