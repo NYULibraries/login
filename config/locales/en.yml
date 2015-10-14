@@ -26,7 +26,7 @@ en:
         failure: "<h2>Something went wrong.</h2> You may have entered your information incorrectly or you do not have access to this resource. If you think you've received this message by mistake please contact <a href='%{ask}' target='_blank'>Ask a Librarian</a>. To see your specific privileges, please visit <a href='https://privileges.library.nyu.edu' target='_blank'>NYU Libraries Privileges guide</a>."
         success: ''
   application:
-    root_url_redirect: "https://pds.library.nyu.edu/pds?func=load-login&institute=NYU&calling_system=primo&url=http%3a%2f%2fbobcat.library.nyu.edu%2fprimo_library%2flibweb%2faction%2fsearch.do%3fdscnt%3d0%26amp%3bvid%3dNYU&func=load-login&amp;institute=NYU&amp;calling_system=primo&amp;url=http://bobcat.library.nyu.edu:80/primo_library/libweb/action/login.do"
+    root_url_redirect: "https://pdsdev.library.nyu.edu/pds?func=load-login&institute=NYU&calling_system=primo&url=http%3a%2f%2fbobcatdev.library.nyu.edu%2fprimo_library%2flibweb%2faction%2fsearch.do%3fdscnt%3d0%26amp%3bvid%3dNYU&func=load-login&amp;institute=NYU&amp;calling_system=primo&amp;url=http://bobcat.library.nyu.edu:80/primo_library/libweb/action/login.do"
     title_html: Login
     header_html: Select your affiliation to login
     auth_footer_html: Need help? %{link}
