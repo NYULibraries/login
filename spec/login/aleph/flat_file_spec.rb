@@ -9,8 +9,16 @@ module Login
           let(:identifier) { "identifier" }
           describe "#find_patron_by_identifier" do
             subject { flatfile.find_patron_by_identifier(identifier) }
-            it { should be_a Patron }
-            its(:identifier) { should eql identifier }
+            context 'when the user logged in with their identifier' do
+              it { should be_a Patron }
+              its(:identifier) { should eql identifier }
+            end
+            context 'when the user logged in with their barcode' do
+              let(:identifier) { "barcode" }
+              it { should be_a Patron }
+              its(:identifier) { should eql "identifier" }
+              its(:barcode) { should eql "barcode" }
+            end
           end
           context "and then flatfile gets removed after loading" do
             describe "#find_patron_by_identifier" do

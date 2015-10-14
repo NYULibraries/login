@@ -26,4 +26,4 @@ Feature: NYU Login
     When I click on the "NYU" button
     And NYU Home authenticates me
     And I visit the root url
-    Then I should be redirected to "http://bobcatdev.library.nyu.edu"
+    Then I should be redirected to "https://dev.login.library.nyu.edu/login"
