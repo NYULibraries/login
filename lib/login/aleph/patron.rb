@@ -20,7 +20,7 @@ module Login
       # the Aleph identity for any user will not have access to that attribute
       attr_accessor :identifier, :verification, :barcode, :patron_status, :patron_type,
       :ill_permission, :college, :department, :dept_code, :major, :major_code, :plif_status,
-      :ill_library, :institution_code, :expiry_date
+      :ill_library, :institution_code, :expiry_date, :bor_name, :first_name, :last_name
 
       def initialize(&block)
         unless block_given?
@@ -31,6 +31,8 @@ module Login
         # Then use the borrower status to map to an institution
         # Or default to NYU
         @institution_code ||= (institution_for_ill_library || institution_for_bor_status || DEFAULT_INSTITUTION)
+        @first_name ||= aleph_names.first_name
+        @last_name ||= aleph_names.last_name
       end
 
       ##
@@ -62,6 +64,11 @@ module Login
         end
       end
       private :institution_for_bor_status
+
+      def aleph_names
+        aleph_names = Login::Aleph::Name.new(self.bor_name, self.identifier)
+      end
+      private :aleph_names
     end
   end
 end

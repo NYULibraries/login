@@ -75,6 +75,8 @@ describe Api::V1::UsersController do
             it { should have_json_path("identities/#{index}/properties/patron_type") }
             it { should have_json_path("identities/#{index}/properties/patron_status") }
             it { should have_json_path("identities/#{index}/properties/ill_permission") }
+            it { should have_json_path("identities/#{index}/properties/first_name") }
+            it { should have_json_path("identities/#{index}/properties/last_name") }
             describe "identity properties" do
               let(:response_properties) { parse_json(body)["identities"][index]["properties"]  }
               subject { response_properties[property] }
@@ -101,6 +103,14 @@ describe Api::V1::UsersController do
               context "when the property is ILL permission" do
                 let(:property) { "ill_permission" }
                 it { should eql "Y" }
+              end
+              context "when the property is first name" do
+                let(:property) { "first_name" }
+                it { should eql "JON" }
+              end
+              context "when the property is last name" do
+                let(:property) { "last_name" }
+                it { should eql "SNOW" }
               end
             end
           end
@@ -187,6 +197,16 @@ describe Api::V1::UsersController do
                 it { should be_blank }
               end
 
+              context "when property is first_name" do
+                let(:property) { "first_name" }
+                it { should eql "Triple" }
+              end
+
+              context "when property is last_name" do
+                let(:property) { "last_name" }
+                it { should eql "Tester" }
+              end
+
             end
 
           end
@@ -249,6 +269,14 @@ describe Api::V1::UsersController do
               context "when property is type" do
                 let(:property) { "patron_type" }
                 it { should be_blank }
+              end
+              context "when property is first_name" do
+                let(:property) { "first_name" }
+                it { should eql "Triple" }
+              end
+              context "when property is last_name" do
+                let(:property) { "last_name" }
+                it { should eql "Tester" }
               end
             end
           end

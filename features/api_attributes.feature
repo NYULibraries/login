@@ -32,6 +32,8 @@ Feature: Get attributes from protected API when user is authenticated
       | Patron Type    | Bastard        |
       | ILL Permission | Y              |
       | PLIF Status    | Kings Landing  |
+      | First Name     | JON            |
+      | Last Name      | SNOW           |
 
   Scenario: Logging in with Facebook
     Given I am logged in as an "Facebook" user

@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 07 Oct 2015 16:24:33 GMT
+      - Tue, 13 Oct 2015 18:51:46 GMT
       Server:
       - ALEPH/5.20
       Content-Type:
@@ -35,7 +35,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<bor-auth>\n<error>Error
-        in Verification</error>\n<session-id>TITH83UIX3F5JRJ8TD13L64J7KX2368PR51PN6JI9SB25ARXP5</session-id>\n</bor-auth>\n "
+        in Verification</error>\n<session-id>71TX6ES88B7PAJJ7Y7UIFPXMGDP5BQUHF22D3681631PES93DU</session-id>\n</bor-auth>\n "
     http_version: 
-  recorded_at: Wed, 07 Oct 2015 16:24:33 GMT
+  recorded_at: Tue, 13 Oct 2015 18:51:46 GMT
 recorded_with: VCR 2.9.3
