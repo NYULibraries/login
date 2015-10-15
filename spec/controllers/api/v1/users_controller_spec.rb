@@ -98,7 +98,7 @@ describe Api::V1::UsersController do
               end
               context "when the property is patron type" do
                 let(:property) { "patron_type" }
-                it { should eql "Bastard" }
+                it { should eql 'Bastard' }
               end
               context "when the property is ILL permission" do
                 let(:property) { "ill_permission" }

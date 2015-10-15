@@ -30,6 +30,14 @@ module Login
           end
         end
 
+        # Look up by identifier or barcode
+        # If none of the cases match or any of the fields are missing, it's a no
+        def matches_identifier?(identifier)
+          (self.identifier.upcase == identifier.upcase || self.barcode.upcase == identifier.upcase)
+        rescue
+          false
+        end
+
         private
 
         attr_writer *ATTRIBUTES

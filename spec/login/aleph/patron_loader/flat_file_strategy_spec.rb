@@ -14,11 +14,11 @@ module Login
         subject { flat_file_strategy.patron }
         context "when identifier is valid and returns a BorInfo object" do
           its(:identifier) { should eql identifier }
-          its(:plif_status) { should be_nil }
+          its(:plif_status) { should eql "plif_status" }
           its(:patron_status) { should eql "patron_status" }
           its(:patron_type) { should eql "patron_type" }
           its(:ill_permission) { should eql "ill_permission" }
-          its(:ill_library) { should be_nil }
+          its(:ill_library) { should eql "ill_library" }
         end
         context "when identifier is invalid" do
           let(:identifier) { 'INVALID_ID' }
