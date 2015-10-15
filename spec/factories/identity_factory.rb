@@ -9,6 +9,7 @@ FactoryGirl.define do
       provider "aleph"
       uid "USERNAME"
       properties({
+        uid: "USERNAME",
         name: "USERNAME, TEST-RECORD",
         nickname: "USERNAME",
         email: "username@library.edu",
