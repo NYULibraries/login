@@ -28,12 +28,12 @@ Feature: Get attributes from protected API when user is authenticated
     When I request my attributes from the protected API
     Then I retrieve the attributes as JSON:
       | Aleph ID       | BOR_ID         |
-      | Patron Status  | 60             |
-      | Patron Type    |                |
+      | Patron Status  | 05             |
+      | Patron Type    | Bastard        |
       | ILL Permission | Y              |
-      | PLIF Status    | PLIF LOADED    |
-      | First Name     | Triple         |
-      | Last Name      | Tester         |
+      | PLIF Status    | Kings Landing  |
+      | First Name     | JON            |
+      | Last Name      | SNOW           |
 
   Scenario: Logging in with Facebook
     Given I am logged in as an "Facebook" user
