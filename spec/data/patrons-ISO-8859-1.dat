@@ -1,2 +1,2 @@
-identifier  barcode  verification  expiry_date  patron_status  patron_type  b�r_name  email  ill_permission  plif_status  college_code  college  dept_code  department  major_code  major  ill_library
+identifier	barcode	verification	expiry_date	patron_status	patron_type	b�r_name	email	ill_permission	plif_status	college_code	college	dept_code	department	major_code	major	ill_library
 identifier	barcode	verification	expiry_date	patron_status	patron_type	b�r_name	email	ill_permission
