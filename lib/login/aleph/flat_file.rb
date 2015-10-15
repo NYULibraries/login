@@ -16,7 +16,7 @@ module Login
           while line = file.gets
             flat_file_line = FlatFileLine.new(line)
             # Look up by identifier or barcode
-            break if flat_file_line.identifier.eql?(identifier) || flat_file_line.barcode.eql?(identifier)
+            break if flat_file_line.identifier.present? && (flat_file_line.identifier.upcase.eql?(identifier.upcase) || flat_file_line.barcode.upcase.eql?(identifier.upcase))
             flat_file_line = nil
           end
         end
