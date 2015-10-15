@@ -28,7 +28,15 @@ describe Login::Primo::Logout do
 
   describe '#logout!' do
     subject { logout.logout! }
-    it { should be_true }
+    context 'when host is valid' do
+      it { should be_true }
+    end
+    context 'when host is invalid' do
+      before { logout.instance_variable_set(:@hosts, ['fakehost.com']) }
+      it 'should raise runtime error' do
+        expect { subject }.to raise_error RuntimeError
+      end
+    end
   end
 
 end

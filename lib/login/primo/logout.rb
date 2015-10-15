@@ -1,5 +1,5 @@
 ##
-# Logout of load-balanced primo servers 
+# Logout of load-balanced primo servers
 #
 # Hack to deal with 2 problems:
 #   1. Call to load balanced URL doesn't kill Primo
