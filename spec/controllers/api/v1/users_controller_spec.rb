@@ -90,15 +90,15 @@ describe Api::V1::UsersController do
               end
               context "when the property is PLIF status" do
                 let(:property) { "plif_status" }
-                it { should eql "Kings Landing" }
+                it { should eql "PLIF LOADED" }
               end
               context "when the property is patron status" do
                 let(:property) { "patron_status" }
-                it { should eql "05" }
+                it { should eql "60" }
               end
               context "when the property is patron type" do
                 let(:property) { "patron_type" }
-                it { should eql "Bastard" }
+                it { should be_blank }
               end
               context "when the property is ILL permission" do
                 let(:property) { "ill_permission" }
@@ -106,11 +106,11 @@ describe Api::V1::UsersController do
               end
               context "when the property is first name" do
                 let(:property) { "first_name" }
-                it { should eql "JON" }
+                it { should eql "Triple" }
               end
               context "when the property is last name" do
                 let(:property) { "last_name" }
-                it { should eql "SNOW" }
+                it { should eql "Tester" }
               end
             end
           end

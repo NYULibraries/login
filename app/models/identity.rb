@@ -22,4 +22,8 @@ class Identity < ActiveRecord::Base
   def expired?
     (updated_at.blank? || updated_at < 1.week.ago)
   end
+
+  def expire!
+    self.update_attribute(:updated_at, nil)
+  end
 end
