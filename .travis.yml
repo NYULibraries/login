@@ -18,6 +18,7 @@ env:
     - SHIBBOLETH_LOGOUT_URL=https://aqa.home.nyu.edu/sso/UI/Logout
     - PDS_URL=https://pdsdev.library.nyu.edu
     - BOBCAT_URL=http://bobcatdev.library.nyu.edu
+    - FLAT_FILE='./spec/data/patrons-UTF-8.dat'
 
 before_script:
   - psql -c 'create database login_test;' -U $LOGIN_DB_USER
