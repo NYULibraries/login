@@ -27,7 +27,11 @@ require 'vcr'
 require 'database_cleaner'
 
 # Set flat file for testing.
-ENV['FLAT_FILE'] = "spec/data/patrons-UTF-8.dat"
+if ENV['TRAVIS']
+  ENV['FLAT_FILE'] = "#{ENV['TRAVIS_BUILD_DIR']}/spec/data/patrons-UTF-8.dat"
+else
+  ENV['FLAT_FILE'] = "spec/data/patrons-UTF-8.dat"
+end
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.

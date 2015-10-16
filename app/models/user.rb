@@ -11,10 +11,9 @@ class User < ActiveRecord::Base
   attr_reader :omniauth_hash_map
 
   # Create an identity from Aleph if the user is in Aleph
-  # Do it first to always attempt to update the identity from the flat file
   after_save :create_or_update_aleph_identity, if: -> { omniauth_hash_map.present? && omniauth_hash_map.nyuidn.present? }
   # Create an identity from the OmniAuth::AuthHash after the user is created
-  after_save :create_or_update_identity_from_omniauth_hash, if: "omniauth_hash_map.present?"
+  after_save :create_or_update_identity_from_omniauth_hash, if: -> { omniauth_hash_map.present? }, unless: -> { provider == 'aleph' }
 
   # Available devise modules are:
   # :database_authenticatable, :registerable,
@@ -54,11 +53,17 @@ class User < ActiveRecord::Base
     @institution ||= Institutions.institutions[institution_code.to_sym]
   end
 
+  # Create Aleph identity specifically for each other identity,
+  # if the patron can be found in Aleph
   def create_or_update_aleph_identity
     identity = identities.find_or_initialize_by(uid: omniauth_hash_map.nyuidn, provider: "aleph")
-    aleph_patron = Login::Aleph::PatronLoader.new(omniauth_hash_map.nyuidn).patron
-    if aleph_patron.present?
-      identity.properties.merge!(aleph_patron.attributes)
+    if identity.expired?
+      aleph_patron = Login::Aleph::PatronLoader.new(omniauth_hash_map.nyuidn).patron
+      # Start with the omniauth hash to create the identity if user logged in with Aleph
+      identity.properties.merge!(omniauth_hash_map.properties) if omniauth_hash_map.provider == 'aleph'
+      # If the patron was also found from the loader, update the properties to those
+      # since they may be more up to date from the flat file
+      identity.properties.merge!(aleph_patron.attributes) if aleph_patron.present?
       identity.save
     end
   end
@@ -67,7 +72,7 @@ class User < ActiveRecord::Base
   def create_or_update_identity_from_omniauth_hash
     # Create or update an identity from the attributes mapped in the mapper
     identity = identities.find_or_initialize_by(uid: omniauth_hash_map.uid, provider: omniauth_hash_map.provider)
-    identity.properties.merge!(omniauth_hash_map.properties) if identity.expired? || omniauth_hash_map.provider == 'aleph'
+    identity.properties.merge!(omniauth_hash_map.properties) if identity.expired?
     identity.save
   end
 end

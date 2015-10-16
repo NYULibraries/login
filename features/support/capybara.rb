@@ -43,4 +43,8 @@ end
 Capybara.app_host = 'http://localhost:3000'
 Capybara.server_port = 3000
 # Set flat file for testing.
-ENV['FLAT_FILE'] = 'spec/data/patrons-UTF-8.dat'
+if ENV['TRAVIS']
+  ENV['FLAT_FILE'] = "#{ENV['TRAVIS_BUILD_DIR']}/spec/data/patrons-UTF-8.dat"
+else
+  ENV['FLAT_FILE'] = "spec/data/patrons-UTF-8.dat"
+end
