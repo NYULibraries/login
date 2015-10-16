@@ -174,7 +174,7 @@ describe Api::V1::UsersController do
 
               context "when property is PLIF status" do
                 let(:property) { "plif_status" }
-                it { should eql "PLIF LOADED" }
+                it { should eql "Kings Landing" }
               end
 
               context "when property is ILL permission" do
@@ -184,7 +184,7 @@ describe Api::V1::UsersController do
 
               context "when property is patron status" do
                 let(:property) { "patron_status" }
-                it { should eql "60" }
+                it { should eql "05" }
               end
 
               context "when the property is the institution_code attributes" do
@@ -194,17 +194,17 @@ describe Api::V1::UsersController do
 
               context "when property is patron type" do
                 let(:property) { "patron_type" }
-                it { should be_blank }
+                it { should eql "Bastard" }
               end
 
               context "when property is first_name" do
                 let(:property) { "first_name" }
-                it { should eql "Triple" }
+                it { should eql "JON" }
               end
 
               context "when property is last_name" do
                 let(:property) { "last_name" }
-                it { should eql "Tester" }
+                it { should eql "SNOW" }
               end
 
             end
@@ -252,7 +252,7 @@ describe Api::V1::UsersController do
               end
               context "when property is PLIF status" do
                 let(:property) { "plif_status" }
-                it { should eql "PLIF LOADED" }
+                it { should eql "Kings Landing" }
               end
               context "when property is ILL permission" do
                 let(:property) { "ill_permission" }
@@ -260,7 +260,7 @@ describe Api::V1::UsersController do
               end
               context "when property is status" do
                 let(:property) { "patron_status" }
-                it { should eql "60" }
+                it { should eql "05" }
               end
               context "when the property is the institution_code attributes" do
                 let(:property) { "institution_code" }
@@ -268,15 +268,15 @@ describe Api::V1::UsersController do
               end
               context "when property is type" do
                 let(:property) { "patron_type" }
-                it { should be_blank }
+                it { should eql "Bastard" }
               end
               context "when property is first_name" do
                 let(:property) { "first_name" }
-                it { should eql "Triple" }
+                it { should eql "JON" }
               end
               context "when property is last_name" do
                 let(:property) { "last_name" }
-                it { should eql "Tester" }
+                it { should eql "SNOW" }
               end
             end
           end
