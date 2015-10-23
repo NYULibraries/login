@@ -24,8 +24,8 @@ GIT
 
 GIT
   remote: git://github.com/NYULibraries/nyulibraries-assets.git
-  revision: 58ed524f803cbcdb517c86d74e5e2010884ede90
-  branch: feature/nysid_view_update
+  revision: af035dd0fa05c3f6a7cc960def3b357a9bb01b9f
+  tag: v4.6.2
   specs:
     nyulibraries-assets (4.6.1)
       bootstrap-sass (~> 3.2.0.2)
