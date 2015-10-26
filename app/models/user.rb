@@ -37,8 +37,6 @@ class User < ActiveRecord::Base
   validates :institution_code, inclusion: { in: VALID_INSTITUTION_CODES },
     allow_blank: true
 
-  validates_format_of :email, with: email_regexp, allow_blank: true, if: :email_changed?
-
   # Attr writer for omniauth_hash_map
   def omniauth_hash_map=(omniauth_hash_map)
     raise ArgumentError unless omniauth_hash_map.is_a? Login::OmniAuthHash::Mapper
