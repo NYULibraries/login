@@ -103,7 +103,7 @@ describe User do
   context "when email is invalid" do
     subject { build(:user, email: "dev123") }
     it { should be_a_new(User) }
-    it { should_not be_valid }
+    it { should be_valid } #We don't check for valid email address, leave it to provider
   end
 
   context "when username is duplicated" do
