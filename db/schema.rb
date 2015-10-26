@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141218161416) do
+ActiveRecord::Schema.define(version: 20151023210740) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20141218161416) do
     t.datetime "updated_at"
   end
 
-  add_index "identities", ["properties"], name: "index_identities_on_properties", using: :gin
+  add_index "identities", ["properties"], name: "index_identities_on_properties", using: :gist
   add_index "identities", ["uid", "provider"], name: "index_identities_on_uid_and_provider", unique: true, using: :btree
   add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
 
