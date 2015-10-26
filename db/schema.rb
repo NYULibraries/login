@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20151023210740) do
     t.datetime "updated_at"
   end
 
+  add_index "identities", ["properties"], name: "index_identities_on_properties", using: :gist
   add_index "identities", ["uid", "provider"], name: "index_identities_on_uid_and_provider", unique: true, using: :btree
   add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
 
