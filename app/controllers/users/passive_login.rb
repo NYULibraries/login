@@ -36,7 +36,8 @@ module Users
       # If user is signed in
       # redirect to client login
       if user_signed_in? && client_app.present?
-        client_authorize_url = URI.join(URI.parse(client_app.redirect_uri), login_path, "?origin=#{CGI::escape(return_uri)}")
+        escaped_return_uri = CGI::escape(return_uri) if return_uri.present?
+        client_authorize_url = URI.join(URI.parse(client_app.redirect_uri), login_path, "?origin=#{escaped_return_uri}")
         redirect_to "#{client_authorize_url}"
       # If the user is not signed in but there is a return URI
       # send the user back there
