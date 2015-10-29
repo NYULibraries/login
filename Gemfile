@@ -55,7 +55,7 @@ gem 'omniauth', '~> 1.2.2'
 # Shibboleth strategy
 gem 'omniauth-shibboleth', '~> 1.2.0'
 # Facebook strategy
-gem 'omniauth-facebook', '~> 2.0.0'
+gem 'omniauth-facebook', '~> 3.0.0'
 # Twitter strategy
 gem 'omniauth-twitter', '~> 1.2.0'
 # GitHub strategy
@@ -74,7 +74,7 @@ gem 'figs', '~> 2.0.0'
 gem 'faraday', '~> 0.9.0'
 gem 'faraday_middleware', '~> 0.9.1'
 
-gem 'dalli'
+gem 'dalli', '~> 2.7.4'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

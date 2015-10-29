@@ -240,7 +240,7 @@ GEM
       faraday (~> 0.9.0)
       multi_xml (~> 0.5.0)
       omniauth (~> 1.2.0)
-    omniauth-facebook (2.0.1)
+    omniauth-facebook (3.0.0)
       omniauth-oauth2 (~> 1.2)
     omniauth-github (1.1.2)
       omniauth (~> 1.0)
@@ -404,7 +404,7 @@ DEPENDENCIES
   compass-rails (~> 2.0.0)
   coveralls (~> 0.7.0)
   cucumber-rails (~> 1.4.1)
-  dalli
+  dalli (~> 2.7.4)
   database_cleaner (~> 1.3.0)
   devise (~> 3.5.0)
   doorkeeper (~> 2.2.0)
@@ -426,7 +426,7 @@ DEPENDENCIES
   nyulibraries-assets!
   omniauth (~> 1.2.2)
   omniauth-aleph (~> 0.1.3)
-  omniauth-facebook (~> 2.0.0)
+  omniauth-facebook (~> 3.0.0)
   omniauth-github (~> 1.1.2)
   omniauth-ldap (~> 1.0.4)
   omniauth-shibboleth (~> 1.2.0)

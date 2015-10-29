@@ -6,6 +6,10 @@ module Login
       context "when flatfile line exists" do
         context "and the flatfile line is complete" do
           let(:line) { "BOR_ID\t12345678910112\tencrypted_value\t20140101\t03\t0\tELOPER,DEV\tdeveloper@nyu.edu\tY\tPLIF STATUS\tCC\tCOLLEGE\t00\tDEPARTMENT\t00000\tMAJOR\tILL LIBRARY\n" }
+          describe "#matches_identifier?" do
+            subject { flatfileline.matches_identifier?('12345678910112') }
+            it { should be_true }
+          end
           describe "#identifier" do
             subject { flatfileline.identifier }
             it { should eq "BOR_ID" }
@@ -157,6 +161,10 @@ module Login
       end
       context "when flatfile line doesn't exists" do
         let(:line) { nil }
+        describe "#matches_identifier?" do
+          subject { flatfileline.matches_identifier?('12345678910112') }
+          it { should be_false }
+        end
         describe "#identifier" do
           subject { flatfileline.identifier }
           it { should be_nil }
