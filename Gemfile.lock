@@ -404,7 +404,7 @@ DEPENDENCIES
   compass-rails (~> 2.0.0)
   coveralls (~> 0.7.0)
   cucumber-rails (~> 1.4.1)
-  dalli
+  dalli (~> 2.7.4)
   database_cleaner (~> 1.3.0)
   devise (~> 3.5.0)
   doorkeeper (~> 2.2.0)
