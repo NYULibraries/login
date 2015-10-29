@@ -55,6 +55,17 @@ describe UsersController do
       subject { get :aleph, { auth_type: auth_type }; response }
       context 'when the omniauth.auth environment is present' do
         before { @request.env['omniauth.auth'] = authhash(:aleph) }
+        context 'when eshelf url and cookie are set' do
+          before { stub_const('ENV', ENV.to_hash.merge('ESHELF_LOGIN_URL' => 'https://eshelf.library.edu')) }
+          context 'when eshelf cookie is already set' do
+            before { @request.cookies[:_nyulibraries_eshelf_passthru] = true }
+            it { should redirect_to root_url }
+          end
+          it 'should set eshelf cookie' do
+            expect(subject.cookies['_nyulibraries_eshelf_passthru']).to be_true
+          end
+          it { should redirect_to 'https://eshelf.library.edu' }
+        end
         context 'when the omniauth.auth.provider is aleph' do
           context 'when the user doesn\'t exist' do
             let(:identity) { assigns(:user).identities.first }
@@ -301,6 +312,16 @@ describe UsersController do
     context 'when user has no saved action' do
       let(:redirect_uri) { nil }
       it { should redirect_to root_path }
+    end
+  end
+
+  describe '#root_url_redirect' do
+    login_user
+    subject { @controller.send(:root_url_redirect) }
+    context 'when BOBCAT_URL and PDS_URL environment variables are not set' do
+      before { stub_const('ENV', ENV.to_hash.merge('BOBCAT_URL' => nil)) }
+      before { stub_const('ENV', ENV.to_hash.merge('PDS_URL' => nil)) }
+      it { should eql "https://pds.library.nyu.edu/pds?func=load-login&institute=NYU&calling_system=primo&url=http%3a%2f%2fbobcat.library.nyu.edu%2fprimo_library%2flibweb%2faction%2fsearch.do%3fdscnt%3d0%26amp%3bvid%3dNYU&func=load-login&amp;institute=NYU&amp;calling_system=primo&amp;url=http://bobcat.library.nyu.edu:80/primo_library/libweb/action/login.do" }
     end
   end
 end
