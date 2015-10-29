@@ -55,7 +55,7 @@ gem 'omniauth', '~> 1.2.2'
 # Shibboleth strategy
 gem 'omniauth-shibboleth', '~> 1.2.0'
 # Facebook strategy
-gem 'omniauth-facebook', '~> 2.0.0'
+gem 'omniauth-facebook', '~> 3.0.0'
 # Twitter strategy
 gem 'omniauth-twitter', '~> 1.2.0'
 # GitHub strategy
