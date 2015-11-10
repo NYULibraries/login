@@ -4,7 +4,6 @@ class UsersController < Devise::OmniauthCallbacksController
   before_filter :require_login, only: [:show]
   before_filter :require_no_authentication, except: [:passthru, :show, :client_passive_login]
   before_filter :require_valid_omniauth_hash, only: (Devise.omniauth_providers << :omniauth_callback)
-  skip_before_filter :verify_authenticity_token, only: [:passthru]
   respond_to :html
 
   def show
