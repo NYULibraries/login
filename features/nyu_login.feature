@@ -21,6 +21,7 @@ Feature: NYU Login
     And I visit the "NYU New York" log-out url
     Then I should be on the NYU New York logged out page
 
+  @wip
   Scenario: Attempting to visit the root page after logging in
     Given I am on the NYU New York login page
     When I click on the "NYU" button
