@@ -55,7 +55,6 @@ module Login
             faraday.request  :url_encoded
             faraday.response :logger
             faraday.adapter Faraday.default_adapter
-            faraday.ssl[:ca_path] = '/etc/pki/tls/certs' 
           end
         end
 
