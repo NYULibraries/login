@@ -21,13 +21,18 @@ describe WayfController do
     describe "GET 'index'" do
       let(:institution) { nil }
       let(:params_institution) { nil }
-      before { @request.env['omniauth.params'] = { "institution" => params_institution } }
+      let(:umlaut_institution) { nil }
+      before { @request.env['omniauth.params'] = { "institution" => params_institution, "umlaut.institution" => umlaut_institution } }
       before { get :index, { institution: institution } }
       subject { response }
       render_views
       describe "GET 'index' for NYU" do
+        context 'when coming from Umlaut' do
+          let(:umlaut_institution) { 'NYU' }
+          it { should redirect_to '/login/nyu' }
+        end
         context 'when institution is passed in to the url' do
-          let(:institution) { 'nyu' }
+          let(:institution) { 'NYU' }
           it { should be_success }
           it("should have a 200 status") { expect(subject.status).to be(200) }
           it do
@@ -42,15 +47,19 @@ describe WayfController do
           end
         end
         context 'when institution is passed in via omniauth.params' do
-          let(:params_institution) { 'nyu' }
+          let(:params_institution) { 'NYU' }
           let(:institution) { nil }
           it { should be_redirect }
           it { should redirect_to '/login/nyu' }
         end
       end
       describe "GET 'index' for HSL" do
+        context 'when coming from Umlaut' do
+          let(:umlaut_institution) { 'HSL' }
+          it { should redirect_to '/login/hsl' }
+        end
         context 'when institution is passed in to the url' do
-          let(:institution) { 'hsl' }
+          let(:institution) { 'HSL' }
           it { should be_success }
           it("should have a 200 status") { expect(subject.status).to be(200) }
           it do
@@ -60,14 +69,18 @@ describe WayfController do
           end
         end
         context 'when institution is passed in via omniauth.params' do
-          let(:params_institution) { 'hsl' }
+          let(:params_institution) { 'HSL' }
           it { should be_redirect }
           it { should redirect_to '/login/hsl' }
         end
       end
       describe "GET 'index' for NYUAD" do
+        context 'when coming from Umlaut' do
+          let(:umlaut_institution) { 'NYUAD' }
+          it { should redirect_to '/login/nyuad' }
+        end
         context 'when institution is passed in to the url' do
-          let(:institution) { 'nyuad' }
+          let(:institution) { 'NYUAD' }
           it { should be_success }
           it("should have a 200 status") { expect(subject.status).to be(200) }
           it do
@@ -77,14 +90,18 @@ describe WayfController do
           end
         end
         context 'when institution is passed in via omniauth.params' do
-          let(:params_institution) { 'nyuad' }
+          let(:params_institution) { 'NYUAD' }
           it { should be_redirect }
           it { should redirect_to '/login/nyuad' }
         end
       end
       describe "GET 'index' for NYUSH" do
+        context 'when coming from Umlaut' do
+          let(:umlaut_institution) { 'NYUSH' }
+          it { should redirect_to '/login/nyush' }
+        end
         context 'when institution is passed in to the url' do
-          let(:institution) { 'nyush' }
+          let(:institution) { 'NYUSH' }
           it { should be_success }
           it("should have a 200 status") { expect(subject.status).to be(200) }
           it do
@@ -94,14 +111,18 @@ describe WayfController do
           end
         end
         context 'when institution is passed in via omniauth.params' do
-          let(:params_institution) { 'nyush' }
+          let(:params_institution) { 'NYUSH' }
           it { should be_redirect }
           it { should redirect_to '/login/nyush' }
         end
       end
       describe "GET 'index' for NS" do
+        context 'when coming from Umlaut' do
+          let(:umlaut_institution) { 'NS' }
+          it { should redirect_to '/login/ns' }
+        end
         context 'when institution is passed in to the url' do
-          let(:institution) { 'ns' }
+          let(:institution) { 'NS' }
           it { should be_success }
           it("should have a 200 status") { expect(subject.status).to be(200) }
           it do
@@ -115,14 +136,18 @@ describe WayfController do
           end
         end
         context 'when institution is passed in via omniauth.params' do
-          let(:params_institution) { 'ns' }
+          let(:params_institution) { 'NS' }
           it { should be_redirect }
           it { should redirect_to '/login/ns' }
         end
       end
       describe "GET 'index' for CU" do
+        context 'when coming from Umlaut' do
+          let(:umlaut_institution) { 'CU' }
+          it { should redirect_to '/login/cu' }
+        end
         context 'when institution is passed in to the url' do
-          let(:institution) { 'cu' }
+          let(:institution) { 'CU' }
           it { should be_success }
           it("should have a 200 status") { expect(subject.status).to be(200) }
           it do
@@ -136,12 +161,16 @@ describe WayfController do
           end
         end
         context 'when institution is passed in via omniauth.params' do
-          let(:params_institution) { 'cu' }
+          let(:params_institution) { 'CU' }
           it { should be_redirect }
           it { should redirect_to '/login/cu' }
         end
       end
       describe "GET 'index' for NYSID" do
+        context 'when coming from Umlaut' do
+          let(:umlaut_institution) { 'NYSID' }
+          it { should redirect_to '/login/nysid' }
+        end
         context 'when institution is passed in to the url' do
           let(:institution) { 'nysid' }
           it { should be_success }
