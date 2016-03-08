@@ -22,15 +22,11 @@ describe WayfController do
       let(:institution) { nil }
       let(:params_institution) { nil }
       let(:umlaut_institution) { nil }
-      before { @request.env['omniauth.params'] = { "institution" => params_institution, "umlaut.institution" => umlaut_institution } }
+      before { @request.cookies['institution_from_url'] = params_institution }
       before { get :index, { institution: institution } }
       subject { response }
       render_views
       describe "GET 'index' for NYU" do
-        context 'when coming from Umlaut' do
-          let(:umlaut_institution) { 'NYU' }
-          it { should redirect_to '/login/nyu' }
-        end
         context 'when institution is passed in to the url' do
           let(:institution) { 'NYU' }
           it { should be_success }
@@ -54,10 +50,6 @@ describe WayfController do
         end
       end
       describe "GET 'index' for HSL" do
-        context 'when coming from Umlaut' do
-          let(:umlaut_institution) { 'HSL' }
-          it { should redirect_to '/login/hsl' }
-        end
         context 'when institution is passed in to the url' do
           let(:institution) { 'HSL' }
           it { should be_success }
@@ -75,10 +67,6 @@ describe WayfController do
         end
       end
       describe "GET 'index' for NYUAD" do
-        context 'when coming from Umlaut' do
-          let(:umlaut_institution) { 'NYUAD' }
-          it { should redirect_to '/login/nyuad' }
-        end
         context 'when institution is passed in to the url' do
           let(:institution) { 'NYUAD' }
           it { should be_success }
@@ -96,10 +84,6 @@ describe WayfController do
         end
       end
       describe "GET 'index' for NYUSH" do
-        context 'when coming from Umlaut' do
-          let(:umlaut_institution) { 'NYUSH' }
-          it { should redirect_to '/login/nyush' }
-        end
         context 'when institution is passed in to the url' do
           let(:institution) { 'NYUSH' }
           it { should be_success }
@@ -117,10 +101,6 @@ describe WayfController do
         end
       end
       describe "GET 'index' for NS" do
-        context 'when coming from Umlaut' do
-          let(:umlaut_institution) { 'NS' }
-          it { should redirect_to '/login/ns' }
-        end
         context 'when institution is passed in to the url' do
           let(:institution) { 'NS' }
           it { should be_success }
@@ -142,10 +122,6 @@ describe WayfController do
         end
       end
       describe "GET 'index' for CU" do
-        context 'when coming from Umlaut' do
-          let(:umlaut_institution) { 'CU' }
-          it { should redirect_to '/login/cu' }
-        end
         context 'when institution is passed in to the url' do
           let(:institution) { 'CU' }
           it { should be_success }
@@ -167,10 +143,6 @@ describe WayfController do
         end
       end
       describe "GET 'index' for NYSID" do
-        context 'when coming from Umlaut' do
-          let(:umlaut_institution) { 'NYSID' }
-          it { should redirect_to '/login/nysid' }
-        end
         context 'when institution is passed in to the url' do
           let(:institution) { 'nysid' }
           it { should be_success }

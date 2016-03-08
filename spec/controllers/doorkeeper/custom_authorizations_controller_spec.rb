@@ -1,9 +1,12 @@
 require 'spec_helper'
 module Doorkeeper
-  describe AuthorizationsController do
+  describe CustomAuthorizationsController do
     let(:application) { create(:oauth_application) }
+    let(:institution) { nil }
+    let(:umlaut_institution) { nil }
     let(:params) { { client_id: application.uid,
-      redirect_uri: application.redirect_uri, response_type: "code" } }
+      redirect_uri: application.redirect_uri, response_type: "code",
+      institution: institution, "umlaut.institution" => umlaut_institution } }
     context "when not logged in" do
       describe "GET 'show'" do
         set_code
@@ -17,6 +20,17 @@ module Doorkeeper
         subject { response }
         it { should be_redirect }
         it { should redirect_to(root_url) }
+        context 'when no institution is set' do
+          it { expect(cookies[:institution_from_url]).to be_nil }
+        end
+        context 'when umlaut.institution param is set' do
+          let(:umlaut_institution) { 'NS' }
+          it { expect(cookies[:institution_from_url]).to eql 'NS' }
+        end
+        context 'when institution param is set' do
+          let(:institution) { 'CU' }
+          it { expect(cookies[:institution_from_url]).to eql 'CU' }
+        end
       end
       describe "POST 'create'" do
         before { post :create, params }
@@ -60,7 +74,7 @@ module Doorkeeper
         before { delete :destroy, params }
         subject { response }
         it { should be_redirect }
-        it { should redirect_to(application.redirect_uri + 
+        it { should redirect_to(application.redirect_uri +
           "?error=access_denied&error_description=The+resource+owner+or+authorization+server+denied+the+request.") }
       end
     end
