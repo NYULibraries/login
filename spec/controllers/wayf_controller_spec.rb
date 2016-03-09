@@ -18,109 +18,113 @@ describe WayfController do
       subject { response }
       it { should render_template("wayf/logged_out") }
     end
-    describe "GET 'index' for NYU" do
-      before { get :index }
+    describe "GET 'index'" do
+      let(:institution) { nil }
+      let(:params_institution) { nil }
+      before { @request.cookies['institution_from_url'] = params_institution }
+      before { get :index, { institution: institution } }
       subject { response }
-      context 'when not rendering views' do
-        render_views false
-        it { should be_success }
-        it("should have a 200 status") { expect(subject.status).to be(200) }
-      end
-      context "when rendering views" do
-        render_views
-        it do
-          should render_template("layouts/login")
-          should render_template("common/_alerts")
-          should render_template("wayf/_nyu")
-          should render_template("wayf/auth_squares/_bobst")
-          should render_template("wayf/auth_squares/_cu")
-          should render_template("wayf/auth_squares/_ns")
-          should render_template("wayf/auth_squares/_nysid")
-          should render_template("wayf/auth_squares/_visitor")
+      render_views
+      describe "GET 'index' for NYU" do
+        context 'when institution is passed in to the url' do
+          let(:institution) { 'NYU' }
+          it { should be_success }
+          it("should have a 200 status") { expect(subject.status).to be(200) }
+          it do
+            should render_template("layouts/login")
+            should render_template("common/_alerts")
+            should render_template("wayf/_nyu")
+            should render_template("wayf/auth_squares/_bobst")
+            should render_template("wayf/auth_squares/_cu")
+            should render_template("wayf/auth_squares/_ns")
+            should render_template("wayf/auth_squares/_nysid")
+            should render_template("wayf/auth_squares/_visitor")
+          end
+        end
+        context 'when institution is passed in via omniauth.params' do
+          let(:params_institution) { 'NYU' }
+          let(:institution) { nil }
+          it { should be_redirect }
+          it { should redirect_to '/login/nyu' }
         end
       end
-    end
-    describe "GET 'index' for HSL" do
-      before { get :index, { institution: "hsl" } }
-      subject { response }
-      context 'when not rendering views' do
-        render_views false
-        it { should be_success }
-        it("should have a 200 status") { expect(subject.status).to be(200) }
-      end
-      context "when rendering views" do
-        render_views
-        it do
-          should render_template("layouts/login")
-          should render_template("common/_alerts")
-          should render_template("wayf/_hsl")
+      describe "GET 'index' for HSL" do
+        context 'when institution is passed in to the url' do
+          let(:institution) { 'HSL' }
+          it { should be_success }
+          it("should have a 200 status") { expect(subject.status).to be(200) }
+          it do
+            should render_template("layouts/login")
+            should render_template("common/_alerts")
+            should render_template("wayf/_hsl")
+          end
+        end
+        context 'when institution is passed in via omniauth.params' do
+          let(:params_institution) { 'HSL' }
+          it { should be_redirect }
+          it { should redirect_to '/login/hsl' }
         end
       end
-    end
-    describe "GET 'index' for NYUAD" do
-      before { get :index, { institution: "nyuad" } }
-      subject { response }
-      context 'when not rendering views' do
-        render_views false
-        it { should be_success }
-        it("should have a 200 status") { expect(subject.status).to be(200) }
-      end
-      context "when rendering views" do
-        render_views
-        it do
-          should render_template("layouts/login")
-          should render_template("common/_alerts")
-          should render_template("wayf/_nyuad")
+      describe "GET 'index' for NYUAD" do
+        context 'when institution is passed in to the url' do
+          let(:institution) { 'NYUAD' }
+          it { should be_success }
+          it("should have a 200 status") { expect(subject.status).to be(200) }
+          it do
+            should render_template("layouts/login")
+            should render_template("common/_alerts")
+            should render_template("wayf/_nyuad")
+          end
+        end
+        context 'when institution is passed in via omniauth.params' do
+          let(:params_institution) { 'NYUAD' }
+          it { should be_redirect }
+          it { should redirect_to '/login/nyuad' }
         end
       end
-    end
-    describe "GET 'index' for NYUSH" do
-      before { get :index, { institution: "nyush" } }
-      subject { response }
-      context 'when not rendering views' do
-        render_views false
-        it { should be_success }
-        it("should have a 200 status") { expect(subject.status).to be(200) }
-      end
-      context "when rendering views" do
-        render_views
-        it do
-          should render_template("layouts/login")
-          should render_template("common/_alerts")
-          should render_template("wayf/_nyush")
+      describe "GET 'index' for NYUSH" do
+        context 'when institution is passed in to the url' do
+          let(:institution) { 'NYUSH' }
+          it { should be_success }
+          it("should have a 200 status") { expect(subject.status).to be(200) }
+          it do
+            should render_template("layouts/login")
+            should render_template("common/_alerts")
+            should render_template("wayf/_nyush")
+          end
+        end
+        context 'when institution is passed in via omniauth.params' do
+          let(:params_institution) { 'NYUSH' }
+          it { should be_redirect }
+          it { should redirect_to '/login/nyush' }
         end
       end
-    end
-    describe "GET 'index' for NS" do
-      before { get :index, { institution: "ns" } }
-      subject { response }
-      context 'when not rendering views' do
-        render_views false
-        it { should be_success }
-        it("should have a 200 status") { expect(subject.status).to be(200) }
-      end
-      context "when rendering views" do
-        render_views
-        it do
-          should render_template("layouts/login")
-          should render_template("common/_alerts")
-          should render_template("wayf/_ns")
-          should render_template("wayf/auth_squares/_nyu")
-          should render_template("wayf/auth_squares/_cu")
-          should render_template("wayf/auth_squares/_nysid")
-          should render_template("wayf/auth_squares/_visitor")
+      describe "GET 'index' for NS" do
+        context 'when institution is passed in to the url' do
+          let(:institution) { 'NS' }
+          it { should be_success }
+          it("should have a 200 status") { expect(subject.status).to be(200) }
+          it do
+            should render_template("layouts/login")
+            should render_template("common/_alerts")
+            should render_template("wayf/_ns")
+            should render_template("wayf/auth_squares/_nyu")
+            should render_template("wayf/auth_squares/_cu")
+            should render_template("wayf/auth_squares/_nysid")
+            should render_template("wayf/auth_squares/_visitor")
+          end
+        end
+        context 'when institution is passed in via omniauth.params' do
+          let(:params_institution) { 'NS' }
+          it { should be_redirect }
+          it { should redirect_to '/login/ns' }
         end
       end
       describe "GET 'index' for CU" do
-        before { get :index, { institution: "cu" } }
-        subject { response }
-        context 'when not rendering views' do
-          render_views false
+        context 'when institution is passed in to the url' do
+          let(:institution) { 'CU' }
           it { should be_success }
           it("should have a 200 status") { expect(subject.status).to be(200) }
-        end
-        context "when rendering views" do
-          render_views
           it do
             should render_template("layouts/login")
             should render_template("common/_alerts")
@@ -131,17 +135,17 @@ describe WayfController do
             should render_template("wayf/auth_squares/_visitor")
           end
         end
+        context 'when institution is passed in via omniauth.params' do
+          let(:params_institution) { 'CU' }
+          it { should be_redirect }
+          it { should redirect_to '/login/cu' }
+        end
       end
       describe "GET 'index' for NYSID" do
-        before { get :index, { institution: "nysid" } }
-        subject { response }
-        context 'when not rendering views' do
-          render_views false
+        context 'when institution is passed in to the url' do
+          let(:institution) { 'nysid' }
           it { should be_success }
           it("should have a 200 status") { expect(subject.status).to be(200) }
-        end
-        context "when rendering views" do
-          render_views
           it do
             should render_template("layouts/login")
             should render_template("common/_alerts")
@@ -151,6 +155,11 @@ describe WayfController do
             should render_template("wayf/auth_squares/_cu")
             should render_template("wayf/auth_squares/_visitor")
           end
+        end
+        context 'when institution is passed in via omniauth.params' do
+          let(:params_institution) { 'nysid' }
+          it { should be_redirect }
+          it { should redirect_to '/login/nysid' }
         end
       end
     end

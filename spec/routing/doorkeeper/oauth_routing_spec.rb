@@ -4,22 +4,22 @@ describe "routes for Doorkeeper" do
 
   describe "GET /oauth/authorize/:code" do
     subject { get('/oauth/authorize/1234') }
-    it { should route_to(controller: 'doorkeeper/authorizations', action: 'show', code: '1234') }
+    it { should route_to(controller: 'doorkeeper/custom_authorizations', action: 'show', code: '1234') }
   end
 
   describe "GET /oauth/authorize" do
     subject { get('/oauth/authorize') }
-    it { should route_to(controller: 'doorkeeper/authorizations', action: 'new') }
+    it { should route_to(controller: 'doorkeeper/custom_authorizations', action: 'new') }
   end
 
   describe "POST /oauth/authorize" do
     subject { post('/oauth/authorize') }
-    it { should route_to(controller: 'doorkeeper/authorizations', action: 'create') }
+    it { should route_to(controller: 'doorkeeper/custom_authorizations', action: 'create') }
   end
 
   describe "DELETE /oauth/authorize" do
     subject { delete('/oauth/authorize') }
-    it { should route_to(controller: 'doorkeeper/authorizations', action: 'destroy') }
+    it { should route_to(controller: 'doorkeeper/custom_authorizations', action: 'destroy') }
   end
 
   describe "POST /oauth/token" do
