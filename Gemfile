@@ -105,6 +105,7 @@ group :development, :test, :cucumber do
   # Use json_spec to do rspec tests with JSON
   gem 'json_spec', '~> 1.1.2'
   gem 'pry', '~> 0.10.1'
+  gem 'pry-remote', '~> 0.1.8'
 end
 
 # Development gems
