@@ -1,12 +1,10 @@
 class Doorkeeper::CustomAuthorizationsController < Doorkeeper::AuthorizationsController
-  prepend_before_filter :set_institution_from_param, only: [:new]
+  prepend_before_filter :set_institution_from_param, only: [:new], if: -> { params["institution"].present? }
 
   private
 
   def set_institution_from_param
-    if params["institution"] || params["umlaut.institution"]
-      cookies[:institution_from_url] = params["institution"] || params["umlaut.institution"]
-    end
+    cookies[:institution_from_url] = params["institution"]
   end
 
 end
