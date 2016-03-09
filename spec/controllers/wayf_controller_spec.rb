@@ -21,7 +21,6 @@ describe WayfController do
     describe "GET 'index'" do
       let(:institution) { nil }
       let(:params_institution) { nil }
-      let(:umlaut_institution) { nil }
       before { @request.cookies['institution_from_url'] = params_institution }
       before { get :index, { institution: institution } }
       subject { response }
