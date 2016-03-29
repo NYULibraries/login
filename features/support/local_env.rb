@@ -10,5 +10,5 @@ Dir[Rails.root.join("features/support/helpers/**/*.rb")].each do |helper|
 end
 # High level of coupling between factories and spec tests. Must re-do factories
 # to be compatible with all tests.
-require Rails.root.join("spec/support/omni_auth_hash_macros.rb")
+require Rails.root.join("spec/support/login_macros/omni_auth_hash_macros.rb")
 Cucumber::Rails::World.send(:include, OmniAuthHashMacros)
