@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 describe UsersController do
   before { @request.env["devise.mapping"] = Devise.mappings[:user] }
   let(:attributes) { attributes_for(:user) }
@@ -62,7 +62,7 @@ describe UsersController do
             it { should redirect_to root_url }
           end
           it 'should set eshelf cookie' do
-            expect(subject.cookies['_nyulibraries_eshelf_passthru']).to be_true
+            expect(subject.cookies['_nyulibraries_eshelf_passthru']).to eql "1"
           end
           it { should redirect_to 'https://eshelf.library.edu' }
         end

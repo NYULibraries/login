@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 module Login
   module Aleph
     describe FlatFile::FlatFileLine do
@@ -8,7 +8,7 @@ module Login
           let(:line) { "BOR_ID\t12345678910112\tencrypted_value\t20140101\t03\t0\tELOPER,DEV\tdeveloper@nyu.edu\tY\tPLIF STATUS\tCC\tCOLLEGE\t00\tDEPARTMENT\t00000\tMAJOR\tILL LIBRARY\n" }
           describe "#matches_identifier?" do
             subject { flatfileline.matches_identifier?('12345678910112') }
-            it { should be_true }
+            it { is_expected.to be true }
           end
           describe "#identifier" do
             subject { flatfileline.identifier }
@@ -163,7 +163,7 @@ module Login
         let(:line) { nil }
         describe "#matches_identifier?" do
           subject { flatfileline.matches_identifier?('12345678910112') }
-          it { should be_false }
+          it { is_expected.to be false }
         end
         describe "#identifier" do
           subject { flatfileline.identifier }

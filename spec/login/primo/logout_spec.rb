@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Login::Primo::Logout do
 
@@ -29,7 +29,7 @@ describe Login::Primo::Logout do
   describe '#logout!' do
     subject { logout.logout! }
     context 'when host is valid' do
-      it { should be_true }
+      it { is_expected.to be true }
     end
     context 'when host is invalid' do
       before { logout.instance_variable_set(:@hosts, ['fakehost.com']) }

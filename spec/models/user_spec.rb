@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe User do
   context "when created with factory defaults" do
@@ -28,28 +28,27 @@ describe User do
   context "when provider is nil" do
     subject { build(:user, provider: nil) }
     it "should raise an error" do
-      expect { subject }.to raise_error
+      expect { subject }.to raise_error ArgumentError
     end
   end
 
   context "when provider is not valid" do
     subject { build(:user, provider: "invalid") }
     it "should raise an error" do
-      expect { subject }.to raise_error
+      expect { subject }.to raise_error ArgumentError
     end
   end
 
   context "when provider is shibboleth" do
     subject { build(:user, provider: "shibboleth") }
     it "should raise an error" do
-      expect { subject }.to raise_error
+      expect { subject }.to raise_error ArgumentError
     end
   end
 
   context "when valid" do
     subject(:user) { build(:user, username: 'dev123', email: 'dev123@example.com', institution_code: 'NYUAD', provider: 'nyu_shibboleth') }
-    it { should be_a(User) }
-    it { should be_a_new(User) }
+    it { is_expected.to be_instance_of User }
     it { should be_valid }
 
     describe '#username' do

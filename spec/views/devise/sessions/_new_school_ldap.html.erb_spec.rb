@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe "devise/sessions/_new_school_ldap.html.erb" do
   subject { render; rendered }

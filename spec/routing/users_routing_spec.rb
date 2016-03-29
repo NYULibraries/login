@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 describe "routes for Users" do
   describe "GET /" do
     subject { get('/') }

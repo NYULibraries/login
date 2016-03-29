@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe "devise/sessions/_visitor.html.erb" do
   let(:current_institution) { "nyu" }
