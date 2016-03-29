@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 describe "routes for Devise::Sessions" do
   describe "GET /auth" do
     context "when no auth_type is passed" do

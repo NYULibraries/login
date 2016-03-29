@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 module Login
   module Aleph
     module XService
@@ -33,11 +33,11 @@ module Login
         describe '#error?' do
           subject { bor_info.error? }
           context "when the identifier is valid" do
-            it { should be_false }
+            it { is_expected.to be false }
           end
           context "when the identifier is invalid" do
             let(:identifier) { "INVALID_ID" }
-            it { should be_true }
+            it { is_expected.to be true }
           end
         end
       end

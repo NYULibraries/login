@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 module Doorkeeper
   describe CustomAuthorizationsController do
     let(:application) { create(:oauth_application) }

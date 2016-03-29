@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 describe "NYU Shibboleth Login" do
   before { https!; get("/users/auth/nyu_shibboleth/callback?auth_type=nyu", nil, environment) }
   context "when there is no Shibboleth session in the SP " do

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 module Doorkeeper
   describe AuthorizedApplicationsController do
     set_access_token

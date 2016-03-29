@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 describe WayfController do
   before { @request.env["devise.mapping"] = Devise.mappings[:user] }
 
