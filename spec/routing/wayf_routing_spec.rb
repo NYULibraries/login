@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 describe "routes for Wayf" do
   describe "GET /login" do
     context "when no institution is passed" do
