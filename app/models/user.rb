@@ -70,7 +70,9 @@ class User < ActiveRecord::Base
   def create_or_update_identity_from_omniauth_hash
     # Create or update an identity from the attributes mapped in the mapper
     identity = identities.find_or_initialize_by(uid: omniauth_hash_map.uid, provider: omniauth_hash_map.provider)
-    identity.properties.merge!(omniauth_hash_map.properties) if identity.expired?
-    identity.save
+    if identity.expired?
+      identity.properties.merge!(omniauth_hash_map.properties)
+      identity.save
+    end
   end
 end
