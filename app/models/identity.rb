@@ -20,6 +20,6 @@ class Identity < ActiveRecord::Base
 
   # Identities expire in a week's time.
   def expired?
-    (updated_at.blank? || updated_at < 1.week.ago)
+    (updated_at.blank? || updated_at < 1.day.ago)
   end
 end
