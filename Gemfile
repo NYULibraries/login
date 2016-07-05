@@ -31,6 +31,7 @@ gem 'mustache-rails', github: 'NYULibraries/mustache-rails', :require => 'mustac
 # Use the NYU Libraries assets gem
 gem 'nyulibraries-assets', github: 'NYULibraries/nyulibraries-assets', tag: 'v4.6.2'
 # gem 'nyulibraries-assets', path: '/apps/nyulibraries-assets'
+gem 'nyulibraries_errors', github: 'NYULibraries/nyulibraries_errors', tag: 'v1.0.0'
 
 # Use the NYU Libraries deploy gem
 gem 'formaggio', github: 'NYULibraries/formaggio', tag: 'v1.4.2'
