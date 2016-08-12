@@ -1,13 +1,12 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.1.14.2'
+gem 'rails', '~> 4.2.7.1'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18.0'
 # Use nested hstore to store serialized objects in Active Record hstore
-gem 'nested-hstore', '~> 0.0.5'
-gem 'activerecord-postgres-hstore', '0.7.6' # 0.7.7 Has a PG syntax error in a rake task that causes this to fail
+gem 'nested-hstore', '~> 0.1.2'
 
 # Use SCSS for stylesheets
 # Locked in at beta1 release because major release doesn't play nice with compass-rails yet
