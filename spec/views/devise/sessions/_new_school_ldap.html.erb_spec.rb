@@ -9,8 +9,8 @@ describe "devise/sessions/_new_school_ldap.html.erb" do
     should match('method="post"')
     should match(/action="\/users\/auth\/new_school_ldap\/callback\?institution=/)
     should match('<label for="username">Enter your NetID</label>')
-    should match('<input class="form-control" id="username" name="username"')
+    should match('<input type="text" name="username" id="username"')
     should match('<label for="password">Enter your password</label>')
-    should match('<input class="form-control" id="password" name="password" type="password"')
+    should match('<input type="password" name="password" id="password" class="form-control"')
   end
 end

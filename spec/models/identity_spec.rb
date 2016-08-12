@@ -84,13 +84,13 @@ describe Identity do
       it { should_not be_empty }
 
       describe ':prop1' do
-        subject { properties[:prop1] }
+        subject { properties["prop1"] }
         it { should_not be_nil }
         it { should eql('Property 1') }
       end
 
       describe ':prop2' do
-        subject { properties[:prop2] }
+        subject { properties["prop2"] }
         it { should_not be_nil }
         it { should eql('Property 2') }
       end
@@ -154,49 +154,49 @@ describe Identity do
         it { should_not be_empty }
 
         describe ':name' do
-          subject { properties[:name] }
+          subject { properties["name"] }
           it { should_not be_nil }
           it { should eql('USERNAME, TEST-RECORD') }
         end
 
         describe ':nickname' do
-          subject { properties[:nickname] }
+          subject { properties["nickname"] }
           it { should_not be_nil }
           it { should eql('USERNAME') }
         end
 
         describe ':email' do
-          subject { properties[:email] }
+          subject { properties["email"] }
           it { should_not be_nil }
           it { should eql('username@library.edu') }
         end
 
         describe ':extra' do
-          subject(:extra) { properties[:extra] }
+          subject(:extra) { properties["extra"] }
           it { should_not be_nil }
           it { should be_a(Hash) }
           it { should_not be_empty }
 
           describe ':raw_info' do
-            subject(:raw_info) { extra[:raw_info] }
+            subject(:raw_info) { extra["raw_info"] }
             it { should_not be_nil }
             it { should be_a(Hash) }
             it { should_not be_empty }
 
             describe ':bor_auth' do
-              subject(:bor_auth) { raw_info[:bor_auth] }
+              subject(:bor_auth) { raw_info["bor_auth"] }
               it { should_not be_nil }
               it { should be_a(Hash) }
               it { should_not be_empty }
 
               describe ':z303' do
-                subject(:z303) { bor_auth[:z303] }
+                subject(:z303) { bor_auth["z303"] }
                 it { should_not be_nil }
                 it { should be_a(Hash) }
                 it { should_not be_empty }
 
                 describe ':z303_id' do
-                  subject(:z303_id) { z303[:z303_id] }
+                  subject(:z303_id) { z303["z303_id"] }
                   it { should_not be_nil }
                   it { should eql("USERNAME") }
                 end
