@@ -8,8 +8,8 @@ describe "devise/sessions/_aleph.html.erb" do
     should match('method="post"')
     should match(/action="\/users\/auth\/aleph\/callback\?institution=/)
     should match('<label for="username">')
-    should match('<input class="form-control" id="username" name="username"')
+    should match('<input type="text" name="username" id="username"')
     should match('<label for="password">')
-    should match('<input class="form-control" id="password" name="password" type="password"')
+    should match('<input type="password" name="password" id="password" class="form-control"')
   end
 end
