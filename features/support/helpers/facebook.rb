@@ -14,7 +14,7 @@ module LoginFeatures
     end
 
     def facebook_url
-      user_omniauth_authorize_path(:provider => "facebook")
+      user_facebook_omniauth_authorize_path
     end
 
   end

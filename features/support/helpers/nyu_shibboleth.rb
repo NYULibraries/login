@@ -1,7 +1,7 @@
 module LoginFeatures
   module NYUShibboleth
     def nyu_shibboleth_callback_url(institution = "NYU")
-      user_omniauth_authorize_path({provider: "nyu_shibboleth"}.merge(institution_user(institution)))
+      user_nyu_shibboleth_omniauth_authorize_path(institution_user(institution))
     end
 
     def set_nyu_shibboleth_login_env

@@ -14,7 +14,7 @@ module LoginFeatures
     end
 
     def aleph_url
-      user_omniauth_authorize_path(:provider => "aleph")
+      user_aleph_omniauth_authorize_path
     end
 
   end

@@ -5,7 +5,7 @@
   <!-- Link to NYU Shibboleth auth -->
   <div id="nyu_shibboleth-login" class="col-sm-9 primary-login">
     <div class="alt-login-link">
-      <%= link_to content_tag(:span, t('application.nyu.link_text')), user_omniauth_authorize_path(:nyu_shibboleth, institution: current_institution.code, auth_type: :nyu) %>
+      <%= link_to content_tag(:span, t('application.nyu.link_text')), user_nyu_shibboleth_omniauth_authorize_path(institution: current_institution.code, auth_type: :nyu) %>
       <%= content_tag(:span, t('application.nyu.link_text')) %>
     </div>
   </div>

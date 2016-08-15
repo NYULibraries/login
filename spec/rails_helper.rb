@@ -67,7 +67,7 @@ RSpec.configure do |config|
   FactoryGirl::SyntaxRunner.send(:include, OmniAuthHashMacros)
 
   # Include Devise test helpers
-  config.include Devise::TestHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :controller
 
   # Include User Macros
   config.include UserMacros, type: :controller

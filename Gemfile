@@ -45,7 +45,7 @@ gem 'turbolinks', '~> 2.5.0'
 gem 'jbuilder', '~> 2.0'
 
 # Use devise for our user model
-gem 'devise', '~> 3.5.3'
+gem 'devise', '~> 4.2.0'
 
 # Use Ox for parsing XML
 gem 'ox', '~> 2.2.0'
