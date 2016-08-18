@@ -62,6 +62,7 @@ class User < ActiveRecord::Base
       # If the patron was also found from the loader, update the properties to those
       # since they may be more up to date from the flat file
       identity.properties.merge!(aleph_patron.attributes) if aleph_patron.present?
+      identity.updated_at = Time.now
       identity.save
     end
   end
