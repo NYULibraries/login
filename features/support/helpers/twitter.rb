@@ -14,7 +14,7 @@ module LoginFeatures
     end
 
     def twitter_url
-      user_omniauth_authorize_path(:provider => "twitter")
+      user_twitter_omniauth_authorize_path
     end
 
   end

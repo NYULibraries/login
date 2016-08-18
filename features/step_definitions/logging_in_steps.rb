@@ -63,7 +63,7 @@ end
 
 When(/^I click on the "(.*?)" button$/) do |button|
   if button == "NYU"
-    expect(page).to have_xpath("//a[contains(@href, '#{user_omniauth_authorize_path(:provider => "nyu_shibboleth")}')]")
+    expect(page).to have_xpath("//a[contains(@href, '#{user_nyu_shibboleth_omniauth_authorize_path}')]")
   else
     click_on button
   end

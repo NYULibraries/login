@@ -13,7 +13,9 @@ module Login
         raise Errno::ENOENT unless location && File.exist?(location)
         flat_file_line = nil
         File.open(location,"r:#{encoding}") do |file|
-          while line = file.gets
+          file.each_line do |line|
+            line.chomp!
+            next unless line.downcase[identifier.downcase]
             flat_file_line = FlatFileLine.new(line)
             break if flat_file_line.matches_identifier?(identifier)
             flat_file_line = nil

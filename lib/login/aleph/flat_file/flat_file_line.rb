@@ -14,7 +14,8 @@ module Login
           return if line.nil?
           line_array = line_to_array(line.chomp)
           ATTRIBUTES.each do |attribute|
-            self.send("#{attribute}=", line_array.shift) unless line_array.empty?
+            break if line_array.empty?
+            self.send("#{attribute}=", line_array.shift)
           end
         end
 
@@ -33,9 +34,7 @@ module Login
         # Look up by identifier or barcode
         # If none of the cases match or any of the fields are missing, it's a no
         def matches_identifier?(identifier)
-          (self.identifier.upcase == identifier.upcase || self.barcode.upcase == identifier.upcase)
-        rescue
-          false
+          (self.identifier.try(:upcase) == identifier.upcase || self.barcode.try(:upcase) == identifier.upcase)
         end
 
         private
