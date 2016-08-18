@@ -103,7 +103,7 @@ describe UsersController do
               end
               context "if expired" do
                 before do
-                  existing_identity.update_attribute :updated_at, Time.now - 1.day - 1.hour
+                  existing_identity.update_attribute :updated_at, Time.zone.now - 1.day - 1.hour
                   expect(existing_identity).to be_expired
                 end
                 it "should update" do
@@ -112,7 +112,7 @@ describe UsersController do
                 end
               end
               context "if unexpired" do
-                let(:updated_at){ Time.now - 30.minutes }
+                let(:updated_at){ (Time.zone.now - 30.minutes).round(4) }
                 before do
                   existing_identity.update_attribute :updated_at, updated_at
                   expect(existing_identity).to_not be_expired
