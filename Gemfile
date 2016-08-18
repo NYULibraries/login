@@ -72,7 +72,7 @@ gem 'doorkeeper', '~> 2.2.0'
 gem 'figs', '~> 2.0.0'
 
 gem 'faraday', '~> 0.9.0'
-gem 'faraday_middleware', '~> 0.9.1'
+gem 'faraday_middleware', '~> 0.10.0'
 
 gem 'dalli', '~> 2.7.4'
 
