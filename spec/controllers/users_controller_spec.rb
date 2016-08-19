@@ -68,8 +68,66 @@ describe UsersController do
         end
         context 'when the omniauth.auth.provider is aleph' do
           context 'when the user doesn\'t exist' do
-            let(:identity) { assigns(:user).identities.first }
+            let(:identity) { assigns(:user).identities.last }
             it "should assign an aleph user to @user"do
+              subject
+              expect(assigns(:user)).not_to be_nil
+              expect(assigns(:user)).to be_a(User)
+              expect(assigns(:user)).not_to be_a_new(User)
+              expect(assigns(:user).provider).to eq("aleph")
+              expect(assigns(:user).identities.count).to eq 1
+              expect(identity).not_to be_nil
+              expect(identity).to be_a(Identity)
+              expect(identity.uid).not_to be_nil
+              expect(identity.provider).to eq("aleph")
+              expect(identity.properties).not_to be_nil
+              expect(identity.properties).not_to be_empty
+            end
+            it { should be_redirect }
+            it { should redirect_to root_url }
+          end
+          context "with existing, matching user" do
+            let!(:existing_user){ create(:user, username: (ENV["TEST_ALEPH_USER"] || 'BOR_ID').downcase, provider: 'aleph') }
+            it "should assign existing aleph user to @user" do
+              subject
+              expect(assigns(:user)).to eq existing_user
+            end
+            it { should be_redirect }
+            it { should redirect_to root_url }
+            context "with existing, matching identity" do
+              let!(:existing_identity){ existing_user.identities.first }
+              let(:identity) { assigns(:user).identities.last }
+              it "should assign existing identity to @user.identity" do
+                subject
+                expect(identity).to eq existing_identity
+              end
+              context "if expired" do
+                before do
+                  existing_identity.update_attribute :updated_at, Time.zone.now - 1.day - 1.hour
+                  expect(existing_identity).to be_expired
+                end
+                it "should update" do
+                  subject
+                  expect(identity).to_not be_expired
+                end
+              end
+              context "if unexpired" do
+                let(:updated_at){ (Time.zone.now - 30.minutes).round(4) }
+                before do
+                  existing_identity.update_attribute :updated_at, updated_at
+                  expect(existing_identity).to_not be_expired
+                end
+                it "should not update" do
+                  subject
+                  expect(identity.updated_at).to be >= updated_at
+                end
+              end
+            end
+          end
+          context "with existing, non-matching user" do
+            let!(:existing_user){ create(:user, username: 'xxxxxx', provider: 'aleph') }
+            let(:identity) { assigns(:user).identities.last }
+            it "should assign a new aleph user to @user"do
               subject
               expect(assigns(:user)).not_to be_nil
               expect(assigns(:user)).to be_a(User)
