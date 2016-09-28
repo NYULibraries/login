@@ -66,7 +66,7 @@ gem 'omniauth-ldap', '~> 1.0.4'
 gem 'font-awesome-rails', '~> 4.2.0'
 
 # Use doorkeeper as our OAuth 2.0 provider
-gem 'doorkeeper', '~> 2.2.0'
+gem 'doorkeeper', '~> 4.2.0'
 
 # Figs for configuration
 gem 'figs', '~> 2.0.0'
