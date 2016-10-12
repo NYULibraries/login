@@ -126,3 +126,5 @@ group :test, :cucumber do
   gem 'vcr', '~> 2.9.3'
   gem 'webmock', '>= 1.8.0', '< 1.16'
 end
+
+gem 'honeybadger', '~> 2.0'
