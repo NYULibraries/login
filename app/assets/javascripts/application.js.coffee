@@ -6,7 +6,7 @@
 #= require bootstrap/collapse
 #= require bootstrap/alert
 #= require bootstrap/dropdown
-#= require nyulibraries/popover
+#= require nyulibraries_javascripts/nyulibraries/popover
 $ ->
   # Help Popover
   new window.nyulibraries.HoverPopover("a.nyulibraries-help").init()

@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   ESHELF_COOKIE_NAME = '_nyulibraries_eshelf_passthru'
 
   # Include these helper functions explicitly to make them available to controllers
-  include Nyulibraries::Assets::InstitutionsHelper, UsersHelper
+  include UsersHelper
 
   # After signing out of the logout application,
   # redirect to a "you are logged out, please close your browser" page
