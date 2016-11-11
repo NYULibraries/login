@@ -11,8 +11,6 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
-require 'nyulibraries-assets'
-
 require 'figs'
 # Don't run this initializer on travis.
 Figs.load(stage: Rails.env) unless ENV['TRAVIS']

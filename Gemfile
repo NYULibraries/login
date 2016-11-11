@@ -21,16 +21,15 @@ gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails', '~> 3.1.0'
 # Use modernizr for browser feature detection
 gem 'modernizr-rails', '~> 2.7.0'
-# Use the Compass CSS framework for sprites, etc.
-gem 'compass-rails', '~> 2.0.0'
-# Use mustache for templating
-# Fix to 0.99.4 cuz 0.99.5 broke my shit.
-gem 'mustache', '0.99.4'
-gem 'mustache-rails', github: 'NYULibraries/mustache-rails', :require => 'mustache/railtie'
 # Use the NYU Libraries assets gem
-gem 'nyulibraries-assets', github: 'NYULibraries/nyulibraries-assets', tag: 'v4.6.9'
+gem 'nyulibraries_stylesheets', git: 'https://github.com/NYULibraries/nyulibraries_stylesheets'
+gem 'nyulibraries_templates', git: 'https://github.com/NYULibraries/nyulibraries_templates'
+gem 'nyulibraries_institutions', git: 'https://github.com/NYULibraries/nyulibraries_institutions'
+gem 'nyulibraries_javascripts', git: 'https://github.com/NYULibraries/nyulibraries_javascripts'
 # gem 'nyulibraries-assets', path: '/apps/nyulibraries-assets'
-gem 'nyulibraries_errors', github: 'NYULibraries/nyulibraries_errors', tag: 'v1.0.0'
+gem 'nyulibraries_errors', git: 'https://github.com/NYULibraries/nyulibraries_errors', tag: 'v1.0.0'
+# Use higher version of Compass CSS framework for sprites, etc.
+gem 'compass-rails', '~> 2.0.0'
 
 # Use the NYU Libraries deploy gem
 gem 'formaggio', github: 'NYULibraries/formaggio', tag: 'v1.4.2'

@@ -1,6 +1,6 @@
 module LoginFeatures
   module Locations
-    include Nyulibraries::Assets::InstitutionsHelper
+    include NyulibrariesInstitutions::InstitutionHelper
     def first_ip_for_institution(institution)
       ip_addresses = institutions[institution.to_sym].ip_addresses
       if ip_addresses.present?
