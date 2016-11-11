@@ -21,12 +21,6 @@ gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails', '~> 3.1.0'
 # Use modernizr for browser feature detection
 gem 'modernizr-rails', '~> 2.7.0'
-# Use the Compass CSS framework for sprites, etc.
-gem 'compass-rails', '~> 2.0.0'
-# Use mustache for templating
-# Fix to 0.99.4 cuz 0.99.5 broke my shit.
-gem 'mustache', '0.99.4'
-gem 'mustache-rails', github: 'NYULibraries/mustache-rails', :require => 'mustache/railtie'
 # Use the NYU Libraries assets gem
 gem 'nyulibraries_stylesheets', git: 'https://github.com/NYULibraries/nyulibraries_stylesheets'
 gem 'nyulibraries_templates', git: 'https://github.com/NYULibraries/nyulibraries_templates'

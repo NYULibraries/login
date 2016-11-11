@@ -15,14 +15,6 @@ GIT
       rvm-capistrano (~> 1.5)
 
 GIT
-  remote: git://github.com/NYULibraries/mustache-rails.git
-  revision: d219b298ddc94ca0c4b749125a803f74157ddd03
-  specs:
-    mustache-rails (0.2.3)
-      actionpack (>= 3.1)
-      mustache (~> 0.99.4)
-
-GIT
   remote: https://github.com/NYULibraries/nyulibraries_errors
   revision: c77c8c8a8699d5af7ceb2775fe6ac7aa81f6a5f5
   tag: v1.0.0
@@ -150,10 +142,6 @@ GEM
       sass (>= 3.3.0, < 3.5)
     compass-import-once (1.0.5)
       sass (>= 3.2, < 3.5)
-    compass-rails (2.0.5)
-      compass (~> 1.0.0)
-      sass-rails (< 5.1)
-      sprockets (< 2.13)
     coveralls (0.7.12)
       multi_json (~> 1.10)
       rest-client (>= 1.6.8, < 2)
@@ -250,7 +238,6 @@ GEM
     multi_test (0.1.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
-    mustache (0.99.4)
     nested-hstore (0.1.2)
       activerecord
       activesupport
@@ -460,7 +447,6 @@ DEPENDENCIES
   better_errors (~> 2.0.0)
   binding_of_caller (~> 0.7.2)
   coffee-rails (~> 4.0.0)
-  compass-rails (~> 2.0.0)
   coveralls (~> 0.7.0)
   cucumber-rails (~> 1.4.1)
   dalli (~> 2.7.4)
@@ -478,8 +464,6 @@ DEPENDENCIES
   jquery-rails (~> 3.1.0)
   json_spec (~> 1.1.4)
   modernizr-rails (~> 2.7.0)
-  mustache (= 0.99.4)
-  mustache-rails!
   nested-hstore (~> 0.1.2)
   newrelic_rpm (~> 3.12.0)
   nyulibraries_errors!
