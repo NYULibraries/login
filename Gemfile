@@ -28,6 +28,8 @@ gem 'nyulibraries_institutions', git: 'https://github.com/NYULibraries/nyulibrar
 gem 'nyulibraries_javascripts', git: 'https://github.com/NYULibraries/nyulibraries_javascripts'
 # gem 'nyulibraries-assets', path: '/apps/nyulibraries-assets'
 gem 'nyulibraries_errors', git: 'https://github.com/NYULibraries/nyulibraries_errors', tag: 'v1.0.0'
+# Use higher version of Compass CSS framework for sprites, etc.
+gem 'compass-rails', '~> 2.0.0'
 
 # Use the NYU Libraries deploy gem
 gem 'formaggio', github: 'NYULibraries/formaggio', tag: 'v1.4.2'
