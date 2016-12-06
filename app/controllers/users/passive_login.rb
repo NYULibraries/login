@@ -58,7 +58,7 @@ module Users
       origin = params[:origin] if params[:origin]
       # If there is a session, authenticate the user
       if shib_session_exists?
-        redirect_to user_nyu_shibboleth_omniauth_authorize_path(institute: current_institute.code, auth_type: :nyu, origin: origin)
+        redirect_to user_nyu_shibboleth_omniauth_authorize_path(institute: current_institution.code, auth_type: :nyu, origin: origin)
       # If there is no session, redirect back to the last action
       else
         redirect_to origin || root_url
