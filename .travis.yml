@@ -13,7 +13,7 @@ env:
     - ALEPH_HOST=aleph.library.edu
     - ALEPH_LIBRARY=ALEPH
     - ALEPH_SUB_LIBRARY=BET
-    - SHIBBOLETH_LOGOUT_URL=https://aqa.home.nyu.edu/sso/UI/Logout
+    - SHIBBOLETH_LOGOUT_URL=http://aqa.home.nyu.edu/sso/UI/Logout
     - PDS_URL=https://pdsdev.library.nyu.edu
     - BOBCAT_URL=http://bobcatdev.library.nyu.edu
 
@@ -21,10 +21,8 @@ before_script:
   - psql -c 'create database login_test;' -U $LOGIN_DB_USER
   - bundle exec rake db:schema:load RAILS_ENV=test
 
-bundler_args: --without development
-
-script: "bundle exec rake"
-
 notifications:
   email:
     - lib-webservices@nyu.edu
+
+cache: bundler

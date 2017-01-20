@@ -85,8 +85,6 @@ gem 'newrelic_rpm', '~> 3.12.0'
 
 # Development gems
 group :development do
-  gem 'pry', '~> 0.10.1'
-  gem 'pry-remote', '~> 0.1.8'
   gem 'better_errors', '~> 2.0.0', platform: :ruby
   gem 'binding_of_caller', '~> 0.7.2', platform: :ruby
 end
@@ -112,4 +110,9 @@ group :test, :cucumber do
   gem 'json_spec', '~> 1.1.4'
   gem 'rspec-its', '~> 1.2.0'
   gem 'faker', '~> 1.6.6'
+end
+
+group :test, :cucumber, :development do
+  gem 'pry', '~> 0.10.1'
+  gem 'pry-remote', '~> 0.1.8'
 end
