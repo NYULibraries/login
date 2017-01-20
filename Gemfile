@@ -83,33 +83,10 @@ end
 # New Relic performance monitoring
 gem 'newrelic_rpm', '~> 3.12.0'
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
-# Development and testing gems
-group :development, :test, :cucumber do
-  # Rspec as the test framework
-  gem 'rspec-rails', '~> 3.4.2'
-  # Phantomjs for headless browser testing
-  gem 'phantomjs', '>= 1.9.7'
-  gem 'poltergeist', '~> 1.6.0'
-  # Use factory girl for creating models
-  gem 'factory_girl_rails', '~> 4.4.1'
-  # Use json_spec to do rspec tests with JSON
-  gem 'json_spec', '~> 1.1.4'
-  gem 'pry', '~> 0.10.1'
-  gem 'pry-remote', '~> 0.1.8'
-  gem 'rspec-its', '~> 1.2.0'
-end
-
 # Development gems
 group :development do
+  gem 'pry', '~> 0.10.1'
+  gem 'pry-remote', '~> 0.1.8'
   gem 'better_errors', '~> 2.0.0', platform: :ruby
   gem 'binding_of_caller', '~> 0.7.2', platform: :ruby
 end
@@ -124,4 +101,15 @@ group :test, :cucumber do
   gem 'database_cleaner', '~> 1.3.0'
   gem 'vcr', '~> 2.9.3'
   gem 'webmock', '>= 1.8.0', '< 1.16'
+  # Rspec as the test framework
+  gem 'rspec-rails', '~> 3.4.2'
+  # Phantomjs for headless browser testing
+  gem 'phantomjs', '>= 1.9.7'
+  gem 'poltergeist', '~> 1.6.0'
+  # Use factory girl for creating models
+  gem 'factory_girl_rails', '~> 4.4.1'
+  # Use json_spec to do rspec tests with JSON
+  gem 'json_spec', '~> 1.1.4'
+  gem 'rspec-its', '~> 1.2.0'
+  gem 'faker', '~> 1.6.6'
 end
