@@ -9,8 +9,8 @@ class Identity < ActiveRecord::Base
   # Properties is an Hstore column type
   validates :properties, presence: true
 
-  # Must have a unique uid per provider
-  validates :uid, uniqueness: { scope: :provider }
+  # Must have a unique uid per provider/user
+  validates :uid, uniqueness: { scope: [:user_id, :provider] }
 
   # Must have a valid provider
   validates :provider, inclusion: { in: VALID_PROVIDERS }

@@ -3,96 +3,95 @@ require 'rails_helper'
 describe Identity do
   context "when created with factory defaults" do
     subject { create(:identity) }
-    it { should be_valid }
-    it { should_not be_expired }
+    it { is_expected.to be_valid }
+    it { is_expected.to_not be_expired }
   end
 
   context "when uid is nil" do
     subject { build(:identity, uid: nil) }
-    it { should_not be_valid }
+    it { is_expected.to_not be_valid }
   end
 
   context "when uid is not unique for the same provider" do
-    before { create(:identity, provider: 'twitter') }
-    subject { build(:identity, provider: 'twitter') }
-    it { should_not be_valid }
+    let!(:user1) { create(:user, username: Faker::Internet.user_name) }
+    let!(:user2) { create(:user, username: Faker::Internet.user_name) }
+    let(:identity) { build(:identity, provider: 'twitter', user: user) }
+    before { create(:identity, provider: 'twitter', user: user1) }
+    subject { identity }
+    context 'and the user is the same' do
+      let(:user) { user1 }
+      it { is_expected.to_not be_valid }
+    end
+    context 'but the user is different' do
+      let(:user) { user2 }
+      it { is_expected.to be_valid }
+    end
   end
 
   context "when uid is not unique for different providers" do
     before { create(:identity, provider: 'twitter') }
     subject { create(:identity, provider: 'aleph') }
-    it { should be_valid }
+    it { is_expected.to be_valid }
   end
 
   context "when provider is nil" do
     subject { build(:identity, provider: nil) }
-    it { should_not be_valid }
+    it { is_expected.to_not be_valid }
   end
 
   context "when provider is nyu_shibboleth" do
     subject { build(:identity, provider: "nyu_shibboleth") }
-    it { should be_valid }
+    it { is_expected.to be_valid }
   end
 
   context "when provider is not valid" do
     subject { build(:identity, provider: "invalid") }
-    it { should_not be_valid }
+    it { is_expected.to_not be_valid }
   end
 
   context "when provider is shibboleth" do
     subject { build(:identity, provider: "shibboleth") }
-    it { should_not be_valid }
+    it { is_expected.to_not be_valid }
   end
 
   context "when properties is nil" do
     subject { build(:identity, properties: nil) }
-    it { should_not be_valid }
+    it { is_expected.to_not be_valid }
   end
 
   context "when valid" do
     subject(:identity) { build(:identity) }
-    it { should be_valid }
-    it { should be_expired }
-
-    # describe '#user' do
-    #   subject(:user) { identity.user }
-    #   it { should be_a User }
-    #
-    #   describe '#username' do
-    #     subject { user.username }
-    #     it { should_not be_nil }
-    #     it { should eql("developer") }
-    #   end
-    # end
+    it { is_expected.to be_valid }
+    it { is_expected.to be_expired }
 
     describe '#provider' do
       subject { identity.provider }
-      it { should_not be_nil }
-      it { should eql("twitter") }
+      it { is_expected.to_not be_nil }
+      it { is_expected.to eql("twitter") }
     end
 
     describe '#uid' do
       subject { identity.uid }
-      it { should_not be_nil }
-      it { should eql("1234567890") }
+      it { is_expected.to_not be_nil }
+      it { is_expected.to eql("1234567890") }
     end
 
     describe '#properties' do
       subject(:properties) { identity.properties }
-      it { should_not be_nil }
-      it { should be_a(Hash) }
-      it { should_not be_empty }
+      it { is_expected.to_not be_nil }
+      it { is_expected.to be_a(Hash) }
+      it { is_expected.to_not be_empty }
 
       describe ':prop1' do
         subject { properties["prop1"] }
-        it { should_not be_nil }
-        it { should eql('Property 1') }
+        it { is_expected.to_not be_nil }
+        it { is_expected.to eql('Property 1') }
       end
 
       describe ':prop2' do
         subject { properties["prop2"] }
-        it { should_not be_nil }
-        it { should eql('Property 2') }
+        it { is_expected.to_not be_nil }
+        it { is_expected.to eql('Property 2') }
       end
     end
   end
@@ -100,105 +99,94 @@ describe Identity do
   context "when Aleph identity" do
     context "when created with factory defaults" do
       subject { create(:aleph_identity) }
-      it { should be_valid }
-      it { should_not be_expired }
+      it { is_expected.to be_valid }
+      it { is_expected.to_not be_expired }
     end
 
     context "when uid is nil" do
       subject { build(:aleph_identity, uid: nil) }
-      it { should_not be_valid }
+      it { is_expected.to_not be_valid }
     end
 
     context "when provider is nil" do
       subject { build(:aleph_identity, provider: nil) }
-      it { should_not be_valid }
+      it { is_expected.to_not be_valid }
     end
 
     context "when properties is nil" do
       subject { build(:aleph_identity, properties: nil) }
-      it { should_not be_valid }
+      it { is_expected.to_not be_valid }
     end
 
     context "when valid" do
       subject(:identity) { build(:aleph_identity) }
-      it { should be_valid }
-      it { should be_expired }
-
-      # describe '#user' do
-      #   subject(:user) { identity.user }
-      #   it { should be_a User }
-      #
-      #   describe '#username' do
-      #     subject { user.username }
-      #     it { should_not be_nil }
-      #     it { should eql("developer") }
-      #   end
-      # end
+      it { is_expected.to be_valid }
+      it { is_expected.to be_expired }
 
       describe '#provider' do
         subject { identity.provider }
-        it { should_not be_nil }
-        it { should eql("aleph") }
+        it { is_expected.to_not be_nil }
+        it { is_expected.to eql("aleph") }
       end
 
       describe '#uid' do
         subject { identity.uid }
-        it { should_not be_nil }
-        it { should eql("USERNAME") }
+        it { is_expected.to_not be_nil }
+        it { is_expected.to eql("USERNAME") }
       end
 
       describe '#properties' do
         subject(:properties) { identity.properties }
-        it { should_not be_nil }
-        it { should be_a(Hash) }
-        it { should_not be_empty }
+        it { is_expected.to_not be_nil }
+        it { is_expected.to be_a(Hash) }
+        it { is_expected.to_not be_empty }
 
         describe ':name' do
           subject { properties["name"] }
-          it { should_not be_nil }
-          it { should eql('USERNAME, TEST-RECORD') }
+          it { is_expected.to_not be_nil }
+          it { is_expected.to eql('USERNAME, TEST-RECORD') }
         end
 
         describe ':nickname' do
           subject { properties["nickname"] }
-          it { should_not be_nil }
-          it { should eql('USERNAME') }
+          it { is_expected.to_not be_nil }
+          it { is_expected.to eql('USERNAME') }
         end
 
         describe ':email' do
           subject { properties["email"] }
-          it { should_not be_nil }
-          it { should eql('username@library.edu') }
+          it { is_expected.to_not be_nil }
+          it { is_expected.to eql('username@library.edu') }
         end
 
         describe ':extra' do
           subject(:extra) { properties["extra"] }
-          it { should_not be_nil }
-          it { should be_a(Hash) }
-          it { should_not be_empty }
+          it { is_expected.to_not be_nil }
+          it { is_expected.to be_a(Hash) }
+          it { is_expected.to_not be_empty }
 
           describe ':raw_info' do
             subject(:raw_info) { extra["raw_info"] }
-            it { should_not be_nil }
-            it { should be_a(Hash) }
-            it { should_not be_empty }
+            it { is_expected.to_not be_nil }
+            it { is_expected.to be_a(Hash) }
+            it { is_expected.to_not be_empty }
 
             describe ':bor_auth' do
               subject(:bor_auth) { raw_info["bor_auth"] }
-              it { should_not be_nil }
-              it { should be_a(Hash) }
-              it { should_not be_empty }
+              it { is_expected.to_not be_nil }
+              it { is_expected.to be_a(Hash) }
+              it { is_expected.to_not be_empty }
 
               describe ':z303' do
                 subject(:z303) { bor_auth["z303"] }
-                it { should_not be_nil }
-                it { should be_a(Hash) }
-                it { should_not be_empty }
+                it { is_expected.to_not be_nil }
+                it { is_expected.to be_a(Hash) }
+                it { is_expected.to_not be_empty }
 
                 describe ':z303_id' do
                   subject(:z303_id) { z303["z303_id"] }
-                  it { should_not be_nil }
-                  it { should eql("USERNAME") }
+                  it { is_expected.to_not be_nil }
+                  it { is_expected.to eql("USERNAME") }
                 end
               end
             end

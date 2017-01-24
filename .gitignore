@@ -41,3 +41,5 @@ wiki
 features/cassettes/get_access_token.yml
 
 .vagrant
+
+lib/tasks/local.rake
