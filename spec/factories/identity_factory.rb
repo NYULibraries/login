@@ -255,8 +255,7 @@ FactoryGirl.define do
             givenname: ["Jon"],
             mail: ["snowj@1newschool.edu"],
             sn: ["Snow"],
-            uid: ["snowj"],
-            cn: ["N12345"]
+            uid: ["snowj"]
           }
         }
       })
