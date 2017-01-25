@@ -262,4 +262,37 @@ http_interactions:
         Test</z304-address-0>\n<z304-zip></z304-zip>\n<z304-email-address></z304-email-address>\n<z304-telephone></z304-telephone>\n<z304-date-from>20140522</z304-date-from>\n<z304-date-to>20990724</z304-date-to>\n<z304-address-type>01</z304-address-type>\n<z304-telephone-2></z304-telephone-2>\n<z304-telephone-3></z304-telephone-3>\n<z304-telephone-4></z304-telephone-4>\n<z304-sms-number></z304-sms-number>\n<z304-update-date>20140522</z304-update-date>\n<z304-cat-name>MONTELEONE</z304-cat-name>\n<z304-upd-time-stamp>200001011200000</z304-upd-time-stamp>\n</z304>\n<z305>\n<z305-id>J001</z305-id>\n<z305-sub-library>NYU50</z305-sub-library>\n<z305-open-date>05/22/2014</z305-open-date>\n<z305-update-date>05/22/2014</z305-update-date>\n<z305-bor-type></z305-bor-type>\n<z305-bor-status>10</z305-bor-status>\n<z305-registration-date>00000000</z305-registration-date>\n<z305-expiry-date>08/31/2014</z305-expiry-date>\n<z305-note></z305-note>\n<z305-loan-permission>N</z305-loan-permission>\n<z305-photo-permission>Y</z305-photo-permission>\n<z305-over-permission>Y</z305-over-permission>\n<z305-multi-hold>N</z305-multi-hold>\n<z305-loan-check>N</z305-loan-check>\n<z305-hold-permission>N</z305-hold-permission>\n<z305-renew-permission>N</z305-renew-permission>\n<z305-rr-permission>N</z305-rr-permission>\n<z305-ignore-late-return>N</z305-ignore-late-return>\n<z305-last-activity-date></z305-last-activity-date>\n<z305-photo-charge>C</z305-photo-charge>\n<z305-no-loan>0000</z305-no-loan>\n<z305-no-hold>0000</z305-no-hold>\n<z305-no-photo>0000</z305-no-photo>\n<z305-no-cash>0000</z305-no-cash>\n<z305-cash-limit>0.00</z305-cash-limit>\n<z305-credit-debit></z305-credit-debit>\n<z305-sum>0.00</z305-sum>\n<z305-delinq-1>00</z305-delinq-1>\n<z305-delinq-n-1></z305-delinq-n-1>\n<z305-delinq-1-update-date>00000000</z305-delinq-1-update-date>\n<z305-delinq-1-cat-name></z305-delinq-1-cat-name>\n<z305-delinq-2>00</z305-delinq-2>\n<z305-delinq-n-2></z305-delinq-n-2>\n<z305-delinq-2-update-date>00000000</z305-delinq-2-update-date>\n<z305-delinq-2-cat-name></z305-delinq-2-cat-name>\n<z305-delinq-3>00</z305-delinq-3>\n<z305-delinq-n-3></z305-delinq-n-3>\n<z305-delinq-3-update-date>00000000</z305-delinq-3-update-date>\n<z305-delinq-3-cat-name></z305-delinq-3-cat-name>\n<z305-field-1></z305-field-1>\n<z305-field-2></z305-field-2>\n<z305-field-3></z305-field-3>\n<z305-hold-on-shelf>N</z305-hold-on-shelf>\n<z305-end-block-date></z305-end-block-date>\n<z305-booking-permission>N</z305-booking-permission>\n<z305-booking-ignore-hours>N</z305-booking-ignore-hours>\n<z305-rush-cat-request>N</z305-rush-cat-request>\n<z305-upd-time-stamp>200001011200000</z305-upd-time-stamp>\n</z305>\n<session-id>H1PM8M5RN3S2RKDUX8LJSGKV48KRNDBL466DT42LB2FM1QH1CF</session-id>\n</bor-info>\n "
     http_version: 
   recorded_at: Tue, 16 Feb 2016 20:39:52 GMT
+- request:
+    method: post
+    uri: https://collector.newrelic.com/agent_listener/14//get_redirect_host?marshal_format=json
+    body:
+      encoding: UTF-8
+      string: "[]"
+    headers:
+      Content-Encoding:
+      - identity
+      Host:
+      - collector.newrelic.com
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - NewRelic-RubyAgent/3.12.1.298 (ruby 2.3.1 x86_64-darwin15) zlib/1.2.5
+      Content-Type:
+      - application/octet-stream
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/plain
+      Content-Length:
+      - '133'
+    body:
+      encoding: UTF-8
+      string: '{"exception":{"message":"Invalid license key, please contact support@newrelic.com","error_type":"NewRelic::Agent::LicenseException"}}'
+    http_version: 
+  recorded_at: Wed, 25 Jan 2017 21:57:18 GMT
 recorded_with: VCR 2.9.3
