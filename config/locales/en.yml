@@ -75,10 +75,9 @@ en:
     nysid:
       header: Login with your NYSID ID number
       link_text: NYSID
-      username_label: Enter D followed by your ID Number
-      username_placeholder: "e.g. D123456"
-      password_label: Enter your last name up to the first four letters
-      password_help_text: Leave out spaces (e.g., De Santo = desa)
+      username_label: Enter your ID Number
+      username_placeholder: "e.g. 123456"
+      password_label: First four letters of your last name
       ask_a_librarian: "http://library.nysid.edu/library/about-the-library/contact-us/"
       wayf_footer_popover_header_html: Online Access to New York School of Interior Design Library
     bobst:
