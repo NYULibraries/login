@@ -1,3 +1,4 @@
+#!/usr/bin/env rake
 # Add your own tasks in files placed in lib/tasks ending in .rake,
 # for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
 
@@ -12,5 +13,5 @@ if Rails.env.test?
   # Add the coveralls task as the default with the appropriate prereqs
   require 'coveralls/rake/task'
   Coveralls::RakeTask.new
-  task default: 'coveralls:push'
+  task :default => [:spec, :cucumber, 'coveralls:push']
 end

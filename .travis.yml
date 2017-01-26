@@ -17,6 +17,10 @@ env:
     - PDS_URL=https://pdsdev.library.nyu.edu
     - BOBCAT_URL=http://bobcatdev.library.nyu.edu
 
+before_install:
+  - gem update bundler
+  - bundle config --local github.https true
+
 before_script:
   - psql -c 'create database login_test;' -U $LOGIN_DB_USER
   - bundle exec rake db:schema:load RAILS_ENV=test
