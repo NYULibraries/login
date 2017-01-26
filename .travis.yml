@@ -18,7 +18,6 @@ env:
     - BOBCAT_URL=http://bobcatdev.library.nyu.edu
 
 before_script:
-  - bundle config --global github.https true
   - psql -c 'create database login_test;' -U $LOGIN_DB_USER
   - bundle exec rake db:schema:load RAILS_ENV=test
 
@@ -26,4 +25,4 @@ notifications:
   email:
     - lib-webservices@nyu.edu
 
-# cache: bundler
+cache: bundler
