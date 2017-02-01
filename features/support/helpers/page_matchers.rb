@@ -61,9 +61,10 @@ module LoginFeatures
     def nysid_login_matchers
       @nysid_login_matchers ||= [
         -> { have_content 'Login with your NYSID ID number' },
-        -> { have_selector("input[placeholder='e.g. 123456']") },
-        -> { have_content 'Enter your ID Number' },
-        -> { have_content 'First four letters of your last name' },
+        -> { have_selector("input[placeholder='e.g. D123456']") },
+        -> { have_content 'Enter D followed by your ID Number' },
+        -> { have_content 'Enter your last name up to the first four letters' },
+        -> { have_content 'Leave out spaces (e.g., De Santo = desa)' },
         -> { have_link("Ask a Librarian", { href: "http://library.nysid.edu/library/about-the-library/contact-us/"}) }
       ]
     end
