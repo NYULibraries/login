@@ -39,9 +39,10 @@ GIT
 
 GIT
   remote: https://github.com/NYULibraries/nyulibraries_stylesheets.git
-  revision: 6c5b298640984390108c291d7b4e98ea0d4f01f4
+  revision: 624975c97ef327fae9876714951cf64cb0e34603
+  tag: v1.0.1
   specs:
-    nyulibraries_stylesheets (1.0.0)
+    nyulibraries_stylesheets (1.0.1)
       bootstrap-sass (~> 3.2)
       compass (>= 1.0.1)
 
@@ -94,7 +95,7 @@ GEM
     addressable (2.5.0)
       public_suffix (~> 2.0, >= 2.0.2)
     arel (6.0.4)
-    autoprefixer-rails (6.7.0)
+    autoprefixer-rails (6.7.2)
       execjs
     bcrypt (3.1.11)
     better_errors (2.0.0)
@@ -348,7 +349,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (10.5.0)
     rb-fsevent (0.9.8)
-    rb-inotify (0.9.7)
+    rb-inotify (0.9.8)
       ffi (>= 0.5.0)
     rdoc (4.3.0)
     ref (2.0.0)
@@ -509,4 +510,4 @@ DEPENDENCIES
   webmock (>= 1.8.0, < 1.16)
 
 BUNDLED WITH
-   1.14.2
+   1.14.3

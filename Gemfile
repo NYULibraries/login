@@ -24,7 +24,7 @@ gem 'jquery-rails', '~> 3.1.0'
 # Use modernizr for browser feature detection
 gem 'modernizr-rails', '~> 2.7.0'
 # Use the NYU Libraries assets gem
-gem 'nyulibraries_stylesheets', github: 'NYULibraries/nyulibraries_stylesheets'#, tag: 'v1.0.0'
+gem 'nyulibraries_stylesheets', github: 'NYULibraries/nyulibraries_stylesheets', tag: 'v1.0.1'
 gem 'nyulibraries_templates', github: 'NYULibraries/nyulibraries_templates', tag: 'v1.0.0'
 gem 'nyulibraries_institutions', github: 'NYULibraries/nyulibraries_institutions', tag: 'v1.0.0'
 gem 'nyulibraries_javascripts', github: 'NYULibraries/nyulibraries_javascripts', tag: 'v1.0.0'
