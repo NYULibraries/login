@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+# Run `bundle config --global github.https true` on the server to quiet warnings
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.2.7.1'
 
@@ -10,7 +12,7 @@ gem 'nested-hstore', '~> 0.1.2'
 
 # Use SCSS for stylesheets
 # Locked in at beta1 release because major release doesn't play nice with compass-rails yet
-gem 'sass-rails', '5.0.0.beta1'
+gem 'sass-rails', '~> 5.0.6'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
@@ -22,12 +24,12 @@ gem 'jquery-rails', '~> 3.1.0'
 # Use modernizr for browser feature detection
 gem 'modernizr-rails', '~> 2.7.0'
 # Use the NYU Libraries assets gem
-gem 'nyulibraries_stylesheets', git: 'https://github.com/NYULibraries/nyulibraries_stylesheets', tag: 'v1.0.0'
-gem 'nyulibraries_templates', git: 'https://github.com/NYULibraries/nyulibraries_templates', tag: 'v1.0.0'
-gem 'nyulibraries_institutions', git: 'https://github.com/NYULibraries/nyulibraries_institutions', tag: 'v1.0.0'
-gem 'nyulibraries_javascripts', git: 'https://github.com/NYULibraries/nyulibraries_javascripts', tag: 'v1.0.0'
+gem 'nyulibraries_stylesheets', github: 'NYULibraries/nyulibraries_stylesheets'#, tag: 'v1.0.0'
+gem 'nyulibraries_templates', github: 'NYULibraries/nyulibraries_templates', tag: 'v1.0.0'
+gem 'nyulibraries_institutions', github: 'NYULibraries/nyulibraries_institutions', tag: 'v1.0.0'
+gem 'nyulibraries_javascripts', github: 'NYULibraries/nyulibraries_javascripts', tag: 'v1.0.0'
 # gem 'nyulibraries-assets', path: '/apps/nyulibraries-assets'
-gem 'nyulibraries_errors', git: 'https://github.com/NYULibraries/nyulibraries_errors', tag: 'v1.0.0'
+gem 'nyulibraries_errors', github: 'NYULibraries/nyulibraries_errors', tag: 'v1.0.0'
 # Use higher version of Compass CSS framework for sprites, etc.
 gem 'compass-rails', '~> 2.0.0'
 

@@ -71,16 +71,16 @@ end
 
 When(/^I enter my Library Patron ID for "(.*?)" and first four letters of my last name$/) do |location|
   within("#aleph") do
-    fill_in 'Enter your', with: username_for_location(location)
-    fill_in 'First four letters of your last name', with: password_for_location(location)
+    fill_in 'username', with: username_for_location(location)
+    fill_in 'password', with: password_for_location(location)
     click_button 'Login'
   end
 end
 
 When(/^I incorrectly enter my Library Patron ID and first four letters of my last name$/) do
   within("#aleph") do
-    fill_in 'Enter your', with: 'copper'
-    fill_in 'First four letters of your last name', with: 'onion'
+    fill_in 'username', with: 'copper'
+    fill_in 'password', with: 'onion'
     click_button 'Login'
   end
 end
