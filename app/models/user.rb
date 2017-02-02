@@ -10,6 +10,10 @@ class User < ActiveRecord::Base
 
   attr_reader :omniauth_hash_map
 
+  scope :non_admin, -> { where(admin: false) }
+  scope :admin, -> { where(admin: true) }
+  scope :inactive, -> { where("last_sign_in_at IS NULL OR last_sign_in_at < ?", 1.year.ago) }
+
   # Create an identity from Aleph if the user is in Aleph
   after_save :create_or_update_aleph_identity, if: -> { omniauth_hash_map.present? && omniauth_hash_map.nyuidn.present? }
   # Create an identity from the OmniAuth::AuthHash after the user is created

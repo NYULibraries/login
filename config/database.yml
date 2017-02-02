@@ -43,7 +43,7 @@ development:
 # Do not set this db to the same as development or production.
 test: &test
   <<: *local
-  database: login_test
+  database: <%= (ENV['LOGIN_TEST_DB_DATABASE'] || "login_test") %>
 
 staging:
   <<: *remote

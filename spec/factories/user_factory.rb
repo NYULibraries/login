@@ -7,6 +7,7 @@ FactoryGirl.define do
     current_sign_in_at Time.now
     admin false
     provider "twitter"
+    last_sign_in_at Time.now
 
     trait :twitter do
       provider "twitter"
@@ -43,6 +44,7 @@ FactoryGirl.define do
     institution_code 'NYU'
     provider "facebook"
     current_sign_in_at Time.now
+    last_sign_in_at Time.now
     admin true
     after(:build) {|user| user.omniauth_hash_map = authhash_map(user.provider) unless user.omniauth_hash_map.present? }
   end
