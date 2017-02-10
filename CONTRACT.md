@@ -1,11 +1,10 @@
 # Contract
 
-The NYU Libraries Central Login system is an OAuth2 provider that allows automatic authentication. Because of this, we have very strict requirements for becoming a client application. The documentation on the process of becoming a client application will be coming soon. As an Oauth2 provider, all calls are made over HTTPS calls.
+The NYU Libraries Login system is an OAuth2 provider that allows automatic authentication. Because of this, we have very strict requirements for becoming a client application. The documentation on the process of becoming a client application can be found in the [getting started guide](/NYULibraries/login/blob/master/GETTING_STARTED.md). As an Oauth2 provider, all calls are made over HTTPS.
 
 ## Adding your application as a client
 
-When you have become verified, you will have to provide us with a Callback URL. The callback URL is the URL endpoint that the authentication system will send data to.
-
+When you have become verified, you will have to provide us with a Callback URL. The callback URL is the endpoint to which the authentication system will send data.
 
 # Configuration
 
@@ -25,10 +24,7 @@ Before you can begin authenticating users, your application will need an Access 
  Location: CALLBACK_URL?code=ACCESS_TOKEN&state=STATE_TOKEN
  ```
 
-
-
 __STATE_TOKEN__ - The State token is a anti-forgery measure that creates a state session between your application and the central Login system. You can create a state token by randomly generating a large number of characters, or hashing some state variables. In any case, the state token should be large and random. Finally, you must then set a session variable in your application named 'state' with the __STATE_TOKEN__ value.
-
 
 Now you are ready to obtain an Access Token, this is an example request, to be replaced with appropriate values.
 
@@ -37,8 +33,6 @@ $ curl -H "Accept: text/javascript" "localhost:3000/oauth/authorize?client_id=CL
 You need to sign in or sign up before continuing.
 ```
 Upon requesting an access token, the login system will give the user the option to login. After logging in, it will redirect back to your application.
-
-
 
 This will hit your Callback URL with the appropriate token. Your callback URL is responsible for storing this token for future API calls.
 
@@ -78,8 +72,7 @@ HTTP/1.1 200 OK
 {"id":1,"username":"username",...,"identities":[{...},...]}
 ```
 
-Finally, you are able to access the user information by running a request for the user resource as a `json`.
-
+Finally, you are able to access the user information by running a request for the user resource as `json`.
 
 This is an example request, to be replaced with appropriate values.
 ```
@@ -93,11 +86,11 @@ If you are using a Rack Based application, you have free reign to use the [omnia
 
 ## Passive Login
 
-The NYU Libraries Central Login system allows users to passively login to your app if the user has already logged into the main provider. This can be implemented using HTTP redirects.
+The NYU Libraries Login system allows users to passively login to your app if the user has already logged into the main provider. This can be implemented using HTTP redirects.
 
 ### Passive Login Flow
 
-The idea behind the passive login is as follows. When the user hits your app, and is not logged in, your app checks to see if a certain cookie exists. We call it `_check_passive_login`. If the cookie exists, then the app knows that the user has visited the app before and was not logged in to the central login system. If the cookie doesn't exist, the app should check to see if the user is indeed logged in. To do this it sets the aforementioned cookie, and then redirects to Login's passive check URI with certain parameters.
+When the user hits your application, and is not logged in, your app checks to see if a certain cookie exists. We call it `_check_passive_login`. If the cookie exists, then the app knows that the user has visited the app before and was not logged in to the central login system. If the cookie doesn't exist, the app should check to see if the user is indeed logged in. To do this it sets the aforementioned cookie, and then redirects to Login's passive check URI with certain parameters.
 
 ```
 LOGIN_URL/login/passive?client_id=APP_ID&return_uri=RETURN_URI
