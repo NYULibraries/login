@@ -7,6 +7,7 @@
 ENV['RAILS_ENV'] = 'cucumber'
 
 require 'cucumber/rails'
+binding.pry
 # Include these helpers so we can stub the IP addresses
 require 'cucumber/rspec/doubles'
 

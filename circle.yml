@@ -1,6 +1,5 @@
 machine:
   environment:
-    LOGIN_DB_USER: postgres
     LOGIN_SECRET_TOKEN: 123abc
     TEST_TWITTER_USERNAME: libtechnyu
     ALEPH_HOST: aleph.library.edu
@@ -14,7 +13,7 @@ dependencies:
     - gem update bundler
     - bundle config github.https true
   post:
-    - psql -c 'create database login_test;' -U $LOGIN_DB_USER
+    - psql -c 'create database login_test;'
     - bundle exec rake db:schema:load RAILS_ENV=test
 test:
   override:
