@@ -16,3 +16,10 @@ dependencies:
   post:
     - psql -c 'create database login_test;' -U $LOGIN_DB_USER
     - bundle exec rake db:schema:load RAILS_ENV=test
+test:
+  override:
+    - RAILS_ENV=test bundle exec rspec --color --format progress
+    - mkdir -p $CIRCLE_TEST_REPORTS/cucumber
+    - RAILS_ENV=test bundle exec cucumber --format pretty --format json --out $CIRCLE_TEST_REPORTS/cucumber/tests.cucumber
+  post:
+    - bundle exec rake coveralls:push
