@@ -13,3 +13,6 @@ dependencies:
   pre:
     - gem update bundler
     - bundle config github.https true
+  post:
+    - psql -c 'create database login_test;' -U $LOGIN_DB_USER
+    - bundle exec rake db:schema:load RAILS_ENV=test
