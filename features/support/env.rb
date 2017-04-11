@@ -4,7 +4,7 @@
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
 
-ENV['RAILS_ENV'] ||= 'cucumber'
+ENV['RAILS_ENV'] = 'cucumber'
 
 require 'cucumber/rails'
 # Include these helpers so we can stub the IP addresses

@@ -8,6 +8,13 @@ echo 'test:
   pool: 5
   username: postgres
   host: db
+cucumber:
+  database: circle_ruby_test
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: postgres
+  host: db
 ' > config/database.yml
 cat config/database.yml
 export RAILS_ENV="test"
