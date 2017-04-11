@@ -12,8 +12,6 @@ dependencies:
   pre:
     - gem update bundler
     - bundle config github.https true
-  post:
-    - RAILS_ENV=test bundle exec rake db:create db:schema:load 
 test:
   override:
     - RAILS_ENV=test bundle exec rspec --color --format progress
