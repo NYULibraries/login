@@ -13,8 +13,7 @@ dependencies:
     - gem update bundler
     - bundle config github.https true
   post:
-    - psql -c 'create database login_test;'
-    - bundle exec rake db:schema:load RAILS_ENV=test
+    - RAILS_ENV=test bundle exec rake db:create db:schema:load 
 test:
   override:
     - RAILS_ENV=test bundle exec rspec --color --format progress
