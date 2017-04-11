@@ -1,0 +1,17 @@
+#!/bin/bash
+
+mv config/database.yml config/old_database_yml
+echo 'test:
+  database: circle_ruby_test
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: postgres
+  host: db
+' > config/database.yml
+cat config/database.yml
+export RAILS_ENV="test"
+bundle exec rake db:create db:schema:load --trace
+bundle exec rspec --color --format progress
+bundle exec cucumber --format pretty
+mv config/old_database_yml config/database.yml
