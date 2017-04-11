@@ -21,4 +21,5 @@ export RAILS_ENV="test"
 bundle exec rake db:create db:schema:load --trace
 bundle exec rspec --color --format progress
 bundle exec cucumber --format pretty
+bundle exec rake coveralls:push
 mv config/old_database_yml config/database.yml
