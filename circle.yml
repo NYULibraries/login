@@ -1,21 +1,18 @@
 machine:
-  environment:
-    LOGIN_SECRET_TOKEN: 123abc
-    TEST_TWITTER_USERNAME: libtechnyu
-    ALEPH_HOST: aleph.library.edu
-    ALEPH_LIBRARY: ALEPH
-    ALEPH_SUB_LIBRARY: BET
-    SHIBBOLETH_LOGOUT_URL: https://aqa.home.nyu.edu/sso/UI/Logout
-    PDS_URL: https://pdsdev.library.nyu.edu
-    BOBCAT_URL: http://bobcatdev.library.nyu.edu
+  services:
+    - docker
+
 dependencies:
-  pre:
-    - gem update bundler
-    - bundle config github.https true
+  override:
+    - docker-compose version
+    - docker-compose up -d
+    - docker-compose run web rake db:create
+    - docker-compose run web rake db:schema:load
+
+database:
+  override:
+    - ":"
+
 test:
   override:
-    - RAILS_ENV=test bundle exec rspec --color --format progress
-    - mkdir -p $CIRCLE_TEST_REPORTS/cucumber
-    - RAILS_ENV=test bundle exec cucumber --format pretty --format json --out $CIRCLE_TEST_REPORTS/cucumber/tests.cucumber
-  post:
-    - bundle exec rake coveralls:push
+    - docker-compose run -e CI=$CI -e CODECLIMATE_REPO_TOKEN=$CODECLIMATE_REPO_TOKEN -e COVERALLS_REPO_TOKEN=$COVERALLS_REPO_TOKEN web rake
