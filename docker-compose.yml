@@ -13,4 +13,13 @@ services:
     links:
       - db
     environment:
+      - LOGIN_DB_USER=postgres
       - LOGIN_DB_HOST=db
+      - LOGIN_SECRET_TOKEN=123abc
+      - TEST_TWITTER_USERNAME=libtechnyu
+      - ALEPH_HOST=aleph.library.edu
+      - ALEPH_LIBRARY=ALEPH
+      - ALEPH_SUB_LIBRARY=BET
+      - SHIBBOLETH_LOGOUT_URL=https://aqa.home.nyu.edu/sso/UI/Logout
+      - PDS_URL=https://pdsdev.library.nyu.edu
+      - BOBCAT_URL=http://bobcatdev.library.nyu.edu

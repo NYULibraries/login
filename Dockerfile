@@ -29,12 +29,3 @@ RUN bundle install
 COPY . $APP_HOME/
 
 WORKDIR $APP_HOME
-
-ENV LOGIN_SECRET_TOKEN 123abc
-ENV TEST_TWITTER_USERNAME libtechnyu
-ENV ALEPH_HOST aleph.library.edu
-ENV ALEPH_LIBRARY ALEPH
-ENV ALEPH_SUB_LIBRARY BET
-ENV SHIBBOLETH_LOGOUT_URL https://aqa.home.nyu.edu/sso/UI/Logout
-ENV PDS_URL https://pdsdev.library.nyu.edu
-ENV BOBCAT_URL http://bobcatdev.library.nyu.edu
