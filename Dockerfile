@@ -11,6 +11,8 @@ RUN apt-get install -y libqt4-webkit libqt4-dev xvfb
 # install phantomjs for cucumber (using npm since building from source takes 30 minutes+)
 RUN apt-get install -y nodejs npm nodejs-legacy
 RUN npm install -g phantomjs-prebuilt
+# add vim
+RUN apt-get install -y vim
 
 # create directory
 ENV APP_HOME /login
