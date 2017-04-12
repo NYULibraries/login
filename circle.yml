@@ -7,7 +7,6 @@ machine:
 
 dependencies:
   override:
-    - sudo service postgresql stop
     - docker-compose version
     - docker-compose up -d
 
