@@ -16,6 +16,4 @@ database:
 
 test:
   override:
-    - docker-compose run web rspec --color --format progress
-    - docker-compose run web cucumber --format pretty
-    - docker-compose run web rake coveralls:push
+    - docker-compose run web rake
