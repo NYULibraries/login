@@ -25,6 +25,10 @@ RUN gem install bundler
 RUN bundle config github.https true
 RUN bundle install
 
+# skip github host check for figs
+RUN mkdir -p ~/.ssh
+RUN ssh-keyscan github.com >> ~/.ssh/known_hosts
+
 # add application
 COPY . $APP_HOME/
 
