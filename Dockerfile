@@ -29,3 +29,4 @@ RUN bundle install
 COPY . $APP_HOME/
 
 WORKDIR $APP_HOME
+ENTRYPOINT ["bundle", "exec"]

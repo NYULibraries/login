@@ -9,13 +9,13 @@ dependencies:
   override:
     - docker-compose version
     - docker-compose up -d
-    - docker-compose run web rake db:create
-    - docker-compose run web rake db:schema:load
 
 database:
   override:
-    - ":"
+    - docker-compose run web rake db:create db:schema:load --trace
 
 test:
   override:
-    - docker-compose run -e CI=$CI -e CODECLIMATE_REPO_TOKEN=$CODECLIMATE_REPO_TOKEN -e COVERALLS_REPO_TOKEN=$COVERALLS_REPO_TOKEN web rake
+    - docker-compose run web rspec --color --format progress
+    - docker-compose run web cucumber --format pretty
+    - docker-compose run -e CI=$CI -e CODECLIMATE_REPO_TOKEN=$CODECLIMATE_REPO_TOKEN -e COVERALLS_REPO_TOKEN=$COVERALLS_REPO_TOKEN web rake coveralls:push
