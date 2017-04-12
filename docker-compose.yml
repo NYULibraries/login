@@ -24,3 +24,6 @@ services:
       - SHIBBOLETH_LOGOUT_URL=https://aqa.home.nyu.edu/sso/UI/Logout
       - PDS_URL=https://pdsdev.library.nyu.edu
       - BOBCAT_URL=http://bobcatdev.library.nyu.edu
+      - CI=1
+      - CODECLIMATE_REPO_TOKEN
+      - COVERALLS_REPO_TOKEN
