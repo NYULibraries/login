@@ -1,3 +1,3 @@
 def ci?
-  ENV["CI"]
+  ENV["CI"] || ENV["DOCKER"]
 end
