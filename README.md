@@ -41,3 +41,27 @@ NYU Shibboleth identity and also will have an Aleph identity. A user who logs in
 via the New School's LDAP server will have a New School LDAP identity and an Aleph
 identity. A user who logs in via Aleph, Facebook or Twitter, will only have an Aleph,
 Facebook or Twitter identity.
+
+## Tests
+
+Run tests together:
+
+```
+bundle exec rake
+```
+
+or separately:
+
+```
+bundle exec rspec
+bundle exec cucumber
+```
+
+or run tests in a docker container:
+
+```
+docker-compose up -d --build
+docker-compose run web rake db:create db:schema:load
+docker-compose run web rspec
+docker-compose run web cucumber
+```
