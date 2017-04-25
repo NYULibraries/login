@@ -13,7 +13,7 @@ Bundler.require(:default, Rails.env)
 
 require 'figs'
 # Don't run this initializer on travis.
-Figs.load(stage: Rails.env) unless ENV['TRAVIS']
+Figs.load(stage: Rails.env)
 
 module Login
   class Application < Rails::Application
