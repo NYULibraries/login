@@ -1,6 +1,6 @@
 # Contract
 
-The NYU Libraries Login system is an OAuth2 provider that allows automatic authentication. Because of this, we have very strict requirements for becoming a client application. The documentation on the process of becoming a client application can be found in the [getting started guide](/NYULibraries/login/blob/master/GETTING_STARTED.md). As an Oauth2 provider, all calls are made over HTTPS.
+The NYU Libraries Login system is an OAuth2 provider that allows automatic authentication. Because of this, we have very strict requirements for becoming a client application. The documentation on the process of becoming a client application can be found in the [getting started guide](GETTING_STARTED.md). As an Oauth2 provider, all calls are made over HTTPS.
 
 ## Adding your application as a client
 
