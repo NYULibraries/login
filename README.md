@@ -1,5 +1,6 @@
 # Login
-[![Build Status](https://travis-ci.org/NYULibraries/login.png?branch=development)](https://travis-ci.org/NYULibraries/login)
+
+[![CircleCI](https://circleci.com/gh/NYULibraries/login.svg?style=svg)](https://circleci.com/gh/NYULibraries/login)
 [![Dependency Status](https://gemnasium.com/NYULibraries/login.png)](https://gemnasium.com/NYULibraries/login)
 [![Code Climate](https://codeclimate.com/github/NYULibraries/login.png)](https://codeclimate.com/github/NYULibraries/login)
 [![Coverage Status](https://coveralls.io/repos/NYULibraries/login/badge.png?branch=development)](https://coveralls.io/r/NYULibraries/login)
