@@ -10,8 +10,6 @@ services:
     links:
       - db
     environment:
-      DOCKER: 1
-      RAILS_ENV: test
       LOGIN_DB_USER: postgres
       LOGIN_DB_HOST: db
       LOGIN_DB_DATABASE: login_test

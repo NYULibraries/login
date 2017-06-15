@@ -42,9 +42,5 @@ end
 
 Capybara.app_host = 'http://localhost:3000'
 Capybara.server_port = 3000
-# Set flat file for testing.
-# if ci?
-#   File.expand_path(File.join(__FILE__, "../../../spec/data/patrons-UTF-8.dat"))
-# else
-  ENV['FLAT_FILE'] = "spec/data/patrons-UTF-8.dat"
-# end
+
+ENV['FLAT_FILE'] = "spec/data/patrons-UTF-8.dat"
