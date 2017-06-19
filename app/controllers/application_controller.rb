@@ -22,4 +22,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def current_user
+    @current_user ||= User.new(admin: true, username: 'xx123', email: 'ba36@nyu.edu')
+  end
+
 end
