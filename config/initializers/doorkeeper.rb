@@ -14,17 +14,17 @@ Doorkeeper.configure do
 
   # If you want to restrict access to the web interface for adding oauth authorized applications, you need to declare the block below.
   admin_authenticator do
-    current_user
+    # current_user
     # Put your admin authentication logic here.
     # Example implementation:
     #   Admin.find_by_id(session[:admin_id]) || redirect_to(new_admin_session_url)
-    # if (user_signed_in? && current_user.admin?)
-    #   current_user
-    # elsif(user_signed_in?)
-    #   redirect_to user_url(current_user.provider, current_user.username)
-    # else
-    #   redirect_to login_url
-    # end
+    if (user_signed_in? && current_user.admin?)
+      current_user
+    elsif(user_signed_in?)
+      redirect_to user_url(current_user.provider, current_user.username)
+    else
+      redirect_to login_url
+    end
   end
 
   # Authorization Code expiration time (default 10 minutes).
@@ -78,7 +78,7 @@ Doorkeeper.configure do
 
   # https://github.com/doorkeeper-gem/doorkeeper/wiki/Client-Credentials-flow
   # add other flows to this array if you want more to be enabled, e.g., %w{authorization_code implicit password}
-  grant_flows ['client_credentials']
+  grant_flows %w{authorization_code client_credentials}
 
   # WWW-Authenticate Realm (default "Doorkeeper").
   # realm "Doorkeeper"
