@@ -2,18 +2,21 @@ machine:
   pre:
     - curl -sSL https://s3.amazonaws.com/circle-downloads/install-circleci-docker.sh | bash -s -- 1.10.0
     - pip install docker-compose
+    # - sudo service docker stop
+    - sudo curl -L -o /usr/bin/docker 'https://s3-external-1.amazonaws.com/circle-downloads/docker-1.10.0-circleci'
+    - sudo chmod 0755 /usr/bin/docker
   services:
     - docker
 
 dependencies:
   override:
+    - docker version
     - docker-compose version
-    - docker-compose up -d
 
 database:
   override:
-    - docker-compose run web rake db:create db:schema:load --trace
+    - echo 'Do nothing'
 
 test:
   override:
-    - docker-compose run web rake
+    - docker-compose run -e RAILS_ENV=test web rake

@@ -1,11 +1,5 @@
 Given(/^I am off campus$/) do
-  # When not on travis stub an IP that is always off-campus
-  unless ci?
-    ActionDispatch::Request.any_instance.stub(:remote_ip).and_return('127.0.0.1')
-  else
-  # When on travis just visit the login page, always off campus
-    visit '/login'
-  end
+  ActionDispatch::Request.any_instance.stub(:remote_ip).and_return('127.0.0.1')
 end
 
 Given(/^I am at (.+)$/) do |location|
