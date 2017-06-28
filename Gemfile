@@ -6,7 +6,7 @@ source 'https://rubygems.org'
 gem 'rails', '~> 4.2.7.1'
 
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 0.18.0'
+gem 'pg', '~> 0.21.0'
 # Use nested hstore to store serialized objects in Active Record hstore
 gem 'nested-hstore', '~> 0.1.2'
 
@@ -16,7 +16,7 @@ gem 'sass-rails', '~> 5.0.6'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails', '~> 4.2.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 # Use jquery as the JavaScript library
@@ -34,37 +34,30 @@ gem 'nyulibraries_errors', github: 'NYULibraries/nyulibraries_errors', tag: 'v1.
 gem 'compass-rails', '~> 2.0.0'
 
 # Use the NYU Libraries deploy gem
-gem 'formaggio', github: 'NYULibraries/formaggio', tag: 'v1.4.2'
+gem 'formaggio', github: 'NYULibraries/formaggio', tag: 'v1.7.2'
 
 # Used for determining which institution is in play
 gem 'institutions', '~> 0.1.3'
 
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks', '~> 2.5.0'
-
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
-
 # Use devise for our user model
-gem 'devise', '~> 4.2.0'
+gem 'devise', '~> 4.3.0'
 
 # Use Ox for parsing XML
-gem 'ox', '~> 2.2.0'
+gem 'ox', '~> 2.5.0'
 
 # Use omniauth for logging in from multiple providers
-gem 'omniauth', '~> 1.2.2'
+gem 'omniauth', '~> 1.6.0'
 # Shibboleth strategy
 gem 'omniauth-shibboleth', '~> 1.2.0'
 # Facebook strategy
-gem 'omniauth-facebook', '~> 3.0.0'
+gem 'omniauth-facebook', '~> 4.0.0'
 # Twitter strategy
-gem 'omniauth-twitter', '~> 1.2.0'
+gem 'omniauth-twitter', '~> 1.4.0'
 # GitHub strategy
-gem 'omniauth-github', '~> 1.1.2'
-gem 'omniauth-aleph', '~> 0.1.3'
+gem 'omniauth-aleph', github: 'barnabyalter/omniauth-aleph', branch: 'chore/update_dependencies' #'~> 0.1.3'
 gem 'omniauth-ldap', '~> 1.0.4'
 
-gem 'font-awesome-rails', '~> 4.2.0'
+gem 'font-awesome-rails', '~> 4'
 
 # Use doorkeeper as our OAuth 2.0 provider
 gem 'doorkeeper', '~> 4.2.0'
@@ -72,8 +65,8 @@ gem 'doorkeeper', '~> 4.2.0'
 # Figs for configuration
 gem 'figs', '~> 2.0.0'
 
-gem 'faraday', '~> 0.9.0'
-gem 'faraday_middleware', '~> 0.10.0'
+gem 'faraday', '~> 0.12.0'
+gem 'faraday_middleware', '~> 0.11.0'
 
 gem 'dalli', '~> 2.7.4'
 
@@ -83,7 +76,7 @@ group :doc do
 end
 
 # New Relic performance monitoring
-gem 'newrelic_rpm', '~> 3.12.0'
+gem 'newrelic_rpm', '~> 4'
 
 # Development gems
 group :development do
