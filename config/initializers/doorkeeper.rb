@@ -14,6 +14,7 @@ Doorkeeper.configure do
 
   # If you want to restrict access to the web interface for adding oauth authorized applications, you need to declare the block below.
   admin_authenticator do
+    # current_user
     # Put your admin authentication logic here.
     # Example implementation:
     #   Admin.find_by_id(session[:admin_id]) || redirect_to(new_admin_session_url)
@@ -72,6 +73,12 @@ Doorkeeper.configure do
   skip_authorization do |resource_owner, client|
     true
   end
+
+  # force_ssl_in_redirect_uri false
+
+  # https://github.com/doorkeeper-gem/doorkeeper/wiki/Client-Credentials-flow
+  # add other flows to this array if you want more to be enabled, e.g., %w{authorization_code implicit password}
+  grant_flows %w{authorization_code client_credentials}
 
   # WWW-Authenticate Realm (default "Doorkeeper").
   # realm "Doorkeeper"

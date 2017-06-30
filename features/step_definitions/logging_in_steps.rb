@@ -4,7 +4,7 @@ end
 
 When(/^I want to login$/) do
   # When on CI were already on the correct institution login page at this point
-  visit '/login' unless ci?
+  visit '/login' #unless page.current_path == "/login"
 end
 
 Then(/^my primary login option should be (.+)$/) do |location|

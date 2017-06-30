@@ -1,8 +1,9 @@
 # Login
-[![Build Status](https://travis-ci.org/NYULibraries/login.png?branch=development)](https://travis-ci.org/NYULibraries/login)
+
+[![CircleCI](https://circleci.com/gh/NYULibraries/login.svg?style=svg)](https://circleci.com/gh/NYULibraries/login)
 [![Dependency Status](https://gemnasium.com/NYULibraries/login.png)](https://gemnasium.com/NYULibraries/login)
 [![Code Climate](https://codeclimate.com/github/NYULibraries/login.png)](https://codeclimate.com/github/NYULibraries/login)
-[![Coverage Status](https://coveralls.io/repos/NYULibraries/login/badge.png?branch=development)](https://coveralls.io/r/NYULibraries/login)
+[![Coverage Status](https://coveralls.io/repos/github/NYULibraries/login/badge.svg?branch=master)](https://coveralls.io/github/NYULibraries/login?branch=master)
 
 The NYU Libraries' Login application is an [OAuth2](http://oauth.net/2/) server
 that provides registered clients with a set of user metadata that can be used for
@@ -60,8 +61,5 @@ bundle exec cucumber
 or run tests in a docker container:
 
 ```
-docker-compose up -d --build
-docker-compose run web rake db:create db:schema:load
-docker-compose run web rspec
-docker-compose run web cucumber
+docker-compose run -e RAILS_ENV=test web rake
 ```
