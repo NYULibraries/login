@@ -54,7 +54,7 @@ gem 'omniauth-facebook', '~> 4.0.0'
 # Twitter strategy
 gem 'omniauth-twitter', '~> 1.4.0'
 # GitHub strategy
-gem 'omniauth-aleph', github: 'barnabyalter/omniauth-aleph', branch: 'chore/update_dependencies' #'~> 0.1.3'
+gem 'omniauth-aleph', '~> 1.0.0'
 gem 'omniauth-ldap', '~> 1.0.4'
 
 gem 'font-awesome-rails', '~> 4'
