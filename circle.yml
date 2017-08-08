@@ -20,3 +20,13 @@ database:
 test:
   override:
     - docker-compose run -e RAILS_ENV=test web rake
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - curl -u $JENKINS_USERNAME:$JENKINS_API_KEY -X POST http://jenkins.library.nyu.edu/view/Login/job/Login%20Production%20Deploy/build/api
+  development:
+    branch: /.+/
+    commands:
+      - curl -u $JENKINS_USERNAME:$JENKINS_API_KEY -X POST http://jenkins.library.nyu.edu/view/Login/job/Login%20Development%20Deploy/build/api
