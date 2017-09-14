@@ -77,6 +77,8 @@ end
 
 # New Relic performance monitoring
 gem 'newrelic_rpm', '~> 4'
+# Rollbar performance monitoring
+gem 'rollbar', '~> 2'
 
 # Development gems
 group :development do
