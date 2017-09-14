@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 # Run `bundle config --global github.https true` on the server to quiet warnings
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.2.7.1'
+gem 'rails', '~> 4.2.9'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.21.0'
@@ -20,7 +20,7 @@ gem 'coffee-rails', '~> 4.2.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 # Use jquery as the JavaScript library
-gem 'jquery-rails', '~> 3.1.0'
+gem 'jquery-rails', '~> 4.3.1'
 # Use modernizr for browser feature detection
 gem 'modernizr-rails', '~> 2.7.0'
 # Use the NYU Libraries assets gem
@@ -31,7 +31,7 @@ gem 'nyulibraries_javascripts', github: 'NYULibraries/nyulibraries_javascripts',
 # gem 'nyulibraries-assets', path: '/apps/nyulibraries-assets'
 gem 'nyulibraries_errors', github: 'NYULibraries/nyulibraries_errors', tag: 'v1.0.0'
 # Use higher version of Compass CSS framework for sprites, etc.
-gem 'compass-rails', '~> 2.0.0'
+gem 'compass-rails', '~> 3.0.0'
 
 # Use the NYU Libraries deploy gem
 gem 'formaggio', github: 'NYULibraries/formaggio', tag: 'v1.7.2'
@@ -43,12 +43,12 @@ gem 'institutions', '~> 0.1.3'
 gem 'devise', '~> 4.3.0'
 
 # Use Ox for parsing XML
-gem 'ox', '~> 2.5.0'
+gem 'ox', '~> 2.6.0'
 
 # Use omniauth for logging in from multiple providers
 gem 'omniauth', '~> 1.6.0'
 # Shibboleth strategy
-gem 'omniauth-shibboleth', '~> 1.2.0'
+gem 'omniauth-shibboleth', '~> 1.3.0'
 # Facebook strategy
 gem 'omniauth-facebook', '~> 4.0.0'
 # Twitter strategy
@@ -65,8 +65,8 @@ gem 'doorkeeper', '~> 4.2.0'
 # Figs for configuration
 gem 'figs', '~> 2.0.0'
 
-gem 'faraday', '~> 0.12.0'
-gem 'faraday_middleware', '~> 0.11.0'
+gem 'faraday'#, '~> 0.13.0'
+gem 'faraday_middleware'#, '~> 0.12.0'
 
 gem 'dalli', '~> 2.7.4'
 
@@ -80,31 +80,31 @@ gem 'newrelic_rpm', '~> 4'
 
 # Development gems
 group :development do
-  gem 'better_errors', '~> 2.0.0', platform: :ruby
+  gem 'better_errors', '~> 2', platform: :ruby
   gem 'binding_of_caller', '~> 0.7.2', platform: :ruby
 end
 
 # Testing gems
 group :test, :cucumber do
   # Coveralls for testing coverage
-  gem 'coveralls', '~> 0.7.0', require: false
-  gem 'cucumber-rails', '~> 1.4.1', require: false
-  gem 'selenium-webdriver', '~> 2.47.0'
-  gem 'pickle', '~> 0.4.11'
+  gem 'coveralls', '~> 0.8', require: false
+  gem 'cucumber-rails', '~> 1.5', require: false
+  gem 'selenium-webdriver', '~> 3'
+  gem 'pickle', '~> 0.5'
   gem 'database_cleaner', '~> 1.3.0'
-  gem 'vcr', '~> 2.9.3'
-  gem 'webmock', '>= 1.8.0', '< 1.16'
+  gem 'vcr', '~> 3'
+  gem 'webmock', '~> 3'
   # Rspec as the test framework
-  gem 'rspec-rails', '~> 3.4.2'
+  gem 'rspec-rails', '~> 3.6'
   # Phantomjs for headless browser testing
   gem 'phantomjs', '>= 1.9.7'
-  gem 'poltergeist', '~> 1.6.0'
+  gem 'poltergeist', '~> 1'
   # Use factory girl for creating models
-  gem 'factory_girl_rails', '~> 4.4.1'
+  gem 'factory_girl_rails', '~> 4'
   # Use json_spec to do rspec tests with JSON
   gem 'json_spec', '~> 1.1.4'
   gem 'rspec-its', '~> 1.2.0'
-  gem 'faker', '~> 1.6.6'
+  gem 'faker', '~> 1'
 end
 
 group :test, :cucumber, :development do
