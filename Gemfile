@@ -65,7 +65,8 @@ gem 'doorkeeper', '~> 4.2.0'
 # Figs for configuration
 gem 'figs', '~> 2.1'
 
-gem 'faraday', '~> 0.12'
+# Taking this up to 0.13 breaks other dependencies
+gem 'faraday', '~> 0.12.0'
 gem 'faraday_middleware', '~> 0.12'
 
 gem 'dalli', '~> 2.7.4'
