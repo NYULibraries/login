@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 # Run `bundle config --global github.https true` on the server to quiet warnings
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.2.9'
+gem 'rails', '=4.2.9'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.21.0'
@@ -14,7 +14,7 @@ gem 'nested-hstore', '~> 0.1.2'
 # Locked in at beta1 release because major release doesn't play nice with compass-rails yet
 gem 'sass-rails', '~> 5.0.6'
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier', '~> 4.0'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.2.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -43,10 +43,10 @@ gem 'institutions', '~> 0.1.3'
 gem 'devise', '~> 4.3.0'
 
 # Use Ox for parsing XML
-gem 'ox', '~> 2.6.0'
+gem 'ox', '~> 2.8.0'
 
 # Use omniauth for logging in from multiple providers
-gem 'omniauth', '~> 1.6.0'
+gem 'omniauth', '~> 1.7.0'
 # Shibboleth strategy
 gem 'omniauth-shibboleth', '~> 1.3.0'
 # Facebook strategy
@@ -63,10 +63,10 @@ gem 'font-awesome-rails', '~> 4'
 gem 'doorkeeper', '~> 4.2.0'
 
 # Figs for configuration
-gem 'figs', '~> 2.0.0'
+gem 'figs', '~> 2.1'
 
-gem 'faraday'#, '~> 0.13.0'
-gem 'faraday_middleware'#, '~> 0.12.0'
+gem 'faraday', '~> 0.12'
+gem 'faraday_middleware', '~> 0.12'
 
 gem 'dalli', '~> 2.7.4'
 
@@ -83,7 +83,7 @@ gem 'rollbar', '~> 2'
 # Development gems
 group :development do
   gem 'better_errors', '~> 2', platform: :ruby
-  gem 'binding_of_caller', '~> 0.7.2', platform: :ruby
+  gem 'binding_of_caller', '~> 0.7', platform: :ruby
 end
 
 # Testing gems
@@ -93,7 +93,7 @@ group :test, :cucumber do
   gem 'cucumber-rails', '~> 1.5', require: false
   gem 'selenium-webdriver', '~> 3'
   gem 'pickle', '~> 0.5'
-  gem 'database_cleaner', '~> 1.3.0'
+  gem 'database_cleaner', '~> 1.3'
   gem 'vcr', '~> 3'
   gem 'webmock', '~> 3'
   # Rspec as the test framework
@@ -104,12 +104,12 @@ group :test, :cucumber do
   # Use factory girl for creating models
   gem 'factory_girl_rails', '~> 4'
   # Use json_spec to do rspec tests with JSON
-  gem 'json_spec', '~> 1.1.4'
-  gem 'rspec-its', '~> 1.2.0'
+  gem 'json_spec', '~> 1.1'
+  gem 'rspec-its', '~> 1.2'
   gem 'faker', '~> 1'
 end
 
 group :test, :cucumber, :development do
-  gem 'pry', '~> 0.10.1'
-  gem 'pry-remote', '~> 0.1.8'
+  gem 'pry', '~> 0'
+  gem 'pry-remote', '~> 0'
 end
