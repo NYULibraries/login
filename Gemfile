@@ -84,7 +84,7 @@ gem 'rollbar', '~> 2'
 # Development gems
 group :development do
   gem 'better_errors', '~> 2', platform: :ruby
-  gem 'binding_of_caller', '~> 0.7', platform: :ruby
+  gem 'binding_of_caller', '~> 0.8', platform: :ruby
 end
 
 # Testing gems
@@ -94,8 +94,8 @@ group :test, :cucumber do
   gem 'cucumber-rails', '~> 1.5', require: false
   gem 'selenium-webdriver', '~> 3'
   gem 'pickle', '~> 0.5'
-  gem 'database_cleaner', '~> 1.3'
-  gem 'vcr', '~> 3'
+  gem 'database_cleaner', '~> 1.6'
+  gem 'vcr', '~> 4'
   gem 'webmock', '~> 3'
   # Rspec as the test framework
   gem 'rspec-rails', '~> 3.6'
