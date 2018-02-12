@@ -14,7 +14,7 @@ gem 'nested-hstore', '~> 0.1.2'
 # Locked in at beta1 release because major release doesn't play nice with compass-rails yet
 gem 'sass-rails', '~> 5.0.6'
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '~> 4.0'
+gem 'uglifier', '~> 4.1'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.2.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -40,7 +40,7 @@ gem 'formaggio', github: 'NYULibraries/formaggio', tag: 'v1.7.2'
 gem 'institutions', '~> 0.1.3'
 
 # Use devise for our user model
-gem 'devise', '~> 4.3.0'
+gem 'devise', '~> 4.4.0'
 
 # Use Ox for parsing XML
 gem 'ox', '~> 2.8.0'

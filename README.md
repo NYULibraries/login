@@ -31,8 +31,8 @@ Below is a table listing the identities provided for a given login type.
 
 | Login Type | Identities |
 | ---------------------- | ---------- |
-| NYU NetID | NYU Shibboleth <br \> Aleph |
-| New School NetID | New School LDAP <br \> Aleph |
+| NYU NetID | NYU Shibboleth <br> Aleph |
+| New School NetID | New School LDAP <br> Aleph |
 | NYU Affiliates and Consortium Aleph patron ID | Aleph |
 | Facebook username | Facebook |
 | Twitter username | Facebook |
