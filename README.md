@@ -35,7 +35,7 @@ Below is a table listing the identities provided for a given login type.
 | New School NetID | New School LDAP <br> Aleph |
 | NYU Affiliates and Consortium Aleph patron ID | Aleph |
 | Facebook username | Facebook |
-| Twitter username | Facebook |
+| Twitter username | Twitter |
 
 For example, a user who logs in via NYU's Shibboleth identity provider will have an
 NYU Shibboleth identity and also will have an Aleph identity. A user who logs in
