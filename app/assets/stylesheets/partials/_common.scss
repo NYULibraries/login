@@ -1,0 +1,14 @@
+.logged_out_text {
+  padding: 7px;
+  p {
+    font-size: 130%;
+    margin-bottom: 1.5em;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.auth-inner-container form fieldset legend {
+  display: none;
+}
