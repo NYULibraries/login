@@ -19,7 +19,7 @@ database:
 
 test:
   override:
-    - docker-compose run -e RAILS_ENV=test web rake
+    - docker-compose run test rake
 
 deployment:
   production:

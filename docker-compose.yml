@@ -1,45 +1,47 @@
-version: '2'
+version: '3'
 services:
 
-  web:
+  dev:
     build: .
     volumes:
       - .:/app
     ports:
       - "3000:3000"
-    links:
-      - db
+    env_file:
+      - test.env
     environment:
-      LOGIN_DB_USER: postgres
-      LOGIN_DB_HOST: db
-      LOGIN_DB_DATABASE: login_test
-      LOGIN_SECRET_TOKEN: 123abc
-      TEST_TWITTER_USERNAME: libtechnyu
-      ALEPH_HOST: aleph.library.edu
-      ALEPH_LIBRARY: ALEPH
-      ALEPH_SUB_LIBRARY: BET
-      SHIBBOLETH_LOGOUT_URL: https://aqa.home.nyu.edu/sso/UI/Logout
-      PDS_URL: https://pdsdev.library.nyu.edu
-      BOBCAT_URL: http://bobcatdev.library.nyu.edu
       CI:
       CODECLIMATE_REPO_TOKEN:
       COVERALLS_REPO_TOKEN:
     command: "tail -f /dev/null"
     depends_on:
-      - setup_tests
+      - setup_dbs
 
-  setup_tests:
+  test:
     build: .
-    command: bundle exec rake db:setup
-    volumes:
-      - .:/app
     environment:
       RAILS_ENV: test
-      LOGIN_DB_USER: postgres
-      LOGIN_DB_HOST: db
-      LOGIN_DB_DATABASE: login_test
-    links:
+    env_file:
+      - test.env
+    command: "tail -f /dev/null"
+    depends_on:
+      - setup_test_dbs
+
+  setup_test_dbs:
+    build: .
+    environment:
+      RAILS_ENV: test
+    env_file:
+      - test.env
+    command: bash -c "sleep 5; rake db:setup"
+    depends_on:
       - db
+
+  setup_dbs:
+    build: .
+    env_file:
+      - test.env
+    command: bash -c "sleep 5; rake db:setup"
     depends_on:
       - db
 
