@@ -6,7 +6,7 @@ module LoginFeatures
     end
 
     def twitter_omniauth_hash
-      @twitter_omniauth_hash ||= OmniAuth::AuthHash.new(FactoryGirl.create(:twitter_authhash))
+      @twitter_omniauth_hash ||= OmniAuth::AuthHash.new(FactoryBot.create(:twitter_authhash))
     end
 
     def set_invalid_aleph_login_env

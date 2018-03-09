@@ -6,7 +6,7 @@ module LoginFeatures
     end
 
     def aleph_omniauth_hash
-      @new_school_ldap_omniauth_hash ||= OmniAuth::AuthHash.new(FactoryGirl.create(:aleph_authhash))
+      @new_school_ldap_omniauth_hash ||= OmniAuth::AuthHash.new(FactoryBot.create(:aleph_authhash))
     end
 
     def set_invalid_aleph_login_env

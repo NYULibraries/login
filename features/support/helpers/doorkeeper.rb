@@ -26,7 +26,7 @@ module LoginFeatures
     end
 
     def oauth_app
-      @oauth_app ||= FactoryGirl.create(:oauth_app_no_redirect)
+      @oauth_app ||= FactoryBot.create(:oauth_app_no_redirect)
     end
 
     def provider_url

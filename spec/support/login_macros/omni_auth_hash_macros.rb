@@ -1,9 +1,9 @@
 module OmniAuthHashMacros
   def authhash(provider)
-    if FactoryGirl.factories.registered?("#{provider}_authhash")
-      FactoryGirl.create("#{provider}_authhash")
+    if FactoryBot.factories.registered?("#{provider}_authhash")
+      FactoryBot.create("#{provider}_authhash")
     else
-      FactoryGirl.create(:invalid_provider_authhash, provider: provider)
+      FactoryBot.create(:invalid_provider_authhash, provider: provider)
     end
   end
 

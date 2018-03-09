@@ -1,5 +1,5 @@
 # Identity factory
-FactoryGirl.define do
+FactoryBot.define do
   factory :identity do
     provider "twitter"
     uid "1234567890"
