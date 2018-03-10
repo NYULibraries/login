@@ -2,7 +2,7 @@ require 'database_cleaner'
 RSpec.configure do |config|
   config.before(:suite) do
     # Run factory girl lint before the suite
-    # FactoryGirl.lint
+    # FactoryBot.lint
 
     # Startout by trucating all the tables
     DatabaseCleaner.clean_with :truncation

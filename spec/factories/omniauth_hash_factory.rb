@@ -1,6 +1,6 @@
 # OmniAuth::AuthHash factory
 # https://github.com/intridea/omniauth/wiki/Auth-Hash-Schema
-FactoryGirl.define do
+FactoryBot.define do
   factory :omniauth_hash, class: OmniAuth::AuthHash do
     skip_create
 

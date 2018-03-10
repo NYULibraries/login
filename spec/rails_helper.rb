@@ -63,9 +63,9 @@ RSpec.configure do |config|
   config.filter_run_excluding pending_implementation: true
 
   # Include Factory Girl convenience methods
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
 
-  FactoryGirl::SyntaxRunner.send(:include, OmniAuthHashMacros)
+  FactoryBot::SyntaxRunner.send(:include, OmniAuthHashMacros)
 
   # Include Devise test helpers
   config.include Devise::Test::ControllerHelpers, type: :controller

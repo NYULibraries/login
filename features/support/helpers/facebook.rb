@@ -6,7 +6,7 @@ module LoginFeatures
     end
 
     def facebook_omniauth_hash
-      @facebook_omniauth_hash ||= OmniAuth::AuthHash.new(FactoryGirl.create(:facebook_authhash))
+      @facebook_omniauth_hash ||= OmniAuth::AuthHash.new(FactoryBot.create(:facebook_authhash))
     end
 
     def set_invalid_aleph_login_env

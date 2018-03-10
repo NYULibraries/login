@@ -2,26 +2,8 @@
 *= require font-awesome
 */
 @import "nyulibraries_stylesheets/login";
-
-.logged_out_text {
-  padding: 7px;
-  p {
-    font-size: 130%;
-    margin-bottom: 1.5em;
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-}
-
-.rebuild-stylesheets {
-  padding: 0;
-}
+@import "partials/common";
 
 #header div.institution {
-  display: none;
-}
-
-.auth-inner-container form fieldset legend {
   display: none;
 }

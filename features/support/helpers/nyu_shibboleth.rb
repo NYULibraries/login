@@ -9,7 +9,7 @@ module LoginFeatures
     end
 
     def nyu_shibboleth_omniauth_hash
-      @nyu_shibboleth_omniauth_hash ||= OmniAuth::AuthHash.new(FactoryGirl.create(:nyu_shibboleth_authhash))
+      @nyu_shibboleth_omniauth_hash ||= OmniAuth::AuthHash.new(FactoryBot.create(:nyu_shibboleth_authhash))
     end
 
   private
