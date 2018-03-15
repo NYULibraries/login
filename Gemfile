@@ -39,13 +39,13 @@ gem 'formaggio', github: 'NYULibraries/formaggio', tag: 'v1.7.2'
 gem 'institutions', '~> 0.1.3'
 
 # Use devise for our user model
-gem 'devise', '~> 4.4.0'
+gem 'devise', '~> 4.4.2'
 
 # Use Ox for parsing XML
-gem 'ox', '~> 2.8.0'
+gem 'ox', '~> 2.9.0'
 
 # Use omniauth for logging in from multiple providers
-gem 'omniauth', '~> 1.7.0'
+gem 'omniauth', '~> 1.8.1'
 # Shibboleth strategy
 gem 'omniauth-shibboleth', '~> 1.3.0'
 # Facebook strategy
@@ -59,6 +59,7 @@ gem 'omniauth-ldap', '~> 1.0.4'
 gem 'font-awesome-rails', '~> 4'
 
 # Use doorkeeper as our OAuth 2.0 provider
+# factory_bot_rails fix needed before update to >4.3.1
 gem 'doorkeeper', '~> 4.2.0'
 
 # Figs for configuration
@@ -68,7 +69,7 @@ gem 'figs', '~> 2.1'
 gem 'faraday', '~> 0.12.0'
 gem 'faraday_middleware', '~> 0.12'
 
-gem 'dalli', '~> 2.7.4'
+gem 'dalli', '~> 2.7.7'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -102,7 +103,7 @@ group :test, :cucumber do
   gem 'phantomjs', '>= 1.9.7'
   gem 'poltergeist', '~> 1'
   # Use factory_bot for creating models
-  gem 'factory_bot_rails', '~> 4'
+  gem 'factory_bot_rails', '~> 4.8.2'
   # Use json_spec to do rspec tests with JSON
   gem 'json_spec', '~> 1.1'
   gem 'rspec-its', '~> 1.2'
