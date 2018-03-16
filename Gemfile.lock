@@ -1,5 +1,5 @@
 GIT
-  remote: https://github.com/NYULibraries/formaggio.git
+  remote: git://github.com/NYULibraries/formaggio.git
   revision: 09e7cc9d7f882c17f1052fdc5ac7b7f32aa367a0
   tag: v1.7.2
   specs:
@@ -15,14 +15,14 @@ GIT
       rvm-capistrano (~> 1.5)
 
 GIT
-  remote: https://github.com/NYULibraries/nyulibraries_errors.git
+  remote: git://github.com/NYULibraries/nyulibraries_errors.git
   revision: 16c7a14892e439c48e6fc1f8ce261c3cbe635e4c
   tag: v1.0.1
   specs:
     nyulibraries_errors (1.0.1)
 
 GIT
-  remote: https://github.com/NYULibraries/nyulibraries_institutions.git
+  remote: git://github.com/NYULibraries/nyulibraries_institutions.git
   revision: edae9f19758afe73686571d8e444e35dfe65cedf
   tag: v1.0.3
   specs:
@@ -31,14 +31,14 @@ GIT
       rails (>= 4)
 
 GIT
-  remote: https://github.com/NYULibraries/nyulibraries_javascripts.git
+  remote: git://github.com/NYULibraries/nyulibraries_javascripts.git
   revision: f2637c4891f273a6227b4f0fed9245a88539f9b2
   tag: v1.0.0
   specs:
     nyulibraries_javascripts (1.0.0)
 
 GIT
-  remote: https://github.com/NYULibraries/nyulibraries_stylesheets.git
+  remote: git://github.com/NYULibraries/nyulibraries_stylesheets.git
   revision: 7635383d77ac815f4a28219138c75f8971f680f6
   tag: v1.0.5
   specs:
@@ -47,7 +47,7 @@ GIT
       compass (>= 1.0.1)
 
 GIT
-  remote: https://github.com/NYULibraries/nyulibraries_templates.git
+  remote: git://github.com/NYULibraries/nyulibraries_templates.git
   revision: 245dea4a7af547de8442c31484dd2888012298de
   tag: v1.1.2
   specs:
@@ -410,8 +410,6 @@ GEM
       sprockets (>= 3.0.0)
     term-ansicolor (1.6.0)
       tins (~> 1.0)
-    test_after_commit (1.1.0)
-      activerecord (>= 3.2)
     therubyracer (0.12.3)
       libv8 (~> 3.16.14.15)
       ref
@@ -448,7 +446,7 @@ DEPENDENCIES
   cucumber-rails (~> 1.5)
   dalli (~> 2.7.7)
   database_cleaner (~> 1.6)
-  devise (~> 4.4.2)
+  devise (~> 4.4.0)
   doorkeeper (~> 4.2.0)
   factory_bot_rails (~> 4.8.2)
   faker (~> 1)
@@ -488,7 +486,6 @@ DEPENDENCIES
   sass-rails (~> 5.0.6)
   sdoc
   selenium-webdriver (~> 3)
-  test_after_commit
   therubyracer
   uglifier (~> 4.1)
   vcr (~> 4)

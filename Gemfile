@@ -39,7 +39,9 @@ gem 'formaggio', github: 'NYULibraries/formaggio', tag: 'v1.7.2'
 gem 'institutions', '~> 0.1.3'
 
 # Use devise for our user model
-gem 'devise', '~> 4.4.2'
+# # NOTE: upgrade to >4.4.2 when bugfix released on rubygems
+# # see: https://github.com/plataformatec/devise/commit/64aad8b1383ac68f2d8cec21d3c69af684709931#diff-bafaaa60fc003e648eb4981c9add523e
+gem 'devise', '~> 4.4.0'
 
 # Use Ox for parsing XML
 gem 'ox', '~> 2.9.0'
@@ -59,7 +61,8 @@ gem 'omniauth-ldap', '~> 1.0.4'
 gem 'font-awesome-rails', '~> 4'
 
 # Use doorkeeper as our OAuth 2.0 provider
-# factory_bot_rails fix needed before update to >4.3.1
+# NOTE: factory_bot_rails fix needed before update to >4.3.1
+# see issue: https://github.com/doorkeeper-gem/doorkeeper/issues/1043
 gem 'doorkeeper', '~> 4.2.0'
 
 # Figs for configuration
@@ -108,7 +111,6 @@ group :test, :cucumber do
   gem 'json_spec', '~> 1.1'
   gem 'rspec-its', '~> 1.2'
   gem 'faker', '~> 1'
-  gem 'test_after_commit', :group => :test
 end
 
 group :test, :cucumber, :development do
