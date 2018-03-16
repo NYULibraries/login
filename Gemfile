@@ -108,6 +108,7 @@ group :test, :cucumber do
   gem 'json_spec', '~> 1.1'
   gem 'rspec-its', '~> 1.2'
   gem 'faker', '~> 1'
+  gem 'test_after_commit', :group => :test
 end
 
 group :test, :cucumber, :development do
