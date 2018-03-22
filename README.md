@@ -61,5 +61,5 @@ bundle exec cucumber
 or run tests in a docker container:
 
 ```
-docker-compose run -e RAILS_ENV=test web rake
+docker-compose run dev rake
 ```
