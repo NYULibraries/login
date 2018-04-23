@@ -41,7 +41,7 @@ gem 'institutions', '~> 0.1.3'
 # Use devise for our user model
 # # NOTE: upgrade to >4.4.2 when bugfix released on rubygems
 # # see: https://github.com/plataformatec/devise/commit/64aad8b1383ac68f2d8cec21d3c69af684709931#diff-bafaaa60fc003e648eb4981c9add523e
-gem 'devise', '4.4.0'
+gem 'devise', '~> 4.4.3'
 
 # Use Ox for parsing XML
 gem 'ox', '~> 2.9.0'
