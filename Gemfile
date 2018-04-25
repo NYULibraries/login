@@ -39,8 +39,6 @@ gem 'formaggio', github: 'NYULibraries/formaggio', tag: 'v1.7.2'
 gem 'institutions', '~> 0.1.3'
 
 # Use devise for our user model
-# # NOTE: upgrade to >4.4.2 when bugfix released on rubygems
-# # see: https://github.com/plataformatec/devise/commit/64aad8b1383ac68f2d8cec21d3c69af684709931#diff-bafaaa60fc003e648eb4981c9add523e
 gem 'devise', '~> 4.4.3'
 
 # Use Ox for parsing XML
@@ -68,11 +66,11 @@ gem 'doorkeeper', '~> 4.2.0'
 # Figs for configuration
 gem 'figs', '~> 2.1'
 
-# Taking this up to 0.13 breaks other dependencies
+# Taking this up to >= 0.13 breaks other dependencies
 gem 'faraday', '~> 0.12.0'
 gem 'faraday_middleware', '~> 0.12'
 
-gem 'dalli', '~> 2.7.7'
+gem 'dalli', '~> 2.7.8'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
