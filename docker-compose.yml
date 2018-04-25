@@ -13,7 +13,7 @@ services:
       CI:
       CODECLIMATE_REPO_TOKEN:
       COVERALLS_REPO_TOKEN:
-    command: ["./wait-for-it.sh", "db:5432", "--", "tail -f", "/dev/null"]
+    command: ["/tmp/wait-for-it.sh", "db:5432", "--", "tail", "-f", "/dev/null"]
     depends_on:
       - setup_dbs
 
@@ -23,7 +23,7 @@ services:
       RAILS_ENV: test
     env_file:
       - test.env
-    command: ["./wait-for-it.sh", "db:5432", "--", "tail -f", "/dev/null"]
+    command: ["/tmp/wait-for-it.sh", "db:5432", "--", "tail", "-f", "/dev/null"]
     depends_on:
       - setup_test_dbs
 
@@ -33,7 +33,7 @@ services:
       RAILS_ENV: test
     env_file:
       - test.env
-    command: ["./wait-for-it.sh", "db:5432", "--", "rake", "db:setup"]
+    command: ["/tmp/wait-for-it.sh", "db:5432", "--", "rake", "db:setup"]
     depends_on:
       - db
 
@@ -41,7 +41,7 @@ services:
     build: .
     env_file:
       - test.env
-    command: ["./wait-for-it.sh", "db:5432", "--", "rake", "db:setup"]
+    command: ["/tmp/wait-for-it.sh", "db:5432", "--", "rake", "db:setup"]
     depends_on:
       - db
 

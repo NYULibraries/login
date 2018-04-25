@@ -23,8 +23,8 @@ USER docker
 
 WORKDIR $INSTALL_PATH
 
-RUN wget --no-check-certificate -q -O - https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh > wait-for-it.sh
-RUN chmod a+x wait-for-it.sh
+RUN wget --no-check-certificate -q -O - https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh > /tmp/wait-for-it.sh
+RUN chmod a+x /tmp/wait-for-it.sh
 
 # For working with locally installed gems
 #COPY vendor ./vendor
