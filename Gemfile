@@ -77,8 +77,6 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-# New Relic performance monitoring
-gem 'newrelic_rpm', '~> 4'
 # Rollbar performance monitoring
 gem 'rollbar', '~> 2'
 

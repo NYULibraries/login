@@ -460,7 +460,6 @@ DEPENDENCIES
   json_spec (~> 1.1)
   modernizr-rails (~> 2.7.0)
   nested-hstore (~> 0.1.2)
-  newrelic_rpm (~> 4)
   nyulibraries_errors!
   nyulibraries_institutions!
   nyulibraries_javascripts!
