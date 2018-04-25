@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 # Run `bundle config --global github.https true` on the server to quiet warnings
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '=4.2.9'
+gem 'rails', '4.2.9'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.21.0'
@@ -95,7 +95,7 @@ group :test, :cucumber do
   gem 'cucumber-rails', '~> 1.5', require: false
   gem 'selenium-webdriver', '~> 3'
   gem 'pickle', '~> 0.5'
-  gem 'database_cleaner', '~> 1.6'
+  gem 'database_cleaner', '~> 1.7'
   gem 'vcr', '~> 4'
   gem 'webmock', '~> 3'
   # Rspec as the test framework
