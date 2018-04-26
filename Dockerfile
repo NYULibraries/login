@@ -3,7 +3,13 @@ FROM ruby:2.3.4
 ENV INSTALL_PATH /app
 
 # Essential dependencies
-RUN apt-get update -qq && apt-get install -y build-essential vim mysql-client git wget libfreetype6 libfontconfig bzip2
+RUN apt-get update -qq && apt-get install -y \
+      bzip2 \
+      git \
+      libfontconfig \
+      libfreetype6 \
+      vim \
+      wget
 
 # PhantomJS
 ENV PHANTOMJS_VERSION 2.1.1
@@ -11,9 +17,14 @@ ENV PHANTOMJS_VERSION 2.1.1
 RUN wget --no-check-certificate -q -O - https://cnpmjs.org/mirrors/phantomjs/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 | tar xjC /opt
 RUN ln -s /opt/phantomjs-$PHANTOMJS_VERSION-linux-x86_64/bin/phantomjs /usr/bin/phantomjs
 
-# Setup working directory
-RUN mkdir -p $INSTALL_PATH
+RUN groupadd -g 2000 docker -r && \
+    useradd -u 1000 -r --no-log-init -m -d $INSTALL_PATH -g docker docker
+USER docker
+
 WORKDIR $INSTALL_PATH
+
+RUN wget --no-check-certificate -q -O - https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh > /tmp/wait-for-it.sh
+RUN chmod a+x /tmp/wait-for-it.sh
 
 # For working with locally installed gems
 #COPY vendor ./vendor
@@ -28,4 +39,4 @@ RUN bundle config --global github.https true
 RUN gem install bundler && bundle install --jobs 20 --retry 5
 
 # Copy source into container
-COPY . .
+COPY --chown=docker:docker . .

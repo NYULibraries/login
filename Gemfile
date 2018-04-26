@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 # Run `bundle config --global github.https true` on the server to quiet warnings
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '=4.2.9'
+gem 'rails', '4.2.9'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.21.0'
@@ -39,9 +39,7 @@ gem 'formaggio', github: 'NYULibraries/formaggio', tag: 'v1.7.2'
 gem 'institutions', '~> 0.1.3'
 
 # Use devise for our user model
-# # NOTE: upgrade to >4.4.2 when bugfix released on rubygems
-# # see: https://github.com/plataformatec/devise/commit/64aad8b1383ac68f2d8cec21d3c69af684709931#diff-bafaaa60fc003e648eb4981c9add523e
-gem 'devise', '4.4.0'
+gem 'devise', '~> 4.4.3'
 
 # Use Ox for parsing XML
 gem 'ox', '~> 2.9.0'
@@ -68,19 +66,17 @@ gem 'doorkeeper', '~> 4.2.0'
 # Figs for configuration
 gem 'figs', '~> 2.1'
 
-# Taking this up to 0.13 breaks other dependencies
+# Taking this up to >= 0.13 breaks other dependencies
 gem 'faraday', '~> 0.12.0'
 gem 'faraday_middleware', '~> 0.12'
 
-gem 'dalli', '~> 2.7.7'
+gem 'dalli', '~> 2.7.8'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
 
-# New Relic performance monitoring
-gem 'newrelic_rpm', '~> 4'
 # Rollbar performance monitoring
 gem 'rollbar', '~> 2'
 
@@ -97,7 +93,7 @@ group :test, :cucumber do
   gem 'cucumber-rails', '~> 1.5', require: false
   gem 'selenium-webdriver', '~> 3'
   gem 'pickle', '~> 0.5'
-  gem 'database_cleaner', '~> 1.6'
+  gem 'database_cleaner', '~> 1.7'
   gem 'vcr', '~> 4'
   gem 'webmock', '~> 3'
   # Rspec as the test framework
