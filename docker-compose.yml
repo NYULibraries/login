@@ -23,7 +23,7 @@ services:
       RAILS_ENV: test
     env_file:
       - test.env
-    command: ["/tmp/wait-for-it.sh", "db:5432", "--", "tail", "-f", "/dev/null"]
+    command: ["/tmp/wait-for-it.sh", "db:5432", "--", "rake"]
     depends_on:
       - setup_test_dbs
 
