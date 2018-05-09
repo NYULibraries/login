@@ -4,7 +4,6 @@ describe Identity do
   context "when created with factory defaults" do
     subject { create(:identity) }
     it { is_expected.to be_valid }
-    it { is_expected.to_not be_expired }
   end
 
   context "when uid is nil" do
@@ -62,7 +61,6 @@ describe Identity do
   context "when valid" do
     subject(:identity) { build(:identity) }
     it { is_expected.to be_valid }
-    it { is_expected.to be_expired }
 
     describe '#provider' do
       subject { identity.provider }
@@ -100,7 +98,6 @@ describe Identity do
     context "when created with factory defaults" do
       subject { create(:aleph_identity) }
       it { is_expected.to be_valid }
-      it { is_expected.to_not be_expired }
     end
 
     context "when uid is nil" do
@@ -121,7 +118,6 @@ describe Identity do
     context "when valid" do
       subject(:identity) { build(:aleph_identity) }
       it { is_expected.to be_valid }
-      it { is_expected.to be_expired }
 
       describe '#provider' do
         subject { identity.provider }
