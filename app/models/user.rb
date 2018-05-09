@@ -59,25 +59,21 @@ class User < ActiveRecord::Base
   # if the patron can be found in Aleph
   def create_or_update_aleph_identity
     identity = identities.find_or_initialize_by(uid: omniauth_hash_map.nyuidn, provider: "aleph")
-    if identity.expired?
-      aleph_patron = Login::Aleph::PatronLoader.new(omniauth_hash_map.nyuidn).patron
-      # Start with the omniauth hash to create the identity if user logged in with Aleph
-      identity.properties.merge!(omniauth_hash_map.properties) if omniauth_hash_map.provider == 'aleph'
-      # If the patron was also found from the loader, update the properties to those
-      # since they may be more up to date from the flat file
-      identity.properties.merge!(aleph_patron.attributes) if aleph_patron.present?
-      identity.updated_at = Time.now
-      identity.save
-    end
+    aleph_patron = Login::Aleph::PatronLoader.new(omniauth_hash_map.nyuidn).patron
+    # Start with the omniauth hash to create the identity if user logged in with Aleph
+    identity.properties.merge!(omniauth_hash_map.properties) if omniauth_hash_map.provider == 'aleph'
+    # If the patron was also found from the loader, update the properties to those
+    # since they may be more up to date from the flat file
+    identity.properties.merge!(aleph_patron.attributes) if aleph_patron.present?
+    identity.updated_at = Time.now
+    identity.save
   end
 
-  # Update identity assoc from OmniAuth hash if it's expired
+  # Update identity assoc from OmniAuth hash
   def create_or_update_identity_from_omniauth_hash
     # Create or update an identity from the attributes mapped in the mapper
     identity = identities.find_or_initialize_by(uid: omniauth_hash_map.uid, provider: omniauth_hash_map.provider)
-    if identity.expired?
-      identity.properties.merge!(omniauth_hash_map.properties)
-      identity.save
-    end
+    identity.properties.merge!(omniauth_hash_map.properties)
+    identity.save
   end
 end
