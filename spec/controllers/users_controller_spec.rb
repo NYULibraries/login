@@ -101,27 +101,12 @@ describe UsersController do
                 subject
                 expect(identity).to eq existing_identity
               end
-              context "if expired" do
-                before do
-                  existing_identity.update_attribute :updated_at, Time.zone.now - 1.day - 1.hour
-                  expect(existing_identity).to be_expired
-                end
-                it "should update" do
-                  subject
-                  expect(identity).to_not be_expired
-                end
+
+              it "should update" do
+                subject
+                expect(existing_identity.updated_at).to be < identity.updated_at
               end
-              context "if unexpired" do
-                let(:updated_at){ (Time.zone.now - 30.minutes).round(4) }
-                before do
-                  existing_identity.update_attribute :updated_at, updated_at
-                  expect(existing_identity).to_not be_expired
-                end
-                it "should not update" do
-                  subject
-                  expect(identity.updated_at).to be >= updated_at
-                end
-              end
+
             end
           end
           context "with existing, non-matching user" do

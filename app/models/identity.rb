@@ -18,8 +18,4 @@ class Identity < ActiveRecord::Base
   # Properties is a NESTED Hstore column type now (no longer string values)
   serialize :properties, ActiveRecord::Coders::NestedHstore
 
-  # Identities expire in a week's time.
-  def expired?
-    (updated_at.blank? || updated_at < 1.day.ago)
-  end
 end
