@@ -34,7 +34,7 @@ RUN mkdir -p ~/.ssh
 RUN ssh-keyscan github.com >> ~/.ssh/known_hosts
 
 # Install gems in cachable way
-COPY Gemfile Gemfile.lock ./
+COPY --chown=docker:docker Gemfile Gemfile.lock ./
 RUN bundle config --global github.https true
 RUN gem install bundler && bundle install --jobs 20 --retry 5
 
