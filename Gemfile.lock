@@ -37,15 +37,19 @@ GIT
   specs:
     nyulibraries_javascripts (1.0.0)
 
-PATH
-  remote: vendor/nyulibraries_stylesheets
+GIT
+  remote: https://github.com/NYULibraries/nyulibraries_stylesheets.git
+  revision: 46c889457c1bbda3b3c8e66433843295e0e253ba
+  branch: feature/login_accessibility
   specs:
     nyulibraries_stylesheets (1.0.6)
       bootstrap-sass (~> 3.2)
       compass (>= 1.0.1)
 
-PATH
-  remote: vendor/nyulibraries_templates
+GIT
+  remote: https://github.com/NYULibraries/nyulibraries_templates.git
+  revision: 2d0353cb5929fbac5c6e00abefbffafb9e7a41b7
+  branch: feature/accessibility_improvements
   specs:
     nyulibraries_templates (1.1.4)
       rails (>= 4)
