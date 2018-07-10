@@ -4,7 +4,8 @@ services:
   dev:
     build: .
     volumes:
-      - .:/app
+      - ./vendor:/app/vendor
+      - ./app:/app/app
     ports:
       - "3000:3000"
     env_file:
