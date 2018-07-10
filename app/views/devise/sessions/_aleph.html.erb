@@ -1,9 +1,7 @@
 <div id="aleph">
-  <h1>
-    <%= t("application.#{auth_type_with_institution}.header") %>
-  </h1>
   <%= form_tag(user_aleph_omniauth_callback_path(institution: current_institution.code, auth_type: params[:auth_type]), class: "#{params[:auth_type]}-login-form") do -%>
-    <%= field_set_tag t("application.#{auth_type_with_institution}.header") do -%>
+    <%= field_set_tag do -%>
+      <legend class="heading"><%= t("application.#{auth_type_with_institution}.header") %></legend>
       <div class="form-group">
         <%= label_tag "username", t("application.#{auth_type_with_institution}.username_label") %>
         <div class="row">
