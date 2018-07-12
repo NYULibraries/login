@@ -1,7 +1,7 @@
 <div id="new_school_ldap">
   <%= form_tag(user_new_school_ldap_omniauth_callback_path(institution: current_institution.code, auth_type: params[:auth_type]), class: "ns-login-form") do -%>
     <%= field_set_tag do -%>
-      <legend class="heading"><%= t('application.ns.header') %></legend>
+      <legend><%= t('application.ns.header') %></legend>
       <div class="form-group">
         <%= label_tag "username", t("application.ns.username_label") %>
         <div class="row">
