@@ -39,7 +39,7 @@ GIT
 
 GIT
   remote: https://github.com/NYULibraries/nyulibraries_stylesheets.git
-  revision: a6b0a75f45e4e2c2d5ce922799c04c6221500f19
+  revision: d9b05d41fadc3e23216b50f23f24137aa27cf1ef
   specs:
     nyulibraries_stylesheets (1.0.6)
       bootstrap-sass (~> 3.2)
@@ -47,7 +47,7 @@ GIT
 
 GIT
   remote: https://github.com/NYULibraries/nyulibraries_templates.git
-  revision: 1c629de759d649bdd5e29d8acad0384fe808da4e
+  revision: 6348904a9164139fd4f42d36cbd9ea2d7e3e06b5
   specs:
     nyulibraries_templates (1.1.4)
       rails (>= 4)
