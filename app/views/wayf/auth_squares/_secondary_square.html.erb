@@ -1,7 +1,4 @@
 <%- name = Institutions.institutions[option.upcase.to_sym].views["login"]["name"] -%>
-<%= content_tag(:div, class: [option, "alt-login", "col-sm-3", "square"], id: "#{option}-login") do
-      content_tag(:div, class: "alt-login-link") do
-        link_to(content_tag(:span, name), auth_path(option, current_institution.code.downcase))+
-        content_tag(:span, name)
-      end
-  end %>
+<%= content_tag(:div, class: [option, "alt-login", "col-sm-3", "square"], id: "#{option}-login") do %>
+ <h2><%= link_to(name, auth_path(option, current_institution.code.downcase)) %></h2>
+<% end %>

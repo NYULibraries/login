@@ -1,13 +1,10 @@
 <div class="row">
-  <h1><%= t('application.header_html') %></h1>
+  <h1 class="heading"><%= t('application.header_html') %></h1>
 </div>
 <div class="row">
   <!-- Link to NYU Shibboleth auth -->
   <div id="nyu_shibboleth-login" class="col-sm-9 primary-login">
-    <div class="alt-login-link">
-      <%= link_to content_tag(:span, t('application.nyu.link_text')), user_nyu_shibboleth_omniauth_authorize_path(institution: current_institution.code, auth_type: :nyu) %>
-      <%= content_tag(:span, t('application.nyu.link_text')) %>
-    </div>
+    <h2><%= link_to t('application.nyu.link_text'), user_nyu_shibboleth_omniauth_authorize_path(institution: current_institution.code, auth_type: :nyu) %></h2>
   </div>
   <!-- Link to the first secondary login auth in the list -->
   <%- option = institution.views["login"]["secondary"].first -%>

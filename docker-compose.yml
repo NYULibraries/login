@@ -4,7 +4,8 @@ services:
   dev:
     build: .
     volumes:
-      - .:/app
+      - ./vendor:/app/vendor
+      - ./app:/app/app
     ports:
       - "3000:3000"
     env_file:
@@ -13,7 +14,7 @@ services:
       CI:
       CODECLIMATE_REPO_TOKEN:
       COVERALLS_REPO_TOKEN:
-    command: ["/tmp/wait-for-it.sh", "db:5432", "--", "tail", "-f", "/dev/null"]
+    command: ["/tmp/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
     depends_on:
       - setup_dbs
 

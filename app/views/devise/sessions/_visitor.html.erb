@@ -1,27 +1,23 @@
 <div id="visitor">
-  <h1>
+  <h1 class="heading">
     <%= t('application.general_public.header') %>
   </h1>
   <div class="row">
-  <%= content_tag(:div, class: ["facebook", "alt-login", "col-sm-4 col-sm-offset-2", "square"], id: "facebook-login") do
-        content_tag(:div, class: "alt-login-link") do
-          link_to(content_tag(:span, "Facebook"), user_facebook_omniauth_authorize_path(institution: current_institution.code), title: "Facebook")+
-          content_tag(:span, "Facebook") do
-            content_tag(:span, "Facebook")+
-            tag(:br)+
-            fa_icon("facebook-square")
-          end
-        end
-    end %>
-  <%= content_tag(:div, class: ["twitter", "alt-login", "col-sm-4", "square"], id: "twitter-login") do
-        content_tag(:div, class: "alt-login-link") do
-          link_to(content_tag(:span, "Twitter"), user_twitter_omniauth_authorize_path(institution: current_institution.code), title: "Twitter")+
-          content_tag(:span) do
-            content_tag(:span, "Twitter")+
-            tag(:br)+
-            fa_icon("twitter")
-          end
-        end
-    end %>
+  <%= content_tag(:div, class: ["facebook", "alt-login", "col-sm-4 col-sm-offset-2", "square"], id: "facebook-login") do %>
+    <h2>
+      <%= link_to(user_facebook_omniauth_authorize_path(institution: current_institution.code), title: "Facebook") do %>
+        Facebook
+        <%= fa_icon("facebook-square", title: 'Facebook logo') %>
+      <% end %>
+    </h2>
+  <% end %>
+  <%= content_tag(:div, class: ["twitter", "alt-login", "col-sm-4", "square"], id: "twitter-login") do %>
+    <h2>
+      <%= link_to(user_twitter_omniauth_authorize_path(institution: current_institution.code), title: "Twitter") do %>
+        Twitter
+        <%= fa_icon("twitter", title: 'Twitter logo')%>
+      <% end %>
+    </h2>
+  <% end %>
   </div>
 </div>

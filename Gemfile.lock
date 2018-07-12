@@ -39,19 +39,19 @@ GIT
 
 GIT
   remote: https://github.com/NYULibraries/nyulibraries_stylesheets.git
-  revision: 7635383d77ac815f4a28219138c75f8971f680f6
-  tag: v1.0.5
+  revision: d9b05d41fadc3e23216b50f23f24137aa27cf1ef
+  tag: v1.1.0
   specs:
-    nyulibraries_stylesheets (1.0.5)
+    nyulibraries_stylesheets (1.0.6)
       bootstrap-sass (~> 3.2)
       compass (>= 1.0.1)
 
 GIT
   remote: https://github.com/NYULibraries/nyulibraries_templates.git
-  revision: 245dea4a7af547de8442c31484dd2888012298de
-  tag: v1.1.2
+  revision: 57e0540a7dca1fce4397115f2ce64e86936a209d
+  tag: v1.2.0
   specs:
-    nyulibraries_templates (1.1.2)
+    nyulibraries_templates (1.1.4)
       rails (>= 4)
 
 GEM
@@ -94,7 +94,7 @@ GEM
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
     arel (6.0.4)
-    autoprefixer-rails (8.1.0.1)
+    autoprefixer-rails (8.6.5)
       execjs
     bcrypt (3.1.11)
     better_errors (2.4.0)
