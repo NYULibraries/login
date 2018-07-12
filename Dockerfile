@@ -28,7 +28,7 @@ RUN wget --no-check-certificate -q -O - https://raw.githubusercontent.com/vishnu
 RUN chmod a+x /tmp/wait-for-it.sh
 
 # For working with locally installed gems
-COPY vendor ./vendor
+#COPY vendor ./vendor
 
 # Add github to known_hosts
 RUN mkdir -p ~/.ssh
