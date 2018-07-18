@@ -77,9 +77,6 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-# Rollbar performance monitoring
-gem 'rollbar', '~> 2'
-
 # Development gems
 group :development do
   gem 'better_errors', '~> 2', platform: :ruby
