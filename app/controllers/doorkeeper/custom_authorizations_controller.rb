@@ -1,5 +1,5 @@
 class Doorkeeper::CustomAuthorizationsController < Doorkeeper::AuthorizationsController
-  prepend_before_filter :set_institution_from_param, only: [:new], if: -> { params["institution"].present? }
+  prepend_before_action :set_institution_from_param, only: [:new], if: -> { params["institution"].present? }
 
   private
 

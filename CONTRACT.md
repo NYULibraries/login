@@ -113,7 +113,7 @@ With Rails you can simply do the following in your `ApplicationController`.
 ```ruby
 class ApplicationController < ActionController::Base
   #...
-  prepend_before_filter :passive_login
+  prepend_before_action :passive_login
   #...
   def passive_login
     if !cookies[:_check_passive_login]
@@ -135,7 +135,7 @@ Or the more fleshed out version we use in our apps:
 ```ruby
 class ApplicationController < ActionController::Base
   #...
-  prepend_before_filter :passive_login
+  prepend_before_action :passive_login
   def passive_login
     if !cookies[:_check_passive_login]
       cookies[:_check_passive_login] = true

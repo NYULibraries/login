@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 # Run `bundle config --global github.https true` on the server to quiet warnings
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.9'
+gem 'rails', '~> 5.2'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.21.0'
@@ -62,6 +62,8 @@ gem 'font-awesome-rails', '~> 4'
 # NOTE: factory_bot_rails fix needed before update to >4.3.1
 # see issue: https://github.com/doorkeeper-gem/doorkeeper/issues/1043
 gem 'doorkeeper', '~> 4.2.0'
+# Manually include responders to maintain respond_with & respond_to functionality
+gem 'responders', '~> 2.0'
 
 # Figs for configuration
 gem 'figs', '~> 2.1'
@@ -107,6 +109,9 @@ group :test, :cucumber do
 end
 
 group :test, :cucumber, :development do
+  # Use Puma as the app server for testing and local development
+  gem 'puma', '~> 3.12'
+
   gem 'pry', '~> 0'
   gem 'pry-remote', '~> 0'
 end
