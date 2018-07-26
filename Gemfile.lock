@@ -16,10 +16,10 @@ GIT
 
 GIT
   remote: https://github.com/NYULibraries/nyulibraries_errors.git
-  revision: 16c7a14892e439c48e6fc1f8ce261c3cbe635e4c
-  tag: v1.0.1
+  revision: ae1d11ac6b5ff345912c8043bdb83f1af155f5da
+  tag: v1.0.2
   specs:
-    nyulibraries_errors (1.0.1)
+    nyulibraries_errors (1.0.2)
 
 GIT
   remote: https://github.com/NYULibraries/nyulibraries_institutions.git
@@ -39,19 +39,19 @@ GIT
 
 GIT
   remote: https://github.com/NYULibraries/nyulibraries_stylesheets.git
-  revision: d9b05d41fadc3e23216b50f23f24137aa27cf1ef
-  tag: v1.1.0
+  revision: cdb3c1e15e6ef178dc244b9b82201736a3330285
+  tag: v1.1.2
   specs:
-    nyulibraries_stylesheets (1.0.6)
+    nyulibraries_stylesheets (1.1.2)
       bootstrap-sass (~> 3.2)
       compass (>= 1.0.1)
 
 GIT
   remote: https://github.com/NYULibraries/nyulibraries_templates.git
-  revision: 57e0540a7dca1fce4397115f2ce64e86936a209d
-  tag: v1.2.0
+  revision: b7c7c2ab23643e7ab6e798e117fe0152045f4534
+  tag: v1.2.1
   specs:
-    nyulibraries_templates (1.1.4)
+    nyulibraries_templates (1.2.1)
       rails (>= 4)
 
 GEM
@@ -330,6 +330,7 @@ GEM
       pry (~> 0.9)
       slop (~> 3.0)
     public_suffix (3.0.2)
+    puma (3.12.0)
     pyu-ruby-sasl (0.0.3.3)
     rack (2.0.5)
     rack-test (1.1.0)
@@ -492,6 +493,7 @@ DEPENDENCIES
   poltergeist (~> 1)
   pry (~> 0)
   pry-remote (~> 0)
+  puma (~> 3.12)
   rails (~> 5.2)
   responders (~> 2.0)
   rspec-its (~> 1.2)
