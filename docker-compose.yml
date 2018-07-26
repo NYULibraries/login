@@ -24,7 +24,7 @@ services:
       RAILS_ENV: test
     env_file:
       - test.env
-    command: ["/tmp/wait-for-it.sh", "db:5432", "--", "rake"]
+    command: ["/tmp/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "rake"]
     depends_on:
       - setup_test_dbs
 
@@ -34,7 +34,7 @@ services:
       RAILS_ENV: test
     env_file:
       - test.env
-    command: ["/tmp/wait-for-it.sh", "db:5432", "--", "rake", "db:setup"]
+    command: ["/tmp/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "rake", "db:setup"]
     depends_on:
       - db
 
@@ -42,7 +42,7 @@ services:
     build: .
     env_file:
       - test.env
-    command: ["/tmp/wait-for-it.sh", "db:5432", "--", "rake", "db:setup"]
+    command: ["/tmp/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "rake", "db:setup"]
     depends_on:
       - db
 
