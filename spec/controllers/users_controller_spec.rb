@@ -12,12 +12,12 @@ describe UsersController do
     context 'when logged in' do
       login_user
       context "when request is for the same user as is logged in" do
-        before { get :show, id: attributes[:username], provider: attributes[:provider] }
+        before { get :show, params: { id: attributes[:username], provider: attributes[:provider] } }
         subject { response }
         it { should_not be_redirect }
         context "when not rendering views" do
           render_views false
-          it { should be_success }
+          it { should be_successful }
           it("should have a 200 status") { expect(subject.status).to be(200) }
           it("should assign @user") do
             expect(assigns(:user)).not_to be_nil
@@ -34,14 +34,14 @@ describe UsersController do
         end
       end
       context "when request is for a different username than is logged in" do
-        before { get :show, id: 'different', provider: attributes[:provider] }
+        before { get :show, params: { id: 'different', provider: attributes[:provider] } }
         subject { response }
         it { should be_redirect }
         it("should have a 302 status") { expect(subject.status).to be(302) }
         it { should redirect_to(user_url build(:user))}
       end
       context "when request is for a different provider than is logged in" do
-        before { get :show, id: attributes[:username], provider: 'aleph' }
+        before { get :show, params: { id: attributes[:username], provider: 'aleph' } }
         subject { response }
         it { should be_redirect }
         it("should have a 302 status") { expect(subject.status).to be(302) }
@@ -52,7 +52,7 @@ describe UsersController do
   describe "OmniAuth callback methods" do
     describe "GET 'aleph'" do
       let(:auth_type) { 'bobst' }
-      subject { get :aleph, { auth_type: auth_type }; response }
+      subject { get :aleph, params: { auth_type: auth_type }; response }
       context 'when the omniauth.auth environment is present' do
         before { @request.env['omniauth.auth'] = authhash(:aleph) }
         context 'when eshelf url and cookie are set' do
@@ -87,7 +87,13 @@ describe UsersController do
             it { should redirect_to root_url }
           end
           context "with existing, matching user" do
-            let!(:existing_user){ create(:user, username: (ENV["TEST_ALEPH_USER"] || 'BOR_ID').downcase, provider: 'aleph') }
+            let!(:existing_user) do
+              create(
+                :user,
+                username: (ENV["TEST_ALEPH_USER"] || 'BOR_ID').downcase,
+                provider: 'aleph'
+              )
+            end
             it "should assign existing aleph user to @user" do
               subject
               expect(assigns(:user)).to eq existing_user
@@ -151,7 +157,7 @@ describe UsersController do
 
     describe "GET 'twitter'" do
       let(:auth_type) { 'twitter' }
-      subject { get :twitter, { auth_type: auth_type }; response }
+      subject { get :twitter, params: { auth_type: auth_type }; response }
       context 'when the omniauth.auth environment is present' do
         before { @request.env['omniauth.auth'] = authhash(:twitter) }
         context 'when the omniauth.auth.provider is twitter' do
@@ -193,7 +199,7 @@ describe UsersController do
 
     describe "GET 'facebook'" do
       let(:auth_type) { 'facebook' }
-      subject { get :facebook, { auth_type: auth_type }; response }
+      subject { get :facebook, params: { auth_type: auth_type }; response }
       context 'when the omniauth.auth environment is present' do
         before { @request.env['omniauth.auth'] = authhash(:facebook) }
         context 'when the omniauth.auth.provider is facebook' do
@@ -235,7 +241,7 @@ describe UsersController do
 
     describe "GET 'nyu_shibboleth'" do
       let(:auth_type) { 'nyu' }
-      subject { get :nyu_shibboleth, { auth_type: auth_type }; response }
+      subject { get :nyu_shibboleth, params: { auth_type: auth_type }; response }
       context 'when the omniauth.auth environment is present' do
         before { @request.env['omniauth.auth'] = authhash(:nyu_shibboleth) }
         context 'when the omniauth.auth environment provider is not nyu_shibboleth' do
@@ -261,7 +267,7 @@ describe UsersController do
 
     describe "GET 'new_school_ldap'" do
       let(:auth_type) { 'ns' }
-      subject { get :new_school_ldap, { auth_type: auth_type }; response }
+      subject { get :new_school_ldap, params: { auth_type: auth_type }; response }
       context 'when the omniauth.auth environment is present' do
         before { @request.env['omniauth.auth'] = authhash(:new_school_ldap) }
         context 'when the omniauth.auth environment provider is not new_school_ldap' do
@@ -291,9 +297,9 @@ describe UsersController do
     let(:return_uri) { 'https://trustedapp.nyu.edu/i/was/in/the/middle/of/something' }
     let(:login_path) { nil }
     let(:params) { { client_id: client_id, return_uri: return_uri, login_path: login_path } }
-    let(:session_params) { nil }
+    let(:session_params) { Hash.new }
     context 'when user is logged out' do
-      before { get :client_passive_login, params, session_params }
+      before { get :client_passive_login, params: params, session: session_params }
       subject { response }
       context 'and hasnt made a call to Shibboleth Idp yet' do
         let(:escaped_return_uri) { "#{CGI::escape(return_uri)}" }
@@ -316,7 +322,7 @@ describe UsersController do
     context 'when user is logged in' do
       login_user
       let(:origin) { CGI::escape('https://trustedapp.nyu.edu/i/was/in/the/middle/of/something') }
-      before { get :client_passive_login, params, session_params }
+      before { get :client_passive_login, params: params, session: session_params }
       subject { response }
       context 'and a custom login path is set' do
         let(:login_path) { '/login' }
@@ -332,21 +338,21 @@ describe UsersController do
     let(:origin) { 'https://trustedapp.nyu.edu' }
     subject { response }
     context 'when user is logged in to shibboleth' do
-      before { get :shibboleth_passive_login, origin: origin }
+      before { get :shibboleth_passive_login, params: { origin: origin } }
       prepend_before { @request.cookies[:_shibsession_] = 'test123' }
       it { should redirect_to 'http://test.host/users/auth/nyu_shibboleth?auth_type=nyu&institute=NYU&origin=https%3A%2F%2Ftrustedapp.nyu.edu' }
     end
     context 'when user is not logged in to shibboleth' do
-      before { get :shibboleth_passive_login, origin: origin }
+      before { get :shibboleth_passive_login, params: { origin: origin } }
       it { should redirect_to 'https://trustedapp.nyu.edu' }
     end
   end
 
   describe 'GET /passthru' do
-    let(:params) { nil }
+    let(:params) { Hash.new }
     let(:redirect_uri) { 'https://trustedapp.nyu.edu' }
     let(:session_params) { { _action_before_eshelf_redirect: redirect_uri } }
-    before { get :passthru, params, session_params }
+    before { get :passthru, params: params, session: session_params }
     prepend_before { @request.cookies[:_nyulibraries_eshelf_passthru] = { value: 1, httponly: true, domain: '.localhost' } }
     subject { response }
     context 'when user has a saved action in session' do

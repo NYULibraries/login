@@ -11,7 +11,7 @@ module Doorkeeper
         it { should redirect_to(root_url) }
       end
       describe "DELETE 'destroy'" do
-        before { delete :destroy, id: application.id }
+        before { delete :destroy, params: { id: application.id } }
         subject { response }
         it { should be_redirect }
         it { should redirect_to(root_url) }
@@ -22,11 +22,11 @@ module Doorkeeper
       describe "GET 'index'" do
         before { get :index }
         subject { response }
-        it { should be_succes }
+        it { should be_successful }
         it { should render_template(:index) }
       end
       describe "DELETE 'destroy'" do
-        before { delete :destroy, id: application.id }
+        before { delete :destroy, params: { id: application.id } }
         subject { response }
         it { should be_redirect }
         it { should redirect_to('/oauth/authorized_applications') }

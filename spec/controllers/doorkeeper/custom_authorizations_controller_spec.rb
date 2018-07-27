@@ -9,13 +9,13 @@ module Doorkeeper
     context "when not logged in" do
       describe "GET 'show'" do
         set_code
-        before { get :show, code: code }
+        before { get :show, params: { code: code } }
         subject { response }
         it { should be_redirect }
         it { should redirect_to(root_url) }
       end
       describe "GET 'new'" do
-        before { get :new, params }
+        before { get :new, params: params }
         subject { response }
         it { should be_redirect }
         it { should redirect_to(root_url) }
@@ -28,13 +28,13 @@ module Doorkeeper
         end
       end
       describe "POST 'create'" do
-        before { post :create, params }
+        before { post :create, params: params }
         subject { response }
         it { should be_redirect }
         it { should redirect_to(root_url) }
       end
       describe "DELETE 'destroy'" do
-        before { delete :destroy, params }
+        before { delete :destroy, params: params }
         subject { response }
         it { should be_redirect }
         it { should redirect_to(root_url) }
@@ -44,13 +44,13 @@ module Doorkeeper
       login_user
       describe "GET 'show'" do
         set_code
-        before { get :show, code: code }
+        before { get :show, params: { code: code } }
         subject { response }
-        it { should be_succes }
+        it { should be_successful }
         it { should render_template(:show) }
       end
       describe "GET 'new'" do
-        before { get :new, params }
+        before { get :new, params: params }
         subject { response }
         it { should be_redirect }
         it("should redirect to the callback URL") do
@@ -58,7 +58,7 @@ module Doorkeeper
         end
       end
       describe "POST 'create'" do
-        before { post :create, params }
+        before { post :create, params: params }
         subject { response }
         it { should be_redirect }
         it("should redirect to the callback URL") do
@@ -66,7 +66,7 @@ module Doorkeeper
         end
       end
       describe "DELETE 'destroy'" do
-        before { delete :destroy, params }
+        before { delete :destroy, params: params }
         subject { response }
         it { should be_redirect }
         it { should redirect_to(application.redirect_uri +
