@@ -43,7 +43,6 @@ module Login
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
 
     # Rails 5 options:
-    config.active_record.belongs_to_required_by_default = true
     config.action_controller.per_form_csrf_tokens = true
     config.action_controller.forgery_protection_origin_check = true
   end

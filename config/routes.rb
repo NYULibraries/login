@@ -1,7 +1,7 @@
-Login::Application.routes.draw do
+Rails.application.routes.draw do
   providers = Regexp.union(Devise.omniauth_providers.map(&:to_s))
   use_doorkeeper do
-    controllers :authorizations => 'doorkeeper/custom_authorizations'    
+    controllers :authorizations => 'doorkeeper/custom_authorizations'
   end
   devise_for :users, controllers: { omniauth_callbacks: 'users', sessions: 'users/sessions' }
   devise_scope :user do
