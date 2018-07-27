@@ -16,14 +16,13 @@ services:
 
   test:
     build: .
-    environment:
-      RAILS_ENV: test
     env_file:
       - test.env
     environment:
       CI:
       CODECLIMATE_REPO_TOKEN:
       COVERALLS_REPO_TOKEN:
+      RAILS_ENV: test
     command: ["/tmp/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "rake"]
     depends_on:
       - setup_test_dbs

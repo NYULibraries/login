@@ -458,7 +458,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2.0)
   compass-rails (~> 3.1)
   coveralls (~> 0.8)
-  cucumber-rails (~> 1.5)
+  cucumber-rails (~> 1.6)
   dalli (~> 2.7.8)
   database_cleaner (~> 1.7)
   devise (~> 4.4.3)
@@ -507,4 +507,4 @@ DEPENDENCIES
   webmock (~> 3)
 
 BUNDLED WITH
-   1.16.1
+   1.16.3

@@ -89,7 +89,7 @@ end
 group :test, :cucumber do
   # Coveralls for testing coverage
   gem 'coveralls', '~> 0.8', require: false
-  gem 'cucumber-rails', '~> 1.5', require: false
+  gem 'cucumber-rails', '~> 1.6', require: false
   gem 'selenium-webdriver', '~> 3'
   gem 'pickle', '~> 0.5'
   gem 'database_cleaner', '~> 1.7'
