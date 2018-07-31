@@ -34,7 +34,7 @@ describe UsersController do
         end
       end
       context "when request is for a different username than is logged in" do
-        before { get :show, params: { id: 'different', provider: attributes[:provider] } }
+        before { get(:show, { params: { id: 'different', provider: attributes[:provider] } }) }
         subject { response }
         it { should be_redirect }
         it("should have a 302 status") { expect(subject.status).to be(302) }
@@ -298,8 +298,10 @@ describe UsersController do
     let(:login_path) { nil }
     let(:params) { { client_id: client_id, return_uri: return_uri, login_path: login_path } }
     let(:session_params) { Hash.new }
+
+    before { params.delete_if { |k, v| v.nil? } }
     context 'when user is logged out' do
-      before { get :client_passive_login, params: params, session: session_params }
+      before { get(:client_passive_login, params: params, session: session_params) }
       subject { response }
       context 'and hasnt made a call to Shibboleth Idp yet' do
         let(:escaped_return_uri) { "#{CGI::escape(return_uri)}" }
@@ -338,12 +340,12 @@ describe UsersController do
     let(:origin) { 'https://trustedapp.nyu.edu' }
     subject { response }
     context 'when user is logged in to shibboleth' do
-      before { get :shibboleth_passive_login, params: { origin: origin } }
+      before { get(:shibboleth_passive_login, params: { origin: origin }) }
       prepend_before { @request.cookies[:_shibsession_] = 'test123' }
       it { should redirect_to 'http://test.host/users/auth/nyu_shibboleth?auth_type=nyu&institute=NYU&origin=https%3A%2F%2Ftrustedapp.nyu.edu' }
     end
     context 'when user is not logged in to shibboleth' do
-      before { get :shibboleth_passive_login, params: { origin: origin } }
+      before { get(:shibboleth_passive_login, params: { origin: origin }) }
       it { should redirect_to 'https://trustedapp.nyu.edu' }
     end
   end
@@ -352,6 +354,7 @@ describe UsersController do
     let(:params) { Hash.new }
     let(:redirect_uri) { 'https://trustedapp.nyu.edu' }
     let(:session_params) { { _action_before_eshelf_redirect: redirect_uri } }
+
     before { get :passthru, params: params, session: session_params }
     prepend_before { @request.cookies[:_nyulibraries_eshelf_passthru] = { value: 1, httponly: true, domain: '.localhost' } }
     subject { response }

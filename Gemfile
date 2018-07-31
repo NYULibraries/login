@@ -74,6 +74,8 @@ gem 'faraday_middleware', '~> 0.12'
 
 gem 'dalli', '~> 2.7.8'
 
+gem 'bootsnap', require: false
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -96,12 +98,12 @@ group :test, :cucumber do
   gem 'vcr', '~> 4'
   gem 'webmock', '~> 3'
   # Rspec as the test framework
-  gem 'rspec-rails', '~> 3.6'
+  gem 'rspec-rails', '~> 3.7'
   # Phantomjs for headless browser testing
   gem 'phantomjs', '>= 1.9.7'
   gem 'poltergeist', '~> 1'
   # Use factory_bot for creating models
-  gem 'factory_bot_rails', '~> 4.8.2'
+  gem 'factory_bot_rails', '~> 4.9'
   # Use json_spec to do rspec tests with JSON
   gem 'json_spec', '~> 1.1'
   gem 'rspec-its', '~> 1.2'
@@ -116,3 +118,5 @@ group :test, :cucumber, :development do
   gem 'pry', '~> 0'
   gem 'pry-remote', '~> 0'
 end
+
+gem "byebug", "~> 10.0", :groups => [:development, :test]

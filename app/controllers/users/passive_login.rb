@@ -83,7 +83,7 @@ module Users
     # spoofed but if it was an we try to authenticate the error will
     # be raised then
     def shib_session_exists?
-      !cookies.detect {|key, val| key.include? SHIBBOLETH_COOKIE_PATTERN }.nil?
+      !cookies.detect { |key, val| key.include? SHIBBOLETH_COOKIE_PATTERN }.nil?
     end
     private :shib_session_exists?
 
