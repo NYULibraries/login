@@ -85,6 +85,7 @@ end
 group :development do
   gem 'better_errors', '~> 2', platform: :ruby
   gem 'binding_of_caller', '~> 0.8', platform: :ruby
+  gem 'listen'
 end
 
 # Testing gems
