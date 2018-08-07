@@ -109,6 +109,7 @@ group :test, :cucumber do
   gem 'json_spec', '~> 1.1'
   gem 'rspec-its', '~> 1.2'
   gem 'faker', '~> 1'
+  # allows for assigns and assert_template testing in Rails 5
   gem 'rails-controller-testing'
 end
 
