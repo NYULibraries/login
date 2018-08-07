@@ -25,10 +25,10 @@ gem 'jquery-rails', '~> 4.3.1'
 gem 'modernizr-rails', '~> 2.7.0'
 # Use the NYU Libraries assets gem
 gem 'nyulibraries_stylesheets', github: 'NYULibraries/nyulibraries_stylesheets', tag: 'v1.1.2'
-gem 'nyulibraries_templates', github: 'NYULibraries/nyulibraries_templates', tag: 'v1.2.1'
+gem 'nyulibraries_templates', github: 'NYULibraries/nyulibraries_templates', tag: 'v1.2.2'
 gem 'nyulibraries_institutions', github: 'NYULibraries/nyulibraries_institutions', tag: 'v1.0.3'
 gem 'nyulibraries_javascripts', github: 'NYULibraries/nyulibraries_javascripts', tag: 'v1.0.0'
-gem 'nyulibraries_errors', github: 'NYULibraries/nyulibraries_errors', tag: 'v1.0.2'
+gem 'nyulibraries_errors', github: 'NYULibraries/nyulibraries_errors', tag: 'v1.1.0'
 # Use higher version of Compass CSS framework for sprites, etc.
 gem 'compass-rails', '~> 3.1'
 
@@ -117,8 +117,6 @@ group :test, :cucumber, :development do
   # Use Puma as the app server for testing and local development
   gem 'puma', '~> 3.12'
 
-  gem 'pry', '~> 0'
-  gem 'pry-remote', '~> 0'
+  gem 'pry-rails'
+  gem 'byebug'
 end
-
-gem "byebug", "~> 10.0", :groups => [:development, :test]
