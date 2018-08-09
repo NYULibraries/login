@@ -166,5 +166,18 @@ describe User do
       subject { user.identities }
       it { should_not be_blank }
     end
+
+    Devise.omniauth_providers.each do |provider|
+      describe "##{provider}_properties" do
+        subject { user.send(:"#{provider}_properties") }
+
+        it { should be_an(HashWithIndifferentAccess) }
+      end
+    end
+
+    describe '#aleph_properties' do |provider|
+      subject { user.aleph_properties.to_h }
+      its(:length) { is_expected.to be > 0 }
+    end
   end
 end

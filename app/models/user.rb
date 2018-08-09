@@ -69,6 +69,13 @@ class User < ApplicationRecord
     identity.save
   end
 
+
+  Devise.omniauth_providers.each do |provider|
+    define_method(:"#{provider}_properties") do
+      HashWithIndifferentAccess.new(identities.find_by(provider: provider)&.properties)
+    end
+  end
+
   # Update identity assoc from OmniAuth hash
   def create_or_update_identity_from_omniauth_hash
     # Create or update an identity from the attributes mapped in the mapper

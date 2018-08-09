@@ -136,4 +136,17 @@ class UsersController < Devise::OmniauthCallbacksController
   end
   private :bobcat_institutions
 
+  def ezborrow
+    ezborrow_user = Login::EZBorrow.new(current_user)
+    barcode = ezborrow_user.barcode
+
+    if ezborrow_user.authorized? && barcode.present?
+      url_base = Login::EZBorrow.url_base
+      ls = params[:ls].present? ? params[:ls] : 'NYU'
+      query = params[:query].present? ? CGI::escape(params[:query]) : ''
+      redirect_to "#{url_base}?command=mkauth&LS=#{ls}&PI=#{barcode}&query=#{query}"
+    else
+      redirect_to Login::EZBorrow.unauthorized_url
+    end
+  end
 end
