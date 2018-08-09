@@ -513,7 +513,7 @@ DEPENDENCIES
   responders (~> 2.0)
   rspec-its (~> 1.2)
   rspec-rails (~> 3.7)
-  sass-rails (~> 5.0.6)
+  sass-rails (~> 5.0.7)
   sdoc
   selenium-webdriver (~> 3)
   therubyracer

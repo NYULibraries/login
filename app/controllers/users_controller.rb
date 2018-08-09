@@ -1,7 +1,8 @@
 class UsersController < Devise::OmniauthCallbacksController
   include Users::PassiveLogin
+  include Users::EZBorrow
   prepend_before_action :redirect_root, only: [:show], if: -> { request.path == '/' && user_signed_in? }
-  before_action :require_login, only: [:show]
+  before_action :require_login, only: [:show, :ezborrow]
   before_action :require_no_authentication, except: [:passthru, :show, :client_passive_login, :ezborrow]
   before_action :require_valid_omniauth_hash, only: (Devise.omniauth_providers << :omniauth_callback)
   respond_to :html
@@ -135,17 +136,4 @@ class UsersController < Devise::OmniauthCallbacksController
     @bobcat_institutions ||= Login::Aleph::Patron::BOR_STATUS_MAPPINGS.map(&:keys).flatten
   end
   private :bobcat_institutions
-
-  def ezborrow
-    ezborrow_user = Login::EZBorrow.new(current_user)
-    barcode = ezborrow_user.barcode
-    if current_user && ezborrow_user.authorized? && barcode.present?
-      url_base = Login::EZBorrow.url_base
-      ls = params[:ls].present? ? params[:ls] : 'NYU'
-      query = params[:query].present? ? CGI::escape(params[:query]) : ''
-      redirect_to "#{url_base}?command=mkauth&LS=#{ls}&PI=#{barcode}&query=#{query}"
-    else
-      redirect_to Login::EZBorrow.unauthorized_url
-    end
-  end
 end

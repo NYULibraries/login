@@ -12,7 +12,7 @@ gem 'nested-hstore', '~> 0.1.2'
 
 # Use SCSS for stylesheets
 # Locked in at beta1 release because major release doesn't play nice with compass-rails yet
-gem 'sass-rails', '~> 5.0.6'
+gem 'sass-rails', '~> 5.0.7'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '~> 4.1'
 # Use CoffeeScript for .js.coffee assets and views
