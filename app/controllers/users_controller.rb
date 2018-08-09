@@ -2,7 +2,7 @@ class UsersController < Devise::OmniauthCallbacksController
   include Users::PassiveLogin
   prepend_before_action :redirect_root, only: [:show], if: -> { request.path == '/' && user_signed_in? }
   before_action :require_login, only: [:show]
-  before_action :require_no_authentication, except: [:passthru, :show, :client_passive_login]
+  before_action :require_no_authentication, except: [:passthru, :show, :client_passive_login, :ezborrow]
   before_action :require_valid_omniauth_hash, only: (Devise.omniauth_providers << :omniauth_callback)
   respond_to :html
 
@@ -139,8 +139,7 @@ class UsersController < Devise::OmniauthCallbacksController
   def ezborrow
     ezborrow_user = Login::EZBorrow.new(current_user)
     barcode = ezborrow_user.barcode
-
-    if ezborrow_user.authorized? && barcode.present?
+    if current_user && ezborrow_user.authorized? && barcode.present?
       url_base = Login::EZBorrow.url_base
       ls = params[:ls].present? ? params[:ls] : 'NYU'
       query = params[:query].present? ? CGI::escape(params[:query]) : ''
