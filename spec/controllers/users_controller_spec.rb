@@ -376,4 +376,22 @@ describe UsersController do
       it { should eql "https://pds.library.nyu.edu/pds?func=load-login&institute=NYU&calling_system=primo&url=http%3a%2f%2fbobcat.library.nyu.edu%2fprimo_library%2flibweb%2faction%2fsearch.do%3fdscnt%3d0%26amp%3bvid%3dNYU&func=load-login&amp;institute=NYU&amp;calling_system=primo&amp;url=http://bobcat.library.nyu.edu:80/primo_library/libweb/action/login.do" }
     end
   end
+
+  # describe 'GET /ezborrow' do
+  #   let(:params) { Hash.new }
+  #   subject { response }
+  #
+  #   let(:fake_ezborrow) do
+  #     Class.new
+  #   end
+  #   stub_const("Login::EZBorrow")
+  #
+  #   before do
+  #     get :ezborrow, params: params
+  #   end
+  #   context 'when user is authorized' do
+  #     let(:params) { { query: 'test_query_string', ls: 'NYU' } }
+  #     it { should redirect_to Login::EZBorrow.base_url }
+  #   end
+  # end
 end
