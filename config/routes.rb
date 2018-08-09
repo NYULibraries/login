@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   end
   devise_for :users, controllers: { omniauth_callbacks: 'users', sessions: 'users/sessions' }
   devise_scope :user do
+    get '/ezborrow', to: "users#ezborrow", as: :ezborrow
     get 'users/:provider/:id(/:institution)', to: 'users#show', as: 'user',
       constraints: { provider: providers, id: /[^\/]+/ }
     get 'logout(/:institution)', to: 'users/sessions#destroy', as: :logout
@@ -24,5 +25,4 @@ Rails.application.routes.draw do
   end
   get 'pds' => redirect{ |params, request| "#{ENV['PDS_URL']}/pds?#{request.query_string}" }
   get 'ezproxy' => redirect{ |params, request| "#{ENV['PDS_URL']}/ezproxy?#{request.query_string}" }
-  get 'ezborrow' => redirect{ |params, request| "#{ENV['PDS_URL']}/ezborrow?#{request.query_string}" }
 end
