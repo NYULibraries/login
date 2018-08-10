@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   end
   devise_for :users, controllers: { omniauth_callbacks: 'users', sessions: 'users/sessions' }
   devise_scope :user do
-    get '/ezborrow', to: "users#ezborrow", as: :ezborrow
     get 'users/:provider/:id(/:institution)', to: 'users#show', as: 'user',
       constraints: { provider: providers, id: /[^\/]+/ }
     get 'logout(/:institution)', to: 'users/sessions#destroy', as: :logout
@@ -14,6 +13,7 @@ Rails.application.routes.draw do
     get 'login/passive_shibboleth', to: 'users#shibboleth_passive_login', as: :passive_shibboleth
     get 'users/show', to: 'users#show'
     match 'passthru', to: 'users#passthru', via: [:post, :get]
+    get '/ezborrow(/:institution)', to: "users#ezborrow", as: :ezborrow
     root 'users#show'
   end
   get 'login(/:institution)', to: 'wayf#index', as: :login
