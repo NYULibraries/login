@@ -12,10 +12,12 @@
   <%= render "wayf/auth_squares/#{option}" %>
 </div>
 <!-- Link to the rest of the secondary logins -->
-<div class="row">
-  <% institution.views["login"]["secondary"][1..-1].each do |option| %>
-    <%= render "wayf/auth_squares/#{option}" %>
-  <% end %>
-  <!-- Link to visitor square -->
-  <%= render "wayf/auth_squares/visitor" %>
-</div>
+<% unless request.env["HTTP_REFERER"]&.include? 'ezborrow' %>
+  <div class="row">
+    <% institution.views["login"]["secondary"][1..-1].each do |option| %>
+      <%= render "wayf/auth_squares/#{option}" %>
+    <% end %>
+    <!-- Link to visitor square -->
+    <%= render "wayf/auth_squares/visitor" %>
+  </div>
+<% end %>
