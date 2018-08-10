@@ -86,6 +86,7 @@ group :development do
   gem 'better_errors', '~> 2', platform: :ruby
   gem 'binding_of_caller', '~> 0.8', platform: :ruby
   gem 'listen'
+  gem 'web-console', '>= 3.3.0'
 end
 
 # Testing gems
