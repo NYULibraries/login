@@ -43,8 +43,7 @@ module Login
 
     # Rails 5 options:
     # autoload only enabled in non-production by default
-    # config.autoload_paths << Rails.root.join('lib')
-    config.autoload_paths << Rails.root.join('app', 'controllers', 'users')
+    config.autoload_paths << Rails.root.join('lib')
 
     # Eager loads all files in lib./ for production environment
     config.eager_load_paths << Rails.root.join('lib')

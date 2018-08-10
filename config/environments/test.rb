@@ -10,7 +10,10 @@ Rails.application.configure do
   # Do not eager load code on boot. This avoids loading your whole application
   # just for the purpose of running a single test. If you are using a tool that
   # preloads Rails for running tests, you may have to set it to true.
-  config.eager_load = false
+
+  #  This will slow down tests, but will increase production testing accuracy
+  #  SEE: https://guides.rubyonrails.org/autoloading_and_reloading_constants.html#autoloading-in-the-test-environment
+  config.eager_load = true
 
   # Configure public file server for tests with Cache-Control for performance.
   config.public_file_server.enabled = true
