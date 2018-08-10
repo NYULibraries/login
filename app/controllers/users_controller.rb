@@ -2,7 +2,7 @@ class UsersController < Devise::OmniauthCallbacksController
   include Users::PassiveLogin
   include Users::EZBorrow
   prepend_before_action :redirect_root, only: [:show], if: -> { request.path == '/' && user_signed_in? }
-  before_action :require_login, only: [:show, :ezborrow]
+  before_action :require_login, only: [:show]
   before_action :require_no_authentication, except: [:passthru, :show, :client_passive_login, :ezborrow]
   before_action :require_valid_omniauth_hash, only: (Devise.omniauth_providers << :omniauth_callback)
   respond_to :html
