@@ -5,8 +5,8 @@ describe AuthTypeHelper do
   let(:institution) { 'nyu' }
   let(:params) do
     {
-      "auth_type" => auth_type,
-      "institution" => institution
+      auth_type: auth_type,
+      institution: institution
     }
   end
   before { allow(helper).to receive(:params).and_return(params) }

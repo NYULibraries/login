@@ -10,7 +10,7 @@ module Doorkeeper
         it { should redirect_to('/login') }
       end
       describe "GET 'show'" do
-        before { get :show, id: application.id }
+        before { get :show, params: { id: application.id } }
         subject { response }
         it { should be_redirect }
         it { should redirect_to('/login') }
@@ -22,27 +22,27 @@ module Doorkeeper
         it { should redirect_to('/login') }
       end
       describe "POST 'create'" do
-        before { post :create, doorkeeper_application: attributes_for(:oauth_application) }
+        before { post :create, params: { doorkeeper_application: attributes_for(:oauth_application) } }
         subject { response }
         it { should be_redirect }
         it { should redirect_to('/login') }
       end
       describe "GET 'edit'" do
-        before { get :show, id: application.id }
+        before { get :show, params: { id: application.id } }
         subject { response }
         it { should be_redirect }
         it { should redirect_to('/login') }
       end
       describe "PUT 'update'" do
         before do
-          put :update, id: application.id, doorkeeper_application: { name: "#{application.name} redux" }
+          put :update, params: { id: application.id, doorkeeper_application: { name: "#{application.name} redux" } }
         end
         subject { response }
         it { should be_redirect }
         it { should redirect_to('/login') }
       end
       describe "DELETE 'destroy'" do
-        before { delete :destroy, id: application.id }
+        before { delete :destroy, params: { id: application.id } }
         subject { response }
         it { should be_redirect }
         it { should redirect_to('/login') }
@@ -58,7 +58,7 @@ module Doorkeeper
           it { should redirect_to(user_url(user.provider, user.username)) }
         end
         describe "GET 'show'" do
-          before { get :show, id: application.id }
+          before { get :show, params: { id: application.id } }
           subject { response }
           it { should be_redirect }
           it { should redirect_to(user_url(user.provider, user.username)) }
@@ -70,27 +70,27 @@ module Doorkeeper
           it { should redirect_to(user_url(user.provider, user.username)) }
         end
         describe "POST 'create'" do
-          before { post :create, doorkeeper_application: attributes_for(:oauth_application) }
+          before { post :create, params: { doorkeeper_application: attributes_for(:oauth_application) } }
           subject { response }
           it { should be_redirect }
           it { should redirect_to(user_url(user.provider, user.username)) }
         end
         describe "GET 'edit'" do
-          before { get :edit, id: application.id }
+          before { get :edit, params: { id: application.id } }
           subject { response }
           it { should be_redirect }
           it { should redirect_to(user_url(user.provider, user.username)) }
         end
         describe "PUT 'update'" do
           before do
-            put :update, id: application.id, doorkeeper_application: { name: "#{application.name} redux" }
+            put :update, params: { id: application.id, doorkeeper_application: { name: "#{application.name} redux" } }
           end
           subject { response }
           it { should be_redirect }
           it { should redirect_to(user_url(user.provider, user.username)) }
         end
         describe "DELETE 'destroy'" do
-          before { delete :destroy, id: application.id }
+          before { delete :destroy, params: { id: application.id }}
           subject { response }
           it { should be_redirect }
           it { should redirect_to(user_url(user.provider, user.username)) }
@@ -101,20 +101,20 @@ module Doorkeeper
         describe "GET 'index'" do
           before { get :index }
           subject { response }
-          it { should be_success }
+          it { should be_successful }
         end
         describe "GET 'show'" do
-          before { get :show, id: application.id }
+          before { get :show, params: { id: application.id }}
           subject { response }
-          it { should be_success }
+          it { should be_successful }
         end
         describe "GET 'new'" do
           before { get :new }
           subject { response }
-          it { should be_success }
+          it { should be_successful }
         end
         describe "POST 'create'" do
-          before { post :create, doorkeeper_application: attributes_for(:oauth_application) }
+          before { post :create, params: { doorkeeper_application: attributes_for(:oauth_application) } }
           subject { response }
           it("should assign @application") do
             expect(assigns(:application)).not_to be_nil
@@ -124,13 +124,13 @@ module Doorkeeper
           it { should redirect_to(oauth_application_url(assigns(:application))) }
         end
         describe "GET 'edit'" do
-          before { get :edit, id: application.id }
+          before { get :edit, params: { id: application.id }}
           subject { response }
-          it { should be_success }
+          it { should be_successful }
         end
         describe "PUT 'update'" do
           before do
-            put :update, id: application.id, doorkeeper_application: { name: "#{application.name} redux" }
+            put :update, params: { id: application.id, doorkeeper_application: { name: "#{application.name} redux" } }
           end
           subject { response }
           it("should assign @application") do
@@ -142,7 +142,7 @@ module Doorkeeper
           it { should redirect_to(oauth_application_url(assigns(:application))) }
         end
         describe "DELETE 'destroy'" do
-          before { delete :destroy, id: application.id }
+          before { delete :destroy, params: { id: application.id } }
           subject { response }
           it("should assign @application") do
             expect(assigns(:application)).not_to be_nil

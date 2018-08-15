@@ -1,6 +1,6 @@
 # A user must have a unique username
 # and a unique and valid email address
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   module ClassMethods
     Devise::Models.config(self, :email_regexp)
   end

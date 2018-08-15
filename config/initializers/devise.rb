@@ -17,7 +17,7 @@ Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
-  if Rails.env.development? or Rails.env.test? or Rails.env.cucumber?
+  if Rails.env.development? || Rails.env.test?
     config.secret_key = ('x' * 128)
   else
     config.secret_key = ENV['DEVISE_SECRET_KEY']
@@ -100,7 +100,7 @@ Devise.setup do |config|
       last_name: 'sn'
     },
     extra_fields: ['nyuidn', 'entitlement'],
-    request_type: (Rails.env.cucumber?) ? :params : :env
+    request_type: (Rails.env.test?) ? :params : :env
   require "omniauth-ldap"
   config.omniauth :ldap,
     name: 'new_school_ldap',

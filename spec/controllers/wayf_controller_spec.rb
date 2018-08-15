@@ -22,13 +22,13 @@ describe WayfController do
       let(:institution) { nil }
       let(:params_institution) { nil }
       before { @request.cookies['institution_from_url'] = params_institution }
-      before { get :index, { institution: institution } }
+      before { get :index, params: { institution: institution } }
       subject { response }
       render_views
       describe "GET 'index' for NYU" do
         context 'when institution is passed in to the url' do
           let(:institution) { 'NYU' }
-          it { should be_success }
+          it { should be_successful }
           it("should have a 200 status") { expect(subject.status).to be(200) }
           it do
             should render_template("layouts/login")
@@ -51,7 +51,7 @@ describe WayfController do
       describe "GET 'index' for HSL" do
         context 'when institution is passed in to the url' do
           let(:institution) { 'HSL' }
-          it { should be_success }
+          it { should be_successful }
           it("should have a 200 status") { expect(subject.status).to be(200) }
           it do
             should render_template("layouts/login")
@@ -68,7 +68,7 @@ describe WayfController do
       describe "GET 'index' for NYUAD" do
         context 'when institution is passed in to the url' do
           let(:institution) { 'NYUAD' }
-          it { should be_success }
+          it { should be_successful }
           it("should have a 200 status") { expect(subject.status).to be(200) }
           it do
             should render_template("layouts/login")
@@ -85,7 +85,7 @@ describe WayfController do
       describe "GET 'index' for NYUSH" do
         context 'when institution is passed in to the url' do
           let(:institution) { 'NYUSH' }
-          it { should be_success }
+          it { should be_successful }
           it("should have a 200 status") { expect(subject.status).to be(200) }
           it do
             should render_template("layouts/login")
@@ -102,7 +102,7 @@ describe WayfController do
       describe "GET 'index' for NS" do
         context 'when institution is passed in to the url' do
           let(:institution) { 'NS' }
-          it { should be_success }
+          it { should be_successful }
           it("should have a 200 status") { expect(subject.status).to be(200) }
           it do
             should render_template("layouts/login")
@@ -123,7 +123,7 @@ describe WayfController do
       describe "GET 'index' for CU" do
         context 'when institution is passed in to the url' do
           let(:institution) { 'CU' }
-          it { should be_success }
+          it { should be_successful }
           it("should have a 200 status") { expect(subject.status).to be(200) }
           it do
             should render_template("layouts/login")
@@ -144,7 +144,7 @@ describe WayfController do
       describe "GET 'index' for NYSID" do
         context 'when institution is passed in to the url' do
           let(:institution) { 'nysid' }
-          it { should be_success }
+          it { should be_successful }
           it("should have a 200 status") { expect(subject.status).to be(200) }
           it do
             should render_template("layouts/login")

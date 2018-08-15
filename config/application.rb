@@ -1,4 +1,4 @@
-require File.expand_path('../boot', __FILE__)
+require_relative 'boot'
 
 # Pick the frameworks you want:
 require "active_record/railtie"
@@ -41,5 +41,15 @@ module Login
     # It seems like images are included by default only from app/assets folder
     # So in order to get images from shared assets we do this
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
+
+    # Rails 5 options:
+    # Eager loads all files in lib./ in production environment
+    config.eager_load_paths << Rails.root.join('lib')
+    # Enables autoloading in production environment
+    # config.enable_dependency_loading = true
+    # config.autoload_paths << Rails.root.join('lib')
+
+    config.action_controller.per_form_csrf_tokens = true
+    config.action_controller.forgery_protection_origin_check = true
   end
 end

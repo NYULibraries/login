@@ -1,4 +1,4 @@
-FROM ruby:2.3.4
+FROM ruby:2.5.1
 
 ENV INSTALL_PATH /app
 ENV BUNDLE_PATH /usr/local/bundle

@@ -12,8 +12,7 @@ module DoorkeeperMacros
 
   def set_code
     let(:code) do
-      get :new, client_id: application.uid,
-        redirect_uri: application.redirect_uri, response_type: "code"
+      get :new, params: { client_id: application.uid, redirect_uri: application.redirect_uri, response_type: "code" }
       response.location.gsub("#{application.redirect_uri}?code=", "")
     end
   end

@@ -40,6 +40,8 @@ Before do
   end
 end
 
+# Capybara.server = :webrick
+Capybara.server = :puma, { Silent: true }
 Capybara.app_host = 'http://localhost:3000'
 Capybara.server_port = 3000
 

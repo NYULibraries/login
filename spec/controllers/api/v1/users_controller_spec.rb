@@ -11,7 +11,7 @@ describe Api::V1::UsersController do
       context 'and not logged in' do
         before { get :show }
         subject { response }
-        it { should_not be_success }
+        it { should_not be_successful }
         it("should be unauthorized") { expect(subject.message).to eq("Unauthorized") }
         it("should have a 401 status") { expect(subject.status).to be(401) }
       end
@@ -20,7 +20,7 @@ describe Api::V1::UsersController do
         login_user
         before { get :show }
         subject { response }
-        it { should_not be_success }
+        it { should_not be_successful }
         it("should be unauthorized") { expect(subject.message).to eq("Unauthorized") }
         it("should have a 401 status") { expect(subject.status).to be(401) }
       end
@@ -31,28 +31,28 @@ describe Api::V1::UsersController do
 
       context "and it's expired" do
         set_expired_access_token
-        before { get :show, access_token: expired_access_token, format: :json }
+        before { get :show, format: :json, params: { access_token: expired_access_token } }
         subject { response }
-        it { should_not be_success }
+        it { should_not be_successful }
         it("should be unauthorized") { expect(subject.message).to eq("Unauthorized") }
         it("should have a 401 status") { expect(subject.status).to be(401) }
       end
 
       context "and it has been revoked" do
         set_revoked_access_token
-        before { get :show, access_token: revoked_access_token, format: :json }
+        before { get :show, format: :json, params: { access_token: revoked_access_token } }
         subject { response }
-        it { should_not be_success }
+        it { should_not be_successful }
         it("should be unauthorized") { expect(subject.message).to eq("Unauthorized") }
         it("should have a 401 status") { expect(subject.status).to be(401) }
       end
 
       context "and it's valid" do
         set_access_token
-        before { get :show, access_token: access_token, format: :json }
+        before { get :show, format: :json, params: { access_token: access_token } }
         subject { response }
 
-        it { should be_success }
+        it { should be_successful }
 
         describe 'body' do
           subject(:body) { response.body }

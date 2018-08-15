@@ -10,23 +10,26 @@ services:
       - "3000:3000"
     env_file:
       - test.env
-    environment:
-      CI:
-      CODECLIMATE_REPO_TOKEN:
-      COVERALLS_REPO_TOKEN:
     command: ["/tmp/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
+    environment:
+      RAILS_ENV:
     depends_on:
       - setup_dbs
 
   test:
     build: .
-    environment:
-      RAILS_ENV: test
     env_file:
       - test.env
-    command: ["/tmp/wait-for-it.sh", "db:5432", "--", "rake"]
+    environment:
+      CI:
+      CODECLIMATE_REPO_TOKEN:
+      COVERALLS_REPO_TOKEN:
+      RAILS_ENV: test
+    command: ["/tmp/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "rake"]
     depends_on:
       - setup_test_dbs
+    # volumes:
+    #   - .:/app
 
   setup_test_dbs:
     build: .
@@ -34,7 +37,7 @@ services:
       RAILS_ENV: test
     env_file:
       - test.env
-    command: ["/tmp/wait-for-it.sh", "db:5432", "--", "rake", "db:setup"]
+    command: ["/tmp/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "rake", "db:setup"]
     depends_on:
       - db
 
@@ -42,7 +45,7 @@ services:
     build: .
     env_file:
       - test.env
-    command: ["/tmp/wait-for-it.sh", "db:5432", "--", "rake", "db:setup"]
+    command: ["/tmp/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "rake", "db:setup"]
     depends_on:
       - db
 

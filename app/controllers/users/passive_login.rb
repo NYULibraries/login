@@ -17,8 +17,8 @@ module Users
     SHIBBOLETH_COOKIE_PATTERN = "_shibsession_"
 
     def self.included(base)
-      base.prepend_before_filter :shibboleth_passive_login_check, only: [:client_passive_login]
-      base.prepend_before_filter :save_return_uri
+      base.prepend_before_action :shibboleth_passive_login_check, only: [:client_passive_login], raise: false
+      base.prepend_before_action :save_return_uri
     end
 
     # GET /login/passive?return_uri=&client_id=[&login_path=]
@@ -83,7 +83,7 @@ module Users
     # spoofed but if it was an we try to authenticate the error will
     # be raised then
     def shib_session_exists?
-      !cookies.detect {|key, val| key.include? SHIBBOLETH_COOKIE_PATTERN }.nil?
+      !cookies.detect { |key, val| key.include? SHIBBOLETH_COOKIE_PATTERN }.nil?
     end
     private :shib_session_exists?
 
