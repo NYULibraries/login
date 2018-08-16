@@ -237,7 +237,7 @@ FactoryBot.define do
     end
     trait :facebook do
       provider { "facebook" }
-      uid { "snowj@ 1nyu.edu"}
+      uid { "snowj@1nyu.edu" }
       info do
         {
           name: "Jon Snow",
