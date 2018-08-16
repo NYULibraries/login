@@ -5,8 +5,8 @@ FactoryBot.define do
     skip_create
 
     trait :new_school_ldap do
-      provider "new_school_ldap"
-      uid "snowj"
+      provider { "new_school_ldap" }
+      uid { "snowj" }
       info do
         {
           name: "Jon Snow",
@@ -32,8 +32,8 @@ FactoryBot.define do
       end
     end
     trait :nyu_shibboleth do
-      provider "nyu_shibboleth"
-      uid "js123"
+      provider { "nyu_shibboleth" }
+      uid { "js123" }
       info do
         {
           name: "Jon Snow",
@@ -56,7 +56,7 @@ FactoryBot.define do
       end
     end
     trait :aleph do
-      provider "aleph"
+      provider { "aleph" }
       uid (ENV["TEST_ALEPH_USER"] || 'BOR_ID')
       info do
         {
@@ -222,8 +222,8 @@ FactoryBot.define do
       end
     end
     trait :twitter do
-      provider "twitter"
-      uid "snowj"
+      provider { "twitter" }
+      uid { "snowj" }
       info do
         {
           name: "Jon Snow",
@@ -236,8 +236,8 @@ FactoryBot.define do
       end
     end
     trait :facebook do
-      provider "facebook"
-      uid "snowj@1nyu.edu"
+      provider { "facebook" }
+      uid { "snowj@ 1nyu.edu"}
       info do
         {
           name: "Jon Snow",
