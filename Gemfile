@@ -104,7 +104,7 @@ group :test, :cucumber do
   gem 'phantomjs', '>= 1.9.7'
   gem 'poltergeist', '~> 1'
   # Use factory_bot for creating models
-  gem 'factory_bot_rails', '~> 4.9'
+  gem 'factory_bot_rails', '~> 4.11'
   # Use json_spec to do rspec tests with JSON
   gem 'json_spec', '~> 1.1'
   gem 'rspec-its', '~> 1.2'
