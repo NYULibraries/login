@@ -11,13 +11,12 @@ module Login
       @user = user
     end
 
-    def authorized?
-      patron_status = user.aleph_properties[:patron_status]
-      patron_status.present? && BOR_STATUSES.include?(patron_status)
+    Login::Aleph::Patron.PATRON_PROPERTIES.each do |prop|
+      define_method(prop) { user.aleph_properties[prop] }
     end
 
-    def barcode
-      user.aleph_properties[:barcode]
+    def authorized?
+      patron_status.present? && BOR_STATUSES.include?(patron_status)
     end
   end
 end

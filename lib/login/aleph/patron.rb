@@ -14,13 +14,17 @@ module Login
       ]
       DEFAULT_INSTITUTION = "NYU"
 
+      PATRON_PROPERTIES = [
+        :identifier, :verification, :barcode, :patron_status, :patron_type,
+        :ill_permission, :college, :department, :dept_code, :major, :major_code, :plif_status,
+        :ill_library, :institution_code, :expiry_date, :bor_name, :first_name, :last_name
+      ].freeze
+
       # Attributes that any patron object will have
       # It is important to note that this cascades to user identities
       # If an attribute is not accessible on the patron object,
       # the Aleph identity for any user will not have access to that attribute
-      attr_accessor :identifier, :verification, :barcode, :patron_status, :patron_type,
-      :ill_permission, :college, :department, :dept_code, :major, :major_code, :plif_status,
-      :ill_library, :institution_code, :expiry_date, :bor_name, :first_name, :last_name
+      attr_accessor(*PATRON_PROPERTIES)
 
       def initialize(&block)
         unless block_given?

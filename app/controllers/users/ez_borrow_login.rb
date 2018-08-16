@@ -1,6 +1,6 @@
 module Users
   module EZBorrowLogin
-    UNAUTHORIZED_REDIRECT = "https://library.nyu.edu/errors/ezborrow-library-nyu-edu/unauthorized"
+    UNAUTHORIZED_REDIRECT = "https://library.nyu.edu/errors/ezborrow-library-nyu-edu/unauthorized".freeze
     URL_BASE = "https://e-zborrow.relaisd2d.com/service-proxy/".freeze
     AUTHORIZED_INSTITUTIONS = %w(nyu nyush nyuad).freeze
 
@@ -41,10 +41,10 @@ module Users
     end
 
     def ezborrow_redirect(ezborrow_user)
-      barcode = ezborrow_user.barcode
+      identifier = ezborrow_user.identifier
       ls = current_institution.code.upcase || 'NYU'
       if params[:query]
-        "#{URL_BASE}?command=mkauth&LS=#{ls}&PI=#{barcode}&query=#{query}"
+        "#{URL_BASE}?command=mkauth&LS=#{ls}&PI=#{identifier}&query=#{query}"
       else
         "https://e-zborrow.relaisd2d.com/index.html"
       end
