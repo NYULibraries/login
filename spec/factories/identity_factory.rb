@@ -141,9 +141,9 @@ FactoryBot.define do
       end
     end
     trait :twitter do
-      provider "twitter"
-      uid "1365110203"
-      properties({
+      provider { "twitter" }
+      uid { "1365110203" }
+      properties { {
         nickname: "libtechnyu",
         name: "libtechnyu",
         urls: {
@@ -186,12 +186,12 @@ FactoryBot.define do
             notifications: false
           }
         }
-      })
+      } }
     end
     trait :facebook do
-      provider "facebook"
-      uid "123456789"
-      properties({
+      provider { "facebook" }
+      uid { "123456789" }
+      properties { {
         nickname: "developer",
         email: "developer@library.edu",
         name: "Dev Eloper",
@@ -218,13 +218,13 @@ FactoryBot.define do
             username: "developer"
           }
         }
-      })
+      } }
     end
     trait :nyu_shibboleth do
-      provider "nyu_shibboleth"
-      uid "nyu1234"
+      provider { "nyu_shibboleth" }
+      uid { "nyu1234" }
 
-      properties({
+      properties { {
         nickname: "nyu1234",
         email: "nyu123@nyu.edu",
         name: "N Yu",
@@ -236,12 +236,12 @@ FactoryBot.define do
             entitlement: "nothing"
           }
         }
-      })
+      } }
     end
     trait :new_school_ldap do
-      provider "new_school_ldap"
-      uid "ns123"
-      properties({
+      provider { "new_school_ldap" }
+      uid { "ns123" }
+      properties { {
         uid: "ns123",
         email: "ns123@newschool.edu",
         first_name: "News",
@@ -259,7 +259,7 @@ FactoryBot.define do
             uid: ["snowj"]
           }
         }
-      })
+      } }
     end
 
     factory :aleph_identity, traits: [:aleph]

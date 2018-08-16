@@ -57,7 +57,7 @@ FactoryBot.define do
     end
     trait :aleph do
       provider { "aleph" }
-      uid (ENV["TEST_ALEPH_USER"] || 'BOR_ID')
+      uid { (ENV["TEST_ALEPH_USER"] || 'BOR_ID') }
       info do
         {
           name: "SNOW, JON",
@@ -258,7 +258,7 @@ FactoryBot.define do
     factory :large_aleph_authhash, traits: [:large_aleph_record]
 
     factory :invalid_provider_authhash do
-      uid "invalid"
+      uid { "invalid" }
       info do
         {
           name: "Invalid Provider"
