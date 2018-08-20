@@ -1,3 +1,5 @@
+Dir[Rails.root.join('spec/support/login_macros/**/*.rb')].each { |f| require f }
+
 RSpec.configure do |config|
   # Include Factory Bot convenience methods
   config.include FactoryBot::Syntax::Methods
