@@ -1,5 +1,5 @@
 RSpec.configure do |config|
-  # Include Factory Girl convenience methods
+  # Include Factory Bot convenience methods
   config.include FactoryBot::Syntax::Methods
 
   FactoryBot::SyntaxRunner.send(:include, OmniAuthHashMacros)

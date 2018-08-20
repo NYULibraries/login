@@ -59,9 +59,7 @@ gem 'omniauth-ldap', '~> 1.0.4'
 gem 'font-awesome-rails', '~> 4'
 
 # Use doorkeeper as our OAuth 2.0 provider
-# NOTE: factory_bot_rails fix needed before update to >4.3.1
-# see issue: https://github.com/doorkeeper-gem/doorkeeper/issues/1043
-gem 'doorkeeper', '~> 4.2.0'
+gem 'doorkeeper', '~> 4.4.2'
 # Manually include responders to maintain respond_with & respond_to functionality
 gem 'responders', '~> 2.0'
 
