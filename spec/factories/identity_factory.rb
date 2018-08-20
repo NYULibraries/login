@@ -191,34 +191,36 @@ FactoryBot.define do
     trait :facebook do
       provider { "facebook" }
       uid { "123456789" }
-      properties { {
-        nickname: "developer",
-        email: "developer@library.edu",
-        name: "Dev Eloper",
-        first_name: "Dev",
-        last_name: "Eloper",
-        image: "http://graph.facebook.com/123456789/picture",
-        urls: {
-          Facebook: "https://www.facebook.com/developer"
-        },
-        verified: "true",
-        extra: {
-          raw_info: {
-            id: "123456789",
-            name: "Dev Eloper",
-            first_name: "Dev",
-            last_name: "Eloper",
-            link: "https://www.facebook.com/developer",
-            gender: "male",
-            email: "developer@library.edu",
-            timezone: -5,
-            locale: "en_US",
-            verified: true,
-            updated_time: "2014-01-21T14:53:00+0000",
-            username: "developer"
+      properties do
+        {
+          nickname: "developer",
+          email: "developer@library.edu",
+          name: "Dev Eloper",
+          first_name: "Dev",
+          last_name: "Eloper",
+          image: "http://graph.facebook.com/123456789/picture",
+          urls: {
+            Facebook: "https://www.facebook.com/developer"
+          },
+          verified: "true",
+          extra: {
+            raw_info: {
+              id: "123456789",
+              name: "Dev Eloper",
+              first_name: "Dev",
+              last_name: "Eloper",
+              link: "https://www.facebook.com/developer",
+              gender: "male",
+              email: "developer@library.edu",
+              timezone: -5,
+              locale: "en_US",
+              verified: true,
+              updated_time: "2014-01-21T14:53:00+0000",
+              username: "developer"
+            }
           }
         }
-      } }
+      end
     end
     trait :nyu_shibboleth do
       provider { "nyu_shibboleth" }
@@ -241,25 +243,27 @@ FactoryBot.define do
     trait :new_school_ldap do
       provider { "new_school_ldap" }
       uid { "ns123" }
-      properties { {
-        uid: "ns123",
-        email: "ns123@newschool.edu",
-        first_name: "News",
-        last_name: "Cholar",
-        nickname: "1234567890",
-        nyuidn: (ENV["TEST_ALEPH_USER"] || 'BOR_ID'),
-        extra: {
-          raw_info: {
-            cn: ["#{(ENV["TEST_ALEPH_USER"] || 'BOR_ID')}"],
-            dn: ["uid=N12345,ou=people,o=newschool.edu,o=cp"],
-            displayname: ["Jon Snow"],
-            givenname: ["Jon"],
-            mail: ["snowj@1newschool.edu"],
-            sn: ["Snow"],
-            uid: ["snowj"]
+      properties do
+        {
+          uid: "ns123",
+          email: "ns123@newschool.edu",
+          first_name: "News",
+          last_name: "Cholar",
+          nickname: "1234567890",
+          nyuidn: (ENV["TEST_ALEPH_USER"] || 'BOR_ID'),
+          extra: {
+            raw_info: {
+              cn: ["#{(ENV["TEST_ALEPH_USER"] || 'BOR_ID')}"],
+              dn: ["uid=N12345,ou=people,o=newschool.edu,o=cp"],
+              displayname: ["Jon Snow"],
+              givenname: ["Jon"],
+              mail: ["snowj@1newschool.edu"],
+              sn: ["Snow"],
+              uid: ["snowj"]
+            }
           }
         }
-      } }
+      end
     end
 
     factory :aleph_identity, traits: [:aleph]

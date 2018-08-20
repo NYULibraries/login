@@ -72,7 +72,7 @@ gem 'faraday_middleware', '~> 0.12'
 
 gem 'dalli', '~> 2.7.8'
 
-gem 'bootsnap', require: false
+gem 'bootsnap', '~> 1.3.1', require: false
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

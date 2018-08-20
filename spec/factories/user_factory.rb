@@ -38,7 +38,7 @@ FactoryBot.define do
     after(:build) { |user| user.omniauth_hash_map = authhash_map(user.provider) unless user.omniauth_hash_map.present?  }
   end
 
-  factory :admin, class: User do
+  factory :admin, class: "User" do
     username { 'admin' }
     email { 'admin@example.com' }
     institution_code { 'NYU' }
