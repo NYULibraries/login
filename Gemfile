@@ -107,6 +107,7 @@ group :test, :cucumber do
   gem 'faker', '~> 1'
   # allows for assigns and assert_template testing in Rails 5
   gem 'rails-controller-testing'
+  gem 'capybara-screenshot'
 end
 
 group :test, :cucumber, :development do

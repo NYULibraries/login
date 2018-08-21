@@ -5,18 +5,31 @@ ENV BUNDLE_PATH /usr/local/bundle
 
 # Essential dependencies
 RUN apt-get update -qq && apt-get install -y \
-      bzip2 \
-      git \
-      libfontconfig \
-      libfreetype6 \
-      vim \
-      wget
+  bzip2 \
+  git \
+  libfontconfig \
+  libfreetype6 \
+  wget \
+  zlib1g-dev \
+  liblzma-dev \
+  xvfb \
+  unzip \
+  libgconf2-4 \
+  libnss3 \
+  nodejs
 
-# PhantomJS
-ENV PHANTOMJS_VERSION 2.1.1
+ENV CHROMIUM_DRIVER_VERSION 2.38
+RUN apt-get update && apt-get -y --no-install-recommends install  \
+ && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -  \
+ && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list \
+ && apt-get update && apt-get -y --no-install-recommends install google-chrome-stable \
+ && rm -rf /var/lib/apt/lists/*
 
-RUN wget --no-check-certificate -q -O - https://cnpmjs.org/mirrors/phantomjs/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 | tar xjC /opt
-RUN ln -s /opt/phantomjs-$PHANTOMJS_VERSION-linux-x86_64/bin/phantomjs /usr/bin/phantomjs
+# Install Chrome driver
+RUN wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/$CHROMIUM_DRIVER_VERSION/chromedriver_linux64.zip \
+    && unzip /tmp/chromedriver.zip chromedriver -d /usr/bin/ \
+    && rm /tmp/chromedriver.zip \
+    && chmod ugo+rx /usr/bin/chromedriver
 
 RUN groupadd -g 2000 docker -r && \
     useradd -u 1000 -r --no-log-init -m -d $INSTALL_PATH -g docker docker
@@ -24,7 +37,7 @@ USER docker
 
 WORKDIR $INSTALL_PATH
 
-RUN wget --no-check-certificate -q -O - https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh > /tmp/wait-for-it.sh
+RUN wget --no-check-certificate -q -O - https://cdn.rawgit.com/vishnubob/wait-for-it/master/wait-for-it.sh > /tmp/wait-for-it.sh
 RUN chmod a+x /tmp/wait-for-it.sh
 
 # For working with locally installed gems
