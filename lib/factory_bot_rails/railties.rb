@@ -1,3 +1,4 @@
+# :nocov:
 require 'factory_bot'
 require 'factory_bot_rails/generator'
 require 'rails'
@@ -44,3 +45,4 @@ module FactoryBot
     end
   end
 end
+# :nocov:
