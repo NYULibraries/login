@@ -1,32 +1,32 @@
 # User factory
 FactoryBot.define do
   factory :user do
-    username 'developer'
-    email 'developer@example.com'
-    institution_code 'NYU'
-    current_sign_in_at Time.now
-    admin false
-    provider "twitter"
-    last_sign_in_at Time.now
+    username { 'developer' }
+    email { 'developer@example.com' }
+    institution_code { 'NYU' }
+    current_sign_in_at { Time.now }
+    admin { false }
+    provider { "twitter" }
+    last_sign_in_at { Time.now }
 
     trait :twitter do
-      provider "twitter"
+      provider { "twitter" }
     end
 
     trait :facebook do
-      provider "facebook"
+      provider { "facebook" }
     end
 
     trait :nyu_shibboleth do
-      provider "nyu_shibboleth"
+      provider { "nyu_shibboleth" }
     end
 
     trait :aleph do
-      provider "aleph"
+      provider { "aleph" }
     end
 
     trait :new_school_ldap do
-      provider "new_school_ldap"
+      provider { "new_school_ldap" }
     end
 
     factory :twitter_user, traits: [:twitter]
@@ -35,17 +35,17 @@ FactoryBot.define do
     factory :aleph_user, traits: [:aleph]
     factory :new_school_ldap_user, traits: [:new_school_ldap]
 
-    after(:build) {|user| user.omniauth_hash_map = authhash_map(user.provider) unless user.omniauth_hash_map.present? }
+    after(:build) { |user| user.omniauth_hash_map = authhash_map(user.provider) unless user.omniauth_hash_map.present?  }
   end
 
-  factory :admin, class: User do
-    username 'admin'
-    email 'admin@example.com'
-    institution_code 'NYU'
-    provider "facebook"
-    current_sign_in_at Time.now
-    last_sign_in_at Time.now
-    admin true
+  factory :admin, class: 'User' do
+    username { 'admin' }
+    email { 'admin@example.com' }
+    institution_code { 'NYU' }
+    provider { "facebook" }
+    current_sign_in_at { Time.now }
+    last_sign_in_at { Time.now }
+    admin { true }
     after(:build) {|user| user.omniauth_hash_map = authhash_map(user.provider) unless user.omniauth_hash_map.present? }
   end
 
