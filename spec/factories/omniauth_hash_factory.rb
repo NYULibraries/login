@@ -1,7 +1,7 @@
 # OmniAuth::AuthHash factory
 # https://github.com/intridea/omniauth/wiki/Auth-Hash-Schema
 FactoryBot.define do
-  factory :omniauth_hash, class: "OmniAuth::AuthHash" do
+  factory :omniauth_hash, class: 'OmniAuth::AuthHash' do
     skip_create
 
     trait :new_school_ldap do
