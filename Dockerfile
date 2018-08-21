@@ -2,16 +2,14 @@ FROM nyulibraries/selenium_chrome_headless_ruby:2.5-slim
 
 ENV INSTALL_PATH /app
 ENV BUNDLE_PATH /usr/local/bundle
+ENV BUILD_PACKAGES git wget \
+  # font requirements
+  libfontconfig libfreetype6 \
+  # gem requirements: C, postgres,
+  build-essential zlib1g-dev libpq-dev
 
-# Essential dependencies
-RUN apt-get update -qq && apt-get install -y \
-  git \
-  libfontconfig \
-  libfreetype6 \
-  build-essential \
-  libpq-dev \
-  zlib1g-dev \
-  wget
+# Essential dependencies: use if rapidly changing gems
+RUN apt-get update -qq && apt-get -y --no-install-recommends install $BUILD_PACKAGES
 
 RUN groupadd -g 2000 docker -r && \
     useradd -u 1000 -r --no-log-init -m -d $INSTALL_PATH -g docker docker
@@ -24,10 +22,6 @@ RUN chmod a+x /tmp/wait-for-it.sh
 
 # For working with locally installed gems
 #COPY vendor ./vendor
-
-# Add github to known_hosts
-RUN mkdir -p ~/.ssh
-RUN ssh-keyscan github.com >> ~/.ssh/known_hosts
 
 # Install gems in cachable way
 COPY --chown=docker:docker Gemfile Gemfile.lock ./
