@@ -3,7 +3,7 @@ require 'rails_helper'
 describe "routes for Doorkeeper" do
 
   describe "GET /oauth/authorize/:code" do
-    subject { get('/oauth/authorize/1234') }
+    subject { get('/oauth/authorize/native?code=1234') }
     it { should route_to(controller: 'doorkeeper/custom_authorizations', action: 'show', code: '1234') }
   end
 

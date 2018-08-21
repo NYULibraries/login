@@ -25,11 +25,12 @@ services:
       CODECLIMATE_REPO_TOKEN:
       COVERALLS_REPO_TOKEN:
       RAILS_ENV: test
+      # SCREENSHOT_FAILURES: "true"
     command: ["/tmp/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "rake"]
     depends_on:
       - setup_test_dbs
     # volumes:
-    #   - .:/app
+      # - ./screenshots:/screenshots/
 
   setup_test_dbs:
     build: .

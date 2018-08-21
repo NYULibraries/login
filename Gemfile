@@ -59,9 +59,7 @@ gem 'omniauth-ldap', '~> 1.0.4'
 gem 'font-awesome-rails', '~> 4'
 
 # Use doorkeeper as our OAuth 2.0 provider
-# NOTE: factory_bot_rails fix needed before update to >4.3.1
-# see issue: https://github.com/doorkeeper-gem/doorkeeper/issues/1043
-gem 'doorkeeper', '~> 4.2.0'
+gem 'doorkeeper', '~> 4.4.2'
 # Manually include responders to maintain respond_with & respond_to functionality
 gem 'responders', '~> 2.0'
 
@@ -74,7 +72,7 @@ gem 'faraday_middleware', '~> 0.12'
 
 gem 'dalli', '~> 2.7.8'
 
-gem 'bootsnap', require: false
+gem 'bootsnap', '~> 1.3.1', require: false
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -104,14 +102,13 @@ group :test, :cucumber do
   # Phantomjs for headless browser testing
   gem 'phantomjs', '>= 1.9.7'
   gem 'poltergeist', '~> 1'
-  # Use factory_bot for creating models
-  gem 'factory_bot_rails', '~> 4.9'
   # Use json_spec to do rspec tests with JSON
   gem 'json_spec', '~> 1.1'
   gem 'rspec-its', '~> 1.2'
   gem 'faker', '~> 1'
   # allows for assigns and assert_template testing in Rails 5
   gem 'rails-controller-testing'
+  gem 'capybara-screenshot'
 end
 
 group :test, :cucumber, :development do
@@ -120,4 +117,6 @@ group :test, :cucumber, :development do
 
   gem 'pry-rails'
   gem 'byebug'
+  # Use factory_bot for creating models
+  gem 'factory_bot_rails', '~> 4.11'
 end

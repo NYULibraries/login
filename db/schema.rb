@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,80 +10,76 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170120190127) do
+ActiveRecord::Schema.define(version: 2018_08_20_205001) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
   enable_extension "hstore"
+  enable_extension "plpgsql"
 
   create_table "identities", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "provider",   limit: 255, default: "", null: false
-    t.string   "uid",        limit: 255, default: "", null: false
-    t.hstore   "properties",             default: {}, null: false
+    t.integer "user_id"
+    t.string "provider", limit: 255, default: "", null: false
+    t.string "uid", limit: 255, default: "", null: false
+    t.hstore "properties", default: {}, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["properties"], name: "index_identities_on_properties", using: :gist
+    t.index ["user_id", "uid", "provider"], name: "index_identities_on_user_id_and_uid_and_provider", unique: true
+    t.index ["user_id"], name: "index_identities_on_user_id"
   end
-
-  add_index "identities", ["properties"], name: "index_identities_on_properties", using: :gist
-  add_index "identities", ["user_id", "uid", "provider"], name: "index_identities_on_user_id_and_uid_and_provider", unique: true, using: :btree
-  add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
 
   create_table "oauth_access_grants", force: :cascade do |t|
-    t.integer  "resource_owner_id",             null: false
-    t.integer  "application_id",                null: false
-    t.string   "token",             limit: 255, null: false
-    t.integer  "expires_in",                    null: false
-    t.text     "redirect_uri",                  null: false
-    t.datetime "created_at",                    null: false
+    t.integer "resource_owner_id", null: false
+    t.integer "application_id", null: false
+    t.string "token", limit: 255, null: false
+    t.integer "expires_in", null: false
+    t.text "redirect_uri", null: false
+    t.datetime "created_at", null: false
     t.datetime "revoked_at"
-    t.string   "scopes",            limit: 255
+    t.string "scopes", limit: 255
+    t.index ["token"], name: "index_oauth_access_grants_on_token", unique: true
   end
-
-  add_index "oauth_access_grants", ["token"], name: "index_oauth_access_grants_on_token", unique: true, using: :btree
 
   create_table "oauth_access_tokens", force: :cascade do |t|
-    t.integer  "resource_owner_id"
-    t.integer  "application_id"
-    t.string   "token",             limit: 255, null: false
-    t.string   "refresh_token",     limit: 255
-    t.integer  "expires_in"
+    t.integer "resource_owner_id"
+    t.integer "application_id"
+    t.string "token", limit: 255, null: false
+    t.string "refresh_token", limit: 255
+    t.integer "expires_in"
     t.datetime "revoked_at"
-    t.datetime "created_at",                    null: false
-    t.string   "scopes",            limit: 255
+    t.datetime "created_at", null: false
+    t.string "scopes", limit: 255
+    t.index ["refresh_token"], name: "index_oauth_access_tokens_on_refresh_token", unique: true
+    t.index ["resource_owner_id"], name: "index_oauth_access_tokens_on_resource_owner_id"
+    t.index ["token"], name: "index_oauth_access_tokens_on_token", unique: true
   end
-
-  add_index "oauth_access_tokens", ["refresh_token"], name: "index_oauth_access_tokens_on_refresh_token", unique: true, using: :btree
-  add_index "oauth_access_tokens", ["resource_owner_id"], name: "index_oauth_access_tokens_on_resource_owner_id", using: :btree
-  add_index "oauth_access_tokens", ["token"], name: "index_oauth_access_tokens_on_token", unique: true, using: :btree
 
   create_table "oauth_applications", force: :cascade do |t|
-    t.string   "name",         limit: 255,              null: false
-    t.string   "uid",          limit: 255,              null: false
-    t.string   "secret",       limit: 255,              null: false
-    t.text     "redirect_uri",                          null: false
+    t.string "name", limit: 255, null: false
+    t.string "uid", limit: 255, null: false
+    t.string "secret", limit: 255, null: false
+    t.text "redirect_uri", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "scopes",       limit: 255, default: "", null: false
+    t.string "scopes", limit: 255, default: "", null: false
+    t.boolean "confidential", default: true, null: false
+    t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true
   end
-
-  add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "username",           limit: 255, default: "",    null: false
-    t.string   "email",              limit: 255, default: "",    null: false
-    t.integer  "sign_in_count",                  default: 0
+    t.string "username", limit: 255, default: "", null: false
+    t.string "email", limit: 255, default: "", null: false
+    t.integer "sign_in_count", default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip", limit: 255
-    t.string   "last_sign_in_ip",    limit: 255
-    t.boolean  "admin",                          default: false
+    t.string "current_sign_in_ip", limit: 255
+    t.string "last_sign_in_ip", limit: 255
+    t.boolean "admin", default: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "institution_code",   limit: 255, default: "",    null: false
-    t.string   "provider",           limit: 255, default: "",    null: false
+    t.string "institution_code", limit: 255, default: "", null: false
+    t.string "provider", limit: 255, default: "", null: false
+    t.index ["username", "provider"], name: "index_users_on_username_and_provider", unique: true
   end
-
-  add_index "users", ["username", "provider"], name: "index_users_on_username_and_provider", unique: true, using: :btree
 
 end
