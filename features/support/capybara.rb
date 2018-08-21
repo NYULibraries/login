@@ -13,7 +13,11 @@ def configure_selenium
       }
     )
 
-    Capybara::Selenium::Driver.new(app, browser: :chrome, desired_capabilities: capabilities)
+    Capybara::Selenium::Driver.new(
+      app,
+      browser: :chrome,
+      desired_capabilities: capabilities
+    )
   end
 end
 

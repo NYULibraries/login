@@ -1,35 +1,17 @@
-FROM ruby:2.5.1
+FROM nyulibraries/selenium_chrome_headless_ruby:2.5-slim
 
 ENV INSTALL_PATH /app
 ENV BUNDLE_PATH /usr/local/bundle
 
 # Essential dependencies
 RUN apt-get update -qq && apt-get install -y \
-  bzip2 \
   git \
   libfontconfig \
   libfreetype6 \
-  wget \
+  build-essential \
+  libpq-dev \
   zlib1g-dev \
-  liblzma-dev \
-  xvfb \
-  unzip \
-  libgconf2-4 \
-  libnss3 \
-  nodejs
-
-ENV CHROMIUM_DRIVER_VERSION 2.38
-RUN apt-get update && apt-get -y --no-install-recommends install  \
- && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -  \
- && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list \
- && apt-get update && apt-get -y --no-install-recommends install google-chrome-stable \
- && rm -rf /var/lib/apt/lists/*
-
-# Install Chrome driver
-RUN wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/$CHROMIUM_DRIVER_VERSION/chromedriver_linux64.zip \
-    && unzip /tmp/chromedriver.zip chromedriver -d /usr/bin/ \
-    && rm /tmp/chromedriver.zip \
-    && chmod ugo+rx /usr/bin/chromedriver
+  wget \
 
 RUN groupadd -g 2000 docker -r && \
     useradd -u 1000 -r --no-log-init -m -d $INSTALL_PATH -g docker docker
