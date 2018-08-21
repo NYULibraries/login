@@ -11,7 +11,7 @@ RUN apt-get update -qq && apt-get install -y \
   build-essential \
   libpq-dev \
   zlib1g-dev \
-  wget \
+  wget
 
 RUN groupadd -g 2000 docker -r && \
     useradd -u 1000 -r --no-log-init -m -d $INSTALL_PATH -g docker docker
