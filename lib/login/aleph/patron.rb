@@ -8,11 +8,13 @@ module Login
         { "CU"    => %w(10 11 12 15 16 17 18 20) },
         { "NS"    => %w(30 31 32 33 34 35 36 37 38 40 41 42 43) },
         { "NYSID" => %w(90 95 96 97) }
-      ]
+      ].freeze
+
       ILL_LIBRARY_MAPPINGS = [
         {"HSL" => %w(ILL_MED)}
-      ]
-      DEFAULT_INSTITUTION = "NYU"
+      ].freeze
+
+      DEFAULT_INSTITUTION = "NYU".freeze
 
       PATRON_PROPERTIES = [
         :identifier, :verification, :barcode, :patron_status, :patron_type,
