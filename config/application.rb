@@ -42,12 +42,7 @@ module Login
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
 
     # Rails 5 options:
-    # autoload only enabled in non-production by default
-    config.autoload_paths << Rails.root.join('lib')
-
-    # Eager loads all files in lib./ for production environment
     config.eager_load_paths << Rails.root.join('lib')
-    config.eager_load_paths << Rails.root.join('app', 'controllers', 'users')
 
     config.action_controller.per_form_csrf_tokens = true
     config.action_controller.forgery_protection_origin_check = true
