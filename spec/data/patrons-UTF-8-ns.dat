@@ -1,0 +1,4 @@
+identifier	barcode	verification	expiry_date	patron_status	patron_type	bor_namé	email	ill_permission	plif_status	college_code	college	dept_code	department	major_code	major	ill_library
+identifier	barcode	verification	expiry_date	patron_status	patron_type	bor_namé	email	ill_permission
+N19064851	21142005781104	verification	20340522	42	Bastard	SNOW, JON	jsnow@nyu.edu	Y	Kings Landing
+BOR_ID	21142005781104	verification	20340522	42	Bastard	SNOW, JON	jsnow@nyu.edu	Y	Kings Landing	

@@ -2,20 +2,15 @@ require 'rails_helper'
 
 module Login
   describe EZBorrow do
+    subject { EZBorrow.new(aleph_user_with_identities) }
+
     let(:aleph_user_with_identities) { create(:aleph_user) }
-    let(:user) { EZBorrow.new(aleph_user_with_identities) }
-    let(:barcode) { '1234567890' }
 
     describe '::initialize' do
-      subject { user }
-
       it { is_expected.to be_a EZBorrow }
-      its(:user) { is_expected.to be_a User }
     end
 
     describe '#authorized?' do
-      subject { user.authorized? }
-
       let(:patron_status) { nil }
 
       before do
@@ -28,27 +23,34 @@ module Login
         context 'with a valid patron status' do
           let(:patron_status) { '20' }
 
-          it { is_expected.to be true }
+          its(:authorized?) { is_expected.to be true }
         end
 
         context 'with an invalid patron status' do
           let(:patron_status) { '999' }
 
-          it { is_expected.to be false }
+          its(:authorized?) { is_expected.to be false }
         end
       end
     end
 
-    describe '#barcode' do
-      subject { user.barcode }
-
+    describe 'maps aleph_properties' do
       before do
         allow(aleph_user_with_identities).
           to receive(:aleph_properties).
-          and_return(barcode: barcode)
+          and_return({
+            barcode: '1234567890',
+            identifier: '12345678907890',
+          })
       end
 
-      it { is_expected.to eql barcode }
+      its(:barcode) { is_expected.to eql '1234567890' }
+      its(:identifier) { is_expected.to eql '12345678907890' }
+    end
+
+    describe 'maps user properites' do
+      its(:username) { is_expected.to eql aleph_user_with_identities.username }
+      its(:institution_code) { is_expected.to eql aleph_user_with_identities.institution_code }
     end
   end
 end
