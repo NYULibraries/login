@@ -2,10 +2,10 @@ require 'rails_helper'
 
 describe User do
   describe 'scopes' do
-    before do
-      create(:user)
-      create(:admin)
-    end
+    before { user; admin }
+    let(:user) { create(:user) }
+    let(:admin) { create(:admin) }
+
     describe 'non_admin' do
       subject { User.non_admin.count }
       it { is_expected.to eql 1 }
@@ -17,6 +17,37 @@ describe User do
     describe 'inactive' do
       subject { User.inactive.count }
       it { is_expected.to eql 0 }
+    end
+
+    describe '::find_for_authentication_or_initialize_by' do
+      context 'when user exists' do
+        subject do
+          User.find_for_authentication_or_initialize_by(
+            username: user.username,
+            provider: user.provider
+          )
+        end
+
+        it { is_expected.to be_a User }
+        its(:username) { is_expected.to eql user.username }
+        its(:provider) { is_expected.to eql user.provider }
+      end
+
+      context 'when user does not exist' do
+        subject do
+          User.find_for_authentication_or_initialize_by(
+            username: username,
+            provider: provider
+          )
+        end
+
+        let(:username) { 'new_user_1' }
+        let(:provider) { 'oauth_provider_1' }
+
+        it { is_expected.to be_a User }
+        its(:username) { is_expected.to eql username }
+        its(:provider) { is_expected.to eql provider }
+      end
     end
   end
 

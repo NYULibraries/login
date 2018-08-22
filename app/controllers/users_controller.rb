@@ -1,11 +1,14 @@
 class UsersController < Devise::OmniauthCallbacksController
   include Users::PassiveLogin
   include Users::EZBorrowLogin
-  prepend_before_action :redirect_root, only: [:show], if: -> { request.path == '/' && user_signed_in? }
+  prepend_before_action :redirect_root,
+                        only: [:show],
+                        if: -> { request.path == '/' && user_signed_in? }
   before_action :require_login, only: [:show]
   before_action :require_no_authentication,
                 except: [:passthru, :show, :client_passive_login, :ezborrow_login]
-  before_action :require_valid_omniauth_hash, only: (Devise.omniauth_providers << :omniauth_callback)
+  before_action :require_valid_omniauth_hash,
+                only: (Devise.omniauth_providers << :omniauth_callback)
   respond_to :html
 
   def show
@@ -54,7 +57,10 @@ class UsersController < Devise::OmniauthCallbacksController
   end
 
   def omniauth_callback
-    @user = find_for_authentication(omniauth_hash_map.username, omniauth_hash_map.provider)
+    @user = User.find_for_authentication_or_initialize_by(
+      username: omniauth_hash_map.username,
+      provider: omniauth_hash_map.provider
+    )
     # Initialize with an email address if the omniauth hash has it.
     @user.email = omniauth_hash_map.email if @user.email.blank? && omniauth_hash_map.email.present?
     # Set the OmniAuth::AuthHash for the user
@@ -73,13 +79,6 @@ class UsersController < Devise::OmniauthCallbacksController
   Devise.omniauth_providers.each do |omniauth_provider|
     alias_method omniauth_provider, :omniauth_callback
   end
-
-  # Use Devise::Models::Authenticatable::ClassMethods#find_for_authentication
-  # to take advantage of the Devise case_insensitive_keys and treat USER and user as the same username
-  def find_for_authentication(username, provider)
-    User.find_for_authentication(username: username, provider: provider) || User.find_or_initialize_by(username: username, provider: provider)
-  end
-  private :find_for_authentication
 
   def require_login
     unless user_signed_in?
@@ -134,7 +133,7 @@ class UsersController < Devise::OmniauthCallbacksController
   private :root_url_redirect
 
   def bobcat_institutions
-    @bobcat_institutions ||= Login::Aleph::Patron::BOR_STATUS_MAPPINGS.map(&:keys).flatten
+    @bobcat_institutions ||= Login::Aleph::Patron::BOR_STATUS_MAPPINGS.keys
   end
   private :bobcat_institutions
 end
