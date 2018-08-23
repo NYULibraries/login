@@ -36,7 +36,7 @@ describe UsersController do
         context 'an invalid ezborrow institution' do
           let(:params) { { institution: 'ns' } }
           it { should be_redirect }
-          it { should redirect_to '/login/nyu?referrer=ezborrow' }
+          it { should redirect_to '/login/ns?referrer=ezborrow' }
         end
       end
     end
