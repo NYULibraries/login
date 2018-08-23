@@ -2,7 +2,7 @@ module Users
   module EZBorrowLogin
     UNAUTHORIZED_REDIRECT = "https://library.nyu.edu/errors/ezborrow-library-nyu-edu/unauthorized".freeze
     URL_BASE = "https://e-zborrow.relaisd2d.com/service-proxy/".freeze
-    AUTHORIZED_INSTITUTIONS = %w(nyu nyush nyuad).freeze
+    AUTHORIZED_INSTITUTIONS = %w(nyu nyush nyuad ns).freeze
 
     def self.included(base)
       base.prepend_before_action :require_login_ezborrow, only: [:ezborrow_login]
@@ -38,7 +38,7 @@ module Users
     end
 
     def ezborrow_redirect
-      identifier = ezborrow_user.identifier
+      identifier = ezborrow_user.aleph_identifier
       ls = institution.upcase
       if params[:query]
         query = CGI.escape(params[:query])
