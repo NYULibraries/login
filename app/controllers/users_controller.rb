@@ -1,8 +1,9 @@
 class UsersController < Devise::OmniauthCallbacksController
   include Users::PassiveLogin
   include Users::EZBorrowLogin
-  include Users::EshelfLogin
+  include Users::Passthru
 
+  before_action :require_login!, only: [:show]
   before_action :authenticate_user!,
                 only: [:passthru, :show, :client_passive_login, :ezborrow_login]
   before_action :require_valid_omniauth_hash,
@@ -14,9 +15,6 @@ class UsersController < Devise::OmniauthCallbacksController
   def show
     if request.path == '/' && user_signed_in?
       redirect_root
-      return
-    elsif !user_signed_in?
-      redirect_to login_url
       return
     end
 
@@ -63,25 +61,27 @@ class UsersController < Devise::OmniauthCallbacksController
     alias_method omniauth_provider, :omniauth_callback
   end
 
+  private
+
   def redirect_root
     redirect_to root_url_redirect
   end
-  private :redirect_root
+
+  def require_login!
+    redirect_to login_url unless user_signed_in?
+  end
 
   def require_valid_omniauth_hash
     redirect_to after_omniauth_failure_path_for(resource_name) unless omniauth_hash_validator.valid?
   end
-  private :require_valid_omniauth_hash
 
   def omniauth_hash_map
     @omniauth_hash_map ||= Login::OmniAuthHash::Mapper.new(request.env["omniauth.auth"])
   end
-  private :omniauth_hash_map
 
   def omniauth_hash_validator
     @omniauth_hash_validator ||= Login::OmniAuthHash::Validator.new(request.env["omniauth.auth"], params[:action])
   end
-  private :omniauth_hash_validator
 
   # Create a session cookie shared with other logged in clients
   # so they can key single sign off indivudally
@@ -89,7 +89,6 @@ class UsersController < Devise::OmniauthCallbacksController
     cookie_hash = { value: 1, httponly: true, domain: ENV['LOGIN_COOKIE_DOMAIN'] }
     cookies[LOGGED_IN_COOKIE_NAME] = cookie_hash
   end
-  private :create_loggedin_cookie!
 
   def root_url_redirect
     @root_url_redirect ||= begin
@@ -100,10 +99,8 @@ class UsersController < Devise::OmniauthCallbacksController
       end
     end
   end
-  private :root_url_redirect
 
   def bobcat_institutions
     @bobcat_institutions ||= Login::Aleph::Patron::BOR_STATUS_MAPPINGS.keys
   end
-  private :bobcat_institutions
 end

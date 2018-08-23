@@ -1,5 +1,5 @@
 module Users
-  module EshelfLogin
+  module Passthru
     ESHELF_COOKIE_NAME = '_nyulibraries_eshelf_passthru'
 
     # GET /passthru

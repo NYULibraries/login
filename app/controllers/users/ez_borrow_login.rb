@@ -4,21 +4,8 @@ module Users
     URL_BASE = "https://e-zborrow.relaisd2d.com/service-proxy/".freeze
     AUTHORIZED_INSTITUTIONS = %w(nyu nyush nyuad ns).freeze
 
-    def self.included(base)
-      base.prepend_before_action :require_login_ezborrow, only: [:ezborrow_login]
-    end
-
-    def require_login_ezborrow
-      unless user_signed_in?
-        redirect_to login_path_ezborrow
-      end
-    end
-
-    def ezborrow_user
-      @ezborrow_user ||= Login::EZBorrow.new(current_user)
-    end
-
     def ezborrow_login
+      require_login_ezborow
       if ezborrow_user.authorized?
         redirect_to ezborrow_redirect
       else
@@ -27,6 +14,16 @@ module Users
     end
 
     private
+
+    def ezborrow_user
+      @ezborrow_user ||= Login::EZBorrow.new(current_user)
+    end
+
+    def require_login_ezborrow
+      unless user_signed_in?
+        redirect_to login_path_ezborrow
+      end
+    end
 
     def institution
       institution = current_institution.code.downcase.to_s
