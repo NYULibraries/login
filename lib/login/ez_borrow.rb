@@ -16,13 +16,13 @@ module Login
       @user.public_send(meth, *args, &blk)
     end
 
-    # Adds all aleph_properties as methods directly callable on the instance
+    # Adds all aleph_properties as "aleph_{property}" methods directly callable on the instance
     Login::Aleph::Patron::PATRON_PROPERTIES.each do |prop|
-      define_method(prop) { aleph_properties[prop] }
+      define_method(:"aleph_#{prop}") { aleph_properties[prop] }
     end
 
     def authorized?
-      patron_status.present? && BOR_STATUSES.include?(patron_status)
+      BOR_STATUSES.include?(aleph_patron_status)
     end
   end
 end
