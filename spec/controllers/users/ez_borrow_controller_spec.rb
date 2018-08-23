@@ -33,6 +33,12 @@ describe UsersController do
           it { should redirect_to '/login/nyush?referrer=ezborrow' }
         end
 
+        describe "ns" do
+          let(:params) { { institution: 'ns' } }
+          it { should be_redirect }
+          it { should redirect_to '/login/ns?referrer=ezborrow' }
+        end
+
         context 'an invalid ezborrow institution' do
           let(:params) { { institution: 'ns' } }
           it { should be_redirect }
@@ -66,15 +72,22 @@ describe UsersController do
         end
 
         context 'when institution specified' do
-          context 'when a valid ezborrow institution' do
+          context 'nyu' do
             let(:params) { { institution: 'nyu' } }
 
             it { should be_redirect }
             it { should redirect_to 'https://e-zborrow.relaisd2d.com/index.html' }
           end
 
-          context 'when invalid ezborrow institution' do
+          context 'ns' do
             let(:params) { { institution: 'ns' } }
+
+            it { should be_redirect }
+            it { should redirect_to 'https://e-zborrow.relaisd2d.com/index.html' }
+          end
+
+          context 'cu' do
+            let(:params) { { institution: 'cu' } }
 
             it { should be_redirect }
             it { should redirect_to 'https://e-zborrow.relaisd2d.com/index.html' }

@@ -45,7 +45,7 @@ describe UsersController do
         subject { response }
         it { should be_redirect }
         it("should have a 302 status") { expect(subject.status).to be(302) }
-        it { should redirect_to(user_url build(:user))}
+        it { should redirect_to(user_url build(:user)) }
       end
     end
   end
