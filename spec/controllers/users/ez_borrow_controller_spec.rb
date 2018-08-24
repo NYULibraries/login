@@ -45,6 +45,13 @@ describe UsersController do
           it { should be_redirect }
           it { should redirect_to '/login/cu?redirect_to=%2Fezborrow%2Fcu' }
         end
+
+        context 'with a query' do
+          let(:params) { { institution: 'nyu', query: 'the astd management development handbook' } }
+
+          it { should be_redirect }
+          it { should redirect_to '/login/nyu?redirect_to=%2Fezborrow%2Fnyu%3Fquery%3Dthe%2Bastd%2Bmanagement%2Bdevelopment%2Bhandbook' }
+        end
       end
     end
 
@@ -58,10 +65,10 @@ describe UsersController do
           it { should redirect_to 'https://e-zborrow.relaisd2d.com/index.html' }
 
           context 'with a query' do
-            let(:params) { { query: 'the astd managemenet development handbook' } }
+            let(:params) { { query: 'the astd management development handbook' } }
 
             it { should be_redirect }
-            it { should redirect_to "https://e-zborrow.relaisd2d.com/service-proxy/?command=mkauth&LS=NYU&PI=BOR_ID&query=the+astd+managemenet+development+handbook" }
+            it { should redirect_to "https://e-zborrow.relaisd2d.com/service-proxy/?command=mkauth&LS=NYU&PI=BOR_ID&query=the+astd+management+development+handbook" }
           end
         end
 
