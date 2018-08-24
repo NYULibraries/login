@@ -4,6 +4,12 @@ class Users::SessionsController < Devise::SessionsController
 
  private
 
+  def new
+    self.resource = resource_class.new(sign_in_params)
+    store_location_for(resource, params[:redirect_to])
+    super
+  end
+
   # Single sign out by clearing cookies on all sub domains
   def sso_logout
     # Logout of Bobcat first while we still have the PDS_HANDLE cookie

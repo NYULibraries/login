@@ -13,37 +13,37 @@ describe UsersController do
   describe 'GET /ezborrow/:institution' do
     context 'when not logged in' do
       it { should be_redirect }
-      it { should redirect_to '/login/nyu?referrer=ezborrow' }
+      it { should redirect_to '/login/nyu?redirect_to=%2Fezborrow' }
 
       context 'and institution route is specified' do
         describe 'nyu' do
           let(:params) { { institution: 'nyu' } }
           it { should be_redirect }
-          it { should redirect_to '/login/nyu?referrer=ezborrow' }
+          it { should redirect_to '/login/nyu?redirect_to=%2Fezborrow%2Fnyu' }
         end
 
         describe "nyuad" do
           let(:params) { { institution: 'nyuad' } }
           it { should be_redirect }
-          it { should redirect_to '/login/nyuad?referrer=ezborrow' }
+          it { should redirect_to '/login/nyuad?redirect_to=%2Fezborrow%2Fnyuad' }
         end
 
         describe "nyush" do
           let(:params) { { institution: 'nyush' } }
           it { should be_redirect }
-          it { should redirect_to '/login/nyush?referrer=ezborrow' }
+          it { should redirect_to '/login/nyush?redirect_to=%2Fezborrow%2Fnyush' }
         end
 
         describe "ns" do
           let(:params) { { institution: 'ns' } }
           it { should be_redirect }
-          it { should redirect_to '/login/ns?referrer=ezborrow' }
+          it { should redirect_to '/login/ns?redirect_to=%2Fezborrow%2Fns' }
         end
 
         context 'an invalid ezborrow institution' do
-          let(:params) { { institution: 'ns' } }
+          let(:params) { { institution: 'cu' } }
           it { should be_redirect }
-          it { should redirect_to '/login/ns?referrer=ezborrow' }
+          it { should redirect_to '/login/cu?redirect_to=%2Fezborrow%2Fcu' }
         end
       end
     end
@@ -97,11 +97,11 @@ describe UsersController do
       end
 
       context 'when user institution is not a valid ezborrow institution' do
-          let(:flat_file) { "spec/data/patrons-UTF-8-ns.dat" }
+        let(:flat_file) { "spec/data/patrons-UTF-8-ns.dat" }
 
-          it { should be_redirect }
-          it { should redirect_to 'https://library.nyu.edu/errors/ezborrow-library-nyu-edu/unauthorized' }
-        end
+        it { should be_redirect }
+        it { should redirect_to 'https://library.nyu.edu/errors/ezborrow-library-nyu-edu/unauthorized' }
+      end
     end
   end
 end

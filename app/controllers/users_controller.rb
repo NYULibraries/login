@@ -4,9 +4,9 @@ class UsersController < Devise::OmniauthCallbacksController
   include Users::Passthru
   include Users::OmniAuthProvider
 
-  before_action :require_login!, only: [:show]
+  before_action :require_login!, only: [:show, :ezborrow_login]
   before_action :authenticate_user!,
-                only: [:passthru, :show, :client_passive_login, :ezborrow_login]
+                only: [:passthru, :client_passive_login]
   respond_to :html
 
   LOGGED_IN_COOKIE_NAME = '_nyulibraries_logged_in'
@@ -32,7 +32,14 @@ class UsersController < Devise::OmniauthCallbacksController
   end
 
   def require_login!
-    redirect_to login_url unless user_signed_in?
+    unless user_signed_in?
+      institution = current_institution.code.downcase.to_s
+
+      redirect_to login_url(
+        institution: institution,
+        redirect_to: request.path
+      )
+    end
   end
 
   def require_valid_omniauth_hash

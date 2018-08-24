@@ -7,7 +7,7 @@ describe UsersController do
     context 'when logged out' do
       before { get :show }
       subject { response }
-      it { should redirect_to login_path }
+      it { should redirect_to "/login/nyu?redirect_to=%2Fusers%2Fshow" }
     end
     context 'when logged in' do
       login_user
