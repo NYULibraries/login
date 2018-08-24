@@ -7,6 +7,7 @@ describe UsersController do
 
   before do
     ENV['FLAT_FILE'] = flat_file
+    @request.env["devise.mapping"] = Devise.mappings[:user]
   end
 
   describe 'GET /ezborrow/:institution' do
