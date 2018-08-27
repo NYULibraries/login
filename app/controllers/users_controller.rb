@@ -5,8 +5,7 @@ class UsersController < Devise::OmniauthCallbacksController
   include Users::OmniAuthProvider
 
   before_action :require_login!, only: [:show, :ezborrow_login]
-  before_action :authenticate_user!,
-                only: [:passthru, :client_passive_login]
+  before_action :authenticate_user!, only: [:passthru, :client_passive_login]
   respond_to :html
 
   LOGGED_IN_COOKIE_NAME = '_nyulibraries_logged_in'

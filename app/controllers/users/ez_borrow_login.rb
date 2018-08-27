@@ -25,7 +25,7 @@ module Users
     end
 
     def institution
-      institution = ezborrow_user.aleph_properties[:institution_code].downcase
+      institution = ezborrow_user.aleph_institution_code.downcase
       AUTHORIZED_INSTITUTIONS.include?(institution) ? institution : 'nyu'
     end
 
