@@ -8,7 +8,7 @@ module Users
       'nyush'  => 'NYU',
       'ns'     => 'THENEWSCHOOL',
     }.freeze
-    AUTHORIZED_INSTITUTIONS = INSTITUTION_LS.keys
+    AUTHORIZED_INSTITUTIONS = INSTITUTION_LS.keys.freeze
 
     def ezborrow_login
       if ezborrow_user.authorized?
