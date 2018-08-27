@@ -11,7 +11,7 @@ class WayfController < ApplicationController
     end
   end
 
- private
+  private
 
   def redirect_to_logout
     redirect_to logout_path
@@ -20,5 +20,4 @@ class WayfController < ApplicationController
   def redirect_to_custom
     redirect_to params[:redirect_to]
   end
-
 end

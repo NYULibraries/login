@@ -2,11 +2,13 @@ module Users
   module EZBorrowLogin
     UNAUTHORIZED_REDIRECT = "https://library.nyu.edu/errors/ezborrow-library-nyu-edu/unauthorized".freeze
     URL_BASE = "https://e-zborrow.relaisd2d.com/service-proxy/".freeze
-    AUTHORIZED_INSTITUTIONS = %w(nyu nyush nyuad ns).freeze
-
-    def self.included(base)
-      # base.before_action :require_login_ezborrow!, only: [:ezborrow_login]
-    end
+    INSTITUTION_LS = {
+      'nyu'    => 'NYU',
+      'nyuad'  => 'NYU',
+      'nyush'  => 'NYU',
+      'ns'     => 'THENEWSCHOOL',
+    }.freeze
+    AUTHORIZED_INSTITUTIONS = INSTITUTION_LS.keys
 
     def ezborrow_login
       if ezborrow_user.authorized?
@@ -22,24 +24,14 @@ module Users
       @ezborrow_user ||= Login::EZBorrow.new(current_user)
     end
 
-    # def require_login_ezborrow!
-    #   unless user_signed_in?
-    #     redirect_to login_path_ezborrow
-    #   end
-    # end
-
     def institution
-      institution = current_institution.code.downcase.to_s
+      institution = ezborrow_user.aleph_properties[:institution_code].downcase
       AUTHORIZED_INSTITUTIONS.include?(institution) ? institution : 'nyu'
     end
 
-    # def login_path_ezborrow
-    #   login_url institution: institution, referrer: 'ezborrow'
-    # end
-
     def ezborrow_redirect
       identifier = ezborrow_user.aleph_identifier
-      ls = institution.upcase
+      ls = INSTITUTION_LS[institution]
       if params[:query]
         query = CGI.escape(params[:query])
         "#{URL_BASE}?command=mkauth&LS=#{ls}&PI=#{identifier}&query=#{query}"

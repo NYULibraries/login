@@ -33,9 +33,8 @@ class UsersController < Devise::OmniauthCallbacksController
 
   def require_login!
     if !user_signed_in?
-      institution = current_institution.code.downcase.to_s
       redirect_to login_url(
-        institution: institution,
+        institution: current_institution.code.to_s.downcase,
         redirect_to: request.fullpath
       )
     end

@@ -2,13 +2,7 @@ class Users::SessionsController < Devise::SessionsController
   before_action :save_user_info, only: :destroy
   after_action :sso_logout, only: :destroy
 
- private
-
-  def new
-    self.resource = resource_class.new(sign_in_params)
-    store_location_for(resource, params[:redirect_to])
-    super
-  end
+  private
 
   # Single sign out by clearing cookies on all sub domains
   def sso_logout
