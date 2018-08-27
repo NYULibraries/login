@@ -60,6 +60,10 @@ describe WayfController do
           it { should be_redirect }
           it { should redirect_to '/login/nyu' }
         end
+        context 'when redirect_to is passed in' do
+          let(:redirect_to_param) { 'http://example.com' }
+          its(:status) { is_expected.to eql 200 }
+        end
       end
       describe "GET 'index' for HSL" do
         context 'when institution is passed in to the url' do
