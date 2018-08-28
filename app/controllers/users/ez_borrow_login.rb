@@ -16,9 +16,8 @@ module Users
     ).to_set.freeze
 
     def ezborrow_login
-      redirect_to(
-        ezborrow_user_authorized? ? ezborrow_redirect : UNAUTHORIZED_REDIRECT
-      )
+      redirect_url = ezborrow_user_authorized? ? ezborrow_redirect : UNAUTHORIZED_REDIRECT
+      redirect_to redirect_url
     end
 
     private
