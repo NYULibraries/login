@@ -28,5 +28,7 @@ COPY --chown=docker:docker Gemfile Gemfile.lock ./
 RUN bundle config --global github.https true
 RUN gem install bundler && bundle install --jobs 20 --retry 5
 
+# Copy compass-core deprecation manual fix
+COPY ./vendor/gems/compass-core-1.0.3/ $BUNDLE_PATH/gems/compass-core-1.0.3/
 # Copy source into container
 COPY --chown=docker:docker . .
