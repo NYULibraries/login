@@ -29,9 +29,7 @@ class UsersController < Devise::OmniauthCallbacksController
   def require_login!
     if !user_signed_in?
       store_user_location! if storable_location?
-      redirect_to login_url(
-        institution: current_institution.code.to_s.downcase
-      )
+      render "wayf/index"
     end
   end
 
