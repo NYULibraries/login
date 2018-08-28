@@ -1,14 +1,12 @@
 class UsersController < Devise::OmniauthCallbacksController
-  include Users::PassiveLogin
+  include Users::ClientPassiveLogin
   include Users::EZBorrowLogin
   include Users::Passthru
-  include Users::OmniAuthProvider
+  include Users::OmniauthProvider
 
   before_action :require_login!, only: [:show, :ezborrow_login]
   before_action :authenticate_user!, only: [:passthru, :client_passive_login]
   respond_to :html
-
-  LOGGED_IN_COOKIE_NAME = '_nyulibraries_logged_in'
 
   def show
     if request.path == '/' && user_signed_in?
@@ -37,25 +35,6 @@ class UsersController < Devise::OmniauthCallbacksController
         redirect_to: request.fullpath
       )
     end
-  end
-
-  def require_valid_omniauth_hash
-    redirect_to after_omniauth_failure_path_for(resource_name) unless omniauth_hash_validator.valid?
-  end
-
-  def omniauth_hash_map
-    @omniauth_hash_map ||= Login::OmniAuthHash::Mapper.new(request.env["omniauth.auth"])
-  end
-
-  def omniauth_hash_validator
-    @omniauth_hash_validator ||= Login::OmniAuthHash::Validator.new(request.env["omniauth.auth"], params[:action])
-  end
-
-  # Create a session cookie shared with other logged in clients
-  # so they can key single sign off indivudally
-  def create_loggedin_cookie!(user)
-    cookie_hash = { value: 1, httponly: true, domain: ENV['LOGIN_COOKIE_DOMAIN'] }
-    cookies[LOGGED_IN_COOKIE_NAME] = cookie_hash
   end
 
   def root_url_redirect

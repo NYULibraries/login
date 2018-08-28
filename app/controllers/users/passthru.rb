@@ -27,11 +27,11 @@ module Users
       end
     end
 
+    private
+
     def create_eshelf_cookie!
       cookie_hash = { value: 1, httponly: true, domain: ENV['LOGIN_COOKIE_DOMAIN'] }
       cookies[ESHELF_COOKIE_NAME] = cookie_hash
     end
-    private :create_eshelf_cookie!
-
   end
 end

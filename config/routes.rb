@@ -23,6 +23,6 @@ Rails.application.routes.draw do
       get '/user' => "users#show", defaults: { format: :json }
     end
   end
-  get 'pds' => redirect{ |params, request| "#{ENV['PDS_URL']}/pds?#{request.query_string}" }
-  get 'ezproxy' => redirect{ |params, request| "#{ENV['PDS_URL']}/ezproxy?#{request.query_string}" }
+  get 'pds' => redirect { |params, request| "#{ENV['PDS_URL']}/pds?#{request.query_string}" }
+  get 'ezproxy' => redirect { |params, request| "#{ENV['PDS_URL']}/ezproxy?#{request.query_string}" }
 end

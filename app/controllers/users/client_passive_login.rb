@@ -11,10 +11,9 @@
 #        which is client_passive_login, let that function handle redirection
 #        back to the client app
 module Users
-  module PassiveLogin
-
-    PASSIVE_SHIBBOLETH_URL_STRING = "/Shibboleth.sso/Login?isPassive=true&target="
-    SHIBBOLETH_COOKIE_PATTERN = "_shibsession_"
+  module ClientPassiveLogin
+    PASSIVE_SHIBBOLETH_URL_STRING = "/Shibboleth.sso/Login?isPassive=true&target=".freeze
+    SHIBBOLETH_COOKIE_PATTERN = "_shibsession_".freeze
 
     def self.included(base)
       base.prepend_before_action :shibboleth_passive_login_check, only: [:client_passive_login], raise: false
