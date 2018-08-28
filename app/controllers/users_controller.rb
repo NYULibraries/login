@@ -1,10 +1,12 @@
 class UsersController < Devise::OmniauthCallbacksController
+  # prepends so that module methods take precedence, and super refers to this controller
+  prepend Users::Passthru
+
   include Users::ClientPassiveLogin
   include Users::EZBorrowLogin
-  include Users::Passthru
   include Users::OmniauthProvider
 
-  prepend_before_action :redirect_root, if: -> { request.path == '/' && user_signed_in? }
+  before_action :redirect_root, if: -> { request.path == '/' && user_signed_in? }
   before_action :require_login!, only: [:show, :ezborrow_login]
   before_action :authenticate_user!, only: [:passthru, :client_passive_login]
   respond_to :html
@@ -26,11 +28,23 @@ class UsersController < Devise::OmniauthCallbacksController
 
   def require_login!
     if !user_signed_in?
+      store_user_location! if storable_location?
       redirect_to login_url(
-        institution: current_institution.code.to_s.downcase,
-        redirect_to: request.fullpath
+        institution: current_institution.code.to_s.downcase
       )
     end
+  end
+
+  def after_sign_in_path_for(resource)
+    stored_location_for(resource) || super
+  end
+
+  def storable_location?
+    request.get? && is_navigational_format? && !devise_controller? && !request.xhr?
+  end
+
+  def store_user_location!
+    store_location_for(:user, request.fullpath)
   end
 
   def root_url_redirect
