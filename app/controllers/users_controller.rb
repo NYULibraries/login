@@ -4,16 +4,12 @@ class UsersController < Devise::OmniauthCallbacksController
   include Users::Passthru
   include Users::OmniauthProvider
 
+  prepend_before_action :redirect_root, if: -> { request.path == '/' && user_signed_in? }
   before_action :require_login!, only: [:show, :ezborrow_login]
   before_action :authenticate_user!, only: [:passthru, :client_passive_login]
   respond_to :html
 
   def show
-    if request.path == '/' && user_signed_in?
-      redirect_root
-      return
-    end
-
     @user = User.find_by(username: params[:id], provider: params[:provider])
     if @user == current_user
       render :show
