@@ -9,18 +9,11 @@ describe UsersController do
 
       before { get :show }
 
+      render_views false
+
       it { should be_successful }
       its(:status) { is_expected.to eql 200 }
-      it do
-        should render_template("layouts/login")
-        should render_template("common/_alerts")
-        should render_template("wayf/_nyu")
-        should render_template("wayf/auth_squares/_bobst")
-        should render_template("wayf/auth_squares/_cu")
-        should render_template("wayf/auth_squares/_ns")
-        should render_template("wayf/auth_squares/_nysid")
-        should render_template("wayf/auth_squares/_visitor")
-      end
+      it { should render_template "wayf/index" }
     end
     context 'when logged in' do
       login_user
@@ -38,7 +31,7 @@ describe UsersController do
           end
         end
         context "when rendering views" do
-          render_views
+          render_views false
           it do
             should render_template("layouts/login")
             should render_template("users/show")
