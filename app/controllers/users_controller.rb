@@ -27,7 +27,7 @@ class UsersController < Devise::OmniauthCallbacksController
   end
 
   def require_login!
-    render "wayf/index" unless user_signed_in?
+    render("wayf/index", institution: institution) unless user_signed_in?
   end
 
   def root_url_redirect
