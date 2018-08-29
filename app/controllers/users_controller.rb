@@ -27,24 +27,7 @@ class UsersController < Devise::OmniauthCallbacksController
   end
 
   def require_login!
-    if !user_signed_in?
-      store_user_location! if storable_location?
-      redirect_to login_url(
-        institution: current_institution.code.to_s.downcase
-      )
-    end
-  end
-
-  def after_sign_in_path_for(resource)
-    stored_location_for(resource) || super
-  end
-
-  def storable_location?
-    request.get? && is_navigational_format? && !devise_controller? && !request.xhr?
-  end
-
-  def store_user_location!
-    store_location_for(:user, request.fullpath)
+    render "wayf/index" unless user_signed_in?
   end
 
   def root_url_redirect

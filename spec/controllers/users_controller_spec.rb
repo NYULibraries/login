@@ -3,11 +3,24 @@ describe UsersController do
   before { @request.env["devise.mapping"] = Devise.mappings[:user] }
   let(:attributes) { attributes_for(:user) }
   describe "GET 'show'" do
-    render_views false
+    render_views
     context 'when logged out' do
-      before { get :show }
       subject { response }
-      # it { should redirect_to "/login/nyu?redirect_to=%2Fusers%2Fshow" }
+
+      before { get :show }
+
+      it { should be_successful }
+      its(:status) { is_expected.to eql 200 }
+      it do
+        should render_template("layouts/login")
+        should render_template("common/_alerts")
+        should render_template("wayf/_nyu")
+        should render_template("wayf/auth_squares/_bobst")
+        should render_template("wayf/auth_squares/_cu")
+        should render_template("wayf/auth_squares/_ns")
+        should render_template("wayf/auth_squares/_nysid")
+        should render_template("wayf/auth_squares/_visitor")
+      end
     end
     context 'when logged in' do
       login_user
