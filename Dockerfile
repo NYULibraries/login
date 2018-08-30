@@ -3,9 +3,7 @@ FROM nyulibraries/selenium_chrome_headless_ruby:2.5-slim
 ENV INSTALL_PATH /app
 ENV BUNDLE_PATH /usr/local/bundle
 ENV BUILD_PACKAGES git wget \
-  # font requirements
   libfontconfig libfreetype6 \
-  # gem requirements: C, postgres,
   build-essential zlib1g-dev libpq-dev
 
 # Essential dependencies: use if rapidly changing gems
