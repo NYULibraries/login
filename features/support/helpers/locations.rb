@@ -69,8 +69,8 @@ module LoginFeatures
       end
     end
 
-    def visit_login_page_for_location(location)
-      visit login_path(institution_for_location(location).downcase)
+    def visit_login_page_for_location(location, params = {})
+      visit login_path(institution_for_location(location).downcase, params)
     end
 
     def expect_login_page_for_location(location)
