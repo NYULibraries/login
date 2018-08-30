@@ -3,13 +3,11 @@ describe UsersController do
   before { @request.env["devise.mapping"] = Devise.mappings[:user] }
   let(:attributes) { attributes_for(:user) }
   describe "GET 'show'" do
-    render_views
+    render_views false
     context 'when logged out' do
       subject { response }
 
       before { get :show }
-
-      render_views false
 
       it { should be_successful }
       its(:status) { is_expected.to eql 200 }
@@ -22,7 +20,6 @@ describe UsersController do
         subject { response }
         it { should_not be_redirect }
         context "when not rendering views" do
-          render_views false
           it { should be_successful }
           it("should have a 200 status") { expect(subject.status).to be(200) }
           it("should assign @user") do
@@ -31,7 +28,7 @@ describe UsersController do
           end
         end
         context "when rendering views" do
-          render_views false
+          render_views
           it do
             should render_template("layouts/login")
             should render_template("users/show")
