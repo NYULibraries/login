@@ -11,8 +11,8 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
-          name: Test
-          command: docker-compose run test
+          name: Build & Test
+          command: docker-compose build dev && docker-compose run test
 
   deploy-dev:
     <<: *docker-defaults
