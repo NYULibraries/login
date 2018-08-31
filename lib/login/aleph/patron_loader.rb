@@ -2,13 +2,15 @@ module Login
   module Aleph
     class PatronLoader
       attr_reader :identifier
+      DISABLE_FLAT_FILE_STRATEGY = true
 
       def initialize(identifier)
         @identifier = identifier
       end
 
       def patron
-        flat_file_strategy.patron || bor_info_strategy.patron
+        (!DISABLE_FLAT_FILE_STRATEGY && flat_file_strategy.patron) ||
+        bor_info_strategy.patron
       end
 
     private

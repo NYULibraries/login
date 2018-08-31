@@ -12,7 +12,7 @@ jobs:
       - setup_remote_docker
       - run:
           name: Build & Test
-          command: docker-compose build dev && docker-compose run test
+          command: docker-compose run test
 
   deploy-dev:
     <<: *docker-defaults
