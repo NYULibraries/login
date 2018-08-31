@@ -5,10 +5,10 @@ services:
     build:
       context: .
     image: login:latest
-    volumes:
-      - ./vendor:/app/vendor
-      - ./lib:/app/lib/
-      - ./app:/app/app/
+    # volumes:
+    #   - ./vendor:/app/vendor
+    #   - ./lib:/app/lib/
+    #   - ./app:/app/app/
     ports:
       - "3000:3000"
     env_file:
@@ -34,12 +34,12 @@ services:
     command: ["/tmp/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "rake"]
     depends_on:
       - setup_test_dbs
-    volumes:
-      - ./lib:/app/lib/
-      - ./app:/app/app/
-      - ./spec:/app/spec/
-      - ./features:/app/features/
-      - ./screenshots:/screenshots/
+    # volumes:
+      # - ./lib:/app/lib/
+      # - ./app:/app/app/
+      # - ./spec:/app/spec/
+      # - ./features:/app/features/
+      # - ./screenshots:/screenshots/
 
   setup_test_dbs:
     build:
