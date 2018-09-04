@@ -5,9 +5,13 @@ describe UsersController do
   describe "GET 'show'" do
     render_views false
     context 'when logged out' do
-      before { get :show }
       subject { response }
-      it { should redirect_to login_path }
+
+      before { get :show }
+
+      it { should be_successful }
+      its(:status) { is_expected.to eql 200 }
+      it { should render_template "wayf/index" }
     end
     context 'when logged in' do
       login_user
@@ -16,7 +20,6 @@ describe UsersController do
         subject { response }
         it { should_not be_redirect }
         context "when not rendering views" do
-          render_views false
           it { should be_successful }
           it("should have a 200 status") { expect(subject.status).to be(200) }
           it("should assign @user") do
@@ -45,7 +48,7 @@ describe UsersController do
         subject { response }
         it { should be_redirect }
         it("should have a 302 status") { expect(subject.status).to be(302) }
-        it { should redirect_to(user_url build(:user))}
+        it { should redirect_to(user_url build(:user)) }
       end
     end
   end

@@ -35,7 +35,11 @@ FactoryBot.define do
     factory :aleph_user, traits: [:aleph]
     factory :new_school_ldap_user, traits: [:new_school_ldap]
 
-    after(:build) { |user| user.omniauth_hash_map = authhash_map(user.provider) unless user.omniauth_hash_map.present?  }
+    after(:build) do |user|
+      if user.omniauth_hash_map.blank?
+        user.omniauth_hash_map = authhash_map(user.provider)
+      end
+    end
   end
 
   factory :admin, class: 'User' do
@@ -46,7 +50,10 @@ FactoryBot.define do
     current_sign_in_at { Time.now }
     last_sign_in_at { Time.now }
     admin { true }
-    after(:build) {|user| user.omniauth_hash_map = authhash_map(user.provider) unless user.omniauth_hash_map.present? }
+    after(:build) do |user|
+      if user.omniauth_hash_map.blank?
+        user.omniauth_hash_map = authhash_map(user.provider)
+      end
+    end
   end
-
 end

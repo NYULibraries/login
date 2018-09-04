@@ -29,6 +29,9 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
+  # Whitelists IP for docker usage of web-console
+  config.web_console.whitelisted_ips = '172.18.0.1'
+
   # Store uploaded files on the local file system (see config/storage.yml for options)
   # config.active_storage.service = :local
 

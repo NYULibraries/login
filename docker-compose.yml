@@ -2,10 +2,13 @@ version: '3.2'
 services:
 
   dev:
-    build: .
-    volumes:
-      - ./vendor:/app/vendor
-      - ./app:/app/app
+    build:
+      context: .
+    image: login:latest
+    # volumes:
+    #   - ./vendor:/app/vendor
+    #   - ./lib:/app/lib/
+    #   - ./app:/app/app/
     ports:
       - "3000:3000"
     env_file:
@@ -17,7 +20,9 @@ services:
       - setup_dbs
 
   test:
-    build: .
+    build:
+      context: .
+    image: login:latest
     env_file:
       - test.env
     environment:
@@ -25,15 +30,21 @@ services:
       CODECLIMATE_REPO_TOKEN:
       COVERALLS_REPO_TOKEN:
       RAILS_ENV: test
-      # SCREENSHOT_FAILURES: "true"
+      SCREENSHOT_FAILURES: "true"
     command: ["/tmp/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "rake"]
     depends_on:
       - setup_test_dbs
     # volumes:
+      # - ./lib:/app/lib/
+      # - ./app:/app/app/
+      # - ./spec:/app/spec/
+      # - ./features:/app/features/
       # - ./screenshots:/screenshots/
 
   setup_test_dbs:
-    build: .
+    build:
+      context: .
+    image: login:latest
     environment:
       RAILS_ENV: test
     env_file:
@@ -43,7 +54,9 @@ services:
       - db
 
   setup_dbs:
-    build: .
+    build:
+      context: .
+    image: login:latest
     env_file:
       - test.env
     command: ["/tmp/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "rake", "db:setup"]

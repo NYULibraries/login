@@ -2,7 +2,7 @@ class Users::SessionsController < Devise::SessionsController
   before_action :save_user_info, only: :destroy
   after_action :sso_logout, only: :destroy
 
- private
+  private
 
   # Single sign out by clearing cookies on all sub domains
   def sso_logout

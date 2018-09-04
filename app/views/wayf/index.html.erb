@@ -3,7 +3,7 @@
     <% if request.path.include? "visitor" %>
       <%= render "visitor" %>
     <% else %>
-      <%= render "#{institution.code.to_s.downcase}" %>
+      <%= render "wayf/#{institution.code.to_s.downcase}" %>
     <% end %>
     <%= render "wayf/help/#{institution.code.to_s.downcase}_help" rescue render "wayf/help/help" %>
   </div>

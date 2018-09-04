@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     get 'login/passive_shibboleth', to: 'users#shibboleth_passive_login', as: :passive_shibboleth
     get 'users/show', to: 'users#show'
     match 'passthru', to: 'users#passthru', via: [:post, :get]
+    get '/ezborrow(/:institution)', to: "users#ezborrow_login", as: :ezborrow
     root 'users#show'
   end
   get 'login(/:institution)', to: 'wayf#index', as: :login
@@ -22,7 +23,6 @@ Rails.application.routes.draw do
       get '/user' => "users#show", defaults: { format: :json }
     end
   end
-  get 'pds' => redirect{ |params, request| "#{ENV['PDS_URL']}/pds?#{request.query_string}" }
-  get 'ezproxy' => redirect{ |params, request| "#{ENV['PDS_URL']}/ezproxy?#{request.query_string}" }
-  get 'ezborrow' => redirect{ |params, request| "#{ENV['PDS_URL']}/ezborrow?#{request.query_string}" }
+  get 'pds' => redirect { |params, request| "#{ENV['PDS_URL']}/pds?#{request.query_string}" }
+  get 'ezproxy' => redirect { |params, request| "#{ENV['PDS_URL']}/ezproxy?#{request.query_string}" }
 end

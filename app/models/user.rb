@@ -4,6 +4,13 @@ class User < ApplicationRecord
   module ClassMethods
     Devise::Models.config(self, :email_regexp)
   end
+
+  # Use Devise::Models::Authenticatable::ClassMethods#find_for_authentication
+  # to take advantage of the Devise case_insensitive_keys and treat USER and user as the same username
+  def self.find_for_authentication_or_initialize_by(attrs)
+    find_for_authentication(attrs) || find_or_initialize_by(attrs)
+  end
+
   self.extend ClassMethods
 
   VALID_INSTITUTION_CODES = Institutions.institutions.keys.map(&:to_s)
@@ -67,6 +74,13 @@ class User < ApplicationRecord
     identity.properties.merge!(aleph_patron.attributes) if aleph_patron.present?
     identity.updated_at = Time.now
     identity.save
+  end
+
+
+  Devise.omniauth_providers.each do |provider|
+    define_method(:"#{provider}_properties") do
+      HashWithIndifferentAccess.new(identities.find_by(provider: provider)&.properties)
+    end
   end
 
   # Update identity assoc from OmniAuth hash

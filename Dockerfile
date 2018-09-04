@@ -3,9 +3,7 @@ FROM nyulibraries/selenium_chrome_headless_ruby:2.5-slim
 ENV INSTALL_PATH /app
 ENV BUNDLE_PATH /usr/local/bundle
 ENV BUILD_PACKAGES git wget \
-  # font requirements
   libfontconfig libfreetype6 \
-  # gem requirements: C, postgres,
   build-essential zlib1g-dev libpq-dev
 
 # Essential dependencies: use if rapidly changing gems
@@ -28,5 +26,7 @@ COPY --chown=docker:docker Gemfile Gemfile.lock ./
 RUN bundle config --global github.https true
 RUN gem install bundler && bundle install --jobs 20 --retry 5
 
+# Copy compass-core deprecation manual fix
+COPY ./vendor/gems/compass-core-1.0.3/ $BUNDLE_PATH/gems/compass-core-1.0.3/
 # Copy source into container
 COPY --chown=docker:docker . .

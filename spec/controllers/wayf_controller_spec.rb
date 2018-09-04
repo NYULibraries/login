@@ -4,10 +4,22 @@ describe WayfController do
 
   context 'when logged in' do
     login_user
+    render_views false
     describe 'GET /logged_out' do
       before { get :logged_out }
       subject { response }
       it { should redirect_to logout_url }
+    end
+
+    describe "GET 'index'" do
+      let(:params) { {} }
+      before { get :index, params: params }
+      context 'when a redirect_to is provided' do
+        let(:redirect_to_param) { "http://www.example.com" }
+        let(:params) { { redirect_to: redirect_to_param } }
+
+        it { should redirect_to redirect_to_param }
+      end
     end
   end
 
@@ -21,8 +33,9 @@ describe WayfController do
     describe "GET 'index'" do
       let(:institution) { nil }
       let(:params_institution) { nil }
+      let(:redirect_to_param) { nil }
       before { @request.cookies['institution_from_url'] = params_institution }
-      before { get :index, params: { institution: institution } }
+      before { get :index, params: { institution: institution, redirect_to: redirect_to_param } }
       subject { response }
       render_views
       describe "GET 'index' for NYU" do
@@ -46,6 +59,10 @@ describe WayfController do
           let(:institution) { nil }
           it { should be_redirect }
           it { should redirect_to '/login/nyu' }
+        end
+        context 'when redirect_to is passed in' do
+          let(:redirect_to_param) { 'http://example.com' }
+          its(:status) { is_expected.to eql 200 }
         end
       end
       describe "GET 'index' for HSL" do

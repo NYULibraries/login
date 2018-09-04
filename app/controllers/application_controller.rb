@@ -6,9 +6,6 @@ class ApplicationController < ActionController::Base
 
   layout Proc.new { |controller| (controller.request.xhr?) ? false : "login" }
 
-  LOGGED_IN_COOKIE_NAME = '_nyulibraries_logged_in'
-  ESHELF_COOKIE_NAME = '_nyulibraries_eshelf_passthru'
-
   # Include these helper functions explicitly to make them available to controllers
   include UsersHelper
 
@@ -23,7 +20,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user_dev
-    @current_user ||= User.new(admin: true, username: 'xx123', email: 'xx123@nyu.edu')
+    @current_user ||= User.new(admin: true, username: 'xx123', email: 'xx123@nyu.edu', provider: "aleph")
   end
   alias_method :current_user, :current_user_dev if Rails.env.development?
 
