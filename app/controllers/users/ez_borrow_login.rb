@@ -37,7 +37,7 @@ module Users
     end
 
     def ezborrow_redirect
-      query = query && CGI.escape(params[:query])
+      query = params[:query] && CGI.escape(params[:query])
       identifier = ezborrow_user.aleph_properties[:identifier]
       ls = LS_BY_INSTITUTION[ezborrow_user_institution]
       "#{URL_BASE}?command=mkauth&LS=#{ls}&PI=#{identifier}&query=#{query}"
