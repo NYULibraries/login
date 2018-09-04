@@ -37,10 +37,14 @@ module Users
     end
 
     def ezborrow_redirect
-      query = CGI.escape(params[:query])
-      identifier = ezborrow_user.aleph_properties[:identifier]
-      ls = LS_BY_INSTITUTION[ezborrow_user_institution]
-      "#{URL_BASE}?command=mkauth&LS=#{ls}&PI=#{identifier}&query=#{query}"
+      if params[:query]
+        query = CGI.escape(params[:query])
+        identifier = ezborrow_user.aleph_properties[:identifier]
+        ls = LS_BY_INSTITUTION[ezborrow_user_institution]
+        "#{URL_BASE}?command=mkauth&LS=#{ls}&PI=#{identifier}&query=#{query}"
+      else
+        'https://e-zborrow.relaisd2d.com/index.html'
+      end
     end
   end
 end
