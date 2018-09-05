@@ -90,7 +90,7 @@ describe Api::V1::UsersController do
               end
               context "when the property is PLIF status" do
                 let(:property) { "plif_status" }
-                it { should eql "Kings Landing" }
+                it { should eql "PLIF LOADED" }
               end
               context "when the property is patron status" do
                 let(:property) { "patron_status" }
@@ -174,7 +174,7 @@ describe Api::V1::UsersController do
 
               context "when property is PLIF status" do
                 let(:property) { "plif_status" }
-                it { should eql "Kings Landing" }
+                it { should eql "PLIF LOADED" }
               end
 
               context "when property is ILL permission" do
@@ -252,7 +252,7 @@ describe Api::V1::UsersController do
               end
               context "when property is PLIF status" do
                 let(:property) { "plif_status" }
-                it { should eql "Kings Landing" }
+                it { should eql "PLIF LOADED" }
               end
               context "when property is ILL permission" do
                 let(:property) { "ill_permission" }

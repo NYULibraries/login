@@ -2,15 +2,16 @@ module Login
   module Aleph
     class PatronLoader
       attr_reader :identifier
-      DISABLE_FLAT_FILE_STRATEGY = true
+
+      # flat_file_strategy is deprecated since its information is no longer necessary for login functionality.
+      FLAT_FILE_STRATEGY_ENABLED = false
 
       def initialize(identifier)
         @identifier = identifier
       end
 
       def patron
-        (!DISABLE_FLAT_FILE_STRATEGY && flat_file_strategy.patron) ||
-        bor_info_strategy.patron
+        FLAT_FILE_STRATEGY_ENABLED && flat_file_strategy.patron || bor_info_strategy.patron
       end
 
     private
