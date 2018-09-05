@@ -61,10 +61,18 @@ describe UsersController do
 
       context "when the user is from a valid ezborrow institution" do
         describe 'without a query' do
-          let(:params) { {} }
+          VALID_INSTITUTIONS.each do |user_institution|
+            [*VALID_INSTITUTIONS, nil].each do |route_institution|
+              let(:flat_file) { "spec/data/ezborrow/patrons-UTF-8-ezborrow-#{user_institution}.dat" }
+              let(:params) { { institution: route_institution } }
+              let(:target_ls) { LS_DICT[user_institution] }
 
-          it { should be_redirect }
-          it { should redirect_to 'https://e-zborrow.relaisd2d.com/index.html' }
+              describe "when a #{user_institution} user at #{route_institution}" do
+                it { should be_redirect }
+                it { should redirect_to "https://e-zborrow.relaisd2d.com/service-proxy/?command=mkauth&LS=#{target_ls}&PI=BOR_ID&query=" }
+              end
+            end
+          end
         end
 
         context 'with a query and valid route institution' do
