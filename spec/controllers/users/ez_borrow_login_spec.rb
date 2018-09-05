@@ -28,11 +28,13 @@ describe UsersController do
   before do
     User.
       any_instance.stub(:aleph_properties).
-      and_return(HashWithIndifferentAccess.new(
-        patron_status: bor_status,
-        institution_code: institution_code,
-        identifier: identifier,
-      ))
+      and_return(
+        HashWithIndifferentAccess.new(
+          patron_status: bor_status,
+          institution_code: institution_code,
+          identifier: identifier,
+        )
+      )
 
     @request.env["devise.mapping"] = Devise.mappings[:user]
   end
@@ -74,6 +76,7 @@ describe UsersController do
     end
 
     context 'when logged in' do
+      login_user
       before { @current_user = ezborrow_user }
 
       let(:provider) { 'aleph' }
