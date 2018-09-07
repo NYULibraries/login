@@ -8,13 +8,13 @@ module Login
         def patron
           unless bor_info.error?
             @patron ||= Patron.new do |instance|
-              instance.identifier = bor_info_body["z303"]["z303_id"]
-              instance.patron_status = bor_info_body["z305"]["z305_bor_status"]
-              instance.patron_type = bor_info_body["z305"]["z305_bor_type"]
-              instance.ill_permission = bor_info_body["z305"]["z305_photo_permission"]
-              instance.ill_library = bor_info_body["z303"]["z303_ill_library"]
-              instance.plif_status = bor_info_body["z303"]["z303_birthplace"]
-              instance.bor_name = bor_info_body["z303"]["z303_name"]
+              instance.identifier = bor_info_body.dig("z303", "z303_id")
+              instance.patron_status = bor_info_body.dig("z305", "z305_bor_status")
+              instance.patron_type = bor_info_body.dig("z305", "z305_bor_type")
+              instance.ill_permission = bor_info_body.dig("z305", "z305_photo_permission")
+              instance.ill_library = bor_info_body.dig("z303", "z303_ill_library")
+              instance.plif_status = bor_info_body.dig("z303", "z303_birthplace")
+              instance.bor_name = bor_info_body.dig("z303", "z303_name")
             end
           end
         end

@@ -9,6 +9,6 @@ end
 
 Given(/^I am (?:an|a) (un)?authorized EZ-Borrow patron$/) do |negator|
   authorized = !negator
-  status = authorized ? 'spec/data/ezborrow/patrons-UTF-8-ezborrow-nyu.dat' : 'spec/data/patrons-UTF-8.dat'
-  set_flat_file(status)
+  status = authorized ? '60' : '999'
+  set_bor_status_for_ezborrow_tests(status)
 end
