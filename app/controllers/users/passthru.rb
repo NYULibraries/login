@@ -12,7 +12,7 @@ module Users
       action_before_eshelf_redirect = session[:_action_before_eshelf_redirect]
       session[:_action_before_eshelf_redirect] = nil
       cookies.delete(ESHELF_COOKIE_NAME, domain: ENV['LOGIN_COOKIE_DOMAIN'])
-      puts "redirect_to stored_location_for(:user): #{redirect_to stored_location_for(:user)}"
+      puts "redirect_to stored_location_for(:user): #{stored_location_for(:user)}"
       puts "action_before_eshelf_redirect: #{action_before_eshelf_redirect}"
       puts "signed_in_root_path(:user): #{signed_in_root_path(:user)}"
       redirect_to stored_location_for(:user) || action_before_eshelf_redirect || signed_in_root_path(:user)
