@@ -15,12 +15,24 @@ module Users
       38 39 40 41
     ).to_set.freeze
 
+    def self.included(base)
+      base.prepend_before_action :require_valid_institution!, only: [:ezborrow_login], raise: false
+    end
+
     def ezborrow_login
       redirect_url = ezborrow_user_authorized? ? ezborrow_redirect : UNAUTHORIZED_REDIRECT
       redirect_to redirect_url
     end
 
     private
+
+    def require_valid_institution!
+      redirect_to UNAUTHORIZED_REDIRECT unless valid_institution?
+    end
+
+    def valid_institution?
+      AUTHORIZED_INSTITUTIONS.include? institution.code.downcase.to_s
+    end
 
     def ezborrow_user
       @ezborrow_user = current_user

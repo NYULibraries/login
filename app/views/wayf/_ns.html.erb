@@ -9,8 +9,14 @@
 </div>
 <!-- Link to the rest of the secondary logins -->
 <div class="row">
+  <% if request.path.include? "ezborrow" %>
+  <% ['nyu'].each do |option| %>
+  <%= render "wayf/auth_squares/#{option}" %>
+  <% end %>
+  <% else %>
   <% institution.views["login"]["secondary"].each do |option| %>
     <%= render "wayf/auth_squares/#{option}" %>
+  <% end %>
   <% end %>
   <!-- Link to visitor square -->
   <%= render "wayf/auth_squares/visitor" %>
