@@ -1,5 +1,5 @@
 class UsersController < Devise::OmniauthCallbacksController
-  # prepends so that module methods take precedence, and super refers to this controller
+  # prepends so that passthru methods take precedence, and super refers to this controller
   prepend Users::Passthru
 
   include Users::ClientPassiveLogin
@@ -18,6 +18,10 @@ class UsersController < Devise::OmniauthCallbacksController
     else
       redirect_to user_url(current_user)
     end
+  end
+
+  def after_sign_in_path_for(resource)
+    stored_location_for(resource) || request.env['omniauth.origin'] || super(resource)
   end
 
   private
