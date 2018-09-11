@@ -22,7 +22,7 @@ services:
       RAILS_ENV:
     depends_on:
       - setup_dbs
-    <<: *default-volumes
+    # <<: *default-volumes
 
   test:
     build:
@@ -39,7 +39,7 @@ services:
     command: ["/tmp/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "rake"]
     depends_on:
       - setup_test_dbs
-    <<: *default-volumes
+    # <<: *default-volumes
 
   setup_test_dbs:
     build:
