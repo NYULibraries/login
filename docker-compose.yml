@@ -15,6 +15,7 @@ services:
     build:
       context: .
       cache_from:
+        - login
         - $ECR_DOMAIN/login
         - $ECR_DOMAIN/login:$BRANCH_NO_SLASH
     image: login:latest
@@ -33,6 +34,7 @@ services:
     build:
       context: .
       cache_from:
+        - login
         - $ECR_DOMAIN/login
         - $ECR_DOMAIN/login:$BRANCH_NO_SLASH
     image: login:latest
