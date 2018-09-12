@@ -73,7 +73,6 @@ workflows:
             branches:
               ignore:
                 - master
-      - push-docker-image
       - deploy-prod:
           requires:
               - test
