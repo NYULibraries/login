@@ -14,7 +14,7 @@ pull_docker: &pull_docker
   run:
     name: Pull Docker
     command: |
-      script/pull_docker.sh || true
+      script/pull_docker.sh
 
 push_docker: &push_docker
   run:
@@ -60,10 +60,18 @@ jobs:
           name: Deploy into production via Jenkins
           command: |
             docker run --rm appropriate/curl -u $JENKINS_USERNAME:$JENKINS_API_KEY -X POST http://jenkins.library.nyu.edu/view/Login/job/Login%20Production%20Deploy/build/api
+  push-docker-image:
+    <<: *docker-defaults
+    steps:
+      - checkout
+      - setup_remote_docker
+      - <<: *auth_ecr
+      - <<: *build_docker
+      - <<: *push_docker
 
 workflows:
   version: 2
-  build-test-and-deploy:
+  build-test-and-deploy-and-store-image:
     jobs:
       - test
       - deploy-dev:
@@ -73,6 +81,7 @@ workflows:
             branches:
               ignore:
                 - master
+      - push-docker-image
       - deploy-prod:
           requires:
               - test
