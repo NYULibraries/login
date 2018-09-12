@@ -38,10 +38,14 @@ jobs:
       - <<: *auth_ecr
       - <<: *pull_docker
       - <<: *build_docker
-      - <<: *push_docker
       - run:
           name: Run tests
           command: docker-compose run test
+      - run:
+          name: Include /tmp/ in docker image
+          command: sed -i '/tmp\//d' ./.dockerignore
+      - <<: *build_docker
+      - <<: *push_docker
 
   deploy-dev:
     <<: *docker-defaults

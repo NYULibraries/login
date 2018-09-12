@@ -1,22 +1,9 @@
 version: '3.2'
-# Utilize version 3.7 for volumes alias
-# version: '3.7'
-# x-volumes: &default-volumes
-#   volumes:
-#     - ./lib:/app/lib/
-#     - ./app:/app/app/
-#     - ./spec:/app/spec/
-#     - ./features:/app/features/
-#     - ./screenshots:/screenshots/
-#     - ./tmp/:/app/tmp/
 
 services:
   dev:
     build:
       context: .
-      cache_from:
-        - $ECR_DOMAIN/login
-        - $ECR_DOMAIN/login:$BRANCH_NO_SLASH
     image: login:latest
     ports:
       - "3000:3000"
@@ -27,14 +14,17 @@ services:
       RAILS_ENV:
     depends_on:
       - setup_dbs
-    # <<: *default-volumes
+    volumes:
+      - ./lib:/app/lib/
+      - ./app:/app/app/
+      - ./spec:/app/spec/
+      - ./features:/app/features/
+      - ./screenshots:/screenshots/
+      - ./tmp/:/app/tmp/
 
   test:
     build:
       context: .
-      cache_from:
-        - $ECR_DOMAIN/login
-        - $ECR_DOMAIN/login:$BRANCH_NO_SLASH
     image: login:latest
     env_file:
       - test.env
@@ -47,7 +37,13 @@ services:
     command: ["/tmp/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "rake"]
     depends_on:
       - setup_test_dbs
-    # <<: *default-volumes
+    volumes:
+      - ./lib:/app/lib/
+      - ./app:/app/app/
+      - ./spec:/app/spec/
+      - ./features:/app/features/
+      - ./screenshots:/screenshots/
+      - ./tmp/:/app/tmp/
 
   setup_test_dbs:
     build:
