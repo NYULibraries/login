@@ -14,6 +14,9 @@ services:
   dev:
     build:
       context: .
+      cache_from:
+        - $ECR_DOMAIN/login
+        - $ECR_DOMAIN/login:$BRANCH_NO_SLASH
     image: login:latest
     ports:
       - "3000:3000"
@@ -22,9 +25,6 @@ services:
     command: ["/tmp/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
     environment:
       RAILS_ENV:
-    cache_from:
-      - $ECR_DOMAIN/login
-      - $ECR_DOMAIN/login:$BRANCH_NO_SLASH
     depends_on:
       - setup_dbs
     # <<: *default-volumes
@@ -32,6 +32,9 @@ services:
   test:
     build:
       context: .
+      cache_from:
+        - $ECR_DOMAIN/login
+        - $ECR_DOMAIN/login:$BRANCH_NO_SLASH
     image: login:latest
     env_file:
       - test.env
@@ -42,9 +45,6 @@ services:
       RAILS_ENV: test
       SCREENSHOT_FAILURES: "true"
     command: ["/tmp/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "rake"]
-    cache_from:
-      - $ECR_DOMAIN/login
-      - $ECR_DOMAIN/login:$BRANCH_NO_SLASH
     depends_on:
       - setup_test_dbs
     # <<: *default-volumes
