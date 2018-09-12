@@ -30,3 +30,5 @@ RUN gem install bundler && bundle install --jobs 20 --retry 5
 COPY ./vendor/gems/compass-core-1.0.3/ $BUNDLE_PATH/gems/compass-core-1.0.3/
 # Copy source into container
 COPY --chown=docker:docker . .
+# Precompiles asset for faster testing and development
+RUN RAILS_ENV=development bundle exec rake assets:precompile
