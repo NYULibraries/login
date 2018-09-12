@@ -18,12 +18,12 @@ services:
     depends_on:
       - setup_dbs
     volumes:
-      - ./lib:/app/lib/
-      - ./app:/app/app/
-      - ./spec:/app/spec/
-      - ./features:/app/features/
-      - ./screenshots:/screenshots/
-      - ./tmp/:/app/tmp/
+      - /app/lib:/app/lib/
+      - /app/app:/app/app/
+      - /app/spec:/app/spec/
+      - /app/features:/app/features/
+      - /app/screenshots:/screenshots/
+      - /app/tmp/:/app/tmp/
 
   test:
     build:
@@ -44,12 +44,12 @@ services:
     depends_on:
       - setup_test_dbs
     volumes:
-      - ./lib:/app/lib/
-      - ./app:/app/app/
-      - ./spec:/app/spec/
-      - ./features:/app/features/
-      - ./screenshots:/screenshots/
-      - ./tmp/:/app/tmp/
+      - /app/lib:/app/lib/
+      - /app/app:/app/app/
+      - /app/spec:/app/spec/
+      - /app/features:/app/features/
+      - /app/screenshots:/screenshots/
+      - /app/tmp/:/app/tmp/
 
   setup_test_dbs:
     build:
