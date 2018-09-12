@@ -30,6 +30,12 @@ class UsersController < Devise::OmniauthCallbacksController
     action_before_eshelf_redirect = session[:_action_before_eshelf_redirect]
     session[:_action_before_eshelf_redirect] = nil
     cookies.delete(ESHELF_COOKIE_NAME, domain: ENV['LOGIN_COOKIE_DOMAIN'])
+    p [
+      stored_location_for(:user),
+      action_before_eshelf_redirect,
+      signed_in_root_path(:user),
+    ]
+
     redirect_to stored_location_for(:user) || action_before_eshelf_redirect || signed_in_root_path(:user)
   end
 
