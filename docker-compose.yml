@@ -1,4 +1,5 @@
 version: '3.2'
+# Utilize version 3.7 for volumes alias
 # version: '3.7'
 # x-volumes: &default-volumes
 #   volumes:
@@ -21,6 +22,9 @@ services:
     command: ["/tmp/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
     environment:
       RAILS_ENV:
+    cache_from:
+      - $ECR_DOMAIN/login
+      - $ECR_DOMAIN/login:$BRANCH_NO_SLASH
     depends_on:
       - setup_dbs
     # <<: *default-volumes
@@ -38,6 +42,9 @@ services:
       RAILS_ENV: test
       SCREENSHOT_FAILURES: "true"
     command: ["/tmp/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "rake"]
+    cache_from:
+      - $ECR_DOMAIN/login
+      - $ECR_DOMAIN/login:$BRANCH_NO_SLASH
     depends_on:
       - setup_test_dbs
     # <<: *default-volumes
