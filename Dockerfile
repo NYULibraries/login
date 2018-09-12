@@ -29,4 +29,5 @@ RUN gem install bundler && bundle install --jobs 20 --retry 5
 # Copy compass-core deprecation manual fix
 COPY ./vendor/gems/compass-core-1.0.3/ $BUNDLE_PATH/gems/compass-core-1.0.3/
 # Copy source into container
+RUN mkdir tmp
 COPY --chown=docker:docker . .
