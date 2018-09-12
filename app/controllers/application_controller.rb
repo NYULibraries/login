@@ -22,6 +22,6 @@ class ApplicationController < ActionController::Base
   def current_user_dev
     @current_user ||= User.new(admin: true, username: 'xx123', email: 'xx123@nyu.edu', provider: "aleph")
   end
-  alias_method :current_user, :current_user_dev if Rails.env.development?
+  # alias_method :current_user, :current_user_dev if Rails.env.development?
 
 end

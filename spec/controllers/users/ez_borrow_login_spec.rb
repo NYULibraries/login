@@ -61,8 +61,8 @@ describe UsersController do
           describe "#{inst} invalid route is specified" do
             let(:params) { { institution: inst } }
 
-            it { should be_successful }
-            it { should render_template "wayf/index" }
+            it { should be_redirect }
+            it { should redirect_to 'https://library.nyu.edu/errors/ezborrow-library-nyu-edu/unauthorized' }
           end
         end
       end

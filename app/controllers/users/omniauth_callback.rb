@@ -1,5 +1,5 @@
 module Users
-  module OmniauthProvider
+  module OmniauthCallback
     LOGGED_IN_COOKIE_NAME = '_nyulibraries_logged_in'.freeze
 
     def self.included(base)
