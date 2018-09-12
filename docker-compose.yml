@@ -1,4 +1,5 @@
 version: '3.2'
+# Utilize version 3.7 for volumes alias
 # version: '3.7'
 # x-volumes: &default-volumes
 #   volumes:
@@ -13,6 +14,9 @@ services:
   dev:
     build:
       context: .
+      cache_from:
+        - $ECR_DOMAIN/login
+        - $ECR_DOMAIN/login:$BRANCH_NO_SLASH
     image: login:latest
     ports:
       - "3000:3000"
@@ -28,6 +32,9 @@ services:
   test:
     build:
       context: .
+      cache_from:
+        - $ECR_DOMAIN/login
+        - $ECR_DOMAIN/login:$BRANCH_NO_SLASH
     image: login:latest
     env_file:
       - test.env
