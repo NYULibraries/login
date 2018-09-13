@@ -6,7 +6,6 @@ class UsersController < Devise::OmniauthCallbacksController
   before_action :redirect_root, if: -> { request.path == '/' && user_signed_in? }
   before_action :require_login!, only: [:show, :ezborrow_login]
   before_action :authenticate_user!, only: [:passthru, :client_passive_login]
-  skip_before_action :verify_authenticity_token if Rails.env.development?
   respond_to :html
 
   ESHELF_COOKIE_NAME = '_nyulibraries_eshelf_passthru'.freeze
@@ -36,8 +35,6 @@ class UsersController < Devise::OmniauthCallbacksController
   def after_sign_in_path_for(resource)
     # If there is an eshelf login variable set then we want to redirect there after login
     # to permanently save eshelf records
-    cookie_redirect = cookies[:redirect_uri]
-    cookies[:redirect_uri] = nil
     if ENV['ESHELF_LOGIN_URL'] && !cookies[ESHELF_COOKIE_NAME]
       session[:_action_before_eshelf_redirect] = (stored_location_for(resource) || request.env['omniauth.origin'] || cookie_redirect)
       create_eshelf_cookie!
@@ -49,17 +46,11 @@ class UsersController < Devise::OmniauthCallbacksController
 
   private
 
-  def store_location!
-    # because omniauth.origin will not be preserved between wayf and /auth pages, redirect stored in cookie instead
-    cookies[:redirect_uri] = request.fullpath
-  end
-
   def redirect_root
     redirect_to root_url_redirect
   end
 
   def require_login!
-    store_location!
     render("wayf/index", institution: institution) unless user_signed_in?
   end
 
