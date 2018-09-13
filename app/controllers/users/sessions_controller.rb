@@ -1,11 +1,10 @@
 class Users::SessionsController < Devise::SessionsController
   before_action :save_user_info, only: :destroy
   after_action :sso_logout, only: :destroy
-  before_action :store_location, only: :new
 
-  def store_location
-    self.resource = resource_class.new(sign_in_params)
-    store_location_for(resource, request.referrer)
+  def new
+    console
+    super
   end
 
   private
