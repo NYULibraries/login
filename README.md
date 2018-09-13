@@ -1,7 +1,6 @@
 # Login
 
 [![CircleCI](https://circleci.com/gh/NYULibraries/login.svg?style=svg)](https://circleci.com/gh/NYULibraries/login)
-[![Dependency Status](https://gemnasium.com/NYULibraries/login.png)](https://gemnasium.com/NYULibraries/login)
 [![Code Climate](https://codeclimate.com/github/NYULibraries/login.png)](https://codeclimate.com/github/NYULibraries/login)
 [![Coverage Status](https://coveralls.io/repos/github/NYULibraries/login/badge.svg?branch=master)](https://coveralls.io/github/NYULibraries/login?branch=master)
 
