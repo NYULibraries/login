@@ -9,14 +9,14 @@ describe "routes for Devise::Sessions" do
     context "when 'ns' is the auth_type parameter" do
       context "when it's a bound parameter" do
         subject { get('/auth/ns') }
-        it { should route_to(controller: "devise/sessions", action: "new", auth_type: "ns") }
+        it { should route_to(controller: "users/sessions", action: "new", auth_type: "ns") }
         context "and institue is a bound parameter" do
           subject { get('/auth/ns/ns') }
-          it { should route_to(controller: "devise/sessions", action: "new", auth_type: "ns", institution: "ns") }
+          it { should route_to(controller: "users/sessions", action: "new", auth_type: "ns", institution: "ns") }
         end
         context "and institution a query string parameter" do
           subject { get('/auth/ns?institution=ns') }
-          it { should route_to(controller: "devise/sessions", action: "new", auth_type: "ns", institution: "ns") }
+          it { should route_to(controller: "users/sessions", action: "new", auth_type: "ns", institution: "ns") }
         end
       end
       context "when it's querystring parameter" do
@@ -28,7 +28,7 @@ describe "routes for Devise::Sessions" do
     context "when 'invalid' auth_type is bound parameter" do
       context "when it's a bound parameter" do
         subject { get('/auth/invalid') }
-        it { should route_to(controller: "devise/sessions", action: "new", auth_type: "invalid") }
+        it { should route_to(controller: "users/sessions", action: "new", auth_type: "invalid") }
       end
 
       context "when it's a query string parameter" do

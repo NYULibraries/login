@@ -1,6 +1,187 @@
 require 'rails_helper'
 module Users
   describe SessionsController do
+    before { @request.env["devise.mapping"] = Devise.mappings[:user] }
+
+    context 'when not logged in' do
+      describe "GET 'new'" do
+        let(:auth_type) { 'bobst' }
+        let(:institution) { nil }
+        before { get :new, params: { institution: institution, auth_type: auth_type } }
+        subject { response }
+
+        describe 'for NYU' do
+          let(:institution) { 'nyu' }
+
+          context 'when not rendering views' do
+            render_views false
+            it { should be_successful }
+            it("should have a 200 status") { expect(subject.status).to be(200) }
+          end
+          context "when rendering views" do
+            render_views
+            it do
+              should render_template("layouts/login")
+              should render_template("sessions/new")
+              should render_template("common/_alerts")
+            end
+            context "when auth type is bobst" do
+              it { should render_template("sessions/_aleph") }
+            end
+            context "when auth type is nysid" do
+              let(:auth_type) { 'nysid' }
+              it { should render_template("sessions/_aleph") }
+            end
+            context "when auth type is cooper union" do
+              let(:auth_type) { 'cu' }
+              it { should render_template("sessions/_aleph") }
+            end
+            context "when auth type is new school" do
+              let(:auth_type) { 'ns' }
+              it { should render_template("sessions/_new_school_ldap") }
+            end
+            context "when auth type is new school" do
+              let(:auth_type) { 'visitor' }
+              it { should render_template("sessions/_visitor") }
+            end
+          end
+        end
+
+        describe "for NYU Abu Dhabi" do
+          let(:institution) { 'nyuad' }
+          context "when rendering views" do
+            render_views
+            it do
+              should render_template("layouts/login")
+              should render_template("sessions/new")
+              should render_template("common/_alerts")
+            end
+            context "when auth type is bobst" do
+              it { should render_template("sessions/_aleph") }
+            end
+          end
+        end
+
+        describe "for NYU Shanghai" do
+          let(:institution) { 'nyush' }
+          context "when rendering views" do
+            render_views
+            it do
+              should render_template("layouts/login")
+              should render_template("sessions/new")
+              should render_template("common/_alerts")
+            end
+            context "when auth type is bobst" do
+              it { should render_template("sessions/_aleph") }
+            end
+          end
+        end
+
+        describe 'for NYU Health Science Libraries' do
+          let(:institution) { 'hsl' }
+          context "when rendering views" do
+            render_views
+            it do
+              should render_template("layouts/login")
+              should render_template("sessions/new")
+              should render_template("common/_alerts")
+            end
+            context "when auth type is bobst" do
+              it { should render_template("sessions/_aleph") }
+            end
+          end
+        end
+
+        describe "for the New School" do
+          let(:auth_type) { 'ns' }
+          let(:institution) { 'ns' }
+          context "when rendering views" do
+            render_views
+            it do
+              should render_template("layouts/login")
+              should render_template("sessions/new")
+              should render_template("common/_alerts")
+            end
+            context "when auth type is new school" do
+              let(:auth_type) { 'ns' }
+              it { should render_template("sessions/_new_school_ldap") }
+            end
+            context "when auth type is nysid" do
+              let(:auth_type) { 'nysid' }
+              it { should render_template("sessions/_aleph") }
+            end
+            context "when auth type is cooper union" do
+              let(:auth_type) { 'cu' }
+              it { should render_template("sessions/_aleph") }
+            end
+            context "when auth type is new school" do
+              let(:auth_type) { 'visitor' }
+              it { should render_template("sessions/_visitor") }
+            end
+          end
+        end
+
+        describe "for Cooper Union" do
+          let(:auth_type) { 'cu' }
+          let(:institution) { 'cu' }
+
+          context "when rendering views" do
+            render_views
+            it do
+              should render_template("layouts/login")
+              should render_template("sessions/new")
+              should render_template("common/_alerts")
+            end
+            context "when auth type is cooper union" do
+              let(:auth_type) { 'cu' }
+              it { should render_template("sessions/_aleph") }
+            end
+            context "when auth type is nysid" do
+              let(:auth_type) { 'nysid' }
+              it { should render_template("sessions/_aleph") }
+            end
+            context "when auth type is new school" do
+              let(:auth_type) { 'ns' }
+              it { should render_template("sessions/_new_school_ldap") }
+            end
+            context "when auth type is new school" do
+              let(:auth_type) { 'visitor' }
+              it { should render_template("sessions/_visitor") }
+            end
+          end
+        end
+
+        describe "for NYSID" do
+          let(:auth_type) { 'nysid' }
+          let(:institution) { 'nysid' }
+
+          context "when rendering views" do
+            render_views
+            it do
+              should render_template("layouts/login")
+              should render_template("sessions/new")
+              should render_template("common/_alerts")
+            end
+            context "when auth type is nysid" do
+              let(:auth_type) { 'nysid' }
+              it { should render_template("sessions/_aleph") }
+            end
+            context "when auth type is cooper union" do
+              let(:auth_type) { 'cu' }
+              it { should render_template("sessions/_aleph") }
+            end
+            context "when auth type is new school" do
+              let(:auth_type) { 'ns' }
+              it { should render_template("sessions/_new_school_ldap") }
+            end
+            context "when auth type is new school" do
+              let(:auth_type) { 'visitor' }
+              it { should render_template("sessions/_visitor") }
+            end
+          end
+        end
+      end
+    end
 
     context 'when logged in' do
       login_user
@@ -28,6 +209,14 @@ module Users
           expect(request.cookies[:provider]).to be_nil
           expect(request.cookies[:current_institution]).to be_nil
         end
+      end
+
+      describe "GET 'new'" do
+        before { get :new, params: { institution: 'nyu', auth_type: 'bobst' } }
+        subject { response }
+        it { should be_redirect }
+        its(:status) { is_expected.to be 302 }
+        it { should redirect_to(root_url) }
       end
     end
 

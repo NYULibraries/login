@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     get 'users/:provider/:id(/:institution)', to: 'users#show', as: 'user',
       constraints: { provider: providers, id: /[^\/]+/ }
     get 'logout(/:institution)', to: 'users/sessions#destroy', as: :logout
-    get 'auth/:auth_type(/:institution)', to: 'devise/sessions#new', as: :auth
+    get 'auth/:auth_type(/:institution)', to: 'users/sessions#new', as: :auth
     get 'login/passive', to: 'users#client_passive_login'
     get 'login/passive_shibboleth', to: 'users#shibboleth_passive_login', as: :passive_shibboleth
     get 'users/show', to: 'users#show'
