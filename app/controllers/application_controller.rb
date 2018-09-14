@@ -24,4 +24,11 @@ class ApplicationController < ActionController::Base
   end
   # alias_method :current_user, :current_user_dev if Rails.env.development?
 
+  def require_login!
+    unless user_signed_in?
+      @redirect_uri = request.fullpath
+      render("wayf/index", institution: institution)
+    end
+  end
+
 end

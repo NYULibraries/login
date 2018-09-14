@@ -1,5 +1,5 @@
 module Users
-  module EZBorrowLogin
+  class EzBorrowLoginController < ApplicationController
     UNAUTHORIZED_REDIRECT = "https://library.nyu.edu/errors/ezborrow-library-nyu-edu/unauthorized".freeze
     URL_BASE = "https://e-zborrow.relaisd2d.com/service-proxy/".freeze
     LS_BY_INSTITUTION = {
@@ -15,9 +15,8 @@ module Users
       38 39 40 41
     ).to_set.freeze
 
-    def self.included(base)
-      base.prepend_before_action :require_valid_institution!, only: [:ezborrow_login], raise: false
-    end
+    before_action :require_valid_institution!
+    before_action :require_login!
 
     def ezborrow_login
       redirect_url = ezborrow_user_authorized? ? ezborrow_redirect : UNAUTHORIZED_REDIRECT

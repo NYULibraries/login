@@ -1,5 +1,5 @@
 <%- if institution.views["login"]["general_public"] -%>
   <%= content_tag(:div, class: ["alt-login", "col-sm-3", "square"], id: "visitor-login") do %>
-    <h2><%= link_to(t('application.general_public.link_text'), auth_path("visitor", current_institution.code.downcase)) %></h2>
+    <h2><%= link_to(t('application.general_public.link_text'), auth_path("visitor", current_institution.code.downcase, redirect_uri: @redirect_uri)) %></h2>
   <% end %>
 <%- end -%>

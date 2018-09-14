@@ -1,10 +1,9 @@
 class UsersController < Devise::OmniauthCallbacksController
   include Users::ClientPassiveLogin
-  include Users::EZBorrowLogin
   include Users::OmniauthCallback
 
   before_action :redirect_root, if: -> { request.path == '/' && user_signed_in? }
-  before_action :require_login!, only: [:show, :ezborrow_login]
+  before_action :require_login!, only: [:show]
   before_action :authenticate_user!, only: [:passthru, :client_passive_login]
   respond_to :html
 
@@ -36,7 +35,7 @@ class UsersController < Devise::OmniauthCallbacksController
     # If there is an eshelf login variable set then we want to redirect there after login
     # to permanently save eshelf records
     if ENV['ESHELF_LOGIN_URL'] && !cookies[ESHELF_COOKIE_NAME]
-      session[:_action_before_eshelf_redirect] = (stored_location_for(resource) || request.env['omniauth.origin'])
+      session[:_action_before_eshelf_redirect] = (stored_location_for(resource) || request.env['omniauth.origin'] || flash[:redirect_uri])
       create_eshelf_cookie!
       return ENV['ESHELF_LOGIN_URL']
     else
@@ -48,10 +47,6 @@ class UsersController < Devise::OmniauthCallbacksController
 
   def redirect_root
     redirect_to root_url_redirect
-  end
-
-  def require_login!
-    render("wayf/index", institution: institution) unless user_signed_in?
   end
 
   def root_url_redirect
