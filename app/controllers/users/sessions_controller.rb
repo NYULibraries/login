@@ -6,7 +6,8 @@ class Users::SessionsController < Devise::SessionsController
   private
 
   def save_location!
-    flash[:redirect_uri] = params[:redirect_uri]
+    flash.keep(:redirect_uri) # persist across login attempts
+    flash[:redirect_uri] ||= params[:redirect_uri]
   end
 
   # Single sign out by clearing cookies on all sub domains
