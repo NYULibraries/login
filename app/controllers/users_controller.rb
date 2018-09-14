@@ -1,10 +1,9 @@
 class UsersController < Devise::OmniauthCallbacksController
   include Users::ClientPassiveLogin
-  include Users::EZBorrowLogin
   include Users::OmniauthCallback
 
   before_action :redirect_root, if: -> { request.path == '/' && user_signed_in? }
-  before_action :require_login!, only: [:show, :ezborrow_login]
+  before_action :require_login!, only: [:show]
   before_action :authenticate_user!, only: [:passthru, :client_passive_login]
   respond_to :html
 
@@ -48,11 +47,6 @@ class UsersController < Devise::OmniauthCallbacksController
 
   def redirect_root
     redirect_to root_url_redirect
-  end
-
-  def require_login!
-    @redirect_uri = request.fullpath
-    render("wayf/index", institution: institution) unless user_signed_in?
   end
 
   def root_url_redirect

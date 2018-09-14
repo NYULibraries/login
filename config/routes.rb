@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     get 'login/passive_shibboleth', to: 'users#shibboleth_passive_login', as: :passive_shibboleth
     get 'users/show', to: 'users#show'
     match 'passthru', to: 'users#passthru', via: [:post, :get]
-    get '/ezborrow(/:institution)', to: "users#ezborrow_login", as: :ezborrow
+    get '/ezborrow(/:institution)', to: "users/ez_borrow_login#ezborrow_login", as: :ezborrow
     root 'users#show'
   end
   get 'login(/:institution)', to: 'wayf#index', as: :login

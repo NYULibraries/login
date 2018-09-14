@@ -1,5 +1,5 @@
 require 'rails_helper'
-describe UsersController do
+describe Users::EzBorrowLoginController do
   subject { get :ezborrow_login, params: params }
 
   LS_BY_INSTITUTION = {
@@ -50,6 +50,9 @@ describe UsersController do
           describe "#{inst} valid route is specified" do
             let(:params) { { institution: inst } }
 
+            # it 'assigns redirect_uri' do
+            #   expect(assigns(:redirect_uri)).to eql "/ezborrow/#{inst}"
+            # end
             it { should be_successful }
             it { should render_template "wayf/index" }
           end
