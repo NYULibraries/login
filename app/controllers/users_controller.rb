@@ -36,7 +36,7 @@ class UsersController < Devise::OmniauthCallbacksController
     # If there is an eshelf login variable set then we want to redirect there after login
     # to permanently save eshelf records
     if ENV['ESHELF_LOGIN_URL'] && !cookies[ESHELF_COOKIE_NAME]
-      session[:_action_before_eshelf_redirect] = (stored_location_for(resource) || request.env['omniauth.origin'] || cookie_redirect)
+      session[:_action_before_eshelf_redirect] = (stored_location_for(resource) || request.env['omniauth.origin'])
       create_eshelf_cookie!
       return ENV['ESHELF_LOGIN_URL']
     else
