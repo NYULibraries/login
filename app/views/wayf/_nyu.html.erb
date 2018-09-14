@@ -5,7 +5,7 @@
 <div class="row">
   <!-- Link to NYU Shibboleth auth -->
   <div id="nyu_shibboleth-login" class="col-sm-9 primary-login">
-    <h2><%= link_to t('application.nyu.link_text'), user_nyu_shibboleth_omniauth_authorize_path(institution: current_institution.code, auth_type: :nyu) %></h2>
+    <h2><%= link_to t('application.nyu.link_text'), user_nyu_shibboleth_omniauth_authorize_path(institution: current_institution.code, auth_type: :nyu, redirect_uri: @redirect_uri) %></h2>
   </div>
   <!-- Link to the first secondary login auth in the list -->
   <%- option = institution.views["login"]["secondary"].first -%>
