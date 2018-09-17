@@ -53,23 +53,6 @@ describe UsersController do
     end
   end
 
-  describe 'GET /passthru' do
-    let(:params) { Hash.new }
-    let(:redirect_uri) { 'https://trustedapp.nyu.edu' }
-    let(:session_params) { { _action_before_eshelf_redirect: redirect_uri } }
-
-    before { get :passthru, params: params, session: session_params }
-    prepend_before { @request.cookies[:_nyulibraries_eshelf_passthru] = { value: 1, httponly: true, domain: '.localhost' } }
-    subject { response }
-    context 'when user has a saved action in session' do
-      it { should redirect_to 'https://trustedapp.nyu.edu' }
-    end
-    context 'when user has no saved action' do
-      let(:redirect_uri) { nil }
-      it { should redirect_to root_path }
-    end
-  end
-
   describe '#root_url_redirect' do
     login_user
     subject { @controller.send(:root_url_redirect) }
