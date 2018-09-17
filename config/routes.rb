@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   end
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions' }
   devise_scope :user do
+    root to: 'root#root', as: 'root'
     get 'users/:provider/:id(/:institution)', to: 'users#show', as: 'user',
       constraints: { provider: providers, id: /[^\/]+/ }
     get 'logout(/:institution)', to: 'users/sessions#destroy', as: :logout
@@ -14,7 +15,6 @@ Rails.application.routes.draw do
     get 'users/show', to: 'users#show'
     match 'passthru', to: 'users/passthru#passthru', via: [:post, :get], as: :passthru
     get '/ezborrow(/:institution)', to: "users/ez_borrow_login#ezborrow_login", as: :ezborrow
-    root 'users#show'
   end
   get 'login(/:institution)', to: 'wayf#index', as: :login
   get 'logged_out(/:institution)', to: 'wayf#logged_out', as: :logged_out

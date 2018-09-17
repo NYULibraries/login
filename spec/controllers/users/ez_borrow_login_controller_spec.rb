@@ -49,10 +49,6 @@ describe Users::EzBorrowLoginController do
         VALID_INSTITUTIONS.each do |inst|
           describe "#{inst} valid route is specified" do
             let(:params) { { institution: inst } }
-
-            # it 'assigns redirect_uri' do
-            #   expect(assigns(:redirect_uri)).to eql "/ezborrow/#{inst}"
-            # end
             it { should be_successful }
             it { should render_template "wayf/index" }
           end
