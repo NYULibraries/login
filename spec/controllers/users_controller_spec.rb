@@ -32,6 +32,7 @@ describe UsersController do
 
         context "when rendering views" do
           render_views
+
           it do
             should render_template("layouts/login")
             should render_template("users/show")
@@ -41,12 +42,13 @@ describe UsersController do
       end
 
       context "when request is for a different username than is logged in" do
-        subject { get(:show, { params: { id: 'different', provider: attributes[:provider] } }) }
+        subject { get :show, { params: { id: 'different', provider: attributes[:provider] } } }
 
         it { should be_redirect }
         it("should have a 302 status") { expect(subject.status).to be(302) }
         it { should redirect_to(user_url build(:user))}
       end
+
       context "when request is for a different provider than is logged in" do
         subject { get :show, params: { id: attributes[:username], provider: 'aleph' } }
 

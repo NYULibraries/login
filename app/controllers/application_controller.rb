@@ -42,9 +42,9 @@ class ApplicationController < ActionController::Base
   # redirect to a "you are logged out, please close your browser" page
   def after_sign_out_path_for(resource_or_scope)
     if cookies[:provider] == 'nyu_shibboleth' && ENV['SHIBBOLETH_LOGOUT_URL']
-      return ENV['SHIBBOLETH_LOGOUT_URL']
+      ENV['SHIBBOLETH_LOGOUT_URL']
     else
-      return logged_out_path(cookies[:current_institution])
+      logged_out_path(cookies[:current_institution])
     end
   end
 
