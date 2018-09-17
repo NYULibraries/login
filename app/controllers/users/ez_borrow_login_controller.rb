@@ -19,8 +19,7 @@ module Users
     before_action :require_login!
 
     def ezborrow_login
-      redirect_url = ezborrow_user_authorized? ? ezborrow_redirect : UNAUTHORIZED_REDIRECT
-      redirect_to redirect_url
+      redirect_to ezborrow_user_authorized? ? ezborrow_redirect : UNAUTHORIZED_REDIRECT
     end
 
     private
