@@ -9,8 +9,8 @@ Rails.application.routes.draw do
       constraints: { provider: providers, id: /[^\/]+/ }
     get 'logout(/:institution)', to: 'users/sessions#destroy', as: :logout
     get 'auth/:auth_type(/:institution)', to: 'users/sessions#new', as: :auth
-    get 'login/passive', to: 'users#client_passive_login'
-    get 'login/passive_shibboleth', to: 'users#shibboleth_passive_login', as: :passive_shibboleth
+    get 'login/passive', to: 'users/client_passive_login#client_passive_login'
+    get 'login/passive_shibboleth', to: 'users/client_passive_login#shibboleth_passive_login', as: :passive_shibboleth
     get 'users/show', to: 'users#show'
     match 'passthru', to: 'users#passthru', via: [:post, :get]
     get '/ezborrow(/:institution)', to: "users/ez_borrow_login#ezborrow_login", as: :ezborrow

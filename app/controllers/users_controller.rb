@@ -1,9 +1,7 @@
 class UsersController < Devise::OmniauthCallbacksController
-  include Users::ClientPassiveLogin
-
   before_action :redirect_root, if: -> { request.path == '/' && user_signed_in? }
   before_action :require_login!, only: [:show]
-  before_action :authenticate_user!, only: [:passthru, :client_passive_login]
+  before_action :authenticate_user!, only: [:passthru]
   before_action :require_valid_omniauth_hash,
                 only: [*Devise.omniauth_providers, :omniauth_callback]
   respond_to :html
