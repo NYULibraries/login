@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   use_doorkeeper do
     controllers :authorizations => 'doorkeeper/custom_authorizations'
   end
-  devise_for :users, controllers: { omniauth_callbacks: 'users', sessions: 'users/sessions' }
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions' }
   devise_scope :user do
     get 'users/:provider/:id(/:institution)', to: 'users#show', as: 'user',
       constraints: { provider: providers, id: /[^\/]+/ }
