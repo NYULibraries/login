@@ -6,13 +6,14 @@ class Users::SessionsController < Devise::SessionsController
   private
 
   def save_location!
-    # persist across login attempts, always delete upon new request
-    redirect_uri = cookies.delete(:cached_redirect_uri)
+    # take from params first, then short-term cached cookie
+    redirect_uri = cookies.delete(CACHED_REDIRECT_COOKIE_NAME)
     redirect_uri = params[:redirect_uri] if params[:redirect_uri].present?
 
+    # If redirect uri found in short-term cache or paramters, assign that to flash and re-cache
     if redirect_uri.present?
-      flash[:redirect_uri] = redirect_uri
-      cookies[:cached_redirect_uri] = { value: redirect_uri, expires: 1.minute.from_now }
+      flash[REDIRECT_COOKIE_NAME] = redirect_uri
+      cookies[CACHED_REDIRECT_COOKIE_NAME] = { value: redirect_uri, expires: 1.minute.from_now }
     end
   end
 

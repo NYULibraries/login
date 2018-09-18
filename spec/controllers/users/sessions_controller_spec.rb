@@ -7,8 +7,55 @@ module Users
       describe "GET 'new'" do
         let(:auth_type) { 'bobst' }
         let(:institution) { nil }
-        before { get :new, params: { institution: institution, auth_type: auth_type } }
+        let(:redirect_uri) { nil }
+        let(:redirect_cookie) { ApplicationController::REDIRECT_COOKIE_NAME }
+        let(:cached_redirect_cookie) { ApplicationController::CACHED_REDIRECT_COOKIE_NAME }
+        let(:params) { { institution: institution, auth_type: auth_type, redirect_uri: redirect_uri } }
+
+        before do
+          params.delete_if { |k, v| v.nil? }
+          get :new, params: params
+        end
         subject { response }
+
+        describe 'redirect_uri cookies' do
+          let(:institution) { 'nyu' }
+
+          describe 'with redirect_uri parameter' do
+            let(:redirect_uri) { 'redirect/to/here' }
+
+            it 'assigns param to cached_redirect_uri cookie' do
+              expect(cookies[cached_redirect_cookie]).to eql redirect_uri
+            end
+
+            it 'assigns param to flash and cached_redirect_uri' do
+              expect(flash[redirect_cookie]).to eql redirect_uri
+            end
+          end
+
+          describe 'with no redirect_uri param' do
+            context 'with a cached redirect uri in cookies' do
+              let(:redirect_uri_cookie) { 'redirect/here/cookie' }
+
+              before do
+                @request.cookies[cached_redirect_cookie] = redirect_uri_cookie
+                get :new, params: params
+              end
+
+              it 'assigns uri to flash and cache (again)' do
+                expect(flash[redirect_cookie]).to eql redirect_uri_cookie
+                expect(cookies[cached_redirect_cookie]).to eql redirect_uri_cookie
+              end
+            end
+
+            context 'without a cached redirect uri in cookies' do
+              it 'does not assign any cookies' do
+                expect(flash[redirect_cookie]).to be_nil
+                expect(cookies[cached_redirect_cookie]).to be_nil
+              end
+            end
+          end
+        end
 
         describe 'for NYU' do
           let(:institution) { 'nyu' }
@@ -192,6 +239,7 @@ module Users
       end
       describe "DELETE 'destroy'" do
         subject { get :destroy }
+
         it { should be_redirect }
         it("should have a 302 status") { expect(subject.status).to be(302) }
         it("should delete the login_sso cookie") do
@@ -203,6 +251,7 @@ module Users
         end
         context 'when logged in as a new school user' do
           let(:provider) { 'new_school_ldap' }
+
           it { should redirect_to(logged_out_url(:nyu)) }
         end
         it "should set post logout session variables so we know where to redirect" do
@@ -212,8 +261,8 @@ module Users
       end
 
       describe "GET 'new'" do
-        before { get :new, params: { institution: 'nyu', auth_type: 'bobst' } }
-        subject { response }
+        subject { get :new, params: { institution: 'nyu', auth_type: 'bobst' } }
+
         it { should be_redirect }
         its(:status) { is_expected.to be 302 }
         it { should redirect_to(root_url) }

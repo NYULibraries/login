@@ -4,8 +4,9 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  ESHELF_COOKIE_NAME = '_nyulibraries_eshelf_passthru'.freeze
-  REDIRECT_COOKIE_NAME = :redirect_uri
+  ESHELF_COOKIE_NAME = :_nyulibraries_eshelf_passthru
+  REDIRECT_COOKIE_NAME = :_nyulibraries_redirect_uri
+  CACHED_REDIRECT_COOKIE_NAME = :_nyulibraries_cached_redirect_uri
 
   layout Proc.new { |controller| (controller.request.xhr?) ? false : "login" }
 
