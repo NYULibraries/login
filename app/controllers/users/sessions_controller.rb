@@ -13,7 +13,7 @@ class Users::SessionsController < Devise::SessionsController
     # If redirect uri found in short-term cache or paramters, assign that to flash and re-cache
     if redirect_uri.present?
       flash[REDIRECT_COOKIE_NAME] = redirect_uri
-      cookies[CACHED_REDIRECT_COOKIE_NAME] = { value: redirect_uri, expires: 1.minute.from_now }
+      cookies[CACHED_REDIRECT_COOKIE_NAME] = { value: redirect_uri, expires: 1.minute.from_now, domain: ENV['LOGIN_COOKIE_DOMAIN'] }
     end
   end
 
