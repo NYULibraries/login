@@ -28,3 +28,5 @@ Capybara.current_driver = :selenium
 Capybara.server = :puma, { Silent: true }
 Capybara.app_host = 'http://localhost:3000'
 Capybara.server_port = 3000
+
+ENV['FLAT_FILE'] = "spec/data/patrons-UTF-8.dat"
