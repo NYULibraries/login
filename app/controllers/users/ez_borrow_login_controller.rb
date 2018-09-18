@@ -1,3 +1,13 @@
+# Controller containing all logic for log in to EZBorrow through the login server.
+
+# Strategy:
+# 1. The institution validity is checked. /ezborrow/invalid_institute is immediately redirected to UNAUTHORIZED_REDIRECT
+# 2. Users not logged in follow the require_login! path, to return back to the original request.fullpath
+# 3. Users logged in are checked against the set of valid BOR_STATUSES
+# - Valid users are redirected to EZBorrow, including the query if present in the original request
+#   - EZBorrow redirect includes the users identifer and institution
+# - Invalid users are redirected to UNAUTHORIZED_REDIRECT
+
 module Users
   class EzBorrowLoginController < ApplicationController
     UNAUTHORIZED_REDIRECT = "https://library.nyu.edu/errors/ezborrow-library-nyu-edu/unauthorized".freeze
@@ -26,11 +36,15 @@ module Users
     private
 
     def require_valid_institution!
-      redirect_to UNAUTHORIZED_REDIRECT unless valid_institution?
+      redirect_to UNAUTHORIZED_REDIRECT if invalid_institution?
     end
 
     def valid_institution?
       AUTHORIZED_INSTITUTIONS.include? institution.code.downcase.to_s
+    end
+
+    def invalid_institution?
+      !valid_institution?
     end
 
     def ezborrow_user
