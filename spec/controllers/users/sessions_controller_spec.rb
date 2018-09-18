@@ -31,6 +31,20 @@ module Users
             it 'assigns param to flash and cached_redirect_uri' do
               expect(flash[redirect_cookie]).to eql redirect_uri
             end
+
+            context 'with a cached redirect uri in cookies' do
+              let(:redirect_uri_cookie) { 'redirect/here/cookie' }
+
+              before do
+                @request.cookies[cached_redirect_cookie] = redirect_uri_cookie
+                get :new, params: params
+              end
+
+              it 'assigns params uri to flash and cache' do
+                expect(flash[redirect_cookie]).to eql redirect_uri
+                expect(cookies[cached_redirect_cookie]).to eql redirect_uri
+              end
+            end
           end
 
           describe 'with no redirect_uri param' do
@@ -42,7 +56,7 @@ module Users
                 get :new, params: params
               end
 
-              it 'assigns uri to flash and cache (again)' do
+              it 'assigns cookie\'s uri to flash and cache (again)' do
                 expect(flash[redirect_cookie]).to eql redirect_uri_cookie
                 expect(cookies[cached_redirect_cookie]).to eql redirect_uri_cookie
               end
