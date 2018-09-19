@@ -1,14 +1,12 @@
-version: '3.2'
-# Utilize version 3.7 for volumes alias
-# version: '3.7'
-# x-volumes: &default-volumes
-#   volumes:
-#     - ./lib:/app/lib/
-#     - ./app:/app/app/
-#     - ./spec:/app/spec/
-#     - ./features:/app/features/
-#     - ./screenshots:/screenshots/
-#     - ./tmp/:/app/tmp/
+version: '3.7'
+x-volumes: &default-volumes
+  volumes:
+    - ./lib:/app/lib/
+    - ./app:/app/app/
+    - ./spec:/app/spec/
+    - ./features:/app/features/
+    - ./screenshots:/screenshots/
+    - ./tmp/:/app/tmp/
 
 services:
   dev:
