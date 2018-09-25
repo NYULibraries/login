@@ -107,7 +107,7 @@ describe Users::EzBorrowLoginController do
 
               describe "when a #{user_institution} user at #{route_institution}" do
                 it { should be_redirect }
-                it { should redirect_to "https://ezb.relaisd2d.com/?LS=#{target_ls}&PI=BOR_ID&query=the+astd+management+development+handbook" }
+                it { should redirect_to "https://ezb.relaisd2d.com/?LS=#{target_ls}&PI=BOR_ID&query=#{Addressable::URI.escape params[:query]}" }
               end
             end
           end

@@ -62,10 +62,10 @@ module Users
     end
 
     def ezborrow_redirect
-      query = params[:query] && CGI.escape(params[:query])
+      query = params[:query]
       identifier = ezborrow_user.aleph_properties[:identifier]
       ls = LS_BY_INSTITUTION[ezborrow_user_institution]
-      "#{URL_BASE}?LS=#{ls}&PI=#{identifier}&query=#{query}"
+      Addressable::URI.encode "#{URL_BASE}?LS=#{ls}&PI=#{identifier}&query=#{query}"
     end
   end
 end
