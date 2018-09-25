@@ -10,6 +10,8 @@
 
 module Users
   class EzBorrowLoginController < ApplicationController
+    require 'addressable/uri'
+
     UNAUTHORIZED_REDIRECT = "https://library.nyu.edu/errors/ezborrow-library-nyu-edu/unauthorized".freeze
     URL_BASE = "https://ezb.relaisd2d.com/".freeze
     LS_BY_INSTITUTION = {
