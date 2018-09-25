@@ -91,7 +91,7 @@ describe Users::EzBorrowLoginController do
 
               describe "when a #{user_institution} user at #{route_institution}" do
                 it { should be_redirect }
-                it { should redirect_to "https://e-zborrow.relaisd2d.com/service-proxy/?command=mkauth&LS=#{target_ls}&PI=BOR_ID&query=" }
+                it { should redirect_to "https://ezb.relaisd2d.com/?LS=#{target_ls}&PI=BOR_ID&query=" }
               end
             end
           end
@@ -107,7 +107,7 @@ describe Users::EzBorrowLoginController do
 
               describe "when a #{user_institution} user at #{route_institution}" do
                 it { should be_redirect }
-                it { should redirect_to "https://e-zborrow.relaisd2d.com/service-proxy/?command=mkauth&LS=#{target_ls}&PI=BOR_ID&query=the+astd+management+development+handbook" }
+                it { should redirect_to "https://ezb.relaisd2d.com/?LS=#{target_ls}&PI=BOR_ID&query=the+astd+management+development+handbook" }
               end
             end
           end
