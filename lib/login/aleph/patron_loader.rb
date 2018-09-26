@@ -11,7 +11,11 @@ module Login
       end
 
       def patron
-        FLAT_FILE_STRATEGY_ENABLED ? flat_file_strategy.patron : bor_info_strategy.patron
+        if FLAT_FILE_STRATEGY_ENABLED
+          flat_file_strategy.patron || bor_info_strategy.patron
+        else
+          bor_info_strategy.patron
+        end
       end
 
     private
