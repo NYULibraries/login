@@ -1,5 +1,4 @@
 # Configure Capybara
-require 'capybara/poltergeist'
 require 'capybara-screenshot/cucumber' if ENV['SCREENSHOT_FAILURES']
 Capybara.save_path = "/screenshots"
 

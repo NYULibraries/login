@@ -3,18 +3,18 @@ Rails.application.routes.draw do
   use_doorkeeper do
     controllers :authorizations => 'doorkeeper/custom_authorizations'
   end
-  devise_for :users, controllers: { omniauth_callbacks: 'users', sessions: 'users/sessions' }
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions' }
   devise_scope :user do
+    root to: 'root#root', as: 'root'
     get 'users/:provider/:id(/:institution)', to: 'users#show', as: 'user',
       constraints: { provider: providers, id: /[^\/]+/ }
     get 'logout(/:institution)', to: 'users/sessions#destroy', as: :logout
-    get 'auth/:auth_type(/:institution)', to: 'devise/sessions#new', as: :auth
-    get 'login/passive', to: 'users#client_passive_login'
-    get 'login/passive_shibboleth', to: 'users#shibboleth_passive_login', as: :passive_shibboleth
+    get 'auth/:auth_type(/:institution)', to: 'users/sessions#new', as: :auth
+    get 'login/passive', to: 'users/client_passive_login#client_passive_login'
+    get 'login/passive_shibboleth', to: 'users/client_passive_login#shibboleth_passive_login', as: :passive_shibboleth
     get 'users/show', to: 'users#show'
-    match 'passthru', to: 'users#passthru', via: [:post, :get]
-    get '/ezborrow(/:institution)', to: "users#ezborrow_login", as: :ezborrow
-    root 'users#show'
+    match 'passthru', to: 'users/passthru#passthru', via: [:post, :get], as: :passthru
+    get '/ezborrow(/:institution)', to: "users/ez_borrow_login#ezborrow_login", as: :ezborrow
   end
   get 'login(/:institution)', to: 'wayf#index', as: :login
   get 'logged_out(/:institution)', to: 'wayf#logged_out', as: :logged_out

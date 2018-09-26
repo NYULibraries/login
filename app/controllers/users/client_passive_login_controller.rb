@@ -1,4 +1,4 @@
-# Module containing all logic for passive login in this application, the server
+# Controller containing all logic for passive login in this application, the server
 # and the calling clients
 #
 # Strategy:
@@ -11,14 +11,13 @@
 #        which is client_passive_login, let that function handle redirection
 #        back to the client app
 module Users
-  module ClientPassiveLogin
+  class ClientPassiveLoginController < Devise::OmniauthCallbacksController
     PASSIVE_SHIBBOLETH_URL_STRING = "/Shibboleth.sso/Login?isPassive=true&target=".freeze
     SHIBBOLETH_COOKIE_PATTERN = "_shibsession_".freeze
 
-    def self.included(base)
-      base.prepend_before_action :shibboleth_passive_login_check, only: [:client_passive_login], raise: false
-      base.prepend_before_action :save_return_uri
-    end
+    before_action :shibboleth_passive_login_check, only: [:client_passive_login]
+    before_action :save_return_uri
+    before_action :authenticate_user!
 
     # GET /login/passive?return_uri=&client_id=[&login_path=]
     # Log client in if SP is logged in
@@ -64,6 +63,8 @@ module Users
       end
     end
 
+    private
+
     # Interrupt and send user out to passively login,
     # if the Idp has a session
     def shibboleth_passive_login_check
@@ -75,7 +76,6 @@ module Users
         redirect_to "#{PASSIVE_SHIBBOLETH_URL_STRING}#{target_url}"
       end
     end
-    private :shibboleth_passive_login_check
 
     # Check if the shibboleth session has been started
     # based off cookie pattern. This is a weak check as it can be
@@ -84,22 +84,16 @@ module Users
     def shib_session_exists?
       !cookies.detect { |key, val| key.include? SHIBBOLETH_COOKIE_PATTERN }.nil?
     end
-    private :shib_session_exists?
 
     # Get the client app based on the passed in client_id param
     def client_app(client_id)
-      client_app = Doorkeeper::Application.all.find do |app|
-        app.uid == client_id
-      end
-      return client_app
+      Doorkeeper::Application.all.find { |app| app.uid == client_id }
     end
-    private :client_app
 
     # Save the return uri if it exists and is whitelisted
     def save_return_uri
       session[:_return_uri] = params[:return_uri] if whitelisted_return_uri?
     end
-    private :save_return_uri
 
     # Whitelist return uri if their host matches the Doorkeeper redirect_uri host
     def whitelisted_return_uri?
@@ -111,7 +105,6 @@ module Users
       # or the return_uri is not a valid URI, just return false
       false
     end
-    private :whitelisted_return_uri?
 
   end
 end

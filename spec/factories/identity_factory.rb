@@ -64,7 +64,8 @@ FactoryBot.define do
                   z303_plif_modification: nil,
                   z303_title_req_limit: "0000",
                   z303_gender: nil,
-                  z303_birthplace: nil},
+                  z303_birthplace: nil,
+                },
                 z304: {
                   z304_id: "USERNAME",
                   z304_sequence: "02",

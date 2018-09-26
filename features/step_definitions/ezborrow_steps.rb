@@ -7,8 +7,14 @@ Given(/^I am on the (.+) login page with a redirect to "(.*)"$/) do |location, d
   expect_login_page_for_location(location)
 end
 
-Given(/^I am (?:an|a) (un)?authorized EZ-Borrow patron$/) do |negator|
-  authorized = !negator
-  status = authorized ? 'spec/data/ezborrow/patrons-UTF-8-ezborrow-nyu.dat' : 'spec/data/patrons-UTF-8.dat'
-  set_flat_file(status)
+Before('@ezborrow_unauthorized') do
+  if ENV['FLAT_FILE_STRATEGY_ENABLED']
+    set_flat_file('spec/data/patrons-UTF-8-ezborrow-unauthorized.dat')
+  end
+end
+
+After('@ezborrow_unauthorized') do
+  if ENV['FLAT_FILE_STRATEGY_ENABLED']
+    set_flat_file('spec/data/patrons-UTF-8.dat')
+  end
 end

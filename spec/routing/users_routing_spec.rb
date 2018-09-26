@@ -2,7 +2,7 @@ require 'rails_helper'
 describe "routes for Users" do
   describe "GET /" do
     subject { get('/') }
-    it { should route_to('users#show') }
+    it { should route_to('root#root') }
   end
 
   describe "POST /" do
@@ -12,7 +12,7 @@ describe "routes for Users" do
 
   describe "GET /login/passive" do
     subject { get('/login/passive') }
-    it { should route_to('users#client_passive_login') }
+    it { should route_to('users/client_passive_login#client_passive_login') }
   end
 
   describe "GET /api/v1/user" do

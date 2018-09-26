@@ -5,13 +5,14 @@
 <div class="row">
   <!-- Link to NYU Shibboleth auth -->
   <div id="nyu_shibboleth-login" class="col-sm-9 primary-login">
-    <h2><%= link_to t('application.nyu.link_text'), user_nyu_shibboleth_omniauth_authorize_path(institution: current_institution.code, auth_type: :nyu) %></h2>
+    <h2><%= link_to t('application.nyu.link_text'), user_nyu_shibboleth_omniauth_authorize_path(institution: current_institution.code, auth_type: :nyu, redirect_uri: @redirect_uri) %></h2>
   </div>
   <!-- Link to the first secondary login auth in the list -->
   <%- option = institution.views["login"]["secondary"].first -%>
   <%= render "wayf/auth_squares/#{option}" %>
 </div>
 <!-- Link to the rest of the secondary logins -->
+
 <div class="row">
   <% institution.views["login"]["secondary"][1..-1].each do |option| %>
     <%= render "wayf/auth_squares/#{option}" %>

@@ -1,14 +1,22 @@
-version: '3.2'
-services:
+version: '3.7'
+x-volumes: &default-volumes
+  volumes:
+    - ./lib:/app/lib/
+    - ./app:/app/app/
+    - ./spec:/app/spec/
+    - ./features:/app/features/
+    - ./screenshots:/screenshots/
+    - ./tmp/:/app/tmp/
 
+services:
   dev:
     build:
       context: .
+      cache_from:
+        - login
+        - $ECR_DOMAIN/login
+        - $ECR_DOMAIN/login:$BRANCH_NO_SLASH
     image: login:latest
-    # volumes:
-    #   - ./vendor:/app/vendor
-    #   - ./lib:/app/lib/
-    #   - ./app:/app/app/
     ports:
       - "3000:3000"
     env_file:
@@ -18,10 +26,15 @@ services:
       RAILS_ENV:
     depends_on:
       - setup_dbs
+    # <<: *default-volumes
 
   test:
     build:
       context: .
+      cache_from:
+        - login
+        - $ECR_DOMAIN/login
+        - $ECR_DOMAIN/login:$BRANCH_NO_SLASH
     image: login:latest
     env_file:
       - test.env
@@ -34,12 +47,7 @@ services:
     command: ["/tmp/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "rake"]
     depends_on:
       - setup_test_dbs
-    # volumes:
-      # - ./lib:/app/lib/
-      # - ./app:/app/app/
-      # - ./spec:/app/spec/
-      # - ./features:/app/features/
-      # - ./screenshots:/screenshots/
+    # <<: *default-volumes
 
   setup_test_dbs:
     build:

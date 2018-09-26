@@ -1,21 +1,41 @@
 require 'rails_helper'
-describe UsersController do
+describe Users::EzBorrowLoginController do
   subject { get :ezborrow_login, params: params }
 
-  LS_DICT = {
-      'nyu'    => 'NYU',
-      'nyuad'  => 'NYU',
-      'nyush'  => 'NYU',
-      'ns'     => 'THENEWSCHOOL',
-  }
+  LS_BY_INSTITUTION = {
+    'nyu'    => 'NYU',
+    'nyuad'  => 'NYU',
+    'nyush'  => 'NYU',
+    'ns'     => 'THENEWSCHOOL',
+  }.freeze
   VALID_INSTITUTIONS = %w(nyu nyush nyuad ns).freeze
   INVALID_INSTITUTIONS = %w(cu nysid).freeze
+  STATUS_BY_INSTITUTION = {
+    'nyu' => '50',
+    'nyuad' => '80',
+    'nyush' => '20',
+    'ns' => '31',
+    'cu' => '666',
+    'nysid' => '666',
+  }.freeze
 
-  let(:flat_file) { "spec/data/ezborrow/patrons-UTF-8-ezborrow-nyu.dat" }
+  let(:bor_status) { "999" }
+  let(:institution_code) { "NYUFAKE" }
+  let(:identifier) { "BOR_ID" }
   let(:params) { {} }
+  let(:ezborrow_user) { create(:ezborrow_user) }
 
   before do
-    ENV['FLAT_FILE'] = flat_file
+    User.
+      any_instance.stub(:aleph_properties).
+      and_return(
+        HashWithIndifferentAccess.new(
+          patron_status: bor_status,
+          institution_code: institution_code,
+          identifier: identifier,
+        )
+      )
+
     @request.env["devise.mapping"] = Devise.mappings[:user]
   end
 
@@ -29,7 +49,6 @@ describe UsersController do
         VALID_INSTITUTIONS.each do |inst|
           describe "#{inst} valid route is specified" do
             let(:params) { { institution: inst } }
-
             it { should be_successful }
             it { should render_template "wayf/index" }
           end
@@ -41,8 +60,8 @@ describe UsersController do
           describe "#{inst} invalid route is specified" do
             let(:params) { { institution: inst } }
 
-            it { should be_successful }
-            it { should render_template "wayf/index" }
+            it { should be_redirect }
+            it { should redirect_to 'https://library.nyu.edu/errors/ezborrow-library-nyu-edu/unauthorized' }
           end
         end
       end
@@ -57,15 +76,18 @@ describe UsersController do
 
     context 'when logged in' do
       login_user
+      before { @current_user = ezborrow_user }
+
       let(:provider) { 'aleph' }
 
       context "when the user is from a valid ezborrow institution" do
         describe 'without a query' do
           VALID_INSTITUTIONS.each do |user_institution|
             [*VALID_INSTITUTIONS, nil].each do |route_institution|
-              let(:flat_file) { "spec/data/ezborrow/patrons-UTF-8-ezborrow-#{user_institution}.dat" }
+              let(:bor_status) { STATUS_BY_INSTITUTION[user_institution] }
+              let(:institution_code) { user_institution }
               let(:params) { { institution: route_institution } }
-              let(:target_ls) { LS_DICT[user_institution] }
+              let(:target_ls) { LS_BY_INSTITUTION[user_institution] }
 
               describe "when a #{user_institution} user at #{route_institution}" do
                 it { should be_redirect }
@@ -78,9 +100,10 @@ describe UsersController do
         context 'with a query and valid route institution' do
           VALID_INSTITUTIONS.each do |user_institution|
             [*VALID_INSTITUTIONS, nil].each do |route_institution|
-              let(:flat_file) { "spec/data/ezborrow/patrons-UTF-8-ezborrow-#{user_institution}.dat" }
+              let(:bor_status) { STATUS_BY_INSTITUTION[user_institution] }
+              let(:institution_code) { user_institution }
               let(:params) { { query: 'the astd management development handbook', institution: route_institution } }
-              let(:target_ls) { LS_DICT[user_institution] }
+              let(:target_ls) { LS_BY_INSTITUTION[user_institution] }
 
               describe "when a #{user_institution} user at #{route_institution}" do
                 it { should be_redirect }
@@ -92,10 +115,9 @@ describe UsersController do
       end
 
       context "when the user is from an invalid ezborrow institution" do
+        let(:bor_status) { STATUS_BY_INSTITUTION['cu'] }
         VALID_INSTITUTIONS.each do |route_institution|
           describe "when an invalid user at #{route_institution}" do
-            let(:flat_file) { "spec/data/patrons-UTF-8.dat" }
-
             it { should be_redirect }
             it { should redirect_to 'https://library.nyu.edu/errors/ezborrow-library-nyu-edu/unauthorized' }
           end

@@ -4,7 +4,7 @@
 <div class="row">
   <!-- Link to New School auth -->
   <div id="ns-login" class="col-sm-12 primary-login">
-    <h2><%= link_to t('application.ns.link_text'), auth_path(:ns, current_institution.code.downcase) %></h2>
+    <h2><%= link_to t('application.ns.link_text'), auth_path(:ns, current_institution.code.downcase, redirect_uri: @redirect_uri) %></h2>
   </div>
 </div>
 <!-- Link to the rest of the secondary logins -->

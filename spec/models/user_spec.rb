@@ -205,10 +205,5 @@ describe User do
         it { should be_an(HashWithIndifferentAccess) }
       end
     end
-
-    describe '#aleph_properties' do |provider|
-      subject { user.aleph_properties.to_h }
-      its(:length) { is_expected.to be > 0 }
-    end
   end
 end

@@ -1,11 +1,9 @@
 module Users
-  module OmniauthProvider
-    LOGGED_IN_COOKIE_NAME = '_nyulibraries_logged_in'.freeze
+  class OmniauthCallbacksController < Devise::OmniauthCallbacksController
+    before_action :require_valid_omniauth_hash!,
+                  only: [*Devise.omniauth_providers, :omniauth_callback]
 
-    def self.included(base)
-      base.before_action :require_valid_omniauth_hash,
-                         only: [*Devise.omniauth_providers, :omniauth_callback]
-    end
+    LOGGED_IN_COOKIE_NAME = '_nyulibraries_logged_in'.freeze
 
     def after_omniauth_failure_path_for(scope)
       flash[:alert] = t('devise.users.user.failure', ask: t("application.#{params[:auth_type]}.ask_a_librarian")).html_safe
@@ -59,7 +57,7 @@ module Users
       cookies[LOGGED_IN_COOKIE_NAME] = cookie_hash
     end
 
-    def require_valid_omniauth_hash
+    def require_valid_omniauth_hash!
       redirect_to after_omniauth_failure_path_for(resource_name) unless omniauth_hash_validator.valid?
     end
   end

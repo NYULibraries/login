@@ -10,17 +10,6 @@ describe WayfController do
       subject { response }
       it { should redirect_to logout_url }
     end
-
-    describe "GET 'index'" do
-      let(:params) { {} }
-      before { get :index, params: params }
-      context 'when a redirect_to is provided' do
-        let(:redirect_to_param) { "http://www.example.com" }
-        let(:params) { { redirect_to: redirect_to_param } }
-
-        it { should redirect_to redirect_to_param }
-      end
-    end
   end
 
   context 'when not logged in' do
