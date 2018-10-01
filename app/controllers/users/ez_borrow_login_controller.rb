@@ -10,8 +10,10 @@
 
 module Users
   class EzBorrowLoginController < ApplicationController
+    require 'addressable/uri'
+
     UNAUTHORIZED_REDIRECT = "https://library.nyu.edu/errors/ezborrow-library-nyu-edu/unauthorized".freeze
-    URL_BASE = "https://e-zborrow.relaisd2d.com/service-proxy/".freeze
+    URL_BASE = "https://ezb.relaisd2d.com/".freeze
     LS_BY_INSTITUTION = {
       'nyu'    => 'NYU',
       'nyuad'  => 'NYU',
@@ -62,10 +64,10 @@ module Users
     end
 
     def ezborrow_redirect
-      query = params[:query] && CGI.escape(params[:query])
+      query = params[:query]
       identifier = ezborrow_user.aleph_properties[:identifier]
       ls = LS_BY_INSTITUTION[ezborrow_user_institution]
-      "#{URL_BASE}?command=mkauth&LS=#{ls}&PI=#{identifier}&query=#{query}"
+      Addressable::URI.encode "#{URL_BASE}?LS=#{ls}&PI=#{identifier}&query=#{query}"
     end
   end
 end
