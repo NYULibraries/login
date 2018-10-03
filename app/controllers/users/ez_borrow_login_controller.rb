@@ -10,7 +10,7 @@
 
 module Users
   class EzBorrowLoginController < ApplicationController
-    require 'addressable/uri'
+    require 'addressable/template'
 
     UNAUTHORIZED_REDIRECT = "https://library.nyu.edu/errors/ezborrow-library-nyu-edu/unauthorized".freeze
     URL_BASE = "https://ezb.relaisd2d.com/".freeze
@@ -64,10 +64,13 @@ module Users
     end
 
     def ezborrow_redirect
-      query = params[:query]
-      identifier = ezborrow_user.aleph_properties[:identifier]
-      ls = LS_BY_INSTITUTION[ezborrow_user_institution]
-      Addressable::URI.encode "#{URL_BASE}?LS=#{ls}&PI=#{identifier}&query=#{query}"
+      template = Addressable::Template.new("#{URL_BASE}{?LS,PI,query}")
+
+      template.expand(
+        query: params[:query],
+        PI: ezborrow_user.aleph_properties[:identifier],
+        LS: LS_BY_INSTITUTION[ezborrow_user_institution],
+      ).to_s
     end
   end
 end
