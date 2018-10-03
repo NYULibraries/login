@@ -24,6 +24,7 @@ describe Users::EzBorrowLoginController do
   let(:identifier) { "BOR_ID" }
   let(:params) { {} }
   let(:ezborrow_user) { create(:ezborrow_user) }
+  let(:query) { 'ti="lean in" and au="sandberg"' }
 
   before do
     User.
@@ -49,6 +50,7 @@ describe Users::EzBorrowLoginController do
         VALID_INSTITUTIONS.each do |inst|
           describe "#{inst} valid route is specified" do
             let(:params) { { institution: inst } }
+
             it { should be_successful }
             it { should render_template "wayf/index" }
           end
@@ -67,7 +69,7 @@ describe Users::EzBorrowLoginController do
       end
 
       describe 'with a query' do
-        let(:params) { { query: 'the astd management development handbook' } }
+        let(:params) { { query: query } }
 
         it { should be_successful }
         it { should render_template "wayf/index" }
@@ -91,7 +93,7 @@ describe Users::EzBorrowLoginController do
 
               describe "when a #{user_institution} user at #{route_institution}" do
                 it { should be_redirect }
-                it { should redirect_to "https://ezb.relaisd2d.com/?LS=#{target_ls}&PI=BOR_ID&query=" }
+                it { should redirect_to "https://ezb.relaisd2d.com/?LS=#{target_ls}&PI=BOR_ID" }
               end
             end
           end
@@ -102,12 +104,12 @@ describe Users::EzBorrowLoginController do
             [*VALID_INSTITUTIONS, nil].each do |route_institution|
               let(:bor_status) { STATUS_BY_INSTITUTION[user_institution] }
               let(:institution_code) { user_institution }
-              let(:params) { { query: 'the astd management development handbook', institution: route_institution } }
+              let(:params) { { query: query, institution: route_institution } }
               let(:target_ls) { LS_BY_INSTITUTION[user_institution] }
 
               describe "when a #{user_institution} user at #{route_institution}" do
                 it { should be_redirect }
-                it { should redirect_to "https://ezb.relaisd2d.com/?LS=#{target_ls}&PI=BOR_ID&query=the%20astd%20management%20development%20handbook" }
+                it { should redirect_to "https://ezb.relaisd2d.com/?LS=#{target_ls}&PI=BOR_ID&query=ti%3D%22lean%20in%22%20and%20au%3D%22sandberg%22" }
               end
             end
           end
@@ -116,6 +118,7 @@ describe Users::EzBorrowLoginController do
 
       context "when the user is from an invalid ezborrow institution" do
         let(:bor_status) { STATUS_BY_INSTITUTION['cu'] }
+
         VALID_INSTITUTIONS.each do |route_institution|
           describe "when an invalid user at #{route_institution}" do
             it { should be_redirect }
