@@ -46,5 +46,9 @@ module Login
 
     config.action_controller.per_form_csrf_tokens = true
     config.action_controller.forgery_protection_origin_check = true
+
+    Raven.configure do |config|
+      config.dsn = ENV['SENTRY_DSN']
+    end
   end
 end
