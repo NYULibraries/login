@@ -235,25 +235,11 @@ FactoryBot.define do
         }
       end
     end
-    trait :facebook do
-      provider { "facebook" }
-      uid { "snowj@1nyu.edu" }
-      info do
-        {
-          name: "Jon Snow",
-          first_name: "Jon",
-          last_name: "Snow",
-          email: "snowj@1nyu.edu",
-          nickname: "jonsnow",
-          location: "The Wall"
-        }
-      end
-    end
+
 
     factory :new_school_ldap_authhash, traits: [:new_school_ldap]
     factory :nyu_shibboleth_authhash, traits: [:nyu_shibboleth]
     factory :twitter_authhash, traits: [:twitter]
-    factory :facebook_authhash, traits: [:facebook]
     factory :aleph_authhash, traits: [:aleph]
     factory :large_aleph_authhash, traits: [:large_aleph_record]
 

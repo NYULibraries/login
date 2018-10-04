@@ -8,7 +8,6 @@ Feature: Visitors authentication page
     When I want to login
     And I press the Visitors login option
     Then I should go to the Visitors authentication page
-    And I should be able to login with a Facebook account
     And I should be able to login with a Twitter account
 
   Scenario: Log in as a Visitor patron from NYU, New York
@@ -16,7 +15,6 @@ Feature: Visitors authentication page
     When I want to login
     And I press the Visitors login option
     Then I should go to the Visitors authentication page
-    And I should be able to login with a Facebook account
     And I should be able to login with a Twitter account
 
   Scenario: Log in as a Visitor patron from New School
@@ -24,7 +22,6 @@ Feature: Visitors authentication page
     When I want to login
     And I press the Visitors login option
     Then I should go to the Visitors authentication page
-    And I should be able to login with a Facebook account
     And I should be able to login with a Twitter account
 
   Scenario: Log in as a Visitor patron from NYSID
@@ -32,7 +29,6 @@ Feature: Visitors authentication page
     When I want to login
     And I press the Visitors login option
     Then I should go to the Visitors authentication page
-    And I should be able to login with a Facebook account
     And I should be able to login with a Twitter account
 
   Scenario: Log in as a Visitor patron from Cooper Union
@@ -40,5 +36,4 @@ Feature: Visitors authentication page
     When I want to login
     And I press the Visitors login option
     Then I should go to the Visitors authentication page
-    And I should be able to login with a Facebook account
     And I should be able to login with a Twitter account

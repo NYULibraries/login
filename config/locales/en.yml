@@ -98,6 +98,6 @@ en:
       password_label: First four letters of your last name
       ask_a_librarian: "http://library.nyu.edu/ask"
     general_public:
-      header: Login with your Facebook or Twitter account
+      header: Login with your Twitter account
       link_text: Visitors
       ask_a_librarian: "http://library.nyu.edu/ask"

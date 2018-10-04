@@ -48,7 +48,7 @@ module Login
 
       # Static whitelist of valid identity providers
       def whitelist_providers
-        [:new_school_ldap, :twitter, :nyu_shibboleth, :facebook, :aleph]
+        [:new_school_ldap, :twitter, :nyu_shibboleth, :aleph]
       end
       private :whitelist_providers
 

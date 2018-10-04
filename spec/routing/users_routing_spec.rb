@@ -21,7 +21,7 @@ describe "routes for Users" do
   end
 
   NON_ROUTABLES =
-    %w{ / /invalid_provider/username /aleph /twitter /facebook /omniauth_callback }
+    %w{ / /invalid_provider/username /aleph /twitter /omniauth_callback }
   # Non-routable
   NON_ROUTABLES.each do |path|
     describe "GET /users#{path}" do

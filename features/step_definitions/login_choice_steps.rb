@@ -22,10 +22,6 @@ Then(/^I should (not )?be able to login with an NYU Abu Dhabi Other Borrower acc
   expectations_for_page(page, negator, *nyuad_other_borrower_matchers)
 end
 
-Then(/^I should (not )?be able to login with a Facebook account$/) do |negator|
-  expectations_for_page(page, negator, *facebook_login_matchers)
-end
-
 Then(/^I should (not )?be able to login with a Twitter account$/) do |negator|
   expectations_for_page(page, negator, *twitter_login_matchers)
 end

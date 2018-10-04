@@ -13,10 +13,6 @@ FactoryBot.define do
       provider { "twitter" }
     end
 
-    trait :facebook do
-      provider { "facebook" }
-    end
-
     trait :nyu_shibboleth do
       provider { "nyu_shibboleth" }
     end
@@ -30,7 +26,6 @@ FactoryBot.define do
     end
 
     factory :twitter_user, traits: [:twitter]
-    factory :facebook_user, traits: [:facebook]
     factory :nyu_shibboleth_user, traits: [:nyu_shibboleth]
     factory :aleph_user, traits: [:aleph]
     factory :new_school_ldap_user, traits: [:new_school_ldap]
@@ -46,7 +41,7 @@ FactoryBot.define do
     username { 'admin' }
     email { 'admin@example.com' }
     institution_code { 'NYU' }
-    provider { "facebook" }
+    provider { "twitter" }
     current_sign_in_at { Time.now }
     last_sign_in_at { Time.now }
     admin { true }

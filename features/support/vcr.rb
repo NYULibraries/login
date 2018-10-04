@@ -10,8 +10,6 @@ VCR.configure do |c|
   c.hook_into :webmock
   c.cassette_library_dir     = 'features/cassettes'
   c.filter_sensitive_data('<TWITTER_APP_KEY>') { ENV['TWITTER_APP_KEY'] }
-  c.filter_sensitive_data('<FACEBOOK_APP_KEY>') { ENV['FACEBOOK_APP_KEY'] }
-  c.filter_sensitive_data('<FACEBOOK_APP_SECRET>') { ENV['FACEBOOK_APP_SECRET'] }
   ["CU", "NYSID", "BOBST"].each do |institution|
     # Filter out aleph username for CU
     c.filter_sensitive_data('username') { ENV["TEST_#{institution}_USERNAME"] }

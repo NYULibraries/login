@@ -48,8 +48,6 @@ gem 'ox', '~> 2.9.0'
 gem 'omniauth', '~> 1.8.1'
 # Shibboleth strategy
 gem 'omniauth-shibboleth', '~> 1.3.0'
-# Facebook strategy
-gem 'omniauth-facebook', '~> 4.0.0'
 # Twitter strategy
 gem 'omniauth-twitter', '~> 1.4.0'
 # GitHub strategy
