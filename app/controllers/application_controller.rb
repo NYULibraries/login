@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+  before_action :set_raven_context
 
   ESHELF_COOKIE_NAME = :_nyulibraries_eshelf_passthru
   REDIRECT_COOKIE_NAME = :_nyulibraries_redirect_uri
@@ -56,4 +57,8 @@ class ApplicationController < ActionController::Base
     cookies[ESHELF_COOKIE_NAME] = cookie_hash
   end
 
+  def set_raven_context
+    Raven.user_context(id: current_user&.id, username: current_user&.username, email: current_user&.email, ip_address: request.ip)
+    Raven.extra_context(params: params.to_unsafe_h, url: request.url)
+  end
 end
