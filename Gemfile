@@ -90,7 +90,7 @@ group :development do
 end
 
 # Testing gems
-group :test, :cucumber do
+group :test do
   # Coveralls for testing coverage
   gem 'coveralls', '~> 0.8', require: false
   gem 'cucumber-rails', '~> 1.6', require: false
@@ -111,9 +111,10 @@ group :test, :cucumber do
   # allows for assigns and assert_template testing in Rails 5
   gem 'rails-controller-testing'
   gem 'capybara-screenshot'
+  gem 'oauth2', '~> 1.4.0'
 end
 
-group :test, :cucumber, :development do
+group :test, :development do
   # Use Puma as the app server for testing and local development
   gem 'puma', '~> 3.12'
 
