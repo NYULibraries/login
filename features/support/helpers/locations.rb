@@ -110,6 +110,7 @@ module LoginFeatures
 
     def provider_to_location
       {
+        "twitter" => "Twitter",
         "nyu_shibboleth" => "NYU Shibboleth"
       }
     end
