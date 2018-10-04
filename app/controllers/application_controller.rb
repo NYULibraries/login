@@ -58,7 +58,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_raven_context
-    Raven.user_context(id: current_user.id, username: current_user.username, ip_address: request.ip, email: current_user.email)
+    Raven.user_context(id: current_user&.id, username: current_user&.username, email: current_user&.email, ip_address: request.ip)
     Raven.extra_context(params: params.to_unsafe_h, url: request.url)
   end
 end
