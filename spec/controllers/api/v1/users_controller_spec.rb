@@ -327,51 +327,6 @@ describe Api::V1::UsersController do
             end
           end
 
-          context "and the user's identity provider is Facebook" do
-            let(:provider) { "facebook" }
-
-            it { should have_json_path("identities/#{identity_index}/properties/uid") }
-            it { should have_json_path("identities/#{identity_index}/properties/nyuidn") }
-            it { should have_json_path("identities/#{identity_index}/properties/first_name") }
-            it { should have_json_path("identities/#{identity_index}/properties/last_name") }
-            describe "identity properties" do
-              let(:response_properties) { JSON.parse(response.body)["identities"][identity_index]["properties"]  }
-              subject { response_properties[property] }
-              context "when property is the NetID" do
-                let(:property) { "uid" }
-                it { should eql "snowj@1nyu.edu" }
-              end
-              context "when property is the N Number" do
-                let(:property) { "nyuidn" }
-                it { should eql "" }
-              end
-              context "when property is the Given Name" do
-                let(:property) { "first_name" }
-                it { should eql "Jon" }
-              end
-              context "when property is the SurName" do
-                let(:property) { "last_name" }
-                it { should eql "Snow" }
-              end
-              context "when property is the NickName" do
-                let(:property) { "nickname" }
-                it { should eql "jonsnow" }
-              end
-              context "when property is the name" do
-                let(:property) { "name" }
-                it { should eql "Jon Snow" }
-              end
-              context "when property is the location" do
-                let(:property) { "location" }
-                it { should eql "The Wall" }
-              end
-
-              context "when the property is the institution_code attributes" do
-                let(:property) { "institution_code" }
-                it { should be_blank }
-              end
-            end
-          end
         end
       end
     end

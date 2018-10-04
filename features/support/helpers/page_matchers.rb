@@ -103,13 +103,6 @@ module LoginFeatures
       ]
     end
 
-    def facebook_login_matchers
-      @facebook_login_matchers ||= [
-        -> { have_content 'Facebook' },
-        -> { have_css '#facebook-login' },
-      ]
-    end
-
     def nyu_option_matchers
       @nyu_option_matchers ||= [
         -> { have_content 'NYU' },
@@ -157,14 +150,6 @@ module LoginFeatures
         -> { have_content 'Authorize NYU Libraries to use your account?' },
         -> { have_css '#oauth_form #username_or_email' },
         -> { have_css '#oauth_form #allow' },
-      ]
-    end
-
-    def facebook_style_matchers
-      @facebook_style_matchers ||= [
-        -> { have_content 'Facebook Login' },
-        -> { have_field 'email' },
-        -> { have_field 'pass' },
       ]
     end
 

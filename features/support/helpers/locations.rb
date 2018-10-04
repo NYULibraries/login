@@ -60,8 +60,6 @@ module LoginFeatures
         :BOBST
       when /Other Borrower/
         :BOBST
-      when /Facebook/
-        :FACEBOOK
       when /Visitors/
         :VISITOR
       else
@@ -85,8 +83,6 @@ module LoginFeatures
         set_nyu_shibboleth_login_env
       when /Aleph$/
         set_aleph_login_env
-      when /Facebook$/
-        set_facebook_login_env
       when /Twitter$/
         set_twitter_login_env
       else
@@ -104,9 +100,6 @@ module LoginFeatures
       when /Aleph$/
         click_on "Other Borrowers"
         click_button "Login"
-      when /Facebook$/
-        click_on "Visitors"
-        click_on "Facebook"
       when /Twitter$/
         click_on "Visitors"
         click_on "Twitter"
@@ -117,7 +110,7 @@ module LoginFeatures
 
     def provider_to_location
       {
-        "facebook" => "Facebook",
+        "twitter" => "Twitter",
         "nyu_shibboleth" => "NYU Shibboleth"
       }
     end

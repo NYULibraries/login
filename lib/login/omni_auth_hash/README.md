@@ -1,6 +1,6 @@
 # OmniAuthHash
 
-This Login application acts as an OAuth2 client (for Shibboleth, Facebook, etc.) and as an OAuth2 provider (for the NYU Libraries applications). When Login is in the callback phase for one of the identity providers we require a way to translate the various identity responses (standardized as OmniAuthHashes) into an object that we can use locally for actions such as creating local identities for the protected API.
+This Login application acts as an OAuth2 client (for Shibboleth, Twitter, etc.) and as an OAuth2 provider (for the NYU Libraries applications). When Login is in the callback phase for one of the identity providers we require a way to translate the various identity responses (standardized as OmniAuthHashes) into an object that we can use locally for actions such as creating local identities for the protected API.
 
 ## Validator
 

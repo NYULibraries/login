@@ -3,15 +3,7 @@
     <%= t('application.general_public.header') %>
   </h1>
   <div class="row">
-  <%= content_tag(:div, class: ["facebook", "alt-login", "col-sm-4 col-sm-offset-2", "square"], id: "facebook-login") do %>
-    <h2>
-      <%= link_to(user_facebook_omniauth_authorize_path(institution: current_institution.code), title: "Facebook") do %>
-        Facebook
-        <%= fa_icon("facebook-square", title: 'Facebook logo') %>
-      <% end %>
-    </h2>
-  <% end %>
-  <%= content_tag(:div, class: ["twitter", "alt-login", "col-sm-4", "square"], id: "twitter-login") do %>
+  <%= content_tag(:div, class: ["twitter", "alt-login", "col-sm-4 col-sm-offset-4", "square"], id: "twitter-login") do %>
     <h2>
       <%= link_to(user_twitter_omniauth_authorize_path(institution: current_institution.code), title: "Twitter") do %>
         Twitter

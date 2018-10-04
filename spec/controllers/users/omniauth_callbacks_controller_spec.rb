@@ -168,55 +168,6 @@ describe Users::OmniauthCallbacksController do
       end
     end
 
-    describe "GET 'facebook'" do
-      subject { get :facebook, params: { auth_type: auth_type }; response }
-      let(:auth_type) { 'facebook' }
-
-      context 'when the omniauth.auth environment is present' do
-        before { @request.env['omniauth.auth'] = authhash(:facebook) }
-
-        context 'when the omniauth.auth.provider is facebook' do
-          let(:identity) { assigns(:user).identities.first }
-
-          it "should assign a facebook user to @user" do
-            subject
-            expect(assigns(:user)).to be_a(User)
-            expect(assigns(:user)).not_to be_nil
-            expect(assigns(:user).provider).to eq("facebook")
-            expect(identity).not_to be_nil
-            expect(identity).to be_a(Identity)
-            expect(identity.uid).not_to be_nil
-            expect(identity.provider).to eq("facebook")
-            expect(identity.properties).not_to be_nil
-            expect(identity.properties).not_to be_empty
-          end
-          it { should be_redirect }
-          it { should redirect_to root_url }
-        end
-        context 'when the omniauth.auth environment provider is not facebook' do
-
-          before { @request.env['omniauth.auth'].provider = "invalid" }
-          it("should not assign @user") { expect(assigns(:user)).to be_nil }
-          it { should be_redirect }
-          it { should redirect_to(auth_url(auth_type, 'nyu')) }
-        end
-
-        context 'when the omniauth.auth environment username is empty' do
-
-          before { @request.env['omniauth.auth'].info.nickname = "" }
-          it("should not assign @user") { expect(assigns(:user)).to be_nil }
-          it { should be_redirect }
-          it { should redirect_to(auth_url(auth_type, 'nyu')) }
-        end
-      end
-
-      context 'when the omniauth.auth environment is not present' do
-        it("should not assign @user") { expect(assigns(:user)).to be_nil }
-        it { should be_redirect }
-        it { should redirect_to(auth_url(auth_type, 'nyu')) }
-      end
-    end
-
     describe "GET 'nyu_shibboleth'" do
       subject { get :nyu_shibboleth, params: { auth_type: auth_type }; response }
 

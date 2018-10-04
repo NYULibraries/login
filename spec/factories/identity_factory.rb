@@ -189,40 +189,7 @@ FactoryBot.define do
         }
       } }
     end
-    trait :facebook do
-      provider { "facebook" }
-      uid { "123456789" }
-      properties do
-        {
-          nickname: "developer",
-          email: "developer@library.edu",
-          name: "Dev Eloper",
-          first_name: "Dev",
-          last_name: "Eloper",
-          image: "http://graph.facebook.com/123456789/picture",
-          urls: {
-            Facebook: "https://www.facebook.com/developer"
-          },
-          verified: "true",
-          extra: {
-            raw_info: {
-              id: "123456789",
-              name: "Dev Eloper",
-              first_name: "Dev",
-              last_name: "Eloper",
-              link: "https://www.facebook.com/developer",
-              gender: "male",
-              email: "developer@library.edu",
-              timezone: -5,
-              locale: "en_US",
-              verified: true,
-              updated_time: "2014-01-21T14:53:00+0000",
-              username: "developer"
-            }
-          }
-        }
-      end
-    end
+
     trait :nyu_shibboleth do
       provider { "nyu_shibboleth" }
       uid { "nyu1234" }
@@ -269,7 +236,6 @@ FactoryBot.define do
 
     factory :aleph_identity, traits: [:aleph]
     factory :twitter_identity, traits: [:twitter]
-    factory :facebook_identity, traits: [:facebook]
     factory :nyu_shibboleth_identity, traits: [:nyu_shibboleth]
     factory :new_school_ldap_identity, traits: [:new_school_ldap]
   end

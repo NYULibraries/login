@@ -48,8 +48,6 @@ gem 'ox', '~> 2.9.0'
 gem 'omniauth', '~> 1.8.1'
 # Shibboleth strategy
 gem 'omniauth-shibboleth', '~> 1.3.0'
-# Facebook strategy
-gem 'omniauth-facebook', '~> 4.0.0'
 # Twitter strategy
 gem 'omniauth-twitter', '~> 1.4.0'
 # GitHub strategy
@@ -92,7 +90,7 @@ group :development do
 end
 
 # Testing gems
-group :test, :cucumber do
+group :test do
   # Coveralls for testing coverage
   gem 'coveralls', '~> 0.8', require: false
   gem 'cucumber-rails', '~> 1.6', require: false
@@ -113,9 +111,10 @@ group :test, :cucumber do
   # allows for assigns and assert_template testing in Rails 5
   gem 'rails-controller-testing'
   gem 'capybara-screenshot'
+  gem 'oauth2', '~> 1.4.0'
 end
 
-group :test, :cucumber, :development do
+group :test, :development do
   # Use Puma as the app server for testing and local development
   gem 'puma', '~> 3.12'
 
