@@ -1,34 +1,42 @@
-FROM nyulibraries/selenium_chrome_headless_ruby:2.5-slim
+FROM ruby:2.5.1-alpine
 
 ENV INSTALL_PATH /app
-ENV BUNDLE_PATH /usr/local/bundle
-ENV BUILD_PACKAGES git wget \
-  libfontconfig libfreetype6 \
-  build-essential zlib1g-dev libpq-dev
 
-# Essential dependencies: use if rapidly changing gems
-RUN apt-get update -qq && apt-get -y --no-install-recommends install $BUILD_PACKAGES
-
-RUN groupadd -g 2000 docker -r && \
-    useradd -u 1000 -r --no-log-init -m -d $INSTALL_PATH -g docker docker
-USER docker
+RUN addgroup -g 1000 -S docker && \
+  adduser -u 1000 -S -G docker docker
 
 WORKDIR $INSTALL_PATH
+RUN chown docker:docker .
 
-RUN wget --no-check-certificate -q -O - https://cdn.rawgit.com/vishnubob/wait-for-it/master/wait-for-it.sh > /tmp/wait-for-it.sh
-RUN chmod a+x /tmp/wait-for-it.sh
-
-# For working with locally installed gems
-#COPY vendor ./vendor
-
-# Install gems in cachable way
+# bundle install
+COPY --chown=docker:docker bin/ bin/
 COPY --chown=docker:docker Gemfile Gemfile.lock ./
-RUN bundle config --global github.https true
-RUN gem install bundler && bundle install --jobs 20 --retry 5
+ARG RUN_PACKAGES="ca-certificates fontconfig mariadb-dev nodejs tzdata postgresql-dev git"
+ARG BUILD_PACKAGES="ruby-dev build-base linux-headers python"
+RUN apk add --no-cache --update $RUN_PACKAGES $BUILD_PACKAGES \
+  && gem install bundler -v '1.16.5' \
+  && bundle config --local github.https true \
+  && bundle install --without no_docker,test,development --jobs 20 --retry 5 \
+  && rm -rf /root/.bundle && rm -rf /root/.gem \
+  && rm -rf /usr/local/bundle/cache \
+  && apk del $BUILD_PACKAGES \
+  && chown -R docker:docker /usr/local/bundle
 
-# Copy compass-core deprecation manual fix
-COPY ./vendor/gems/compass-core-1.0.3/ $BUNDLE_PATH/gems/compass-core-1.0.3/
-# Copy source into container
+# precompile assets; use temporary secret token to silence error, real token set at runtime
+USER docker
 COPY --chown=docker:docker . .
-# Precompiles asset for faster testing and development
-RUN RAILS_ENV=development bundle exec rake assets:precompile
+RUN RAILS_ENV=production DEVISE_SECRET_KEY=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1) SECRET_TOKEN=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1) \
+  bundle exec rake assets:precompile
+
+# run microscanner
+USER root
+ARG AQUA_MICROSCANNER_TOKEN
+RUN wget -O /microscanner https://get.aquasec.com/microscanner && \
+  chmod +x /microscanner && \
+  /microscanner ${AQUA_MICROSCANNER_TOKEN} && \
+  rm -rf /microscanner
+
+USER docker
+EXPOSE 9292
+
+CMD ./script/start.sh development
