@@ -11,14 +11,11 @@ gem 'pg', '~> 0.21.0'
 gem 'nested-hstore', '~> 0.1.2'
 
 # Use SCSS for stylesheets
-# Locked in at beta1 release because major release doesn't play nice with compass-rails yet
 gem 'sass-rails', '~> 5.0.7'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '~> 4.1'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.2.0'
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-gem 'therubyracer', platforms: :ruby
 # Use jquery as the JavaScript library
 gem 'jquery-rails', '~> 4.3.1'
 # Use modernizr for browser feature detection
@@ -58,8 +55,6 @@ gem 'font-awesome-rails', '~> 4'
 
 # Use doorkeeper as our OAuth 2.0 provider
 gem 'doorkeeper', '~> 4.4.2'
-# Manually include responders to maintain respond_with & respond_to functionality
-gem 'responders', '~> 2.0'
 
 # Figs for configuration
 gem 'figs', '~> 2.1'
@@ -70,11 +65,17 @@ gem 'faraday_middleware', '~> 0.12'
 
 gem 'dalli', '~> 2.7.8'
 
+# Rails 5 mechanism for faster bootup times
 gem 'bootsnap', '~> 1.3.1', require: false
 
+# Used to compose URLs for external services
 gem 'addressable', '~> 2.5.2'
 
+# Use sentry.io for observability
 gem 'sentry-raven', '~> 2'
+
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+gem 'therubyracer', platforms: :ruby
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -101,9 +102,6 @@ group :test do
   gem 'webmock', '~> 3'
   # Rspec as the test framework
   gem 'rspec-rails', '~> 3.7'
-  # Phantomjs for headless browser testing
-  gem 'phantomjs', '>= 1.9.7'
-  gem 'poltergeist', '~> 1'
   # Use json_spec to do rspec tests with JSON
   gem 'json_spec', '~> 1.1'
   gem 'rspec-its', '~> 1.2'
@@ -111,6 +109,7 @@ group :test do
   # allows for assigns and assert_template testing in Rails 5
   gem 'rails-controller-testing'
   gem 'capybara-screenshot'
+  # Used to mock an Oauth2 Client
   gem 'oauth2', '~> 1.4.0'
 end
 
@@ -122,4 +121,8 @@ group :test, :development do
   gem 'byebug'
   # Use factory_bot for creating models
   gem 'factory_bot_rails', '~> 4.11'
+end
+
+group :production do
+  gem 'unicorn', '~> 5.3.0'
 end
