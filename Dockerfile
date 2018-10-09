@@ -1,6 +1,7 @@
 FROM ruby:2.5.1-alpine
 
 ENV INSTALL_PATH /app
+ENV BUNDLE_PATH /usr/local/bundle
 
 RUN addgroup -g 1000 -S docker && \
   adduser -u 1000 -S -G docker docker
@@ -16,7 +17,7 @@ ARG BUILD_PACKAGES="ruby-dev build-base linux-headers python"
 RUN apk add --no-cache --update $RUN_PACKAGES $BUILD_PACKAGES \
   && gem install bundler -v '1.16.5' \
   && bundle config --local github.https true \
-  && bundle install --without no_docker,test,development --jobs 20 --retry 5 \
+  && bundle install --deployment --without no_docker,test,development --jobs 20 --retry 5 \
   && rm -rf /root/.bundle && rm -rf /root/.gem \
   && rm -rf /usr/local/bundle/cache \
   && apk del $BUILD_PACKAGES \
