@@ -56,9 +56,6 @@ gem 'font-awesome-rails', '~> 4'
 # Use doorkeeper as our OAuth 2.0 provider
 gem 'doorkeeper', '~> 4.4.2'
 
-# Figs for configuration
-gem 'figs', '~> 2.1'
-
 # Taking this up to >= 0.13 breaks other dependencies
 gem 'faraday', '~> 0.12.0'
 gem 'faraday_middleware', '~> 0.12'
@@ -73,9 +70,6 @@ gem 'addressable', '~> 2.5.2'
 
 # Use sentry.io for observability
 gem 'sentry-raven', '~> 2'
-
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-gem 'therubyracer', platforms: :ruby
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -111,6 +105,9 @@ group :test do
   gem 'capybara-screenshot'
   # Used to mock an Oauth2 Client
   gem 'oauth2', '~> 1.4.0'
+
+  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
+  gem 'therubyracer', platforms: :ruby
 end
 
 group :test, :development do
@@ -125,4 +122,9 @@ end
 
 group :production do
   gem 'unicorn', '~> 5.3.0'
+end
+
+group :no_docker do
+  # Figs for configuration
+  gem 'figs', '~> 2.1'
 end

@@ -14,13 +14,13 @@ pull_docker: &pull_docker
   run:
     name: Pull Docker
     command: |
-      script/pull_docker.sh
+      script/docker/pull_docker.sh
 
 push_docker: &push_docker
   run:
     name: Push Docker
     command: |
-      script/push_docker.sh
+      script/docker/push_docker.sh
 
 auth_ecr: &auth_ecr
   run:

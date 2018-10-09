@@ -89,8 +89,9 @@ services:
       UNICORN_PORT: "5000"
       RAILS_ENV: "staging"
       LOG_LEVEL: "debug"
-    env_file:
-      - test.env
+      DISABLE_FIGS: "true"
+    # env_file:
+      # - test.env
     command: "./script/start.sh staging"
     depends_on:
       - setup_dbs

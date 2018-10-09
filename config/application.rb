@@ -11,9 +11,11 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
-require 'figs'
-# Don't run this initializer on travis.
-Figs.load(stage: Rails.env)
+unless ENV['DISABLE_FIGS']
+  require 'figs'
+  # Don't run this initializer on travis.
+  Figs.load(stage: Rails.env)
+end
 
 module Login
   class Application < Rails::Application
