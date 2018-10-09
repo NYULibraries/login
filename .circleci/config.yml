@@ -9,6 +9,7 @@ build_docker: &build_docker
     command: |
       export BRANCH_NO_SLASH=${CIRCLE_BRANCH//\//_}
       docker-compose build dev
+      docker-compose build unicorn
 
 pull_docker: &pull_docker
   run:
