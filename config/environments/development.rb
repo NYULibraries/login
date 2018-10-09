@@ -30,7 +30,7 @@ Rails.application.configure do
   end
 
   # Whitelists IP for docker usage of web-console
-  config.web_console.whitelisted_ips = '172.18.0.1'
+  config.web_console.whitelisted_ips = ['172.16.0.0/12'] # broad ip pool for docker
 
   # Store uploaded files on the local file system (see config/storage.yml for options)
   # config.active_storage.service = :local
@@ -63,4 +63,10 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  if ENV['USE_PRODUCTION_ASSETS'] # Necessary for running dev in unicorn environment
+    config.assets.debug = false
+    config.assets.quiet = false
+    config.assets.compile = false
+  end
 end

@@ -1,7 +1,7 @@
 # Ignore bundler config
 /.bundle
 
-# Ignore all logfiles and tempfiles
+# Ignore all logfiles and tempfiles (safe to comment out in dev)
 /log/*.log
 /tmp
 /coverage

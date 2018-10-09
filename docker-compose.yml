@@ -89,14 +89,16 @@ services:
       - login
     image: login:latest
     ports:
-    - "5000:5000"
+      - "5000:5000"
     environment:
-      UNICORN_PORT: "5000"
-      RAILS_ENV: "staging"
+      RAILS_ENV:
+      USE_PRODUCTION_ASSETS: "true" # Use with RAILS_ENV=development
+      UNICORN_PORT: 5000
+      UNICORN_WEB_CONCURRENCY: 2
       LOG_LEVEL: "debug"
       DISABLE_FIGS: "true"
-    # env_file:
-      # - test.env
+    env_file:
+      - test.env
     command: "./script/start.sh staging"
     depends_on:
       - setup_dbs
