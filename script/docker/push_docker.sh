@@ -2,19 +2,18 @@
 
 : "${ECR_DOMAIN?Must specify ECR_DOMAIN}"
 
-tag=login
 subtags="test unicorn"
 
 for subtag in $subtags
 do
-  docker tag $tag_$subtag $ECR_DOMAIN/$tag_$subtag:latest
-  docker tag $tag_$subtag $ECR_DOMAIN/$tag_$subtag:${CIRCLE_BRANCH//\//_}
-  docker tag $tag_$subtag $ECR_DOMAIN/$tag_$subtag:${CIRCLE_BRANCH//\//_}-${CIRCLE_SHA1}
+  docker tag login_$subtag $ECR_DOMAIN/login_$subtag:latest
+  docker tag login_$subtag $ECR_DOMAIN/login_$subtag:${CIRCLE_BRANCH//\//_}
+  docker tag login_$subtag $ECR_DOMAIN/login_$subtag:${CIRCLE_BRANCH//\//_}-${CIRCLE_SHA1}
 done
 
 for subtag in $subtags
 do
-  docker push $ECR_DOMAIN/$tag_$subtag:latest
-  docker push $ECR_DOMAIN/$tag_$subtag:${CIRCLE_BRANCH//\//_}
-  docker push $ECR_DOMAIN/$tag_$subtag:${CIRCLE_BRANCH//\//_}-${CIRCLE_SHA1}
+  docker push $ECR_DOMAIN/login_$subtag:latest
+  docker push $ECR_DOMAIN/login_$subtag:${CIRCLE_BRANCH//\//_}
+  docker push $ECR_DOMAIN/login_$subtag:${CIRCLE_BRANCH//\//_}-${CIRCLE_SHA1}
 done
