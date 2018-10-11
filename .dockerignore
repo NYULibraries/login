@@ -5,7 +5,6 @@
 /log/*.log
 /tmp
 /coverage
-/vendor
 
 # Ignore various configuration files
 .DS_Store

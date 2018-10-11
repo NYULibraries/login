@@ -22,7 +22,7 @@ services:
       - "3000:3000"
     env_file:
       - test.env
-    command: ["/tmp/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
+    command: /tmp/wait-for-it.sh db:5432 -- bundle exec rails server -b 0.0.0.0
     environment:
       RAILS_ENV:
     depends_on:
@@ -46,7 +46,7 @@ services:
       COVERALLS_REPO_TOKEN:
       RAILS_ENV: test
       SCREENSHOT_FAILURES: "true"
-    command: ["/tmp/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "rake"]
+    command: /tmp/wait-for-it.sh db:5432 -- bundle exec rake
     depends_on:
       - setup_test_dbs
     # <<: *default-volumes
@@ -60,7 +60,7 @@ services:
       RAILS_ENV: test
     env_file:
       - test.env
-    command: ["/tmp/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "rake", "db:setup"]
+    command: /tmp/wait-for-it.sh db:5432 -- bundle exec rake db:setup
     depends_on:
       - db
 
@@ -71,7 +71,7 @@ services:
     image: login_test:latest
     env_file:
       - test.env
-    command: ["/tmp/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "rake", "db:setup"]
+    command: /tmp/wait-for-it.sh db:5432 -- bundle exec rake db:setup
     depends_on:
       - db
 
@@ -96,6 +96,5 @@ services:
       LOG_LEVEL: "debug"
     env_file:
       - test.env
-    command: "./script/start.sh staging"
     depends_on:
       - setup_dbs
