@@ -14,8 +14,8 @@ services:
       context: .
       cache_from:
         - login_test
-        - $ECR_DOMAIN/login
-        - $ECR_DOMAIN/login:$BRANCH_NO_SLASH
+        - $ECR_DOMAIN/login_test
+        - $ECR_DOMAIN/login_test:$BRANCH_NO_SLASH
       dockerfile: Dockerfile.test
     image: login_test:latest
     ports:
@@ -25,7 +25,6 @@ services:
     command: ["/tmp/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
     environment:
       RAILS_ENV:
-      DISABLE_FIGS: "true"
     depends_on:
       - setup_dbs
     # <<: *default-volumes
@@ -35,8 +34,8 @@ services:
       context: .
       cache_from:
         - login_test
-        - $ECR_DOMAIN/login
-        - $ECR_DOMAIN/login:$BRANCH_NO_SLASH
+        - $ECR_DOMAIN/login_test
+        - $ECR_DOMAIN/login_test:$BRANCH_NO_SLASH
       dockerfile: Dockerfile.test
     image: login_test:latest
     env_file:
@@ -47,7 +46,6 @@ services:
       COVERALLS_REPO_TOKEN:
       RAILS_ENV: test
       SCREENSHOT_FAILURES: "true"
-      DISABLE_FIGS: "true"
     command: ["/tmp/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "rake"]
     depends_on:
       - setup_test_dbs
@@ -96,7 +94,6 @@ services:
       UNICORN_PORT: 5000
       UNICORN_WEB_CONCURRENCY: 2
       LOG_LEVEL: "debug"
-      DISABLE_FIGS: "true"
     env_file:
       - test.env
     command: "./script/start.sh staging"

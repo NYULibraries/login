@@ -1,4 +1,4 @@
-FROM nyulibraries/selenium_chrome_headless_ruby:2.5.1-slim-chrome_69
+FROM nyulibraries/selenium_chrome_headless_ruby:2.5-slim
 
 ENV INSTALL_PATH /app
 ENV BUNDLE_PATH /usr/local/bundle
