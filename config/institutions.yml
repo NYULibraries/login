@@ -1,5 +1,5 @@
 # Private institutional settings
-<% if ENV.has_key?("INSTITUTIONS") %>
+<% if ENV.has_key?("INSTITUTIONS") && !(Rails.env.test? || ENV["DOCKER"]) %>
 <%= Figs.env.institutions.to_yaml %>
 <% else %>
 ---

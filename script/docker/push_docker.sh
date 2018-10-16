@@ -2,7 +2,7 @@
 
 : "${ECR_DOMAIN?Must specify ECR_DOMAIN}"
 
-docker tag login_$subtag $ECR_DOMAIN/login:latest
+docker tag login $ECR_DOMAIN/login:latest
 docker tag login $ECR_DOMAIN/login:${CIRCLE_BRANCH//\//_}
 docker tag login $ECR_DOMAIN/login:${CIRCLE_BRANCH//\//_}-${CIRCLE_SHA1}
 

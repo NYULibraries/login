@@ -11,7 +11,7 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
-unless ENV['DISABLE_FIGS']
+unless Rails.env.test? || ENV['DOCKER']
   require 'figs'
   # Don't run this initializer on travis.
   Figs.load(stage: Rails.env)

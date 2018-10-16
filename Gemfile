@@ -74,6 +74,9 @@ gem 'sentry-raven', '~> 2'
 # Manually include responders to maintain respond_with & respond_to functionality
 gem 'responders', '~> 2.0'
 
+# Install to docker images, but don't use in docker images by default
+gem 'figs', '~> 2.1'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -128,6 +131,5 @@ group :production do
 end
 
 group :no_docker do
-  # Figs for configuration
-  gem 'figs', '~> 2.1'
+  # For future non-docker gems
 end

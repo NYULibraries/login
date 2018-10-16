@@ -46,6 +46,7 @@ services:
       COVERALLS_REPO_TOKEN:
       RAILS_ENV: test
       SCREENSHOT_FAILURES: "true"
+      DOCKER: "true"
     command: /tmp/wait-for-it.sh db:5432 -- bundle exec rake
     depends_on:
       - setup_test_dbs
@@ -94,6 +95,7 @@ services:
       UNICORN_PORT: 5000
       UNICORN_WEB_CONCURRENCY: 2
       LOG_LEVEL: "debug"
+      DOCKER: "true"
     env_file:
       - test.env
     depends_on:

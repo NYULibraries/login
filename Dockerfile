@@ -17,7 +17,7 @@ ARG BUILD_PACKAGES="ruby-dev build-base linux-headers python"
 RUN apk add --no-cache --update $RUN_PACKAGES $BUILD_PACKAGES \
   && gem install bundler \
   && bundle config --local github.https true \
-  && bundle install --deployment --without no_docker,test,development --jobs 20 --retry 5 \
+  && bundle install --without no_docker,test,development --jobs 20 --retry 5 \
   && rm -rf /root/.bundle && rm -rf /root/.gem \
   && rm -rf /usr/local/bundle/cache \
   && apk del $BUILD_PACKAGES \
@@ -28,7 +28,7 @@ COPY --chown=docker:docker . .
 # Copy compass-core deprecation manual fix
 COPY ./vendor/gems/compass-core-1.0.3/ $BUNDLE_PATH/gems/compass-core-1.0.3/
 # precompile assets; use temporary secret token to silence error, real token set at runtime
-RUN DISABLE_FIGS=true RAILS_ENV=production DEVISE_SECRET_KEY=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1) SECRET_TOKEN=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1) \
+RUN DOCKER=true RAILS_ENV=production DEVISE_SECRET_KEY=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1) SECRET_TOKEN=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1) \
   bundle exec rake assets:precompile
 
 # run microscanner
