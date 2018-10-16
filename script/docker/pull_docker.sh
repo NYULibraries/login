@@ -1,12 +1,12 @@
 #!/bin/sh -e
 
-: "${ECR_DOMAIN?Must specify ECR_DOMAIN}"
+: "${IMAGES_DOMAIN?Must specify IMAGES_DOMAIN}"
 
-docker pull $ECR_DOMAIN/login:${CIRCLE_BRANCH//\//_} || docker pull $ECR_DOMAIN/login:latest
+docker pull $IMAGES_DOMAIN/login:${CIRCLE_BRANCH//\//_} || docker pull $IMAGES_DOMAIN/login:latest
 
 subtags="test"
 
 for subtag in $subtags
 do
-  docker pull $ECR_DOMAIN/login_$subtag:${CIRCLE_BRANCH//\//_} || docker pull $ECR_DOMAIN/login_$subtag:latest
+  docker pull $IMAGES_DOMAIN/login_$subtag:${CIRCLE_BRANCH//\//_} || docker pull $IMAGES_DOMAIN/login_$subtag:latest
 done
