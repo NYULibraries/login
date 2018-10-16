@@ -86,6 +86,8 @@ services:
       context: .
       cache_from:
       - login
+      - $IMAGES_DOMAIN/login
+      - $IMAGES_DOMAIN/login:$BRANCH_NO_SLASH
     image: login:latest
     ports:
       - "5000:5000"
