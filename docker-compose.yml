@@ -14,8 +14,8 @@ services:
       context: .
       cache_from:
         - login_test
-        - $ECR_DOMAIN/login_test
-        - $ECR_DOMAIN/login_test:$BRANCH_NO_SLASH
+        - $IMAGES_DOMAIN/login_test
+        - $IMAGES_DOMAIN/login_test:$BRANCH_NO_SLASH
       dockerfile: Dockerfile.test
     image: login_test:latest
     ports:
@@ -34,8 +34,8 @@ services:
       context: .
       cache_from:
         - login_test
-        - $ECR_DOMAIN/login_test
-        - $ECR_DOMAIN/login_test:$BRANCH_NO_SLASH
+        - $IMAGES_DOMAIN/login_test
+        - $IMAGES_DOMAIN/login_test:$BRANCH_NO_SLASH
       dockerfile: Dockerfile.test
     image: login_test:latest
     env_file:
