@@ -2,7 +2,9 @@
 
 : "${ECR_DOMAIN?Must specify ECR_DOMAIN}"
 
-subtags="test unicorn"
+docker pull $ECR_DOMAIN/login:${CIRCLE_BRANCH//\//_} || docker pull $ECR_DOMAIN/login:latest
+
+subtags="test"
 
 for subtag in $subtags
 do
