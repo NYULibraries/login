@@ -3,10 +3,10 @@ source 'https://rubygems.org'
 # Run `bundle config --global github.https true` on the server to quiet warnings
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2'
+gem 'rails', '~> 5.2.1'
 
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 0.21.0'
+gem 'pg', '~> 1.1.3'
 # Use nested hstore to store serialized objects in Active Record hstore
 gem 'nested-hstore', '~> 0.1.2'
 
@@ -22,10 +22,10 @@ gem 'jquery-rails', '~> 4.3.1'
 gem 'modernizr-rails', '~> 2.7.0'
 # Use the NYU Libraries assets gem
 gem 'nyulibraries_stylesheets', github: 'NYULibraries/nyulibraries_stylesheets', tag: 'v1.1.2'
-gem 'nyulibraries_templates', github: 'NYULibraries/nyulibraries_templates', tag: 'v1.2.2'
+gem 'nyulibraries_templates', github: 'NYULibraries/nyulibraries_templates', tag: 'v1.2.4'
 gem 'nyulibraries_institutions', github: 'NYULibraries/nyulibraries_institutions', tag: 'v1.0.3'
 gem 'nyulibraries_javascripts', github: 'NYULibraries/nyulibraries_javascripts', tag: 'v1.0.0'
-gem 'nyulibraries_errors', github: 'NYULibraries/nyulibraries_errors', tag: 'v1.1.0'
+gem 'nyulibraries_errors', github: 'NYULibraries/nyulibraries_errors', tag: 'v1.1.1'
 # Use higher version of Compass CSS framework for sprites, etc.
 gem 'compass-rails', '~> 3.1'
 
@@ -63,7 +63,7 @@ gem 'faraday_middleware', '~> 0.12'
 gem 'dalli', '~> 2.7.8'
 
 # Rails 5 mechanism for faster bootup times
-gem 'bootsnap', '~> 1.3.1', require: false
+gem 'bootsnap', '~> 1.3.2', require: false
 
 # Used to compose URLs for external services
 gem 'addressable', '~> 2.5.2'
