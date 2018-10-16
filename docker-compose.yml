@@ -84,8 +84,8 @@ services:
     build:
       context: .
       cache_from:
-      - login_unicorn
-    image: login_unicorn:latest
+      - login
+    image: login:latest
     ports:
       - "5000:5000"
     environment:
