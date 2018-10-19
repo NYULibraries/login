@@ -6,7 +6,7 @@ source 'https://rubygems.org'
 gem 'rails', '~> 5.2.1'
 
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 1.1.3'
+gem 'pg', '~> 0.21.0'
 # Use nested hstore to store serialized objects in Active Record hstore
 gem 'nested-hstore', '~> 0.1.2'
 
