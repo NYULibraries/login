@@ -8,25 +8,26 @@ build_docker: &build_docker
     name: Build Docker
     command: |
       export BRANCH_NO_SLASH=${CIRCLE_BRANCH//\//_}
-      docker-compose build dev
+      docker-compose build test
+      docker-compose build unicorn
 
 pull_docker: &pull_docker
   run:
     name: Pull Docker
     command: |
-      script/pull_docker.sh
+      script/docker/pull_docker.sh
 
 push_docker: &push_docker
   run:
     name: Push Docker
     command: |
-      script/push_docker.sh
+      script/docker/push_docker.sh
 
-auth_ecr: &auth_ecr
+auth_ecr: &auth_docker
   run:
-    name: Authenticate ECR
+    name: Authenticate Docker
     command: |
-      eval $(aws ecr get-login --no-include-email --region us-east-1)
+      docker login -u "$DOCKER_USERNAME" --password "$DOCKER_PASSWORD"
 
 version: 2
 jobs:
@@ -35,7 +36,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - <<: *auth_ecr
+      - <<: *auth_docker
       - <<: *pull_docker
       - <<: *build_docker
       - <<: *push_docker

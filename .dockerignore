@@ -1,3 +1,25 @@
-log/
-tmp/
-coverage/
+# Ignore bundler config
+/.bundle
+
+# Ignore all logfiles and tempfiles (safe to comment out in dev)
+/log/*.log
+/tmp
+/coverage
+
+# Ignore various configuration files
+.DS_Store
+Figsfile
+.git
+.circleci/
+Dockerfile*
+docker-compose.yml
+nginx
+node_modules
+
+
+script/push_docker.sh
+script/pull_docker.sh
+
+# Miscellaneous Docs
+*.md
+screenshots/

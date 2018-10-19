@@ -13,15 +13,16 @@ services:
     build:
       context: .
       cache_from:
-        - login
-        - $ECR_DOMAIN/login
-        - $ECR_DOMAIN/login:$BRANCH_NO_SLASH
-    image: login:latest
+        - login_test
+        - $IMAGES_DOMAIN/login_test
+        - $IMAGES_DOMAIN/login_test:$BRANCH_NO_SLASH
+      dockerfile: Dockerfile.test
+    image: login_test:latest
     ports:
       - "3000:3000"
     env_file:
       - test.env
-    command: ["/tmp/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
+    command: /tmp/wait-for-it.sh db:5432 -- bundle exec rails server -b 0.0.0.0
     environment:
       RAILS_ENV:
     depends_on:
@@ -32,10 +33,11 @@ services:
     build:
       context: .
       cache_from:
-        - login
-        - $ECR_DOMAIN/login
-        - $ECR_DOMAIN/login:$BRANCH_NO_SLASH
-    image: login:latest
+        - login_test
+        - $IMAGES_DOMAIN/login_test
+        - $IMAGES_DOMAIN/login_test:$BRANCH_NO_SLASH
+      dockerfile: Dockerfile.test
+    image: login_test:latest
     env_file:
       - test.env
     environment:
@@ -44,7 +46,8 @@ services:
       COVERALLS_REPO_TOKEN:
       RAILS_ENV: test
       SCREENSHOT_FAILURES: "true"
-    command: ["/tmp/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "rake"]
+      DOCKER: "true"
+    command: /tmp/wait-for-it.sh db:5432 -- bundle exec rake
     depends_on:
       - setup_test_dbs
     # <<: *default-volumes
@@ -52,22 +55,24 @@ services:
   setup_test_dbs:
     build:
       context: .
-    image: login:latest
+      dockerfile: Dockerfile.test
+    image: login_test:latest
     environment:
       RAILS_ENV: test
     env_file:
       - test.env
-    command: ["/tmp/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "rake", "db:setup"]
+    command: /tmp/wait-for-it.sh db:5432 -- bundle exec rake db:setup
     depends_on:
       - db
 
   setup_dbs:
     build:
       context: .
-    image: login:latest
+      dockerfile: Dockerfile.test
+    image: login_test:latest
     env_file:
       - test.env
-    command: ["/tmp/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "rake", "db:setup"]
+    command: /tmp/wait-for-it.sh db:5432 -- bundle exec rake db:setup
     depends_on:
       - db
 
@@ -75,3 +80,25 @@ services:
     image: postgres:alpine
     expose:
       - "5432"
+
+  unicorn:
+    build:
+      context: .
+      cache_from:
+      - login
+      - $IMAGES_DOMAIN/login
+      - $IMAGES_DOMAIN/login:$BRANCH_NO_SLASH
+    image: login:latest
+    ports:
+      - "5000:5000"
+    environment:
+      RAILS_ENV:
+      USE_PRODUCTION_ASSETS: "true" # Use with RAILS_ENV=development
+      UNICORN_PORT: 5000
+      UNICORN_WEB_CONCURRENCY: 2
+      LOG_LEVEL: "debug"
+      DOCKER: "true"
+    env_file:
+      - test.env
+    depends_on:
+      - setup_dbs

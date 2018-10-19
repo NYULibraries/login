@@ -42,3 +42,5 @@ features/cassettes/get_access_token.yml
 lib/tasks/local.rake
 
 vendor/nyulibraries_*
+
+.env
