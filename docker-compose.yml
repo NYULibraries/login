@@ -104,3 +104,12 @@ services:
       - test.env
     depends_on:
       - setup_dbs
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - unicorn
