@@ -22,7 +22,6 @@ RUN wget --no-check-certificate -q -O - https://cdn.rawgit.com/vishnubob/wait-fo
   && apt-get update -qq \
   && apt-get -y --no-install-recommends install $RUN_PACKAGES $BUILD_PACKAGES \
   && gem install bundler \
-  && su - docker \
   && bundle install --without no_docker,production --jobs 20 --retry 5 \
   && apt-get remove --purge -y $BUILD_PACKAGES
 
