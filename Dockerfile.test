@@ -16,20 +16,19 @@ RUN groupadd -g 2000 docker -r && \
 WORKDIR $INSTALL_PATH
 
 # Install gems in cachable way
-COPY --chown=docker:docker Gemfile Gemfile.lock ./
+COPY Gemfile Gemfile.lock ./
 RUN bundle config --global github.https true
 RUN wget --no-check-certificate -q -O - https://cdn.rawgit.com/vishnubob/wait-for-it/master/wait-for-it.sh > /tmp/wait-for-it.sh && chmod a+x /tmp/wait-for-it.sh \
   && apt-get update -qq \
   && apt-get -y --no-install-recommends install $RUN_PACKAGES $BUILD_PACKAGES \
   && gem install bundler \
-  && bundle install --without no_docker --jobs 20 --retry 5 \
+  && su - docker \
+  && bundle install --without no_docker,production --jobs 20 --retry 5 \
   && apt-get remove --purge -y $BUILD_PACKAGES
 
 # Copy compass-core deprecation manual fix
 COPY ./vendor/gems/compass-core-1.0.3/ $BUNDLE_PATH/gems/compass-core-1.0.3/
 # Copy source into container
-COPY --chown=docker:docker . .
+COPY . .
 # Precompiles asset for faster testing and development
 RUN DOCKER=true RAILS_ENV=development bundle exec rake assets:precompile
-
-USER docker
