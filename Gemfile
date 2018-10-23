@@ -6,7 +6,8 @@ source 'https://rubygems.org'
 gem 'rails', '~> 5.2.1'
 
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 1.1.3'
+# Note: Not recommended to upgrade unless for major security updates
+gem 'pg', '~> 0.21.0'
 # Use nested hstore to store serialized objects in Active Record hstore
 gem 'nested-hstore', '~> 0.1.2'
 
@@ -111,9 +112,6 @@ group :test do
   gem 'capybara-screenshot'
   # Used to mock an Oauth2 Client
   gem 'oauth2', '~> 1.4.0'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  gem 'therubyracer', platforms: :ruby
 end
 
 group :test, :development do
@@ -132,4 +130,6 @@ end
 
 group :no_docker do
   # For future non-docker gems
+  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
+  gem 'therubyracer', platforms: :ruby
 end

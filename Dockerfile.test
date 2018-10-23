@@ -4,7 +4,8 @@ ENV INSTALL_PATH /app
 ENV BUNDLE_PATH /usr/local/bundle
 ENV BUILD_PACKAGES git wget \
   libfontconfig libfreetype6 \
-  build-essential zlib1g-dev libpq-dev
+  build-essential zlib1g-dev libpq-dev \
+  nodejs
 
 # Essential dependencies: use if rapidly changing gems
 RUN apt-get update -qq && apt-get -y --no-install-recommends install $BUILD_PACKAGES

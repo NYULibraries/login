@@ -12,7 +12,7 @@ RUN chown docker:docker .
 # bundle install
 COPY --chown=docker:docker bin/ bin/
 COPY --chown=docker:docker Gemfile Gemfile.lock ./
-ARG RUN_PACKAGES="ca-certificates fontconfig mariadb-dev nodejs tzdata postgresql-dev git"
+ARG RUN_PACKAGES="ca-certificates fontconfig nodejs tzdata postgresql-dev git"
 ARG BUILD_PACKAGES="ruby-dev build-base linux-headers python"
 RUN apk add --no-cache --update $RUN_PACKAGES $BUILD_PACKAGES \
   && gem install bundler \
