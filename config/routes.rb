@@ -24,5 +24,5 @@ Rails.application.routes.draw do
     end
   end
   get 'pds' => redirect { |params, request| "#{ENV['PDS_URL']}/pds?#{request.query_string}" }
-  get 'ezproxy' => redirect { |params, request| "#{ENV['PDS_URL']}/ezproxy?#{request.query_string}" }
+  get 'ezproxy' => redirect { |params, request| "#{ENV['EZPROXY_URL']}/login?#{request.query_string}" }
 end
