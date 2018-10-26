@@ -22,6 +22,7 @@ RUN apk add --no-cache --update $RUN_PACKAGES $BUILD_PACKAGES \
   && rm -rf /usr/local/bundle/cache \
   && apk del $BUILD_PACKAGES \
   && chown -R docker:docker /usr/local/bundle
+RUN npm install --global yarn
 
 USER docker
 COPY --chown=docker:docker . .
