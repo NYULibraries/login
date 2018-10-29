@@ -87,13 +87,13 @@ services:
       LOG_LEVEL: "debug"
       DOCKER: "true"
     # Use below settings when testing unicorn image locally
-      USE_PRODUCTION_ASSETS: "true" # necessary otherwise stack level too deep
-    depends_on:
-      - setup_dbs
-    <<: *dev-env
-    env_file:
-      - test.env
-    <<: *default-volumes
+    #   USE_PRODUCTION_ASSETS: "true" # necessary otherwise stack level too deep
+    # depends_on:
+    #   - setup_dbs
+    # <<: *dev-env
+    # env_file:
+    #   - test.env
+    # <<: *default-volumes
 
   # Sets up dummy database for unicorn server
   setup_dbs:
@@ -101,9 +101,10 @@ services:
     command: /tmp/wait-for-it.sh db:5432 -- bundle exec rake db:setup
     depends_on:
       - db
-    <<: *dev-env
-    env_file:
-      - test.env
+    # Use below settings when testing unicorn image locally
+    # <<: *dev-env
+    # env_file:
+    #   - test.env
 
   nginx:
     build:
