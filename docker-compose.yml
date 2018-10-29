@@ -8,7 +8,7 @@ x-volumes: &default-volumes
     - ./screenshots:/screenshots/
     - ./tmp/:/app/tmp/
 
-x-production: &production-build
+x-production: &production-image
   build:
     context: .
     cache_from:
@@ -17,7 +17,7 @@ x-production: &production-build
     - $IMAGES_DOMAIN/login:$BRANCH_NO_SLASH
   image: login:latest
 
-x-development: &development-build
+x-development: &development-image
   build:
     context: .
     cache_from:
@@ -36,10 +36,9 @@ x-dev-env: &dev-env
   env_file:
     - test.env
 
-
 services:
   dev:
-    <<: *development-build
+    <<: *development-image
     ports:
       - "3000:3000"
     command: /tmp/wait-for-it.sh db:5432 -- bundle exec rails server -b 0.0.0.0
@@ -49,14 +48,14 @@ services:
     # <<: *default-volumes
 
   setup_dev_dbs:
-    <<: *development-build
+    <<: *development-image
     command: /tmp/wait-for-it.sh db:5432 -- bundle exec rake db:setup
     depends_on:
       - db
     <<: *dev-env
 
   test:
-    <<: *development-build
+    <<: *development-image
     command: /tmp/wait-for-it.sh db:5432 -- bundle exec rake
     depends_on:
       - setup_test_dbs
@@ -70,7 +69,7 @@ services:
     # <<: *default-volumes
 
   setup_test_dbs:
-    <<: *development-build
+    <<: *development-image
     command: /tmp/wait-for-it.sh db:5432 -- bundle exec rake db:setup
     depends_on:
       - db
@@ -79,7 +78,7 @@ services:
       RAILS_ENV: test
 
   unicorn:
-    <<: *production-build
+    <<: *production-image
     ports:
       - "5000:5000"
     environment:
@@ -88,10 +87,23 @@ services:
       LOG_LEVEL: "debug"
       DOCKER: "true"
     # Use below settings when testing unicorn image locally
-    #   USE_PRODUCTION_ASSETS: "true" # necessary otherwise stack level too deep
-    # depends_on:
-    #   - setup_dev_dbs
-    # <<: *dev-env
+      USE_PRODUCTION_ASSETS: "true" # necessary otherwise stack level too deep
+    depends_on:
+      - setup_dbs
+    <<: *dev-env
+    env_file:
+      - test.env
+    <<: *default-volumes
+
+  # Sets up dummy database for unicorn server
+  setup_dbs:
+    <<: *production-image
+    command: /tmp/wait-for-it.sh db:5432 -- bundle exec rake db:setup
+    depends_on:
+      - db
+    <<: *dev-env
+    env_file:
+      - test.env
 
   nginx:
     build:
