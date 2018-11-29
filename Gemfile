@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 # Run `bundle config --global github.https true` on the server to quiet warnings
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.1'
+gem 'rails', '~> 5.2.1.1'
 
 # Use postgresql as the database for Active Record
 # Note: Not recommended to upgrade unless for major security updates
