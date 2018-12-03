@@ -47,13 +47,6 @@ services:
     <<: *dev-env
     # <<: *default-volumes
 
-  setup_dev_dbs:
-    <<: *development-image
-    command: /tmp/wait-for-it.sh db:5432 -- bundle exec rake db:setup
-    depends_on:
-      - db
-    <<: *dev-env
-
   test:
     <<: *development-image
     command: /tmp/wait-for-it.sh db:5432 -- bundle exec rake
@@ -68,6 +61,13 @@ services:
       SCREENSHOT_FAILURES: "true"
     # <<: *default-volumes
 
+  setup_dev_dbs:
+    <<: *development-image
+    command: /tmp/wait-for-it.sh db:5432 -- bundle exec rake db:setup
+    depends_on:
+      - db
+    <<: *dev-env
+
   setup_test_dbs:
     <<: *development-image
     command: /tmp/wait-for-it.sh db:5432 -- bundle exec rake db:setup
@@ -77,45 +77,21 @@ services:
     environment:
       RAILS_ENV: test
 
-  unicorn:
-    <<: *production-image
-    ports:
-      - "5000:5000"
-    environment:
-      UNICORN_PORT: 5000
-      UNICORN_WEB_CONCURRENCY: 2
-      LOG_LEVEL: "debug"
-      DOCKER: "true"
-    # Use below settings when testing unicorn image locally
-    #   USE_PRODUCTION_ASSETS: "true" # necessary otherwise stack level too deep
-    # depends_on:
-    #   - setup_dbs
-    # <<: *dev-env
-    # env_file:
-    #   - test.env
-    # <<: *default-volumes
-
-  # Sets up dummy database for unicorn server
-  setup_dbs:
-    <<: *production-image
-    command: /tmp/wait-for-it.sh db:5432 -- bundle exec rake db:setup
-    depends_on:
-      - db
-    # Use below settings when testing unicorn image locally
-    # <<: *dev-env
-    # env_file:
-    #   - test.env
-
-  nginx:
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
-    ports:
-      - "80:80"
-    depends_on:
-      - unicorn
-
   db:
     image: postgres:alpine
     expose:
       - "5432"
+
+  # Use below settings for testing unicorn image locally
+  # unicorn:
+  #   <<: *production-image
+  #   ports:
+  #     - "5000:5000"
+  #   environment:
+  #     UNICORN_PORT: 5000
+  #     UNICORN_WEB_CONCURRENCY: 1
+  #     UNICORN_LOG_LEVEL: "debug"
+  #     DOCKER: "true"
+  #   env_file:
+  #     - .env
+  #   <<: *default-volumes

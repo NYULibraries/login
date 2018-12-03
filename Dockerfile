@@ -43,8 +43,4 @@ RUN wget -O /microscanner https://get.aquasec.com/microscanner && \
 USER docker
 EXPOSE 9292
 
-# get wait-for script (apline compatible)
-RUN wget --no-check-certificate -q -O - https://raw.githubusercontent.com/eficode/wait-for/master/wait-for > /tmp/wait-for-it.sh
-RUN chmod a+x /tmp/wait-for-it.sh
-
 CMD ./script/start.sh development

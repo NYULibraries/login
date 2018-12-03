@@ -64,7 +64,7 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  if ENV['USE_PRODUCTION_ASSETS'] # Necessary for running dev in unicorn environment
+  if ENV['DOCKER'] # Necessary for running dev in unicorn environment
     config.assets.debug = false
     config.assets.quiet = false
     config.assets.compile = false

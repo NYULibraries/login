@@ -5,7 +5,7 @@ require 'fileutils'
 
 # Let X be your average memory usage, let B be your box's memory, and let C be your workers.
 # C = (B/X).floor # e.g. (512MB/20MB).floor = 2 workers
-worker_processes Integer(ENV["UNICORN_WEB_CONCURRENCY"] || 2)
+worker_processes Integer(ENV["UNICORN_WEB_CONCURRENCY"] || 1)
 working_directory @dir
 
 timeout 120
