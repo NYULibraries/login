@@ -1,7 +1,7 @@
 # Login
 
 [![CircleCI](https://circleci.com/gh/NYULibraries/login.svg?style=svg)](https://circleci.com/gh/NYULibraries/login)
-[![Code Climate](https://codeclimate.com/github/NYULibraries/login.png)](https://codeclimate.com/github/NYULibraries/login)
+[![Maintainability](https://api.codeclimate.com/v1/badges/2a091dafe59646001866/maintainability)](https://codeclimate.com/github/NYULibraries/login/maintainability)
 [![Coverage Status](https://coveralls.io/repos/github/NYULibraries/login/badge.svg?branch=master)](https://coveralls.io/github/NYULibraries/login?branch=master)
 
 The NYU Libraries' Login application is an [OAuth2](http://oauth.net/2/) server
