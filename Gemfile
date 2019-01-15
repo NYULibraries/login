@@ -61,10 +61,7 @@ gem 'doorkeeper', '~> 4.4.2'
 gem 'faraday', '~> 0.12.0'
 gem 'faraday_middleware', '~> 0.12'
 
-gem 'dalli', '~> 2.7.8'
-
-# Rails 5 mechanism for faster bootup times
-gem 'bootsnap', '~> 1.3.2', require: false
+gem 'dalli', '~> 2.7.9'
 
 # Used to compose URLs for external services
 gem 'addressable', '~> 2.5.2'

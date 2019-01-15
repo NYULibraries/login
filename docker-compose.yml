@@ -37,6 +37,8 @@ services:
         - $IMAGES_DOMAIN/login_test
         - $IMAGES_DOMAIN/login_test:$BRANCH_NO_SLASH
       dockerfile: Dockerfile.test
+      args:
+        AQUA_MICROSCANNER_TOKEN:
     image: login_test:latest
     env_file:
       - test.env
