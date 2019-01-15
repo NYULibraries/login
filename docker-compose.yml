@@ -47,6 +47,7 @@ services:
       RAILS_ENV: test
       SCREENSHOT_FAILURES: "true"
       DOCKER: "true"
+      AQUA_MICROSCANNER_TOKEN:
     command: /tmp/wait-for-it.sh db:5432 -- bundle exec rake
     depends_on:
       - setup_test_dbs
