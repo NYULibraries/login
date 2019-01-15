@@ -37,6 +37,8 @@ services:
         - $IMAGES_DOMAIN/login_test
         - $IMAGES_DOMAIN/login_test:$BRANCH_NO_SLASH
       dockerfile: Dockerfile.test
+      args:
+        AQUA_MICROSCANNER_TOKEN:
     image: login_test:latest
     env_file:
       - test.env
@@ -47,7 +49,6 @@ services:
       RAILS_ENV: test
       SCREENSHOT_FAILURES: "true"
       DOCKER: "true"
-      AQUA_MICROSCANNER_TOKEN:
     command: /tmp/wait-for-it.sh db:5432 -- bundle exec rake
     depends_on:
       - setup_test_dbs
