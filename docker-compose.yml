@@ -13,8 +13,8 @@ x-production: &production-image
     context: .
     cache_from:
     - login
-    - $IMAGES_DOMAIN/login
-    - $IMAGES_DOMAIN/login:$BRANCH_NO_SLASH
+    - quay.io/nyulibraries/login
+    - quay.io/nyulibraries/login:$BRANCH_NO_SLASH
   image: login:latest
 
 x-development: &development-image
@@ -22,8 +22,8 @@ x-development: &development-image
     context: .
     cache_from:
     - login_test
-    - $IMAGES_DOMAIN/login_test
-    - $IMAGES_DOMAIN/login_test:$BRANCH_NO_SLASH
+    - quay.io/nyulibraries/login_test
+    - quay.io/nyulibraries/login_test:$BRANCH_NO_SLASH
     dockerfile: Dockerfile.test
     args:
       AQUA_MICROSCANNER_TOKEN:
