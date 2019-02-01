@@ -18,8 +18,7 @@ nginx
 node_modules
 
 
-script/push_docker.sh
-script/pull_docker.sh
+script/docker/*
 
 # Miscellaneous Docs
 *.md
