@@ -39,10 +39,10 @@ jobs:
       - <<: *pull_docker
       - <<: *build_docker
       - <<: *auth_quay
-      - <<: *push_docker
       - run:
           name: Run tests
           command: docker-compose run test
+      - <<: *push_docker
 
   deploy-dev:
     <<: *docker-defaults
