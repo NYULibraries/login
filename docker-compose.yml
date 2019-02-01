@@ -29,12 +29,6 @@ x-development: &development-image
       AQUA_MICROSCANNER_TOKEN:
   image: login_test:latest
 
-x-dev-env: &dev-env
-  environment:
-    RAILS_ENV: development
-  env_file:
-    - test.env
-
 services:
   dev:
     <<: *development-image
@@ -43,7 +37,10 @@ services:
     command: /tmp/wait-for-it.sh db:5432 -- bundle exec rails server -b 0.0.0.0
     depends_on:
       - setup_dev_dbs
-    <<: *dev-env
+    env_file:
+      - test.env
+    environment:
+      RAILS_ENV: development
     # <<: *default-volumes
 
   test:
@@ -51,7 +48,8 @@ services:
     command: /tmp/wait-for-it.sh db:5432 -- bundle exec rake
     depends_on:
       - setup_test_dbs
-    <<: *dev-env
+    env_file:
+      - test.env
     environment:
       RAILS_ENV: test
       CI:
@@ -65,14 +63,18 @@ services:
     command: /tmp/wait-for-it.sh db:5432 -- bundle exec rake db:setup
     depends_on:
       - db
-    <<: *dev-env
+    env_file:
+      - test.env
+    environment:
+      RAILS_ENV: development
 
   setup_test_dbs:
     <<: *development-image
     command: /tmp/wait-for-it.sh db:5432 -- bundle exec rake db:setup
     depends_on:
       - db
-    <<: *dev-env
+    env_file:
+      - test.env
     environment:
       RAILS_ENV: test
 
