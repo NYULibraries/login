@@ -88,6 +88,8 @@ services:
     <<: *production-image
     ports:
       - "5000:5000"
+    env_file:
+      - test.env
     environment:
       UNICORN_PORT: 5000
       #UNICORN_WEB_CONCURRENCY: 1
