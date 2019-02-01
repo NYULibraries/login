@@ -32,7 +32,6 @@ x-development: &development-image
 x-dev-env: &dev-env
   environment:
     RAILS_ENV: development
-    DOCKER: "true"
   env_file:
     - test.env
 
@@ -89,9 +88,10 @@ services:
       - "5000:5000"
     environment:
       UNICORN_PORT: 5000
-      UNICORN_WEB_CONCURRENCY: 1
-      UNICORN_LOG_LEVEL: "debug"
-      DOCKER: "true"
-    # env_file:
-    #   - .env
+      #UNICORN_WEB_CONCURRENCY: 1
+      #UNICORN_LOG_LEVEL: "debug"
+    env_file:
+      - .env
     # <<: *default-volumes
+    depends_on:
+      - setup_dev_dbs

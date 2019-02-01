@@ -1,5 +1,6 @@
 FROM ruby:2.5.1-alpine
 
+ENV DOCKER true
 ENV INSTALL_PATH /app
 ENV BUNDLE_PATH /usr/local/bundle
 
@@ -29,7 +30,7 @@ COPY --chown=docker:docker . .
 # Copy compass-core deprecation manual fix
 COPY ./vendor/gems/compass-core-1.0.3/ $BUNDLE_PATH/gems/compass-core-1.0.3/
 # precompile assets; use temporary secret token to silence error, real token set at runtime
-RUN DOCKER=true RAILS_ENV=production DEVISE_SECRET_KEY=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1) SECRET_TOKEN=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1) \
+RUN RAILS_ENV=production DEVISE_SECRET_KEY=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1) SECRET_TOKEN=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1) \
   bundle exec rake assets:precompile
 
 # run microscanner
