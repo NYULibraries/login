@@ -486,7 +486,6 @@ DEPENDENCIES
   faker (~> 1)
   faraday (~> 0.12.0)
   faraday_middleware (~> 0.12)
-  figs (~> 2.1)
   font-awesome-rails (~> 4)
   formaggio!
   institutions (~> 0.1.3)
