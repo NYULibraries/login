@@ -106,7 +106,9 @@ services:
   nginx:
     image: quay.io/nyulibraries/nginx:1.15.8-0
     volumes:
-      - ./config/nginx.conf:/etc/nginx/nginx.conf
+      - ./config/nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "9292:9292"
     depends_on:
       - unicorn
       - shibboleth
