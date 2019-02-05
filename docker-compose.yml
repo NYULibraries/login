@@ -101,7 +101,7 @@ services:
       context: shibboleth2_config/
     image: login_shibboleth
     ports:
-      - 8080:80
+      - "8080:8080"
 
   nginx:
     image: quay.io/nyulibraries/nginx:1.15.8-0
