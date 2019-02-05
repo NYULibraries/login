@@ -17,8 +17,8 @@ docker-compose.yml
 nginx
 node_modules
 
-
 script/docker/*
+config/nginx.conf
 
 # Miscellaneous Docs
 *.md
