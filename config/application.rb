@@ -9,9 +9,9 @@ require "sprockets/railtie"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
-Bundler.require(:default, Rails.env)
+Bundler.require(*Rails.groups)
 
-unless Rails.env.test? || ENV['DOCKER']
+if !ENV['DOCKER'] && !Rails.env.test?
   require 'figs'
   # Don't run this initializer on travis.
   Figs.load(stage: Rails.env)
@@ -35,10 +35,6 @@ module Login
     # Mailer default URL options
     config.action_mailer.default_url_options = { protocol: "https", host: "login.library.nyu.edu" }
 
-    # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-    config.force_ssl = true
-
-
     # It seems like images are included by default only from app/assets folder
     # So in order to get images from shared assets we do this
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
@@ -51,6 +47,21 @@ module Login
 
     Raven.configure do |config|
       config.dsn = ENV['SENTRY_DSN']
+    end
+
+    # output rails logs to unicorn; thanks to https://gist.github.com/soultech67/67cf623b3fbc732291a2
+    if ENV['DOCKER'] && !Rails.env.test?
+      config.force_ssl = false
+
+      config.unicorn_logger = Logger.new(STDOUT)
+      config.unicorn_logger.formatter = Logger::Formatter.new
+      config.logger = ActiveSupport::TaggedLogging.new(config.unicorn_logger)
+
+      config.logger.level = Logger.const_get('INFO')
+      config.log_level = ENV['UNICORN_LOG_LEVEL']&.to_sym || :info
+    else
+      # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
+      config.force_ssl = true
     end
   end
 end

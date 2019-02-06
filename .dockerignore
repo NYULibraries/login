@@ -11,14 +11,14 @@
 Figsfile
 .git
 .circleci/
+*.env
 Dockerfile*
 docker-compose.yml
 nginx
 node_modules
 
-
-script/push_docker.sh
-script/pull_docker.sh
+script/docker/*
+config/nginx.conf
 
 # Miscellaneous Docs
 *.md

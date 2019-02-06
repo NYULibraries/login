@@ -44,3 +44,4 @@ lib/tasks/local.rake
 vendor/nyulibraries_*
 
 .env
+shibboleth2_config/

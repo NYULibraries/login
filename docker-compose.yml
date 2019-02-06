@@ -8,99 +8,105 @@ x-volumes: &default-volumes
     - ./screenshots:/screenshots/
     - ./tmp/:/app/tmp/
 
+x-production: &production-image
+  build:
+    context: .
+    cache_from:
+    - login
+    - quay.io/nyulibraries/login
+    - quay.io/nyulibraries/login:$BRANCH_NO_SLASH
+  image: login:latest
+
+x-development: &development-image
+  build:
+    context: .
+    cache_from:
+    - login_test
+    - quay.io/nyulibraries/login_test
+    - quay.io/nyulibraries/login_test:$BRANCH_NO_SLASH
+    dockerfile: Dockerfile.test
+    args:
+      AQUA_MICROSCANNER_TOKEN:
+  image: login_test:latest
+
 services:
   dev:
-    build:
-      context: .
-      cache_from:
-        - login_test
-        - $IMAGES_DOMAIN/login_test
-        - $IMAGES_DOMAIN/login_test:$BRANCH_NO_SLASH
-      dockerfile: Dockerfile.test
-    image: login_test:latest
+    <<: *development-image
     ports:
       - "3000:3000"
+    command: /tmp/wait-for-it.sh db:5432 -- bundle exec rails server -b 0.0.0.0
+    depends_on:
+      - setup_dev_dbs
     env_file:
       - test.env
-    command: /tmp/wait-for-it.sh db:5432 -- bundle exec rails server -b 0.0.0.0
     environment:
-      RAILS_ENV:
-    depends_on:
-      - setup_dbs
+      RAILS_ENV: development
     # <<: *default-volumes
 
   test:
-    build:
-      context: .
-      cache_from:
-        - login_test
-        - $IMAGES_DOMAIN/login_test
-        - $IMAGES_DOMAIN/login_test:$BRANCH_NO_SLASH
-      dockerfile: Dockerfile.test
-      args:
-        AQUA_MICROSCANNER_TOKEN:
-    image: login_test:latest
-    env_file:
-      - test.env
-    environment:
-      CI:
-      CODECLIMATE_REPO_TOKEN:
-      COVERALLS_REPO_TOKEN:
-      RAILS_ENV: test
-      SCREENSHOT_FAILURES: "true"
-      DOCKER: "true"
+    <<: *development-image
     command: /tmp/wait-for-it.sh db:5432 -- bundle exec rake
     depends_on:
       - setup_test_dbs
-    # <<: *default-volumes
-
-  setup_test_dbs:
-    build:
-      context: .
-      dockerfile: Dockerfile.test
-    image: login_test:latest
+    env_file:
+      - test.env
     environment:
       RAILS_ENV: test
-    env_file:
-      - test.env
-    command: /tmp/wait-for-it.sh db:5432 -- bundle exec rake db:setup
-    depends_on:
-      - db
+      CI:
+      CODECLIMATE_REPO_TOKEN:
+      COVERALLS_REPO_TOKEN:
+      SCREENSHOT_FAILURES: "true"
+    # <<: *default-volumes
 
-  setup_dbs:
-    build:
-      context: .
-      dockerfile: Dockerfile.test
-    image: login_test:latest
-    env_file:
-      - test.env
+  setup_dev_dbs:
+    <<: *development-image
     command: /tmp/wait-for-it.sh db:5432 -- bundle exec rake db:setup
     depends_on:
       - db
+    env_file:
+      - test.env
+    environment:
+      RAILS_ENV: development
+
+  setup_test_dbs:
+    <<: *development-image
+    command: /tmp/wait-for-it.sh db:5432 -- bundle exec rake db:setup
+    depends_on:
+      - db
+    env_file:
+      - test.env
+    environment:
+      RAILS_ENV: test
 
   db:
     image: postgres:alpine
     expose:
       - "5432"
 
+  # Use below settings for testing unicorn image locally
   unicorn:
-    build:
-      context: .
-      cache_from:
-      - login
-      - $IMAGES_DOMAIN/login
-      - $IMAGES_DOMAIN/login:$BRANCH_NO_SLASH
-    image: login:latest
+    <<: *production-image
+    command: ["./script/start.sh", "production"]
     ports:
       - "5000:5000"
-    environment:
-      RAILS_ENV:
-      USE_PRODUCTION_ASSETS: "true" # Use with RAILS_ENV=development
-      UNICORN_PORT: 5000
-      UNICORN_WEB_CONCURRENCY: 2
-      LOG_LEVEL: "debug"
-      DOCKER: "true"
     env_file:
       - test.env
+    environment:
+      UNICORN_PORT: 5000
     depends_on:
-      - setup_dbs
+      - setup_dev_dbs
+  
+  shibboleth:
+    image: quay.io/nyulibraries/login_shibboleth:master
+    ports:
+      - "8080:8080"
+
+  nginx:
+    image: quay.io/nyulibraries/nginx:1.15.8-0
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "9292:9292"
+    depends_on:
+      - unicorn
+      - shibboleth
