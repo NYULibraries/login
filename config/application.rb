@@ -35,9 +35,6 @@ module Login
     # Mailer default URL options
     config.action_mailer.default_url_options = { protocol: "https", host: "login.library.nyu.edu" }
 
-    # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-    config.force_ssl = true
-
     # It seems like images are included by default only from app/assets folder
     # So in order to get images from shared assets we do this
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
@@ -62,6 +59,9 @@ module Login
 
       config.logger.level = Logger.const_get('INFO')
       config.log_level = ENV['UNICORN_LOG_LEVEL']&.to_sym || :info
+    else
+      # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
+      config.force_ssl = true
     end
   end
 end
