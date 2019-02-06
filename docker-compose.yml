@@ -97,9 +97,7 @@ services:
       - setup_dev_dbs
   
   shibboleth:
-    build:
-      context: shibboleth2_config/
-    image: login_shibboleth
+    image: quay.io/nyulibraries/login_shibboleth:master
     ports:
       - "8080:8080"
 
