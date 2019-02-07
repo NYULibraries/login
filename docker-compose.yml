@@ -93,6 +93,7 @@ services:
       - test.env
     environment:
       UNICORN_PORT: 5000
+      LOGIN_DB_DATABASE: login_development
     depends_on:
       - setup_dev_dbs
   
