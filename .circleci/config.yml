@@ -52,6 +52,8 @@ jobs:
           name: Deploy into staging via Jenkins
           command: |
             docker run --rm appropriate/curl -u $JENKINS_USERNAME:$JENKINS_API_KEY -X POST http://jenkins.library.nyu.edu/view/Login/job/Login%20Development%20Deploy/build/api
+            export BRANCH_NO_SLASH=${CIRCLE_BRANCH//\//_}
+            curl -u $JENKINS_STAGE_USERNAME:$JENKINS_STAGE_API_KEY -X POST https://jenkinsapi-dev.library.nyu.edu/job/Login%20Development%20Deploy/build/api --data-urlencode json="{\"parameter\": [{\"name\":\"TAG\", \"value\":\"${BRANCH_NO_SLASH}-${CIRCLE_SHA1}\"}]}"
 
   deploy-prod:
     <<: *docker-defaults
@@ -61,6 +63,8 @@ jobs:
           name: Deploy into production via Jenkins
           command: |
             docker run --rm appropriate/curl -u $JENKINS_USERNAME:$JENKINS_API_KEY -X POST http://jenkins.library.nyu.edu/view/Login/job/Login%20Production%20Deploy/build/api
+            export BRANCH_NO_SLASH=${CIRCLE_BRANCH//\//_}
+            curl -u $JENKINS_PROD_USERNAME:$JENKINS_PROD_API_KEY -X POST https://jenkinsapi.library.nyu.edu/job/Login%20Production%20Deploy/build/api --data-urlencode json="{\"parameter\": [{\"name\":\"TAG\", \"value\":\"${BRANCH_NO_SLASH}-${CIRCLE_SHA1}\"}]}"
 
 workflows:
   version: 2
