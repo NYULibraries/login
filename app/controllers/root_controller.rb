@@ -5,6 +5,11 @@ class RootController < ApplicationController
     redirect_to root_url_redirect
   end
 
+  def healthcheck
+    render json: {success: true}
+    return
+  end
+
   private
 
   def root_url_redirect
