@@ -1,8 +1,13 @@
 class RootController < ApplicationController
-  before_action :require_login!
+  before_action :require_login!, except: [:healthcheck]
 
   def root
     redirect_to root_url_redirect
+  end
+
+  def healthcheck
+    render json: {success: true}
+    return
   end
 
   private
