@@ -25,8 +25,6 @@ x-development: &development-image
     - quay.io/nyulibraries/login_test
     - quay.io/nyulibraries/login_test:$BRANCH_NO_SLASH
     dockerfile: Dockerfile.test
-    args:
-      AQUA_MICROSCANNER_TOKEN:
   image: login_test:latest
 
 services:
@@ -37,10 +35,11 @@ services:
     command: /tmp/wait-for-it.sh db:5432 -- bundle exec rails server -b 0.0.0.0
     depends_on:
       - setup_dev_dbs
+        #  - memcached
     env_file:
       - test.env
     environment:
-      RAILS_ENV: development
+      RAILS_ENV: development 
     # <<: *default-volumes
 
   test:
@@ -83,6 +82,9 @@ services:
     expose:
       - "5432"
 
+  memcached:
+    image: memcached:alpine
+
   # Use below settings for testing unicorn image locally
   unicorn:
     <<: *production-image
@@ -96,6 +98,7 @@ services:
       LOGIN_DB_DATABASE: login_development
     depends_on:
       - setup_dev_dbs
+      - memcached
   
   shibboleth:
     image: quay.io/nyulibraries/login_shibboleth:master
