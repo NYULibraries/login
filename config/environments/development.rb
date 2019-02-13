@@ -14,20 +14,14 @@ Rails.application.configure do
 
   # Do not force ssl in development.
   config.force_ssl = false
-  # Enable/disable caching. By default caching is disabled.
-  # Run rails dev:cache to toggle caching.
-  if Rails.root.join('tmp', 'caching-dev.txt').exist?
-    config.action_controller.perform_caching = true
 
-    config.cache_store = :memory_store
-    config.public_file_server.headers = {
-      'Cache-Control' => "public, max-age=#{2.days.to_i}"
-    }
-  else
-    config.action_controller.perform_caching = false
+  # need to enable caching since session is stored in cache
+  config.action_controller.perform_caching = true
 
-    config.cache_store = :null_store
-  end
+  config.cache_store = :memory_store
+  config.public_file_server.headers = {
+    'Cache-Control' => "public, max-age=#{2.days.to_i}"
+  }
 
   # Whitelists IP for docker usage of web-console
   config.web_console.whitelisted_ips = ['172.16.0.0/12'] # broad ip pool for docker
