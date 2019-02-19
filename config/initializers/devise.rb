@@ -99,6 +99,17 @@ Devise.setup do |config|
     },
     extra_fields: ['nyuidn', 'entitlement'],
     request_type: (Rails.env.test?) ? :params : :env
+  config.omniauth :shibboleth,
+    name: 'nyu_shibboleth2',
+    uid_field: 'uid',
+    info_fields: {
+      email: 'email',
+      nickname: 'givenName' ,
+      first_name: 'givenName',
+      last_name: 'sn'
+    },
+    extra_fields: ['nyuidn', 'entitlement'],
+    request_type: (Rails.env.test?) ? :params : :header
   require "omniauth-ldap"
   config.omniauth :ldap,
     name: 'new_school_ldap',
