@@ -96,6 +96,7 @@ services:
     environment:
       UNICORN_PORT: 5000
       LOGIN_DB_DATABASE: login_development
+      RAILS_LOG_LEVEL: debug
     depends_on:
       - setup_dev_dbs
       - memcached
