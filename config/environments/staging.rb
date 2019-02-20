@@ -43,7 +43,7 @@ Login::Application.configure do
   # config.force_ssl = true
 
   # Set to :debug to see everything in the log.
-  config.log_level = :warn
+  config.log_level = ENV['RAILS_LOG_LEVEL']&.to_sym || :warn
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]

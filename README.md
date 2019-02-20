@@ -64,3 +64,7 @@ or
 ```
 docker-compose run test
 ```
+
+## Logging
+
+Logging on unicorn container is to stdout/stderr for kubernetes compatibility. Log level defaults to warn but is configurable via `RAILS_LOG_LEVEL`

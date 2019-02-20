@@ -44,7 +44,7 @@ Rails.application.configure do
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
 
-  config.log_level = :warn
+  config.log_level = ENV['RAILS_LOG_LEVEL']&.to_sym || :warn
 
   # Prepend all log lines with the following tags.
   config.log_tags = [ :request_id ]
