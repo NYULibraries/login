@@ -88,6 +88,7 @@ Devise.setup do |config|
   require "omniauth-twitter"
   config.omniauth :twitter, ENV['TWITTER_APP_KEY'], ENV['TWITTER_APP_SECRET']
   require "omniauth-shibboleth"
+  # https://wiki.shibboleth.net/confluence/display/SHIB2/NativeSPSpoofChecking
   config.omniauth :shibboleth,
     name: 'nyu_shibboleth',
     uid_field: 'uid',
@@ -98,7 +99,7 @@ Devise.setup do |config|
       last_name: 'sn'
     },
     extra_fields: ['nyuidn', 'entitlement'],
-    request_type: (Rails.env.test?) ? :params : :env
+    request_type: (Rails.env.test?) ? :params : (ENV['SHIBBOLETH_REQUEST_TYPE_HEADER']) ? :header : :env
   require "omniauth-ldap"
   config.omniauth :ldap,
     name: 'new_school_ldap',
