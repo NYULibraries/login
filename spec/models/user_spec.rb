@@ -205,5 +205,10 @@ describe User do
         it { should be_an(HashWithIndifferentAccess) }
       end
     end
+
+    context 'and we cannot create an Aleph identity from the AuthHash' do
+      let(:user) { build(:user, omniauth_hash_map: authhash_map(:aleph)) }
+      subject { user.save }
+    end
   end
 end
