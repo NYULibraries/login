@@ -2,7 +2,7 @@ require 'rails_helper'
 describe "routes for Users" do
   describe "GET /" do
     subject { get('/') }
-    it { should route_to('root#root') }
+    it { should route_to('wayf#index') }
   end
 
   describe "POST /" do
