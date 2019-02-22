@@ -207,8 +207,12 @@ describe User do
     end
 
     context 'and we cannot create an Aleph identity from the AuthHash' do
-      let(:user) { build(:user, omniauth_hash_map: authhash_map(:aleph)) }
-      subject { user.save }
+      let(:user) { create(:user, omniauth_hash_map: authhash_map(:aleph)) }
+      before { stub_const('ENV', ENV.to_hash.merge('ALEPH_HOST' => "https://no.site.ever")) }
+      subject { user }
+      it "should quietly fail when ALEPH_HOST is unavailable" do
+        expect { subject }.to_not raise_error(Exception)
+      end
     end
   end
 end
