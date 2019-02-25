@@ -35,11 +35,11 @@ services:
     command: /tmp/wait-for-it.sh db:5432 -- bundle exec rails server -b 0.0.0.0
     depends_on:
       - setup_dev_dbs
-        #  - memcached
+      - memcached
     env_file:
       - test.env
     environment:
-      RAILS_ENV: development 
+      RAILS_ENV: development
     # <<: *default-volumes
 
   test:
@@ -100,7 +100,7 @@ services:
     depends_on:
       - setup_dev_dbs
       - memcached
-  
+
   shibboleth:
     image: quay.io/nyulibraries/login_shibboleth:master
     ports:

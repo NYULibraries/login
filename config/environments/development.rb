@@ -18,7 +18,7 @@ Rails.application.configure do
   # need to enable caching since session is stored in cache
   config.action_controller.perform_caching = true
 
-  config.cache_store = :memory_store
+  config.cache_store = :dalli_store
   config.public_file_server.headers = {
     'Cache-Control' => "public, max-age=#{2.days.to_i}"
   }
