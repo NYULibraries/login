@@ -7,6 +7,8 @@ require "action_mailer/railtie"
 require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
+require "resolv"
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -62,6 +64,18 @@ module Login
     else
       # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
       config.force_ssl = true
+    end
+
+    # set cache store to dalli, which uses memcached
+    # resolve DNS if service set and not servers to leverage memcached client sharding
+    if ENV['MEMCACHE_SERVICE'] && !ENV['MEMCACHE_SERVERS']
+      memcached_hosts = []
+      Resolv::DNS.new.each_resource(ENV['MEMCACHE_SERVICE'], Resolv::DNS::Resource::IN::SRV) { |rr|
+        memcached_hosts << rr.target.to_s
+      }
+      config.cache_store = :dalli_store, memcached_hosts
+    else
+      config.cache_store = :dalli_store
     end
   end
 end

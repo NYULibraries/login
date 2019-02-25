@@ -15,6 +15,8 @@ Rails.application.configure do
   #  SEE: https://guides.rubyonrails.org/autoloading_and_reloading_constants.html#autoloading-in-the-test-environment
   config.eager_load = false
 
+  config.cache_store = nil
+
   # Configure public file server for tests with Cache-Control for performance.
   config.public_file_server.enabled = true
   config.public_file_server.headers = {
