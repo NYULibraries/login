@@ -49,9 +49,17 @@ Rails.application.configure do
   # Prepend all log lines with the following tags.
   config.log_tags = [ :request_id ]
 
-  # Use a different cache store in production.
-  # config.cache_store = :mem_cache_store
-  config.cache_store = :dalli_store
+  # set cache store to dalli, which uses memcached
+  # resolve DNS if service set and not servers to leverage memcached client sharding
+  if ENV['MEMCACHE_SERVICE'] && !ENV['MEMCACHE_SERVERS']
+    memcached_hosts = []
+    Resolv::DNS.new.each_resource(ENV['MEMCACHE_SERVICE'], Resolv::DNS::Resource::IN::SRV) { |rr|
+      memcached_hosts << rr.target.to_s
+    }
+    config.cache_store = :dalli_store, memcached_hosts
+  else
+    config.cache_store = :dalli_store
+  end
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
