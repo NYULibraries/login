@@ -33,6 +33,7 @@ class ApplicationController < ActionController::Base
     # to permanently save eshelf records
     if ENV['ESHELF_LOGIN_URL'] && !cookies[ESHELF_COOKIE_NAME]
       session[:_action_before_eshelf_redirect] = (stored_location_for(resource) || request.env['omniauth.origin'] || flash[REDIRECT_COOKIE_NAME])
+      create_debug_cookie!
       create_eshelf_cookie!
       ENV['ESHELF_LOGIN_URL']
     else
@@ -55,6 +56,11 @@ class ApplicationController < ActionController::Base
   def create_eshelf_cookie!
     cookie_hash = { value: 1, httponly: true, domain: ENV['LOGIN_COOKIE_DOMAIN'] }
     cookies[ESHELF_COOKIE_NAME] = cookie_hash
+  end
+
+  def create_debug_cookie!
+    cookie_hash = { value: session[:_action_before_eshelf_redirect], httponly: true, domain: ENV['LOGIN_COOKIE_DOMAIN'] }
+    cookies['_login_test_cookie_redirect'] = cookie_hash
   end
 
   def set_raven_context
