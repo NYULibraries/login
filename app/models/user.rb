@@ -66,7 +66,12 @@ class User < ApplicationRecord
   # if the patron can be found in Aleph
   def create_or_update_aleph_identity
     identity = identities.find_or_initialize_by(uid: omniauth_hash_map.nyuidn, provider: "aleph")
-    aleph_patron = Login::Aleph::PatronLoader.new(omniauth_hash_map.nyuidn).patron
+    aleph_patron = begin
+      Login::Aleph::PatronLoader.new(omniauth_hash_map.nyuidn).patron
+    rescue Exception => e
+      Raven.capture_exception(e)
+      nil
+    end
     # Start with the omniauth hash to create the identity if user logged in with Aleph
     identity.properties.merge!(omniauth_hash_map.properties) if omniauth_hash_map.provider == 'aleph'
     # If the patron was also found from the loader, update the properties to those
