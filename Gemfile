@@ -37,7 +37,7 @@ gem 'formaggio', github: 'NYULibraries/formaggio', tag: 'v1.7.2'
 gem 'institutions', '~> 0.1.3'
 
 # Use devise for our user model
-gem 'devise', '~> 4.4.3'
+gem 'devise', '~> 4.6.0'
 
 # Use Ox for parsing XML
 gem 'ox', '~> 2.9.0'
