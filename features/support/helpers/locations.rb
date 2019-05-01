@@ -18,12 +18,12 @@ module LoginFeatures
     end
 
     def username_for_location(location)
-      # Defaults out to 'auth_key' for Travis' and VCR's sake
+      # Defaults out to 'auth_key' for CI 
       ENV.fetch(username_for(location), "username")
     end
 
     def password_for_location(location)
-      # Defaults out to 'auth_key' for Travis' and VCR's sake
+      # Defaults out to 'auth_key' for CI 
       ENV.fetch(password_for(location), "auth_key")
     end
 
