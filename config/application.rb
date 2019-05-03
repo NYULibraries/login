@@ -15,7 +15,6 @@ Bundler.require(*Rails.groups)
 
 if !ENV['DOCKER'] && !Rails.env.test?
   require 'figs'
-  # Don't run this initializer on travis.
   Figs.load(stage: Rails.env)
 end
 

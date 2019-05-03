@@ -50,6 +50,3 @@ staging:
 
 production:
   <<: *remote
-
-cucumber:
-  <<: *test
