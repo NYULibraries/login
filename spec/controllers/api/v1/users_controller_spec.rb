@@ -207,6 +207,11 @@ describe Api::V1::UsersController do
                 it { should eql "Tester" }
               end
 
+              context "when property is address" do
+                let(:property) { "address" }
+                it { should eql("city"=>"NEW YORK", "postal_code"=>"12345", "state"=>"NY", "street_address"=>"123 Main St") }
+              end
+
             end
 
           end

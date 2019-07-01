@@ -15,11 +15,21 @@ module Login
               instance.ill_library = bor_info_body.dig("z303", "z303_ill_library")
               instance.plif_status = bor_info_body.dig("z303", "z303_birthplace")
               instance.bor_name = bor_info_body.dig("z303", "z303_name")
+              instance.address = bor_address
             end
           end
         end
 
       private
+
+        def bor_address
+          {
+            street_address: bor_info_body.dig("z304", "z304_address_1"),
+            city: bor_info_body.dig("z304", "z304_address_2"),
+            state: bor_info_body.dig("z304", "z304_address_3"),
+            postal_code: bor_info_body.dig("z304", "z304_zip")
+          }
+        end
 
         # Convenience for extracting the body of the response, wherein lies what we desire
         def bor_info_body
