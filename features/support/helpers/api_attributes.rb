@@ -10,7 +10,11 @@ module LoginFeatures
         "Aleph ID" => "uid",
         "Given Name" => "first_name",
         "Surname" => "last_name",
-        "N Number" => "nyuidn"
+        "N Number" => "nyuidn",
+        "Street Address" => "street_address",
+        "City" => "city",
+        "State" => "state",
+        "Postal Code" => "postal_code",
       }
     end
   end

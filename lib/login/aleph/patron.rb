@@ -19,7 +19,7 @@ module Login
       PATRON_PROPERTIES = [
         :identifier, :verification, :barcode, :patron_status, :patron_type,
         :ill_permission, :college, :department, :dept_code, :major, :major_code, :plif_status,
-        :ill_library, :institution_code, :expiry_date, :bor_name, :first_name, :last_name
+        :ill_library, :institution_code, :expiry_date, :bor_name, :first_name, :last_name, :address
       ].freeze
 
       # Attributes that any patron object will have

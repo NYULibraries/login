@@ -33,14 +33,6 @@ COPY ./vendor/gems/compass-core-1.0.3/ $BUNDLE_PATH/gems/compass-core-1.0.3/
 RUN RAILS_ENV=production DEVISE_SECRET_KEY=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1) SECRET_TOKEN=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1) \
   bundle exec rake assets:precompile
 
-# run microscanner
-USER root
-ARG AQUA_MICROSCANNER_TOKEN
-RUN wget -O /microscanner https://get.aquasec.com/microscanner && \
-  chmod +x /microscanner && \
-  /microscanner ${AQUA_MICROSCANNER_TOKEN} && \
-  rm -rf /microscanner
-
 USER docker
 EXPOSE 9292
 

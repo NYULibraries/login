@@ -12,6 +12,14 @@ module Login
       let(:major) { 'Major' }
       let(:plif_status) { 'PLIF_LOADED' }
       let(:bor_name) { "ELOPER, DEV"}
+      let(:address) {
+        {
+          street_address: "70 WASHINGTON SQUARE SOUTH",
+          city: "NEW YORK",
+          state: "NY",
+          postal_code: "10012"
+        }
+      }
       let(:patron_hash) {
         {
           identifier: identifier,
@@ -23,7 +31,8 @@ module Login
           department: department,
           major: major,
           plif_status: plif_status,
-          bor_name: bor_name
+          bor_name: bor_name,
+          address: address,
         }
       }
       subject (:patron) do
@@ -38,6 +47,7 @@ module Login
           patron.major = major
           patron.plif_status = plif_status
           patron.bor_name = bor_name
+          patron.address = address
         end
       end
       it { should be_a Patron }
@@ -84,6 +94,10 @@ module Login
       describe '#last_name' do
         subject { patron.last_name }
         it { should eq "ELOPER" }
+      end
+      describe '#address' do
+        subject { patron.address }
+        it { should eq address }
       end
       describe '#to_h' do
         subject { patron.to_h }

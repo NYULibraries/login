@@ -34,6 +34,10 @@ Feature: Get attributes from protected API when user is authenticated
       | PLIF Status    | PLIF LOADED    |
       | First Name     | Triple         |
       | Last Name      | Tester         |
+      | Street Address | 123 Main St    |
+      | City | NEW YORK    |
+      | State | NY    |
+      | Postal Code | 12345 |
 
 
   Scenario: Logging in with Twitter
