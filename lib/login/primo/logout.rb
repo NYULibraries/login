@@ -12,8 +12,8 @@ module Login
   module Primo
     class Logout
       SERVER_MAP = {
-        "http://bobcatdev.library.nyu.edu" => ["lib-dv-primofe1.bobst.nyu.edu", "lib-dv-primofe2.bobst.nyu.edu"],
-        "http://bobcat.library.nyu.edu" => ["lib-pr-primofe1.bobst.nyu.edu", "lib-pr-primofe2.bobst.nyu.edu"] 
+        "http://bobcatdev.library.nyu.edu" => ["lib-dv-primofe1.bobst.nyu.edu/primo_library", "lib-dv-primofe2.bobst.nyu.edu/primo_library"],
+        "http://bobcat.library.nyu.edu" => ["lib-pr-primofe1.bobst.nyu.edu/primo_library", "lib-pr-primofe2.bobst.nyu.edu/primo_library"] 
       }
       attr_accessor :bobcat_url, :pds_handle, :hosts
 
