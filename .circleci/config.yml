@@ -34,8 +34,8 @@ hermes_deploy: &hermes_deploy
     name: Deploy via Hermes
     command: |
       export TAG=${CIRCLE_BRANCH//\//_}-${CIRCLE_SHA1}
-      docker run -e HERMES_HOST -e HERMES_SECRET quay.io/nyulibraries/hermesclient:master setImage -deployment=salon-unicorn -tag=$TAG
-      docker run -e HERMES_HOST -e HERMES_SECRET quay.io/nyulibraries/hermesclient:master rolloutStatus -deployment=salon-unicorn
+      docker run -e HERMES_HOST -e HERMES_SECRET quay.io/nyulibraries/hermesclient:master setImage -deployment=login-unicorn -tag=$TAG
+      docker run -e HERMES_HOST -e HERMES_SECRET quay.io/nyulibraries/hermesclient:master rolloutStatus -deployment=login-unicorn
 
 version: 2
 jobs:
