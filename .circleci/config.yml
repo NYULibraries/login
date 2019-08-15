@@ -29,6 +29,14 @@ auth_quay: &auth_quay
     command: |
       docker login -u "$QUAY_USERNAME" --password "$QUAY_PASSWORD" quay.io
 
+hermes_deploy: &hermes_deploy
+  run:
+    name: Deploy via Hermes
+    command: |
+      export TAG=${CIRCLE_BRANCH//\//_}-${CIRCLE_SHA1}
+      docker run -e HERMES_HOST -e HERMES_SECRET quay.io/nyulibraries/hermesclient:master setImage -deployment=login-unicorn -tag=$TAG
+      docker run -e HERMES_HOST -e HERMES_SECRET quay.io/nyulibraries/hermesclient:master rolloutStatus -deployment=login-unicorn
+
 version: 2
 jobs:
   test:
@@ -44,27 +52,38 @@ jobs:
           command: docker-compose run test
       - <<: *push_docker
 
+
   deploy-dev:
-    docker:
-      - image: appropriate/curl
+    <<: *docker-defaults
     steps:
+      - setup_remote_docker
+      - <<: *auth_quay
       - run:
-          name: Deploy into staging via Jenkins
+          name: Curl on-prem Jenkins
           command: |
-            curl -u $JENKINS_USERNAME:$JENKINS_API_KEY -X POST http://jenkins.library.nyu.edu/view/Login/job/Login%20Development%20Deploy/build/api
-            export BRANCH_NO_SLASH=${CIRCLE_BRANCH//\//_}
-            curl -u $JENKINS_STAGE_USERNAME:$JENKINS_STAGE_API_KEY -X POST https://jenkinsapi-dev.library.nyu.edu/job/Login%20Development%20Deploy/build/api --data-urlencode json="{\"parameter\": [{\"name\":\"TAG\", \"value\":\"${BRANCH_NO_SLASH}-${CIRCLE_SHA1}\"}]}"
+            docker run appropriate/curl -u $JENKINS_USERNAME:$JENKINS_API_KEY -X POST http://jenkins.library.nyu.edu/view/Login/job/Login%20Development%20Deploy/build/api
+      - run:
+          name: Export Hermes Dev env vars
+          command: |
+            echo 'export HERMES_HOST=https://hermes-dev.library.nyu.edu' >> $BASH_ENV
+            echo 'export HERMES_SECRET=$HERMES_SECRET_DEV' >> $BASH_ENV
+      - <<: *hermes_deploy
 
   deploy-prod:
-    docker:
-      - image: appropriate/curl
+    <<: *docker-defaults
     steps:
+      - setup_remote_docker
+      - <<: *auth_quay
       - run:
-          name: Deploy into production via Jenkins
+          name: Curl on-prem Jenkins
           command: |
-            curl -u $JENKINS_USERNAME:$JENKINS_API_KEY -X POST http://jenkins.library.nyu.edu/view/Login/job/Login%20Production%20Deploy/build/api
-            export BRANCH_NO_SLASH=${CIRCLE_BRANCH//\//_}
-            curl -u $JENKINS_PROD_USERNAME:$JENKINS_PROD_API_KEY -X POST https://jenkinsapi.library.nyu.edu/job/Login%20Production%20Deploy/build/api --data-urlencode json="{\"parameter\": [{\"name\":\"TAG\", \"value\":\"${BRANCH_NO_SLASH}-${CIRCLE_SHA1}\"}]}"
+            docker run appropriate/curl -u $JENKINS_USERNAME:$JENKINS_API_KEY -X POST http://jenkins.library.nyu.edu/view/Login/job/Login%20Production%20Deploy/build/api
+      - run:
+          name: Export Hermes Prod env vars
+          command: |
+            echo 'export HERMES_HOST=https://hermes.library.nyu.edu' >> $BASH_ENV
+            echo 'export HERMES_SECRET=$HERMES_SECRET_PROD' >> $BASH_ENV
+      - <<: *hermes_deploy
 
 workflows:
   version: 2
