@@ -290,7 +290,7 @@ GEM
       net-ssh (>= 4.0.0)
     newrelic_rpm (5.3.0.346)
     nio4r (2.3.1)
-    nokogiri (1.10.2)
+    nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
     oauth (0.5.4)
     oauth2 (1.4.0)
@@ -472,6 +472,7 @@ DEPENDENCIES
   addressable (~> 2.5.2)
   better_errors (~> 2)
   binding_of_caller (~> 0.8)
+  bootstrap-sass (~> 3.3.7)
   byebug
   capybara-screenshot
   coffee-rails (~> 4.2.0)
@@ -528,3 +529,4 @@ DEPENDENCIES
 
 BUNDLED WITH
    1.17.1
+
