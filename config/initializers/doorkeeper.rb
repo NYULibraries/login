@@ -74,7 +74,7 @@ Doorkeeper.configure do
     true
   end
 
-  # force_ssl_in_redirect_uri false
+  force_ssl_in_redirect_uri false
 
   # https://github.com/doorkeeper-gem/doorkeeper/wiki/Client-Credentials-flow
   # add other flows to this array if you want more to be enabled, e.g., %w{authorization_code implicit password}

@@ -32,7 +32,7 @@ services:
     <<: *development-image
     ports:
       - "3000:3000"
-    command: /tmp/wait-for-it.sh db:5432 -- bundle exec rails server -b 0.0.0.0
+    command: ["/tmp/wait-for-it.sh", "db:5432", "--", "rails", "server", "-b", "0.0.0.0", "-p", "3000"]
     depends_on:
       - setup_dev_dbs
       - memcached
@@ -40,11 +40,14 @@ services:
       - test.env
     environment:
       RAILS_ENV: development
-    # <<: *default-volumes
+    <<: *default-volumes
+    networks:
+     - custom
+     - default
 
   test:
     <<: *development-image
-    command: /tmp/wait-for-it.sh db:5432 -- bundle exec rake
+    command: ["/tmp/wait-for-it.sh", "db:5432",  "--", "rake"]
     depends_on:
       - setup_test_dbs
     env_file:
@@ -59,7 +62,7 @@ services:
 
   setup_dev_dbs:
     <<: *development-image
-    command: /tmp/wait-for-it.sh db:5432 -- bundle exec rake db:setup
+    command: ["/tmp/wait-for-it.sh", "db:5432",  "--", "bundle", "exec", "rake", "db:setup"]
     depends_on:
       - db
     env_file:
@@ -69,7 +72,7 @@ services:
 
   setup_test_dbs:
     <<: *development-image
-    command: /tmp/wait-for-it.sh db:5432 -- bundle exec rake db:setup
+    command: ["/tmp/wait-for-it.sh", "db:5432",  "--", "rake", "db:setup"]
     depends_on:
       - db
     env_file:
@@ -115,3 +118,7 @@ services:
     depends_on:
       - unicorn
       - shibboleth
+
+networks:
+  custom:
+    external: true

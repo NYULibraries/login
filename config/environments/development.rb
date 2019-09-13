@@ -23,7 +23,7 @@ Rails.application.configure do
   }
 
   # Whitelists IP for docker usage of web-console
-  config.web_console.whitelisted_ips = ['172.16.0.0/12'] # broad ip pool for docker
+  config.web_console.whitelisted_ips = ['10.0.0.0/8', '172.16.0.0/12', '192.168.0.0/16'] # broad ip pool for docker
 
   # Store uploaded files on the local file system (see config/storage.yml for options)
   # config.active_storage.service = :local

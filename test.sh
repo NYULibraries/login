@@ -1,0 +1,2 @@
+ http POST http://localhost:3000/oauth/token code=00f3ad5fd989684dab712042713a32a4d383e1502b544fb048100f682770cd5b client_id=5570f661d19c14f5615198f2383a5e1ffc16e27fb9701ce49da23a68011400fb client_secret=9ede82cac5ccd8c92c7f862cd6acac75de5596053f90684e3721ada92acbd0a5 redirect_uri=http://localhost:8080/illiad/illiad.dll grant_type=authorization_code
+
