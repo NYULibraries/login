@@ -14,5 +14,15 @@ if Rails.env.development? and User.find_by_username(username).nil?
     admin: true,
     provider: "nyu_shibboleth"
   })
-  user.save!
+  user.identities.create!({
+    provider: "aleph",
+    uid: "USERNAME",
+    properties: {
+      uid: "USERNAME",
+      name: "USERNAME, TEST-RECORD",
+      nickname: "USERNAME",
+      email: "username@library.edu",
+    }
+  })
+  user.save!  
 end
