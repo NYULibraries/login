@@ -40,10 +40,10 @@ services:
       - test.env
     environment:
       RAILS_ENV: development
-    <<: *default-volumes
-    networks:
-     - custom
-     - default
+    # <<: *default-volumes
+    # networks:
+    #  - custom
+    #  - default
 
   test:
     <<: *development-image
@@ -119,6 +119,6 @@ services:
       - unicorn
       - shibboleth
 
-networks:
-  custom:
-    external: true
+# networks:
+#   custom:
+#     external: true
