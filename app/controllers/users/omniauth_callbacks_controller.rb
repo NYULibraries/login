@@ -61,7 +61,8 @@ module Users
     end
 
     def create_illiad_loggedin_cookie!(user)
-      cookie_hash = { value: Digest::MD5.hexdigest((Time.now.to_f * 1000).round), httponly: true, domain: ENV['LOGIN_COOKIE_DOMAIN'] }
+      timestamp = ((Time.now.to_f * 1000).round).to_s
+      cookie_hash = { value: Digest::MD5.hexdigest(timestamp), httponly: true, domain: ENV['LOGIN_COOKIE_DOMAIN'] }
       cookies[ILLIAD_LOGGED_IN_COOKIE_NAME] = cookie_hash
     end
 
