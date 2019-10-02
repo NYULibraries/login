@@ -40,6 +40,10 @@ class Users::SessionsController < Devise::SessionsController
       cookies[:provider] = current_user.provider
       cookies[:current_institution] = current_institution.code.downcase
     end
+    # If user is logging out from illiad, always assume nyu_shibboleth
+    if params[:institution] == 'illiad'
+      cookies[:provider] = 'nyu_shibboleth'
+    end
   end
 
   def bobcat_url
