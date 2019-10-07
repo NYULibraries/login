@@ -5,3 +5,24 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+username = 'admin'
+if Rails.env.development? and User.find_by_username(username).nil?
+  user = User.create!({
+    username: username,
+    email: 'dev.eloper@library.edu',
+    institution_code: :NYU,
+    admin: true,
+    provider: "nyu_shibboleth"
+  })
+  user.identities.create!({
+    provider: "aleph",
+    uid: "USERNAME",
+    properties: {
+      uid: "USERNAME",
+      name: "USERNAME, TEST-RECORD",
+      nickname: "USERNAME",
+      email: "username@library.edu",
+    }
+  })
+  user.save!  
+end

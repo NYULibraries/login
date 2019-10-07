@@ -1,9 +1,11 @@
+require 'digest/md5'
 module Users
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     before_action :require_valid_omniauth_hash!,
                   only: [*Devise.omniauth_providers, :omniauth_callback]
 
     LOGGED_IN_COOKIE_NAME = '_nyulibraries_logged_in'.freeze
+    ILLIAD_LOGGED_IN_COOKIE_NAME = '_nyulibraries_illiad_login_session'.freeze
 
     def after_omniauth_failure_path_for(scope)
       flash[:alert] = t('devise.users.user.failure', ask: t("application.#{params[:auth_type]}.ask_a_librarian")).html_safe
@@ -28,6 +30,7 @@ module Users
       @user.institution_code = omniauth_hash_map.properties.institution_code.to_s unless omniauth_hash_map.properties.institution_code.nil?
       if @user.save
         create_loggedin_cookie!(@user)
+        create_illiad_loggedin_cookie!(@user)
         sign_in_and_redirect @user, event: :authentication
         kind = omniauth_hash_map.provider.titleize
         set_flash_message(:notice, :success, kind: kind) if is_navigational_format?
@@ -55,6 +58,12 @@ module Users
     def create_loggedin_cookie!(user)
       cookie_hash = { value: 1, httponly: true, domain: ENV['LOGIN_COOKIE_DOMAIN'] }
       cookies[LOGGED_IN_COOKIE_NAME] = cookie_hash
+    end
+
+    def create_illiad_loggedin_cookie!(user)
+      timestamp = ((Time.now.to_f * 1000).round).to_s
+      cookie_hash = { value: Digest::MD5.hexdigest(timestamp), httponly: true, domain: ENV['LOGIN_COOKIE_DOMAIN'] }
+      cookies[ILLIAD_LOGGED_IN_COOKIE_NAME] = cookie_hash
     end
 
     def require_valid_omniauth_hash!
