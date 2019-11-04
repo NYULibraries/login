@@ -73,7 +73,7 @@ gem 'sentry-raven', '~> 2'
 # Manually include responders to maintain respond_with & respond_to functionality
 gem 'responders', '~> 2.0'
 
-gem 'prometheus-client', '~> 1.0'
+gem 'prometheus-client', '~> 0.9.0'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
