@@ -1,5 +1,5 @@
 GIT
-  remote: https://github.com/NYULibraries/formaggio.git
+  remote: git://github.com/NYULibraries/formaggio.git
   revision: 09e7cc9d7f882c17f1052fdc5ac7b7f32aa367a0
   tag: v1.7.2
   specs:
@@ -15,7 +15,7 @@ GIT
       rvm-capistrano (~> 1.5)
 
 GIT
-  remote: https://github.com/NYULibraries/nyulibraries_errors.git
+  remote: git://github.com/NYULibraries/nyulibraries_errors.git
   revision: 54d8def9c219b2829a1b5284970e698fd4725cb7
   tag: v1.1.1
   specs:
@@ -23,7 +23,7 @@ GIT
       rails (>= 4)
 
 GIT
-  remote: https://github.com/NYULibraries/nyulibraries_institutions.git
+  remote: git://github.com/NYULibraries/nyulibraries_institutions.git
   revision: edae9f19758afe73686571d8e444e35dfe65cedf
   tag: v1.0.3
   specs:
@@ -32,14 +32,14 @@ GIT
       rails (>= 4)
 
 GIT
-  remote: https://github.com/NYULibraries/nyulibraries_javascripts.git
+  remote: git://github.com/NYULibraries/nyulibraries_javascripts.git
   revision: f2637c4891f273a6227b4f0fed9245a88539f9b2
   tag: v1.0.0
   specs:
     nyulibraries_javascripts (1.0.0)
 
 GIT
-  remote: https://github.com/NYULibraries/nyulibraries_stylesheets.git
+  remote: git://github.com/NYULibraries/nyulibraries_stylesheets.git
   revision: cdb3c1e15e6ef178dc244b9b82201736a3330285
   tag: v1.1.2
   specs:
@@ -48,7 +48,7 @@ GIT
       compass (>= 1.0.1)
 
 GIT
-  remote: https://github.com/NYULibraries/nyulibraries_templates.git
+  remote: git://github.com/NYULibraries/nyulibraries_templates.git
   revision: 5a43698fca7934afa01634bd3c29e2278a9d0764
   tag: v1.2.4
   specs:
@@ -228,12 +228,12 @@ GEM
     font-awesome-rails (4.7.0.4)
       railties (>= 3.2, < 6.0)
     gherkin (5.1.0)
-    git (1.4.0)
+    git (1.5.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     hashdiff (0.3.7)
     hashie (3.5.7)
-    highline (2.0.0)
+    highline (2.0.3)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
     institutions (0.1.3)
@@ -281,14 +281,14 @@ GEM
       activerecord
       activesupport
     net-ldap (0.16.1)
-    net-scp (1.2.1)
-      net-ssh (>= 2.6.5)
+    net-scp (2.0.0)
+      net-ssh (>= 2.6.5, < 6.0.0)
     net-sftp (2.1.2)
       net-ssh (>= 2.6.5)
-    net-ssh (5.0.2)
+    net-ssh (5.2.0)
     net-ssh-gateway (2.0.0)
       net-ssh (>= 4.0.0)
-    newrelic_rpm (5.3.0.346)
+    newrelic_rpm (6.7.0.359)
     nio4r (2.3.1)
     nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
@@ -404,7 +404,7 @@ GEM
     rspec-support (3.8.0)
     ruby_dep (1.5.0)
     rubyntlm (0.3.4)
-    rubyzip (1.2.2)
+    rubyzip (1.3.0)
     rvm-capistrano (1.5.6)
       capistrano (~> 2.15.4)
     safe_yaml (1.0.4)
