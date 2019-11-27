@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
     sign_in(:user, current_user)
     @current_user ||= current_user
   end
-  alias_method :current_user, :current_user_dev if Rails.env.development?
+  # alias_method :current_user, :current_user_dev if Rails.env.development?
 
   def require_login!
     unless user_signed_in?

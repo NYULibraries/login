@@ -32,13 +32,6 @@ GIT
       rails (>= 4)
 
 GIT
-  remote: https://github.com/NYULibraries/nyulibraries_javascripts.git
-  revision: f2637c4891f273a6227b4f0fed9245a88539f9b2
-  tag: v1.0.0
-  specs:
-    nyulibraries_javascripts (1.0.0)
-
-GIT
   remote: https://github.com/NYULibraries/nyulibraries_stylesheets.git
   revision: cdb3c1e15e6ef178dc244b9b82201736a3330285
   tag: v1.1.2
@@ -500,7 +493,6 @@ DEPENDENCIES
   nested-hstore (~> 0.1.2)
   nyulibraries_errors!
   nyulibraries_institutions!
-  nyulibraries_javascripts!
   nyulibraries_stylesheets!
   nyulibraries_templates!
   oauth2 (~> 1.4.0)

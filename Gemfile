@@ -26,7 +26,6 @@ gem 'nyulibraries_stylesheets', github: 'NYULibraries/nyulibraries_stylesheets',
 gem 'bootstrap-sass', '~> 3.3.7' # lock due to sassc incompatibility on jenkins
 gem 'nyulibraries_templates', github: 'NYULibraries/nyulibraries_templates', tag: 'v1.2.4'
 gem 'nyulibraries_institutions', github: 'NYULibraries/nyulibraries_institutions', tag: 'v1.0.3'
-gem 'nyulibraries_javascripts', github: 'NYULibraries/nyulibraries_javascripts', tag: 'v1.0.0'
 gem 'nyulibraries_errors', github: 'NYULibraries/nyulibraries_errors', tag: 'v1.1.1'
 # Use higher version of Compass CSS framework for sprites, etc.
 gem 'compass-rails', '~> 3.1'
