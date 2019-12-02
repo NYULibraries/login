@@ -24,7 +24,7 @@ gem 'modernizr-rails', '~> 2.7.0'
 # Use the NYU Libraries assets gem
 gem 'nyulibraries_stylesheets', github: 'NYULibraries/nyulibraries_stylesheets', tag: 'v1.1.2'
 gem 'bootstrap-sass', '~> 3.3.7' # lock due to sassc incompatibility on jenkins
-gem 'nyulibraries_templates', github: 'NYULibraries/nyulibraries_templates', tag: 'v1.2.4'
+gem 'nyulibraries_templates', github: 'NYULibraries/nyulibraries_templates', tag: 'v1.3.1'
 gem 'nyulibraries_institutions', github: 'NYULibraries/nyulibraries_institutions', tag: 'v1.0.3'
 gem 'nyulibraries_errors', github: 'NYULibraries/nyulibraries_errors', tag: 'v1.1.1'
 # Use higher version of Compass CSS framework for sprites, etc.
@@ -79,7 +79,7 @@ group :development do
   gem 'better_errors', '~> 2', platform: :ruby
   gem 'binding_of_caller', '~> 0.8', platform: :ruby
   gem 'listen'
-  gem 'web-console', '>= 3.3.0'
+  # gem 'web-console', '>= 3.3.0'
 end
 
 # Testing gems
