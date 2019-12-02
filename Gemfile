@@ -74,11 +74,6 @@ gem 'responders', '~> 2.0'
 
 gem 'prometheus-client', '~> 0.9.0'
 
-group :doc do
-  # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', require: false
-end
-
 # Development gems
 group :development do
   gem 'better_errors', '~> 2', platform: :ruby
