@@ -40,7 +40,7 @@ services:
       - test.env
     environment:
       RAILS_ENV: development
-    <<: *default-volumes
+    # <<: *default-volumes
     # networks:
     #  - custom
     #  - default
