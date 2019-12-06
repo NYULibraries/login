@@ -107,7 +107,7 @@ end
 
 group :test, :development do
   # Use Puma as the app server for testing and local development
-  gem 'puma', '~> 3.12'
+  gem 'puma', '~> 4.3'
 
   gem 'pry-rails'
   gem 'byebug'
