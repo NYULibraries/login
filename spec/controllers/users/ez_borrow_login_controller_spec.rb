@@ -6,14 +6,16 @@ describe Users::EzBorrowLoginController do
     'nyu'    => 'NYU',
     'nyuad'  => 'NYU',
     'nyush'  => 'NYU',
+    'hsl'    => 'NYU',
     'ns'     => 'THENEWSCHOOL',
   }.freeze
-  VALID_INSTITUTIONS = %w(nyu nyush nyuad ns).freeze
-  INVALID_INSTITUTIONS = %w(cu nysid).freeze
+  SKINNED_INSTITUTIONS = %w(nyu nyush nyuad ns).freeze
+  UNSKINNED_INSTITUTIONS = %w(cu nysid).freeze
   STATUS_BY_INSTITUTION = {
     'nyu' => '50',
     'nyuad' => '80',
     'nyush' => '20',
+    'hsl' => '60',
     'ns' => '31',
     'cu' => '666',
     'nysid' => '666',
@@ -47,7 +49,7 @@ describe Users::EzBorrowLoginController do
       it { should render_template "wayf/index" }
 
       context 'when a valid institution' do
-        VALID_INSTITUTIONS.each do |inst|
+        SKINNED_INSTITUTIONS.each do |inst|
           describe "#{inst} valid route is specified" do
             let(:params) { { institution: inst } }
 
@@ -57,13 +59,13 @@ describe Users::EzBorrowLoginController do
         end
       end
 
-      context 'when an invalid institution' do
-        INVALID_INSTITUTIONS.each do |inst|
+      context 'when an unskinned institution' do
+        UNSKINNED_INSTITUTIONS.each do |inst|
           describe "#{inst} invalid route is specified" do
             let(:params) { { institution: inst } }
 
-            it { should be_redirect }
-            it { should redirect_to 'https://library.nyu.edu/errors/ezborrow-library-nyu-edu/unauthorized' }
+            it { should be_successful }
+            it { should render_template "wayf/index" }
           end
         end
       end
@@ -84,8 +86,8 @@ describe Users::EzBorrowLoginController do
 
       context "when the user is from a valid ezborrow institution" do
         describe 'without a query' do
-          VALID_INSTITUTIONS.each do |user_institution|
-            [*VALID_INSTITUTIONS, nil].each do |route_institution|
+          SKINNED_INSTITUTIONS.each do |user_institution|
+            [*SKINNED_INSTITUTIONS, nil].each do |route_institution|
               let(:bor_status) { STATUS_BY_INSTITUTION[user_institution] }
               let(:institution_code) { user_institution }
               let(:params) { { institution: route_institution } }
@@ -100,8 +102,8 @@ describe Users::EzBorrowLoginController do
         end
 
         context 'with a query and valid route institution' do
-          VALID_INSTITUTIONS.each do |user_institution|
-            [*VALID_INSTITUTIONS, nil].each do |route_institution|
+          SKINNED_INSTITUTIONS.each do |user_institution|
+            [*SKINNED_INSTITUTIONS, nil].each do |route_institution|
               let(:bor_status) { STATUS_BY_INSTITUTION[user_institution] }
               let(:institution_code) { user_institution }
               let(:params) { { query: query, institution: route_institution } }
@@ -119,7 +121,7 @@ describe Users::EzBorrowLoginController do
       context "when the user is from an invalid ezborrow institution" do
         let(:bor_status) { STATUS_BY_INSTITUTION['cu'] }
 
-        VALID_INSTITUTIONS.each do |route_institution|
+        SKINNED_INSTITUTIONS.each do |route_institution|
           describe "when an invalid user at #{route_institution}" do
             it { should be_redirect }
             it { should redirect_to 'https://library.nyu.edu/errors/ezborrow-library-nyu-edu/unauthorized' }
