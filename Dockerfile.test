@@ -1,4 +1,4 @@
-FROM nyulibraries/selenium_chrome_headless_ruby:2.5.1-slim-chrome_69
+FROM quay.io/nyulibraries/selenium_chrome_headless_ruby:2.5.3-slim-chrome_73
 
 ENV DOCKER true
 ENV INSTALL_PATH /app
@@ -10,18 +10,15 @@ RUN groupadd -g 2000 docker -r && \
 # Installs dependencies to image (since test image, leave installed)
 COPY --chown=docker:docker Gemfile Gemfile.lock ./
 ARG RUN_PACKAGES="git libfontconfig libfreetype6 libpq-dev zlib1g-dev build-essential"
-RUN apt-get update -qq && apt-get -y --no-install-recommends install $RUN_PACKAGES  \
-  && apt-get install -y gnupg2 curl && curl -sL https://deb.nodesource.com/setup_8.x | bash -  \
-  && apt-get install -y nodejs \
-  && apt-get autoremove gnupg2 curl --purge -y \
+RUN apt-get update -qq && apt-get -y --no-install-recommends install $RUN_PACKAGES \
   && wget --no-check-certificate -q -O - https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh > /tmp/wait-for-it.sh \
   && chmod a+x /tmp/wait-for-it.sh \
   && gem install bundler -v '2.0.2' \
-  && bundle config --global github.https true \ 
-  && bundle install --without no_docker --jobs 20 --retry 5 \ 
+  && bundle config --global github.https true \
+  && bundle install --without no_docker --jobs 20 --retry 5 \
   && chown -R docker:docker /usr/local/bundle \
   && chown -R docker:docker $INSTALL_PATH
-RUN npm install -g yarn
+RUN apt-get install -y nodejs 
 
 WORKDIR $INSTALL_PATH
 USER docker
