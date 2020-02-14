@@ -199,6 +199,11 @@ describe User do
       it { should_not be_blank }
     end
 
+    describe '#auth_groups' do
+      subject { user.auth_groups }
+      it { is_expected.to eql [] }
+    end
+
     Devise.omniauth_providers.each do |provider|
       describe "##{provider}_properties" do
         subject { user.send(:"#{provider}_properties") }
@@ -215,5 +220,16 @@ describe User do
         expect { subject }.to_not raise_error(Exception)
       end
     end
+  end
+
+  context 'when user is an undergraduate student' do
+    let(:user) { create(:ny_undergraduate_user) }
+    subject { user.auth_groups }
+    it { is_expected.to eql ["undergraduate"] }
+  end
+  context 'when user is a graduate student' do
+    let(:user) { create(:ny_graduate_user) }
+    subject { user.auth_groups }
+    it { is_expected.to eql ["graduate"] }
   end
 end
