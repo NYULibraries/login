@@ -146,6 +146,7 @@ describe User do
       subject { user.identities }
       it { should be_blank }
     end
+
   end
 
 
