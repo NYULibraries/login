@@ -59,7 +59,7 @@ FactoryBot.define do
     institution_code { 'NYU' }
     current_sign_in_at { Time.now }
     admin { false }
-    provider { "nyu_shibboleth" }
+    provider { "ny_undergraduate" }
     last_sign_in_at { Time.now }
 
     identities { build_list :ny_undergraduate_aleph_identity, 1 }
@@ -71,7 +71,7 @@ FactoryBot.define do
     institution_code { 'NYU' }
     current_sign_in_at { Time.now }
     admin { false }
-    provider { "nyu_shibboleth" }
+    provider { "ny_graduate" }
     last_sign_in_at { Time.now }
 
     identities { build_list :ny_graduate_aleph_identity, 1 }

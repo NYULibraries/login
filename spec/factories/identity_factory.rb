@@ -11,9 +11,9 @@ FactoryBot.define do
       properties {
         {
           address: {"street_address"=>"123 Main St", "city"=>"NEW YORK", "state"=>"NY", "postal_code"=>"12345"},
-          bor_name: "Tester, Triple",
-          last_name: "Tester",
-          first_name: "Triple",
+          bor_name: "Grad, Newy",
+          last_name: "Grad",
+          first_name: "Newy",
           identifier: "BOR_ID",
           aleph_names: "",
           ill_library: "",
@@ -32,9 +32,9 @@ FactoryBot.define do
       properties {
         {
           address: {"street_address"=>"123 Main St", "city"=>"NEW YORK", "state"=>"NY", "postal_code"=>"12345"},
-          bor_name: "Tester, Triple",
-          last_name: "Tester",
-          first_name: "Triple",
+          bor_name: "Undergrad, Newb",
+          last_name: "Undergrad",
+          first_name: "Newb",
           identifier: "BOR_ID",
           aleph_names: "",
           ill_library: "",

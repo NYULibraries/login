@@ -62,6 +62,12 @@ describe Api::V1::UsersController do
             end
           end
 
+          # ny_undergraduate
+          context "and the user is an undergraduate" do
+            let(:provider) { "ny_undergraduate" }
+            it { should eql '' }
+          end
+
           context "and the user's identity provider is Aleph" do
             let(:provider) { "aleph" }
             let(:index) do
