@@ -81,7 +81,7 @@ services:
       RAILS_ENV: test
 
   db:
-    image: postgres:alpine
+    image: postgres:11-alpine
     expose:
       - "5432"
 
