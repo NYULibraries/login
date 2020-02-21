@@ -72,8 +72,6 @@ gem 'sentry-raven', '~> 2'
 # Manually include responders to maintain respond_with & respond_to functionality
 gem 'responders', '~> 2.0'
 
-gem 'prometheus-client', '~> 0.9.0'
-
 # Development gems
 group :development do
   gem 'better_errors', '~> 2', platform: :ruby
@@ -124,3 +122,5 @@ group :no_docker do
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', platforms: :ruby
 end
+
+gem 'prometheus-client', '~> 2.0.0'
