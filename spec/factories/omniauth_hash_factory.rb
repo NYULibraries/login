@@ -306,6 +306,8 @@ FactoryBot.define do
     factory :twitter_authhash, traits: [:twitter]
     factory :aleph_authhash, traits: [:aleph]
     factory :large_aleph_authhash, traits: [:large_aleph_record]
+    factory :ny_undergraduate_authhash, traits: [:ny_undergraduate]
+    factory :ny_graduate_authhash, traits: [:ny_graduate]
 
     factory :invalid_provider_authhash do
       uid { "invalid" }

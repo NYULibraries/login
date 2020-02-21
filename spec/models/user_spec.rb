@@ -188,7 +188,7 @@ describe User do
   end
 
   context "when OmniAuth::AuthHash is present" do
-    let(:user) { create(:user, omniauth_hash_map: authhash_map(:aleph)) }
+    let(:user) { create(:user, omniauth_hash_map: authhash_map_by_provider(:aleph)) }
     subject { user }
     it { should be_a(User) }
     it { should_not be_a_new(User) }
@@ -213,7 +213,7 @@ describe User do
     end
 
     context 'and we cannot create an Aleph identity from the AuthHash' do
-      let(:user) { create(:user, omniauth_hash_map: authhash_map(:aleph)) }
+      let(:user) { create(:user, omniauth_hash_map: authhash_map_by_provider(:aleph)) }
       before { stub_const('ENV', ENV.to_hash.merge('ALEPH_HOST' => "https://no.site.ever")) }
       subject { user }
       it "should quietly fail when ALEPH_HOST is unavailable" do

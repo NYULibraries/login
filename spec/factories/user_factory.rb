@@ -33,7 +33,7 @@ FactoryBot.define do
 
     after(:build) do |user|
       if user.omniauth_hash_map.blank?
-        user.omniauth_hash_map = authhash_map(user.provider)
+        user.omniauth_hash_map = authhash_map_by_provider(user.provider)
       end
     end
   end
@@ -48,7 +48,7 @@ FactoryBot.define do
     admin { true }
     after(:build) do |user|
       if user.omniauth_hash_map.blank?
-        user.omniauth_hash_map = authhash_map(user.provider)
+        user.omniauth_hash_map = authhash_map_by_provider(user.provider)
       end
     end
   end
@@ -59,7 +59,7 @@ FactoryBot.define do
     institution_code { 'NYU' }
     current_sign_in_at { Time.now }
     admin { false }
-    provider { "ny_undergraduate" }
+    provider { "nyu_shibboleth" }
     last_sign_in_at { Time.now }
 
     identities { build_list :ny_undergraduate_aleph_identity, 1 }
@@ -71,7 +71,7 @@ FactoryBot.define do
     institution_code { 'NYU' }
     current_sign_in_at { Time.now }
     admin { false }
-    provider { "ny_graduate" }
+    provider { "nyu_shibboleth" }
     last_sign_in_at { Time.now }
 
     identities { build_list :ny_graduate_aleph_identity, 1 }

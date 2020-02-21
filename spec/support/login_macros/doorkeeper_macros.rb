@@ -1,7 +1,11 @@
 module DoorkeeperMacros
   def set_resource_owner
+    # Allow user to be defined by provider, which is strictly whitelisted by the AuthHash Mapper
     let(:passthru_provider) { defined?(provider) ? provider : "twitter" }
-    let(:resource_owner) { find_or_create_user(passthru_provider) }
+    # or allow a user to be defined by a usertype, which can be arbitrarily named in a factory, 
+    # and have a corresponding #{usertype}_authhash factory
+    let(:passthru_usertype) { defined?(usertype) ? usertype : nil }
+    let(:resource_owner) { passthru_usertype.present? ? find_or_create_user_by_usertype(passthru_usertype) : find_or_create_user_by_provider(passthru_provider) }
   end
   private :set_resource_owner
 

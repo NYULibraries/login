@@ -62,10 +62,16 @@ describe Api::V1::UsersController do
             end
           end
 
-          # ny_undergraduate
           context "and the user is an undergraduate" do
-            let(:provider) { "ny_undergraduate" }
-            it { should eql '' }
+            let(:usertype) { "ny_undergraduate" }
+            subject { parse_json(body)["auth_groups"] }
+            it { should eql ["undergraduate"] }
+          end
+
+          context "and the user is an graduate" do
+            let(:usertype) { "ny_graduate" }
+            subject { parse_json(body)["auth_groups"] }
+            it { should eql ["graduate"] }
           end
 
           context "and the user's identity provider is Aleph" do
