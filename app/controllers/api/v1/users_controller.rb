@@ -7,7 +7,7 @@ module Api::V1
     def show
       if doorkeeper_token
         @user = User.find(doorkeeper_token.resource_owner_id)
-        respond_with(@user, include: :identities, methods: :auth_groups)
+        respond_with(@user, include: :identities, methods: [:auth_groups, :firstname, :lastname])
       end
     end
 

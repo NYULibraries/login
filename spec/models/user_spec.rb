@@ -199,6 +199,16 @@ describe User do
       it { should_not be_blank }
     end
 
+    describe '#firstname' do  
+      subject { user.firstname }
+      it { is_expected.to eql 'JON' }
+    end
+
+    describe '#lastname' do  
+      subject { user.lastname }
+      it { is_expected.to eql 'SNOW' }
+    end
+
     describe '#auth_groups' do
       subject { user.auth_groups }
       it { is_expected.to eql [] }

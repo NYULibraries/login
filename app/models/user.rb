@@ -54,6 +54,18 @@ class User < ApplicationRecord
     @auth_groups = auth_groups.auth_groups
   end
 
+  def firstname
+    @firstname ||= aleph_identity&.properties.try(:[], "first_name")
+  end
+
+  def lastname
+    @lastname ||= aleph_identity&.properties.try(:[], "last_name")
+  end
+
+  def aleph_identity
+    @aleph_identity ||= identities.where(provider: "aleph").first
+  end
+
   # Attr writer for omniauth_hash_map
   def omniauth_hash_map=(omniauth_hash_map)
     raise ArgumentError unless omniauth_hash_map.is_a? Login::OmniAuthHash::Mapper

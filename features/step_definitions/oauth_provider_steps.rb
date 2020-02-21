@@ -45,7 +45,7 @@ end
 Then(/^the OAuth2 client should (not )?have access to exposed attributes$/) do |negator|
   begin
     get api_v1_user_path(:access_token => access_token)
-    expect(last_response.body).to include current_resource_owner.to_json(include: :identities, methods: :auth_groups)
+    expect(last_response.body).to include current_resource_owner.to_json(include: :identities, methods: [:auth_groups, :firstname, :lastname])
   rescue Exception => e
     expect(negator).to include "not"
     expect(e).to be_instance_of(OAuth2::Error)
