@@ -19,7 +19,7 @@ FactoryBot.define do
           ill_library: "",
           patron_type: "",
           plif_status: "PLIF LOADED",
-          patron_status: "72",
+          patron_status: "61",
           ill_permission: "Y",
           institution_code: "NYU"
         }
@@ -40,7 +40,7 @@ FactoryBot.define do
           ill_library: "",
           patron_type: "",
           plif_status: "PLIF LOADED",
-          patron_status: "77",
+          patron_status: "22",
           ill_permission: "Y",
           institution_code: "NYU"
         }
