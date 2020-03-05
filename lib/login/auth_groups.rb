@@ -3,8 +3,8 @@
 #
 module Login
   class AuthGroups
-    NY_UNDERGRADUATE = %w{57 77 82 64}
-    NY_GRADUATE = %w{54 55 61 72 74}
+    NY_UNDERGRADUATE = %w{57 22 82 64}
+    NY_GRADUATE = %w{54 55 61}
 
     attr_accessor :user
 
