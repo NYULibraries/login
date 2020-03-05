@@ -111,7 +111,7 @@ FactoryBot.define do
               },
               z305: {
                 z305_bor_type: "PLIF",
-                z305_bor_status: "77",
+                z305_bor_status: "22",
                 z305_photo_permission: "Y"
               }
             }
@@ -143,7 +143,7 @@ FactoryBot.define do
               },
               z305: {
                 z305_bor_type: "PLIF",
-                z305_bor_status: "72",
+                z305_bor_status: "61",
                 z305_photo_permission: "Y"
               }
             }
