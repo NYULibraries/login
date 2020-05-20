@@ -23,15 +23,11 @@ gem 'jquery-rails', '~> 4.3.1'
 gem 'modernizr-rails', '~> 2.7.0'
 # Use the NYU Libraries assets gem
 gem 'nyulibraries_stylesheets', github: 'NYULibraries/nyulibraries_stylesheets', tag: 'v1.1.2'
-gem 'bootstrap-sass', '~> 3.3.7' # lock due to sassc incompatibility on jenkins
 gem 'nyulibraries_templates', github: 'NYULibraries/nyulibraries_templates', tag: 'v1.3.1'
 gem 'nyulibraries_institutions', github: 'NYULibraries/nyulibraries_institutions', tag: 'v1.0.3'
 gem 'nyulibraries_errors', github: 'NYULibraries/nyulibraries_errors', tag: 'v1.1.1'
 # Use higher version of Compass CSS framework for sprites, etc.
 gem 'compass-rails', '~> 3.1'
-
-# Use the NYU Libraries deploy gem
-gem 'formaggio', github: 'NYULibraries/formaggio', tag: 'v1.7.2'
 
 # Used for determining which institution is in play
 gem 'institutions', '~> 0.1.3'
@@ -105,7 +101,7 @@ end
 
 group :test, :development do
   # Use Puma as the app server for testing and local development
-  gem 'puma', '~> 3.12'
+  gem 'puma', '~> 4.3'
 
   gem 'pry-rails'
   gem 'byebug'
