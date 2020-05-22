@@ -1,5 +1,5 @@
 GIT
-  remote: https://github.com/NYULibraries/nyulibraries_errors.git
+  remote: git://github.com/NYULibraries/nyulibraries_errors.git
   revision: 54d8def9c219b2829a1b5284970e698fd4725cb7
   tag: v1.1.1
   specs:
@@ -7,7 +7,7 @@ GIT
       rails (>= 4)
 
 GIT
-  remote: https://github.com/NYULibraries/nyulibraries_institutions.git
+  remote: git://github.com/NYULibraries/nyulibraries_institutions.git
   revision: edae9f19758afe73686571d8e444e35dfe65cedf
   tag: v1.0.3
   specs:
@@ -16,7 +16,7 @@ GIT
       rails (>= 4)
 
 GIT
-  remote: https://github.com/NYULibraries/nyulibraries_stylesheets.git
+  remote: git://github.com/NYULibraries/nyulibraries_stylesheets.git
   revision: cdb3c1e15e6ef178dc244b9b82201736a3330285
   tag: v1.1.2
   specs:
@@ -25,7 +25,7 @@ GIT
       compass (>= 1.0.1)
 
 GIT
-  remote: https://github.com/NYULibraries/nyulibraries_templates.git
+  remote: git://github.com/NYULibraries/nyulibraries_templates.git
   revision: d5e120823d70469e9cd281930ab5f63632cf3f8c
   tag: v1.3.1
   specs:
@@ -286,7 +286,7 @@ GEM
     pry-rails (0.3.9)
       pry (>= 0.10.4)
     public_suffix (3.1.1)
-    puma (4.3.4)
+    puma (4.3.5)
       nio4r (~> 2.0)
     pyu-ruby-sasl (0.0.3.3)
     rack (2.2.2)
