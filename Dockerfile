@@ -16,7 +16,7 @@ COPY --chown=docker:docker Gemfile Gemfile.lock ./
 ARG RUN_PACKAGES="ca-certificates fontconfig nodejs tzdata postgresql-dev"
 ARG BUILD_PACKAGES="ruby-dev build-base linux-headers python git"
 RUN apk add --no-cache --update $RUN_PACKAGES $BUILD_PACKAGES \
-  && gem install bundler -v '2.0.2' \
+  && gem install bundler -v '2.1.4' \
   && bundle config --local github.https true \
   && bundle install --without no_docker,test,development --jobs 20 --retry 5 \
   && rm -rf /root/.bundle && rm -rf /root/.gem \
