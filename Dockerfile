@@ -3,6 +3,7 @@ FROM ruby:2.5.1-alpine
 ENV DOCKER true
 ENV INSTALL_PATH /app
 ENV BUNDLE_PATH /usr/local/bundle
+ENV BUNDLER_VERSION 2.1.4
 
 RUN addgroup -g 1000 -S docker && \
   adduser -u 1000 -S -G docker docker
@@ -16,7 +17,7 @@ COPY --chown=docker:docker Gemfile Gemfile.lock ./
 ARG RUN_PACKAGES="ca-certificates fontconfig nodejs tzdata postgresql-dev"
 ARG BUILD_PACKAGES="ruby-dev build-base linux-headers python git"
 RUN apk add --no-cache --update $RUN_PACKAGES $BUILD_PACKAGES \
-  && gem install bundler -v '2.0.2' \
+  && gem install bundler -v ${BUNDLER_VERSION} \
   && bundle config --local github.https true \
   && bundle install --without no_docker,test,development --jobs 20 --retry 5 \
   && rm -rf /root/.bundle && rm -rf /root/.gem \
