@@ -15,7 +15,7 @@ RUN chown docker:docker .
 COPY --chown=docker:docker bin/ bin/
 COPY --chown=docker:docker Gemfile Gemfile.lock ./
 ARG RUN_PACKAGES="ca-certificates fontconfig nodejs tzdata postgresql-dev"
-ARG BUILD_PACKAGES="ruby-dev build-base linux-headers python git"
+ARG BUILD_PACKAGES="ruby-dev build-base linux-headers python git shared-mime-info"
 RUN apk add --no-cache --update $RUN_PACKAGES $BUILD_PACKAGES \
   && gem install bundler -v ${BUNDLER_VERSION} \
   && bundle config --local github.https true \
