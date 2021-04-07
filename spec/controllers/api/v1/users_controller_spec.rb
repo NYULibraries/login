@@ -62,6 +62,22 @@ describe Api::V1::UsersController do
             end
           end
 
+          context "and the user is an undergraduate" do
+            let(:usertype) { "ny_undergraduate" }
+            subject { parse_json(body) }
+            its(["auth_groups"]) { is_expected.to eql ["undergraduate"] }
+            its(["firstname"]) { is_expected.to eql "Newb" }
+            its(["lastname"]) { is_expected.to eql "Undergrad" }
+          end
+
+          context "and the user is an graduate" do
+            let(:usertype) { "ny_graduate" }
+            subject { parse_json(body) }
+            its(["auth_groups"]) { is_expected.to eql ["graduate"] }
+            its(["firstname"]) { is_expected.to eql "Newy" }
+            its(["lastname"]) { is_expected.to eql "Grad" }
+          end
+
           context "and the user's identity provider is Aleph" do
             let(:provider) { "aleph" }
             let(:index) do

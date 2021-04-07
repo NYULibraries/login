@@ -87,6 +87,70 @@ FactoryBot.define do
         }
       end
     end
+    trait :ny_undergraduate do
+      provider { "aleph" }
+      uid { (ENV["TEST_ALEPH_USER"] || 'BOR_ID') }
+      info do
+        {
+          name: "Undergrad, Newb",
+          email: "undergrad@example.org",
+          nickname: "Newby",
+          uid: (ENV["TEST_ALEPH_USER"] || 'BOR_ID'),
+          location: "",
+          phone: ""
+        }
+      end
+      extra do
+        {
+          raw_info: {
+            bor_auth: {
+              z303: {
+                z303_id: (ENV["TEST_ALEPH_USER"] || 'BOR_ID'),
+                z303_birthplace: "",
+                z303_name: "Undergrad, Newb"
+              },
+              z305: {
+                z305_bor_type: "PLIF",
+                z305_bor_status: "22",
+                z305_photo_permission: "Y"
+              }
+            }
+          }
+        }
+      end
+    end
+    trait :ny_graduate do
+      provider { "aleph" }
+      uid { (ENV["TEST_ALEPH_USER"] || 'BOR_ID') }
+      info do
+        {
+          name: "Grad, Newy",
+          email: "grad@example.org",
+          nickname: "Newy",
+          uid: (ENV["TEST_ALEPH_USER"] || 'BOR_ID'),
+          location: "",
+          phone: ""
+        }
+      end
+      extra do
+        {
+          raw_info: {
+            bor_auth: {
+              z303: {
+                z303_id: (ENV["TEST_ALEPH_USER"] || 'BOR_ID'),
+                z303_birthplace: "",
+                z303_name: "Grad, Newy"
+              },
+              z305: {
+                z305_bor_type: "PLIF",
+                z305_bor_status: "61",
+                z305_photo_permission: "Y"
+              }
+            }
+          }
+        }
+      end
+    end 
     trait :large_aleph_record do
       extra do
         {
@@ -242,6 +306,8 @@ FactoryBot.define do
     factory :twitter_authhash, traits: [:twitter]
     factory :aleph_authhash, traits: [:aleph]
     factory :large_aleph_authhash, traits: [:large_aleph_record]
+    factory :ny_undergraduate_authhash, traits: [:ny_undergraduate]
+    factory :ny_graduate_authhash, traits: [:ny_graduate]
 
     factory :invalid_provider_authhash do
       uid { "invalid" }

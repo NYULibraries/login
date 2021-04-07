@@ -4,6 +4,49 @@ FactoryBot.define do
     provider { "twitter" }
     uid { "1234567890" }
     properties { { prop1: "Property 1", prop2: "Property 2" } }
+
+    trait :ny_graduate do
+      provider { "aleph" }
+      uid { (ENV["TEST_ALEPH_USER"] || 'BOR_ID') }
+      properties {
+        {
+          address: {"street_address"=>"123 Main St", "city"=>"NEW YORK", "state"=>"NY", "postal_code"=>"12345"},
+          bor_name: "Grad, Newy",
+          last_name: "Grad",
+          first_name: "Newy",
+          identifier: "BOR_ID",
+          aleph_names: "",
+          ill_library: "",
+          patron_type: "",
+          plif_status: "PLIF LOADED",
+          patron_status: "61",
+          ill_permission: "Y",
+          institution_code: "NYU"
+        }
+      }
+    end
+
+    trait :ny_undergraduate do
+      provider { "aleph" }
+      uid { (ENV["TEST_ALEPH_USER"] || 'BOR_ID') }
+      properties {
+        {
+          address: {"street_address"=>"123 Main St", "city"=>"NEW YORK", "state"=>"NY", "postal_code"=>"12345"},
+          bor_name: "Undergrad, Newb",
+          last_name: "Undergrad",
+          first_name: "Newb",
+          identifier: "BOR_ID",
+          aleph_names: "",
+          ill_library: "",
+          patron_type: "",
+          plif_status: "PLIF LOADED",
+          patron_status: "22",
+          ill_permission: "Y",
+          institution_code: "NYU"
+        }
+      }
+    end
+
     trait :aleph do
       provider { "aleph" }
       uid { "USERNAME" }
@@ -238,5 +281,7 @@ FactoryBot.define do
     factory :twitter_identity, traits: [:twitter]
     factory :nyu_shibboleth_identity, traits: [:nyu_shibboleth]
     factory :new_school_ldap_identity, traits: [:new_school_ldap]
+    factory :ny_undergraduate_aleph_identity, traits: [:ny_undergraduate]
+    factory :ny_graduate_aleph_identity, traits: [:ny_graduate]
   end
 end

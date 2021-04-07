@@ -146,6 +146,7 @@ describe User do
       subject { user.identities }
       it { should be_blank }
     end
+
   end
 
 
@@ -187,7 +188,7 @@ describe User do
   end
 
   context "when OmniAuth::AuthHash is present" do
-    let(:user) { create(:user, omniauth_hash_map: authhash_map(:aleph)) }
+    let(:user) { create(:user, omniauth_hash_map: authhash_map_by_provider(:aleph)) }
     subject { user }
     it { should be_a(User) }
     it { should_not be_a_new(User) }
@@ -196,6 +197,21 @@ describe User do
     describe '#identities' do
       subject { user.identities }
       it { should_not be_blank }
+    end
+
+    describe '#firstname' do  
+      subject { user.firstname }
+      it { is_expected.to eql 'JON' }
+    end
+
+    describe '#lastname' do  
+      subject { user.lastname }
+      it { is_expected.to eql 'SNOW' }
+    end
+
+    describe '#auth_groups' do
+      subject { user.auth_groups }
+      it { is_expected.to eql [] }
     end
 
     Devise.omniauth_providers.each do |provider|
@@ -207,12 +223,23 @@ describe User do
     end
 
     context 'and we cannot create an Aleph identity from the AuthHash' do
-      let(:user) { create(:user, omniauth_hash_map: authhash_map(:aleph)) }
+      let(:user) { create(:user, omniauth_hash_map: authhash_map_by_provider(:aleph)) }
       before { stub_const('ENV', ENV.to_hash.merge('ALEPH_HOST' => "https://no.site.ever")) }
       subject { user }
       it "should quietly fail when ALEPH_HOST is unavailable" do
         expect { subject }.to_not raise_error(Exception)
       end
     end
+  end
+
+  context 'when user is an undergraduate student' do
+    let(:user) { create(:ny_undergraduate_user) }
+    subject { user.auth_groups }
+    it { is_expected.to eql ["undergraduate"] }
+  end
+  context 'when user is a graduate student' do
+    let(:user) { create(:ny_graduate_user) }
+    subject { user.auth_groups }
+    it { is_expected.to eql ["graduate"] }
   end
 end

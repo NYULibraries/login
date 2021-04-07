@@ -16,6 +16,7 @@ class User < ApplicationRecord
   VALID_INSTITUTION_CODES = Institutions.institutions.keys.map(&:to_s)
 
   attr_reader :omniauth_hash_map
+  attr_reader :auth_groups
 
   scope :non_admin, -> { where(admin: false) }
   scope :admin, -> { where(admin: true) }
@@ -47,6 +48,23 @@ class User < ApplicationRecord
   # Must have a valid institution code
   validates :institution_code, inclusion: { in: VALID_INSTITUTION_CODES },
     allow_blank: true
+
+  def auth_groups
+    auth_groups = Login::AuthGroups.new(self)
+    @auth_groups = auth_groups.auth_groups
+  end
+
+  def firstname
+    @firstname ||= aleph_identity&.properties.try(:[], "first_name")
+  end
+
+  def lastname
+    @lastname ||= aleph_identity&.properties.try(:[], "last_name")
+  end
+
+  def aleph_identity
+    @aleph_identity ||= identities.where(provider: "aleph").first
+  end
 
   # Attr writer for omniauth_hash_map
   def omniauth_hash_map=(omniauth_hash_map)
