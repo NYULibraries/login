@@ -203,7 +203,7 @@ module LoginFeatures
 
     def nyu_logout_matchers
       @nyu_logout_matchers ||= [
-        -> { have_content 'LOGGED OUT' }
+        -> { have_content 'Logged Out' }
       ]
     end
 
