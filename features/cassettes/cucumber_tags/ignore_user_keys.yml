@@ -295,4 +295,66 @@ http_interactions:
       string: '{"exception":{"message":"Invalid license key, please contact support@newrelic.com","error_type":"NewRelic::Agent::LicenseException"}}'
     http_version: 
   recorded_at: Wed, 25 Jan 2017 21:57:18 GMT
-recorded_with: VCR 2.9.3
+- request:
+    method: get
+    uri: http://lib-dv-primofe1.bobst.nyu.edu/primo_library/libweb/ssoLogout?pdsHandle=
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.12.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      Date:
+      - Tue, 29 Jun 2021 17:11:09 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: 
+  recorded_at: Tue, 29 Jun 2021 17:11:09 GMT
+- request:
+    method: get
+    uri: http://lib-dv-primofe2.bobst.nyu.edu/primo_library/libweb/ssoLogout?pdsHandle=
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.12.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      Date:
+      - Tue, 29 Jun 2021 17:11:09 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: 
+  recorded_at: Tue, 29 Jun 2021 17:11:09 GMT
+recorded_with: VCR 4.0.0

@@ -146,4 +146,66 @@ http_interactions:
       string: ''
     http_version: 
   recorded_at: Fri, 07 Sep 2018 16:10:51 GMT
+- request:
+    method: get
+    uri: http://lib-dv-primofe1.bobst.nyu.edu/primo_library/libweb/ssoLogout?pdsHandle=
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.12.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      Date:
+      - Tue, 29 Jun 2021 17:11:20 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: 
+  recorded_at: Tue, 29 Jun 2021 17:11:20 GMT
+- request:
+    method: get
+    uri: http://lib-dv-primofe2.bobst.nyu.edu/primo_library/libweb/ssoLogout?pdsHandle=
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.12.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      Date:
+      - Tue, 29 Jun 2021 17:11:20 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: 
+  recorded_at: Tue, 29 Jun 2021 17:11:20 GMT
 recorded_with: VCR 4.0.0
