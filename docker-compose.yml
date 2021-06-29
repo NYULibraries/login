@@ -28,6 +28,16 @@ x-development: &development-image
   image: login_test:latest
 
 services:
+  update:
+    <<: *development-image
+    env_file:
+      - test.env
+    environment:
+      RAILS_ENV: development
+    volumes:
+      - ./Gemfile:/app/Gemfile
+      - ./Gemfile.lock:/app/Gemfile.lock
+
   dev:
     <<: *development-image
     ports:
