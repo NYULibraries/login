@@ -60,7 +60,7 @@ gem 'faraday_middleware', '~> 0.12'
 gem 'dalli', '~> 2.7.9'
 
 # Used to compose URLs for external services
-gem 'addressable', '~> 2.5.2'
+gem 'addressable', '~> 2.8.0'
 
 # Use sentry.io for observability
 gem 'sentry-raven', '~> 2'
