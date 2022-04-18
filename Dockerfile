@@ -1,4 +1,4 @@
-FROM ruby:2.5.1-alpine
+FROM ruby:2.6.9-alpine
 
 ENV DOCKER true
 ENV INSTALL_PATH /app
@@ -14,8 +14,8 @@ RUN chown docker:docker .
 # bundle install
 COPY --chown=docker:docker bin/ bin/
 COPY --chown=docker:docker Gemfile Gemfile.lock ./
-ARG RUN_PACKAGES="ca-certificates fontconfig nodejs tzdata postgresql-dev"
-ARG BUILD_PACKAGES="ruby-dev build-base linux-headers python git shared-mime-info"
+ARG RUN_PACKAGES="ca-certificates fontconfig npm nodejs tzdata postgresql-dev"
+ARG BUILD_PACKAGES="ruby-dev build-base linux-headers python3 git shared-mime-info"
 RUN apk add --no-cache --update $RUN_PACKAGES $BUILD_PACKAGES \
   && gem install bundler -v ${BUNDLER_VERSION} \
   && bundle config --local github.https true \
