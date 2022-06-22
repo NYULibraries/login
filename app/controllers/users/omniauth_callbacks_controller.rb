@@ -24,7 +24,7 @@ module Users
         provider: omniauth_hash_map.provider
       )
       # Initialize with an email address if the omniauth hash has it.
-      @user.email = omniauth_hash_map.email if @user.email.blank? && omniauth_hash_map.email.present?
+      @user.email = omniauth_hash_map.email if omniauth_hash_map.email.present?
       # Set the OmniAuth::AuthHash for the user
       @user.omniauth_hash_map = omniauth_hash_map
       @user.institution_code = omniauth_hash_map.properties.institution_code.to_s unless omniauth_hash_map.properties.institution_code.nil?
