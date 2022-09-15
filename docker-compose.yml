@@ -3,7 +3,6 @@ x-volumes: &default-volumes
   volumes:
     - ./lib:/app/lib/
     - ./app:/app/app/
-    - ./config:/app/config/
     - ./spec:/app/spec/
     - ./features:/app/features/
     - ./screenshots:/screenshots/

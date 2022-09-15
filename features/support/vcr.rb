@@ -23,10 +23,16 @@ VCR.configure do |c|
   c.filter_sensitive_data('&library=ALEPH') { "&library=#{ENV["ALEPH_LIBRARY"]}" }
   c.filter_sensitive_data('aleph.library.edu') { ENV["ALEPH_HOST"] }
   c.filter_sensitive_data('BOR_ID') { ENV["TEST_ALEPH_USER"] }
+
+  # Used to mock an EZ Borrow user with an unauthorized bor-status
+  c.before_playback(:ezborrow_unauthorized) do |i|
+    i.response.body.sub!('<z305-bor-status>60</z305-bor-status>', '<z305-bor-status>999</z305-bor-status>')
+  end
 end
 
 VCR.cucumber_tags do |t|
   t.tag '@twitter_login', use_scenario_name: true, record: :once
   t.tag '@vcr', use_scenario_name: true, record: :new_episodes
   t.tag '@ignore_user_keys', record: :new_episodes, match_requests_on: [:method, VCR.request_matchers.uri_without_params(:verification, :bor_id, :sub_library, :library)]
+  t.tag '@ezborrow_unauthorized', record: :new_episodes
 end
