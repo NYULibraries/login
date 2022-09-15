@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     end
   end
   get 'pds' => redirect { |params, request| "#{ENV['PDS_URL']}/pds?#{request.query_string}" }
-  get '/ezborrow/:institution', to: redirect(ENV['EZBORROW_URL'], status: 301)
+  get '/ezborrow/:institution' => redirect { |params, request| ENV['EZBORROW_URL'] }
   get 'ezproxy' => redirect { |params, request| "#{ENV['EZPROXY_URL']}/login?#{request.query_string}" }
   get 'healthcheck' => 'root#healthcheck'
 end
