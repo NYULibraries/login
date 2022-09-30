@@ -1,3 +1,5 @@
+EZBORROW_URL = (ENV['EZBORROW_URL'] || "https://library.nyu.edu/services/borrowing/from-non-nyu-libraries/e-zborrow/").freeze
+
 Rails.application.routes.draw do
   providers = Regexp.union(Devise.omniauth_providers.map(&:to_s))
   use_doorkeeper do
@@ -14,7 +16,7 @@ Rails.application.routes.draw do
     get 'login/passive_shibboleth', to: 'users/client_passive_login#shibboleth_passive_login', as: :passive_shibboleth
     get 'users/show', to: 'users#show'
     match 'passthru', to: 'users/passthru#passthru', via: [:post, :get], as: :passthru
-    get '/ezborrow(/:institution)', to: "users/ez_borrow_login#ezborrow_login", as: :ezborrow
+    #get '/ezborrow(/:institution)', to: "users/ez_borrow_login#ezborrow_login", as: :ezborrow
   end
   get 'login(/:institution)', to: 'wayf#index', as: :login
   get 'logged_out(/:institution)', to: 'wayf#logged_out', as: :logged_out
@@ -24,7 +26,7 @@ Rails.application.routes.draw do
     end
   end
   get 'pds' => redirect { |params, request| "#{ENV['PDS_URL']}/pds?#{request.query_string}" }
-  get '/ezborrow(/:institution)' => redirect { ENV['EZBORROW_URL'] }
+  get '/ezborrow(/:institution)' => redirect { EZBORROW_URL }
   get 'ezproxy' => redirect { |params, request| "#{ENV['EZPROXY_URL']}/login?#{request.query_string}" }
   get 'healthcheck' => 'root#healthcheck'
 end
