@@ -1,4 +1,4 @@
-EZBORROW_URL = (ENV['EZBORROW_URL'] || "https://library.nyu.edu/services/borrowing/from-non-nyu-libraries/e-zborrow/").freeze
+EZBORROW_URL = (ENV['EZBORROW_URL'] || "https://library.nyu.edu/services/borrowing/from-non-nyu-libraries/e-zborrow/")
 
 Rails.application.routes.draw do
   providers = Regexp.union(Devise.omniauth_providers.map(&:to_s))
