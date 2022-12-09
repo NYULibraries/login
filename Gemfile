@@ -57,7 +57,7 @@ gem 'doorkeeper', '~> 4.4.2'
 gem 'faraday', '~> 0.12.0'
 gem 'faraday_middleware', '~> 0.12'
 
-gem 'dalli', '~> 2.7.9'
+gem 'dalli', '~> 3.2.3'
 
 # Used to compose URLs for external services
 gem 'addressable', '~> 2.8.0'
