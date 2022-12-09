@@ -39,7 +39,7 @@ gem 'devise', '~> 4.7.1'
 gem 'ox', '~> 2.9.0'
 
 # Use omniauth for logging in from multiple providers
-gem 'omniauth', '~> 1.8.1'
+gem 'omniauth', '~> 1.9.2'
 # Shibboleth strategy
 gem 'omniauth-shibboleth', '~> 1.3.0'
 # Twitter strategy
